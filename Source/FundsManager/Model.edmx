@@ -1,0 +1,2502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FundsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountingMovements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_AccountingMovements_Funds" Type="int" Nullable="false" />
+          <Property Name="description" Type="text" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="reference" Type="text" Nullable="false" />
+          <Property Name="FK_AccountingMovements_Currencies" Type="int" Nullable="false" />
+          <Property Name="original_reference" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="type" Type="int" Nullable="false" />
+          <Property Name="amount" Type="money" Nullable="false" />
+          <Property Name="FK_Accounts_Funds" Type="int" Nullable="false" />
+          <Property Name="number" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountsBankingAccounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_AccountsBankingAccount_Funds" Type="int" Nullable="false" />
+          <Property Name="account_id" Type="int" Nullable="false" />
+          <Property Name="banking_account_id" Type="int" Nullable="false" />
+          <Property Name="amount" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountsClients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="account_id" Type="int" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="amount" Type="money" Nullable="false" />
+          <Property Name="FK_AccountsBankingAccount_Funds" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountsCreditors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_AccountsCreditors_Funds" Type="int" Nullable="false" />
+          <Property Name="account_id" Type="int" Nullable="false" />
+          <Property Name="creditor_id" Type="int" Nullable="false" />
+          <Property Name="amount" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountsEmployees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_AccountsEmployees_Funds" Type="int" Nullable="false" />
+          <Property Name="account_id" Type="int" Nullable="false" />
+          <Property Name="employee_id" Type="int" Nullable="false" />
+          <Property Name="amount" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BankingAccounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="iban" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FK_BankingAccounts_Banks" Type="int" Nullable="false" />
+          <Property Name="FK_BankingAccounts_Currencies" Type="int" Nullable="false" />
+          <Property Name="amount" Type="money" Nullable="false" />
+          <Property Name="FK_BankingAccounts_Funds" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Banks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="own" Type="int" Nullable="false" />
+          <Property Name="FK_Banks_Funds" Type="int" Nullable="false" />
+          <Property Name="FK_Banks_Countries" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bonds">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="number" Type="text" Nullable="false" />
+          <Property Name="issued" Type="date" Nullable="false" />
+          <Property Name="FK_Bonds_Funds" Type="int" Nullable="false" />
+          <Property Name="price" Type="money" Nullable="false" />
+          <Property Name="interest_on_bond" Type="float" Nullable="false" />
+          <Property Name="interest_tff_contribution" Type="float" Nullable="false" />
+          <Property Name="pieces" Type="float" Nullable="false" />
+          <Property Name="active" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BondsInvestors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_BondsInvestors_Bonds" Type="int" Nullable="false" />
+          <Property Name="FK_BondsInvestors_Investors" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="FK_Clients_Funds" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="FK_Countries_Funds" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Creditors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="FK_Creditors_Funds" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Currencies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="code" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="symbol" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="exchange" Type="real" Nullable="false" />
+          <Property Name="FK_Currencies_Funds" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Disbursements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="investment_id" Type="int" Nullable="false" />
+          <Property Name="currency_id" Type="int" Nullable="false" />
+          <Property Name="exchange_rate" Type="int" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="underlying_debtor_id" Type="int" />
+          <Property Name="bank_risk_id" Type="int" />
+          <Property Name="profit_share" Type="money" Nullable="false" />
+          <Property Name="amount" Type="money" Nullable="false" />
+          <Property Name="fund_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="FK_Employees_Funds" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Funds">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="contract_prefix" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Investments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="contract" Type="text" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="total_disbursement" Type="money" />
+          <Property Name="profit_share" Type="money" />
+          <Property Name="fund_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Investors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="FK_Investors_Funds" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="FK_Items_Funds" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movements_Accounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_Movements_Accounts_Subaccounts" Type="int" />
+          <Property Name="FK_Movements_Accounts_AccountingMovements" Type="int" Nullable="false" />
+          <Property Name="credit" Type="money" Nullable="false" />
+          <Property Name="debit" Type="money" Nullable="false" />
+          <Property Name="subaccount" Type="int" />
+          <Property Name="subaccount_type" Type="int" />
+          <Property Name="FK_Movements_Accounts_Funds" Type="int" Nullable="false" />
+          <Property Name="FK_Movements_Accounts_Accounts" Type="int" />
+        </EntityType>
+        <EntityType Name="OtherDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="FK_OtherDetails_Funds" Type="int" Nullable="false" />
+          <Property Name="FK_OtherDetails_Accounts" Type="int" />
+        </EntityType>
+        <EntityType Name="Sectors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="FK_Sectors_Funds" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subaccounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="FK_Subaccounts_Accounts" Type="int" Nullable="false" />
+          <Property Name="FK_Accounts_Funds" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnderlyingDebtors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="debtor_bank_id" Type="int" />
+          <Property Name="FK_UnderlyingDebtors_Funds" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="debtor_bank_id">
+          <End Role="Banks" Type="Self.Banks" Multiplicity="0..1" />
+          <End Role="UnderlyingDebtors" Type="Self.UnderlyingDebtors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnderlyingDebtors">
+              <PropertyRef Name="debtor_bank_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountingMovements_Currencies">
+          <End Role="Currencies" Type="Self.Currencies" Multiplicity="1" />
+          <End Role="AccountingMovements" Type="Self.AccountingMovements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountingMovements">
+              <PropertyRef Name="FK_AccountingMovements_Currencies" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountingMovements_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="AccountingMovements" Type="Self.AccountingMovements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountingMovements">
+              <PropertyRef Name="FK_AccountingMovements_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accounts_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="FK_Accounts_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsBankingAccount_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="AccountsBankingAccounts" Type="Self.AccountsBankingAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsBankingAccounts">
+              <PropertyRef Name="account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsBankingAccount_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="AccountsBankingAccounts" Type="Self.AccountsBankingAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsBankingAccounts">
+              <PropertyRef Name="FK_AccountsBankingAccount_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsBankingAccounts_BankingAccounts">
+          <End Role="BankingAccounts" Type="Self.BankingAccounts" Multiplicity="1" />
+          <End Role="AccountsBankingAccounts" Type="Self.AccountsBankingAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankingAccounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsBankingAccounts">
+              <PropertyRef Name="banking_account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsClients_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="AccountsClients" Type="Self.AccountsClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsClients">
+              <PropertyRef Name="account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsClients_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="AccountsClients" Type="Self.AccountsClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsClients">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsClients_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="AccountsClients" Type="Self.AccountsClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsClients">
+              <PropertyRef Name="FK_AccountsBankingAccount_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsCreditors_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="AccountsCreditors" Type="Self.AccountsCreditors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsCreditors">
+              <PropertyRef Name="account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsCreditors_Creditors">
+          <End Role="Creditors" Type="Self.Creditors" Multiplicity="1" />
+          <End Role="AccountsCreditors" Type="Self.AccountsCreditors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Creditors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsCreditors">
+              <PropertyRef Name="creditor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsCreditors_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="AccountsCreditors" Type="Self.AccountsCreditors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsCreditors">
+              <PropertyRef Name="FK_AccountsCreditors_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsEmployees_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="AccountsEmployees" Type="Self.AccountsEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsEmployees">
+              <PropertyRef Name="account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsEmployees_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="AccountsEmployees" Type="Self.AccountsEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsEmployees">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsEmployees_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="AccountsEmployees" Type="Self.AccountsEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsEmployees">
+              <PropertyRef Name="FK_AccountsEmployees_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankingAccounts_Banks">
+          <End Role="Banks" Type="Self.Banks" Multiplicity="1" />
+          <End Role="BankingAccounts" Type="Self.BankingAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankingAccounts">
+              <PropertyRef Name="FK_BankingAccounts_Banks" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankingAccounts_Currencies">
+          <End Role="Currencies" Type="Self.Currencies" Multiplicity="1" />
+          <End Role="BankingAccounts" Type="Self.BankingAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankingAccounts">
+              <PropertyRef Name="FK_BankingAccounts_Currencies" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankingAccounts_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="BankingAccounts" Type="Self.BankingAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankingAccounts">
+              <PropertyRef Name="FK_BankingAccounts_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Banks_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Banks" Type="Self.Banks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Banks">
+              <PropertyRef Name="FK_Banks_Countries" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Banks_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="Banks" Type="Self.Banks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Banks">
+              <PropertyRef Name="FK_Banks_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bonds_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="Bonds" Type="Self.Bonds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bonds">
+              <PropertyRef Name="FK_Bonds_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BondsInvestors_Bonds">
+          <End Role="Bonds" Type="Self.Bonds" Multiplicity="1" />
+          <End Role="BondsInvestors" Type="Self.BondsInvestors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bonds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BondsInvestors">
+              <PropertyRef Name="FK_BondsInvestors_Bonds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BondsInvestors_Investors">
+          <End Role="Investors" Type="Self.Investors" Multiplicity="1" />
+          <End Role="BondsInvestors" Type="Self.BondsInvestors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Investors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BondsInvestors">
+              <PropertyRef Name="FK_BondsInvestors_Investors" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="FK_Clients_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Countries_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="Countries" Type="Self.Countries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Countries">
+              <PropertyRef Name="FK_Countries_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Creditors_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="Creditors" Type="Self.Creditors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Creditors">
+              <PropertyRef Name="FK_Creditors_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Currencies_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="Currencies" Type="Self.Currencies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Currencies">
+              <PropertyRef Name="FK_Currencies_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Banks">
+          <End Role="Banks" Type="Self.Banks" Multiplicity="0..1" />
+          <End Role="Disbursements" Type="Self.Disbursements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursements">
+              <PropertyRef Name="bank_risk_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Disbursements" Type="Self.Disbursements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursements">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Currencies">
+          <End Role="Currencies" Type="Self.Currencies" Multiplicity="1" />
+          <End Role="Disbursements" Type="Self.Disbursements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursements">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="Disbursements" Type="Self.Disbursements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursements">
+              <PropertyRef Name="fund_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Investments">
+          <End Role="Investments" Type="Self.Investments" Multiplicity="1" />
+          <End Role="Disbursements" Type="Self.Disbursements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Investments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursements">
+              <PropertyRef Name="investment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_UnderlyingDebtors">
+          <End Role="UnderlyingDebtors" Type="Self.UnderlyingDebtors" Multiplicity="0..1" />
+          <End Role="Disbursements" Type="Self.Disbursements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnderlyingDebtors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursements">
+              <PropertyRef Name="underlying_debtor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="FK_Employees_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Investments_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="Investments" Type="Self.Investments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Investments">
+              <PropertyRef Name="fund_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Investors_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="Investors" Type="Self.Investors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Investors">
+              <PropertyRef Name="FK_Investors_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="FK_Items_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movements_Accounts_AccountingMovements">
+          <End Role="AccountingMovements" Type="Self.AccountingMovements" Multiplicity="1" />
+          <End Role="Movements_Accounts" Type="Self.Movements_Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingMovements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movements_Accounts">
+              <PropertyRef Name="FK_Movements_Accounts_AccountingMovements" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movements_Accounts_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="Movements_Accounts" Type="Self.Movements_Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movements_Accounts">
+              <PropertyRef Name="FK_Movements_Accounts_Accounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movements_Accounts_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="Movements_Accounts" Type="Self.Movements_Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movements_Accounts">
+              <PropertyRef Name="FK_Movements_Accounts_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movements_Accounts_Subaccounts">
+          <End Role="Subaccounts" Type="Self.Subaccounts" Multiplicity="0..1" />
+          <End Role="Movements_Accounts" Type="Self.Movements_Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subaccounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movements_Accounts">
+              <PropertyRef Name="FK_Movements_Accounts_Subaccounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtherDetails_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="OtherDetails" Type="Self.OtherDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtherDetails">
+              <PropertyRef Name="FK_OtherDetails_Accounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtherDetails_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="OtherDetails" Type="Self.OtherDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtherDetails">
+              <PropertyRef Name="FK_OtherDetails_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sectors_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="Sectors" Type="Self.Sectors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sectors">
+              <PropertyRef Name="FK_Sectors_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subaccounts_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Subaccounts" Type="Self.Subaccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subaccounts">
+              <PropertyRef Name="FK_Subaccounts_Accounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subaccounts_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="Subaccounts" Type="Self.Subaccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subaccounts">
+              <PropertyRef Name="FK_Accounts_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnderlyingDebtors_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="UnderlyingDebtors" Type="Self.UnderlyingDebtors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnderlyingDebtors">
+              <PropertyRef Name="FK_UnderlyingDebtors_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FundsDBModelStoreContainer">
+          <EntitySet Name="AccountingMovements" EntityType="Self.AccountingMovements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountsBankingAccounts" EntityType="Self.AccountsBankingAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountsClients" EntityType="Self.AccountsClients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountsCreditors" EntityType="Self.AccountsCreditors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountsEmployees" EntityType="Self.AccountsEmployees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankingAccounts" EntityType="Self.BankingAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Banks" EntityType="Self.Banks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bonds" EntityType="Self.Bonds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BondsInvestors" EntityType="Self.BondsInvestors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Creditors" EntityType="Self.Creditors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currencies" EntityType="Self.Currencies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Disbursements" EntityType="Self.Disbursements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Funds" EntityType="Self.Funds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Investments" EntityType="Self.Investments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Investors" EntityType="Self.Investors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movements_Accounts" EntityType="Self.Movements_Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OtherDetails" EntityType="Self.OtherDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sectors" EntityType="Self.Sectors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subaccounts" EntityType="Self.Subaccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnderlyingDebtors" EntityType="Self.UnderlyingDebtors" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="debtor_bank_id" Association="Self.debtor_bank_id">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="UnderlyingDebtors" EntitySet="UnderlyingDebtors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountingMovements_Currencies" Association="Self.FK_AccountingMovements_Currencies">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="AccountingMovements" EntitySet="AccountingMovements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountingMovements_Funds" Association="Self.FK_AccountingMovements_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="AccountingMovements" EntitySet="AccountingMovements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accounts_Funds" Association="Self.FK_Accounts_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsBankingAccount_Accounts" Association="Self.FK_AccountsBankingAccount_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AccountsBankingAccounts" EntitySet="AccountsBankingAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsBankingAccount_Funds" Association="Self.FK_AccountsBankingAccount_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="AccountsBankingAccounts" EntitySet="AccountsBankingAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsBankingAccounts_BankingAccounts" Association="Self.FK_AccountsBankingAccounts_BankingAccounts">
+            <End Role="BankingAccounts" EntitySet="BankingAccounts" />
+            <End Role="AccountsBankingAccounts" EntitySet="AccountsBankingAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsClients_Accounts" Association="Self.FK_AccountsClients_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AccountsClients" EntitySet="AccountsClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsClients_Clients" Association="Self.FK_AccountsClients_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="AccountsClients" EntitySet="AccountsClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsClients_Funds" Association="Self.FK_AccountsClients_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="AccountsClients" EntitySet="AccountsClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsCreditors_Accounts" Association="Self.FK_AccountsCreditors_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AccountsCreditors" EntitySet="AccountsCreditors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsCreditors_Creditors" Association="Self.FK_AccountsCreditors_Creditors">
+            <End Role="Creditors" EntitySet="Creditors" />
+            <End Role="AccountsCreditors" EntitySet="AccountsCreditors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsCreditors_Funds" Association="Self.FK_AccountsCreditors_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="AccountsCreditors" EntitySet="AccountsCreditors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsEmployees_Accounts" Association="Self.FK_AccountsEmployees_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AccountsEmployees" EntitySet="AccountsEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsEmployees_Employees" Association="Self.FK_AccountsEmployees_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="AccountsEmployees" EntitySet="AccountsEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsEmployees_Funds" Association="Self.FK_AccountsEmployees_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="AccountsEmployees" EntitySet="AccountsEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankingAccounts_Banks" Association="Self.FK_BankingAccounts_Banks">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="BankingAccounts" EntitySet="BankingAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankingAccounts_Currencies" Association="Self.FK_BankingAccounts_Currencies">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="BankingAccounts" EntitySet="BankingAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankingAccounts_Funds" Association="Self.FK_BankingAccounts_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="BankingAccounts" EntitySet="BankingAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Banks_Countries" Association="Self.FK_Banks_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Banks" EntitySet="Banks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Banks_Funds" Association="Self.FK_Banks_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="Banks" EntitySet="Banks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bonds_Funds" Association="Self.FK_Bonds_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="Bonds" EntitySet="Bonds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BondsInvestors_Bonds" Association="Self.FK_BondsInvestors_Bonds">
+            <End Role="Bonds" EntitySet="Bonds" />
+            <End Role="BondsInvestors" EntitySet="BondsInvestors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BondsInvestors_Investors" Association="Self.FK_BondsInvestors_Investors">
+            <End Role="Investors" EntitySet="Investors" />
+            <End Role="BondsInvestors" EntitySet="BondsInvestors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Funds" Association="Self.FK_Clients_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Countries_Funds" Association="Self.FK_Countries_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="Countries" EntitySet="Countries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Creditors_Funds" Association="Self.FK_Creditors_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="Creditors" EntitySet="Creditors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Currencies_Funds" Association="Self.FK_Currencies_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="Currencies" EntitySet="Currencies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Banks" Association="Self.FK_Disbursements_Banks">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="Disbursements" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Clients" Association="Self.FK_Disbursements_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Disbursements" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Currencies" Association="Self.FK_Disbursements_Currencies">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="Disbursements" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Funds" Association="Self.FK_Disbursements_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="Disbursements" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Investments" Association="Self.FK_Disbursements_Investments">
+            <End Role="Investments" EntitySet="Investments" />
+            <End Role="Disbursements" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_UnderlyingDebtors" Association="Self.FK_Disbursements_UnderlyingDebtors">
+            <End Role="UnderlyingDebtors" EntitySet="UnderlyingDebtors" />
+            <End Role="Disbursements" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Funds" Association="Self.FK_Employees_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Investments_Funds" Association="Self.FK_Investments_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="Investments" EntitySet="Investments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Investors_Funds" Association="Self.FK_Investors_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="Investors" EntitySet="Investors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Funds" Association="Self.FK_Items_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movements_Accounts_AccountingMovements" Association="Self.FK_Movements_Accounts_AccountingMovements">
+            <End Role="AccountingMovements" EntitySet="AccountingMovements" />
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movements_Accounts_Accounts" Association="Self.FK_Movements_Accounts_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movements_Accounts_Funds" Association="Self.FK_Movements_Accounts_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movements_Accounts_Subaccounts" Association="Self.FK_Movements_Accounts_Subaccounts">
+            <End Role="Subaccounts" EntitySet="Subaccounts" />
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtherDetails_Accounts" Association="Self.FK_OtherDetails_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="OtherDetails" EntitySet="OtherDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtherDetails_Funds" Association="Self.FK_OtherDetails_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="OtherDetails" EntitySet="OtherDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sectors_Funds" Association="Self.FK_Sectors_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="Sectors" EntitySet="Sectors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subaccounts_Accounts" Association="Self.FK_Subaccounts_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Subaccounts" EntitySet="Subaccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subaccounts_Funds" Association="Self.FK_Subaccounts_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="Subaccounts" EntitySet="Subaccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnderlyingDebtors_Funds" Association="Self.FK_UnderlyingDebtors_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="UnderlyingDebtors" EntitySet="UnderlyingDebtors" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FundsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FundsDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountingMovements" EntityType="FundsDBModel.AccountingMovement" />
+          <EntitySet Name="Accounts" EntityType="FundsDBModel.Account" />
+          <EntitySet Name="AccountsBankingAccounts" EntityType="FundsDBModel.AccountsBankingAccount" />
+          <EntitySet Name="AccountsClients" EntityType="FundsDBModel.AccountsClient" />
+          <EntitySet Name="AccountsCreditors" EntityType="FundsDBModel.AccountsCreditor" />
+          <EntitySet Name="AccountsEmployees" EntityType="FundsDBModel.AccountsEmployee" />
+          <EntitySet Name="BankingAccounts" EntityType="FundsDBModel.BankingAccount" />
+          <EntitySet Name="Banks" EntityType="FundsDBModel.Bank" />
+          <EntitySet Name="Bonds" EntityType="FundsDBModel.Bond" />
+          <EntitySet Name="BondsInvestors" EntityType="FundsDBModel.BondsInvestor" />
+          <EntitySet Name="Clients" EntityType="FundsDBModel.Client" />
+          <EntitySet Name="Countries" EntityType="FundsDBModel.Country" />
+          <EntitySet Name="Creditors" EntityType="FundsDBModel.Creditor" />
+          <EntitySet Name="Currencies" EntityType="FundsDBModel.Currency" />
+          <EntitySet Name="Disbursements" EntityType="FundsDBModel.Disbursement" />
+          <EntitySet Name="Employees" EntityType="FundsDBModel.Employee" />
+          <EntitySet Name="Funds" EntityType="FundsDBModel.Fund" />
+          <EntitySet Name="Investments" EntityType="FundsDBModel.Investment" />
+          <EntitySet Name="Investors" EntityType="FundsDBModel.Investor" />
+          <EntitySet Name="Items" EntityType="FundsDBModel.Item" />
+          <EntitySet Name="Movements_Accounts" EntityType="FundsDBModel.Movements_Accounts" />
+          <EntitySet Name="OtherDetails" EntityType="FundsDBModel.OtherDetail" />
+          <EntitySet Name="Sectors" EntityType="FundsDBModel.Sector" />
+          <EntitySet Name="Subaccounts" EntityType="FundsDBModel.Subaccount" />
+          <EntitySet Name="UnderlyingDebtors" EntityType="FundsDBModel.UnderlyingDebtor" />
+          <AssociationSet Name="FK_AccountingMovements_Currencies" Association="FundsDBModel.FK_AccountingMovements_Currencies">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountingMovements_Funds" Association="FundsDBModel.FK_AccountingMovements_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movements_Accounts_AccountingMovements" Association="FundsDBModel.FK_Movements_Accounts_AccountingMovements">
+            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accounts_Funds" Association="FundsDBModel.FK_Accounts_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsBankingAccount_Accounts" Association="FundsDBModel.FK_AccountsBankingAccount_Accounts">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="AccountsBankingAccount" EntitySet="AccountsBankingAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsClients_Accounts" Association="FundsDBModel.FK_AccountsClients_Accounts">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="AccountsClient" EntitySet="AccountsClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsCreditors_Accounts" Association="FundsDBModel.FK_AccountsCreditors_Accounts">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="AccountsCreditor" EntitySet="AccountsCreditors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsEmployees_Accounts" Association="FundsDBModel.FK_AccountsEmployees_Accounts">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="AccountsEmployee" EntitySet="AccountsEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movements_Accounts_Accounts" Association="FundsDBModel.FK_Movements_Accounts_Accounts">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtherDetails_Accounts" Association="FundsDBModel.FK_OtherDetails_Accounts">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="OtherDetail" EntitySet="OtherDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subaccounts_Accounts" Association="FundsDBModel.FK_Subaccounts_Accounts">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Subaccount" EntitySet="Subaccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsBankingAccount_Funds" Association="FundsDBModel.FK_AccountsBankingAccount_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="AccountsBankingAccount" EntitySet="AccountsBankingAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsBankingAccounts_BankingAccounts" Association="FundsDBModel.FK_AccountsBankingAccounts_BankingAccounts">
+            <End Role="BankingAccount" EntitySet="BankingAccounts" />
+            <End Role="AccountsBankingAccount" EntitySet="AccountsBankingAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsClients_Clients" Association="FundsDBModel.FK_AccountsClients_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="AccountsClient" EntitySet="AccountsClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsClients_Funds" Association="FundsDBModel.FK_AccountsClients_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="AccountsClient" EntitySet="AccountsClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsCreditors_Creditors" Association="FundsDBModel.FK_AccountsCreditors_Creditors">
+            <End Role="Creditor" EntitySet="Creditors" />
+            <End Role="AccountsCreditor" EntitySet="AccountsCreditors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsCreditors_Funds" Association="FundsDBModel.FK_AccountsCreditors_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="AccountsCreditor" EntitySet="AccountsCreditors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsEmployees_Employees" Association="FundsDBModel.FK_AccountsEmployees_Employees">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="AccountsEmployee" EntitySet="AccountsEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsEmployees_Funds" Association="FundsDBModel.FK_AccountsEmployees_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="AccountsEmployee" EntitySet="AccountsEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankingAccounts_Banks" Association="FundsDBModel.FK_BankingAccounts_Banks">
+            <End Role="Bank" EntitySet="Banks" />
+            <End Role="BankingAccount" EntitySet="BankingAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankingAccounts_Currencies" Association="FundsDBModel.FK_BankingAccounts_Currencies">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="BankingAccount" EntitySet="BankingAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankingAccounts_Funds" Association="FundsDBModel.FK_BankingAccounts_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="BankingAccount" EntitySet="BankingAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="debtor_bank_id" Association="FundsDBModel.debtor_bank_id">
+            <End Role="Bank" EntitySet="Banks" />
+            <End Role="UnderlyingDebtor" EntitySet="UnderlyingDebtors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Banks_Countries" Association="FundsDBModel.FK_Banks_Countries">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Bank" EntitySet="Banks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Banks_Funds" Association="FundsDBModel.FK_Banks_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Bank" EntitySet="Banks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Banks" Association="FundsDBModel.FK_Disbursements_Banks">
+            <End Role="Bank" EntitySet="Banks" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bonds_Funds" Association="FundsDBModel.FK_Bonds_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Bond" EntitySet="Bonds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BondsInvestors_Bonds" Association="FundsDBModel.FK_BondsInvestors_Bonds">
+            <End Role="Bond" EntitySet="Bonds" />
+            <End Role="BondsInvestor" EntitySet="BondsInvestors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BondsInvestors_Investors" Association="FundsDBModel.FK_BondsInvestors_Investors">
+            <End Role="Investor" EntitySet="Investors" />
+            <End Role="BondsInvestor" EntitySet="BondsInvestors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Funds" Association="FundsDBModel.FK_Clients_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Clients" Association="FundsDBModel.FK_Disbursements_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Countries_Funds" Association="FundsDBModel.FK_Countries_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Country" EntitySet="Countries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Creditors_Funds" Association="FundsDBModel.FK_Creditors_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Creditor" EntitySet="Creditors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Currencies_Funds" Association="FundsDBModel.FK_Currencies_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Currency" EntitySet="Currencies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Currencies" Association="FundsDBModel.FK_Disbursements_Currencies">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Funds" Association="FundsDBModel.FK_Disbursements_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Investments" Association="FundsDBModel.FK_Disbursements_Investments">
+            <End Role="Investment" EntitySet="Investments" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_UnderlyingDebtors" Association="FundsDBModel.FK_Disbursements_UnderlyingDebtors">
+            <End Role="UnderlyingDebtor" EntitySet="UnderlyingDebtors" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Funds" Association="FundsDBModel.FK_Employees_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Investments_Funds" Association="FundsDBModel.FK_Investments_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Investment" EntitySet="Investments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Investors_Funds" Association="FundsDBModel.FK_Investors_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Investor" EntitySet="Investors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Funds" Association="FundsDBModel.FK_Items_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movements_Accounts_Funds" Association="FundsDBModel.FK_Movements_Accounts_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtherDetails_Funds" Association="FundsDBModel.FK_OtherDetails_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="OtherDetail" EntitySet="OtherDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sectors_Funds" Association="FundsDBModel.FK_Sectors_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Sector" EntitySet="Sectors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subaccounts_Funds" Association="FundsDBModel.FK_Subaccounts_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Subaccount" EntitySet="Subaccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnderlyingDebtors_Funds" Association="FundsDBModel.FK_UnderlyingDebtors_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="UnderlyingDebtor" EntitySet="UnderlyingDebtors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movements_Accounts_Subaccounts" Association="FundsDBModel.FK_Movements_Accounts_Subaccounts">
+            <End Role="Subaccount" EntitySet="Subaccounts" />
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AccountingMovement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_AccountingMovements_Funds" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="reference" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_AccountingMovements_Currencies" Type="Int32" Nullable="false" />
+          <Property Name="original_reference" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Currency" Relationship="FundsDBModel.FK_AccountingMovements_Currencies" FromRole="AccountingMovement" ToRole="Currency" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_AccountingMovements_Funds" FromRole="AccountingMovement" ToRole="Fund" />
+          <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_AccountingMovements" FromRole="AccountingMovement" ToRole="Movements_Accounts" />
+        </EntityType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="FK_Accounts_Funds" Type="Int32" Nullable="false" />
+          <Property Name="number" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Accounts_Funds" FromRole="Account" ToRole="Fund" />
+          <NavigationProperty Name="AccountsBankingAccounts" Relationship="FundsDBModel.FK_AccountsBankingAccount_Accounts" FromRole="Account" ToRole="AccountsBankingAccount" />
+          <NavigationProperty Name="AccountsClients" Relationship="FundsDBModel.FK_AccountsClients_Accounts" FromRole="Account" ToRole="AccountsClient" />
+          <NavigationProperty Name="AccountsCreditors" Relationship="FundsDBModel.FK_AccountsCreditors_Accounts" FromRole="Account" ToRole="AccountsCreditor" />
+          <NavigationProperty Name="AccountsEmployees" Relationship="FundsDBModel.FK_AccountsEmployees_Accounts" FromRole="Account" ToRole="AccountsEmployee" />
+          <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_Accounts" FromRole="Account" ToRole="Movements_Accounts" />
+          <NavigationProperty Name="OtherDetails" Relationship="FundsDBModel.FK_OtherDetails_Accounts" FromRole="Account" ToRole="OtherDetail" />
+          <NavigationProperty Name="Subaccounts" Relationship="FundsDBModel.FK_Subaccounts_Accounts" FromRole="Account" ToRole="Subaccount" />
+        </EntityType>
+        <EntityType Name="AccountsBankingAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_AccountsBankingAccount_Funds" Type="Int32" Nullable="false" />
+          <Property Name="account_id" Type="Int32" Nullable="false" />
+          <Property Name="banking_account_id" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Account" Relationship="FundsDBModel.FK_AccountsBankingAccount_Accounts" FromRole="AccountsBankingAccount" ToRole="Account" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_AccountsBankingAccount_Funds" FromRole="AccountsBankingAccount" ToRole="Fund" />
+          <NavigationProperty Name="BankingAccount" Relationship="FundsDBModel.FK_AccountsBankingAccounts_BankingAccounts" FromRole="AccountsBankingAccount" ToRole="BankingAccount" />
+        </EntityType>
+        <EntityType Name="AccountsClient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="account_id" Type="Int32" Nullable="false" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="FK_AccountsBankingAccount_Funds" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="FundsDBModel.FK_AccountsClients_Accounts" FromRole="AccountsClient" ToRole="Account" />
+          <NavigationProperty Name="Client" Relationship="FundsDBModel.FK_AccountsClients_Clients" FromRole="AccountsClient" ToRole="Client" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_AccountsClients_Funds" FromRole="AccountsClient" ToRole="Fund" />
+        </EntityType>
+        <EntityType Name="AccountsCreditor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_AccountsCreditors_Funds" Type="Int32" Nullable="false" />
+          <Property Name="account_id" Type="Int32" Nullable="false" />
+          <Property Name="creditor_id" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Account" Relationship="FundsDBModel.FK_AccountsCreditors_Accounts" FromRole="AccountsCreditor" ToRole="Account" />
+          <NavigationProperty Name="Creditor" Relationship="FundsDBModel.FK_AccountsCreditors_Creditors" FromRole="AccountsCreditor" ToRole="Creditor" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_AccountsCreditors_Funds" FromRole="AccountsCreditor" ToRole="Fund" />
+        </EntityType>
+        <EntityType Name="AccountsEmployee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_AccountsEmployees_Funds" Type="Int32" Nullable="false" />
+          <Property Name="account_id" Type="Int32" Nullable="false" />
+          <Property Name="employee_id" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Account" Relationship="FundsDBModel.FK_AccountsEmployees_Accounts" FromRole="AccountsEmployee" ToRole="Account" />
+          <NavigationProperty Name="Employee" Relationship="FundsDBModel.FK_AccountsEmployees_Employees" FromRole="AccountsEmployee" ToRole="Employee" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_AccountsEmployees_Funds" FromRole="AccountsEmployee" ToRole="Fund" />
+        </EntityType>
+        <EntityType Name="BankingAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="iban" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FK_BankingAccounts_Banks" Type="Int32" Nullable="false" />
+          <Property Name="FK_BankingAccounts_Currencies" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="FK_BankingAccounts_Funds" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccountsBankingAccounts" Relationship="FundsDBModel.FK_AccountsBankingAccounts_BankingAccounts" FromRole="BankingAccount" ToRole="AccountsBankingAccount" />
+          <NavigationProperty Name="Bank" Relationship="FundsDBModel.FK_BankingAccounts_Banks" FromRole="BankingAccount" ToRole="Bank" />
+          <NavigationProperty Name="Currency" Relationship="FundsDBModel.FK_BankingAccounts_Currencies" FromRole="BankingAccount" ToRole="Currency" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_BankingAccounts_Funds" FromRole="BankingAccount" ToRole="Fund" />
+        </EntityType>
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="own" Type="Int32" Nullable="false" />
+          <Property Name="FK_Banks_Funds" Type="Int32" Nullable="false" />
+          <Property Name="FK_Banks_Countries" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BankingAccounts" Relationship="FundsDBModel.FK_BankingAccounts_Banks" FromRole="Bank" ToRole="BankingAccount" />
+          <NavigationProperty Name="UnderlyingDebtors" Relationship="FundsDBModel.debtor_bank_id" FromRole="Bank" ToRole="UnderlyingDebtor" />
+          <NavigationProperty Name="Country" Relationship="FundsDBModel.FK_Banks_Countries" FromRole="Bank" ToRole="Country" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Banks_Funds" FromRole="Bank" ToRole="Fund" />
+          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Banks" FromRole="Bank" ToRole="Disbursement" />
+        </EntityType>
+        <EntityType Name="Bond">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="number" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="issued" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FK_Bonds_Funds" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="interest_on_bond" Type="Double" Nullable="false" />
+          <Property Name="interest_tff_contribution" Type="Double" Nullable="false" />
+          <Property Name="pieces" Type="Double" Nullable="false" />
+          <Property Name="active" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Bonds_Funds" FromRole="Bond" ToRole="Fund" />
+          <NavigationProperty Name="BondsInvestors" Relationship="FundsDBModel.FK_BondsInvestors_Bonds" FromRole="Bond" ToRole="BondsInvestor" />
+        </EntityType>
+        <EntityType Name="BondsInvestor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_BondsInvestors_Bonds" Type="Int32" Nullable="false" />
+          <Property Name="FK_BondsInvestors_Investors" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Bond" Relationship="FundsDBModel.FK_BondsInvestors_Bonds" FromRole="BondsInvestor" ToRole="Bond" />
+          <NavigationProperty Name="Investor" Relationship="FundsDBModel.FK_BondsInvestors_Investors" FromRole="BondsInvestor" ToRole="Investor" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Clients_Funds" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccountsClients" Relationship="FundsDBModel.FK_AccountsClients_Clients" FromRole="Client" ToRole="AccountsClient" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Clients_Funds" FromRole="Client" ToRole="Fund" />
+          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Clients" FromRole="Client" ToRole="Disbursement" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Countries_Funds" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Banks" Relationship="FundsDBModel.FK_Banks_Countries" FromRole="Country" ToRole="Bank" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Countries_Funds" FromRole="Country" ToRole="Fund" />
+        </EntityType>
+        <EntityType Name="Creditor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Creditors_Funds" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccountsCreditors" Relationship="FundsDBModel.FK_AccountsCreditors_Creditors" FromRole="Creditor" ToRole="AccountsCreditor" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Creditors_Funds" FromRole="Creditor" ToRole="Fund" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="symbol" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="exchange" Type="Single" Nullable="false" />
+          <Property Name="FK_Currencies_Funds" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccountingMovements" Relationship="FundsDBModel.FK_AccountingMovements_Currencies" FromRole="Currency" ToRole="AccountingMovement" />
+          <NavigationProperty Name="BankingAccounts" Relationship="FundsDBModel.FK_BankingAccounts_Currencies" FromRole="Currency" ToRole="BankingAccount" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Currencies_Funds" FromRole="Currency" ToRole="Fund" />
+          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Currencies" FromRole="Currency" ToRole="Disbursement" />
+        </EntityType>
+        <EntityType Name="Disbursement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="investment_id" Type="Int32" Nullable="false" />
+          <Property Name="currency_id" Type="Int32" Nullable="false" />
+          <Property Name="exchange_rate" Type="Int32" Nullable="false" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="underlying_debtor_id" Type="Int32" />
+          <Property Name="bank_risk_id" Type="Int32" />
+          <Property Name="profit_share" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="fund_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bank" Relationship="FundsDBModel.FK_Disbursements_Banks" FromRole="Disbursement" ToRole="Bank" />
+          <NavigationProperty Name="Client" Relationship="FundsDBModel.FK_Disbursements_Clients" FromRole="Disbursement" ToRole="Client" />
+          <NavigationProperty Name="Currency" Relationship="FundsDBModel.FK_Disbursements_Currencies" FromRole="Disbursement" ToRole="Currency" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Disbursements_Funds" FromRole="Disbursement" ToRole="Fund" />
+          <NavigationProperty Name="Investment" Relationship="FundsDBModel.FK_Disbursements_Investments" FromRole="Disbursement" ToRole="Investment" />
+          <NavigationProperty Name="UnderlyingDebtor" Relationship="FundsDBModel.FK_Disbursements_UnderlyingDebtors" FromRole="Disbursement" ToRole="UnderlyingDebtor" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Employees_Funds" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccountsEmployees" Relationship="FundsDBModel.FK_AccountsEmployees_Employees" FromRole="Employee" ToRole="AccountsEmployee" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Employees_Funds" FromRole="Employee" ToRole="Fund" />
+        </EntityType>
+        <EntityType Name="Fund">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="contract_prefix" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AccountingMovements" Relationship="FundsDBModel.FK_AccountingMovements_Funds" FromRole="Fund" ToRole="AccountingMovement" />
+          <NavigationProperty Name="Accounts" Relationship="FundsDBModel.FK_Accounts_Funds" FromRole="Fund" ToRole="Account" />
+          <NavigationProperty Name="AccountsBankingAccounts" Relationship="FundsDBModel.FK_AccountsBankingAccount_Funds" FromRole="Fund" ToRole="AccountsBankingAccount" />
+          <NavigationProperty Name="AccountsClients" Relationship="FundsDBModel.FK_AccountsClients_Funds" FromRole="Fund" ToRole="AccountsClient" />
+          <NavigationProperty Name="AccountsCreditors" Relationship="FundsDBModel.FK_AccountsCreditors_Funds" FromRole="Fund" ToRole="AccountsCreditor" />
+          <NavigationProperty Name="AccountsEmployees" Relationship="FundsDBModel.FK_AccountsEmployees_Funds" FromRole="Fund" ToRole="AccountsEmployee" />
+          <NavigationProperty Name="BankingAccounts" Relationship="FundsDBModel.FK_BankingAccounts_Funds" FromRole="Fund" ToRole="BankingAccount" />
+          <NavigationProperty Name="Banks" Relationship="FundsDBModel.FK_Banks_Funds" FromRole="Fund" ToRole="Bank" />
+          <NavigationProperty Name="Bonds" Relationship="FundsDBModel.FK_Bonds_Funds" FromRole="Fund" ToRole="Bond" />
+          <NavigationProperty Name="Clients" Relationship="FundsDBModel.FK_Clients_Funds" FromRole="Fund" ToRole="Client" />
+          <NavigationProperty Name="Countries" Relationship="FundsDBModel.FK_Countries_Funds" FromRole="Fund" ToRole="Country" />
+          <NavigationProperty Name="Creditors" Relationship="FundsDBModel.FK_Creditors_Funds" FromRole="Fund" ToRole="Creditor" />
+          <NavigationProperty Name="Currencies" Relationship="FundsDBModel.FK_Currencies_Funds" FromRole="Fund" ToRole="Currency" />
+          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Funds" FromRole="Fund" ToRole="Disbursement" />
+          <NavigationProperty Name="Employees" Relationship="FundsDBModel.FK_Employees_Funds" FromRole="Fund" ToRole="Employee" />
+          <NavigationProperty Name="Investments" Relationship="FundsDBModel.FK_Investments_Funds" FromRole="Fund" ToRole="Investment" />
+          <NavigationProperty Name="Investors" Relationship="FundsDBModel.FK_Investors_Funds" FromRole="Fund" ToRole="Investor" />
+          <NavigationProperty Name="Items" Relationship="FundsDBModel.FK_Items_Funds" FromRole="Fund" ToRole="Item" />
+          <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_Funds" FromRole="Fund" ToRole="Movements_Accounts" />
+          <NavigationProperty Name="OtherDetails" Relationship="FundsDBModel.FK_OtherDetails_Funds" FromRole="Fund" ToRole="OtherDetail" />
+          <NavigationProperty Name="Sectors" Relationship="FundsDBModel.FK_Sectors_Funds" FromRole="Fund" ToRole="Sector" />
+          <NavigationProperty Name="Subaccounts" Relationship="FundsDBModel.FK_Subaccounts_Funds" FromRole="Fund" ToRole="Subaccount" />
+          <NavigationProperty Name="UnderlyingDebtors" Relationship="FundsDBModel.FK_UnderlyingDebtors_Funds" FromRole="Fund" ToRole="UnderlyingDebtor" />
+        </EntityType>
+        <EntityType Name="Investment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contract" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="total_disbursement" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="profit_share" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fund_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Investments" FromRole="Investment" ToRole="Disbursement" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Investments_Funds" FromRole="Investment" ToRole="Fund" />
+        </EntityType>
+        <EntityType Name="Investor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Investors_Funds" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BondsInvestors" Relationship="FundsDBModel.FK_BondsInvestors_Investors" FromRole="Investor" ToRole="BondsInvestor" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Investors_Funds" FromRole="Investor" ToRole="Fund" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Items_Funds" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Items_Funds" FromRole="Item" ToRole="Fund" />
+        </EntityType>
+        <EntityType Name="Movements_Accounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_Movements_Accounts_Subaccounts" Type="Int32" />
+          <Property Name="FK_Movements_Accounts_AccountingMovements" Type="Int32" Nullable="false" />
+          <Property Name="credit" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="debit" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="subaccount" Type="Int32" />
+          <Property Name="subaccount_type" Type="Int32" />
+          <Property Name="FK_Movements_Accounts_Funds" Type="Int32" Nullable="false" />
+          <Property Name="FK_Movements_Accounts_Accounts" Type="Int32" />
+          <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_Movements_Accounts_AccountingMovements" FromRole="Movements_Accounts" ToRole="AccountingMovement" />
+          <NavigationProperty Name="Account" Relationship="FundsDBModel.FK_Movements_Accounts_Accounts" FromRole="Movements_Accounts" ToRole="Account" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Movements_Accounts_Funds" FromRole="Movements_Accounts" ToRole="Fund" />
+          <NavigationProperty Name="Subaccount1" Relationship="FundsDBModel.FK_Movements_Accounts_Subaccounts" FromRole="Movements_Accounts" ToRole="Subaccount" />
+        </EntityType>
+        <EntityType Name="OtherDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_OtherDetails_Funds" Type="Int32" Nullable="false" />
+          <Property Name="FK_OtherDetails_Accounts" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="FundsDBModel.FK_OtherDetails_Accounts" FromRole="OtherDetail" ToRole="Account" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_OtherDetails_Funds" FromRole="OtherDetail" ToRole="Fund" />
+        </EntityType>
+        <EntityType Name="Sector">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Sectors_Funds" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Sectors_Funds" FromRole="Sector" ToRole="Fund" />
+        </EntityType>
+        <EntityType Name="Subaccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Subaccounts_Accounts" Type="Int32" Nullable="false" />
+          <Property Name="FK_Accounts_Funds" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="FundsDBModel.FK_Subaccounts_Accounts" FromRole="Subaccount" ToRole="Account" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Subaccounts_Funds" FromRole="Subaccount" ToRole="Fund" />
+          <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_Subaccounts" FromRole="Subaccount" ToRole="Movements_Accounts" />
+        </EntityType>
+        <EntityType Name="UnderlyingDebtor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="debtor_bank_id" Type="Int32" />
+          <Property Name="FK_UnderlyingDebtors_Funds" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bank" Relationship="FundsDBModel.debtor_bank_id" FromRole="UnderlyingDebtor" ToRole="Bank" />
+          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_UnderlyingDebtors" FromRole="UnderlyingDebtor" ToRole="Disbursement" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_UnderlyingDebtors_Funds" FromRole="UnderlyingDebtor" ToRole="Fund" />
+        </EntityType>
+        <Association Name="FK_AccountingMovements_Currencies">
+          <End Type="FundsDBModel.Currency" Role="Currency" Multiplicity="1" />
+          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountingMovement">
+              <PropertyRef Name="FK_AccountingMovements_Currencies" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountingMovements_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountingMovement">
+              <PropertyRef Name="FK_AccountingMovements_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movements_Accounts_AccountingMovements">
+          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="1" />
+          <End Type="FundsDBModel.Movements_Accounts" Role="Movements_Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingMovement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movements_Accounts">
+              <PropertyRef Name="FK_Movements_Accounts_AccountingMovements" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accounts_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="FK_Accounts_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsBankingAccount_Accounts">
+          <End Type="FundsDBModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="FundsDBModel.AccountsBankingAccount" Role="AccountsBankingAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsBankingAccount">
+              <PropertyRef Name="account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsClients_Accounts">
+          <End Type="FundsDBModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="FundsDBModel.AccountsClient" Role="AccountsClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsClient">
+              <PropertyRef Name="account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsCreditors_Accounts">
+          <End Type="FundsDBModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="FundsDBModel.AccountsCreditor" Role="AccountsCreditor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsCreditor">
+              <PropertyRef Name="account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsEmployees_Accounts">
+          <End Type="FundsDBModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="FundsDBModel.AccountsEmployee" Role="AccountsEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsEmployee">
+              <PropertyRef Name="account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movements_Accounts_Accounts">
+          <End Type="FundsDBModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="FundsDBModel.Movements_Accounts" Role="Movements_Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movements_Accounts">
+              <PropertyRef Name="FK_Movements_Accounts_Accounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtherDetails_Accounts">
+          <End Type="FundsDBModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="FundsDBModel.OtherDetail" Role="OtherDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtherDetail">
+              <PropertyRef Name="FK_OtherDetails_Accounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subaccounts_Accounts">
+          <End Type="FundsDBModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="FundsDBModel.Subaccount" Role="Subaccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subaccount">
+              <PropertyRef Name="FK_Subaccounts_Accounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsBankingAccount_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.AccountsBankingAccount" Role="AccountsBankingAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsBankingAccount">
+              <PropertyRef Name="FK_AccountsBankingAccount_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsBankingAccounts_BankingAccounts">
+          <End Type="FundsDBModel.BankingAccount" Role="BankingAccount" Multiplicity="1" />
+          <End Type="FundsDBModel.AccountsBankingAccount" Role="AccountsBankingAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankingAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsBankingAccount">
+              <PropertyRef Name="banking_account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsClients_Clients">
+          <End Type="FundsDBModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="FundsDBModel.AccountsClient" Role="AccountsClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsClient">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsClients_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.AccountsClient" Role="AccountsClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsClient">
+              <PropertyRef Name="FK_AccountsBankingAccount_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsCreditors_Creditors">
+          <End Type="FundsDBModel.Creditor" Role="Creditor" Multiplicity="1" />
+          <End Type="FundsDBModel.AccountsCreditor" Role="AccountsCreditor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Creditor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsCreditor">
+              <PropertyRef Name="creditor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsCreditors_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.AccountsCreditor" Role="AccountsCreditor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsCreditor">
+              <PropertyRef Name="FK_AccountsCreditors_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsEmployees_Employees">
+          <End Type="FundsDBModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="FundsDBModel.AccountsEmployee" Role="AccountsEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsEmployee">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsEmployees_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.AccountsEmployee" Role="AccountsEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountsEmployee">
+              <PropertyRef Name="FK_AccountsEmployees_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankingAccounts_Banks">
+          <End Type="FundsDBModel.Bank" Role="Bank" Multiplicity="1" />
+          <End Type="FundsDBModel.BankingAccount" Role="BankingAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankingAccount">
+              <PropertyRef Name="FK_BankingAccounts_Banks" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankingAccounts_Currencies">
+          <End Type="FundsDBModel.Currency" Role="Currency" Multiplicity="1" />
+          <End Type="FundsDBModel.BankingAccount" Role="BankingAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankingAccount">
+              <PropertyRef Name="FK_BankingAccounts_Currencies" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankingAccounts_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.BankingAccount" Role="BankingAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankingAccount">
+              <PropertyRef Name="FK_BankingAccounts_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="debtor_bank_id">
+          <End Type="FundsDBModel.Bank" Role="Bank" Multiplicity="0..1" />
+          <End Type="FundsDBModel.UnderlyingDebtor" Role="UnderlyingDebtor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnderlyingDebtor">
+              <PropertyRef Name="debtor_bank_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Banks_Countries">
+          <End Type="FundsDBModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="FundsDBModel.Bank" Role="Bank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bank">
+              <PropertyRef Name="FK_Banks_Countries" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Banks_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Bank" Role="Bank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bank">
+              <PropertyRef Name="FK_Banks_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Banks">
+          <End Type="FundsDBModel.Bank" Role="Bank" Multiplicity="0..1" />
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="bank_risk_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bonds_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Bond" Role="Bond" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bond">
+              <PropertyRef Name="FK_Bonds_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BondsInvestors_Bonds">
+          <End Type="FundsDBModel.Bond" Role="Bond" Multiplicity="1" />
+          <End Type="FundsDBModel.BondsInvestor" Role="BondsInvestor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bond">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BondsInvestor">
+              <PropertyRef Name="FK_BondsInvestors_Bonds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BondsInvestors_Investors">
+          <End Type="FundsDBModel.Investor" Role="Investor" Multiplicity="1" />
+          <End Type="FundsDBModel.BondsInvestor" Role="BondsInvestor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Investor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BondsInvestor">
+              <PropertyRef Name="FK_BondsInvestors_Investors" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Client" Role="Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="FK_Clients_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Clients">
+          <End Type="FundsDBModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Countries_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Country" Role="Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Country">
+              <PropertyRef Name="FK_Countries_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Creditors_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Creditor" Role="Creditor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Creditor">
+              <PropertyRef Name="FK_Creditors_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Currencies_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Currency" Role="Currency" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Currency">
+              <PropertyRef Name="FK_Currencies_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Currencies">
+          <End Type="FundsDBModel.Currency" Role="Currency" Multiplicity="1" />
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="fund_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Investments">
+          <End Type="FundsDBModel.Investment" Role="Investment" Multiplicity="1" />
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Investment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="investment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_UnderlyingDebtors">
+          <End Type="FundsDBModel.UnderlyingDebtor" Role="UnderlyingDebtor" Multiplicity="0..1" />
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnderlyingDebtor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="underlying_debtor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="FK_Employees_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Investments_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Investment" Role="Investment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Investment">
+              <PropertyRef Name="fund_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Investors_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Investor" Role="Investor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Investor">
+              <PropertyRef Name="FK_Investors_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="FK_Items_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movements_Accounts_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Movements_Accounts" Role="Movements_Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movements_Accounts">
+              <PropertyRef Name="FK_Movements_Accounts_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtherDetails_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.OtherDetail" Role="OtherDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtherDetail">
+              <PropertyRef Name="FK_OtherDetails_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sectors_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Sector" Role="Sector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sector">
+              <PropertyRef Name="FK_Sectors_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subaccounts_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Subaccount" Role="Subaccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subaccount">
+              <PropertyRef Name="FK_Accounts_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnderlyingDebtors_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.UnderlyingDebtor" Role="UnderlyingDebtor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnderlyingDebtor">
+              <PropertyRef Name="FK_UnderlyingDebtors_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movements_Accounts_Subaccounts">
+          <End Type="FundsDBModel.Subaccount" Role="Subaccount" Multiplicity="0..1" />
+          <End Type="FundsDBModel.Movements_Accounts" Role="Movements_Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subaccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movements_Accounts">
+              <PropertyRef Name="FK_Movements_Accounts_Subaccounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FundsDBModelStoreContainer" CdmEntityContainer="FundsDBEntities">
+          <EntitySetMapping Name="AccountingMovements">
+            <EntityTypeMapping TypeName="FundsDBModel.AccountingMovement">
+              <MappingFragment StoreEntitySet="AccountingMovements">
+                <ScalarProperty Name="original_reference" ColumnName="original_reference" />
+                <ScalarProperty Name="FK_AccountingMovements_Currencies" ColumnName="FK_AccountingMovements_Currencies" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="FK_AccountingMovements_Funds" ColumnName="FK_AccountingMovements_Funds" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="FundsDBModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="FK_Accounts_Funds" ColumnName="FK_Accounts_Funds" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountsBankingAccounts">
+            <EntityTypeMapping TypeName="FundsDBModel.AccountsBankingAccount">
+              <MappingFragment StoreEntitySet="AccountsBankingAccounts">
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="banking_account_id" ColumnName="banking_account_id" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="FK_AccountsBankingAccount_Funds" ColumnName="FK_AccountsBankingAccount_Funds" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountsClients">
+            <EntityTypeMapping TypeName="FundsDBModel.AccountsClient">
+              <MappingFragment StoreEntitySet="AccountsClients">
+                <ScalarProperty Name="FK_AccountsBankingAccount_Funds" ColumnName="FK_AccountsBankingAccount_Funds" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountsCreditors">
+            <EntityTypeMapping TypeName="FundsDBModel.AccountsCreditor">
+              <MappingFragment StoreEntitySet="AccountsCreditors">
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="creditor_id" ColumnName="creditor_id" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="FK_AccountsCreditors_Funds" ColumnName="FK_AccountsCreditors_Funds" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountsEmployees">
+            <EntityTypeMapping TypeName="FundsDBModel.AccountsEmployee">
+              <MappingFragment StoreEntitySet="AccountsEmployees">
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="FK_AccountsEmployees_Funds" ColumnName="FK_AccountsEmployees_Funds" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankingAccounts">
+            <EntityTypeMapping TypeName="FundsDBModel.BankingAccount">
+              <MappingFragment StoreEntitySet="BankingAccounts">
+                <ScalarProperty Name="FK_BankingAccounts_Funds" ColumnName="FK_BankingAccounts_Funds" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="FK_BankingAccounts_Currencies" ColumnName="FK_BankingAccounts_Currencies" />
+                <ScalarProperty Name="FK_BankingAccounts_Banks" ColumnName="FK_BankingAccounts_Banks" />
+                <ScalarProperty Name="iban" ColumnName="iban" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banks">
+            <EntityTypeMapping TypeName="FundsDBModel.Bank">
+              <MappingFragment StoreEntitySet="Banks">
+                <ScalarProperty Name="FK_Banks_Countries" ColumnName="FK_Banks_Countries" />
+                <ScalarProperty Name="FK_Banks_Funds" ColumnName="FK_Banks_Funds" />
+                <ScalarProperty Name="own" ColumnName="own" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bonds">
+            <EntityTypeMapping TypeName="FundsDBModel.Bond">
+              <MappingFragment StoreEntitySet="Bonds">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="pieces" ColumnName="pieces" />
+                <ScalarProperty Name="interest_tff_contribution" ColumnName="interest_tff_contribution" />
+                <ScalarProperty Name="interest_on_bond" ColumnName="interest_on_bond" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="FK_Bonds_Funds" ColumnName="FK_Bonds_Funds" />
+                <ScalarProperty Name="issued" ColumnName="issued" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BondsInvestors">
+            <EntityTypeMapping TypeName="FundsDBModel.BondsInvestor">
+              <MappingFragment StoreEntitySet="BondsInvestors">
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="FK_BondsInvestors_Investors" ColumnName="FK_BondsInvestors_Investors" />
+                <ScalarProperty Name="FK_BondsInvestors_Bonds" ColumnName="FK_BondsInvestors_Bonds" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="FundsDBModel.Client">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="FK_Clients_Funds" ColumnName="FK_Clients_Funds" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="FundsDBModel.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="FK_Countries_Funds" ColumnName="FK_Countries_Funds" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Creditors">
+            <EntityTypeMapping TypeName="FundsDBModel.Creditor">
+              <MappingFragment StoreEntitySet="Creditors">
+                <ScalarProperty Name="FK_Creditors_Funds" ColumnName="FK_Creditors_Funds" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currencies">
+            <EntityTypeMapping TypeName="FundsDBModel.Currency">
+              <MappingFragment StoreEntitySet="Currencies">
+                <ScalarProperty Name="FK_Currencies_Funds" ColumnName="FK_Currencies_Funds" />
+                <ScalarProperty Name="exchange" ColumnName="exchange" />
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Disbursements">
+            <EntityTypeMapping TypeName="FundsDBModel.Disbursement">
+              <MappingFragment StoreEntitySet="Disbursements">
+                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="profit_share" ColumnName="profit_share" />
+                <ScalarProperty Name="bank_risk_id" ColumnName="bank_risk_id" />
+                <ScalarProperty Name="underlying_debtor_id" ColumnName="underlying_debtor_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="exchange_rate" ColumnName="exchange_rate" />
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+                <ScalarProperty Name="investment_id" ColumnName="investment_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="FundsDBModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="FK_Employees_Funds" ColumnName="FK_Employees_Funds" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Funds">
+            <EntityTypeMapping TypeName="FundsDBModel.Fund">
+              <MappingFragment StoreEntitySet="Funds">
+                <ScalarProperty Name="contract_prefix" ColumnName="contract_prefix" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Investments">
+            <EntityTypeMapping TypeName="FundsDBModel.Investment">
+              <MappingFragment StoreEntitySet="Investments">
+                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
+                <ScalarProperty Name="profit_share" ColumnName="profit_share" />
+                <ScalarProperty Name="total_disbursement" ColumnName="total_disbursement" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="contract" ColumnName="contract" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Investors">
+            <EntityTypeMapping TypeName="FundsDBModel.Investor">
+              <MappingFragment StoreEntitySet="Investors">
+                <ScalarProperty Name="FK_Investors_Funds" ColumnName="FK_Investors_Funds" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="FundsDBModel.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="FK_Items_Funds" ColumnName="FK_Items_Funds" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movements_Accounts">
+            <EntityTypeMapping TypeName="FundsDBModel.Movements_Accounts">
+              <MappingFragment StoreEntitySet="Movements_Accounts">
+                <ScalarProperty Name="FK_Movements_Accounts_Accounts" ColumnName="FK_Movements_Accounts_Accounts" />
+                <ScalarProperty Name="FK_Movements_Accounts_Funds" ColumnName="FK_Movements_Accounts_Funds" />
+                <ScalarProperty Name="subaccount_type" ColumnName="subaccount_type" />
+                <ScalarProperty Name="subaccount" ColumnName="subaccount" />
+                <ScalarProperty Name="debit" ColumnName="debit" />
+                <ScalarProperty Name="credit" ColumnName="credit" />
+                <ScalarProperty Name="FK_Movements_Accounts_AccountingMovements" ColumnName="FK_Movements_Accounts_AccountingMovements" />
+                <ScalarProperty Name="FK_Movements_Accounts_Subaccounts" ColumnName="FK_Movements_Accounts_Subaccounts" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OtherDetails">
+            <EntityTypeMapping TypeName="FundsDBModel.OtherDetail">
+              <MappingFragment StoreEntitySet="OtherDetails">
+                <ScalarProperty Name="FK_OtherDetails_Accounts" ColumnName="FK_OtherDetails_Accounts" />
+                <ScalarProperty Name="FK_OtherDetails_Funds" ColumnName="FK_OtherDetails_Funds" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sectors">
+            <EntityTypeMapping TypeName="FundsDBModel.Sector">
+              <MappingFragment StoreEntitySet="Sectors">
+                <ScalarProperty Name="FK_Sectors_Funds" ColumnName="FK_Sectors_Funds" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subaccounts">
+            <EntityTypeMapping TypeName="FundsDBModel.Subaccount">
+              <MappingFragment StoreEntitySet="Subaccounts">
+                <ScalarProperty Name="FK_Accounts_Funds" ColumnName="FK_Accounts_Funds" />
+                <ScalarProperty Name="FK_Subaccounts_Accounts" ColumnName="FK_Subaccounts_Accounts" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnderlyingDebtors">
+            <EntityTypeMapping TypeName="FundsDBModel.UnderlyingDebtor">
+              <MappingFragment StoreEntitySet="UnderlyingDebtors">
+                <ScalarProperty Name="FK_UnderlyingDebtors_Funds" ColumnName="FK_UnderlyingDebtors_Funds" />
+                <ScalarProperty Name="debtor_bank_id" ColumnName="debtor_bank_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
