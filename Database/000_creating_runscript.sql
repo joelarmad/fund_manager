@@ -1,5 +1,0 @@
-CREATE TABLE [dbo].[Runscripts]
-(
-	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [Name] VARCHAR(255) NOT NULL
-)
