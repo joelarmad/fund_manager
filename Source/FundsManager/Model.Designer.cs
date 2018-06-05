@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'd:\joel\documents\visual studio 2017\Projects\FundsManager\FundsManager\Model.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\00_Proyectos\Others\fund_manager\Source\FundsManager\Model.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

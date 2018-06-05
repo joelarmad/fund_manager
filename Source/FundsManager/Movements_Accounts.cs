@@ -23,6 +23,8 @@ namespace FundsManager
         public Nullable<int> subaccount_type { get; set; }
         public int FK_Movements_Accounts_Funds { get; set; }
         public Nullable<int> FK_Movements_Accounts_Accounts { get; set; }
+        public decimal acc_amount { get; set; }
+        public decimal subacc_amount { get; set; }
     
         public virtual AccountingMovement AccountingMovement { get; set; }
         public virtual Account Account { get; set; }

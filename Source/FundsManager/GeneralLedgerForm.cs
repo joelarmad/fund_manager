@@ -263,6 +263,8 @@ namespace FundsManager
 
             foreach (Movement my_movement in movements)
             {
+                
+
                 //subaccount_type  1 -> Client, 2 -> Banking Account, 3 -> Employee, 4 -> Lender, 5 -> OtherDetail
                 Movements_Accounts _maccount = new Movements_Accounts();
 
@@ -277,13 +279,18 @@ namespace FundsManager
                     _maccount.subaccount = my_movement.Detail;
                 _maccount.debit = my_movement.Debit;
                 _maccount.credit = my_movement.Credit;
-                manager.My_db.Movements_Accounts.Add(_maccount);
 
                 // TODO: Hay que identificar como segun el tipo de cuenta se modifica el saldo de la cuenta.
                 Account _account = manager.My_db.Accounts.First(x => x.Id == my_movement.Account);
+                Subaccount _subaccount = manager.My_db.Subaccounts.First(x => x.Id == my_movement.Subaccount);
 
-                _account.amount += my_movement.Credit;
-                _account.amount -= my_movement.Debit;
+                _account.amount += my_movement.Debit;
+                _subaccount.amount += my_movement.Credit;
+
+                _maccount.acc_amount = _account.amount;
+                _maccount.subacc_amount = _subaccount.amount;
+                
+                manager.My_db.Movements_Accounts.Add(_maccount);
 
                 manager.My_db.SaveChanges();
             }
