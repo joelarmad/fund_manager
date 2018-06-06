@@ -333,7 +333,7 @@ namespace FundsManager
                         _accountBalances.Add(_movement.AccountBalance);
                         _subAccountBalances.Add(_movement.SubAccountBalance);
                     }
-                    //else
+                    else
                     {
                         int _index = _subAccountIds.IndexOf(_movement.Subaccount);
 
