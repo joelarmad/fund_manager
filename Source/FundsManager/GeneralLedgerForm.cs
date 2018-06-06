@@ -183,33 +183,34 @@ namespace FundsManager
             movement.Credit = Convert.ToDecimal(textBox2.Text);
             total_credit += movement.Credit;
 
-            Account _account = manager.My_db.Accounts.First(x => x.Id == movement.Account);
-            Subaccount _subaccount = manager.My_db.Subaccounts.First(x => x.Id == movement.Subaccount);
+            Account _account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == movement.Account);
+            Subaccount _subAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == movement.Subaccount);
 
-            int _credit_factor = 1;
-            int _debit_factor = -1;
+            int _creditFactor = 1;
+            int _debitFactor = -1;
 
             if (_account.type == 0 || _account.type == 4 || _account.type == 5)
             {
-                _credit_factor = -1;
-                _debit_factor = 1;
+                _creditFactor = -1;
+                _debitFactor = 1;
             }
 
-            decimal _amount_shift = _debit_factor * movement.Debit + _credit_factor * movement.Credit;
-            movement.Account_balance = calculateAccountBalance(movement.Account, _amount_shift);
-            movement.Sub_account_balance = calculateSubAccountBalance(movement.Subaccount, _amount_shift);
+            decimal _amountShift = _debitFactor * movement.Debit + _creditFactor * movement.Credit;
+
+            movement.AccountBalance = calculateAccountBalance(movement.Account, _amountShift);
+            movement.SubAccountBalance = calculateSubAccountBalance(movement.Subaccount, _amountShift);
 
             movements.Add(movement);
 
             if (listView1.Items.Count > 0)
                 listView1.Items.RemoveAt(listView1.Items.Count - 1);
 
-            string[] row = {comboBox1.Text, comboBox2.Text, comboBox3.Text, textBox1.Text, textBox2.Text, movement.Sub_account_balance.ToString() };
+            string[] row = {comboBox1.Text, comboBox2.Text, comboBox3.Text, textBox1.Text, textBox2.Text, movement.SubAccountBalance.ToString() };
             ListViewItem my_item = new ListViewItem(row);
 
-            if (movement.Sub_account_balance < 0)
+            if (movement.SubAccountBalance < 0)
             {
-                my_item.ForeColor = _color = Color.FromName("Red");
+                my_item.ForeColor = Color.FromName("Red");
             }
 
             listView1.Items.Add(my_item);
@@ -234,35 +235,35 @@ namespace FundsManager
 
             textBox1.Text = 0.ToString();
             textBox2.Text = 0.ToString();
-
-            listView1.Refresh();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             ArrayList _movementsToDelete = new ArrayList();
 
-            foreach (int index in listView1.SelectedIndices)
-                _movementsToDelete.Add(movements[index]);
-
-            foreach (Movement _movementToDelete in _movementsToDelete)
+            foreach (int _index in listView1.SelectedIndices)
             {
-                movements.Remove(_movementToDelete);
+                _movementsToDelete.Add(movements[_index]);
+            }
+
+            foreach (Movement _movement in _movementsToDelete)
+            {
+                movements.Remove(_movement);
             }
 
             listView1.Items.Clear();
 
-            ArrayList _sub_accounts_ids = new ArrayList();
-            ArrayList _accounts_balances = new ArrayList();
-            ArrayList _sub_accounts_balances = new ArrayList();
+            ArrayList _subAccountIds = new ArrayList();
+            ArrayList _accountBalances = new ArrayList();
+            ArrayList _subAccountBalances = new ArrayList();
 
             total_credit = 0;
             total_debit = 0;
 
             foreach (Movement _movement in movements)
             {
-                _movement.Account_balance = 0;
-                _movement.Sub_account_balance = 0;
+                _movement.SubAccountBalance = 0;
+                _movement.AccountBalance = 0;
             }
 
             foreach (Movement _movement in movements)
@@ -271,68 +272,72 @@ namespace FundsManager
                 total_debit += _movement.Debit;
 
                 Account _account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == _movement.Account);
-                Subaccount _subaccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == _movement.Subaccount);
+                Subaccount _subAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == _movement.Subaccount);
                 OtherDetail _detail = manager.My_db.OtherDetails.FirstOrDefault(x => x.Id == _movement.Detail);
 
-                int _credit_factor = 1;
-                int _debit_factor = -1;
+                int _creditFactor = 1;
+                int _debitFactor = -1;
 
                 if (_account.type == 0 || _account.type == 4 || _account.type == 5)
                 {
-                    _credit_factor = -1;
-                    _debit_factor = 1;
+                    _creditFactor = -1;
+                    _debitFactor = 1;
                 }
 
-                decimal _amount_shift = _debit_factor * _movement.Debit + _credit_factor * _movement.Credit;
+                decimal _amountShift = _debitFactor * _movement.Debit + _creditFactor * _movement.Credit;
 
-                if (!_sub_accounts_ids.Contains(_movement.Subaccount))
+                if (!_subAccountIds.Contains(_movement.Subaccount))
                 {
-                    _movement.Account_balance = _account.amount + _amount_shift;
-                    _movement.Sub_account_balance = _subaccount.amount + _amount_shift;
+                    _movement.AccountBalance = _account.amount + _amountShift;
+                    _movement.SubAccountBalance = _subAccount.amount + _amountShift;
 
-                    _sub_accounts_ids.Add(_movement.Subaccount);
-                    _accounts_balances.Add(_movement.Account_balance);
-                    _sub_accounts_balances.Add(_movement.Sub_account_balance);
+                    _subAccountIds.Add(_movement.Subaccount);
+                    _accountBalances.Add(_movement.AccountBalance);
+                    _subAccountBalances.Add(_movement.SubAccountBalance);
                 }
                 else
                 {
-                    int _index = _sub_accounts_ids.IndexOf(_movement.Subaccount);
+                    int _index = _subAccountIds.IndexOf(_movement.Subaccount);
 
-                    _movement.Account_balance = decimal.Parse(_accounts_balances[_index].ToString()) + _amount_shift;
-                    _movement.Sub_account_balance = decimal.Parse(_sub_accounts_balances[_index].ToString()) + _amount_shift;
+                    _movement.AccountBalance = decimal.Parse(_accountBalances[_index].ToString()) + _amountShift;
+                    _movement.SubAccountBalance = decimal.Parse(_subAccountBalances[_index].ToString()) + _amountShift;
 
-                    _accounts_balances[_index] = _movement.Account_balance;
-                    _sub_accounts_balances[_index] = _movement.Sub_account_balance;
-
+                    _accountBalances[_index] = _movement.AccountBalance;
+                    _subAccountBalances[_index] = _movement.SubAccountBalance;
                 }
 
-                string[] row = { _account.name, _subaccount.name, _detail.name, _movement.Debit.ToString(), _movement.Credit.ToString(), _movement.Sub_account_balance.ToString() };
+                string[] row = { _account.name, _subAccount.name, _detail.name, _movement.Debit.ToString(), _movement.Credit.ToString(), _movement.SubAccountBalance.ToString() };
                 ListViewItem my_item = new ListViewItem(row);
 
-                if (_movement.Sub_account_balance < 0)
+                if (_movement.SubAccountBalance < 0)
                 {
-                    my_item.ForeColor = _color = Color.FromName("Red");
+                    my_item.ForeColor = Color.FromName("Red");
                 }
 
                 listView1.Items.Add(my_item);
             }
 
-            string[] totales = { "Total", "", "", Convert.ToString(total_debit), Convert.ToString(total_credit), "" };
-            var listViewItemTotal = new ListViewItem(totales);
-
-            if (total_credit == total_debit)
+            if (total_credit > 0 || total_debit > 0)
             {
-                _color = Color.FromName("Green");
-                button2.Enabled = true;
-            }
-            else
-            {
-                _color = Color.FromName("Red");
-                button2.Enabled = false;
+                string[] totales = { "Total", "", "", Convert.ToString(total_debit), Convert.ToString(total_credit), "" };
+                var listViewItemTotal = new ListViewItem(totales);
+
+                if (total_credit == total_debit)
+                {
+                    _color = Color.FromName("Green");
+                    button2.Enabled = true;
+                }
+                else
+                {
+                    _color = Color.FromName("Red");
+                    button2.Enabled = false;
+                }
+
+                listViewItemTotal.ForeColor = _color;
+                listView1.Items.Add(listViewItemTotal);
             }
 
-            listViewItemTotal.ForeColor = _color;
-            listView1.Items.Add(listViewItemTotal);
+            button3.Enabled = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -373,32 +378,31 @@ namespace FundsManager
                 _maccount.debit = my_movement.Debit;
                 _maccount.credit = my_movement.Credit;
 
-                Account _account = manager.My_db.Accounts.First(x => x.Id == my_movement.Account);
-                Subaccount _subaccount = manager.My_db.Subaccounts.First(x => x.Id == my_movement.Subaccount);
-                
-                int _credit_factor = 1;
-                int _debit_factor = -1;
-                
+                Account _account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == my_movement.Account);
+                Subaccount _subAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == my_movement.Subaccount);
+
+                int _creditFactor = 1;
+                int _debitFactor = -1;
+
                 if (_account.type == 0 || _account.type == 4 || _account.type == 5)
                 {
-                    _credit_factor = -1;
-                    _debit_factor = 1;
+                    _creditFactor = -1;
+                    _debitFactor = 1;
                 }
 
-                _account.amount += _debit_factor * my_movement.Debit;
-                _account.amount += _credit_factor * my_movement.Credit;
+                _account.amount += _debitFactor * my_movement.Debit;
+                _account.amount += _creditFactor * my_movement.Credit;
 
-                _subaccount.amount += _debit_factor * my_movement.Debit;
-                _subaccount.amount += _credit_factor * my_movement.Credit;
+                _subAccount.amount += _debitFactor * my_movement.Debit;
+                _subAccount.amount += _creditFactor * my_movement.Credit;
 
                 _maccount.acc_amount = _account.amount;
-                _maccount.subacc_amount = _subaccount.amount;
-                
+                _maccount.subacc_amount = _subAccount.amount;
+
                 manager.My_db.Movements_Accounts.Add(_maccount);
 
                 manager.My_db.SaveChanges();
             }
-
             movements.Clear();
         }
 
@@ -411,7 +415,7 @@ namespace FundsManager
             {
                 if (_movement.Account == aAccountId)
                 {
-                    _latestAmount = _movement.Account_balance;
+                    _latestAmount = _movement.AccountBalance;
                     _found = true;
                 }
             }
@@ -435,5 +439,88 @@ namespace FundsManager
             {
                 if (_movement.Subaccount == aSubAccountId)
                 {
-                    _latestAmount = _movement.Sub_account_balance;
-                    _found = tr
+                    _latestAmount = _movement.SubAccountBalance;
+                    _found = true;
+                }
+            }
+
+            if (!_found)
+            {
+                Subaccount _subAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == aSubAccountId);
+
+                _latestAmount = _subAccount.amount;
+            }
+
+            return _latestAmount + amountShift;
+        }
+
+        private void checkEnablingAddButton()
+        {
+            decimal _debit = 0;
+            decimal _credit = 0;
+
+            button1.Enabled = comboBox3.SelectedIndex > 0
+                && decimal.TryParse(textBox1.Text, out _debit)
+                && decimal.TryParse(textBox2.Text, out _credit)
+                && (_debit > 0 || _credit > 0);
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            checkEnablingAddButton();
+        }
+
+        private void textBox1_Enter(object sender, EventArgs e)
+        {
+            if(textBox1.Text == "0")
+                textBox1.Text = "";
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            decimal _result = 0;
+            if (!decimal.TryParse(textBox1.Text, out _result) || _result <= 0)
+            {
+                textBox1.Text = "0";
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            checkEnablingAddButton();
+        }
+
+        private void textBox2_Enter(object sender, EventArgs e)
+        {
+            if (textBox2.Text == "0")
+                textBox2.Text = "";
+        }
+
+        private void textBox2_Leave(object sender, EventArgs e)
+        {
+            decimal _result = 0;
+            if (!decimal.TryParse(textBox2.Text, out _result) || _result <= 0)
+            {
+                textBox2.Text = "0";
+            }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            checkEnablingAddButton();
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach (int _index in listView1.SelectedIndices)
+            {
+                if (_index == listView1.Items.Count - 1)
+                {
+                    listView1.SelectedIndices.Remove(_index);
+                }
+            }
+
+            button3.Enabled = listView1.SelectedIndices.Count > 0;
+        }
+    }
+}

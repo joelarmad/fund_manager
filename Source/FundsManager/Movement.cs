@@ -15,8 +15,8 @@ namespace FundsManager
         private int detail_type;
         private Decimal debit;
         private Decimal credit;
-        private Decimal account_balance;
-        private Decimal sub_account_balance;
+        private Decimal accountBalance;
+        private Decimal subAccountBalance;
 
 
         public int Id { get => id; set => id = value; }
@@ -26,8 +26,8 @@ namespace FundsManager
         public int Detail_type { get => detail_type; set => detail_type = value; }
         public decimal Debit { get => debit; set => debit = value; }
         public decimal Credit { get => credit; set => credit = value; }
-        public decimal Account_balance { get => account_balance; set => account_balance = value; }
-        public decimal Sub_account_balance { get => sub_account_balance; set => sub_account_balance = value; }
+        public decimal AccountBalance { get => accountBalance; set => accountBalance = value; }
+        public decimal SubAccountBalance { get => subAccountBalance; set => subAccountBalance = value; }
 
 
         public Movement() {
@@ -37,4 +37,7 @@ namespace FundsManager
             detail = -1;
             detail_type = -1;
             debit = 0;
-            credit =
+            credit = 0;
+        }
+    }
+}
