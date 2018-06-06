@@ -15,6 +15,7 @@ namespace FundsManager
     {
         private MyFundsManager manager;
         private List<Movement> movements;
+        private List<Account> fFloatingAccounts;
 
         //subaccount_type  1 -> Client, 2 -> Banking Account, 3 -> Employee, 4 -> Lender, 5 -> OtherDetail
 
@@ -53,11 +54,12 @@ namespace FundsManager
             comboBox3.SelectedText = "Select detail";
             textBox3.Text = MyNewReference();
 
+            fFloatingAccounts = manager.My_db.Accounts.ToList();
         }
 
         private void OnAccountChanged(object sender, EventArgs e)
         {
-            Dictionary<int,string> comboSource = new Dictionary<int, string>();
+            Dictionary<int, string> comboSource = new Dictionary<int, string>();
 
             foreach (Subaccount _subaccount in manager.My_db.Subaccounts)
             {
@@ -74,7 +76,7 @@ namespace FundsManager
                 comboBox2.ValueMember = "Key";
                 comboBox2.Enabled = true;
             }
-            
+
 
         }
 
@@ -91,7 +93,7 @@ namespace FundsManager
                 int custom_id = int.Parse(1.ToString() + _client.Id.ToString());
                 comboSource.Add(custom_id, _client.name);
             }
-            
+
             foreach (BankingAccount _bankingaccount in manager.My_db.BankingAccounts)
             {
                 int custom_id = int.Parse(2.ToString() + _bankingaccount.Id.ToString());
@@ -109,7 +111,7 @@ namespace FundsManager
                 int custom_id = int.Parse(4.ToString() + _creditor.Id.ToString());
                 comboSource.Add(custom_id, _creditor.name);
             }
-            
+
 
             foreach (OtherDetail _detail in manager.My_db.OtherDetails)
             {
@@ -176,11 +178,11 @@ namespace FundsManager
                 movement.Detail_type = -1;
                 movement.Detail = -1;
             }
-                                    
-            movement.Debit = Convert.ToDecimal(textBox1.Text);
+
+            movement.Debit = decimal.Parse(textBox1.Text);
             total_debit += movement.Debit;
 
-            movement.Credit = Convert.ToDecimal(textBox2.Text);
+            movement.Credit = decimal.Parse(textBox2.Text);
             total_credit += movement.Credit;
 
             Account _account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == movement.Account);
@@ -205,7 +207,7 @@ namespace FundsManager
             if (listView1.Items.Count > 0)
                 listView1.Items.RemoveAt(listView1.Items.Count - 1);
 
-            string[] row = {comboBox1.Text, comboBox2.Text, comboBox3.Text, textBox1.Text, textBox2.Text, movement.SubAccountBalance.ToString() };
+            string[] row = { comboBox1.Text, comboBox2.Text, comboBox3.Text, movement.Debit.ToString(), movement.Credit.ToString(), movement.AccountBalance.ToString() };
             ListViewItem my_item = new ListViewItem(row);
 
             if (movement.SubAccountBalance < 0)
@@ -295,7 +297,7 @@ namespace FundsManager
                     _accountBalances.Add(_movement.AccountBalance);
                     _subAccountBalances.Add(_movement.SubAccountBalance);
                 }
-                else
+                //else
                 {
                     int _index = _subAccountIds.IndexOf(_movement.Subaccount);
 
@@ -306,7 +308,7 @@ namespace FundsManager
                     _subAccountBalances[_index] = _movement.SubAccountBalance;
                 }
 
-                string[] row = { _account.name, _subAccount.name, _detail.name, _movement.Debit.ToString(), _movement.Credit.ToString(), _movement.SubAccountBalance.ToString() };
+                string[] row = { _account.name, _subAccount.name, _detail.name, _movement.Debit.ToString(), _movement.Credit.ToString(), _movement.Account.ToString() };
                 ListViewItem my_item = new ListViewItem(row);
 
                 if (_movement.SubAccountBalance < 0)
@@ -342,68 +344,75 @@ namespace FundsManager
 
         private void button2_Click(object sender, EventArgs e)
         {
-            AccountingMovement _movement = new AccountingMovement();
-            _movement.FK_AccountingMovements_Funds = manager.Selected;
-            _movement.description = textBox4.Text;
-            _movement.date = Convert.ToDateTime(dateTimePicker1.Text);
-            _movement.reference = textBox3.Text;
-            _movement.FK_AccountingMovements_Currencies = Convert.ToInt32(comboBox4.SelectedValue);
-            _movement.original_reference = textBox5.Text;
-            manager.My_db.AccountingMovements.Add(_movement);
-            manager.My_db.SaveChanges();
-            
-            textBox3.Text = MyNewReference();
-            textBox4.Clear();
-            textBox5.Clear();
-            listView1.Items.Clear();
-            textBox1.Text = 0.ToString();
-            textBox2.Text = 0.ToString();
-            total_credit = 0;
-            total_debit = 0;
-
-            foreach (Movement my_movement in movements)
+            if (canMakeMovement())
             {
-                //subaccount_type  1 -> Client, 2 -> Banking Account, 3 -> Employee, 4 -> Lender, 5 -> OtherDetail
-                Movements_Accounts _maccount = new Movements_Accounts();
-
-                _maccount.FK_Movements_Accounts_AccountingMovements = _movement.Id;
-                _maccount.FK_Movements_Accounts_Funds = manager.Selected;
-                _maccount.FK_Movements_Accounts_Accounts = my_movement.Account;
-                if(my_movement.Subaccount != -1)
-                    _maccount.FK_Movements_Accounts_Subaccounts = my_movement.Subaccount;
-                /*WARNING en la tabla Movements_Accounts los campos subaccount y subaccount_type se refieren a detail y detail_type respectivamente*/
-                _maccount.subaccount_type = my_movement.Detail_type;
-                if (my_movement.Detail != -1)
-                    _maccount.subaccount = my_movement.Detail;
-                _maccount.debit = my_movement.Debit;
-                _maccount.credit = my_movement.Credit;
-
-                Account _account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == my_movement.Account);
-                Subaccount _subAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == my_movement.Subaccount);
-
-                int _creditFactor = 1;
-                int _debitFactor = -1;
-
-                if (_account.type == 0 || _account.type == 4 || _account.type == 5)
-                {
-                    _creditFactor = -1;
-                    _debitFactor = 1;
-                }
-
-                _account.amount += _debitFactor * my_movement.Debit;
-                _account.amount += _creditFactor * my_movement.Credit;
-
-                _subAccount.amount += _debitFactor * my_movement.Debit;
-                _subAccount.amount += _creditFactor * my_movement.Credit;
-
-                _maccount.acc_amount = _account.amount;
-                _maccount.subacc_amount = _subAccount.amount;
-
-                manager.My_db.Movements_Accounts.Add(_maccount);
-
+                AccountingMovement _movement = new AccountingMovement();
+                _movement.FK_AccountingMovements_Funds = manager.Selected;
+                _movement.description = textBox4.Text;
+                _movement.date = Convert.ToDateTime(dateTimePicker1.Text);
+                _movement.reference = textBox3.Text;
+                _movement.FK_AccountingMovements_Currencies = Convert.ToInt32(comboBox4.SelectedValue);
+                _movement.original_reference = textBox5.Text;
+                manager.My_db.AccountingMovements.Add(_movement);
                 manager.My_db.SaveChanges();
+
+                textBox3.Text = MyNewReference();
+                textBox4.Clear();
+                textBox5.Clear();
+                listView1.Items.Clear();
+                textBox1.Text = 0.ToString();
+                textBox2.Text = 0.ToString();
+                total_credit = 0;
+                total_debit = 0;
+
+                foreach (Movement my_movement in movements)
+                {
+                    //subaccount_type  1 -> Client, 2 -> Banking Account, 3 -> Employee, 4 -> Lender, 5 -> OtherDetail
+                    Movements_Accounts _maccount = new Movements_Accounts();
+
+                    _maccount.FK_Movements_Accounts_AccountingMovements = _movement.Id;
+                    _maccount.FK_Movements_Accounts_Funds = manager.Selected;
+                    _maccount.FK_Movements_Accounts_Accounts = my_movement.Account;
+                    if (my_movement.Subaccount != -1)
+                        _maccount.FK_Movements_Accounts_Subaccounts = my_movement.Subaccount;
+                    /*WARNING en la tabla Movements_Accounts los campos subaccount y subaccount_type se refieren a detail y detail_type respectivamente*/
+                    _maccount.subaccount_type = my_movement.Detail_type;
+                    if (my_movement.Detail != -1)
+                        _maccount.subaccount = my_movement.Detail;
+                    _maccount.debit = my_movement.Debit;
+                    _maccount.credit = my_movement.Credit;
+
+                    Account _account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == my_movement.Account);
+                    Subaccount _subAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == my_movement.Subaccount);
+
+                    int _creditFactor = 1;
+                    int _debitFactor = -1;
+
+                    if (_account.type == 0 || _account.type == 4 || _account.type == 5)
+                    {
+                        _creditFactor = -1;
+                        _debitFactor = 1;
+                    }
+
+                    _account.amount += _debitFactor * my_movement.Debit;
+                    _account.amount += _creditFactor * my_movement.Credit;
+
+                    _subAccount.amount += _debitFactor * my_movement.Debit;
+                    _subAccount.amount += _creditFactor * my_movement.Credit;
+
+                    _maccount.acc_amount = _account.amount;
+                    _maccount.subacc_amount = _subAccount.amount;
+
+                    manager.My_db.Movements_Accounts.Add(_maccount);
+
+                    manager.My_db.SaveChanges();
+                }
+                movements.Clear();
             }
-            movements.Clear();
+            else
+            {
+                MessageBox.Show("Balance error");
+            }
         }
 
         private decimal calculateAccountBalance(int aAccountId, decimal amountShift)
@@ -472,7 +481,7 @@ namespace FundsManager
 
         private void textBox1_Enter(object sender, EventArgs e)
         {
-            if(textBox1.Text == "0")
+            if (textBox1.Text == "0")
                 textBox1.Text = "";
         }
 
@@ -521,6 +530,35 @@ namespace FundsManager
             }
 
             button3.Enabled = listView1.SelectedIndices.Count > 0;
+        }
+
+        private bool canMakeMovement()
+        {
+            decimal _leftAccount = 0;   //Asset + Expense
+            decimal _rigthAccount = 0;  //Liability + Equity + Income
+
+            List<Account> _accounts = manager.My_db.Accounts.ToList();
+
+            foreach (Movement _movement in movements)
+            {
+                Account _account = _accounts.First(x => x.Id == _movement.Account);
+
+                _account.amount = _movement.AccountBalance;
+            }
+
+            foreach (Account _account in _accounts)
+            {
+                if (_account.type == 0 || _account.type == 4 || _account.type == 5)
+                {
+                    _leftAccount += _account.amount;
+                }
+                else
+                {
+                    _rigthAccount += _account.amount;
+                }
+            }
+
+            return _leftAccount == _rigthAccount;
         }
     }
 }
