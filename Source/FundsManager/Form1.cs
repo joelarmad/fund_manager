@@ -100,7 +100,7 @@ namespace FundsManager
         }
 
         private void movementToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        { 
             this.IsMdiContainer = true;
             GeneralLedgerForm general_ledger_form = new GeneralLedgerForm(manager);
             general_ledger_form.MdiParent = this;
@@ -189,6 +189,14 @@ namespace FundsManager
             UnderlyingDebtorsForm underlyingdebtor_form = new UnderlyingDebtorsForm(manager);
             underlyingdebtor_form.MdiParent = this;
             underlyingdebtor_form.Show();
+        }
+
+        private void generalBalanceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            ReportForms.GeneralBalanceForm _generalBalance = new ReportForms.GeneralBalanceForm();
+            _generalBalance.MdiParent = this;
+            _generalBalance.Show();
         }
     }
 }
