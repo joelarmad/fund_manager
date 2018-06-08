@@ -239,7 +239,7 @@ namespace FundsManager
                 string[] row = { comboBox1.Text, comboBox2.Text, comboBox3.Text, String.Format("{0:0.00}", movement.Debit), String.Format("{0:0.00}", movement.Credit), String.Format("{0:0.00}", movement.AccountBalance) };
                 ListViewItem my_item = new ListViewItem(row);
 
-                if (movement.SubAccountBalance < 0)
+                if (movement.AccountBalance < 0)
                 {
                     my_item.ForeColor = Color.FromName("Red");
                 }
@@ -347,7 +347,7 @@ namespace FundsManager
                     string[] row = { _account.name, _subAccount.name, _detail.name, String.Format("{0:0.00}", _movement.Debit), String.Format("{0:0.00}", _movement.Credit), String.Format("{0:0.00}", _movement.AccountBalance) };
                     ListViewItem my_item = new ListViewItem(row);
 
-                    if (_movement.SubAccountBalance < 0)
+                    if (_movement.AccountBalance < 0)
                     {
                         my_item.ForeColor = Color.FromName("Red");
                     }

@@ -19,6 +19,8 @@ namespace FundsManager.ReportForms
 
         private void GeneralBalanceForm_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'fundsDBDataSet.BalanceResume' table. You can move, or remove it, as needed.
+            this.balanceResumeTableAdapter.Fill(this.fundsDBDataSet.BalanceResume);
             // TODO: This line of code loads data into the 'fundsDBDataSet.SubAccountBalance' table. You can move, or remove it, as needed.
             this.subAccountBalanceTableAdapter.Fill(this.fundsDBDataSet.SubAccountBalance);
 
