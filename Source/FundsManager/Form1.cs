@@ -198,5 +198,13 @@ namespace FundsManager
             _generalBalance.MdiParent = this;
             _generalBalance.Show();
         }
+
+        private void returnsStateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            ReportForms.ReturnsState _returnsState = new ReportForms.ReturnsState();
+            _returnsState.MdiParent = this;
+            _returnsState.Show();
+        }
     }
 }

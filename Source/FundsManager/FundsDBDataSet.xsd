@@ -1567,7 +1567,7 @@ SELECT Id, contract, date, total_disbursement, profit_share, fund_id FROM Invest
               <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.AccountBalance" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT acct_number, acct_name, acct_type, acct_passive, acct_amount FROM dbo.AccountBalance</CommandText>
+                    <CommandText>SELECT acct_number, acct_type, acct_name, acct_passive, acct_amount FROM dbo.AccountBalance</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -1575,8 +1575,8 @@ SELECT Id, contract, date, total_disbursement, profit_share, fund_id FROM Invest
             </MainSource>
             <Mappings>
               <Mapping SourceColumn="acct_number" DataSetColumn="acct_number" />
-              <Mapping SourceColumn="acct_name" DataSetColumn="acct_name" />
               <Mapping SourceColumn="acct_type" DataSetColumn="acct_type" />
+              <Mapping SourceColumn="acct_name" DataSetColumn="acct_name" />
               <Mapping SourceColumn="acct_passive" DataSetColumn="acct_passive" />
               <Mapping SourceColumn="acct_amount" DataSetColumn="acct_amount" />
             </Mappings>
@@ -1587,7 +1587,7 @@ SELECT Id, contract, date, total_disbursement, profit_share, fund_id FROM Invest
               <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.SubAccountBalance" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT acct_number, acct_name, acct_type, acct_passive, acct_amount, subacct_name, subacct_amount FROM dbo.SubAccountBalance</CommandText>
+                    <CommandText>SELECT acct_number, acct_type, acct_name, acct_amount, subacct_name, subacct_amount FROM dbo.SubAccountBalance</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -1595,9 +1595,8 @@ SELECT Id, contract, date, total_disbursement, profit_share, fund_id FROM Invest
             </MainSource>
             <Mappings>
               <Mapping SourceColumn="acct_number" DataSetColumn="acct_number" />
-              <Mapping SourceColumn="acct_name" DataSetColumn="acct_name" />
               <Mapping SourceColumn="acct_type" DataSetColumn="acct_type" />
-              <Mapping SourceColumn="acct_passive" DataSetColumn="acct_passive" />
+              <Mapping SourceColumn="acct_name" DataSetColumn="acct_name" />
               <Mapping SourceColumn="acct_amount" DataSetColumn="acct_amount" />
               <Mapping SourceColumn="subacct_name" DataSetColumn="subacct_name" />
               <Mapping SourceColumn="subacct_amount" DataSetColumn="subacct_amount" />
@@ -1609,15 +1608,88 @@ SELECT Id, contract, date, total_disbursement, profit_share, fund_id FROM Invest
               <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.BalanceResume" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT Active, Pasive FROM dbo.BalanceResume</CommandText>
+                    <CommandText>SELECT Asset, Liability FROM dbo.BalanceResume</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
             </MainSource>
             <Mappings>
-              <Mapping SourceColumn="Active" DataSetColumn="Active" />
-              <Mapping SourceColumn="Pasive" DataSetColumn="Pasive" />
+              <Mapping SourceColumn="Asset" DataSetColumn="Asset" />
+              <Mapping SourceColumn="Liability" DataSetColumn="Liability" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="MovementsTableAdapter" GeneratorDataComponentClassName="MovementsTableAdapter" Name="Movements" UserDataComponentName="MovementsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.Movements" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Id, Reference, description, TypeId, AccountType, Account, SubAccount, Date, Debit, Credit, Shift_Amount, Acc_Amount, SubAcc_amount FROM dbo.Movements</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Id" DataSetColumn="Id" />
+              <Mapping SourceColumn="Reference" DataSetColumn="Reference" />
+              <Mapping SourceColumn="description" DataSetColumn="description" />
+              <Mapping SourceColumn="TypeId" DataSetColumn="TypeId" />
+              <Mapping SourceColumn="AccountType" DataSetColumn="AccountType" />
+              <Mapping SourceColumn="Account" DataSetColumn="Account" />
+              <Mapping SourceColumn="SubAccount" DataSetColumn="SubAccount" />
+              <Mapping SourceColumn="Date" DataSetColumn="Date" />
+              <Mapping SourceColumn="Debit" DataSetColumn="Debit" />
+              <Mapping SourceColumn="Credit" DataSetColumn="Credit" />
+              <Mapping SourceColumn="Shift_Amount" DataSetColumn="Shift_Amount" />
+              <Mapping SourceColumn="Acc_Amount" DataSetColumn="Acc_Amount" />
+              <Mapping SourceColumn="SubAcc_amount" DataSetColumn="SubAcc_amount" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ProfitResultsTableAdapter" GeneratorDataComponentClassName="ProfitResultsTableAdapter" Name="ProfitResults" UserDataComponentName="ProfitResultsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.ProfitResults" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Id, Reference, description, TypeId, AccountType, Account, SubAccount, Date, Debit, Credit, Shift_Amount, Acc_Amount, SubAcc_amount FROM dbo.ProfitResults</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Id" DataSetColumn="Id" />
+              <Mapping SourceColumn="Reference" DataSetColumn="Reference" />
+              <Mapping SourceColumn="description" DataSetColumn="description" />
+              <Mapping SourceColumn="TypeId" DataSetColumn="TypeId" />
+              <Mapping SourceColumn="AccountType" DataSetColumn="AccountType" />
+              <Mapping SourceColumn="Account" DataSetColumn="Account" />
+              <Mapping SourceColumn="SubAccount" DataSetColumn="SubAccount" />
+              <Mapping SourceColumn="Date" DataSetColumn="Date" />
+              <Mapping SourceColumn="Debit" DataSetColumn="Debit" />
+              <Mapping SourceColumn="Credit" DataSetColumn="Credit" />
+              <Mapping SourceColumn="Shift_Amount" DataSetColumn="Shift_Amount" />
+              <Mapping SourceColumn="Acc_Amount" DataSetColumn="Acc_Amount" />
+              <Mapping SourceColumn="SubAcc_amount" DataSetColumn="SubAcc_amount" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ProfitsResumeTableAdapter" GeneratorDataComponentClassName="ProfitsResumeTableAdapter" Name="ProfitsResume" UserDataComponentName="ProfitsResumeTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.ProfitsResume" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Income, Expense FROM dbo.ProfitsResume</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Income" DataSetColumn="Income" />
+              <Mapping SourceColumn="Expense" DataSetColumn="Expense" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -2103,17 +2175,17 @@ SELECT Id, contract, date, total_disbursement, profit_share, fund_id FROM Invest
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="acct_type" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnacct_type" msprop:Generator_ColumnPropNameInRow="acct_type" msprop:Generator_ColumnPropNameInTable="acct_typeColumn" msprop:Generator_UserColumnName="acct_type" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="9" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
               <xs:element name="acct_name" msprop:Generator_ColumnVarNameInTable="columnacct_name" msprop:Generator_ColumnPropNameInRow="acct_name" msprop:Generator_ColumnPropNameInTable="acct_nameColumn" msprop:Generator_UserColumnName="acct_name">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="2147483647" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="acct_type" msprop:Generator_ColumnVarNameInTable="columnacct_type" msprop:Generator_ColumnPropNameInRow="acct_type" msprop:Generator_ColumnPropNameInTable="acct_typeColumn" msprop:Generator_UserColumnName="acct_type">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -2132,6 +2204,13 @@ SELECT Id, contract, date, total_disbursement, profit_share, fund_id FROM Invest
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="acct_type" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnacct_type" msprop:Generator_ColumnPropNameInRow="acct_type" msprop:Generator_ColumnPropNameInTable="acct_typeColumn" msprop:Generator_UserColumnName="acct_type" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="9" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
               <xs:element name="acct_name" msprop:Generator_ColumnVarNameInTable="columnacct_name" msprop:Generator_ColumnPropNameInRow="acct_name" msprop:Generator_ColumnPropNameInTable="acct_nameColumn" msprop:Generator_UserColumnName="acct_name">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -2139,14 +2218,6 @@ SELECT Id, contract, date, total_disbursement, profit_share, fund_id FROM Invest
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="acct_type" msprop:Generator_ColumnVarNameInTable="columnacct_type" msprop:Generator_ColumnPropNameInRow="acct_type" msprop:Generator_ColumnPropNameInTable="acct_typeColumn" msprop:Generator_UserColumnName="acct_type">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="acct_passive" msprop:Generator_ColumnVarNameInTable="columnacct_passive" msprop:Generator_ColumnPropNameInRow="acct_passive" msprop:Generator_ColumnPropNameInTable="acct_passiveColumn" msprop:Generator_UserColumnName="acct_passive" type="xs:boolean" />
               <xs:element name="acct_amount" msprop:Generator_ColumnVarNameInTable="columnacct_amount" msprop:Generator_ColumnPropNameInRow="acct_amount" msprop:Generator_ColumnPropNameInTable="acct_amountColumn" msprop:Generator_UserColumnName="acct_amount" type="xs:decimal" />
               <xs:element name="subacct_name" msprop:Generator_ColumnVarNameInTable="columnsubacct_name" msprop:Generator_ColumnPropNameInRow="subacct_name" msprop:Generator_ColumnPropNameInTable="subacct_nameColumn" msprop:Generator_UserColumnName="subacct_name">
                 <xs:simpleType>
@@ -2162,8 +2233,114 @@ SELECT Id, contract, date, total_disbursement, profit_share, fund_id FROM Invest
         <xs:element name="BalanceResume" msprop:Generator_TableClassName="BalanceResumeDataTable" msprop:Generator_TableVarName="tableBalanceResume" msprop:Generator_TablePropName="BalanceResume" msprop:Generator_RowDeletingName="BalanceResumeRowDeleting" msprop:Generator_RowChangingName="BalanceResumeRowChanging" msprop:Generator_RowEvHandlerName="BalanceResumeRowChangeEventHandler" msprop:Generator_RowDeletedName="BalanceResumeRowDeleted" msprop:Generator_UserTableName="BalanceResume" msprop:Generator_RowChangedName="BalanceResumeRowChanged" msprop:Generator_RowEvArgName="BalanceResumeRowChangeEvent" msprop:Generator_RowClassName="BalanceResumeRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Active" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnActive" msprop:Generator_ColumnPropNameInRow="Active" msprop:Generator_ColumnPropNameInTable="ActiveColumn" msprop:Generator_UserColumnName="Active" type="xs:decimal" minOccurs="0" />
-              <xs:element name="Pasive" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPasive" msprop:Generator_ColumnPropNameInRow="Pasive" msprop:Generator_ColumnPropNameInTable="PasiveColumn" msprop:Generator_UserColumnName="Pasive" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Asset" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnAsset" msprop:Generator_ColumnPropNameInRow="Asset" msprop:Generator_ColumnPropNameInTable="AssetColumn" msprop:Generator_UserColumnName="Asset" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Liability" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnLiability" msprop:Generator_ColumnPropNameInRow="Liability" msprop:Generator_ColumnPropNameInTable="LiabilityColumn" msprop:Generator_UserColumnName="Liability" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Movements" msprop:Generator_TableClassName="MovementsDataTable" msprop:Generator_TableVarName="tableMovements" msprop:Generator_TablePropName="Movements" msprop:Generator_RowDeletingName="MovementsRowDeleting" msprop:Generator_RowChangingName="MovementsRowChanging" msprop:Generator_RowEvHandlerName="MovementsRowChangeEventHandler" msprop:Generator_RowDeletedName="MovementsRowDeleted" msprop:Generator_UserTableName="Movements" msprop:Generator_RowChangedName="MovementsRowChanged" msprop:Generator_RowEvArgName="MovementsRowChangeEvent" msprop:Generator_RowClassName="MovementsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
+              <xs:element name="Reference" msprop:Generator_ColumnVarNameInTable="columnReference" msprop:Generator_ColumnPropNameInRow="Reference" msprop:Generator_ColumnPropNameInTable="ReferenceColumn" msprop:Generator_UserColumnName="Reference">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="description" msprop:Generator_ColumnVarNameInTable="columndescription" msprop:Generator_ColumnPropNameInRow="description" msprop:Generator_ColumnPropNameInTable="descriptionColumn" msprop:Generator_UserColumnName="description">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TypeId" msprop:Generator_ColumnVarNameInTable="columnTypeId" msprop:Generator_ColumnPropNameInRow="TypeId" msprop:Generator_ColumnPropNameInTable="TypeIdColumn" msprop:Generator_UserColumnName="TypeId" type="xs:int" />
+              <xs:element name="AccountType" msprop:Generator_ColumnVarNameInTable="columnAccountType" msprop:Generator_ColumnPropNameInRow="AccountType" msprop:Generator_ColumnPropNameInTable="AccountTypeColumn" msprop:Generator_UserColumnName="AccountType">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Account" msprop:Generator_ColumnVarNameInTable="columnAccount" msprop:Generator_ColumnPropNameInRow="Account" msprop:Generator_ColumnPropNameInTable="AccountColumn" msprop:Generator_UserColumnName="Account">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SubAccount" msprop:Generator_ColumnVarNameInTable="columnSubAccount" msprop:Generator_ColumnPropNameInRow="SubAccount" msprop:Generator_ColumnPropNameInTable="SubAccountColumn" msprop:Generator_UserColumnName="SubAccount">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_UserColumnName="Date" type="xs:dateTime" />
+              <xs:element name="Debit" msprop:Generator_ColumnVarNameInTable="columnDebit" msprop:Generator_ColumnPropNameInRow="Debit" msprop:Generator_ColumnPropNameInTable="DebitColumn" msprop:Generator_UserColumnName="Debit" type="xs:decimal" />
+              <xs:element name="Credit" msprop:Generator_ColumnVarNameInTable="columnCredit" msprop:Generator_ColumnPropNameInRow="Credit" msprop:Generator_ColumnPropNameInTable="CreditColumn" msprop:Generator_UserColumnName="Credit" type="xs:decimal" />
+              <xs:element name="Shift_Amount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnShift_Amount" msprop:Generator_ColumnPropNameInRow="Shift_Amount" msprop:Generator_ColumnPropNameInTable="Shift_AmountColumn" msprop:Generator_UserColumnName="Shift_Amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Acc_Amount" msprop:Generator_ColumnVarNameInTable="columnAcc_Amount" msprop:Generator_ColumnPropNameInRow="Acc_Amount" msprop:Generator_ColumnPropNameInTable="Acc_AmountColumn" msprop:Generator_UserColumnName="Acc_Amount" type="xs:decimal" />
+              <xs:element name="SubAcc_amount" msprop:Generator_ColumnVarNameInTable="columnSubAcc_amount" msprop:Generator_ColumnPropNameInRow="SubAcc_amount" msprop:Generator_ColumnPropNameInTable="SubAcc_amountColumn" msprop:Generator_UserColumnName="SubAcc_amount" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ProfitResults" msprop:Generator_TableClassName="ProfitResultsDataTable" msprop:Generator_TableVarName="tableProfitResults" msprop:Generator_RowChangedName="ProfitResultsRowChanged" msprop:Generator_TablePropName="ProfitResults" msprop:Generator_RowDeletingName="ProfitResultsRowDeleting" msprop:Generator_RowChangingName="ProfitResultsRowChanging" msprop:Generator_RowEvHandlerName="ProfitResultsRowChangeEventHandler" msprop:Generator_RowDeletedName="ProfitResultsRowDeleted" msprop:Generator_RowClassName="ProfitResultsRow" msprop:Generator_UserTableName="ProfitResults" msprop:Generator_RowEvArgName="ProfitResultsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
+              <xs:element name="Reference" msprop:Generator_ColumnVarNameInTable="columnReference" msprop:Generator_ColumnPropNameInRow="Reference" msprop:Generator_ColumnPropNameInTable="ReferenceColumn" msprop:Generator_UserColumnName="Reference">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="description" msprop:Generator_ColumnVarNameInTable="columndescription" msprop:Generator_ColumnPropNameInRow="description" msprop:Generator_ColumnPropNameInTable="descriptionColumn" msprop:Generator_UserColumnName="description">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TypeId" msprop:Generator_ColumnVarNameInTable="columnTypeId" msprop:Generator_ColumnPropNameInRow="TypeId" msprop:Generator_ColumnPropNameInTable="TypeIdColumn" msprop:Generator_UserColumnName="TypeId" type="xs:int" />
+              <xs:element name="AccountType" msprop:Generator_ColumnVarNameInTable="columnAccountType" msprop:Generator_ColumnPropNameInRow="AccountType" msprop:Generator_ColumnPropNameInTable="AccountTypeColumn" msprop:Generator_UserColumnName="AccountType">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Account" msprop:Generator_ColumnVarNameInTable="columnAccount" msprop:Generator_ColumnPropNameInRow="Account" msprop:Generator_ColumnPropNameInTable="AccountColumn" msprop:Generator_UserColumnName="Account">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SubAccount" msprop:Generator_ColumnVarNameInTable="columnSubAccount" msprop:Generator_ColumnPropNameInRow="SubAccount" msprop:Generator_ColumnPropNameInTable="SubAccountColumn" msprop:Generator_UserColumnName="SubAccount">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_UserColumnName="Date" type="xs:dateTime" />
+              <xs:element name="Debit" msprop:Generator_ColumnVarNameInTable="columnDebit" msprop:Generator_ColumnPropNameInRow="Debit" msprop:Generator_ColumnPropNameInTable="DebitColumn" msprop:Generator_UserColumnName="Debit" type="xs:decimal" />
+              <xs:element name="Credit" msprop:Generator_ColumnVarNameInTable="columnCredit" msprop:Generator_ColumnPropNameInRow="Credit" msprop:Generator_ColumnPropNameInTable="CreditColumn" msprop:Generator_UserColumnName="Credit" type="xs:decimal" />
+              <xs:element name="Shift_Amount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnShift_Amount" msprop:Generator_ColumnPropNameInRow="Shift_Amount" msprop:Generator_ColumnPropNameInTable="Shift_AmountColumn" msprop:Generator_UserColumnName="Shift_Amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Acc_Amount" msprop:Generator_ColumnVarNameInTable="columnAcc_Amount" msprop:Generator_ColumnPropNameInRow="Acc_Amount" msprop:Generator_ColumnPropNameInTable="Acc_AmountColumn" msprop:Generator_UserColumnName="Acc_Amount" type="xs:decimal" />
+              <xs:element name="SubAcc_amount" msprop:Generator_ColumnVarNameInTable="columnSubAcc_amount" msprop:Generator_ColumnPropNameInRow="SubAcc_amount" msprop:Generator_ColumnPropNameInTable="SubAcc_amountColumn" msprop:Generator_UserColumnName="SubAcc_amount" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ProfitsResume" msprop:Generator_TableClassName="ProfitsResumeDataTable" msprop:Generator_TableVarName="tableProfitsResume" msprop:Generator_TablePropName="ProfitsResume" msprop:Generator_RowDeletingName="ProfitsResumeRowDeleting" msprop:Generator_RowChangingName="ProfitsResumeRowChanging" msprop:Generator_RowEvHandlerName="ProfitsResumeRowChangeEventHandler" msprop:Generator_RowDeletedName="ProfitsResumeRowDeleted" msprop:Generator_UserTableName="ProfitsResume" msprop:Generator_RowChangedName="ProfitsResumeRowChanged" msprop:Generator_RowEvArgName="ProfitsResumeRowChangeEvent" msprop:Generator_RowClassName="ProfitsResumeRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Income" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnIncome" msprop:Generator_ColumnPropNameInRow="Income" msprop:Generator_ColumnPropNameInTable="IncomeColumn" msprop:Generator_UserColumnName="Income" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Expense" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnExpense" msprop:Generator_ColumnPropNameInRow="Expense" msprop:Generator_ColumnPropNameInTable="ExpenseColumn" msprop:Generator_UserColumnName="Expense" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

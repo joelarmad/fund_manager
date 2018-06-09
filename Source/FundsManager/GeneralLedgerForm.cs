@@ -674,24 +674,17 @@ namespace FundsManager
                 decimal _leftAccount = 0;   //Asset + Expense
                 decimal _rigthAccount = 0;  //Liability + Equity + Income
 
-                List<Account> _accounts = manager.My_db.Accounts.ToList();
-
                 foreach (Movement _movement in movements)
                 {
-                    Account _account = _accounts.First(x => x.Id == _movement.Account);
+                    Account _account = manager.My_db.Accounts.First(x => x.Id == _movement.Account);
 
-                    _account.amount = _movement.AccountBalance;
-                }
-
-                foreach (Account _account in _accounts)
-                {
                     if (_account.type == 0 || _account.type == 4 || _account.type == 5)
                     {
-                        _leftAccount += _account.amount;
+                        _leftAccount += _movement.AccountBalance;
                     }
                     else
                     {
-                        _rigthAccount += _account.amount;
+                        _rigthAccount += _movement.AccountBalance;
                     }
                 }
 

@@ -59,6 +59,7 @@
             this.bondsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -275,21 +276,22 @@
             // movementsToolStripMenuItem
             // 
             this.movementsToolStripMenuItem.Name = "movementsToolStripMenuItem";
-            this.movementsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.movementsToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.movementsToolStripMenuItem.Text = "Movements";
             this.movementsToolStripMenuItem.Click += new System.EventHandler(this.movementsToolStripMenuItem_Click);
             // 
             // bondsToolStripMenuItem1
             // 
             this.bondsToolStripMenuItem1.Name = "bondsToolStripMenuItem1";
-            this.bondsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.bondsToolStripMenuItem1.Size = new System.Drawing.Size(137, 22);
             this.bondsToolStripMenuItem1.Text = "Bonds";
             this.bondsToolStripMenuItem1.Click += new System.EventHandler(this.bondsToolStripMenuItem1_Click);
             // 
             // reportsToolStripMenuItem1
             // 
             this.reportsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.generalBalanceToolStripMenuItem});
+            this.generalBalanceToolStripMenuItem,
+            this.returnsStateToolStripMenuItem});
             this.reportsToolStripMenuItem1.Name = "reportsToolStripMenuItem1";
             this.reportsToolStripMenuItem1.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem1.Text = "Reports";
@@ -300,6 +302,13 @@
             this.generalBalanceToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.generalBalanceToolStripMenuItem.Text = "General Balance";
             this.generalBalanceToolStripMenuItem.Click += new System.EventHandler(this.generalBalanceToolStripMenuItem_Click);
+            // 
+            // returnsStateToolStripMenuItem
+            // 
+            this.returnsStateToolStripMenuItem.Name = "returnsStateToolStripMenuItem";
+            this.returnsStateToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.returnsStateToolStripMenuItem.Text = "Returns State";
+            this.returnsStateToolStripMenuItem.Click += new System.EventHandler(this.returnsStateToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -354,6 +363,7 @@
         private System.Windows.Forms.ToolStripMenuItem underlyingDebtorsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem generalBalanceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem returnsStateToolStripMenuItem;
     }
 }
 
