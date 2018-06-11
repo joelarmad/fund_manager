@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -39,14 +39,14 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.accountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
-            this.accountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountsTableAdapter();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeText = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.accountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
+            this.accountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountsTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
@@ -92,6 +92,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(123, 20);
             this.textBox2.TabIndex = 4;
+            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // comboBox1
             // 
@@ -141,20 +142,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(494, 365);
             this.dataGridView1.TabIndex = 9;
             // 
-            // accountsBindingSource
-            // 
-            this.accountsBindingSource.DataMember = "Accounts";
-            this.accountsBindingSource.DataSource = this.fundsDBDataSet;
-            // 
-            // fundsDBDataSet
-            // 
-            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
-            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // accountsTableAdapter
-            // 
-            this.accountsTableAdapter.ClearBeforeFill = true;
-            // 
             // Column1
             // 
             this.Column1.DataPropertyName = "Id";
@@ -166,10 +153,10 @@
             // amountDataGridViewTextBoxColumn
             // 
             this.amountDataGridViewTextBoxColumn.DataPropertyName = "number";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = "0";
-            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = "0";
+            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.amountDataGridViewTextBoxColumn.HeaderText = "Account Number";
             this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
             this.amountDataGridViewTextBoxColumn.ReadOnly = true;
@@ -198,6 +185,20 @@
             this.TypeText.Name = "TypeText";
             this.TypeText.ReadOnly = true;
             this.TypeText.Width = 150;
+            // 
+            // accountsBindingSource
+            // 
+            this.accountsBindingSource.DataMember = "Accounts";
+            this.accountsBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // fundsDBDataSet
+            // 
+            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
+            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // accountsTableAdapter
+            // 
+            this.accountsTableAdapter.ClearBeforeFill = true;
             // 
             // AccountsForm
             // 

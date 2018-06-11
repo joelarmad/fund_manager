@@ -34,6 +34,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.accountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,15 +43,13 @@
             this.fKOtherDetailsAccountsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.account = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.otherDetailsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.otherDetailsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.OtherDetailsTableAdapter();
             this.button2 = new System.Windows.Forms.Button();
-            this.accountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.accountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountsTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.otherDetailsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -67,6 +67,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(131, 20);
             this.textBox1.TabIndex = 1;
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // button1
             // 
@@ -97,6 +98,16 @@
             this.comboBox1.Size = new System.Drawing.Size(131, 21);
             this.comboBox1.TabIndex = 5;
             this.comboBox1.ValueMember = "Id";
+            // 
+            // accountsBindingSource
+            // 
+            this.accountsBindingSource.DataMember = "Accounts";
+            this.accountsBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // fundsDBDataSet
+            // 
+            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
+            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // dataGridView1
             // 
@@ -162,11 +173,6 @@
             this.otherDetailsBindingSource.DataMember = "OtherDetails";
             this.otherDetailsBindingSource.DataSource = this.fundsDBDataSet;
             // 
-            // fundsDBDataSet
-            // 
-            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
-            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // otherDetailsTableAdapter
             // 
             this.otherDetailsTableAdapter.ClearBeforeFill = true;
@@ -180,11 +186,6 @@
             this.button2.Text = "Delete";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // accountsBindingSource
-            // 
-            this.accountsBindingSource.DataMember = "Accounts";
-            this.accountsBindingSource.DataSource = this.fundsDBDataSet;
             // 
             // accountsTableAdapter
             // 
@@ -208,10 +209,10 @@
             this.ShowInTaskbar = false;
             this.Text = "Other Details";
             this.Load += new System.EventHandler(this.OtherDetailsForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.otherDetailsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

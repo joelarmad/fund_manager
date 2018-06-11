@@ -38,14 +38,14 @@
             this.button1 = new System.Windows.Forms.Button();
             this.accountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountsTableAdapter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.subaccountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.subaccountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.SubaccountsTableAdapter();
-            this.button2 = new System.Windows.Forms.Button();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fKSubaccountsAccountsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Account = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fKAccountsFundsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subaccountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.subaccountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.SubaccountsTableAdapter();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -67,6 +67,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(160, 20);
             this.textBox1.TabIndex = 1;
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // comboBox1
             // 
@@ -132,25 +133,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(406, 253);
             this.dataGridView1.TabIndex = 5;
             // 
-            // subaccountsBindingSource
-            // 
-            this.subaccountsBindingSource.DataMember = "Subaccounts";
-            this.subaccountsBindingSource.DataSource = this.fundsDBDataSet;
-            // 
-            // subaccountsTableAdapter
-            // 
-            this.subaccountsTableAdapter.ClearBeforeFill = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(293, 405);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(108, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Delete";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // idDataGridViewTextBoxColumn
             // 
             this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
@@ -189,6 +171,25 @@
             this.fKAccountsFundsDataGridViewTextBoxColumn.Name = "fKAccountsFundsDataGridViewTextBoxColumn";
             this.fKAccountsFundsDataGridViewTextBoxColumn.ReadOnly = true;
             this.fKAccountsFundsDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // subaccountsBindingSource
+            // 
+            this.subaccountsBindingSource.DataMember = "Subaccounts";
+            this.subaccountsBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // subaccountsTableAdapter
+            // 
+            this.subaccountsTableAdapter.ClearBeforeFill = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(293, 405);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(108, 23);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Delete";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // SubaccountsForm
             // 

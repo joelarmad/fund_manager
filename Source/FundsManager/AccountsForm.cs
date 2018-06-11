@@ -59,47 +59,8 @@ namespace FundsManager
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            addAccount();
             
-            Account _account = new Account();
-            _account.name = textBox1.Text;
-            _account.amount = 0;
-            _account.number = textBox2.Text;
-            _account.FK_Accounts_Funds = manager.Selected;
-            _account.type = comboBox1.SelectedIndex;
-            manager.My_db.Accounts.Add(_account);
-            manager.My_db.SaveChanges();
-            textBox1.Clear();
-            textBox2.Clear();
-            this.accountsTableAdapter.Fill(this.fundsDBDataSet.Accounts);
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
-            {
-                string temp = dataGridView1.Rows[i].Cells[3].Value.ToString();
-                switch (temp)
-                {
-
-                    case "0":
-                        dataGridView1.Rows[i].Cells[4].Value = "Asset";
-                        break;
-                    case "1":
-                        dataGridView1.Rows[i].Cells[4].Value = "Liability";
-                        break;
-                    case "2":
-                        dataGridView1.Rows[i].Cells[4].Value = "Equity";
-                        break;
-                    case "3":
-                        dataGridView1.Rows[i].Cells[4].Value = "Income";
-                        break;
-                    case "4":
-                        dataGridView1.Rows[i].Cells[4].Value = "Expense";
-                        break;
-                    case "5":
-                        dataGridView1.Rows[i].Cells[4].Value = "Contingency Asset";
-                        break;
-                    case "6":
-                        dataGridView1.Rows[i].Cells[4].Value = "Contingency Liability";
-                        break;
-                }
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -142,6 +103,74 @@ namespace FundsManager
                             break;
                     }
                 }
+            }
+        }
+
+        private void addAccount()
+        {
+            try
+            {
+                Account _validationAccount = manager.My_db.Accounts.FirstOrDefault(x => x.number == textBox2.Text);
+
+                if (_validationAccount != null)
+                {
+                    MessageBox.Show("Duplicated account number.");
+                    return;
+                }
+
+                Account _account = new Account();
+                _account.name = textBox1.Text;
+                _account.amount = 0;
+                _account.number = textBox2.Text;
+                _account.FK_Accounts_Funds = manager.Selected;
+                _account.type = comboBox1.SelectedIndex;
+                manager.My_db.Accounts.Add(_account);
+                manager.My_db.SaveChanges();
+                textBox1.Clear();
+                textBox2.Clear();
+                this.accountsTableAdapter.Fill(this.fundsDBDataSet.Accounts);
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    string temp = dataGridView1.Rows[i].Cells[3].Value.ToString();
+                    switch (temp)
+                    {
+
+                        case "0":
+                            dataGridView1.Rows[i].Cells[4].Value = "Asset";
+                            break;
+                        case "1":
+                            dataGridView1.Rows[i].Cells[4].Value = "Liability";
+                            break;
+                        case "2":
+                            dataGridView1.Rows[i].Cells[4].Value = "Equity";
+                            break;
+                        case "3":
+                            dataGridView1.Rows[i].Cells[4].Value = "Income";
+                            break;
+                        case "4":
+                            dataGridView1.Rows[i].Cells[4].Value = "Expense";
+                            break;
+                        case "5":
+                            dataGridView1.Rows[i].Cells[4].Value = "Contingency Asset";
+                            break;
+                        case "6":
+                            dataGridView1.Rows[i].Cells[4].Value = "Contingency Liability";
+                            break;
+                    }
+                }
+                textBox1.Focus();
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error at AccountsForm.addAccount: " + _ex.Message);
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\r' || e.KeyChar == '\r')
+            {
+                addAccount();
             }
         }
     }

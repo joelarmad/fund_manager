@@ -38,21 +38,7 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Subaccount _subaccount = new Subaccount();
-            _subaccount.name = textBox1.Text;
-            _subaccount.FK_Subaccounts_Accounts = Convert.ToInt32(comboBox1.SelectedValue);
-            _subaccount.FK_Accounts_Funds = manager.Selected;
-            manager.My_db.Subaccounts.Add(_subaccount);
-            manager.My_db.SaveChanges();
-            textBox1.Clear();
-            comboBox1.ResetText();
-            this.subaccountsTableAdapter.Fill(this.fundsDBDataSet.Subaccounts);
-            foreach (DataGridViewRow _row in dataGridView1.Rows)
-            {
-                Account _account = new Account();
-                _account = manager.My_db.Accounts.Find(Convert.ToInt32(_row.Cells[2].Value));
-                _row.Cells[3].Value = _account.name;
-            }
+            addSubAccount();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -67,6 +53,33 @@ namespace FundsManager
                 manager.DeleteSubaccount(Convert.ToInt32(selectedRow.Cells[0].Value));
                 this.subaccountsTableAdapter.Fill(this.fundsDBDataSet.Subaccounts);
                 
+            }
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\b' || e.KeyChar == '\r')
+            {
+                addSubAccount();
+            }
+        }
+
+        private void addSubAccount()
+        {
+            Subaccount _subaccount = new Subaccount();
+            _subaccount.name = textBox1.Text;
+            _subaccount.FK_Subaccounts_Accounts = Convert.ToInt32(comboBox1.SelectedValue);
+            _subaccount.FK_Accounts_Funds = manager.Selected;
+            manager.My_db.Subaccounts.Add(_subaccount);
+            manager.My_db.SaveChanges();
+            textBox1.Clear();
+            //comboBox1.ResetText();
+            this.subaccountsTableAdapter.Fill(this.fundsDBDataSet.Subaccounts);
+            foreach (DataGridViewRow _row in dataGridView1.Rows)
+            {
+                Account _account = new Account();
+                _account = manager.My_db.Accounts.Find(Convert.ToInt32(_row.Cells[2].Value));
+                _row.Cells[3].Value = _account.name;
             }
         }
     }

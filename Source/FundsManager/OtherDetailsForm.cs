@@ -35,21 +35,7 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OtherDetail _otherdetail = new OtherDetail();
-            _otherdetail.name = textBox1.Text;
-            _otherdetail.FK_OtherDetails_Accounts = Convert.ToInt32(comboBox1.SelectedValue);
-            _otherdetail.FK_OtherDetails_Funds = manager.Selected;
-            manager.My_db.OtherDetails.Add(_otherdetail);
-            manager.My_db.SaveChanges();
-            textBox1.Clear();
-            comboBox1.ResetText();
-            this.otherDetailsTableAdapter.Fill(this.fundsDBDataSet.OtherDetails);
-            foreach (DataGridViewRow _row in dataGridView1.Rows)
-            {
-                Account _account = new Account();
-                _account = manager.My_db.Accounts.Find(Convert.ToInt32(_row.Cells[3].Value));
-                _row.Cells[4].Value = _account.name;
-            }
+            addDetail();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -64,6 +50,33 @@ namespace FundsManager
                 manager.DeleteOtherDetails(Convert.ToInt32(selectedRow.Cells[0].Value));
                 this.otherDetailsTableAdapter.Fill(this.fundsDBDataSet.OtherDetails);
 
+            }
+        }
+
+        private void addDetail()
+        {
+            OtherDetail _otherdetail = new OtherDetail();
+            _otherdetail.name = textBox1.Text;
+            _otherdetail.FK_OtherDetails_Accounts = Convert.ToInt32(comboBox1.SelectedValue);
+            _otherdetail.FK_OtherDetails_Funds = manager.Selected;
+            manager.My_db.OtherDetails.Add(_otherdetail);
+            manager.My_db.SaveChanges();
+            textBox1.Clear();
+            //comboBox1.ResetText();
+            this.otherDetailsTableAdapter.Fill(this.fundsDBDataSet.OtherDetails);
+            foreach (DataGridViewRow _row in dataGridView1.Rows)
+            {
+                Account _account = new Account();
+                _account = manager.My_db.Accounts.Find(Convert.ToInt32(_row.Cells[3].Value));
+                _row.Cells[4].Value = _account.name;
+            }
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\b' || e.KeyChar == '\r')
+            {
+                addDetail();
             }
         }
     }
