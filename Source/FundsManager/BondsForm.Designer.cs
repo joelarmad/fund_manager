@@ -74,6 +74,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(79, 32);
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(104, 20);
             this.textBox1.TabIndex = 1;
             // 
@@ -227,6 +228,7 @@
             // 
             // button2
             // 
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(377, 484);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(141, 36);

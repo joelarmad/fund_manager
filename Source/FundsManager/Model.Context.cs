@@ -50,5 +50,7 @@ namespace FundsManager
         public virtual DbSet<UnderlyingDebtor> UnderlyingDebtors { get; set; }
         public virtual DbSet<Subaccount> Subaccounts { get; set; }
         public virtual DbSet<Movements_Accounts> Movements_Accounts { get; set; }
+        public virtual DbSet<AccountType> AccountTypes { get; set; }
+        public virtual DbSet<Resource> Resources { get; set; }
     }
 }

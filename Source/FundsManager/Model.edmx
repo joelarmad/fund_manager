@@ -26,7 +26,7 @@
           <Property Name="type" Type="int" Nullable="false" />
           <Property Name="amount" Type="money" Nullable="false" />
           <Property Name="FK_Accounts_Funds" Type="int" Nullable="false" />
-          <Property Name="number" Type="text" Nullable="false" />
+          <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="AccountsBankingAccounts">
           <Key>
@@ -68,6 +68,13 @@
           <Property Name="employee_id" Type="int" Nullable="false" />
           <Property Name="amount" Type="money" Nullable="false" />
         </EntityType>
+        <EntityType Name="AccountType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="AccountType" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="BankingAccounts">
           <Key>
             <PropertyRef Name="Id" />
@@ -95,7 +102,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="number" Type="text" Nullable="false" />
+          <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="issued" Type="date" Nullable="false" />
           <Property Name="FK_Bonds_Funds" Type="int" Nullable="false" />
           <Property Name="price" Type="money" Nullable="false" />
@@ -230,6 +237,14 @@
           <Property Name="name" Type="text" Nullable="false" />
           <Property Name="FK_OtherDetails_Funds" Type="int" Nullable="false" />
           <Property Name="FK_OtherDetails_Accounts" Type="int" />
+        </EntityType>
+        <EntityType Name="Resources">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Value" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Sectors">
           <Key>
@@ -841,6 +856,7 @@
           <EntitySet Name="AccountsClients" EntityType="Self.AccountsClients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountsCreditors" EntityType="Self.AccountsCreditors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountsEmployees" EntityType="Self.AccountsEmployees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountType" EntityType="Self.AccountType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BankingAccounts" EntityType="Self.BankingAccounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Banks" EntityType="Self.Banks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bonds" EntityType="Self.Bonds" Schema="dbo" store:Type="Tables" />
@@ -857,6 +873,7 @@
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movements_Accounts" EntityType="Self.Movements_Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OtherDetails" EntityType="Self.OtherDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resources" EntityType="Self.Resources" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sectors" EntityType="Self.Sectors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subaccounts" EntityType="Self.Subaccounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnderlyingDebtors" EntityType="Self.UnderlyingDebtors" Schema="dbo" store:Type="Tables" />
@@ -1275,6 +1292,8 @@
             <End Role="Subaccount" EntitySet="Subaccounts" />
             <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
           </AssociationSet>
+          <EntitySet Name="AccountTypes" EntityType="FundsDBModel.AccountType" />
+          <EntitySet Name="Resources" EntityType="FundsDBModel.Resource" />
         </EntityContainer>
         <EntityType Name="AccountingMovement">
           <Key>
@@ -1300,7 +1319,7 @@
           <Property Name="type" Type="Int32" Nullable="false" />
           <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="FK_Accounts_Funds" Type="Int32" Nullable="false" />
-          <Property Name="number" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Accounts_Funds" FromRole="Account" ToRole="Fund" />
           <NavigationProperty Name="AccountsBankingAccounts" Relationship="FundsDBModel.FK_AccountsBankingAccount_Accounts" FromRole="Account" ToRole="AccountsBankingAccount" />
           <NavigationProperty Name="AccountsClients" Relationship="FundsDBModel.FK_AccountsClients_Accounts" FromRole="Account" ToRole="AccountsClient" />
@@ -1398,7 +1417,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="number" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="issued" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="FK_Bonds_Funds" Type="Int32" Nullable="false" />
           <Property Name="price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
@@ -2201,6 +2220,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AccountType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="AccountType1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2481,6 +2515,23 @@
                 <ScalarProperty Name="credit" ColumnName="credit" />
                 <ScalarProperty Name="FK_Movements_Accounts_AccountingMovements" ColumnName="FK_Movements_Accounts_AccountingMovements" />
                 <ScalarProperty Name="FK_Movements_Accounts_Subaccounts" ColumnName="FK_Movements_Accounts_Subaccounts" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountTypes">
+            <EntityTypeMapping TypeName="FundsDBModel.AccountType">
+              <MappingFragment StoreEntitySet="AccountType">
+                <ScalarProperty Name="AccountType1" ColumnName="AccountType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resources">
+            <EntityTypeMapping TypeName="FundsDBModel.Resource">
+              <MappingFragment StoreEntitySet="Resources">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

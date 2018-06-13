@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FundsManager.Classes.Utilities;
+using System.Collections;
 
 namespace FundsManager
 {
@@ -16,6 +18,8 @@ namespace FundsManager
         private List<InvestorForBond> investors;
         private Decimal check_pieces;
         private Color _color;
+
+        private int fBondConsecutive = 0;
 
         public BondsForm(MyFundsManager _manager)
         {
@@ -30,11 +34,19 @@ namespace FundsManager
 
         private void BondsForm_Load(object sender, EventArgs e)
         {
+            fBondConsecutive = 0;
+
             // TODO: This line of code loads data into the 'fundsDBDataSet.Investors' table. You can move, or remove it, as needed.
             this.investorsTableAdapter.Fill(this.fundsDBDataSet.Investors);
             comboBox1.SelectedItem = null;
             comboBox1.SelectedText = "Select investor";
 
+            Resource _resource = manager.My_db.Resources.FirstOrDefault(x => x.Name == KeyDefinitions.BOND_CONSECUTIVE_KEY);
+
+            if (_resource != null && _resource.Value != null && int.TryParse(_resource.Value, out fBondConsecutive))
+            {
+                textBox1.Text = "Bond " + Conversions.toRomanNumeral(fBondConsecutive);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -66,10 +78,12 @@ namespace FundsManager
             if (check_pieces == Convert.ToDecimal(textBox6.Text))
             {
                 _color = Color.FromName("Green");
+                button2.Enabled = true;
             }
             else
             {
                 _color = Color.FromName("Red");
+                button2.Enabled = false;
             }
 
             totales_item.ForeColor = _color;
@@ -80,14 +94,61 @@ namespace FundsManager
 
         private void button3_Click(object sender, EventArgs e)
         {
-            foreach (int index in listView1.SelectedIndices)
-               investors.RemoveAt(index);
+            ArrayList _investorsToDelete = new ArrayList();
 
-            foreach (ListViewItem _item in listView1.SelectedItems)
+            foreach (int _index in listView1.SelectedIndices)
             {
-                check_pieces -= Convert.ToDecimal(_item.SubItems[1].Text);
-                listView1.Items.Remove(_item);
+                _investorsToDelete.Add(investors[_index]);
             }
+
+            foreach (InvestorForBond _investor in _investorsToDelete)
+            {
+                investors.Remove(_investor);
+            }
+
+            listView1.Items.Clear();
+
+            check_pieces = 0;
+            Decimal pieces_price = Convert.ToDecimal(textBox2.Text);
+
+            foreach (InvestorForBond _investorForBond in investors)
+            {
+                float investor_amount = (float)pieces_price * _investorForBond.Pieces;
+
+                Investor _investor = manager.My_db.Investors.FirstOrDefault(x => x.Id == _investorForBond.Id);
+
+                string[] row = { _investor.name, _investorForBond.Pieces.ToString(), string.Format("€{0:N2}", investor_amount) };
+                ListViewItem my_item = new ListViewItem(row);
+                listView1.Items.Add(my_item);
+
+                check_pieces += (decimal)_investorForBond.Pieces;
+                
+                
+                textBox5.Text = "";
+                comboBox1.ResetText();
+            }
+            
+            Decimal amount = (pieces_price * Convert.ToDecimal(textBox6.Text));
+
+            string[] totales = { "Total", textBox6.Text, string.Format("€{0:N2}", amount) };
+
+            if (check_pieces == Convert.ToDecimal(textBox6.Text))
+            {
+                _color = Color.FromName("Green");
+                button2.Enabled = true;
+            }
+            else
+            {
+                _color = Color.FromName("Red");
+                button2.Enabled = false;
+            }
+
+            ListViewItem totales_item = new ListViewItem(totales);
+
+            totales_item.ForeColor = _color;
+            listView1.Items.Add(totales_item);
+
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -114,7 +175,15 @@ namespace FundsManager
 
             }
 
-            textBox1.Text = "";
+            Resource _resource = manager.My_db.Resources.FirstOrDefault(x => x.Name == KeyDefinitions.BOND_CONSECUTIVE_KEY);
+
+            fBondConsecutive++;
+
+            _resource.Value = fBondConsecutive.ToString();
+
+            manager.My_db.SaveChanges();
+
+            textBox1.Text = "Bond " + Conversions.toRomanNumeral(fBondConsecutive);
             textBox2.Text = "";
             textBox3.Text = "";
             textBox4.Text = "";

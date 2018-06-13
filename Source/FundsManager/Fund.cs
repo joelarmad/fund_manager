@@ -35,11 +35,11 @@ namespace FundsManager
             this.Investments = new HashSet<Investment>();
             this.Investors = new HashSet<Investor>();
             this.Items = new HashSet<Item>();
-            this.Movements_Accounts = new HashSet<Movements_Accounts>();
             this.OtherDetails = new HashSet<OtherDetail>();
             this.Sectors = new HashSet<Sector>();
-            this.Subaccounts = new HashSet<Subaccount>();
             this.UnderlyingDebtors = new HashSet<UnderlyingDebtor>();
+            this.Subaccounts = new HashSet<Subaccount>();
+            this.Movements_Accounts = new HashSet<Movements_Accounts>();
         }
     
         public int Id { get; set; }
@@ -83,14 +83,14 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Item> Items { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Movements_Accounts> Movements_Accounts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OtherDetail> OtherDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sector> Sectors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UnderlyingDebtor> UnderlyingDebtors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Subaccount> Subaccounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UnderlyingDebtor> UnderlyingDebtors { get; set; }
+        public virtual ICollection<Movements_Accounts> Movements_Accounts { get; set; }
     }
 }

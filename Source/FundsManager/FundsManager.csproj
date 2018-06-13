@@ -119,6 +119,9 @@
     <Compile Include="AccountsForm.Designer.cs">
       <DependentUpon>AccountsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AccountType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="ActivateBondsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +164,8 @@
     <Compile Include="BondsList.Designer.cs">
       <DependentUpon>BondsList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Utilities\Conversions.cs" />
+    <Compile Include="Classes\Utilities\KeyDefinitions.cs" />
     <Compile Include="Client.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -330,6 +335,9 @@
     </Compile>
     <Compile Include="ReportForms\ReturnsState.Designer.cs">
       <DependentUpon>ReturnsState.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Resource.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Sector.cs">
       <DependentUpon>Model.tt</DependentUpon>
