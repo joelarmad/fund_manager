@@ -63,7 +63,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!subacct_amount.Value</Value>
+                              <Value>=Fields!acct_amount.Value</Value>
                               <Style>
                                 <FontWeight>Normal</FontWeight>
                                 <Color>#333333</Color>
@@ -103,7 +103,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>="Total: " + CStr(Sum(Fields!subacct_amount.Value))</Value>
+                              <Value>="Total: " + CStr(Sum(Fields!acct_amount.Value))</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>#333333</Color>
@@ -260,16 +260,16 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.15278in</Size>
+                    <Size>1in</Size>
                     <CellContents>
-                      <Textbox Name="Textbox9">
+                      <Textbox Name="Textbox1">
                         <CanGrow>true</CanGrow>
                         <KeepTogether>true</KeepTogether>
                         <Paragraphs>
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Account</Value>
+                                <Value>Number</Value>
                                 <Style>
                                   <FontWeight>Bold</FontWeight>
                                   <TextDecoration>Underline</TextDecoration>
@@ -278,11 +278,11 @@
                               </TextRun>
                             </TextRuns>
                             <Style>
-                              <TextAlign>Right</TextAlign>
+                              <TextAlign>Left</TextAlign>
                             </Style>
                           </Paragraph>
                         </Paragraphs>
-                        <rd:DefaultName>Textbox9</rd:DefaultName>
+                        <rd:DefaultName>Textbox1</rd:DefaultName>
                         <Style>
                           <Border>
                             <Style>None</Style>
@@ -299,16 +299,16 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.98214in</Size>
+                        <Size>3.13493in</Size>
                         <CellContents>
-                          <Textbox Name="Textbox7">
+                          <Textbox Name="Textbox9">
                             <CanGrow>true</CanGrow>
                             <KeepTogether>true</KeepTogether>
                             <Paragraphs>
                               <Paragraph>
                                 <TextRuns>
                                   <TextRun>
-                                    <Value>SubAccount</Value>
+                                    <Value>Account</Value>
                                     <Style>
                                       <FontWeight>Bold</FontWeight>
                                       <TextDecoration>Underline</TextDecoration>
@@ -317,11 +317,11 @@
                                   </TextRun>
                                 </TextRuns>
                                 <Style>
-                                  <TextAlign>Right</TextAlign>
+                                  <TextAlign>Left</TextAlign>
                                 </Style>
                               </Paragraph>
                             </Paragraphs>
-                            <rd:DefaultName>Textbox7</rd:DefaultName>
+                            <rd:DefaultName>Textbox9</rd:DefaultName>
                             <Style>
                               <Border>
                                 <Style>None</Style>
@@ -335,6 +335,9 @@
                           </Textbox>
                         </CellContents>
                       </TablixHeader>
+                      <TablixMembers>
+                        <TablixMember />
+                      </TablixMembers>
                     </TablixMember>
                   </TablixMembers>
                 </TablixMember>
@@ -362,6 +365,13 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
+                            <Value xml:space="preserve">  </Value>
+                            <Style>
+                              <FontWeight>Normal</FontWeight>
+                              <Color>#333333</Color>
+                            </Style>
+                          </TextRun>
+                          <TextRun>
                             <Value>=Fields!acct_type.Value</Value>
                             <Style>
                               <FontWeight>Normal</FontWeight>
@@ -370,7 +380,7 @@
                           </TextRun>
                         </TextRuns>
                         <Style>
-                          <TextAlign>Right</TextAlign>
+                          <TextAlign>Left</TextAlign>
                         </Style>
                       </Paragraph>
                     </Paragraphs>
@@ -390,27 +400,27 @@
               </TablixHeader>
               <TablixMembers>
                 <TablixMember>
-                  <Group Name="acct_name">
+                  <Group Name="acct_number">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!acct_name.Value</GroupExpression>
+                      <GroupExpression>=Fields!acct_number.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!acct_name.Value</Value>
+                      <Value>=Fields!acct_number.Value</Value>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>2.15278in</Size>
+                    <Size>1in</Size>
                     <CellContents>
-                      <Textbox Name="acct_name">
+                      <Textbox Name="acct_number">
                         <CanGrow>true</CanGrow>
                         <KeepTogether>true</KeepTogether>
                         <Paragraphs>
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>=Fields!acct_name.Value</Value>
+                                <Value>=Fields!acct_number.Value</Value>
                                 <Style>
                                   <FontWeight>Normal</FontWeight>
                                   <Color>#333333</Color>
@@ -418,11 +428,11 @@
                               </TextRun>
                             </TextRuns>
                             <Style>
-                              <TextAlign>Right</TextAlign>
+                              <TextAlign>Left</TextAlign>
                             </Style>
                           </Paragraph>
                         </Paragraphs>
-                        <rd:DefaultName>acct_name</rd:DefaultName>
+                        <rd:DefaultName>acct_number</rd:DefaultName>
                         <Style>
                           <Border>
                             <Style>None</Style>
@@ -438,27 +448,27 @@
                   </TablixHeader>
                   <TablixMembers>
                     <TablixMember>
-                      <Group Name="subacct_name">
+                      <Group Name="acct_name">
                         <GroupExpressions>
-                          <GroupExpression>=Fields!subacct_name.Value</GroupExpression>
+                          <GroupExpression>=Fields!acct_name.Value</GroupExpression>
                         </GroupExpressions>
                       </Group>
                       <SortExpressions>
                         <SortExpression>
-                          <Value>=Fields!subacct_name.Value</Value>
+                          <Value>=Fields!acct_name.Value</Value>
                         </SortExpression>
                       </SortExpressions>
                       <TablixHeader>
-                        <Size>1.98214in</Size>
+                        <Size>3.13493in</Size>
                         <CellContents>
-                          <Textbox Name="subacct_name">
+                          <Textbox Name="acct_name">
                             <CanGrow>true</CanGrow>
                             <KeepTogether>true</KeepTogether>
                             <Paragraphs>
                               <Paragraph>
                                 <TextRuns>
                                   <TextRun>
-                                    <Value>=Fields!subacct_name.Value</Value>
+                                    <Value>=Fields!acct_name.Value</Value>
                                     <Style>
                                       <FontWeight>Normal</FontWeight>
                                       <Color>#333333</Color>
@@ -466,11 +476,11 @@
                                   </TextRun>
                                 </TextRuns>
                                 <Style>
-                                  <TextAlign>Right</TextAlign>
+                                  <TextAlign>Left</TextAlign>
                                 </Style>
                               </Paragraph>
                             </Paragraphs>
-                            <rd:DefaultName>subacct_name</rd:DefaultName>
+                            <rd:DefaultName>acct_name</rd:DefaultName>
                             <Style>
                               <Border>
                                 <Style>None</Style>
@@ -492,9 +502,9 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.15278in</Size>
+                    <Size>1in</Size>
                     <CellContents>
-                      <Textbox Name="Textbox21">
+                      <Textbox Name="Textbox5">
                         <CanGrow>true</CanGrow>
                         <KeepTogether>true</KeepTogether>
                         <Paragraphs>
@@ -513,7 +523,7 @@
                             </Style>
                           </Paragraph>
                         </Paragraphs>
-                        <rd:DefaultName>Textbox21</rd:DefaultName>
+                        <rd:DefaultName>Textbox5</rd:DefaultName>
                         <Style>
                           <Border>
                             <Style>None</Style>
@@ -530,9 +540,9 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.98214in</Size>
+                        <Size>3.13493in</Size>
                         <CellContents>
-                          <Textbox Name="Textbox22">
+                          <Textbox Name="Textbox21">
                             <CanGrow>true</CanGrow>
                             <KeepTogether>true</KeepTogether>
                             <Paragraphs>
@@ -551,7 +561,7 @@
                                 </Style>
                               </Paragraph>
                             </Paragraphs>
-                            <rd:DefaultName>Textbox22</rd:DefaultName>
+                            <rd:DefaultName>Textbox21</rd:DefaultName>
                             <Style>
                               <Border>
                                 <Style>None</Style>
@@ -565,6 +575,9 @@
                           </Textbox>
                         </CellContents>
                       </TablixHeader>
+                      <TablixMembers>
+                        <TablixMember />
+                      </TablixMembers>
                     </TablixMember>
                   </TablixMembers>
                   <KeepWithGroup>Before</KeepWithGroup>
@@ -611,9 +624,9 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.15278in</Size>
+                    <Size>1in</Size>
                     <CellContents>
-                      <Textbox Name="Textbox25">
+                      <Textbox Name="Textbox6">
                         <CanGrow>true</CanGrow>
                         <KeepTogether>true</KeepTogether>
                         <Paragraphs>
@@ -632,7 +645,7 @@
                             </Style>
                           </Paragraph>
                         </Paragraphs>
-                        <rd:DefaultName>Textbox25</rd:DefaultName>
+                        <rd:DefaultName>Textbox6</rd:DefaultName>
                         <Style>
                           <Border>
                             <Style>None</Style>
@@ -649,9 +662,9 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.98214in</Size>
+                        <Size>3.13493in</Size>
                         <CellContents>
-                          <Textbox Name="Textbox26">
+                          <Textbox Name="Textbox25">
                             <CanGrow>true</CanGrow>
                             <KeepTogether>true</KeepTogether>
                             <Paragraphs>
@@ -670,7 +683,7 @@
                                 </Style>
                               </Paragraph>
                             </Paragraphs>
-                            <rd:DefaultName>Textbox26</rd:DefaultName>
+                            <rd:DefaultName>Textbox25</rd:DefaultName>
                             <Style>
                               <Border>
                                 <Style>None</Style>
@@ -682,8 +695,12 @@
                               <PaddingBottom>2pt</PaddingBottom>
                             </Style>
                           </Textbox>
+                          <rd:Selected>true</rd:Selected>
                         </CellContents>
                       </TablixHeader>
+                      <TablixMembers>
+                        <TablixMember />
+                      </TablixMembers>
                     </TablixMember>
                   </TablixMembers>
                 </TablixMember>
@@ -730,9 +747,9 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.15278in</Size>
+                    <Size>1in</Size>
                     <CellContents>
-                      <Textbox Name="Textbox11">
+                      <Textbox Name="Textbox7">
                         <CanGrow>true</CanGrow>
                         <KeepTogether>true</KeepTogether>
                         <Paragraphs>
@@ -751,7 +768,7 @@
                             </Style>
                           </Paragraph>
                         </Paragraphs>
-                        <rd:DefaultName>Textbox11</rd:DefaultName>
+                        <rd:DefaultName>Textbox7</rd:DefaultName>
                         <Style>
                           <Border>
                             <Style>None</Style>
@@ -768,9 +785,9 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.98214in</Size>
+                        <Size>3.13493in</Size>
                         <CellContents>
-                          <Textbox Name="Textbox6">
+                          <Textbox Name="Textbox11">
                             <CanGrow>true</CanGrow>
                             <KeepTogether>true</KeepTogether>
                             <Paragraphs>
@@ -789,7 +806,7 @@
                                 </Style>
                               </Paragraph>
                             </Paragraphs>
-                            <rd:DefaultName>Textbox6</rd:DefaultName>
+                            <rd:DefaultName>Textbox11</rd:DefaultName>
                             <Style>
                               <Border>
                                 <Style>None</Style>
@@ -826,7 +843,7 @@
     <Height>1.46875in</Height>
     <Style />
   </Body>
-  <Width>6.85517in</Width>
+  <Width>6.83434in</Width>
   <Page>
     <PageHeader>
       <Height>1.06125in</Height>
@@ -974,22 +991,14 @@
           <DataField>acct_amount</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="subacct_name">
-          <DataField>subacct_name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="subacct_amount">
-          <DataField>subacct_amount</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>FundsDBDataSet</rd:DataSetName>
         <rd:SchemaPath>D:\00_Proyectos\Others\fund_manager\Source\FundsManager\FundsDBDataSet.xsd</rd:SchemaPath>
-        <rd:TableName>SubAccountBalance</rd:TableName>
+        <rd:TableName>AccountBalance</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>SubAccountBalanceTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterName>AccountBalanceTableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
     <DataSet Name="DataSet2">
