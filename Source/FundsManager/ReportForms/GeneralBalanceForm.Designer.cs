@@ -31,17 +31,31 @@
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.label1 = new System.Windows.Forms.Label();
-            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.accountBalanceBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.accountBalanceTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountBalanceTableAdapter();
+            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.balanceResumeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.accountBalanceTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountBalanceTableAdapter();
             this.balanceResumeTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.BalanceResumeTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountBalanceBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.balanceResumeBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // accountBalanceBindingSource
+            // 
+            this.accountBalanceBindingSource.DataMember = "AccountBalance";
+            this.accountBalanceBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // fundsDBDataSet
+            // 
+            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
+            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // balanceResumeBindingSource
+            // 
+            this.balanceResumeBindingSource.DataMember = "BalanceResume";
+            this.balanceResumeBindingSource.DataSource = this.fundsDBDataSet;
             // 
             // reportViewer1
             // 
@@ -52,39 +66,15 @@
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource2);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "FundsManager.Reports.GeneralBalance.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(12, 27);
+            this.reportViewer1.Location = new System.Drawing.Point(12, 12);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(797, 450);
+            this.reportViewer1.Size = new System.Drawing.Size(797, 465);
             this.reportViewer1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Under construction....";
-            // 
-            // fundsDBDataSet
-            // 
-            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
-            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // accountBalanceBindingSource
-            // 
-            this.accountBalanceBindingSource.DataMember = "AccountBalance";
-            this.accountBalanceBindingSource.DataSource = this.fundsDBDataSet;
             // 
             // accountBalanceTableAdapter
             // 
             this.accountBalanceTableAdapter.ClearBeforeFill = true;
-            // 
-            // balanceResumeBindingSource
-            // 
-            this.balanceResumeBindingSource.DataMember = "BalanceResume";
-            this.balanceResumeBindingSource.DataSource = this.fundsDBDataSet;
             // 
             // balanceResumeTableAdapter
             // 
@@ -95,26 +85,23 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(821, 489);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.reportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GeneralBalanceForm";
-            this.Text = "General Balance";
+            this.Text = "Balance Sheet";
             this.Load += new System.EventHandler(this.GeneralBalanceForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountBalanceBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.balanceResumeBindingSource)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
-        private System.Windows.Forms.Label label1;
         private FundsDBDataSet fundsDBDataSet;
         private System.Windows.Forms.BindingSource accountBalanceBindingSource;
         private FundsDBDataSetTableAdapters.AccountBalanceTableAdapter accountBalanceTableAdapter;

@@ -56,6 +56,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtBondPieces = new System.Windows.Forms.TextBox();
+            this.dtpExpirationDate = new System.Windows.Forms.DateTimePicker();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.investorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -81,7 +83,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(407, 77);
+            this.label2.Location = new System.Drawing.Point(27, 110);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 13);
             this.label2.TabIndex = 2;
@@ -89,10 +91,11 @@
             // 
             // dtpIssuingDate
             // 
-            this.dtpIssuingDate.Location = new System.Drawing.Point(480, 74);
+            this.dtpIssuingDate.Location = new System.Drawing.Point(111, 107);
             this.dtpIssuingDate.Name = "dtpIssuingDate";
             this.dtpIssuingDate.Size = new System.Drawing.Size(200, 20);
             this.dtpIssuingDate.TabIndex = 30;
+            this.dtpIssuingDate.ValueChanged += new System.EventHandler(this.dtpIssuingDate_ValueChanged);
             // 
             // txtPrice
             // 
@@ -160,9 +163,9 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
-            this.listView1.Location = new System.Drawing.Point(29, 189);
+            this.listView1.Location = new System.Drawing.Point(29, 259);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(489, 289);
+            this.listView1.Size = new System.Drawing.Size(489, 219);
             this.listView1.TabIndex = 10;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -279,7 +282,7 @@
             this.groupBox1.Controls.Add(this.cmdRemovePiece);
             this.groupBox1.Controls.Add(this.cmdAddPiece);
             this.groupBox1.Controls.Add(this.txtInvestorPieces);
-            this.groupBox1.Location = new System.Drawing.Point(30, 113);
+            this.groupBox1.Location = new System.Drawing.Point(30, 178);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(619, 70);
             this.groupBox1.TabIndex = 18;
@@ -306,11 +309,30 @@
             this.txtBondPieces.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox6_KeyUp);
             this.txtBondPieces.Leave += new System.EventHandler(this.textBox6_Leave);
             // 
+            // dtpExpirationDate
+            // 
+            this.dtpExpirationDate.Location = new System.Drawing.Point(111, 133);
+            this.dtpExpirationDate.Name = "dtpExpirationDate";
+            this.dtpExpirationDate.Size = new System.Drawing.Size(200, 20);
+            this.dtpExpirationDate.TabIndex = 32;
+            this.dtpExpirationDate.ValueChanged += new System.EventHandler(this.dtpExpirationDate_ValueChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(27, 136);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(80, 13);
+            this.label9.TabIndex = 31;
+            this.label9.Text = "Expiration date:";
+            // 
             // BondsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 569);
+            this.Controls.Add(this.dtpExpirationDate);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.txtBondPieces);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox1);
@@ -370,5 +392,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtBondPieces;
+        private System.Windows.Forms.DateTimePicker dtpExpirationDate;
+        private System.Windows.Forms.Label label9;
     }
 }

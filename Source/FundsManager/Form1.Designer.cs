@@ -299,15 +299,15 @@
             // generalBalanceToolStripMenuItem
             // 
             this.generalBalanceToolStripMenuItem.Name = "generalBalanceToolStripMenuItem";
-            this.generalBalanceToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.generalBalanceToolStripMenuItem.Text = "General Balance";
+            this.generalBalanceToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.generalBalanceToolStripMenuItem.Text = "Balance Sheet";
             this.generalBalanceToolStripMenuItem.Click += new System.EventHandler(this.generalBalanceToolStripMenuItem_Click);
             // 
             // returnsStateToolStripMenuItem
             // 
             this.returnsStateToolStripMenuItem.Name = "returnsStateToolStripMenuItem";
-            this.returnsStateToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.returnsStateToolStripMenuItem.Text = "Returns State";
+            this.returnsStateToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.returnsStateToolStripMenuItem.Text = "Profit && Loss Statement";
             this.returnsStateToolStripMenuItem.Click += new System.EventHandler(this.returnsStateToolStripMenuItem_Click);
             // 
             // Form1

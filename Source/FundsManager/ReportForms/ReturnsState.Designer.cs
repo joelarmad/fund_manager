@@ -33,10 +33,9 @@
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.profitResultsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
-            this.label1 = new System.Windows.Forms.Label();
+            this.profitsResumeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.profitResultsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ProfitResultsTableAdapter();
-            this.profitsResumeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.profitsResumeTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ProfitsResumeTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.profitResultsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
@@ -53,14 +52,10 @@
             this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
             this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // label1
+            // profitsResumeBindingSource
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Under construction....";
+            this.profitsResumeBindingSource.DataMember = "ProfitsResume";
+            this.profitsResumeBindingSource.DataSource = this.fundsDBDataSet;
             // 
             // reportViewer1
             // 
@@ -71,20 +66,15 @@
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource2);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "FundsManager.Reports.ProfitsState.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(12, 25);
+            this.reportViewer1.Location = new System.Drawing.Point(12, 12);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(732, 397);
+            this.reportViewer1.Size = new System.Drawing.Size(732, 410);
             this.reportViewer1.TabIndex = 3;
             // 
             // profitResultsTableAdapter
             // 
             this.profitResultsTableAdapter.ClearBeforeFill = true;
-            // 
-            // profitsResumeBindingSource
-            // 
-            this.profitsResumeBindingSource.DataMember = "ProfitsResume";
-            this.profitsResumeBindingSource.DataSource = this.fundsDBDataSet;
             // 
             // profitsResumeTableAdapter
             // 
@@ -96,24 +86,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(756, 434);
             this.Controls.Add(this.reportViewer1);
-            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ReturnsState";
-            this.Text = "ReturnsState";
+            this.Text = "Profit & Loss Statement";
             this.Load += new System.EventHandler(this.ReturnsState_Load);
             ((System.ComponentModel.ISupportInitialize)(this.profitResultsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.profitsResumeBindingSource)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private FundsDBDataSet fundsDBDataSet;
         private System.Windows.Forms.BindingSource profitResultsBindingSource;

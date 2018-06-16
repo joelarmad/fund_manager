@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="FundsDBModel.AccountsEmployee" Width="1.5" PointX="5.25" PointY="43.25" />
         <EntityTypeShape EntityType="FundsDBModel.BankingAccount" Width="1.5" PointX="7.5" PointY="37.25" />
         <EntityTypeShape EntityType="FundsDBModel.Bank" Width="1.5" PointX="5.25" PointY="28.875" />
-        <EntityTypeShape EntityType="FundsDBModel.Bond" Width="1.5" PointX="3" PointY="49.5" />
         <EntityTypeShape EntityType="FundsDBModel.BondsInvestor" Width="1.5" PointX="5.25" PointY="34.125" />
         <EntityTypeShape EntityType="FundsDBModel.Client" Width="1.5" PointX="3" PointY="53.375" />
         <EntityTypeShape EntityType="FundsDBModel.Country" Width="1.5" PointX="3" PointY="23.25" />
@@ -51,8 +50,6 @@
         <AssociationConnector Association="FundsDBModel.FK_Banks_Countries" />
         <AssociationConnector Association="FundsDBModel.FK_Banks_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Banks" />
-        <AssociationConnector Association="FundsDBModel.FK_Bonds_Funds" />
-        <AssociationConnector Association="FundsDBModel.FK_BondsInvestors_Bonds" />
         <AssociationConnector Association="FundsDBModel.FK_BondsInvestors_Investors" />
         <AssociationConnector Association="FundsDBModel.FK_Clients_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Clients" />
@@ -80,6 +77,9 @@
         <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_Subaccounts" />
         <EntityTypeShape EntityType="FundsDBModel.AccountType" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="FundsDBModel.Resource" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FundsDBModel.Bond" Width="1.5" PointX="3" PointY="38.875" />
+        <AssociationConnector Association="FundsDBModel.FK_Bonds_Funds" />
+        <AssociationConnector Association="FundsDBModel.FK_BondsInvestors_Bonds" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

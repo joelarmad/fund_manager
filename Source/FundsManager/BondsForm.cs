@@ -56,6 +56,8 @@ namespace FundsManager
                 {
                     txtNumber.Text = "Bond " + Conversions.toRomanNumeral(fBondConsecutive);
                 }
+
+                dtpExpirationDate.Value = dtpIssuingDate.Value.AddDays(30);
             }
             catch (Exception _ex)
             {
@@ -196,7 +198,9 @@ namespace FundsManager
             {
                 Bond bond = new Bond();
                 bond.number = txtNumber.Text;
+                //TODO: look for better way of datetime conversions, using DateTimePicker.Value
                 bond.issued = Convert.ToDateTime(dtpIssuingDate.Text);
+                bond.expired = Convert.ToDateTime(dtpExpirationDate.Text);
                 bond.FK_Bonds_Funds = manager.Selected;
                 bond.price = Convert.ToDecimal(txtPrice.Text);
                 bond.pieces = (float)Convert.ToDecimal(txtBondPieces.Text);
@@ -260,7 +264,12 @@ namespace FundsManager
                     && _bondPieces > 0 
                     && _interestOnBond >= 0
                     && _interestOnTFF >= 0
-                    && _investorPieces > 0;
+                    && _investorPieces > 0
+                    && dtpExpirationDate.Value > DateTime.Now
+                    && dtpIssuingDate.Value > DateTime.Now.Date
+                    && dtpIssuingDate.Value < dtpExpirationDate.Value;
+
+                
             }
             catch (Exception _ex)
             {
@@ -400,7 +409,7 @@ namespace FundsManager
                 }
                 else
                 {
-                    txtBondInterest.Text = String.Format("{0:0.00}", _result);
+                    txtBondInterest.Text = String.Format("{0:0}", _result);
                 }
 
                 checkEnablingAddButton();
@@ -422,7 +431,7 @@ namespace FundsManager
                 }
                 else
                 {
-                    txtTFFInterest.Text = String.Format("{0:0.00}", _result);
+                    txtTFFInterest.Text = String.Format("{0:0}", _result);
                 }
 
                 checkEnablingAddButton();
@@ -550,6 +559,16 @@ namespace FundsManager
             {
                 Console.WriteLine("Error in BondsForm.listView1_SelectedIndexChanged: " + _ex.Message);
             }
+        }
+
+        private void dtpIssuingDate_ValueChanged(object sender, EventArgs e)
+        {
+            checkEnablingAddButton();
+        }
+
+        private void dtpExpirationDate_ValueChanged(object sender, EventArgs e)
+        {
+            checkEnablingAddButton();
         }
     }
 }
