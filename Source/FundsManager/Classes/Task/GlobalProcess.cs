@@ -31,7 +31,7 @@ namespace FundsManager.Classes.Task
                         {
                             DateTime _profitDate = _bond.issued.AddDays(30);
 
-                            while (_profitDate <= _bond.expired /*&& _profitDate <= DateTime.Now.Date*/)
+                            while (_profitDate <= _bond.expired && _profitDate <= DateTime.Now.Date)
                             {
                                 InvestorBondProfit _profit = aManager.My_db.InvestorBondProfits.FirstOrDefault(x => x.BondId == _bond.Id && x.InvestorId == _bondInvestor.FK_BondsInvestors_Investors && x.date == _profitDate);
 
