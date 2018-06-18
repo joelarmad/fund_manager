@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FundsManager.Classes.Utilities;
+using FundsManager.Classes.Task;
 using System.Collections;
 using System.Globalization;
 
@@ -206,6 +207,7 @@ namespace FundsManager
                 bond.pieces = (float)Convert.ToDecimal(txtBondPieces.Text);
                 bond.interest_on_bond = Convert.ToInt32(txtBondInterest.Text);
                 bond.interest_tff_contribution = Convert.ToInt32(txtTFFInterest.Text);
+                bond.active = 1;
                 manager.My_db.Bonds.Add(bond);
                 manager.My_db.SaveChanges();
 

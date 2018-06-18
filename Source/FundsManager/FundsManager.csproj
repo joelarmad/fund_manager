@@ -164,6 +164,9 @@
     <Compile Include="BondsList.Designer.cs">
       <DependentUpon>BondsList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classes\DataModel\Bond.cs" />
+    <Compile Include="Classes\DataModel\BondInvestor.cs" />
+    <Compile Include="Classes\Task\GlobalProcess.cs" />
     <Compile Include="Classes\Utilities\Conversions.cs" />
     <Compile Include="Classes\Utilities\KeyDefinitions.cs" />
     <Compile Include="Client.cs">
@@ -230,6 +233,9 @@
     <Compile Include="Fund.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="FundBondProfit.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="FundsDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -269,6 +275,9 @@
       <DependentUpon>InvestmentsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Investor.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestorBondProfit.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="InvestorForBond.cs" />

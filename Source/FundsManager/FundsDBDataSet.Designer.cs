@@ -92,6 +92,14 @@ namespace FundsManager {
         
         private ResourcesDataTable tableResources;
         
+        private BondDetailsDataTable tableBondDetails;
+        
+        private Disbursement_datesDataTable tableDisbursement_dates;
+        
+        private FundBondProfitsDataTable tableFundBondProfits;
+        
+        private InvestorBondProfitsDataTable tableInvestorBondProfits;
+        
         private global::System.Data.DataRelation relationcurrency_id;
         
         private global::System.Data.DataRelation relationFK_BankingAccounts_Funds;
@@ -219,6 +227,18 @@ namespace FundsManager {
         private global::System.Data.DataRelation relationFK_BondsInvestors_Bonds;
         
         private global::System.Data.DataRelation relationFK_Bonds_Funds;
+        
+        private global::System.Data.DataRelation relationFK_Disbursement_dates_Disbursement;
+        
+        private global::System.Data.DataRelation relationFK_Disbursement_dates_Funds;
+        
+        private global::System.Data.DataRelation relationFK_FundBondProfits_Bonds;
+        
+        private global::System.Data.DataRelation relationFK_InvestorBondProfits_Account;
+        
+        private global::System.Data.DataRelation relationFK_InvestorBondProfits_Bond;
+        
+        private global::System.Data.DataRelation relationFK_InvestorBondProfits_Investor;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -349,6 +369,18 @@ namespace FundsManager {
                 }
                 if ((ds.Tables["Resources"] != null)) {
                     base.Tables.Add(new ResourcesDataTable(ds.Tables["Resources"]));
+                }
+                if ((ds.Tables["BondDetails"] != null)) {
+                    base.Tables.Add(new BondDetailsDataTable(ds.Tables["BondDetails"]));
+                }
+                if ((ds.Tables["Disbursement_dates"] != null)) {
+                    base.Tables.Add(new Disbursement_datesDataTable(ds.Tables["Disbursement_dates"]));
+                }
+                if ((ds.Tables["FundBondProfits"] != null)) {
+                    base.Tables.Add(new FundBondProfitsDataTable(ds.Tables["FundBondProfits"]));
+                }
+                if ((ds.Tables["InvestorBondProfits"] != null)) {
+                    base.Tables.Add(new InvestorBondProfitsDataTable(ds.Tables["InvestorBondProfits"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -710,6 +742,46 @@ namespace FundsManager {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public BondDetailsDataTable BondDetails {
+            get {
+                return this.tableBondDetails;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public Disbursement_datesDataTable Disbursement_dates {
+            get {
+                return this.tableDisbursement_dates;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public FundBondProfitsDataTable FundBondProfits {
+            get {
+                return this.tableFundBondProfits;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public InvestorBondProfitsDataTable InvestorBondProfits {
+            get {
+                return this.tableInvestorBondProfits;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -876,6 +948,18 @@ namespace FundsManager {
                 }
                 if ((ds.Tables["Resources"] != null)) {
                     base.Tables.Add(new ResourcesDataTable(ds.Tables["Resources"]));
+                }
+                if ((ds.Tables["BondDetails"] != null)) {
+                    base.Tables.Add(new BondDetailsDataTable(ds.Tables["BondDetails"]));
+                }
+                if ((ds.Tables["Disbursement_dates"] != null)) {
+                    base.Tables.Add(new Disbursement_datesDataTable(ds.Tables["Disbursement_dates"]));
+                }
+                if ((ds.Tables["FundBondProfits"] != null)) {
+                    base.Tables.Add(new FundBondProfitsDataTable(ds.Tables["FundBondProfits"]));
+                }
+                if ((ds.Tables["InvestorBondProfits"] != null)) {
+                    base.Tables.Add(new InvestorBondProfitsDataTable(ds.Tables["InvestorBondProfits"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -1114,6 +1198,30 @@ namespace FundsManager {
                     this.tableResources.InitVars();
                 }
             }
+            this.tableBondDetails = ((BondDetailsDataTable)(base.Tables["BondDetails"]));
+            if ((initTable == true)) {
+                if ((this.tableBondDetails != null)) {
+                    this.tableBondDetails.InitVars();
+                }
+            }
+            this.tableDisbursement_dates = ((Disbursement_datesDataTable)(base.Tables["Disbursement_dates"]));
+            if ((initTable == true)) {
+                if ((this.tableDisbursement_dates != null)) {
+                    this.tableDisbursement_dates.InitVars();
+                }
+            }
+            this.tableFundBondProfits = ((FundBondProfitsDataTable)(base.Tables["FundBondProfits"]));
+            if ((initTable == true)) {
+                if ((this.tableFundBondProfits != null)) {
+                    this.tableFundBondProfits.InitVars();
+                }
+            }
+            this.tableInvestorBondProfits = ((InvestorBondProfitsDataTable)(base.Tables["InvestorBondProfits"]));
+            if ((initTable == true)) {
+                if ((this.tableInvestorBondProfits != null)) {
+                    this.tableInvestorBondProfits.InitVars();
+                }
+            }
             this.relationcurrency_id = this.Relations["currency_id"];
             this.relationFK_BankingAccounts_Funds = this.Relations["FK_BankingAccounts_Funds"];
             this.relationFK_Clients_Funds = this.Relations["FK_Clients_Funds"];
@@ -1178,6 +1286,12 @@ namespace FundsManager {
             this.relationFK_Accounts_Funds = this.Relations["FK_Accounts_Funds"];
             this.relationFK_BondsInvestors_Bonds = this.Relations["FK_BondsInvestors_Bonds"];
             this.relationFK_Bonds_Funds = this.Relations["FK_Bonds_Funds"];
+            this.relationFK_Disbursement_dates_Disbursement = this.Relations["FK_Disbursement_dates_Disbursement"];
+            this.relationFK_Disbursement_dates_Funds = this.Relations["FK_Disbursement_dates_Funds"];
+            this.relationFK_FundBondProfits_Bonds = this.Relations["FK_FundBondProfits_Bonds"];
+            this.relationFK_InvestorBondProfits_Account = this.Relations["FK_InvestorBondProfits_Account"];
+            this.relationFK_InvestorBondProfits_Bond = this.Relations["FK_InvestorBondProfits_Bond"];
+            this.relationFK_InvestorBondProfits_Investor = this.Relations["FK_InvestorBondProfits_Investor"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1256,6 +1370,14 @@ namespace FundsManager {
             base.Tables.Add(this.tableBonds);
             this.tableResources = new ResourcesDataTable();
             base.Tables.Add(this.tableResources);
+            this.tableBondDetails = new BondDetailsDataTable();
+            base.Tables.Add(this.tableBondDetails);
+            this.tableDisbursement_dates = new Disbursement_datesDataTable();
+            base.Tables.Add(this.tableDisbursement_dates);
+            this.tableFundBondProfits = new FundBondProfitsDataTable();
+            base.Tables.Add(this.tableFundBondProfits);
+            this.tableInvestorBondProfits = new InvestorBondProfitsDataTable();
+            base.Tables.Add(this.tableInvestorBondProfits);
             this.relationcurrency_id = new global::System.Data.DataRelation("currency_id", new global::System.Data.DataColumn[] {
                         this.tableCurrencies.IdColumn}, new global::System.Data.DataColumn[] {
                         this.tableBankingAccounts.IdColumn}, false);
@@ -1512,6 +1634,30 @@ namespace FundsManager {
                         this.tableFunds.IdColumn}, new global::System.Data.DataColumn[] {
                         this.tableBonds.FK_Bonds_FundsColumn}, false);
             this.Relations.Add(this.relationFK_Bonds_Funds);
+            this.relationFK_Disbursement_dates_Disbursement = new global::System.Data.DataRelation("FK_Disbursement_dates_Disbursement", new global::System.Data.DataColumn[] {
+                        this.tableDisbursements.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDisbursement_dates.disbursement_idColumn}, false);
+            this.Relations.Add(this.relationFK_Disbursement_dates_Disbursement);
+            this.relationFK_Disbursement_dates_Funds = new global::System.Data.DataRelation("FK_Disbursement_dates_Funds", new global::System.Data.DataColumn[] {
+                        this.tableFunds.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDisbursement_dates.fund_idColumn}, false);
+            this.Relations.Add(this.relationFK_Disbursement_dates_Funds);
+            this.relationFK_FundBondProfits_Bonds = new global::System.Data.DataRelation("FK_FundBondProfits_Bonds", new global::System.Data.DataColumn[] {
+                        this.tableBonds.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableFundBondProfits.BondIdColumn}, false);
+            this.Relations.Add(this.relationFK_FundBondProfits_Bonds);
+            this.relationFK_InvestorBondProfits_Account = new global::System.Data.DataRelation("FK_InvestorBondProfits_Account", new global::System.Data.DataColumn[] {
+                        this.tableAccounts.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableInvestorBondProfits.AccountIdColumn}, false);
+            this.Relations.Add(this.relationFK_InvestorBondProfits_Account);
+            this.relationFK_InvestorBondProfits_Bond = new global::System.Data.DataRelation("FK_InvestorBondProfits_Bond", new global::System.Data.DataColumn[] {
+                        this.tableBonds.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableInvestorBondProfits.BondIdColumn}, false);
+            this.Relations.Add(this.relationFK_InvestorBondProfits_Bond);
+            this.relationFK_InvestorBondProfits_Investor = new global::System.Data.DataRelation("FK_InvestorBondProfits_Investor", new global::System.Data.DataColumn[] {
+                        this.tableInvestors.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableInvestorBondProfits.InvestorIdColumn}, false);
+            this.Relations.Add(this.relationFK_InvestorBondProfits_Investor);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1720,6 +1866,30 @@ namespace FundsManager {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeBondDetails() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeDisbursement_dates() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeFundBondProfits() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeInvestorBondProfits() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -1874,6 +2044,18 @@ namespace FundsManager {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void ResourcesRowChangeEventHandler(object sender, ResourcesRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void BondDetailsRowChangeEventHandler(object sender, BondDetailsRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void Disbursement_datesRowChangeEventHandler(object sender, Disbursement_datesRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void FundBondProfitsRowChangeEventHandler(object sender, FundBondProfitsRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void InvestorBondProfitsRowChangeEventHandler(object sender, InvestorBondProfitsRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -5381,6 +5563,10 @@ namespace FundsManager {
             
             private global::System.Data.DataColumn columnFK_Movements_Accounts_Accounts;
             
+            private global::System.Data.DataColumn columnacc_amount;
+            
+            private global::System.Data.DataColumn columnsubacc_amount;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public Movements_AccountsDataTable() {
@@ -5488,6 +5674,22 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn acc_amountColumn {
+                get {
+                    return this.columnacc_amount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn subacc_amountColumn {
+                get {
+                    return this.columnsubacc_amount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5523,7 +5725,7 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Movements_AccountsRow AddMovements_AccountsRow(AccountingMovementsRow parentAccountingMovementsRowByFK_Movements_Accounts_AccountingMovements, decimal credit, decimal debit, SubaccountsRow parentSubaccountsRowByFK_Movements_Accounts_Subaccounts, int subaccount, int subaccount_type, FundsRow parentFundsRowByFK_Movements_Accounts_Funds, AccountsRow parentAccountsRowByFK_Movements_Accounts_Accounts) {
+            public Movements_AccountsRow AddMovements_AccountsRow(AccountingMovementsRow parentAccountingMovementsRowByFK_Movements_Accounts_AccountingMovements, decimal credit, decimal debit, SubaccountsRow parentSubaccountsRowByFK_Movements_Accounts_Subaccounts, int subaccount, int subaccount_type, FundsRow parentFundsRowByFK_Movements_Accounts_Funds, AccountsRow parentAccountsRowByFK_Movements_Accounts_Accounts, decimal acc_amount, decimal subacc_amount) {
                 Movements_AccountsRow rowMovements_AccountsRow = ((Movements_AccountsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -5534,7 +5736,9 @@ namespace FundsManager {
                         subaccount,
                         subaccount_type,
                         null,
-                        null};
+                        null,
+                        acc_amount,
+                        subacc_amount};
                 if ((parentAccountingMovementsRowByFK_Movements_Accounts_AccountingMovements != null)) {
                     columnValuesArray[1] = parentAccountingMovementsRowByFK_Movements_Accounts_AccountingMovements[0];
                 }
@@ -5585,6 +5789,8 @@ namespace FundsManager {
                 this.columnsubaccount_type = base.Columns["subaccount_type"];
                 this.columnFK_Movements_Accounts_Funds = base.Columns["FK_Movements_Accounts_Funds"];
                 this.columnFK_Movements_Accounts_Accounts = base.Columns["FK_Movements_Accounts_Accounts"];
+                this.columnacc_amount = base.Columns["acc_amount"];
+                this.columnsubacc_amount = base.Columns["subacc_amount"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5608,6 +5814,10 @@ namespace FundsManager {
                 base.Columns.Add(this.columnFK_Movements_Accounts_Funds);
                 this.columnFK_Movements_Accounts_Accounts = new global::System.Data.DataColumn("FK_Movements_Accounts_Accounts", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFK_Movements_Accounts_Accounts);
+                this.columnacc_amount = new global::System.Data.DataColumn("acc_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnacc_amount);
+                this.columnsubacc_amount = new global::System.Data.DataColumn("subacc_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsubacc_amount);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
                 this.columnId.AutoIncrement = true;
@@ -5623,6 +5833,8 @@ namespace FundsManager {
                 this.columnsubaccount.AllowDBNull = false;
                 this.columnsubaccount_type.AllowDBNull = false;
                 this.columnFK_Movements_Accounts_Funds.AllowDBNull = false;
+                this.columnacc_amount.AllowDBNull = false;
+                this.columnsubacc_amount.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7779,6 +7991,8 @@ namespace FundsManager {
             
             private global::System.Data.DataColumn columnFK_Accounts_Funds;
             
+            private global::System.Data.DataColumn columnamount;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public SubaccountsDataTable() {
@@ -7846,6 +8060,14 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn amountColumn {
+                get {
+                    return this.columnamount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -7881,13 +8103,14 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public SubaccountsRow AddSubaccountsRow(string name, AccountsRow parentAccountsRowByFK_Subaccounts_Accounts, FundsRow parentFundsRowByFK_Subaccounts_Funds) {
+            public SubaccountsRow AddSubaccountsRow(string name, AccountsRow parentAccountsRowByFK_Subaccounts_Accounts, FundsRow parentFundsRowByFK_Subaccounts_Funds, decimal amount) {
                 SubaccountsRow rowSubaccountsRow = ((SubaccountsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         name,
                         null,
-                        null};
+                        null,
+                        amount};
                 if ((parentAccountsRowByFK_Subaccounts_Accounts != null)) {
                     columnValuesArray[2] = parentAccountsRowByFK_Subaccounts_Accounts[0];
                 }
@@ -7927,6 +8150,7 @@ namespace FundsManager {
                 this.columnname = base.Columns["name"];
                 this.columnFK_Subaccounts_Accounts = base.Columns["FK_Subaccounts_Accounts"];
                 this.columnFK_Accounts_Funds = base.Columns["FK_Accounts_Funds"];
+                this.columnamount = base.Columns["amount"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7940,6 +8164,8 @@ namespace FundsManager {
                 base.Columns.Add(this.columnFK_Subaccounts_Accounts);
                 this.columnFK_Accounts_Funds = new global::System.Data.DataColumn("FK_Accounts_Funds", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFK_Accounts_Funds);
+                this.columnamount = new global::System.Data.DataColumn("amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnamount);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
                 this.columnId.AutoIncrement = true;
@@ -7952,6 +8178,7 @@ namespace FundsManager {
                 this.columnname.MaxLength = 2147483647;
                 this.columnFK_Subaccounts_Accounts.AllowDBNull = false;
                 this.columnFK_Accounts_Funds.AllowDBNull = false;
+                this.columnamount.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13073,6 +13300,1389 @@ namespace FundsManager {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class BondDetailsDataTable : global::System.Data.TypedTableBase<BondDetailsRow> {
+            
+            private global::System.Data.DataColumn columnBondId;
+            
+            private global::System.Data.DataColumn columnNumber;
+            
+            private global::System.Data.DataColumn columnEmissionDate;
+            
+            private global::System.Data.DataColumn columnExpirationDate;
+            
+            private global::System.Data.DataColumn columnPricePerPieces;
+            
+            private global::System.Data.DataColumn columnBondPieces;
+            
+            private global::System.Data.DataColumn columnInterestOnBond;
+            
+            private global::System.Data.DataColumn columnInteretsOnTFFContribution;
+            
+            private global::System.Data.DataColumn columnInvestroId;
+            
+            private global::System.Data.DataColumn columnInvestor;
+            
+            private global::System.Data.DataColumn columnInvestorPieces;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public BondDetailsDataTable() {
+                this.TableName = "BondDetails";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal BondDetailsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected BondDetailsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BondIdColumn {
+                get {
+                    return this.columnBondId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn NumberColumn {
+                get {
+                    return this.columnNumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EmissionDateColumn {
+                get {
+                    return this.columnEmissionDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ExpirationDateColumn {
+                get {
+                    return this.columnExpirationDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PricePerPiecesColumn {
+                get {
+                    return this.columnPricePerPieces;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BondPiecesColumn {
+                get {
+                    return this.columnBondPieces;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn InterestOnBondColumn {
+                get {
+                    return this.columnInterestOnBond;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn InteretsOnTFFContributionColumn {
+                get {
+                    return this.columnInteretsOnTFFContribution;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn InvestroIdColumn {
+                get {
+                    return this.columnInvestroId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn InvestorColumn {
+                get {
+                    return this.columnInvestor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn InvestorPiecesColumn {
+                get {
+                    return this.columnInvestorPieces;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public BondDetailsRow this[int index] {
+                get {
+                    return ((BondDetailsRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event BondDetailsRowChangeEventHandler BondDetailsRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event BondDetailsRowChangeEventHandler BondDetailsRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event BondDetailsRowChangeEventHandler BondDetailsRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event BondDetailsRowChangeEventHandler BondDetailsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddBondDetailsRow(BondDetailsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public BondDetailsRow AddBondDetailsRow(int BondId, string Number, System.DateTime EmissionDate, System.DateTime ExpirationDate, decimal PricePerPieces, double BondPieces, double InterestOnBond, double InteretsOnTFFContribution, int InvestroId, string Investor, double InvestorPieces) {
+                BondDetailsRow rowBondDetailsRow = ((BondDetailsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        BondId,
+                        Number,
+                        EmissionDate,
+                        ExpirationDate,
+                        PricePerPieces,
+                        BondPieces,
+                        InterestOnBond,
+                        InteretsOnTFFContribution,
+                        InvestroId,
+                        Investor,
+                        InvestorPieces};
+                rowBondDetailsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowBondDetailsRow);
+                return rowBondDetailsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                BondDetailsDataTable cln = ((BondDetailsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new BondDetailsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnBondId = base.Columns["BondId"];
+                this.columnNumber = base.Columns["Number"];
+                this.columnEmissionDate = base.Columns["EmissionDate"];
+                this.columnExpirationDate = base.Columns["ExpirationDate"];
+                this.columnPricePerPieces = base.Columns["PricePerPieces"];
+                this.columnBondPieces = base.Columns["BondPieces"];
+                this.columnInterestOnBond = base.Columns["InterestOnBond"];
+                this.columnInteretsOnTFFContribution = base.Columns["InteretsOnTFFContribution"];
+                this.columnInvestroId = base.Columns["InvestroId"];
+                this.columnInvestor = base.Columns["Investor"];
+                this.columnInvestorPieces = base.Columns["InvestorPieces"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnBondId = new global::System.Data.DataColumn("BondId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBondId);
+                this.columnNumber = new global::System.Data.DataColumn("Number", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNumber);
+                this.columnEmissionDate = new global::System.Data.DataColumn("EmissionDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEmissionDate);
+                this.columnExpirationDate = new global::System.Data.DataColumn("ExpirationDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnExpirationDate);
+                this.columnPricePerPieces = new global::System.Data.DataColumn("PricePerPieces", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPricePerPieces);
+                this.columnBondPieces = new global::System.Data.DataColumn("BondPieces", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBondPieces);
+                this.columnInterestOnBond = new global::System.Data.DataColumn("InterestOnBond", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInterestOnBond);
+                this.columnInteretsOnTFFContribution = new global::System.Data.DataColumn("InteretsOnTFFContribution", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInteretsOnTFFContribution);
+                this.columnInvestroId = new global::System.Data.DataColumn("InvestroId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInvestroId);
+                this.columnInvestor = new global::System.Data.DataColumn("Investor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInvestor);
+                this.columnInvestorPieces = new global::System.Data.DataColumn("InvestorPieces", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInvestorPieces);
+                this.columnBondId.AllowDBNull = false;
+                this.columnNumber.AllowDBNull = false;
+                this.columnNumber.MaxLength = 50;
+                this.columnEmissionDate.AllowDBNull = false;
+                this.columnPricePerPieces.AllowDBNull = false;
+                this.columnBondPieces.AllowDBNull = false;
+                this.columnInterestOnBond.AllowDBNull = false;
+                this.columnInteretsOnTFFContribution.AllowDBNull = false;
+                this.columnInvestroId.AllowDBNull = false;
+                this.columnInvestor.AllowDBNull = false;
+                this.columnInvestor.MaxLength = 2147483647;
+                this.columnInvestorPieces.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public BondDetailsRow NewBondDetailsRow() {
+                return ((BondDetailsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new BondDetailsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(BondDetailsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.BondDetailsRowChanged != null)) {
+                    this.BondDetailsRowChanged(this, new BondDetailsRowChangeEvent(((BondDetailsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.BondDetailsRowChanging != null)) {
+                    this.BondDetailsRowChanging(this, new BondDetailsRowChangeEvent(((BondDetailsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.BondDetailsRowDeleted != null)) {
+                    this.BondDetailsRowDeleted(this, new BondDetailsRowChangeEvent(((BondDetailsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.BondDetailsRowDeleting != null)) {
+                    this.BondDetailsRowDeleting(this, new BondDetailsRowChangeEvent(((BondDetailsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveBondDetailsRow(BondDetailsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FundsDBDataSet ds = new FundsDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "BondDetailsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class Disbursement_datesDataTable : global::System.Data.TypedTableBase<Disbursement_datesRow> {
+            
+            private global::System.Data.DataColumn columnId;
+            
+            private global::System.Data.DataColumn columndate;
+            
+            private global::System.Data.DataColumn columnday;
+            
+            private global::System.Data.DataColumn columndisbursement_id;
+            
+            private global::System.Data.DataColumn columnfund_id;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Disbursement_datesDataTable() {
+                this.TableName = "Disbursement_dates";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal Disbursement_datesDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected Disbursement_datesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IdColumn {
+                get {
+                    return this.columnId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dateColumn {
+                get {
+                    return this.columndate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dayColumn {
+                get {
+                    return this.columnday;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn disbursement_idColumn {
+                get {
+                    return this.columndisbursement_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn fund_idColumn {
+                get {
+                    return this.columnfund_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Disbursement_datesRow this[int index] {
+                get {
+                    return ((Disbursement_datesRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event Disbursement_datesRowChangeEventHandler Disbursement_datesRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event Disbursement_datesRowChangeEventHandler Disbursement_datesRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event Disbursement_datesRowChangeEventHandler Disbursement_datesRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event Disbursement_datesRowChangeEventHandler Disbursement_datesRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddDisbursement_datesRow(Disbursement_datesRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Disbursement_datesRow AddDisbursement_datesRow(System.DateTime date, int day, DisbursementsRow parentDisbursementsRowByFK_Disbursement_dates_Disbursement, FundsRow parentFundsRowByFK_Disbursement_dates_Funds) {
+                Disbursement_datesRow rowDisbursement_datesRow = ((Disbursement_datesRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        date,
+                        day,
+                        null,
+                        null};
+                if ((parentDisbursementsRowByFK_Disbursement_dates_Disbursement != null)) {
+                    columnValuesArray[3] = parentDisbursementsRowByFK_Disbursement_dates_Disbursement[0];
+                }
+                if ((parentFundsRowByFK_Disbursement_dates_Funds != null)) {
+                    columnValuesArray[4] = parentFundsRowByFK_Disbursement_dates_Funds[0];
+                }
+                rowDisbursement_datesRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDisbursement_datesRow);
+                return rowDisbursement_datesRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Disbursement_datesRow FindById(int Id) {
+                return ((Disbursement_datesRow)(this.Rows.Find(new object[] {
+                            Id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                Disbursement_datesDataTable cln = ((Disbursement_datesDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new Disbursement_datesDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnId = base.Columns["Id"];
+                this.columndate = base.Columns["date"];
+                this.columnday = base.Columns["day"];
+                this.columndisbursement_id = base.Columns["disbursement_id"];
+                this.columnfund_id = base.Columns["fund_id"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnId = new global::System.Data.DataColumn("Id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnId);
+                this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndate);
+                this.columnday = new global::System.Data.DataColumn("day", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnday);
+                this.columndisbursement_id = new global::System.Data.DataColumn("disbursement_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndisbursement_id);
+                this.columnfund_id = new global::System.Data.DataColumn("fund_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfund_id);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnId}, true));
+                this.columnId.AutoIncrement = true;
+                this.columnId.AutoIncrementSeed = -1;
+                this.columnId.AutoIncrementStep = -1;
+                this.columnId.AllowDBNull = false;
+                this.columnId.ReadOnly = true;
+                this.columnId.Unique = true;
+                this.columndate.AllowDBNull = false;
+                this.columnday.AllowDBNull = false;
+                this.columndisbursement_id.AllowDBNull = false;
+                this.columnfund_id.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Disbursement_datesRow NewDisbursement_datesRow() {
+                return ((Disbursement_datesRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new Disbursement_datesRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(Disbursement_datesRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.Disbursement_datesRowChanged != null)) {
+                    this.Disbursement_datesRowChanged(this, new Disbursement_datesRowChangeEvent(((Disbursement_datesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.Disbursement_datesRowChanging != null)) {
+                    this.Disbursement_datesRowChanging(this, new Disbursement_datesRowChangeEvent(((Disbursement_datesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.Disbursement_datesRowDeleted != null)) {
+                    this.Disbursement_datesRowDeleted(this, new Disbursement_datesRowChangeEvent(((Disbursement_datesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.Disbursement_datesRowDeleting != null)) {
+                    this.Disbursement_datesRowDeleting(this, new Disbursement_datesRowChangeEvent(((Disbursement_datesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveDisbursement_datesRow(Disbursement_datesRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FundsDBDataSet ds = new FundsDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "Disbursement_datesDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class FundBondProfitsDataTable : global::System.Data.TypedTableBase<FundBondProfitsRow> {
+            
+            private global::System.Data.DataColumn columnId;
+            
+            private global::System.Data.DataColumn columnBondId;
+            
+            private global::System.Data.DataColumn columnIncome;
+            
+            private global::System.Data.DataColumn columndate;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FundBondProfitsDataTable() {
+                this.TableName = "FundBondProfits";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal FundBondProfitsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected FundBondProfitsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IdColumn {
+                get {
+                    return this.columnId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BondIdColumn {
+                get {
+                    return this.columnBondId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IncomeColumn {
+                get {
+                    return this.columnIncome;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dateColumn {
+                get {
+                    return this.columndate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FundBondProfitsRow this[int index] {
+                get {
+                    return ((FundBondProfitsRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event FundBondProfitsRowChangeEventHandler FundBondProfitsRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event FundBondProfitsRowChangeEventHandler FundBondProfitsRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event FundBondProfitsRowChangeEventHandler FundBondProfitsRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event FundBondProfitsRowChangeEventHandler FundBondProfitsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddFundBondProfitsRow(FundBondProfitsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FundBondProfitsRow AddFundBondProfitsRow(BondsRow parentBondsRowByFK_FundBondProfits_Bonds, decimal Income, System.DateTime date) {
+                FundBondProfitsRow rowFundBondProfitsRow = ((FundBondProfitsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        Income,
+                        date};
+                if ((parentBondsRowByFK_FundBondProfits_Bonds != null)) {
+                    columnValuesArray[1] = parentBondsRowByFK_FundBondProfits_Bonds[0];
+                }
+                rowFundBondProfitsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowFundBondProfitsRow);
+                return rowFundBondProfitsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FundBondProfitsRow FindById(int Id) {
+                return ((FundBondProfitsRow)(this.Rows.Find(new object[] {
+                            Id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                FundBondProfitsDataTable cln = ((FundBondProfitsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new FundBondProfitsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnId = base.Columns["Id"];
+                this.columnBondId = base.Columns["BondId"];
+                this.columnIncome = base.Columns["Income"];
+                this.columndate = base.Columns["date"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnId = new global::System.Data.DataColumn("Id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnId);
+                this.columnBondId = new global::System.Data.DataColumn("BondId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBondId);
+                this.columnIncome = new global::System.Data.DataColumn("Income", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIncome);
+                this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndate);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnId}, true));
+                this.columnId.AutoIncrement = true;
+                this.columnId.AutoIncrementSeed = -1;
+                this.columnId.AutoIncrementStep = -1;
+                this.columnId.AllowDBNull = false;
+                this.columnId.ReadOnly = true;
+                this.columnId.Unique = true;
+                this.columnBondId.AllowDBNull = false;
+                this.columnIncome.AllowDBNull = false;
+                this.columndate.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FundBondProfitsRow NewFundBondProfitsRow() {
+                return ((FundBondProfitsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new FundBondProfitsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(FundBondProfitsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.FundBondProfitsRowChanged != null)) {
+                    this.FundBondProfitsRowChanged(this, new FundBondProfitsRowChangeEvent(((FundBondProfitsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.FundBondProfitsRowChanging != null)) {
+                    this.FundBondProfitsRowChanging(this, new FundBondProfitsRowChangeEvent(((FundBondProfitsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.FundBondProfitsRowDeleted != null)) {
+                    this.FundBondProfitsRowDeleted(this, new FundBondProfitsRowChangeEvent(((FundBondProfitsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.FundBondProfitsRowDeleting != null)) {
+                    this.FundBondProfitsRowDeleting(this, new FundBondProfitsRowChangeEvent(((FundBondProfitsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveFundBondProfitsRow(FundBondProfitsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FundsDBDataSet ds = new FundsDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "FundBondProfitsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class InvestorBondProfitsDataTable : global::System.Data.TypedTableBase<InvestorBondProfitsRow> {
+            
+            private global::System.Data.DataColumn columnId;
+            
+            private global::System.Data.DataColumn columnBondId;
+            
+            private global::System.Data.DataColumn columnInvestorId;
+            
+            private global::System.Data.DataColumn columnAccountId;
+            
+            private global::System.Data.DataColumn columnIncome;
+            
+            private global::System.Data.DataColumn columndate;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public InvestorBondProfitsDataTable() {
+                this.TableName = "InvestorBondProfits";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal InvestorBondProfitsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected InvestorBondProfitsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IdColumn {
+                get {
+                    return this.columnId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BondIdColumn {
+                get {
+                    return this.columnBondId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn InvestorIdColumn {
+                get {
+                    return this.columnInvestorId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AccountIdColumn {
+                get {
+                    return this.columnAccountId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IncomeColumn {
+                get {
+                    return this.columnIncome;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dateColumn {
+                get {
+                    return this.columndate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public InvestorBondProfitsRow this[int index] {
+                get {
+                    return ((InvestorBondProfitsRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event InvestorBondProfitsRowChangeEventHandler InvestorBondProfitsRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event InvestorBondProfitsRowChangeEventHandler InvestorBondProfitsRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event InvestorBondProfitsRowChangeEventHandler InvestorBondProfitsRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event InvestorBondProfitsRowChangeEventHandler InvestorBondProfitsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddInvestorBondProfitsRow(InvestorBondProfitsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public InvestorBondProfitsRow AddInvestorBondProfitsRow(BondsRow parentBondsRowByFK_InvestorBondProfits_Bond, InvestorsRow parentInvestorsRowByFK_InvestorBondProfits_Investor, AccountsRow parentAccountsRowByFK_InvestorBondProfits_Account, decimal Income, System.DateTime date) {
+                InvestorBondProfitsRow rowInvestorBondProfitsRow = ((InvestorBondProfitsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        null,
+                        null,
+                        Income,
+                        date};
+                if ((parentBondsRowByFK_InvestorBondProfits_Bond != null)) {
+                    columnValuesArray[1] = parentBondsRowByFK_InvestorBondProfits_Bond[0];
+                }
+                if ((parentInvestorsRowByFK_InvestorBondProfits_Investor != null)) {
+                    columnValuesArray[2] = parentInvestorsRowByFK_InvestorBondProfits_Investor[0];
+                }
+                if ((parentAccountsRowByFK_InvestorBondProfits_Account != null)) {
+                    columnValuesArray[3] = parentAccountsRowByFK_InvestorBondProfits_Account[0];
+                }
+                rowInvestorBondProfitsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowInvestorBondProfitsRow);
+                return rowInvestorBondProfitsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public InvestorBondProfitsRow FindById(int Id) {
+                return ((InvestorBondProfitsRow)(this.Rows.Find(new object[] {
+                            Id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                InvestorBondProfitsDataTable cln = ((InvestorBondProfitsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new InvestorBondProfitsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnId = base.Columns["Id"];
+                this.columnBondId = base.Columns["BondId"];
+                this.columnInvestorId = base.Columns["InvestorId"];
+                this.columnAccountId = base.Columns["AccountId"];
+                this.columnIncome = base.Columns["Income"];
+                this.columndate = base.Columns["date"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnId = new global::System.Data.DataColumn("Id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnId);
+                this.columnBondId = new global::System.Data.DataColumn("BondId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBondId);
+                this.columnInvestorId = new global::System.Data.DataColumn("InvestorId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInvestorId);
+                this.columnAccountId = new global::System.Data.DataColumn("AccountId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAccountId);
+                this.columnIncome = new global::System.Data.DataColumn("Income", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIncome);
+                this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndate);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnId}, true));
+                this.columnId.AutoIncrement = true;
+                this.columnId.AutoIncrementSeed = -1;
+                this.columnId.AutoIncrementStep = -1;
+                this.columnId.AllowDBNull = false;
+                this.columnId.ReadOnly = true;
+                this.columnId.Unique = true;
+                this.columnBondId.AllowDBNull = false;
+                this.columnInvestorId.AllowDBNull = false;
+                this.columnAccountId.AllowDBNull = false;
+                this.columnIncome.AllowDBNull = false;
+                this.columndate.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public InvestorBondProfitsRow NewInvestorBondProfitsRow() {
+                return ((InvestorBondProfitsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new InvestorBondProfitsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(InvestorBondProfitsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.InvestorBondProfitsRowChanged != null)) {
+                    this.InvestorBondProfitsRowChanged(this, new InvestorBondProfitsRowChangeEvent(((InvestorBondProfitsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.InvestorBondProfitsRowChanging != null)) {
+                    this.InvestorBondProfitsRowChanging(this, new InvestorBondProfitsRowChangeEvent(((InvestorBondProfitsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.InvestorBondProfitsRowDeleted != null)) {
+                    this.InvestorBondProfitsRowDeleted(this, new InvestorBondProfitsRowChangeEvent(((InvestorBondProfitsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.InvestorBondProfitsRowDeleting != null)) {
+                    this.InvestorBondProfitsRowDeleting(this, new InvestorBondProfitsRowChangeEvent(((InvestorBondProfitsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveInvestorBondProfitsRow(InvestorBondProfitsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FundsDBDataSet ds = new FundsDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "InvestorBondProfitsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class BankingAccountsRow : global::System.Data.DataRow {
@@ -14253,6 +15863,17 @@ namespace FundsManager {
                     return ((BondsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Bonds_Funds"])));
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Disbursement_datesRow[] GetDisbursement_datesRows() {
+                if ((this.Table.ChildRelations["FK_Disbursement_dates_Funds"] == null)) {
+                    return new Disbursement_datesRow[0];
+                }
+                else {
+                    return ((Disbursement_datesRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Disbursement_dates_Funds"])));
+                }
+            }
         }
         
         /// <summary>
@@ -14785,6 +16406,28 @@ namespace FundsManager {
                 }
                 set {
                     this[this.tableMovements_Accounts.FK_Movements_Accounts_AccountsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal acc_amount {
+                get {
+                    return ((decimal)(this[this.tableMovements_Accounts.acc_amountColumn]));
+                }
+                set {
+                    this[this.tableMovements_Accounts.acc_amountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal subacc_amount {
+                get {
+                    return ((decimal)(this[this.tableMovements_Accounts.subacc_amountColumn]));
+                }
+                set {
+                    this[this.tableMovements_Accounts.subacc_amountColumn] = value;
                 }
             }
             
@@ -15534,6 +17177,17 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal amount {
+                get {
+                    return ((decimal)(this[this.tableSubaccounts.amountColumn]));
+                }
+                set {
+                    this[this.tableSubaccounts.amountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public FundsRow FundsRow {
                 get {
                     return ((FundsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Subaccounts_Funds"])));
@@ -15731,6 +17385,17 @@ namespace FundsManager {
                 }
                 else {
                     return ((BondsInvestorsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_BondsInvestors_Investors"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public InvestorBondProfitsRow[] GetInvestorBondProfitsRows() {
+                if ((this.Table.ChildRelations["FK_InvestorBondProfits_Investor"] == null)) {
+                    return new InvestorBondProfitsRow[0];
+                }
+                else {
+                    return ((InvestorBondProfitsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_InvestorBondProfits_Investor"])));
                 }
             }
         }
@@ -16039,6 +17704,17 @@ namespace FundsManager {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Setbank_risk_idNull() {
                 this[this.tableDisbursements.bank_risk_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Disbursement_datesRow[] GetDisbursement_datesRows() {
+                if ((this.Table.ChildRelations["FK_Disbursement_dates_Disbursement"] == null)) {
+                    return new Disbursement_datesRow[0];
+                }
+                else {
+                    return ((Disbursement_datesRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Disbursement_dates_Disbursement"])));
+                }
             }
         }
         
@@ -16936,6 +18612,17 @@ namespace FundsManager {
                     return ((OtherDetailsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_OtherDetails_Accounts"])));
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public InvestorBondProfitsRow[] GetInvestorBondProfitsRows() {
+                if ((this.Table.ChildRelations["FK_InvestorBondProfits_Account"] == null)) {
+                    return new InvestorBondProfitsRow[0];
+                }
+                else {
+                    return ((InvestorBondProfitsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_InvestorBondProfits_Account"])));
+                }
+            }
         }
         
         /// <summary>
@@ -17213,6 +18900,28 @@ namespace FundsManager {
                     return ((BondsInvestorsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_BondsInvestors_Bonds"])));
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FundBondProfitsRow[] GetFundBondProfitsRows() {
+                if ((this.Table.ChildRelations["FK_FundBondProfits_Bonds"] == null)) {
+                    return new FundBondProfitsRow[0];
+                }
+                else {
+                    return ((FundBondProfitsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_FundBondProfits_Bonds"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public InvestorBondProfitsRow[] GetInvestorBondProfitsRows() {
+                if ((this.Table.ChildRelations["FK_InvestorBondProfits_Bond"] == null)) {
+                    return new InvestorBondProfitsRow[0];
+                }
+                else {
+                    return ((InvestorBondProfitsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_InvestorBondProfits_Bond"])));
+                }
+            }
         }
         
         /// <summary>
@@ -17277,6 +18986,435 @@ namespace FundsManager {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetValueNull() {
                 this[this.tableResources.ValueColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class BondDetailsRow : global::System.Data.DataRow {
+            
+            private BondDetailsDataTable tableBondDetails;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal BondDetailsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableBondDetails = ((BondDetailsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int BondId {
+                get {
+                    return ((int)(this[this.tableBondDetails.BondIdColumn]));
+                }
+                set {
+                    this[this.tableBondDetails.BondIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Number {
+                get {
+                    return ((string)(this[this.tableBondDetails.NumberColumn]));
+                }
+                set {
+                    this[this.tableBondDetails.NumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime EmissionDate {
+                get {
+                    return ((global::System.DateTime)(this[this.tableBondDetails.EmissionDateColumn]));
+                }
+                set {
+                    this[this.tableBondDetails.EmissionDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime ExpirationDate {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableBondDetails.ExpirationDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'ExpirationDate\' de la tabla \'BondDetails\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBondDetails.ExpirationDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal PricePerPieces {
+                get {
+                    return ((decimal)(this[this.tableBondDetails.PricePerPiecesColumn]));
+                }
+                set {
+                    this[this.tableBondDetails.PricePerPiecesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double BondPieces {
+                get {
+                    return ((double)(this[this.tableBondDetails.BondPiecesColumn]));
+                }
+                set {
+                    this[this.tableBondDetails.BondPiecesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double InterestOnBond {
+                get {
+                    return ((double)(this[this.tableBondDetails.InterestOnBondColumn]));
+                }
+                set {
+                    this[this.tableBondDetails.InterestOnBondColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double InteretsOnTFFContribution {
+                get {
+                    return ((double)(this[this.tableBondDetails.InteretsOnTFFContributionColumn]));
+                }
+                set {
+                    this[this.tableBondDetails.InteretsOnTFFContributionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int InvestroId {
+                get {
+                    return ((int)(this[this.tableBondDetails.InvestroIdColumn]));
+                }
+                set {
+                    this[this.tableBondDetails.InvestroIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Investor {
+                get {
+                    return ((string)(this[this.tableBondDetails.InvestorColumn]));
+                }
+                set {
+                    this[this.tableBondDetails.InvestorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double InvestorPieces {
+                get {
+                    return ((double)(this[this.tableBondDetails.InvestorPiecesColumn]));
+                }
+                set {
+                    this[this.tableBondDetails.InvestorPiecesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsExpirationDateNull() {
+                return this.IsNull(this.tableBondDetails.ExpirationDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetExpirationDateNull() {
+                this[this.tableBondDetails.ExpirationDateColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class Disbursement_datesRow : global::System.Data.DataRow {
+            
+            private Disbursement_datesDataTable tableDisbursement_dates;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal Disbursement_datesRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableDisbursement_dates = ((Disbursement_datesDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Id {
+                get {
+                    return ((int)(this[this.tableDisbursement_dates.IdColumn]));
+                }
+                set {
+                    this[this.tableDisbursement_dates.IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime date {
+                get {
+                    return ((global::System.DateTime)(this[this.tableDisbursement_dates.dateColumn]));
+                }
+                set {
+                    this[this.tableDisbursement_dates.dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int day {
+                get {
+                    return ((int)(this[this.tableDisbursement_dates.dayColumn]));
+                }
+                set {
+                    this[this.tableDisbursement_dates.dayColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int disbursement_id {
+                get {
+                    return ((int)(this[this.tableDisbursement_dates.disbursement_idColumn]));
+                }
+                set {
+                    this[this.tableDisbursement_dates.disbursement_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int fund_id {
+                get {
+                    return ((int)(this[this.tableDisbursement_dates.fund_idColumn]));
+                }
+                set {
+                    this[this.tableDisbursement_dates.fund_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementsRow DisbursementsRow {
+                get {
+                    return ((DisbursementsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Disbursement_dates_Disbursement"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Disbursement_dates_Disbursement"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FundsRow FundsRow {
+                get {
+                    return ((FundsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Disbursement_dates_Funds"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Disbursement_dates_Funds"]);
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class FundBondProfitsRow : global::System.Data.DataRow {
+            
+            private FundBondProfitsDataTable tableFundBondProfits;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal FundBondProfitsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableFundBondProfits = ((FundBondProfitsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Id {
+                get {
+                    return ((int)(this[this.tableFundBondProfits.IdColumn]));
+                }
+                set {
+                    this[this.tableFundBondProfits.IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int BondId {
+                get {
+                    return ((int)(this[this.tableFundBondProfits.BondIdColumn]));
+                }
+                set {
+                    this[this.tableFundBondProfits.BondIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal Income {
+                get {
+                    return ((decimal)(this[this.tableFundBondProfits.IncomeColumn]));
+                }
+                set {
+                    this[this.tableFundBondProfits.IncomeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime date {
+                get {
+                    return ((global::System.DateTime)(this[this.tableFundBondProfits.dateColumn]));
+                }
+                set {
+                    this[this.tableFundBondProfits.dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public BondsRow BondsRow {
+                get {
+                    return ((BondsRow)(this.GetParentRow(this.Table.ParentRelations["FK_FundBondProfits_Bonds"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_FundBondProfits_Bonds"]);
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class InvestorBondProfitsRow : global::System.Data.DataRow {
+            
+            private InvestorBondProfitsDataTable tableInvestorBondProfits;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal InvestorBondProfitsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableInvestorBondProfits = ((InvestorBondProfitsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Id {
+                get {
+                    return ((int)(this[this.tableInvestorBondProfits.IdColumn]));
+                }
+                set {
+                    this[this.tableInvestorBondProfits.IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int BondId {
+                get {
+                    return ((int)(this[this.tableInvestorBondProfits.BondIdColumn]));
+                }
+                set {
+                    this[this.tableInvestorBondProfits.BondIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int InvestorId {
+                get {
+                    return ((int)(this[this.tableInvestorBondProfits.InvestorIdColumn]));
+                }
+                set {
+                    this[this.tableInvestorBondProfits.InvestorIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int AccountId {
+                get {
+                    return ((int)(this[this.tableInvestorBondProfits.AccountIdColumn]));
+                }
+                set {
+                    this[this.tableInvestorBondProfits.AccountIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal Income {
+                get {
+                    return ((decimal)(this[this.tableInvestorBondProfits.IncomeColumn]));
+                }
+                set {
+                    this[this.tableInvestorBondProfits.IncomeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime date {
+                get {
+                    return ((global::System.DateTime)(this[this.tableInvestorBondProfits.dateColumn]));
+                }
+                set {
+                    this[this.tableInvestorBondProfits.dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public AccountsRow AccountsRow {
+                get {
+                    return ((AccountsRow)(this.GetParentRow(this.Table.ParentRelations["FK_InvestorBondProfits_Account"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_InvestorBondProfits_Account"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public BondsRow BondsRow {
+                get {
+                    return ((BondsRow)(this.GetParentRow(this.Table.ParentRelations["FK_InvestorBondProfits_Bond"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_InvestorBondProfits_Bond"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public InvestorsRow InvestorsRow {
+                get {
+                    return ((InvestorsRow)(this.GetParentRow(this.Table.ParentRelations["FK_InvestorBondProfits_Investor"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_InvestorBondProfits_Investor"]);
+                }
             }
         }
         
@@ -18422,6 +20560,142 @@ namespace FundsManager {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ResourcesRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class BondDetailsRowChangeEvent : global::System.EventArgs {
+            
+            private BondDetailsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public BondDetailsRowChangeEvent(BondDetailsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public BondDetailsRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class Disbursement_datesRowChangeEvent : global::System.EventArgs {
+            
+            private Disbursement_datesRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Disbursement_datesRowChangeEvent(Disbursement_datesRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Disbursement_datesRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class FundBondProfitsRowChangeEvent : global::System.EventArgs {
+            
+            private FundBondProfitsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FundBondProfitsRowChangeEvent(FundBondProfitsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FundBondProfitsRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class InvestorBondProfitsRowChangeEvent : global::System.EventArgs {
+            
+            private InvestorBondProfitsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public InvestorBondProfitsRowChangeEvent(InvestorBondProfitsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public InvestorBondProfitsRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -22247,10 +24521,12 @@ SELECT Id, FK_AccountingMovements_Funds, description, date, FK_AccountingMovemen
             tableMapping.ColumnMappings.Add("subaccount_type", "subaccount_type");
             tableMapping.ColumnMappings.Add("FK_Movements_Accounts_Funds", "FK_Movements_Accounts_Funds");
             tableMapping.ColumnMappings.Add("FK_Movements_Accounts_Accounts", "FK_Movements_Accounts_Accounts");
+            tableMapping.ColumnMappings.Add("acc_amount", "acc_amount");
+            tableMapping.ColumnMappings.Add("subacc_amount", "subacc_amount");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Movements_Accounts] WHERE (([Id] = @Original_Id) AND ([FK_Movements_Accounts_AccountingMovements] = @Original_FK_Movements_Accounts_AccountingMovements) AND ([credit] = @Original_credit) AND ([debit] = @Original_debit) AND ([FK_Movements_Accounts_Funds] = @Original_FK_Movements_Accounts_Funds) AND ((@IsNull_FK_Movements_Accounts_Subaccounts = 1 AND [FK_Movements_Accounts_Subaccounts] IS NULL) OR ([FK_Movements_Accounts_Subaccounts] = @Original_FK_Movements_Accounts_Subaccounts)) AND ((@IsNull_subaccount = 1 AND [subaccount] IS NULL) OR ([subaccount] = @Original_subaccount)) AND ((@IsNull_subaccount_type = 1 AND [subaccount_type] IS NULL) OR ([subaccount_type] = @Original_subaccount_type)) AND ((@IsNull_FK_Movements_Accounts_Accounts = 1 AND [FK_Movements_Accounts_Accounts] IS NULL) OR ([FK_Movements_Accounts_Accounts] = @Original_FK_Movements_Accounts_Accounts)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Movements_Accounts] WHERE (([Id] = @Original_Id) AND ([FK_Movements_Accounts_AccountingMovements] = @Original_FK_Movements_Accounts_AccountingMovements) AND ([credit] = @Original_credit) AND ([debit] = @Original_debit) AND ([FK_Movements_Accounts_Funds] = @Original_FK_Movements_Accounts_Funds) AND ((@IsNull_FK_Movements_Accounts_Subaccounts = 1 AND [FK_Movements_Accounts_Subaccounts] IS NULL) OR ([FK_Movements_Accounts_Subaccounts] = @Original_FK_Movements_Accounts_Subaccounts)) AND ((@IsNull_subaccount = 1 AND [subaccount] IS NULL) OR ([subaccount] = @Original_subaccount)) AND ((@IsNull_subaccount_type = 1 AND [subaccount_type] IS NULL) OR ([subaccount_type] = @Original_subaccount_type)) AND ((@IsNull_FK_Movements_Accounts_Accounts = 1 AND [FK_Movements_Accounts_Accounts] IS NULL) OR ([FK_Movements_Accounts_Accounts] = @Original_FK_Movements_Accounts_Accounts)) AND ([acc_amount] = @Original_acc_amount) AND ([subacc_amount] = @Original_subacc_amount))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FK_Movements_Accounts_AccountingMovements", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Movements_Accounts_AccountingMovements", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -22265,10 +24541,12 @@ SELECT Id, FK_AccountingMovements_Funds, description, date, FK_AccountingMovemen
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_subaccount_type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "subaccount_type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_FK_Movements_Accounts_Accounts", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Movements_Accounts_Accounts", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FK_Movements_Accounts_Accounts", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Movements_Accounts_Accounts", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_acc_amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "acc_amount", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_subacc_amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "subacc_amount", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Movements_Accounts] ([FK_Movements_Accounts_AccountingMovements], [credit], [debit], [FK_Movements_Accounts_Funds], [FK_Movements_Accounts_Subaccounts], [subaccount], [subaccount_type], [FK_Movements_Accounts_Accounts]) VALUES (@FK_Movements_Accounts_AccountingMovements, @credit, @debit, @FK_Movements_Accounts_Funds, @FK_Movements_Accounts_Subaccounts, @subaccount, @subaccount_type, @FK_Movements_Accounts_Accounts);
-SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movements_Accounts_Funds, FK_Movements_Accounts_Subaccounts, subaccount, subaccount_type, FK_Movements_Accounts_Accounts FROM Movements_Accounts WHERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Movements_Accounts] ([FK_Movements_Accounts_AccountingMovements], [credit], [debit], [FK_Movements_Accounts_Funds], [FK_Movements_Accounts_Subaccounts], [subaccount], [subaccount_type], [FK_Movements_Accounts_Accounts], [acc_amount], [subacc_amount]) VALUES (@FK_Movements_Accounts_AccountingMovements, @credit, @debit, @FK_Movements_Accounts_Funds, @FK_Movements_Accounts_Subaccounts, @subaccount, @subaccount_type, @FK_Movements_Accounts_Accounts, @acc_amount, @subacc_amount);
+SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movements_Accounts_Funds, FK_Movements_Accounts_Subaccounts, subaccount, subaccount_type, FK_Movements_Accounts_Accounts, acc_amount, subacc_amount FROM Movements_Accounts WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FK_Movements_Accounts_AccountingMovements", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Movements_Accounts_AccountingMovements", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@credit", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "credit", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -22278,6 +24556,8 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@subaccount", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "subaccount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@subaccount_type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "subaccount_type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FK_Movements_Accounts_Accounts", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Movements_Accounts_Accounts", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@acc_amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "acc_amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@subacc_amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "subacc_amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = "UPDATE [Movements_Accounts] SET [FK_Movements_Accounts_AccountingMovements] = @FK" +
@@ -22285,20 +24565,23 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
                 "FK_Movements_Accounts_Funds] = @FK_Movements_Accounts_Funds, [FK_Movements_Accou" +
                 "nts_Subaccounts] = @FK_Movements_Accounts_Subaccounts, [subaccount] = @subaccoun" +
                 "t, [subaccount_type] = @subaccount_type, [FK_Movements_Accounts_Accounts] = @FK_" +
-                "Movements_Accounts_Accounts WHERE (([Id] = @Original_Id) AND ([FK_Movements_Acco" +
-                "unts_AccountingMovements] = @Original_FK_Movements_Accounts_AccountingMovements)" +
-                " AND ([credit] = @Original_credit) AND ([debit] = @Original_debit) AND ([FK_Move" +
-                "ments_Accounts_Funds] = @Original_FK_Movements_Accounts_Funds) AND ((@IsNull_FK_" +
-                "Movements_Accounts_Subaccounts = 1 AND [FK_Movements_Accounts_Subaccounts] IS NU" +
-                "LL) OR ([FK_Movements_Accounts_Subaccounts] = @Original_FK_Movements_Accounts_Su" +
-                "baccounts)) AND ((@IsNull_subaccount = 1 AND [subaccount] IS NULL) OR ([subaccou" +
-                "nt] = @Original_subaccount)) AND ((@IsNull_subaccount_type = 1 AND [subaccount_t" +
-                "ype] IS NULL) OR ([subaccount_type] = @Original_subaccount_type)) AND ((@IsNull_" +
-                "FK_Movements_Accounts_Accounts = 1 AND [FK_Movements_Accounts_Accounts] IS NULL)" +
-                " OR ([FK_Movements_Accounts_Accounts] = @Original_FK_Movements_Accounts_Accounts" +
-                ")));\r\nSELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Mo" +
-                "vements_Accounts_Funds, FK_Movements_Accounts_Subaccounts, subaccount, subaccoun" +
-                "t_type, FK_Movements_Accounts_Accounts FROM Movements_Accounts WHERE (Id = @Id)";
+                "Movements_Accounts_Accounts, [acc_amount] = @acc_amount, [subacc_amount] = @suba" +
+                "cc_amount WHERE (([Id] = @Original_Id) AND ([FK_Movements_Accounts_AccountingMov" +
+                "ements] = @Original_FK_Movements_Accounts_AccountingMovements) AND ([credit] = @" +
+                "Original_credit) AND ([debit] = @Original_debit) AND ([FK_Movements_Accounts_Fun" +
+                "ds] = @Original_FK_Movements_Accounts_Funds) AND ((@IsNull_FK_Movements_Accounts" +
+                "_Subaccounts = 1 AND [FK_Movements_Accounts_Subaccounts] IS NULL) OR ([FK_Moveme" +
+                "nts_Accounts_Subaccounts] = @Original_FK_Movements_Accounts_Subaccounts)) AND ((" +
+                "@IsNull_subaccount = 1 AND [subaccount] IS NULL) OR ([subaccount] = @Original_su" +
+                "baccount)) AND ((@IsNull_subaccount_type = 1 AND [subaccount_type] IS NULL) OR (" +
+                "[subaccount_type] = @Original_subaccount_type)) AND ((@IsNull_FK_Movements_Accou" +
+                "nts_Accounts = 1 AND [FK_Movements_Accounts_Accounts] IS NULL) OR ([FK_Movements" +
+                "_Accounts_Accounts] = @Original_FK_Movements_Accounts_Accounts)) AND ([acc_amoun" +
+                "t] = @Original_acc_amount) AND ([subacc_amount] = @Original_subacc_amount));\r\nSE" +
+                "LECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movements_" +
+                "Accounts_Funds, FK_Movements_Accounts_Subaccounts, subaccount, subaccount_type, " +
+                "FK_Movements_Accounts_Accounts, acc_amount, subacc_amount FROM Movements_Account" +
+                "s WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FK_Movements_Accounts_AccountingMovements", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Movements_Accounts_AccountingMovements", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@credit", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "credit", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -22308,6 +24591,8 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@subaccount", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "subaccount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@subaccount_type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "subaccount_type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FK_Movements_Accounts_Accounts", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Movements_Accounts_Accounts", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@acc_amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "acc_amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@subacc_amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "subacc_amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FK_Movements_Accounts_AccountingMovements", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Movements_Accounts_AccountingMovements", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_credit", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "credit", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -22321,6 +24606,8 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_subaccount_type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "subaccount_type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_FK_Movements_Accounts_Accounts", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Movements_Accounts_Accounts", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FK_Movements_Accounts_Accounts", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Movements_Accounts_Accounts", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_acc_amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "acc_amount", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_subacc_amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "subacc_amount", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -22339,7 +24626,8 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movements" +
                 "_Accounts_Funds, FK_Movements_Accounts_Subaccounts, subaccount, subaccount_type," +
-                " FK_Movements_Accounts_Accounts FROM Movements_Accounts";
+                " FK_Movements_Accounts_Accounts, acc_amount, subacc_amount FROM Movements_Accoun" +
+                "ts";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -22400,7 +24688,7 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_Id, int Original_FK_Movements_Accounts_AccountingMovements, decimal Original_credit, decimal Original_debit, int Original_FK_Movements_Accounts_Funds, global::System.Nullable<int> Original_FK_Movements_Accounts_Subaccounts, global::System.Nullable<int> Original_subaccount, global::System.Nullable<int> Original_subaccount_type, global::System.Nullable<int> Original_FK_Movements_Accounts_Accounts) {
+        public virtual int Delete(int Original_Id, int Original_FK_Movements_Accounts_AccountingMovements, decimal Original_credit, decimal Original_debit, int Original_FK_Movements_Accounts_Funds, global::System.Nullable<int> Original_FK_Movements_Accounts_Subaccounts, global::System.Nullable<int> Original_subaccount, global::System.Nullable<int> Original_subaccount_type, global::System.Nullable<int> Original_FK_Movements_Accounts_Accounts, decimal Original_acc_amount, decimal Original_subacc_amount) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_FK_Movements_Accounts_AccountingMovements));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_credit));
@@ -22438,6 +24726,8 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
                 this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
+            this.Adapter.DeleteCommand.Parameters[13].Value = ((decimal)(Original_acc_amount));
+            this.Adapter.DeleteCommand.Parameters[14].Value = ((decimal)(Original_subacc_amount));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -22458,7 +24748,7 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int FK_Movements_Accounts_AccountingMovements, decimal credit, decimal debit, int FK_Movements_Accounts_Funds, global::System.Nullable<int> FK_Movements_Accounts_Subaccounts, global::System.Nullable<int> subaccount, global::System.Nullable<int> subaccount_type, global::System.Nullable<int> FK_Movements_Accounts_Accounts) {
+        public virtual int Insert(int FK_Movements_Accounts_AccountingMovements, decimal credit, decimal debit, int FK_Movements_Accounts_Funds, global::System.Nullable<int> FK_Movements_Accounts_Subaccounts, global::System.Nullable<int> subaccount, global::System.Nullable<int> subaccount_type, global::System.Nullable<int> FK_Movements_Accounts_Accounts, decimal acc_amount, decimal subacc_amount) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(FK_Movements_Accounts_AccountingMovements));
             this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(credit));
             this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(debit));
@@ -22487,6 +24777,8 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
             else {
                 this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
+            this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(acc_amount));
+            this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(subacc_amount));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -22516,6 +24808,8 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
                     global::System.Nullable<int> subaccount, 
                     global::System.Nullable<int> subaccount_type, 
                     global::System.Nullable<int> FK_Movements_Accounts_Accounts, 
+                    decimal acc_amount, 
+                    decimal subacc_amount, 
                     int Original_Id, 
                     int Original_FK_Movements_Accounts_AccountingMovements, 
                     decimal Original_credit, 
@@ -22525,6 +24819,8 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
                     global::System.Nullable<int> Original_subaccount, 
                     global::System.Nullable<int> Original_subaccount_type, 
                     global::System.Nullable<int> Original_FK_Movements_Accounts_Accounts, 
+                    decimal Original_acc_amount, 
+                    decimal Original_subacc_amount, 
                     int Id) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(FK_Movements_Accounts_AccountingMovements));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(credit));
@@ -22554,44 +24850,48 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
             else {
                 this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_Id));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_FK_Movements_Accounts_AccountingMovements));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_credit));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_debit));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_FK_Movements_Accounts_Funds));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(acc_amount));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(subacc_amount));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_Id));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_FK_Movements_Accounts_AccountingMovements));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_credit));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_debit));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_FK_Movements_Accounts_Funds));
             if ((Original_FK_Movements_Accounts_Subaccounts.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_FK_Movements_Accounts_Subaccounts.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            if ((Original_subaccount.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_subaccount.Value));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_FK_Movements_Accounts_Subaccounts.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
-            if ((Original_subaccount_type.HasValue == true)) {
+            if ((Original_subaccount.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_subaccount_type.Value));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_subaccount.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
-            if ((Original_FK_Movements_Accounts_Accounts.HasValue == true)) {
+            if ((Original_subaccount_type.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((int)(Original_FK_Movements_Accounts_Accounts.Value));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((int)(Original_subaccount_type.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Id));
+            if ((Original_FK_Movements_Accounts_Accounts.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((int)(Original_FK_Movements_Accounts_Accounts.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[23].Value = ((decimal)(Original_acc_amount));
+            this.Adapter.UpdateCommand.Parameters[24].Value = ((decimal)(Original_subacc_amount));
+            this.Adapter.UpdateCommand.Parameters[25].Value = ((int)(Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -22621,6 +24921,8 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
                     global::System.Nullable<int> subaccount, 
                     global::System.Nullable<int> subaccount_type, 
                     global::System.Nullable<int> FK_Movements_Accounts_Accounts, 
+                    decimal acc_amount, 
+                    decimal subacc_amount, 
                     int Original_Id, 
                     int Original_FK_Movements_Accounts_AccountingMovements, 
                     decimal Original_credit, 
@@ -22629,8 +24931,10 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
                     global::System.Nullable<int> Original_FK_Movements_Accounts_Subaccounts, 
                     global::System.Nullable<int> Original_subaccount, 
                     global::System.Nullable<int> Original_subaccount_type, 
-                    global::System.Nullable<int> Original_FK_Movements_Accounts_Accounts) {
-            return this.Update(FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movements_Accounts_Funds, FK_Movements_Accounts_Subaccounts, subaccount, subaccount_type, FK_Movements_Accounts_Accounts, Original_Id, Original_FK_Movements_Accounts_AccountingMovements, Original_credit, Original_debit, Original_FK_Movements_Accounts_Funds, Original_FK_Movements_Accounts_Subaccounts, Original_subaccount, Original_subaccount_type, Original_FK_Movements_Accounts_Accounts, Original_Id);
+                    global::System.Nullable<int> Original_FK_Movements_Accounts_Accounts, 
+                    decimal Original_acc_amount, 
+                    decimal Original_subacc_amount) {
+            return this.Update(FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movements_Accounts_Funds, FK_Movements_Accounts_Subaccounts, subaccount, subaccount_type, FK_Movements_Accounts_Accounts, acc_amount, subacc_amount, Original_Id, Original_FK_Movements_Accounts_AccountingMovements, Original_credit, Original_debit, Original_FK_Movements_Accounts_Funds, Original_FK_Movements_Accounts_Subaccounts, Original_subaccount, Original_subaccount_type, Original_FK_Movements_Accounts_Accounts, Original_acc_amount, Original_subacc_amount, Original_Id);
         }
     }
     
@@ -24549,35 +26853,40 @@ SELECT Id, FK_AccountsEmployees_Funds, account_id, employee_id, amount FROM Acco
             tableMapping.ColumnMappings.Add("name", "name");
             tableMapping.ColumnMappings.Add("FK_Subaccounts_Accounts", "FK_Subaccounts_Accounts");
             tableMapping.ColumnMappings.Add("FK_Accounts_Funds", "FK_Accounts_Funds");
+            tableMapping.ColumnMappings.Add("amount", "amount");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Subaccounts] WHERE (([Id] = @Original_Id) AND ([FK_Subaccounts" +
-                "_Accounts] = @Original_FK_Subaccounts_Accounts) AND ([FK_Accounts_Funds] = @Orig" +
-                "inal_FK_Accounts_Funds))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [Subaccounts] WHERE (([Id] = @Original_Id) AND ([FK_Subaccounts_Accou" +
+                "nts] = @Original_FK_Subaccounts_Accounts) AND ([FK_Accounts_Funds] = @Original_F" +
+                "K_Accounts_Funds) AND ([amount] = @Original_amount))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FK_Subaccounts_Accounts", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Subaccounts_Accounts", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FK_Accounts_Funds", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Accounts_Funds", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "amount", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Subaccounts] ([name], [FK_Subaccounts_Accounts], [FK_Accounts_Funds]) VALUES (@name, @FK_Subaccounts_Accounts, @FK_Accounts_Funds);
-SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds FROM Subaccounts WHERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Subaccounts] ([name], [FK_Subaccounts_Accounts], [FK_Accounts_Funds], [amount]) VALUES (@name, @FK_Subaccounts_Accounts, @FK_Accounts_Funds, @amount);
+SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds, amount FROM Subaccounts WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FK_Subaccounts_Accounts", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Subaccounts_Accounts", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FK_Accounts_Funds", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Accounts_Funds", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Subaccounts] SET [name] = @name, [FK_Subaccounts_Accounts] = @FK_Subaccounts_Accounts, [FK_Accounts_Funds] = @FK_Accounts_Funds WHERE (([Id] = @Original_Id) AND ([FK_Subaccounts_Accounts] = @Original_FK_Subaccounts_Accounts) AND ([FK_Accounts_Funds] = @Original_FK_Accounts_Funds));
-SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds FROM Subaccounts WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Subaccounts] SET [name] = @name, [FK_Subaccounts_Accounts] = @FK_Subaccounts_Accounts, [FK_Accounts_Funds] = @FK_Accounts_Funds, [amount] = @amount WHERE (([Id] = @Original_Id) AND ([FK_Subaccounts_Accounts] = @Original_FK_Subaccounts_Accounts) AND ([FK_Accounts_Funds] = @Original_FK_Accounts_Funds) AND ([amount] = @Original_amount));
+SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds, amount FROM Subaccounts WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FK_Subaccounts_Accounts", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Subaccounts_Accounts", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FK_Accounts_Funds", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Accounts_Funds", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FK_Subaccounts_Accounts", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Subaccounts_Accounts", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FK_Accounts_Funds", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Accounts_Funds", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "amount", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -24594,7 +26903,8 @@ SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds FROM Subaccounts WHE
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds FROM dbo.Subaccounts";
+            this._commandCollection[0].CommandText = "SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds, amount FROM Subaccou" +
+                "nts";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -24655,10 +26965,11 @@ SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds FROM Subaccounts WHE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_Id, int Original_FK_Subaccounts_Accounts, int Original_FK_Accounts_Funds) {
+        public virtual int Delete(int Original_Id, int Original_FK_Subaccounts_Accounts, int Original_FK_Accounts_Funds, decimal Original_amount) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_FK_Subaccounts_Accounts));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_FK_Accounts_Funds));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((decimal)(Original_amount));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -24679,7 +26990,7 @@ SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds FROM Subaccounts WHE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string name, int FK_Subaccounts_Accounts, int FK_Accounts_Funds) {
+        public virtual int Insert(string name, int FK_Subaccounts_Accounts, int FK_Accounts_Funds, decimal amount) {
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
@@ -24688,6 +26999,7 @@ SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds FROM Subaccounts WHE
             }
             this.Adapter.InsertCommand.Parameters[1].Value = ((int)(FK_Subaccounts_Accounts));
             this.Adapter.InsertCommand.Parameters[2].Value = ((int)(FK_Accounts_Funds));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(amount));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -24708,7 +27020,7 @@ SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds FROM Subaccounts WHE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int FK_Subaccounts_Accounts, int FK_Accounts_Funds, int Original_Id, int Original_FK_Subaccounts_Accounts, int Original_FK_Accounts_Funds, int Id) {
+        public virtual int Update(string name, int FK_Subaccounts_Accounts, int FK_Accounts_Funds, decimal amount, int Original_Id, int Original_FK_Subaccounts_Accounts, int Original_FK_Accounts_Funds, decimal Original_amount, int Id) {
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
@@ -24717,10 +27029,12 @@ SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds FROM Subaccounts WHE
             }
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(FK_Subaccounts_Accounts));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(FK_Accounts_Funds));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_Id));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_FK_Subaccounts_Accounts));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_FK_Accounts_Funds));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Id));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(amount));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_Id));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_FK_Subaccounts_Accounts));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_FK_Accounts_Funds));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_amount));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -24741,8 +27055,8 @@ SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds FROM Subaccounts WHE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int FK_Subaccounts_Accounts, int FK_Accounts_Funds, int Original_Id, int Original_FK_Subaccounts_Accounts, int Original_FK_Accounts_Funds) {
-            return this.Update(name, FK_Subaccounts_Accounts, FK_Accounts_Funds, Original_Id, Original_FK_Subaccounts_Accounts, Original_FK_Accounts_Funds, Original_Id);
+        public virtual int Update(string name, int FK_Subaccounts_Accounts, int FK_Accounts_Funds, decimal amount, int Original_Id, int Original_FK_Subaccounts_Accounts, int Original_FK_Accounts_Funds, decimal Original_amount) {
+            return this.Update(name, FK_Subaccounts_Accounts, FK_Accounts_Funds, amount, Original_Id, Original_FK_Subaccounts_Accounts, Original_FK_Accounts_Funds, Original_amount, Original_Id);
         }
     }
     
@@ -29072,6 +31386,1164 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class BondDetailsTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public BondDetailsTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "BondDetails";
+            tableMapping.ColumnMappings.Add("BondId", "BondId");
+            tableMapping.ColumnMappings.Add("Number", "Number");
+            tableMapping.ColumnMappings.Add("EmissionDate", "EmissionDate");
+            tableMapping.ColumnMappings.Add("ExpirationDate", "ExpirationDate");
+            tableMapping.ColumnMappings.Add("PricePerPieces", "PricePerPieces");
+            tableMapping.ColumnMappings.Add("BondPieces", "BondPieces");
+            tableMapping.ColumnMappings.Add("InterestOnBond", "InterestOnBond");
+            tableMapping.ColumnMappings.Add("InteretsOnTFFContribution", "InteretsOnTFFContribution");
+            tableMapping.ColumnMappings.Add("InvestroId", "InvestroId");
+            tableMapping.ColumnMappings.Add("Investor", "Investor");
+            tableMapping.ColumnMappings.Add("InvestorPieces", "InvestorPieces");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::FundsManager.Properties.Settings.Default.FundsDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT BondId, Number, EmissionDate, ExpirationDate, PricePerPieces, BondPieces, " +
+                "InterestOnBond, InteretsOnTFFContribution, InvestroId, Investor, InvestorPieces " +
+                "FROM dbo.BondDetails";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FundsDBDataSet.BondDetailsDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FundsDBDataSet.BondDetailsDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FundsDBDataSet.BondDetailsDataTable dataTable = new FundsDBDataSet.BondDetailsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class Disbursement_datesTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public Disbursement_datesTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "Disbursement_dates";
+            tableMapping.ColumnMappings.Add("Id", "Id");
+            tableMapping.ColumnMappings.Add("date", "date");
+            tableMapping.ColumnMappings.Add("day", "day");
+            tableMapping.ColumnMappings.Add("disbursement_id", "disbursement_id");
+            tableMapping.ColumnMappings.Add("fund_id", "fund_id");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Disbursement_dates] WHERE (([Id] = @Original_Id) AND ([date] =" +
+                " @Original_date) AND ([day] = @Original_day) AND ([disbursement_id] = @Original_" +
+                "disbursement_id) AND ([fund_id] = @Original_fund_id))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_day", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "day", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_disbursement_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_fund_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Disbursement_dates] ([date], [day], [disbursement_id], [fund_i" +
+                "d]) VALUES (@date, @day, @disbursement_id, @fund_id);\r\nSELECT Id, date, day, dis" +
+                "bursement_id, fund_id FROM Disbursement_dates WHERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@day", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "day", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@disbursement_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fund_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Disbursement_dates] SET [date] = @date, [day] = @day, [disbursement_id] = @disbursement_id, [fund_id] = @fund_id WHERE (([Id] = @Original_Id) AND ([date] = @Original_date) AND ([day] = @Original_day) AND ([disbursement_id] = @Original_disbursement_id) AND ([fund_id] = @Original_fund_id));
+SELECT Id, date, day, disbursement_id, fund_id FROM Disbursement_dates WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@day", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "day", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@disbursement_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fund_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_day", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "day", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_disbursement_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_fund_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::FundsManager.Properties.Settings.Default.FundsDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT Id, date, day, disbursement_id, fund_id FROM dbo.Disbursement_dates";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FundsDBDataSet.Disbursement_datesDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FundsDBDataSet.Disbursement_datesDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FundsDBDataSet.Disbursement_datesDataTable dataTable = new FundsDBDataSet.Disbursement_datesDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FundsDBDataSet.Disbursement_datesDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FundsDBDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "Disbursement_dates");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_Id, System.DateTime Original_date, int Original_day, int Original_disbursement_id, int Original_fund_id) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((System.DateTime)(Original_date));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_day));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_disbursement_id));
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_fund_id));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(System.DateTime date, int day, int disbursement_id, int fund_id) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((System.DateTime)(date));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(day));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(disbursement_id));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(fund_id));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(System.DateTime date, int day, int disbursement_id, int fund_id, int Original_Id, System.DateTime Original_date, int Original_day, int Original_disbursement_id, int Original_fund_id, int Id) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((System.DateTime)(date));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(day));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(disbursement_id));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(fund_id));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_Id));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(Original_date));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_day));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_disbursement_id));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_fund_id));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Id));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(System.DateTime date, int day, int disbursement_id, int fund_id, int Original_Id, System.DateTime Original_date, int Original_day, int Original_disbursement_id, int Original_fund_id) {
+            return this.Update(date, day, disbursement_id, fund_id, Original_Id, Original_date, Original_day, Original_disbursement_id, Original_fund_id, Original_Id);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class FundBondProfitsTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public FundBondProfitsTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "FundBondProfits";
+            tableMapping.ColumnMappings.Add("Id", "Id");
+            tableMapping.ColumnMappings.Add("BondId", "BondId");
+            tableMapping.ColumnMappings.Add("Income", "Income");
+            tableMapping.ColumnMappings.Add("date", "date");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[FundBondProfits] WHERE (([Id] = @Original_Id) AND ([BondId] = " +
+                "@Original_BondId) AND ([Income] = @Original_Income) AND ([date] = @Original_date" +
+                "))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BondId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BondId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Income", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Income", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[FundBondProfits] ([BondId], [Income], [date]) VALUES (@BondId," +
+                " @Income, @date);\r\nSELECT Id, BondId, Income, date FROM FundBondProfits WHERE (I" +
+                "d = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BondId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BondId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Income", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Income", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[FundBondProfits] SET [BondId] = @BondId, [Income] = @Income, [date] = @date WHERE (([Id] = @Original_Id) AND ([BondId] = @Original_BondId) AND ([Income] = @Original_Income) AND ([date] = @Original_date));
+SELECT Id, BondId, Income, date FROM FundBondProfits WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BondId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BondId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Income", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Income", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BondId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BondId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Income", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Income", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::FundsManager.Properties.Settings.Default.FundsDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT Id, BondId, Income, date FROM dbo.FundBondProfits";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FundsDBDataSet.FundBondProfitsDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FundsDBDataSet.FundBondProfitsDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FundsDBDataSet.FundBondProfitsDataTable dataTable = new FundsDBDataSet.FundBondProfitsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FundsDBDataSet.FundBondProfitsDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FundsDBDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "FundBondProfits");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_Id, int Original_BondId, decimal Original_Income, System.DateTime Original_date) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_BondId));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_Income));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((System.DateTime)(Original_date));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(int BondId, decimal Income, System.DateTime date) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(BondId));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(Income));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(date));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int BondId, decimal Income, System.DateTime date, int Original_Id, int Original_BondId, decimal Original_Income, System.DateTime Original_date, int Id) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(BondId));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(Income));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(date));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_Id));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_BondId));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(Original_Income));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(Original_date));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Id));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int BondId, decimal Income, System.DateTime date, int Original_Id, int Original_BondId, decimal Original_Income, System.DateTime Original_date) {
+            return this.Update(BondId, Income, date, Original_Id, Original_BondId, Original_Income, Original_date, Original_Id);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class InvestorBondProfitsTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public InvestorBondProfitsTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "InvestorBondProfits";
+            tableMapping.ColumnMappings.Add("Id", "Id");
+            tableMapping.ColumnMappings.Add("BondId", "BondId");
+            tableMapping.ColumnMappings.Add("InvestorId", "InvestorId");
+            tableMapping.ColumnMappings.Add("AccountId", "AccountId");
+            tableMapping.ColumnMappings.Add("Income", "Income");
+            tableMapping.ColumnMappings.Add("date", "date");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[InvestorBondProfits] WHERE (([Id] = @Original_Id) AND ([BondId" +
+                "] = @Original_BondId) AND ([InvestorId] = @Original_InvestorId) AND ([AccountId]" +
+                " = @Original_AccountId) AND ([Income] = @Original_Income) AND ([date] = @Origina" +
+                "l_date))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BondId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BondId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_InvestorId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InvestorId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_AccountId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AccountId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Income", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Income", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[InvestorBondProfits] ([BondId], [InvestorId], [AccountId], [Income], [date]) VALUES (@BondId, @InvestorId, @AccountId, @Income, @date);
+SELECT Id, BondId, InvestorId, AccountId, Income, date FROM InvestorBondProfits WHERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BondId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BondId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InvestorId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InvestorId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AccountId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AccountId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Income", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Income", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[InvestorBondProfits] SET [BondId] = @BondId, [InvestorId] = @InvestorId, [AccountId] = @AccountId, [Income] = @Income, [date] = @date WHERE (([Id] = @Original_Id) AND ([BondId] = @Original_BondId) AND ([InvestorId] = @Original_InvestorId) AND ([AccountId] = @Original_AccountId) AND ([Income] = @Original_Income) AND ([date] = @Original_date));
+SELECT Id, BondId, InvestorId, AccountId, Income, date FROM InvestorBondProfits WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BondId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BondId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InvestorId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InvestorId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AccountId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AccountId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Income", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Income", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BondId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BondId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_InvestorId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InvestorId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_AccountId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AccountId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Income", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Income", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::FundsManager.Properties.Settings.Default.FundsDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT Id, BondId, InvestorId, AccountId, Income, date FROM dbo.InvestorBondProfi" +
+                "ts";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FundsDBDataSet.InvestorBondProfitsDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FundsDBDataSet.InvestorBondProfitsDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FundsDBDataSet.InvestorBondProfitsDataTable dataTable = new FundsDBDataSet.InvestorBondProfitsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FundsDBDataSet.InvestorBondProfitsDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FundsDBDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "InvestorBondProfits");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_Id, int Original_BondId, int Original_InvestorId, int Original_AccountId, decimal Original_Income, System.DateTime Original_date) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_BondId));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_InvestorId));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_AccountId));
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_Income));
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((System.DateTime)(Original_date));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(int BondId, int InvestorId, int AccountId, decimal Income, System.DateTime date) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(BondId));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(InvestorId));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(AccountId));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(Income));
+            this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(date));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int BondId, int InvestorId, int AccountId, decimal Income, System.DateTime date, int Original_Id, int Original_BondId, int Original_InvestorId, int Original_AccountId, decimal Original_Income, System.DateTime Original_date, int Id) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(BondId));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(InvestorId));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(AccountId));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(Income));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(date));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_Id));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_BondId));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_InvestorId));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_AccountId));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(Original_Income));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((System.DateTime)(Original_date));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Id));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int BondId, int InvestorId, int AccountId, decimal Income, System.DateTime date, int Original_Id, int Original_BondId, int Original_InvestorId, int Original_AccountId, decimal Original_Income, System.DateTime Original_date) {
+            return this.Update(BondId, InvestorId, AccountId, Income, date, Original_Id, Original_BondId, Original_InvestorId, Original_AccountId, Original_Income, Original_date, Original_Id);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -29136,6 +32608,12 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
         private BondsTableAdapter _bondsTableAdapter;
         
         private ResourcesTableAdapter _resourcesTableAdapter;
+        
+        private Disbursement_datesTableAdapter _disbursement_datesTableAdapter;
+        
+        private FundBondProfitsTableAdapter _fundBondProfitsTableAdapter;
+        
+        private InvestorBondProfitsTableAdapter _investorBondProfitsTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -29532,6 +33010,48 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public Disbursement_datesTableAdapter Disbursement_datesTableAdapter {
+            get {
+                return this._disbursement_datesTableAdapter;
+            }
+            set {
+                this._disbursement_datesTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public FundBondProfitsTableAdapter FundBondProfitsTableAdapter {
+            get {
+                return this._fundBondProfitsTableAdapter;
+            }
+            set {
+                this._fundBondProfitsTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public InvestorBondProfitsTableAdapter InvestorBondProfitsTableAdapter {
+            get {
+                return this._investorBondProfitsTableAdapter;
+            }
+            set {
+                this._investorBondProfitsTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -29657,6 +33177,18 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                             && (this._resourcesTableAdapter.Connection != null))) {
                     return this._resourcesTableAdapter.Connection;
                 }
+                if (((this._disbursement_datesTableAdapter != null) 
+                            && (this._disbursement_datesTableAdapter.Connection != null))) {
+                    return this._disbursement_datesTableAdapter.Connection;
+                }
+                if (((this._fundBondProfitsTableAdapter != null) 
+                            && (this._fundBondProfitsTableAdapter.Connection != null))) {
+                    return this._fundBondProfitsTableAdapter.Connection;
+                }
+                if (((this._investorBondProfitsTableAdapter != null) 
+                            && (this._investorBondProfitsTableAdapter.Connection != null))) {
+                    return this._investorBondProfitsTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -29751,6 +33283,15 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                 if ((this._resourcesTableAdapter != null)) {
                     count = (count + 1);
                 }
+                if ((this._disbursement_datesTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._fundBondProfitsTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._investorBondProfitsTableAdapter != null)) {
+                    count = (count + 1);
+                }
                 return count;
             }
         }
@@ -29780,6 +33321,15 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._clientsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Clients.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._clientsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._currenciesTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Currencies.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -29795,6 +33345,24 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._accountsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._investmentsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Investments.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._investmentsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._underlyingDebtorsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.UnderlyingDebtors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._underlyingDebtorsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -29816,174 +33384,12 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._subaccountsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Subaccounts.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._subaccountsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._employeesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Employees.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._employeesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._bondsTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Bonds.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._bondsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._investorsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Investors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._investorsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._accountingMovementsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.AccountingMovements.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._accountingMovementsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._creditorsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Creditors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._creditorsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._clientsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Clients.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._clientsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._underlyingDebtorsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.UnderlyingDebtors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._underlyingDebtorsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._investmentsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Investments.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._investmentsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._accountTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.AccountType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._accountTypeTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._accountsEmployeesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.AccountsEmployees.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._accountsEmployeesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._bondsInvestorsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.BondsInvestors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._bondsInvestorsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._otherDetailsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.OtherDetails.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._otherDetailsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._accountsCreditorsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.AccountsCreditors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._accountsCreditorsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._accountsClientsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.AccountsClients.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._accountsClientsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._accountsBankingAccountsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.AccountsBankingAccounts.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._accountsBankingAccountsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._movements_AccountsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Movements_Accounts.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._movements_AccountsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._sectorsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Sectors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._sectorsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._itemsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Items.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._itemsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -29996,12 +33402,174 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._investorsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Investors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._investorsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._employeesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Employees.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._employeesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._subaccountsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Subaccounts.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._subaccountsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._creditorsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Creditors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._creditorsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._accountingMovementsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.AccountingMovements.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._accountingMovementsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._accountsClientsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.AccountsClients.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._accountsClientsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._disbursement_datesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Disbursement_dates.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._disbursement_datesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._resourcesTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Resources.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._resourcesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._accountTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.AccountType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._accountTypeTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._itemsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Items.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._itemsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._sectorsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Sectors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._sectorsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._bondsInvestorsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.BondsInvestors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._bondsInvestorsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._movements_AccountsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Movements_Accounts.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._movements_AccountsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._otherDetailsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.OtherDetails.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._otherDetailsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._fundBondProfitsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.FundBondProfits.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._fundBondProfitsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._accountsEmployeesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.AccountsEmployees.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._accountsEmployeesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._accountsCreditorsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.AccountsCreditors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._accountsCreditorsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._accountsBankingAccountsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.AccountsBankingAccounts.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._accountsBankingAccountsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._investorBondProfitsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.InvestorBondProfits.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._investorBondProfitsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -30031,6 +33599,14 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._clientsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Clients.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._clientsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._currenciesTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Currencies.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -30044,6 +33620,22 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._accountsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._investmentsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Investments.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._investmentsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._underlyingDebtorsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.UnderlyingDebtors.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._underlyingDebtorsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -30063,155 +33655,11 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._subaccountsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Subaccounts.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._subaccountsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._employeesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Employees.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._employeesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._bondsTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Bonds.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._bondsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._investorsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Investors.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._investorsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._accountingMovementsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.AccountingMovements.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._accountingMovementsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._creditorsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Creditors.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._creditorsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._clientsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Clients.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._clientsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._underlyingDebtorsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.UnderlyingDebtors.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._underlyingDebtorsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._investmentsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Investments.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._investmentsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._accountTypeTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.AccountType.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._accountTypeTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._accountsEmployeesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.AccountsEmployees.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._accountsEmployeesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._bondsInvestorsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.BondsInvestors.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._bondsInvestorsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._otherDetailsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.OtherDetails.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._otherDetailsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._accountsCreditorsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.AccountsCreditors.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._accountsCreditorsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._accountsClientsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.AccountsClients.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._accountsClientsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._accountsBankingAccountsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.AccountsBankingAccounts.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._accountsBankingAccountsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._movements_AccountsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Movements_Accounts.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._movements_AccountsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._sectorsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Sectors.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._sectorsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._itemsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Items.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._itemsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -30223,11 +33671,155 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._investorsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Investors.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._investorsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._employeesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Employees.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._employeesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._subaccountsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Subaccounts.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._subaccountsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._creditorsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Creditors.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._creditorsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._accountingMovementsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.AccountingMovements.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._accountingMovementsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._accountsClientsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.AccountsClients.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._accountsClientsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._disbursement_datesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Disbursement_dates.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._disbursement_datesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._resourcesTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Resources.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._resourcesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._accountTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.AccountType.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._accountTypeTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._itemsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Items.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._itemsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._sectorsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Sectors.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._sectorsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._bondsInvestorsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.BondsInvestors.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._bondsInvestorsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._movements_AccountsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Movements_Accounts.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._movements_AccountsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._otherDetailsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.OtherDetails.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._otherDetailsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._fundBondProfitsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.FundBondProfits.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._fundBondProfitsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._accountsEmployeesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.AccountsEmployees.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._accountsEmployeesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._accountsCreditorsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.AccountsCreditors.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._accountsCreditorsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._accountsBankingAccountsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.AccountsBankingAccounts.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._accountsBankingAccountsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._investorBondProfitsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.InvestorBondProfits.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._investorBondProfitsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -30241,43 +33833,11 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateDeletedRows(FundsDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._resourcesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Resources.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._investorBondProfitsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.InvestorBondProfits.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._resourcesTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._disbursementsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Disbursements.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._disbursementsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._itemsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Items.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._itemsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._sectorsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Sectors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._sectorsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._movements_AccountsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Movements_Accounts.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._movements_AccountsTableAdapter.Update(deletedRows));
+                    result = (result + this._investorBondProfitsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -30289,35 +33849,11 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._accountsClientsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.AccountsClients.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._accountsClientsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._accountsCreditorsTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.AccountsCreditors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._accountsCreditorsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._otherDetailsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.OtherDetails.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._otherDetailsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._bondsInvestorsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.BondsInvestors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._bondsInvestorsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -30329,6 +33865,54 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._fundBondProfitsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.FundBondProfits.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._fundBondProfitsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._otherDetailsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.OtherDetails.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._otherDetailsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._movements_AccountsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Movements_Accounts.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._movements_AccountsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._bondsInvestorsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.BondsInvestors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._bondsInvestorsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._sectorsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Sectors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._sectorsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._itemsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Items.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._itemsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._accountTypeTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.AccountType.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -30337,35 +33921,27 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._investmentsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Investments.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._resourcesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Resources.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._investmentsTableAdapter.Update(deletedRows));
+                    result = (result + this._resourcesTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._underlyingDebtorsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.UnderlyingDebtors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._disbursement_datesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Disbursement_dates.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._underlyingDebtorsTableAdapter.Update(deletedRows));
+                    result = (result + this._disbursement_datesTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._clientsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Clients.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._accountsClientsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.AccountsClients.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._clientsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._creditorsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Creditors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._creditorsTableAdapter.Update(deletedRows));
+                    result = (result + this._accountsClientsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -30377,19 +33953,19 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._investorsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Investors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._creditorsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Creditors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._investorsTableAdapter.Update(deletedRows));
+                    result = (result + this._creditorsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._bondsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Bonds.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._subaccountsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Subaccounts.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._bondsTableAdapter.Update(deletedRows));
+                    result = (result + this._subaccountsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -30401,11 +33977,27 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._subaccountsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Subaccounts.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._investorsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Investors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._subaccountsTableAdapter.Update(deletedRows));
+                    result = (result + this._investorsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._disbursementsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Disbursements.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._disbursementsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._bondsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Bonds.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._bondsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -30425,6 +34017,22 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._underlyingDebtorsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.UnderlyingDebtors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._underlyingDebtorsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._investmentsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Investments.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._investmentsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._accountsTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Accounts.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -30438,6 +34046,14 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._currenciesTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._clientsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Clients.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._clientsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -30628,6 +34244,21 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
             }
             if (((this._resourcesTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._resourcesTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
+                        "sma cadena de conexión.");
+            }
+            if (((this._disbursement_datesTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._disbursement_datesTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
+                        "sma cadena de conexión.");
+            }
+            if (((this._fundBondProfitsTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._fundBondProfitsTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
+                        "sma cadena de conexión.");
+            }
+            if (((this._investorBondProfitsTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._investorBondProfitsTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
                         "sma cadena de conexión.");
             }
@@ -30906,6 +34537,33 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                         adaptersWithAcceptChangesDuringUpdate.Add(this._resourcesTableAdapter.Adapter);
                     }
                 }
+                if ((this._disbursement_datesTableAdapter != null)) {
+                    revertConnections.Add(this._disbursement_datesTableAdapter, this._disbursement_datesTableAdapter.Connection);
+                    this._disbursement_datesTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._disbursement_datesTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._disbursement_datesTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._disbursement_datesTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._disbursement_datesTableAdapter.Adapter);
+                    }
+                }
+                if ((this._fundBondProfitsTableAdapter != null)) {
+                    revertConnections.Add(this._fundBondProfitsTableAdapter, this._fundBondProfitsTableAdapter.Connection);
+                    this._fundBondProfitsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._fundBondProfitsTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._fundBondProfitsTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._fundBondProfitsTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._fundBondProfitsTableAdapter.Adapter);
+                    }
+                }
+                if ((this._investorBondProfitsTableAdapter != null)) {
+                    revertConnections.Add(this._investorBondProfitsTableAdapter, this._investorBondProfitsTableAdapter.Connection);
+                    this._investorBondProfitsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._investorBondProfitsTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._investorBondProfitsTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._investorBondProfitsTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._investorBondProfitsTableAdapter.Adapter);
+                    }
+                }
                 // 
                 //---- Perform updates -----------
                 //
@@ -31071,6 +34729,18 @@ SELECT Id, number, issued, FK_Bonds_Funds, price, interest_on_bond, interest_tff
                 if ((this._resourcesTableAdapter != null)) {
                     this._resourcesTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._resourcesTableAdapter]));
                     this._resourcesTableAdapter.Transaction = null;
+                }
+                if ((this._disbursement_datesTableAdapter != null)) {
+                    this._disbursement_datesTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._disbursement_datesTableAdapter]));
+                    this._disbursement_datesTableAdapter.Transaction = null;
+                }
+                if ((this._fundBondProfitsTableAdapter != null)) {
+                    this._fundBondProfitsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._fundBondProfitsTableAdapter]));
+                    this._fundBondProfitsTableAdapter.Transaction = null;
+                }
+                if ((this._investorBondProfitsTableAdapter != null)) {
+                    this._investorBondProfitsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._investorBondProfitsTableAdapter]));
+                    this._investorBondProfitsTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

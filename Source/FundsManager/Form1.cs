@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FundsManager.Classes.Task;
 
 namespace FundsManager
 {
@@ -17,6 +18,17 @@ namespace FundsManager
         {
             manager = new MyFundsManager();
             InitializeComponent();
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                GlobalProcess.performBondProfitsUpdate(manager);
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error in Form1.Form1_Load: " + _ex.Message);
+            }
         }
 
         private void fundsToolStripMenuItem_Click(object sender, EventArgs e)

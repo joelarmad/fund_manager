@@ -18,6 +18,7 @@ namespace FundsManager
         public Investor()
         {
             this.BondsInvestors = new HashSet<BondsInvestor>();
+            this.InvestorBondProfits = new HashSet<InvestorBondProfit>();
         }
     
         public int Id { get; set; }
@@ -27,5 +28,7 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BondsInvestor> BondsInvestors { get; set; }
         public virtual Fund Fund { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InvestorBondProfit> InvestorBondProfits { get; set; }
     }
 }

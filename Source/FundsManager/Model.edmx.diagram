@@ -80,7 +80,13 @@
         <EntityTypeShape EntityType="FundsDBModel.Bond" Width="1.5" PointX="3" PointY="38.875" />
         <AssociationConnector Association="FundsDBModel.FK_Bonds_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_BondsInvestors_Bonds" />
-      </Diagram>
+        <EntityTypeShape EntityType="FundsDBModel.FundBondProfit" Width="1.5" PointX="5.25" PointY="25.75" />
+        <EntityTypeShape EntityType="FundsDBModel.InvestorBondProfit" Width="1.5" PointX="10.25" PointY="33.875" />
+        <AssociationConnector Association="FundsDBModel.FK_InvestorBondProfits_Account" />
+        <AssociationConnector Association="FundsDBModel.FK_FundBondProfits_Bonds" />
+        <AssociationConnector Association="FundsDBModel.FK_InvestorBondProfits_Bond" />
+        <AssociationConnector Association="FundsDBModel.FK_InvestorBondProfits_Investor" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

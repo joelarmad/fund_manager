@@ -52,5 +52,7 @@ namespace FundsManager
         public virtual DbSet<AccountType> AccountTypes { get; set; }
         public virtual DbSet<Resource> Resources { get; set; }
         public virtual DbSet<Bond> Bonds { get; set; }
+        public virtual DbSet<FundBondProfit> FundBondProfits { get; set; }
+        public virtual DbSet<InvestorBondProfit> InvestorBondProfits { get; set; }
     }
 }

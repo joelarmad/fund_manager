@@ -179,6 +179,15 @@
           <Property Name="name" Type="text" Nullable="false" />
           <Property Name="FK_Employees_Funds" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="FundBondProfits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BondId" Type="int" Nullable="false" />
+          <Property Name="Income" Type="money" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+        </EntityType>
         <EntityType Name="Funds">
           <Key>
             <PropertyRef Name="Id" />
@@ -197,6 +206,17 @@
           <Property Name="total_disbursement" Type="money" />
           <Property Name="profit_share" Type="money" />
           <Property Name="fund_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InvestorBondProfits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BondId" Type="int" Nullable="false" />
+          <Property Name="InvestorId" Type="int" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="Income" Type="money" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Investors">
           <Key>
@@ -694,6 +714,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FundBondProfits_Bonds">
+          <End Role="Bonds" Type="Self.Bonds" Multiplicity="1" />
+          <End Role="FundBondProfits" Type="Self.FundBondProfits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bonds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FundBondProfits">
+              <PropertyRef Name="BondId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Investments_Funds">
           <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
           <End Role="Investments" Type="Self.Investments" Multiplicity="*" />
@@ -703,6 +735,42 @@
             </Principal>
             <Dependent Role="Investments">
               <PropertyRef Name="fund_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvestorBondProfits_Account">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="InvestorBondProfits" Type="Self.InvestorBondProfits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvestorBondProfits">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvestorBondProfits_Bond">
+          <End Role="Bonds" Type="Self.Bonds" Multiplicity="1" />
+          <End Role="InvestorBondProfits" Type="Self.InvestorBondProfits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bonds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvestorBondProfits">
+              <PropertyRef Name="BondId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvestorBondProfits_Investor">
+          <End Role="Investors" Type="Self.Investors" Multiplicity="1" />
+          <End Role="InvestorBondProfits" Type="Self.InvestorBondProfits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Investors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvestorBondProfits">
+              <PropertyRef Name="InvestorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -868,8 +936,10 @@
           <EntitySet Name="Currencies" EntityType="Self.Currencies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disbursements" EntityType="Self.Disbursements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FundBondProfits" EntityType="Self.FundBondProfits" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Funds" EntityType="Self.Funds" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Investments" EntityType="Self.Investments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvestorBondProfits" EntityType="Self.InvestorBondProfits" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Investors" EntityType="Self.Investors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movements_Accounts" EntityType="Self.Movements_Accounts" Schema="dbo" store:Type="Tables" />
@@ -1018,9 +1088,25 @@
             <End Role="Funds" EntitySet="Funds" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
+          <AssociationSet Name="FK_FundBondProfits_Bonds" Association="Self.FK_FundBondProfits_Bonds">
+            <End Role="Bonds" EntitySet="Bonds" />
+            <End Role="FundBondProfits" EntitySet="FundBondProfits" />
+          </AssociationSet>
           <AssociationSet Name="FK_Investments_Funds" Association="Self.FK_Investments_Funds">
             <End Role="Funds" EntitySet="Funds" />
             <End Role="Investments" EntitySet="Investments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvestorBondProfits_Account" Association="Self.FK_InvestorBondProfits_Account">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="InvestorBondProfits" EntitySet="InvestorBondProfits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvestorBondProfits_Bond" Association="Self.FK_InvestorBondProfits_Bond">
+            <End Role="Bonds" EntitySet="Bonds" />
+            <End Role="InvestorBondProfits" EntitySet="InvestorBondProfits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvestorBondProfits_Investor" Association="Self.FK_InvestorBondProfits_Investor">
+            <End Role="Investors" EntitySet="Investors" />
+            <End Role="InvestorBondProfits" EntitySet="InvestorBondProfits" />
           </AssociationSet>
           <AssociationSet Name="FK_Investors_Funds" Association="Self.FK_Investors_Funds">
             <End Role="Funds" EntitySet="Funds" />
@@ -1295,7 +1381,25 @@
             <End Role="Bond" EntitySet="Bonds" />
             <End Role="BondsInvestor" EntitySet="BondsInvestors" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="FundBondProfits" EntityType="FundsDBModel.FundBondProfit" />
+          <EntitySet Name="InvestorBondProfits" EntityType="FundsDBModel.InvestorBondProfit" />
+          <AssociationSet Name="FK_InvestorBondProfits_Account" Association="FundsDBModel.FK_InvestorBondProfits_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="InvestorBondProfit" EntitySet="InvestorBondProfits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FundBondProfits_Bonds" Association="FundsDBModel.FK_FundBondProfits_Bonds">
+            <End Role="Bond" EntitySet="Bonds" />
+            <End Role="FundBondProfit" EntitySet="FundBondProfits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvestorBondProfits_Bond" Association="FundsDBModel.FK_InvestorBondProfits_Bond">
+            <End Role="Bond" EntitySet="Bonds" />
+            <End Role="InvestorBondProfit" EntitySet="InvestorBondProfits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvestorBondProfits_Investor" Association="FundsDBModel.FK_InvestorBondProfits_Investor">
+            <End Role="Investor" EntitySet="Investors" />
+            <End Role="InvestorBondProfit" EntitySet="InvestorBondProfits" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="AccountingMovement">
           <Key>
             <PropertyRef Name="Id" />
@@ -1329,6 +1433,7 @@
           <NavigationProperty Name="OtherDetails" Relationship="FundsDBModel.FK_OtherDetails_Accounts" FromRole="Account" ToRole="OtherDetail" />
           <NavigationProperty Name="Subaccounts" Relationship="FundsDBModel.FK_Subaccounts_Accounts" FromRole="Account" ToRole="Subaccount" />
           <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_Accounts" FromRole="Account" ToRole="Movements_Accounts" />
+          <NavigationProperty Name="InvestorBondProfits" Relationship="FundsDBModel.FK_InvestorBondProfits_Account" FromRole="Account" ToRole="InvestorBondProfit" />
         </EntityType>
         <EntityType Name="AccountsBankingAccount">
           <Key>
@@ -1554,6 +1659,7 @@
           <Property Name="FK_Investors_Funds" Type="Int32" Nullable="false" />
           <NavigationProperty Name="BondsInvestors" Relationship="FundsDBModel.FK_BondsInvestors_Investors" FromRole="Investor" ToRole="BondsInvestor" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Investors_Funds" FromRole="Investor" ToRole="Fund" />
+          <NavigationProperty Name="InvestorBondProfits" Relationship="FundsDBModel.FK_InvestorBondProfits_Investor" FromRole="Investor" ToRole="InvestorBondProfit" />
         </EntityType>
         <EntityType Name="Item">
           <Key>
@@ -2212,6 +2318,8 @@
           <Property Name="expired" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Bonds_Funds" FromRole="Bond" ToRole="Fund" />
           <NavigationProperty Name="BondsInvestors" Relationship="FundsDBModel.FK_BondsInvestors_Bonds" FromRole="Bond" ToRole="BondsInvestor" />
+          <NavigationProperty Name="FundBondProfits" Relationship="FundsDBModel.FK_FundBondProfits_Bonds" FromRole="Bond" ToRole="FundBondProfit" />
+          <NavigationProperty Name="InvestorBondProfits" Relationship="FundsDBModel.FK_InvestorBondProfits_Bond" FromRole="Bond" ToRole="InvestorBondProfit" />
         </EntityType>
         <Association Name="FK_Bonds_Funds">
           <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
@@ -2234,6 +2342,78 @@
             </Principal>
             <Dependent Role="BondsInvestor">
               <PropertyRef Name="FK_BondsInvestors_Bonds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FundBondProfit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BondId" Type="Int32" Nullable="false" />
+          <Property Name="Income" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Bond" Relationship="FundsDBModel.FK_FundBondProfits_Bonds" FromRole="FundBondProfit" ToRole="Bond" />
+        </EntityType>
+        <EntityType Name="InvestorBondProfit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BondId" Type="Int32" Nullable="false" />
+          <Property Name="InvestorId" Type="Int32" Nullable="false" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="Income" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Account" Relationship="FundsDBModel.FK_InvestorBondProfits_Account" FromRole="InvestorBondProfit" ToRole="Account" />
+          <NavigationProperty Name="Bond" Relationship="FundsDBModel.FK_InvestorBondProfits_Bond" FromRole="InvestorBondProfit" ToRole="Bond" />
+          <NavigationProperty Name="Investor" Relationship="FundsDBModel.FK_InvestorBondProfits_Investor" FromRole="InvestorBondProfit" ToRole="Investor" />
+        </EntityType>
+        <Association Name="FK_InvestorBondProfits_Account">
+          <End Type="FundsDBModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="FundsDBModel.InvestorBondProfit" Role="InvestorBondProfit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvestorBondProfit">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FundBondProfits_Bonds">
+          <End Type="FundsDBModel.Bond" Role="Bond" Multiplicity="1" />
+          <End Type="FundsDBModel.FundBondProfit" Role="FundBondProfit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bond">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FundBondProfit">
+              <PropertyRef Name="BondId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvestorBondProfits_Bond">
+          <End Type="FundsDBModel.Bond" Role="Bond" Multiplicity="1" />
+          <End Type="FundsDBModel.InvestorBondProfit" Role="InvestorBondProfit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bond">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvestorBondProfit">
+              <PropertyRef Name="BondId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvestorBondProfits_Investor">
+          <End Type="FundsDBModel.Investor" Role="Investor" Multiplicity="1" />
+          <End Type="FundsDBModel.InvestorBondProfit" Role="InvestorBondProfit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Investor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvestorBondProfit">
+              <PropertyRef Name="InvestorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2535,6 +2715,28 @@
                 <ScalarProperty Name="FK_Bonds_Funds" ColumnName="FK_Bonds_Funds" />
                 <ScalarProperty Name="issued" ColumnName="issued" />
                 <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FundBondProfits">
+            <EntityTypeMapping TypeName="FundsDBModel.FundBondProfit">
+              <MappingFragment StoreEntitySet="FundBondProfits">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="Income" ColumnName="Income" />
+                <ScalarProperty Name="BondId" ColumnName="BondId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvestorBondProfits">
+            <EntityTypeMapping TypeName="FundsDBModel.InvestorBondProfit">
+              <MappingFragment StoreEntitySet="InvestorBondProfits">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="Income" ColumnName="Income" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="InvestorId" ColumnName="InvestorId" />
+                <ScalarProperty Name="BondId" ColumnName="BondId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
