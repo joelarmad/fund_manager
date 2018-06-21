@@ -14,20 +14,29 @@ namespace FundsManager
     
     public partial class Disbursement
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Disbursement()
+        {
+            this.Disbursement_dates = new HashSet<Disbursement_dates>();
+        }
+    
         public int Id { get; set; }
         public int investment_id { get; set; }
         public int currency_id { get; set; }
-        public int exchange_rate { get; set; }
+        public float exchange_rate { get; set; }
         public int client_id { get; set; }
         public Nullable<int> underlying_debtor_id { get; set; }
         public Nullable<int> bank_risk_id { get; set; }
         public decimal profit_share { get; set; }
         public decimal amount { get; set; }
         public int fund_id { get; set; }
+        public System.DateTime date { get; set; }
     
         public virtual Bank Bank { get; set; }
         public virtual Client Client { get; set; }
         public virtual Currency Currency { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Disbursement_dates> Disbursement_dates { get; set; }
         public virtual Fund Fund { get; set; }
         public virtual Investment Investment { get; set; }
         public virtual UnderlyingDebtor UnderlyingDebtor { get; set; }

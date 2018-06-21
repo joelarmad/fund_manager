@@ -38,10 +38,8 @@ namespace FundsManager
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Creditor> Creditors { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
-        public virtual DbSet<Disbursement> Disbursements { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Fund> Funds { get; set; }
-        public virtual DbSet<Investment> Investments { get; set; }
         public virtual DbSet<Investor> Investors { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<OtherDetail> OtherDetails { get; set; }
@@ -54,5 +52,8 @@ namespace FundsManager
         public virtual DbSet<Bond> Bonds { get; set; }
         public virtual DbSet<FundBondProfit> FundBondProfits { get; set; }
         public virtual DbSet<InvestorBondProfit> InvestorBondProfits { get; set; }
+        public virtual DbSet<Disbursement_dates> Disbursement_dates { get; set; }
+        public virtual DbSet<Investment> Investments { get; set; }
+        public virtual DbSet<Disbursement> Disbursements { get; set; }
     }
 }

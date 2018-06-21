@@ -166,6 +166,7 @@
     </Compile>
     <Compile Include="Classes\DataModel\Bond.cs" />
     <Compile Include="Classes\DataModel\BondInvestor.cs" />
+    <Compile Include="Classes\DataModel\Disbursement.cs" />
     <Compile Include="Classes\Task\GlobalProcess.cs" />
     <Compile Include="Classes\Utilities\Conversions.cs" />
     <Compile Include="Classes\Utilities\KeyDefinitions.cs" />
@@ -214,6 +215,9 @@
     </Compile>
     <Compile Include="DisbursementsForm.Designer.cs">
       <DependentUpon>DisbursementsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Disbursement_dates.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>Model.tt</DependentUpon>

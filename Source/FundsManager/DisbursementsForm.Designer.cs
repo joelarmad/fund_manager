@@ -71,11 +71,12 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button3 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cmdCreate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
@@ -351,9 +352,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(811, 203);
+            this.button2.Location = new System.Drawing.Point(689, 203);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(120, 23);
+            this.button2.Size = new System.Drawing.Size(115, 23);
             this.button2.TabIndex = 22;
             this.button2.Text = "Add Disbursement";
             this.button2.UseVisualStyleBackColor = true;
@@ -401,31 +402,6 @@
             this.columnHeader5.Text = "Total to Collect";
             this.columnHeader5.Width = 128;
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(829, 522);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(102, 23);
-            this.button3.TabIndex = 24;
-            this.button3.Text = "Delete";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(566, 205);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 25;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(527, 208);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(33, 13);
-            this.label11.TabIndex = 26;
-            this.label11.Text = "Date:";
-            // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "Date";
@@ -435,11 +411,47 @@
             // 
             this.columnHeader7.Text = "Day";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(810, 203);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(121, 23);
+            this.button3.TabIndex = 24;
+            this.button3.Text = "Delete";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(483, 205);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 25;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(444, 208);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(33, 13);
+            this.label11.TabIndex = 26;
+            this.label11.Text = "Date:";
+            // 
+            // cmdCreate
+            // 
+            this.cmdCreate.Location = new System.Drawing.Point(803, 522);
+            this.cmdCreate.Name = "cmdCreate";
+            this.cmdCreate.Size = new System.Drawing.Size(128, 23);
+            this.cmdCreate.TabIndex = 27;
+            this.cmdCreate.Text = "Create Investment";
+            this.cmdCreate.UseVisualStyleBackColor = true;
+            this.cmdCreate.Click += new System.EventHandler(this.cmdCreate_Click);
+            // 
             // DisbursementsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(947, 578);
+            this.Controls.Add(this.cmdCreate);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.button3);
@@ -534,5 +546,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.Button cmdCreate;
     }
 }

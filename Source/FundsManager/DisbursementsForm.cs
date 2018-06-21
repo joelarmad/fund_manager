@@ -17,14 +17,17 @@ namespace FundsManager
         private Double disbursement;
         private Double profit;
 
-        private List<DisbursementForInvestement> disbursements;
+        //private List<DisbursementForInvestement> disbursements;
+        private List<Disbursement> disbursements;
+        private List<int> fItemIds = new List<int>();
 
         public DisbursementsForm(MyFundsManager _manager)
         {
             disbursement = 0;
             profit = 0;
 
-            disbursements = new List<DisbursementForInvestement>();
+            //disbursements = new List<DisbursementForInvestement>();
+            disbursements = new List<Disbursement>();
 
             manager = _manager;
             InitializeComponent();
@@ -105,53 +108,57 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (comboBox6.SelectedIndex >= 0)
+            {
+                fItemIds.Add((int)comboBox6.SelectedValue);
+
+                listBox1.Items.Add(comboBox6.Text);
+            }
+
             
-            listBox1.Items.Add(comboBox6.Text);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DisbursementForInvestement _disbursement = new DisbursementForInvestement();
             Decimal total_amount = 0;
             Decimal total_profit = 0;
             Decimal total_euro_collection = 0;
             TimeSpan day = new TimeSpan();
+            
+            Disbursement _disbursement = new Disbursement();
 
-            _disbursement.Amount = Convert.ToDecimal(textBox1.Text);
-            _disbursement.Exchange = Convert.ToDecimal(textBox2.Text);
-            _disbursement.Profit = Convert.ToDecimal(textBox3.Text);
-            _disbursement.Currency = Convert.ToInt32(comboBox1.SelectedValue);
+            _disbursement.fund_id = manager.Selected;
 
-            _disbursement.Bank = Convert.ToInt32(comboBox4.SelectedValue);
-            _disbursement.Client = Convert.ToInt32(comboBox2.SelectedValue);
-            _disbursement.Underlying_debtor = Convert.ToInt32(comboBox3.SelectedValue);
+            _disbursement.amount = Convert.ToDecimal(textBox1.Text);
+            _disbursement.exchange_rate = Convert.ToSingle(textBox2.Text);
+            _disbursement.profit_share = Convert.ToDecimal(textBox3.Text);
+            _disbursement.currency_id = Convert.ToInt32(comboBox1.SelectedValue);
+            _disbursement.bank_risk_id = Convert.ToInt32(comboBox4.SelectedValue);
+            _disbursement.client_id = Convert.ToInt32(comboBox2.SelectedValue);
+            _disbursement.underlying_debtor_id = Convert.ToInt32(comboBox3.SelectedValue);
+            _disbursement.date = Convert.ToDateTime(dateTimePicker1.Text);
 
-            _disbursement.Sector = Convert.ToInt32(comboBox5.SelectedValue);
-            _disbursement.Date = Convert.ToDateTime(dateTimePicker1.Text);
-
-            _disbursement.Euro_collection = Convert.ToDecimal((disbursement + profit) / Convert.ToDouble(textBox2.Text));
-
-            foreach (String _item in listBox1.Items) 
-                foreach (Item real_item in manager.My_db.Items) 
-                    if (real_item.name == _item)
-                        _disbursement.Items.Add(real_item.Id);
 
             disbursements.Add(_disbursement);
-            if (disbursements.First<DisbursementForInvestement>().Date != _disbursement.Date)
-                day = _disbursement.Date.Subtract(disbursements.First<DisbursementForInvestement>().Date);
+            
+            _disbursement.Euro_collection = Convert.ToDecimal((disbursement + profit) / Convert.ToDouble(textBox2.Text));
+
+            if (disbursements.First<Disbursement>().date != _disbursement.date)
+                day = _disbursement.date.Subtract(disbursements.First<Disbursement>().date);
 
             if (listView1.Items.Count > 0)
                 listView1.Items.RemoveAt(listView1.Items.Count - 1);
 
-            
-            string[] row = { comboBox2.Text, comboBox3.Text, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", textBox1.Text), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", textBox3.Text), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", textBox4.Text), dateTimePicker1.Text, Convert.ToString(day.Days)};
+
+            string[] row = { comboBox2.Text, comboBox3.Text, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", textBox1.Text), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", textBox3.Text), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", textBox4.Text), dateTimePicker1.Text, Convert.ToString(day.Days) };
             ListViewItem my_item = new ListViewItem(row);
             listView1.Items.Add(my_item);
 
 
-            foreach (DisbursementForInvestement _dis in disbursements) { 
-                total_amount += _dis.Amount;
-                total_profit += _dis.Profit;
+            foreach (Disbursement _dis in disbursements)
+            {
+                total_amount += _dis.amount;
+                total_profit += _dis.profit_share;
                 total_euro_collection += _dis.Euro_collection;
             }
 
@@ -163,7 +170,60 @@ namespace FundsManager
             textBox2.Clear();
             textBox3.Clear();
             listBox1.Items.Clear();
+        }
 
+        private void cmdCreate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal _totalDisbursement = 0;
+                decimal _totalProfitShare = 0;
+
+                Investment _newInvestment = new Investment();
+
+                _newInvestment.contract = "";
+                _newInvestment.date = DateTime.Now.Date;
+                _newInvestment.fund_id = manager.Selected;
+                _newInvestment.sector_id = Convert.ToInt32(comboBox5.SelectedValue);
+                
+                manager.My_db.Investments.Add(_newInvestment);
+                manager.My_db.SaveChanges();
+
+                foreach (int _itemId in fItemIds)
+                {
+                    Item _item = manager.My_db.Items.FirstOrDefault(x => x.Id == _itemId);
+
+                    _newInvestment.Items.Add(_item);
+                }
+
+                foreach (Disbursement _disbursement in disbursements)
+                {
+                    _disbursement.investment_id = _newInvestment.Id;
+
+                    _totalDisbursement += _disbursement.Euro_collection;
+                    _totalProfitShare += _disbursement.profit_share;
+
+                    manager.My_db.Disbursements.Add(_disbursement);
+                }
+
+                _newInvestment.total_disbursement = _totalDisbursement;
+                _newInvestment.profit_share = _totalProfitShare;
+
+                manager.My_db.SaveChanges();
+
+                fItemIds.Clear();
+
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
+                textBox4.Text = "";
+                listBox1.Items.Clear();
+                listView1.Items.Clear();
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error in DisbursementsForm.cmdCreate_Click: " + _ex.Message);
+            }
         }
     }
 }
