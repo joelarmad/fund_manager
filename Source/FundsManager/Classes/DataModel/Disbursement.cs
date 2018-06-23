@@ -9,6 +9,10 @@ namespace FundsManager
     public partial class Disbursement
     {
         public decimal Euro_collection;
+
+        public string TextClient;
+
+        public string TextUnderlyingDebtor;
     }
 
 
