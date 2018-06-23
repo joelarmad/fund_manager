@@ -17,11 +17,9 @@ namespace FundsManager
         public int Id { get; set; }
         public int BondId { get; set; }
         public int InvestorId { get; set; }
-        public int AccountId { get; set; }
         public decimal Income { get; set; }
         public System.DateTime date { get; set; }
     
-        public virtual Account Account { get; set; }
         public virtual Bond Bond { get; set; }
         public virtual Investor Investor { get; set; }
     }

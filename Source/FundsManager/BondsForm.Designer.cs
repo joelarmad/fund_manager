@@ -132,7 +132,7 @@
             this.txtBondInterest.Name = "txtBondInterest";
             this.txtBondInterest.Size = new System.Drawing.Size(62, 20);
             this.txtBondInterest.TabIndex = 3;
-            this.txtBondInterest.Text = "0";
+            this.txtBondInterest.Text = "10";
             this.txtBondInterest.Enter += new System.EventHandler(this.textBox3_Enter);
             this.txtBondInterest.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyUp);
             this.txtBondInterest.Leave += new System.EventHandler(this.textBox3_Leave);
@@ -152,7 +152,7 @@
             this.txtTFFInterest.Name = "txtTFFInterest";
             this.txtTFFInterest.Size = new System.Drawing.Size(58, 20);
             this.txtTFFInterest.TabIndex = 4;
-            this.txtTFFInterest.Text = "0";
+            this.txtTFFInterest.Text = "1";
             this.txtTFFInterest.Enter += new System.EventHandler(this.textBox4_Enter);
             this.txtTFFInterest.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox4_KeyUp);
             this.txtTFFInterest.Leave += new System.EventHandler(this.textBox4_Leave);

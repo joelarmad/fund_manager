@@ -199,7 +199,6 @@ namespace FundsManager
             {
                 Bond bond = new Bond();
                 bond.number = txtNumber.Text;
-                //TODO: look for better way of datetime conversions, using DateTimePicker.Value
                 bond.issued = Convert.ToDateTime(dtpIssuingDate.Text);
                 bond.expired = Convert.ToDateTime(dtpExpirationDate.Text);
                 bond.FK_Bonds_Funds = manager.Selected;
@@ -239,6 +238,14 @@ namespace FundsManager
                 txtBondPieces.Text = "";
                 cbInvestors.ResetText();
                 listView1.Items.Clear();
+
+                Account _account510 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "510");
+
+                if (_account510 != null)
+                {
+                    _account510.amount += (decimal)bond.pieces * bond.price;
+                    manager.My_db.SaveChanges();
+                }
             }
             catch (Exception _ex)
             {

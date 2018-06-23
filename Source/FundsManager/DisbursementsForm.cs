@@ -162,6 +162,8 @@ namespace FundsManager
                     fItemIds.Add((int)cbItems.SelectedValue);
 
                     lbISelectedItems.Items.Add(cbItems.Text);
+
+                    checkEnablingAddInvestmentButton();
                 }
             }
             catch (Exception _ex)
@@ -250,6 +252,8 @@ namespace FundsManager
                 txtProfitShare.Clear();
                 lbISelectedItems.Items.Clear();
                 txtTotalToBeCollected.Clear();
+
+                checkEnablingAddInvestmentButton();
             }
             catch (Exception _ex)
             {
@@ -353,6 +357,13 @@ namespace FundsManager
             }
         }
 
+        private void checkEnablingAddInvestmentButton()
+        {
+            cmdCreateInvestment.Enabled = disbursements.Count > 0
+                && fItemIds.Count > 0
+                && cbSector.SelectedIndex >= 0;
+        }
+
         private void cmdDeleteDisbursement_Click(object sender, EventArgs e)
         {
             try
@@ -398,6 +409,8 @@ namespace FundsManager
                     ListViewItem listViewItemTotal = new ListViewItem(totales);
                     lvDisbursements.Items.Add(listViewItemTotal);
                 }
+
+                checkEnablingAddInvestmentButton();
             }
             catch (Exception _ex)
             {
@@ -469,7 +482,7 @@ namespace FundsManager
         {
             try
             {
-                checkEnablingAddDisbursementButton();
+                checkEnablingAddInvestmentButton();
             }
             catch (Exception _ex)
             {

@@ -455,6 +455,7 @@
             // 
             // cmdCreateInvestment
             // 
+            this.cmdCreateInvestment.Enabled = false;
             this.cmdCreateInvestment.Location = new System.Drawing.Point(803, 522);
             this.cmdCreateInvestment.Name = "cmdCreateInvestment";
             this.cmdCreateInvestment.Size = new System.Drawing.Size(128, 23);

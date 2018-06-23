@@ -16,6 +16,10 @@ namespace FundsManager.Classes.Task
         {
             try
             {
+                Account _bondInterestAcruedAccount = aManager.My_db.Accounts.FirstOrDefault(x => x.number == "515");
+                Subaccount _bondInvestorInterestAcct = aManager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == _bondInterestAcruedAccount.Id && x.name == "Bond Investor Interests");
+                Subaccount _bondTFFInterestAcct = aManager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == _bondInterestAcruedAccount.Id && x.name == "Bond TFF Interests");
+
                 List<Bond> _bonds = aManager.My_db.Bonds.Where(x => x.active == 1).ToList();
 
                 foreach (Bond _bond in _bonds)
@@ -23,11 +27,8 @@ namespace FundsManager.Classes.Task
                     List<BondsInvestor> _bondInvestors = aManager.My_db.BondsInvestors.Where(x => x.FK_BondsInvestors_Bonds == _bond.Id).ToList();
 
                     foreach (BondsInvestor _bondInvestor in _bondInvestors)
-                    {
-                        //TODO: ajustar con la cuenta correcta
-                        Account _account = aManager.My_db.Accounts.FirstOrDefault(x => x.number == "900");
-
-                        if (_account != null)
+                    {                        
+                        if (_bondInterestAcruedAccount != null)
                         {
                             DateTime _profitDate = _bond.issued.AddDays(30);
 
@@ -37,17 +38,14 @@ namespace FundsManager.Classes.Task
 
                                 if (_profit == null)
                                 {
-                                    //TODO: MODIFICAR LUEGO DE CONFIRMACION CON EL CLIENTE
                                     decimal _investorProfit = _bond.price * (decimal)_bondInvestor.quantity * (decimal)_bond.interest_on_bond / 100;
-                                    decimal _fundProfit = _investorProfit * (decimal)_bond.interest_tff_contribution / 100;
-                                    _investorProfit -= _fundProfit;
+                                    decimal _fundProfit = _bond.price * (decimal)_bondInvestor.quantity * (decimal)_bond.interest_tff_contribution / 100;
 
                                     InvestorBondProfit _newInvestorProfit = new InvestorBondProfit();
                                     _newInvestorProfit.date = _profitDate;
                                     _newInvestorProfit.BondId = _bond.Id;
                                     _newInvestorProfit.InvestorId = _bondInvestor.FK_BondsInvestors_Investors;
                                     _newInvestorProfit.Income = _investorProfit;
-                                    _newInvestorProfit.AccountId = _account.Id;
 
                                     FundBondProfit _newFundBondProfit = new FundBondProfit();
                                     _newFundBondProfit.date = _profitDate;
@@ -56,6 +54,21 @@ namespace FundsManager.Classes.Task
 
                                     aManager.My_db.InvestorBondProfits.Add(_newInvestorProfit);
                                     aManager.My_db.FundBondProfits.Add(_newFundBondProfit);
+
+                                    if (_bondInterestAcruedAccount != null)
+                                    {
+                                        _bondInterestAcruedAccount.amount += _newInvestorProfit.Income + _newFundBondProfit.Income;
+                                    }
+
+                                    if (_bondInvestorInterestAcct != null)
+                                    {
+                                        _bondInvestorInterestAcct.amount += _newInvestorProfit.Income;
+                                    }
+
+                                    if (_bondTFFInterestAcct != null)
+                                    {
+                                        _bondTFFInterestAcct.amount += _newFundBondProfit.Income;
+                                    }
                                 }
 
                                 _profitDate = _profitDate.AddDays(30);

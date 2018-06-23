@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="261fa96f59a74e08b2d054a9f6e39a57" Name="Diagram1" ZoomLevel="42">
+      <Diagram DiagramId="261fa96f59a74e08b2d054a9f6e39a57" Name="Diagram1" ZoomLevel="124">
         <EntityTypeShape EntityType="FundsDBModel.AccountingMovement" Width="1.5" PointX="5.25" PointY="38.625" />
         <EntityTypeShape EntityType="FundsDBModel.Account" Width="1.5" PointX="3" PointY="58.875" />
         <EntityTypeShape EntityType="FundsDBModel.AccountsBankingAccount" Width="1.5" PointX="9.75" PointY="45.75" />
@@ -72,11 +72,7 @@
         <AssociationConnector Association="FundsDBModel.FK_Bonds_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_BondsInvestors_Bonds" />
         <EntityTypeShape EntityType="FundsDBModel.FundBondProfit" Width="1.5" PointX="5.25" PointY="25.75" />
-        <EntityTypeShape EntityType="FundsDBModel.InvestorBondProfit" Width="1.5" PointX="10.25" PointY="33.875" />
-        <AssociationConnector Association="FundsDBModel.FK_InvestorBondProfits_Account" />
         <AssociationConnector Association="FundsDBModel.FK_FundBondProfits_Bonds" />
-        <AssociationConnector Association="FundsDBModel.FK_InvestorBondProfits_Bond" />
-        <AssociationConnector Association="FundsDBModel.FK_InvestorBondProfits_Investor" />
         <EntityTypeShape EntityType="FundsDBModel.Disbursement_dates" Width="1.5" PointX="13" PointY="36.25" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursement_dates_Funds" />
         <EntityTypeShape EntityType="FundsDBModel.Investment" Width="1.5" PointX="11.25" PointY="50.375" />
@@ -91,6 +87,9 @@
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Investments" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_UnderlyingDebtors" />
+        <EntityTypeShape EntityType="FundsDBModel.InvestorBondProfit" Width="1.5" PointX="8.25" PointY="29" />
+        <AssociationConnector Association="FundsDBModel.FK_InvestorBondProfits_Bond" />
+        <AssociationConnector Association="FundsDBModel.FK_InvestorBondProfits_Investor" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
