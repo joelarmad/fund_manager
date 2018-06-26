@@ -77,6 +77,7 @@
             this.dtpDisbursementDate = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
             this.cmdCreateInvestment = new System.Windows.Forms.Button();
+            this.cmdDeleteItem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
@@ -344,6 +345,7 @@
             this.lbISelectedItems.Name = "lbISelectedItems";
             this.lbISelectedItems.Size = new System.Drawing.Size(120, 95);
             this.lbISelectedItems.TabIndex = 19;
+            this.lbISelectedItems.SelectedIndexChanged += new System.EventHandler(this.lbISelectedItems_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -464,11 +466,23 @@
             this.cmdCreateInvestment.UseVisualStyleBackColor = true;
             this.cmdCreateInvestment.Click += new System.EventHandler(this.cmdCreate_Click);
             // 
+            // cmdDeleteItem
+            // 
+            this.cmdDeleteItem.Enabled = false;
+            this.cmdDeleteItem.Location = new System.Drawing.Point(702, 72);
+            this.cmdDeleteItem.Name = "cmdDeleteItem";
+            this.cmdDeleteItem.Size = new System.Drawing.Size(75, 23);
+            this.cmdDeleteItem.TabIndex = 28;
+            this.cmdDeleteItem.Text = "Delete Item";
+            this.cmdDeleteItem.UseVisualStyleBackColor = true;
+            this.cmdDeleteItem.Click += new System.EventHandler(this.cmdDeleteItem_Click);
+            // 
             // DisbursementsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(947, 578);
+            this.Controls.Add(this.cmdDeleteItem);
             this.Controls.Add(this.cmdCreateInvestment);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.dtpDisbursementDate);
@@ -565,5 +579,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Button cmdCreateInvestment;
+        private System.Windows.Forms.Button cmdDeleteItem;
     }
 }

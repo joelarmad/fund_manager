@@ -13,6 +13,8 @@ namespace FundsManager
         public string TextClient;
 
         public string TextUnderlyingDebtor;
+
+        public List<int> ItemsIds = new List<int>();
     }
 
 

@@ -18,6 +18,7 @@ namespace FundsManager
         public Disbursement()
         {
             this.Disbursement_dates = new HashSet<Disbursement_dates>();
+            this.Items = new HashSet<Item>();
         }
     
         public int Id { get; set; }
@@ -31,6 +32,7 @@ namespace FundsManager
         public decimal amount { get; set; }
         public int fund_id { get; set; }
         public System.DateTime date { get; set; }
+        public int sector_id { get; set; }
     
         public virtual Bank Bank { get; set; }
         public virtual Client Client { get; set; }
@@ -39,6 +41,9 @@ namespace FundsManager
         public virtual ICollection<Disbursement_dates> Disbursement_dates { get; set; }
         public virtual Fund Fund { get; set; }
         public virtual Investment Investment { get; set; }
+        public virtual Sector Sector { get; set; }
         public virtual UnderlyingDebtor UnderlyingDebtor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Item> Items { get; set; }
     }
 }

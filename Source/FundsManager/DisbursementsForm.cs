@@ -61,6 +61,7 @@ namespace FundsManager
                 this.clientsTableAdapter.Fill(this.fundsDBDataSet.Clients);
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Currencies' table. You can move, or remove it, as needed.
                 this.currenciesTableAdapter.Fill(this.fundsDBDataSet.Currencies);
+
             }
             catch (Exception _ex)
             {
@@ -104,8 +105,8 @@ namespace FundsManager
                 decimal _profit = 0;
                 decimal _exchange = 0;
 
-                if (decimal.TryParse(txtAmount.Text, out _amount) 
-                    && decimal.TryParse(txtProfitShare.Text, out _profit) 
+                if (decimal.TryParse(txtAmount.Text, out _amount)
+                    && decimal.TryParse(txtProfitShare.Text, out _profit)
                     && decimal.TryParse(txtExchangeRate.Text, out _exchange))
                 {
                     txtTotalToBeCollected.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", ((_amount + _profit) / _exchange));
@@ -157,13 +158,13 @@ namespace FundsManager
         {
             try
             {
-                if (cbItems.SelectedIndex >= 0)
+                if (cbItems.SelectedIndex >= 0 && !fItemIds.Contains((int)cbItems.SelectedValue))
                 {
                     fItemIds.Add((int)cbItems.SelectedValue);
 
                     lbISelectedItems.Items.Add(cbItems.Text);
 
-                    checkEnablingAddInvestmentButton();
+                    checkEnablingAddDisbursementButton();
                 }
             }
             catch (Exception _ex)
@@ -175,7 +176,7 @@ namespace FundsManager
         private void button2_Click(object sender, EventArgs e)
         {
             try
-            {       
+            {
                 Decimal total_amount = 0;
                 Decimal total_profit = 0;
                 Decimal total_euro_collection = 0;
@@ -193,12 +194,18 @@ namespace FundsManager
                 _disbursement.client_id = Convert.ToInt32(cbClient.SelectedValue);
                 _disbursement.underlying_debtor_id = Convert.ToInt32(cbUnderlyingDebtor.SelectedValue);
                 _disbursement.date = Convert.ToDateTime(dtpDisbursementDate.Text);
+                _disbursement.sector_id = Convert.ToInt32(cbSector.SelectedValue);
 
                 _disbursement.TextClient = cbClient.Text;
                 _disbursement.TextUnderlyingDebtor = cbUnderlyingDebtor.Text;
 
                 _disbursement.Euro_collection = Convert.ToDecimal((_disbursement.amount + _disbursement.profit_share) / (decimal)_disbursement.exchange_rate);
-                
+
+                foreach (int _itemId in fItemIds)
+                {
+                    _disbursement.ItemsIds.Add(_itemId);
+                }
+
                 int _index = -1;
 
                 for (int i = 0; i < disbursements.Count; i++)
@@ -252,6 +259,9 @@ namespace FundsManager
                 txtProfitShare.Clear();
                 lbISelectedItems.Items.Clear();
                 txtTotalToBeCollected.Clear();
+                lbISelectedItems.Items.Clear();
+                lbISelectedItems.Items.Clear();
+                fItemIds.Clear();
 
                 checkEnablingAddInvestmentButton();
             }
@@ -273,17 +283,9 @@ namespace FundsManager
                 _newInvestment.contract = "";
                 _newInvestment.date = DateTime.Now.Date;
                 _newInvestment.fund_id = manager.Selected;
-                _newInvestment.sector_id = Convert.ToInt32(cbSector.SelectedValue);
-                
+
                 manager.My_db.Investments.Add(_newInvestment);
                 manager.My_db.SaveChanges();
-
-                foreach (int _itemId in fItemIds)
-                {
-                    Item _item = manager.My_db.Items.FirstOrDefault(x => x.Id == _itemId);
-
-                    _newInvestment.Items.Add(_item);
-                }
 
                 foreach (Disbursement _disbursement in disbursements)
                 {
@@ -293,6 +295,20 @@ namespace FundsManager
                     _totalProfitShare += _disbursement.profit_share;
 
                     manager.My_db.Disbursements.Add(_disbursement);
+
+                    manager.My_db.SaveChanges();
+
+                    foreach (int _itemId in _disbursement.ItemsIds)
+                    {
+                        Item _item = manager.My_db.Items.FirstOrDefault(x => x.Id == _itemId);
+
+                        if (_item != null)
+                        {
+                            _disbursement.Items.Add(_item);
+                        }
+                    }
+
+                    manager.My_db.SaveChanges();
                 }
 
                 _newInvestment.total_disbursement = _totalDisbursement;
@@ -359,9 +375,7 @@ namespace FundsManager
 
         private void checkEnablingAddInvestmentButton()
         {
-            cmdCreateInvestment.Enabled = disbursements.Count > 0
-                && fItemIds.Count > 0
-                && cbSector.SelectedIndex >= 0;
+            cmdCreateInvestment.Enabled = disbursements.Count > 0;
         }
 
         private void cmdDeleteDisbursement_Click(object sender, EventArgs e)
@@ -403,7 +417,7 @@ namespace FundsManager
                     total_euro_collection += _disbursement.Euro_collection;
                 }
 
-                if(disbursements.Count > 0)
+                if (disbursements.Count > 0)
                 {
                     string[] totales = { "Total", "", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_profit), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_euro_collection) };
                     ListViewItem listViewItemTotal = new ListViewItem(totales);
@@ -575,6 +589,22 @@ namespace FundsManager
             catch (Exception _ex)
             {
                 Console.WriteLine("Error in DisbursementsForm.txtAmount_KeyUp: " + _ex.Message);
+            }
+        }
+
+        private void lbISelectedItems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmdDeleteItem.Enabled = lbISelectedItems.SelectedIndex >= 0;
+        }
+
+        private void cmdDeleteItem_Click(object sender, EventArgs e)
+        {
+            if (lbISelectedItems.SelectedIndex >= 0)
+            {
+                fItemIds.RemoveAt(lbISelectedItems.SelectedIndex);
+                lbISelectedItems.Items.RemoveAt(lbISelectedItems.SelectedIndex);
+
+                checkEnablingAddDisbursementButton();
             }
         }
     }
