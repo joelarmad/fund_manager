@@ -102,112 +102,112 @@
             // accountsToolStripMenuItem
             // 
             this.accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
-            this.accountsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.accountsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.accountsToolStripMenuItem.Text = "Accounts";
             this.accountsToolStripMenuItem.Click += new System.EventHandler(this.accountsToolStripMenuItem_Click);
             // 
             // subaccountsToolStripMenuItem
             // 
             this.subaccountsToolStripMenuItem.Name = "subaccountsToolStripMenuItem";
-            this.subaccountsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.subaccountsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.subaccountsToolStripMenuItem.Text = "Subaccounts";
             this.subaccountsToolStripMenuItem.Click += new System.EventHandler(this.subaccountsToolStripMenuItem_Click);
             // 
             // otherDetailsToolStripMenuItem
             // 
             this.otherDetailsToolStripMenuItem.Name = "otherDetailsToolStripMenuItem";
-            this.otherDetailsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.otherDetailsToolStripMenuItem.Text = "Other Details";
+            this.otherDetailsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.otherDetailsToolStripMenuItem.Text = "Other Account Details";
             this.otherDetailsToolStripMenuItem.Click += new System.EventHandler(this.otherDetailsToolStripMenuItem_Click);
             // 
             // bankingAccountsToolStripMenuItem
             // 
             this.bankingAccountsToolStripMenuItem.Name = "bankingAccountsToolStripMenuItem";
-            this.bankingAccountsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.bankingAccountsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.bankingAccountsToolStripMenuItem.Text = "Banking Accounts";
             this.bankingAccountsToolStripMenuItem.Click += new System.EventHandler(this.bankingAccountsToolStripMenuItem_Click);
             // 
             // banksToolStripMenuItem
             // 
             this.banksToolStripMenuItem.Name = "banksToolStripMenuItem";
-            this.banksToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.banksToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.banksToolStripMenuItem.Text = "Banks";
             this.banksToolStripMenuItem.Click += new System.EventHandler(this.banksToolStripMenuItem_Click);
             // 
             // clientsToolStripMenuItem
             // 
             this.clientsToolStripMenuItem.Name = "clientsToolStripMenuItem";
-            this.clientsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.clientsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.clientsToolStripMenuItem.Text = "Clients";
             this.clientsToolStripMenuItem.Click += new System.EventHandler(this.clientsToolStripMenuItem_Click);
             // 
             // countriesToolStripMenuItem
             // 
             this.countriesToolStripMenuItem.Name = "countriesToolStripMenuItem";
-            this.countriesToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.countriesToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.countriesToolStripMenuItem.Text = "Countries";
             this.countriesToolStripMenuItem.Click += new System.EventHandler(this.countriesToolStripMenuItem_Click);
             // 
             // creditorsToolStripMenuItem
             // 
             this.creditorsToolStripMenuItem.Name = "creditorsToolStripMenuItem";
-            this.creditorsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.creditorsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.creditorsToolStripMenuItem.Text = "Lenders";
             this.creditorsToolStripMenuItem.Click += new System.EventHandler(this.creditorsToolStripMenuItem_Click);
             // 
             // currenciesToolStripMenuItem
             // 
             this.currenciesToolStripMenuItem.Name = "currenciesToolStripMenuItem";
-            this.currenciesToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.currenciesToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.currenciesToolStripMenuItem.Text = "Currencies";
             this.currenciesToolStripMenuItem.Click += new System.EventHandler(this.currenciesToolStripMenuItem_Click);
             // 
             // employeesToolStripMenuItem
             // 
             this.employeesToolStripMenuItem.Name = "employeesToolStripMenuItem";
-            this.employeesToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.employeesToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.employeesToolStripMenuItem.Text = "Employees";
             this.employeesToolStripMenuItem.Click += new System.EventHandler(this.employeesToolStripMenuItem_Click);
             // 
             // itemsToolStripMenuItem
             // 
             this.itemsToolStripMenuItem.Name = "itemsToolStripMenuItem";
-            this.itemsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.itemsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.itemsToolStripMenuItem.Text = "Items";
             this.itemsToolStripMenuItem.Click += new System.EventHandler(this.itemsToolStripMenuItem_Click);
             // 
             // sectorsToolStripMenuItem
             // 
             this.sectorsToolStripMenuItem.Name = "sectorsToolStripMenuItem";
-            this.sectorsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.sectorsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.sectorsToolStripMenuItem.Text = "Sectors";
             this.sectorsToolStripMenuItem.Click += new System.EventHandler(this.sectorsToolStripMenuItem_Click);
             // 
             // fundsToolStripMenuItem
             // 
             this.fundsToolStripMenuItem.Name = "fundsToolStripMenuItem";
-            this.fundsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.fundsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.fundsToolStripMenuItem.Text = "Funds";
             this.fundsToolStripMenuItem.Click += new System.EventHandler(this.fundsToolStripMenuItem_Click);
             // 
             // investorsToolStripMenuItem
             // 
             this.investorsToolStripMenuItem.Name = "investorsToolStripMenuItem";
-            this.investorsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.investorsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.investorsToolStripMenuItem.Text = "Investors";
             this.investorsToolStripMenuItem.Click += new System.EventHandler(this.investorsToolStripMenuItem_Click);
             // 
             // bondsToolStripMenuItem
             // 
             this.bondsToolStripMenuItem.Name = "bondsToolStripMenuItem";
-            this.bondsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.bondsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.bondsToolStripMenuItem.Text = "Bonds";
             this.bondsToolStripMenuItem.Click += new System.EventHandler(this.bondsToolStripMenuItem_Click);
             // 
             // underlyingDebtorsToolStripMenuItem
             // 
             this.underlyingDebtorsToolStripMenuItem.Name = "underlyingDebtorsToolStripMenuItem";
-            this.underlyingDebtorsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.underlyingDebtorsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.underlyingDebtorsToolStripMenuItem.Text = "Underlying Debtors";
             this.underlyingDebtorsToolStripMenuItem.Click += new System.EventHandler(this.underlyingDebtorsToolStripMenuItem_Click);
             // 

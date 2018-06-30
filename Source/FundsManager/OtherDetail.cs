@@ -17,9 +17,9 @@ namespace FundsManager
         public int Id { get; set; }
         public string name { get; set; }
         public int FK_OtherDetails_Funds { get; set; }
-        public Nullable<int> FK_OtherDetails_Accounts { get; set; }
+        public int subacct_id { get; set; }
     
-        public virtual Account Account { get; set; }
         public virtual Fund Fund { get; set; }
+        public virtual Subaccount Subaccount { get; set; }
     }
 }

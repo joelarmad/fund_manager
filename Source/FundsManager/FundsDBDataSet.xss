@@ -24,27 +24,27 @@
     <Shape ID="DesignTable:AccountsEmployees" ZOrder="72" X="2354" Y="0" Height="172" Width="260" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
     <Shape ID="DesignTable:Employees" ZOrder="71" X="2684" Y="0" Height="134" Width="206" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
     <Shape ID="DesignTable:Subaccounts" ZOrder="61" X="2960" Y="0" Height="172" Width="218" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
-    <Shape ID="DesignTable:OtherDetails" ZOrder="59" X="3248" Y="0" Height="153" Width="217" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
-    <Shape ID="DesignTable:Investors" ZOrder="46" X="3535" Y="0" Height="134" Width="197" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
-    <Shape ID="DesignTable:BondsInvestors" ZOrder="44" X="4052" Y="0" Height="153" Width="233" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
-    <Shape ID="DesignTable:SubAccountBalance" ZOrder="40" X="5562" Y="0" Height="191" Width="259" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
-    <Shape ID="DesignTable:BalanceResume" ZOrder="39" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
-    <Shape ID="DesignTable:Movements" ZOrder="38" X="5891" Y="0" Height="305" Width="213" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
-    <Shape ID="DesignTable:ProfitResults" ZOrder="37" X="6174" Y="0" Height="305" Width="219" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
-    <Shape ID="DesignTable:ProfitsResume" ZOrder="36" X="6463" Y="0" Height="115" Width="229" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
-    <Shape ID="DesignTable:Accounts" ZOrder="35" X="6762" Y="0" Height="191" Width="198" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
-    <Shape ID="DesignTable:AccountType" ZOrder="25" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
-    <Shape ID="DesignTable:AccountBalance" ZOrder="26" X="4543" Y="226" Height="172" Width="237" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
-    <Shape ID="DesignTable:Bonds" ZOrder="24" X="7030" Y="0" Height="267" Width="180" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="216" />
-    <Shape ID="DesignTable:Resources" ZOrder="21" X="7280" Y="0" Height="134" Width="203" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
-    <Shape ID="DesignTable:BondDetails" ZOrder="20" X="7884" Y="0" Height="286" Width="215" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="235" />
-    <Shape ID="DesignTable:Disbursement_dates" ZOrder="19" X="8169" Y="0" Height="172" Width="261" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
-    <Shape ID="DesignTable:FundBondProfits" ZOrder="17" X="8500" Y="0" Height="153" Width="243" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
-    <Shape ID="DesignTable:InvestorBondProfits" ZOrder="7" X="9756" Y="0" Height="172" Width="261" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
+    <Shape ID="DesignTable:Investors" ZOrder="48" X="3535" Y="0" Height="134" Width="197" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
+    <Shape ID="DesignTable:BondsInvestors" ZOrder="46" X="4052" Y="0" Height="153" Width="233" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
+    <Shape ID="DesignTable:SubAccountBalance" ZOrder="42" X="5562" Y="0" Height="191" Width="259" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
+    <Shape ID="DesignTable:BalanceResume" ZOrder="41" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
+    <Shape ID="DesignTable:Movements" ZOrder="40" X="5891" Y="0" Height="305" Width="213" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:ProfitResults" ZOrder="39" X="6174" Y="0" Height="305" Width="219" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:ProfitsResume" ZOrder="38" X="6463" Y="0" Height="115" Width="229" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
+    <Shape ID="DesignTable:Accounts" ZOrder="37" X="6762" Y="0" Height="191" Width="198" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
+    <Shape ID="DesignTable:AccountType" ZOrder="28" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
+    <Shape ID="DesignTable:AccountBalance" ZOrder="29" X="4543" Y="226" Height="172" Width="237" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
+    <Shape ID="DesignTable:Bonds" ZOrder="27" X="7030" Y="0" Height="267" Width="180" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="216" />
+    <Shape ID="DesignTable:Resources" ZOrder="24" X="7280" Y="0" Height="134" Width="203" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
+    <Shape ID="DesignTable:BondDetails" ZOrder="23" X="7884" Y="0" Height="286" Width="215" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="235" />
+    <Shape ID="DesignTable:Disbursement_dates" ZOrder="22" X="8169" Y="0" Height="172" Width="261" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
+    <Shape ID="DesignTable:FundBondProfits" ZOrder="20" X="8500" Y="0" Height="153" Width="243" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
+    <Shape ID="DesignTable:InvestorBondProfits" ZOrder="10" X="9756" Y="0" Height="172" Width="261" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
     <Shape ID="DesignTable:UnderlyingDebtors" ZOrder="100" X="319" Y="1000" Height="172" Width="255" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
-    <Shape ID="DesignTable:DisbursementItems" ZOrder="4" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
-    <Shape ID="DesignTable:Disbursements" ZOrder="15" X="9456" Y="0" Height="305" Width="230" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
-    <Shape ID="DesignTable:Investments" ZOrder="42" X="0" Y="0" Height="210" Width="215" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />
+    <Shape ID="DesignTable:DisbursementItems" ZOrder="7" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
+    <Shape ID="DesignTable:Disbursements" ZOrder="18" X="9456" Y="0" Height="305" Width="230" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:Investments" ZOrder="44" X="0" Y="0" Height="210" Width="215" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />
+    <Shape ID="DesignTable:OtherDetails" ZOrder="3" X="10087" Y="0" Height="153" Width="217" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
   </Shapes>
   <Connectors>
     <Connector ID="DesignRelation:currency_id" ZOrder="99" LineWidth="11">
@@ -499,7 +499,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Movements_Accounts_Funds" ZOrder="58" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Movements_Accounts_Funds" ZOrder="59" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>249</X>
@@ -511,7 +511,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Movements_Accounts_Subaccounts" ZOrder="57" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Movements_Accounts_Subaccounts" ZOrder="58" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>2985</X>
@@ -527,27 +527,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_OtherDetails_Funds" ZOrder="56" LineWidth="11">
-      <RoutePoints>
-        <Point>
-          <X>136</X>
-          <Y>70</Y>
-        </Point>
-        <Point>
-          <X>136</X>
-          <Y>-54</Y>
-        </Point>
-        <Point>
-          <X>3256</X>
-          <Y>-54</Y>
-        </Point>
-        <Point>
-          <X>3256</X>
-          <Y>0</Y>
-        </Point>
-      </RoutePoints>
-    </Connector>
-    <Connector ID="DesignRelation:FK_Banks_Countries" ZOrder="55" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Banks_Countries" ZOrder="57" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>344</X>
@@ -559,7 +539,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Banks_Funds1" ZOrder="54" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Banks_Funds1" ZOrder="56" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>128</X>
@@ -575,7 +555,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_AccountingMovements_Currencies" ZOrder="53" LineWidth="11">
+    <Connector ID="DesignRelation:FK_AccountingMovements_Currencies" ZOrder="55" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>469</X>
@@ -591,7 +571,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Clients_Funds1" ZOrder="52" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Clients_Funds1" ZOrder="54" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>120</X>
@@ -607,7 +587,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Countries_Funds1" ZOrder="51" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Countries_Funds1" ZOrder="53" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>112</X>
@@ -623,7 +603,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Creditors_Funds1" ZOrder="50" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Creditors_Funds1" ZOrder="52" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>104</X>
@@ -639,7 +619,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Currencies_Funds1" ZOrder="49" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Currencies_Funds1" ZOrder="51" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>96</X>
@@ -655,7 +635,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Items_Funds1" ZOrder="48" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Items_Funds1" ZOrder="50" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>88</X>
@@ -671,7 +651,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Sectors_Funds1" ZOrder="47" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Sectors_Funds1" ZOrder="49" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>80</X>
@@ -691,7 +671,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Investors_Funds" ZOrder="45" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Investors_Funds" ZOrder="47" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>249</X>
@@ -711,7 +691,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_BondsInvestors_Investors" ZOrder="43" LineWidth="11">
+    <Connector ID="DesignRelation:FK_BondsInvestors_Investors" ZOrder="45" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>3724</X>
@@ -731,7 +711,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Movements_Accounts_Accounts" ZOrder="34" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Movements_Accounts_Accounts" ZOrder="36" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>6762</X>
@@ -743,7 +723,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_AccountsBankingAccount_Accounts" ZOrder="33" LineWidth="11">
+    <Connector ID="DesignRelation:FK_AccountsBankingAccount_Accounts" ZOrder="35" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>6770</X>
@@ -763,7 +743,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_AccountsClients_Accounts" ZOrder="32" LineWidth="11">
+    <Connector ID="DesignRelation:FK_AccountsClients_Accounts" ZOrder="34" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>6778</X>
@@ -783,7 +763,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_AccountsCreditors_Accounts" ZOrder="31" LineWidth="11">
+    <Connector ID="DesignRelation:FK_AccountsCreditors_Accounts" ZOrder="33" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>6786</X>
@@ -803,7 +783,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_AccountsEmployees_Accounts" ZOrder="30" LineWidth="11">
+    <Connector ID="DesignRelation:FK_AccountsEmployees_Accounts" ZOrder="32" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>6794</X>
@@ -823,7 +803,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Subaccounts_Accounts" ZOrder="29" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Subaccounts_Accounts" ZOrder="31" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>6802</X>
@@ -843,27 +823,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_OtherDetails_Accounts" ZOrder="28" LineWidth="11">
-      <RoutePoints>
-        <Point>
-          <X>6810</X>
-          <Y>0</Y>
-        </Point>
-        <Point>
-          <X>6810</X>
-          <Y>-118</Y>
-        </Point>
-        <Point>
-          <X>3457</X>
-          <Y>-118</Y>
-        </Point>
-        <Point>
-          <X>3457</X>
-          <Y>0</Y>
-        </Point>
-      </RoutePoints>
-    </Connector>
-    <Connector ID="DesignRelation:FK_Accounts_Funds" ZOrder="27" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Accounts_Funds" ZOrder="30" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>249</X>
@@ -883,7 +843,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_BondsInvestors_Bonds" ZOrder="23" LineWidth="11">
+    <Connector ID="DesignRelation:FK_BondsInvestors_Bonds" ZOrder="26" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>7030</X>
@@ -899,7 +859,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Bonds_Funds" ZOrder="22" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Bonds_Funds" ZOrder="25" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>249</X>
@@ -911,7 +871,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Disbursement_dates_Funds" ZOrder="18" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Disbursement_dates_Funds" ZOrder="21" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>249</X>
@@ -931,7 +891,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_FundBondProfits_Bonds" ZOrder="16" LineWidth="11">
+    <Connector ID="DesignRelation:FK_FundBondProfits_Bonds" ZOrder="19" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>7210</X>
@@ -947,7 +907,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_InvestorBondProfits_Bond" ZOrder="6" LineWidth="11">
+    <Connector ID="DesignRelation:FK_InvestorBondProfits_Bond" ZOrder="9" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>7210</X>
@@ -963,7 +923,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_InvestorBondProfits_Investor" ZOrder="5" LineWidth="11">
+    <Connector ID="DesignRelation:FK_InvestorBondProfits_Investor" ZOrder="8" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>3716</X>
@@ -1011,7 +971,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Disbursement_dates_Disbursement" ZOrder="14" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Disbursement_dates_Disbursement" ZOrder="17" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>9456</X>
@@ -1027,7 +987,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_DisbursementItems_Disbursement" ZOrder="3" LineWidth="11">
+    <Connector ID="DesignRelation:FK_DisbursementItems_Disbursement" ZOrder="6" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>158</X>
@@ -1047,7 +1007,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_DisbursementItems_Item" ZOrder="2" LineWidth="11">
+    <Connector ID="DesignRelation:FK_DisbursementItems_Item" ZOrder="5" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>158</X>
@@ -1067,7 +1027,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Disbursements_Banks" ZOrder="13" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Disbursements_Banks" ZOrder="16" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>461</X>
@@ -1083,7 +1043,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Disbursements_Clients" ZOrder="12" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Disbursements_Clients" ZOrder="15" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>453</X>
@@ -1099,7 +1059,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Disbursements_Currencies" ZOrder="11" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Disbursements_Currencies" ZOrder="14" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>445</X>
@@ -1115,7 +1075,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Disbursements_Funds" ZOrder="10" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Disbursements_Funds" ZOrder="13" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>249</X>
@@ -1127,7 +1087,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Disbursements_Investments" ZOrder="9" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Disbursements_Investments" ZOrder="12" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>72</X>
@@ -1147,7 +1107,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Disbursements_UnderlyingDebtors" ZOrder="8" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Disbursements_UnderlyingDebtors" ZOrder="11" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>574</X>
@@ -1163,7 +1123,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Investments_Funds" ZOrder="41" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Investments_Funds" ZOrder="43" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>249</X>
@@ -1183,7 +1143,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_Disbursements_Sector" ZOrder="1" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Disbursements_Sector" ZOrder="4" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>437</X>
@@ -1196,6 +1156,46 @@
         <Point>
           <X>9456</X>
           <Y>288</Y>
+        </Point>
+      </RoutePoints>
+    </Connector>
+    <Connector ID="DesignRelation:FK_OtherDetails_Funds" ZOrder="2" LineWidth="11">
+      <RoutePoints>
+        <Point>
+          <X>249</X>
+          <Y>114</Y>
+        </Point>
+        <Point>
+          <X>10334</X>
+          <Y>114</Y>
+        </Point>
+        <Point>
+          <X>10334</X>
+          <Y>102</Y>
+        </Point>
+        <Point>
+          <X>10304</X>
+          <Y>102</Y>
+        </Point>
+      </RoutePoints>
+    </Connector>
+    <Connector ID="DesignRelation:FK_OtherDetails_SubAcct" ZOrder="1" LineWidth="11">
+      <RoutePoints>
+        <Point>
+          <X>3162</X>
+          <Y>0</Y>
+        </Point>
+        <Point>
+          <X>3162</X>
+          <Y>-54</Y>
+        </Point>
+        <Point>
+          <X>10095</X>
+          <Y>-54</Y>
+        </Point>
+        <Point>
+          <X>10095</X>
+          <Y>0</Y>
         </Point>
       </RoutePoints>
     </Connector>

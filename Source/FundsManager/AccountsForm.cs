@@ -12,6 +12,8 @@ namespace FundsManager
 {
     public partial class AccountsForm : Form
     {
+        private bool fEditMode = false;
+
         private MyFundsManager manager;
         private string[] tipos = new string[7] { "Asset", "Liability", "Equity", "Income", "Expense", "Contingency Asset","Contingency Liability" };
         public AccountsForm(MyFundsManager _manager)
@@ -19,13 +21,14 @@ namespace FundsManager
             manager = _manager;
             InitializeComponent();
             
-            comboBox1.DataSource = tipos;
+            cbType.DataSource = tipos;
         }       
 
         private void AccountsForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'fundsDBDataSet.Accounts' table. You can move, or remove it, as needed.
             this.accountsTableAdapter.Fill(this.fundsDBDataSet.Accounts);
+
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 string temp = dataGridView1.Rows[i].Cells[3].Value.ToString();
@@ -103,6 +106,18 @@ namespace FundsManager
                             break;
                     }
                 }
+
+                fEditMode = false;
+
+                cmdAddOrSave.Text = "Add";
+
+                txtName.Text = "";
+                txtAccountNumber.Text = "";
+                txtAccountNumber.Enabled = true;
+
+                cbType.SelectedIndex = 0;
+
+                cmdCancel.Visible = false;
             }
         }
 
@@ -110,25 +125,41 @@ namespace FundsManager
         {
             try
             {
-                Account _validationAccount = manager.My_db.Accounts.FirstOrDefault(x => x.number == textBox2.Text);
-
-                if (_validationAccount != null)
+                if (!fEditMode)
                 {
-                    MessageBox.Show("Duplicated account number.");
-                    return;
+                    Account _validationAccount = manager.My_db.Accounts.FirstOrDefault(x => x.number == txtAccountNumber.Text);
+
+                    if (_validationAccount != null)
+                    {
+                        MessageBox.Show("Duplicated account number.");
+                        return;
+                    }
+
+                    Account _account = new Account();
+                    _account.name = txtName.Text;
+                    _account.amount = 0;
+                    _account.number = txtAccountNumber.Text;
+                    _account.FK_Accounts_Funds = manager.Selected;
+                    _account.type = cbType.SelectedIndex;
+                    manager.My_db.Accounts.Add(_account);
+                    manager.My_db.SaveChanges();
+                    
+                }
+                else
+                {
+                    Account _selectedAccount = manager.My_db.Accounts.FirstOrDefault(x => x.number == txtAccountNumber.Text);
+
+                    if (_selectedAccount != null)
+                    {
+                        _selectedAccount.name = txtName.Text;
+                        _selectedAccount.type = cbType.SelectedIndex;
+
+                        manager.My_db.SaveChanges();
+                    }
                 }
 
-                Account _account = new Account();
-                _account.name = textBox1.Text;
-                _account.amount = 0;
-                _account.number = textBox2.Text;
-                _account.FK_Accounts_Funds = manager.Selected;
-                _account.type = comboBox1.SelectedIndex;
-                manager.My_db.Accounts.Add(_account);
-                manager.My_db.SaveChanges();
-                textBox1.Clear();
-                textBox2.Clear();
                 this.accountsTableAdapter.Fill(this.fundsDBDataSet.Accounts);
+
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
                     string temp = dataGridView1.Rows[i].Cells[3].Value.ToString();
@@ -158,7 +189,10 @@ namespace FundsManager
                             break;
                     }
                 }
-                textBox1.Focus();
+
+                cmdCancel_Click(null, null);
+
+                txtName.Focus();
             }
             catch (Exception _ex)
             {
@@ -172,6 +206,44 @@ namespace FundsManager
             {
                 addAccount();
             }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow _row = dataGridView1.Rows[e.RowIndex];
+
+            string _accountNumber = _row.Cells[1].Value.ToString();
+
+            Account _selectedAccount = manager.My_db.Accounts.FirstOrDefault(x => x.number == _accountNumber);
+
+            if (_selectedAccount != null)
+            {
+                fEditMode = true;
+                cmdAddOrSave.Text = "Save";
+
+                txtName.Text = _selectedAccount.name;
+                txtAccountNumber.Text = _selectedAccount.number;
+                txtAccountNumber.Enabled = false;
+
+                cbType.SelectedIndex = _selectedAccount.type;
+
+                cmdCancel.Visible = true;
+            }
+        }
+
+        private void cmdCancel_Click(object sender, EventArgs e)
+        {
+            fEditMode = false;
+
+            cmdAddOrSave.Text = "Add";
+
+            txtName.Text = "";
+            txtAccountNumber.Text = "";
+            txtAccountNumber.Enabled = true;
+
+            cbType.SelectedIndex = 0;
+
+            cmdCancel.Visible = false;
         }
     }
 }

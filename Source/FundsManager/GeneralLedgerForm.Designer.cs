@@ -126,15 +126,15 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(436, 32);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 13);
+            this.label3.Size = new System.Drawing.Size(102, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Detail:";
+            this.label3.Text = "Sub Account Detail:";
             // 
             // comboBox3
             // 
             this.comboBox3.Enabled = false;
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(479, 29);
+            this.comboBox3.Location = new System.Drawing.Point(540, 29);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(121, 21);
             this.comboBox3.TabIndex = 5;

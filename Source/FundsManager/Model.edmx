@@ -276,7 +276,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="text" Nullable="false" />
           <Property Name="FK_OtherDetails_Funds" Type="int" Nullable="false" />
-          <Property Name="FK_OtherDetails_Accounts" Type="int" />
+          <Property Name="subacct_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Resources">
           <Key>
@@ -913,18 +913,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OtherDetails_Accounts">
-          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
-          <End Role="OtherDetails" Type="Self.OtherDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Accounts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OtherDetails">
-              <PropertyRef Name="FK_OtherDetails_Accounts" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OtherDetails_Funds">
           <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
           <End Role="OtherDetails" Type="Self.OtherDetails" Multiplicity="*" />
@@ -934,6 +922,18 @@
             </Principal>
             <Dependent Role="OtherDetails">
               <PropertyRef Name="FK_OtherDetails_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtherDetails_SubAcct">
+          <End Role="Subaccounts" Type="Self.Subaccounts" Multiplicity="1" />
+          <End Role="OtherDetails" Type="Self.OtherDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subaccounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtherDetails">
+              <PropertyRef Name="subacct_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1217,12 +1217,12 @@
             <End Role="Subaccounts" EntitySet="Subaccounts" />
             <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
           </AssociationSet>
-          <AssociationSet Name="FK_OtherDetails_Accounts" Association="Self.FK_OtherDetails_Accounts">
-            <End Role="Accounts" EntitySet="Accounts" />
-            <End Role="OtherDetails" EntitySet="OtherDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_OtherDetails_Funds" Association="Self.FK_OtherDetails_Funds">
             <End Role="Funds" EntitySet="Funds" />
+            <End Role="OtherDetails" EntitySet="OtherDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtherDetails_SubAcct" Association="Self.FK_OtherDetails_SubAcct">
+            <End Role="Subaccounts" EntitySet="Subaccounts" />
             <End Role="OtherDetails" EntitySet="OtherDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_Sectors_Funds" Association="Self.FK_Sectors_Funds">
@@ -1264,7 +1264,6 @@
           <EntitySet Name="Funds" EntityType="FundsDBModel.Fund" />
           <EntitySet Name="Investors" EntityType="FundsDBModel.Investor" />
           <EntitySet Name="Items" EntityType="FundsDBModel.Item" />
-          <EntitySet Name="OtherDetails" EntityType="FundsDBModel.OtherDetail" />
           <EntitySet Name="Sectors" EntityType="FundsDBModel.Sector" />
           <AssociationSet Name="FK_AccountingMovements_Currencies" Association="FundsDBModel.FK_AccountingMovements_Currencies">
             <End Role="Currency" EntitySet="Currencies" />
@@ -1293,10 +1292,6 @@
           <AssociationSet Name="FK_AccountsEmployees_Accounts" Association="FundsDBModel.FK_AccountsEmployees_Accounts">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="AccountsEmployee" EntitySet="AccountsEmployees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OtherDetails_Accounts" Association="FundsDBModel.FK_OtherDetails_Accounts">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="OtherDetail" EntitySet="OtherDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_AccountsBankingAccount_Funds" Association="FundsDBModel.FK_AccountsBankingAccount_Funds">
             <End Role="Fund" EntitySet="Funds" />
@@ -1381,10 +1376,6 @@
           <AssociationSet Name="FK_Items_Funds" Association="FundsDBModel.FK_Items_Funds">
             <End Role="Fund" EntitySet="Funds" />
             <End Role="Item" EntitySet="Items" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OtherDetails_Funds" Association="FundsDBModel.FK_OtherDetails_Funds">
-            <End Role="Fund" EntitySet="Funds" />
-            <End Role="OtherDetail" EntitySet="OtherDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_Sectors_Funds" Association="FundsDBModel.FK_Sectors_Funds">
             <End Role="Fund" EntitySet="Funds" />
@@ -1497,6 +1488,15 @@
             <End Role="Disbursement" EntitySet="Disbursements" />
             <End Role="Item" EntitySet="Items" />
           </AssociationSet>
+          <EntitySet Name="OtherDetails" EntityType="FundsDBModel.OtherDetail" />
+          <AssociationSet Name="FK_OtherDetails_Funds" Association="FundsDBModel.FK_OtherDetails_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="OtherDetail" EntitySet="OtherDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtherDetails_SubAcct" Association="FundsDBModel.FK_OtherDetails_SubAcct">
+            <End Role="Subaccount" EntitySet="Subaccounts" />
+            <End Role="OtherDetail" EntitySet="OtherDetails" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccountingMovement">
           <Key>
@@ -1528,7 +1528,6 @@
           <NavigationProperty Name="AccountsClients" Relationship="FundsDBModel.FK_AccountsClients_Accounts" FromRole="Account" ToRole="AccountsClient" />
           <NavigationProperty Name="AccountsCreditors" Relationship="FundsDBModel.FK_AccountsCreditors_Accounts" FromRole="Account" ToRole="AccountsCreditor" />
           <NavigationProperty Name="AccountsEmployees" Relationship="FundsDBModel.FK_AccountsEmployees_Accounts" FromRole="Account" ToRole="AccountsEmployee" />
-          <NavigationProperty Name="OtherDetails" Relationship="FundsDBModel.FK_OtherDetails_Accounts" FromRole="Account" ToRole="OtherDetail" />
           <NavigationProperty Name="Subaccounts" Relationship="FundsDBModel.FK_Subaccounts_Accounts" FromRole="Account" ToRole="Subaccount" />
           <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_Accounts" FromRole="Account" ToRole="Movements_Accounts" />
         </EntityType>
@@ -1704,7 +1703,6 @@
           <NavigationProperty Name="Employees" Relationship="FundsDBModel.FK_Employees_Funds" FromRole="Fund" ToRole="Employee" />
           <NavigationProperty Name="Investors" Relationship="FundsDBModel.FK_Investors_Funds" FromRole="Fund" ToRole="Investor" />
           <NavigationProperty Name="Items" Relationship="FundsDBModel.FK_Items_Funds" FromRole="Fund" ToRole="Item" />
-          <NavigationProperty Name="OtherDetails" Relationship="FundsDBModel.FK_OtherDetails_Funds" FromRole="Fund" ToRole="OtherDetail" />
           <NavigationProperty Name="Sectors" Relationship="FundsDBModel.FK_Sectors_Funds" FromRole="Fund" ToRole="Sector" />
           <NavigationProperty Name="Subaccounts" Relationship="FundsDBModel.FK_Subaccounts_Funds" FromRole="Fund" ToRole="Subaccount" />
           <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_Funds" FromRole="Fund" ToRole="Movements_Accounts" />
@@ -1713,6 +1711,7 @@
           <NavigationProperty Name="UnderlyingDebtors" Relationship="FundsDBModel.FK_UnderlyingDebtors_Funds" FromRole="Fund" ToRole="UnderlyingDebtor" />
           <NavigationProperty Name="Investments" Relationship="FundsDBModel.FK_Investments_Funds" FromRole="Fund" ToRole="Investment" />
           <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Funds" FromRole="Fund" ToRole="Disbursement" />
+          <NavigationProperty Name="OtherDetails" Relationship="FundsDBModel.FK_OtherDetails_Funds" FromRole="Fund" ToRole="OtherDetail" />
         </EntityType>
         <EntityType Name="Investor">
           <Key>
@@ -1734,17 +1733,6 @@
           <Property Name="FK_Items_Funds" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Items_Funds" FromRole="Item" ToRole="Fund" />
           <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.DisbursementItems" FromRole="Item" ToRole="Disbursement" />
-        </EntityType>
-        <EntityType Name="OtherDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FK_OtherDetails_Funds" Type="Int32" Nullable="false" />
-          <Property Name="FK_OtherDetails_Accounts" Type="Int32" />
-          <NavigationProperty Name="Account" Relationship="FundsDBModel.FK_OtherDetails_Accounts" FromRole="OtherDetail" ToRole="Account" />
-          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_OtherDetails_Funds" FromRole="OtherDetail" ToRole="Fund" />
         </EntityType>
         <EntityType Name="Sector">
           <Key>
@@ -1837,18 +1825,6 @@
             </Principal>
             <Dependent Role="AccountsEmployee">
               <PropertyRef Name="account_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OtherDetails_Accounts">
-          <End Type="FundsDBModel.Account" Role="Account" Multiplicity="0..1" />
-          <End Type="FundsDBModel.OtherDetail" Role="OtherDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OtherDetail">
-              <PropertyRef Name="FK_OtherDetails_Accounts" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2104,18 +2080,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OtherDetails_Funds">
-          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
-          <End Type="FundsDBModel.OtherDetail" Role="OtherDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Fund">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OtherDetail">
-              <PropertyRef Name="FK_OtherDetails_Funds" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Sectors_Funds">
           <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
           <End Type="FundsDBModel.Sector" Role="Sector" Multiplicity="*" />
@@ -2140,6 +2104,7 @@
           <NavigationProperty Name="Account" Relationship="FundsDBModel.FK_Subaccounts_Accounts" FromRole="Subaccount" ToRole="Account" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Subaccounts_Funds" FromRole="Subaccount" ToRole="Fund" />
           <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_Subaccounts" FromRole="Subaccount" ToRole="Movements_Accounts" />
+          <NavigationProperty Name="OtherDetails" Relationship="FundsDBModel.FK_OtherDetails_SubAcct" FromRole="Subaccount" ToRole="OtherDetail" />
         </EntityType>
         <Association Name="FK_Subaccounts_Accounts">
           <End Type="FundsDBModel.Account" Role="Account" Multiplicity="1" />
@@ -2560,6 +2525,41 @@
           <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
           <End Type="FundsDBModel.Item" Role="Item" Multiplicity="*" />
         </Association>
+        <EntityType Name="OtherDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_OtherDetails_Funds" Type="Int32" Nullable="false" />
+          <Property Name="subacct_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_OtherDetails_Funds" FromRole="OtherDetail" ToRole="Fund" />
+          <NavigationProperty Name="Subaccount" Relationship="FundsDBModel.FK_OtherDetails_SubAcct" FromRole="OtherDetail" ToRole="Subaccount" />
+        </EntityType>
+        <Association Name="FK_OtherDetails_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.OtherDetail" Role="OtherDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtherDetail">
+              <PropertyRef Name="FK_OtherDetails_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtherDetails_SubAcct">
+          <End Type="FundsDBModel.Subaccount" Role="Subaccount" Multiplicity="1" />
+          <End Type="FundsDBModel.OtherDetail" Role="OtherDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subaccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtherDetail">
+              <PropertyRef Name="subacct_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2744,16 +2744,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OtherDetails">
-            <EntityTypeMapping TypeName="FundsDBModel.OtherDetail">
-              <MappingFragment StoreEntitySet="OtherDetails">
-                <ScalarProperty Name="FK_OtherDetails_Accounts" ColumnName="FK_OtherDetails_Accounts" />
-                <ScalarProperty Name="FK_OtherDetails_Funds" ColumnName="FK_OtherDetails_Funds" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Sectors">
             <EntityTypeMapping TypeName="FundsDBModel.Sector">
               <MappingFragment StoreEntitySet="Sectors">
@@ -2904,6 +2894,16 @@
               <ScalarProperty Name="Id" ColumnName="DisbursementId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="OtherDetails">
+            <EntityTypeMapping TypeName="FundsDBModel.OtherDetail">
+              <MappingFragment StoreEntitySet="OtherDetails">
+                <ScalarProperty Name="subacct_id" ColumnName="subacct_id" />
+                <ScalarProperty Name="FK_OtherDetails_Funds" ColumnName="FK_OtherDetails_Funds" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

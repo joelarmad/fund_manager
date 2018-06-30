@@ -32,7 +32,6 @@ namespace FundsManager
             this.Employees = new HashSet<Employee>();
             this.Investors = new HashSet<Investor>();
             this.Items = new HashSet<Item>();
-            this.OtherDetails = new HashSet<OtherDetail>();
             this.Sectors = new HashSet<Sector>();
             this.Subaccounts = new HashSet<Subaccount>();
             this.Movements_Accounts = new HashSet<Movements_Accounts>();
@@ -41,6 +40,7 @@ namespace FundsManager
             this.UnderlyingDebtors = new HashSet<UnderlyingDebtor>();
             this.Investments = new HashSet<Investment>();
             this.Disbursements = new HashSet<Disbursement>();
+            this.OtherDetails = new HashSet<OtherDetail>();
         }
     
         public int Id { get; set; }
@@ -78,8 +78,6 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Item> Items { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OtherDetail> OtherDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sector> Sectors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Subaccount> Subaccounts { get; set; }
@@ -95,5 +93,7 @@ namespace FundsManager
         public virtual ICollection<Investment> Investments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disbursement> Disbursements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OtherDetail> OtherDetails { get; set; }
     }
 }

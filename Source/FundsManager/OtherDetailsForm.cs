@@ -21,15 +21,18 @@ namespace FundsManager
 
         private void OtherDetailsForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'fundsDBDataSet.Accounts' table. You can move, or remove it, as needed.
-            this.accountsTableAdapter.Fill(this.fundsDBDataSet.Accounts);
-            // TODO: This line of code loads data into the 'fundsDBDataSet.OtherDetails' table. You can move, or remove it, as needed.
+            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.OtherDetails' Puede moverla o quitarla según sea necesario.
             this.otherDetailsTableAdapter.Fill(this.fundsDBDataSet.OtherDetails);
+            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.OtherDetails' Puede moverla o quitarla según sea necesario.
+            this.otherDetailsTableAdapter.Fill(this.fundsDBDataSet.OtherDetails);
+            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Subaccounts' Puede moverla o quitarla según sea necesario.
+            this.subaccountsTableAdapter.Fill(this.fundsDBDataSet.Subaccounts);
+
             foreach (DataGridViewRow _row in dataGridView1.Rows)
             {
-                Account _account = new Account();
-                _account = manager.My_db.Accounts.Find(Convert.ToInt32(_row.Cells[3].Value));
-                _row.Cells[4].Value = _account.name;
+                Subaccount _subaccount = new Subaccount();
+                _subaccount = manager.My_db.Subaccounts.Find(Convert.ToInt32(_row.Cells[3].Value));
+                _row.Cells[4].Value = _subaccount.name;
             }
         }
 
@@ -56,19 +59,20 @@ namespace FundsManager
         private void addDetail()
         {
             OtherDetail _otherdetail = new OtherDetail();
-            _otherdetail.name = textBox1.Text;
-            _otherdetail.FK_OtherDetails_Accounts = Convert.ToInt32(comboBox1.SelectedValue);
+            _otherdetail.name = txtName.Text;
+            _otherdetail.subacct_id = Convert.ToInt32(cbSubAccount.SelectedValue);
             _otherdetail.FK_OtherDetails_Funds = manager.Selected;
             manager.My_db.OtherDetails.Add(_otherdetail);
             manager.My_db.SaveChanges();
-            textBox1.Clear();
-            //comboBox1.ResetText();
+            txtName.Clear();
+            
             this.otherDetailsTableAdapter.Fill(this.fundsDBDataSet.OtherDetails);
+
             foreach (DataGridViewRow _row in dataGridView1.Rows)
             {
-                Account _account = new Account();
-                _account = manager.My_db.Accounts.Find(Convert.ToInt32(_row.Cells[3].Value));
-                _row.Cells[4].Value = _account.name;
+                Subaccount _subaccount = new Subaccount();
+                _subaccount = manager.My_db.Subaccounts.Find(Convert.ToInt32(_row.Cells[3].Value));
+                _row.Cells[4].Value = _subaccount.name;
             }
         }
 

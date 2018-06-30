@@ -13,6 +13,8 @@ namespace FundsManager
     public partial class FundsForm : Form
     {
         private MyFundsManager manager;
+
+        private bool fEditMode = false;
         
         public FundsForm(MyFundsManager _manager)
         {
@@ -22,14 +24,34 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Fund _fund = new Fund();
-            _fund.name = textBox1.Text;
-            _fund.contract_prefix = textBox2.Text;
-            manager.My_db.Funds.Add(_fund);
-            manager.My_db.SaveChanges();
-            textBox1.Clear();
-            textBox2.Clear();
-            this.fundsTableAdapter.Fill(this.fundsDBDataSet.Funds);
+            if (!fEditMode)
+            {
+                Fund _fund = new Fund();
+                _fund.name = txtName.Text;
+                _fund.contract_prefix = txtContractPrefix.Text;
+                manager.My_db.Funds.Add(_fund);
+                manager.My_db.SaveChanges();
+                txtName.Clear();
+                txtContractPrefix.Clear();
+                this.fundsTableAdapter.Fill(this.fundsDBDataSet.Funds);
+            }
+            else
+            {
+                Fund _selectedFund = manager.My_db.Funds.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                if (_selectedFund != null)
+                {
+                    _selectedFund.name = txtName.Text;
+                    _selectedFund.contract_prefix = txtContractPrefix.Text;
+
+                    manager.My_db.SaveChanges();
+
+                    this.fundsTableAdapter.Fill(this.fundsDBDataSet.Funds);
+                }
+            }
+            
+
+            listBox1.SelectedIndex = -1;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -41,7 +63,7 @@ namespace FundsManager
                 
                 manager.DeleteFund(Convert.ToInt32(listBox1.SelectedValue));                
                 this.fundsTableAdapter.Fill(this.fundsDBDataSet.Funds);
-
+                listBox1.SelectedIndex = -1;
             }
         }
 
@@ -50,6 +72,41 @@ namespace FundsManager
             // TODO: This line of code loads data into the 'fundsDBDataSet.Funds' table. You can move, or remove it, as needed.
             this.fundsTableAdapter.Fill(this.fundsDBDataSet.Funds);
 
+            listBox1.SelectedIndex = -1;
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex >= 0)
+            {
+                fEditMode = true;
+                cmdAddOrUpdate.Text = "Save";
+
+                Fund _selectedFund = manager.My_db.Funds.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                if (_selectedFund != null)
+                {
+                    txtName.Text = _selectedFund.name;
+                    txtContractPrefix.Text = _selectedFund.contract_prefix;
+                }
+
+                cmdCancelEdit.Visible = true;
+            }
+            else
+            {
+                fEditMode = false;
+                cmdAddOrUpdate.Text = "Add";
+                txtName.Text = "";
+                txtContractPrefix.Text = "";
+
+                cmdCancelEdit.Visible = false;
+            }
+        }
+
+        private void cmdCancelEdit_Click(object sender, EventArgs e)
+        {
+            listBox1.SelectedIndex = -1;
         }
     }
 }

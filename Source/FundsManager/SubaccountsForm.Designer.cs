@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.cbAccount = new System.Windows.Forms.ComboBox();
             this.accountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cmdAddOrSave = new System.Windows.Forms.Button();
             this.accountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountsTableAdapter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,7 +45,8 @@
             this.fKAccountsFundsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subaccountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.subaccountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.SubaccountsTableAdapter();
-            this.button2 = new System.Windows.Forms.Button();
+            this.cmdDelete = new System.Windows.Forms.Button();
+            this.cmdCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -61,24 +62,24 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Name:";
             // 
-            // textBox1
+            // txtName
             // 
-            this.textBox1.Location = new System.Drawing.Point(75, 39);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(160, 20);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txtName.Location = new System.Drawing.Point(75, 39);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(160, 20);
+            this.txtName.TabIndex = 1;
+            this.txtName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
-            // comboBox1
+            // cbAccount
             // 
-            this.comboBox1.DataSource = this.accountsBindingSource;
-            this.comboBox1.DisplayMember = "name";
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(75, 81);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(190, 21);
-            this.comboBox1.TabIndex = 2;
-            this.comboBox1.ValueMember = "Id";
+            this.cbAccount.DataSource = this.accountsBindingSource;
+            this.cbAccount.DisplayMember = "name";
+            this.cbAccount.FormattingEnabled = true;
+            this.cbAccount.Location = new System.Drawing.Point(75, 81);
+            this.cbAccount.Name = "cbAccount";
+            this.cbAccount.Size = new System.Drawing.Size(190, 21);
+            this.cbAccount.TabIndex = 2;
+            this.cbAccount.ValueMember = "Id";
             // 
             // accountsBindingSource
             // 
@@ -99,15 +100,15 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Account:";
             // 
-            // button1
+            // cmdAddOrSave
             // 
-            this.button1.Location = new System.Drawing.Point(293, 80);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(108, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.cmdAddOrSave.Location = new System.Drawing.Point(279, 80);
+            this.cmdAddOrSave.Name = "cmdAddOrSave";
+            this.cmdAddOrSave.Size = new System.Drawing.Size(78, 23);
+            this.cmdAddOrSave.TabIndex = 4;
+            this.cmdAddOrSave.Text = "Add";
+            this.cmdAddOrSave.UseVisualStyleBackColor = true;
+            this.cmdAddOrSave.Click += new System.EventHandler(this.button1_Click);
             // 
             // accountsTableAdapter
             // 
@@ -132,6 +133,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(406, 253);
             this.dataGridView1.TabIndex = 5;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -181,27 +183,39 @@
             // 
             this.subaccountsTableAdapter.ClearBeforeFill = true;
             // 
-            // button2
+            // cmdDelete
             // 
-            this.button2.Location = new System.Drawing.Point(293, 405);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(108, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Delete";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.cmdDelete.Location = new System.Drawing.Point(293, 405);
+            this.cmdDelete.Name = "cmdDelete";
+            this.cmdDelete.Size = new System.Drawing.Size(108, 23);
+            this.cmdDelete.TabIndex = 6;
+            this.cmdDelete.Text = "Delete";
+            this.cmdDelete.UseVisualStyleBackColor = true;
+            this.cmdDelete.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // cmdCancel
+            // 
+            this.cmdCancel.Location = new System.Drawing.Point(363, 81);
+            this.cmdCancel.Name = "cmdCancel";
+            this.cmdCancel.Size = new System.Drawing.Size(78, 23);
+            this.cmdCancel.TabIndex = 7;
+            this.cmdCancel.Text = "Cancel";
+            this.cmdCancel.UseVisualStyleBackColor = true;
+            this.cmdCancel.Visible = false;
+            this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
             // 
             // SubaccountsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(478, 473);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.cmdCancel);
+            this.Controls.Add(this.cmdDelete);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.cmdAddOrSave);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.cbAccount);
+            this.Controls.Add(this.txtName);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "SubaccountsForm";
@@ -221,21 +235,22 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.ComboBox cbAccount;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cmdAddOrSave;
         private FundsDBDataSet fundsDBDataSet;
         private System.Windows.Forms.BindingSource accountsBindingSource;
         private FundsDBDataSetTableAdapters.AccountsTableAdapter accountsTableAdapter;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource subaccountsBindingSource;
         private FundsDBDataSetTableAdapters.SubaccountsTableAdapter subaccountsTableAdapter;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button cmdDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fKSubaccountsAccountsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Account;
         private System.Windows.Forms.DataGridViewTextBoxColumn fKAccountsFundsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button cmdCancel;
     }
 }

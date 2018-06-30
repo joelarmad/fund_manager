@@ -48,8 +48,6 @@ namespace FundsManager
                 this.accountsTableAdapter.Fill(this.fundsDBDataSet.Accounts);
                 comboBox1.SelectedItem = null;
                 comboBox1.SelectedText = "Select account";
-                comboBox2.SelectedItem = null;
-                comboBox2.SelectedText = "Select subaccount";
                 comboBox2.SelectedIndex = -1;
                 comboBox3.SelectedItem = null;
                 comboBox3.SelectedIndex = -1;
@@ -84,6 +82,22 @@ namespace FundsManager
                     comboBox2.DisplayMember = "Value";
                     comboBox2.ValueMember = "Key";
                     comboBox2.Enabled = true;
+                }
+                else
+                {
+                    comboBox2.DataSource = null;
+                    comboBox2.Items.Clear();
+                    comboBox2.Text = "";
+                    comboBox2.SelectedItem = null;
+                    comboBox2.SelectedText = "Select subaccount";
+                    comboBox2.Enabled = false;
+
+                    comboBox3.DataSource = null;
+                    comboBox3.Items.Clear();
+                    comboBox3.Text = "";
+                    comboBox3.SelectedItem = null;
+                    comboBox3.SelectedText = "Select detail";
+                    comboBox3.Enabled = false;
                 }
             }
             catch (Exception _ex)
