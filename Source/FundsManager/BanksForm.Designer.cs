@@ -31,19 +31,20 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.cbCountry = new System.Windows.Forms.ComboBox();
             this.countriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.countriesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CountriesTableAdapter();
+            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
+            this.chkOurBank = new System.Windows.Forms.CheckBox();
+            this.cmdAddOrSave = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.banksBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cmdDelete = new System.Windows.Forms.Button();
+            this.countriesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CountriesTableAdapter();
             this.banksTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.BanksTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
+            this.cmdCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.countriesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banksBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,43 +66,53 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Country:";
             // 
-            // textBox1
+            // txtName
             // 
-            this.textBox1.Location = new System.Drawing.Point(72, 21);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(128, 20);
-            this.textBox1.TabIndex = 3;
+            this.txtName.Location = new System.Drawing.Point(72, 21);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(128, 20);
+            this.txtName.TabIndex = 3;
             // 
-            // comboBox1
+            // cbCountry
             // 
-            this.comboBox1.DataSource = this.countriesBindingSource;
-            this.comboBox1.DisplayMember = "name";
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(72, 56);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(128, 21);
-            this.comboBox1.TabIndex = 4;
-            this.comboBox1.ValueMember = "Id";
+            this.cbCountry.DataSource = this.countriesBindingSource;
+            this.cbCountry.DisplayMember = "name";
+            this.cbCountry.FormattingEnabled = true;
+            this.cbCountry.Location = new System.Drawing.Point(72, 56);
+            this.cbCountry.Name = "cbCountry";
+            this.cbCountry.Size = new System.Drawing.Size(128, 21);
+            this.cbCountry.TabIndex = 4;
+            this.cbCountry.ValueMember = "Id";
             // 
-            // checkBox1
+            // countriesBindingSource
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(249, 24);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(85, 17);
-            this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "Is our bank?";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.countriesBindingSource.DataMember = "Countries";
+            this.countriesBindingSource.DataSource = this.fundsDBDataSet;
             // 
-            // button1
+            // fundsDBDataSet
             // 
-            this.button1.Location = new System.Drawing.Point(249, 64);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
+            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // chkOurBank
+            // 
+            this.chkOurBank.AutoSize = true;
+            this.chkOurBank.Location = new System.Drawing.Point(249, 24);
+            this.chkOurBank.Name = "chkOurBank";
+            this.chkOurBank.Size = new System.Drawing.Size(85, 17);
+            this.chkOurBank.TabIndex = 5;
+            this.chkOurBank.Text = "Is our bank?";
+            this.chkOurBank.UseVisualStyleBackColor = true;
+            // 
+            // cmdAddOrSave
+            // 
+            this.cmdAddOrSave.Location = new System.Drawing.Point(249, 56);
+            this.cmdAddOrSave.Name = "cmdAddOrSave";
+            this.cmdAddOrSave.Size = new System.Drawing.Size(75, 23);
+            this.cmdAddOrSave.TabIndex = 6;
+            this.cmdAddOrSave.Text = "Add";
+            this.cmdAddOrSave.UseVisualStyleBackColor = true;
+            this.cmdAddOrSave.Click += new System.EventHandler(this.button1_Click);
             // 
             // listBox1
             // 
@@ -113,51 +124,54 @@
             this.listBox1.Size = new System.Drawing.Size(196, 160);
             this.listBox1.TabIndex = 7;
             this.listBox1.ValueMember = "Id";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(249, 241);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Delete";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // fundsDBDataSet
-            // 
-            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
-            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // countriesBindingSource
-            // 
-            this.countriesBindingSource.DataMember = "Countries";
-            this.countriesBindingSource.DataSource = this.fundsDBDataSet;
-            // 
-            // countriesTableAdapter
-            // 
-            this.countriesTableAdapter.ClearBeforeFill = true;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // banksBindingSource
             // 
             this.banksBindingSource.DataMember = "Banks";
             this.banksBindingSource.DataSource = this.fundsDBDataSet;
             // 
+            // cmdDelete
+            // 
+            this.cmdDelete.Location = new System.Drawing.Point(249, 241);
+            this.cmdDelete.Name = "cmdDelete";
+            this.cmdDelete.Size = new System.Drawing.Size(75, 23);
+            this.cmdDelete.TabIndex = 8;
+            this.cmdDelete.Text = "Delete";
+            this.cmdDelete.UseVisualStyleBackColor = true;
+            this.cmdDelete.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // countriesTableAdapter
+            // 
+            this.countriesTableAdapter.ClearBeforeFill = true;
+            // 
             // banksTableAdapter
             // 
             this.banksTableAdapter.ClearBeforeFill = true;
+            // 
+            // cmdCancel
+            // 
+            this.cmdCancel.Location = new System.Drawing.Point(249, 104);
+            this.cmdCancel.Name = "cmdCancel";
+            this.cmdCancel.Size = new System.Drawing.Size(75, 23);
+            this.cmdCancel.TabIndex = 9;
+            this.cmdCancel.Text = "Cancel";
+            this.cmdCancel.UseVisualStyleBackColor = true;
+            this.cmdCancel.Visible = false;
+            this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
             // 
             // BanksForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(366, 305);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.cmdCancel);
+            this.Controls.Add(this.cmdDelete);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.cmdAddOrSave);
+            this.Controls.Add(this.chkOurBank);
+            this.Controls.Add(this.cbCountry);
+            this.Controls.Add(this.txtName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -166,8 +180,8 @@
             this.ShowInTaskbar = false;
             this.Text = "Banks";
             this.Load += new System.EventHandler(this.BanksForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.countriesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.banksBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -178,16 +192,17 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.ComboBox cbCountry;
+        private System.Windows.Forms.CheckBox chkOurBank;
+        private System.Windows.Forms.Button cmdAddOrSave;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button cmdDelete;
         private FundsDBDataSet fundsDBDataSet;
         private System.Windows.Forms.BindingSource countriesBindingSource;
         private FundsDBDataSetTableAdapters.CountriesTableAdapter countriesTableAdapter;
         private System.Windows.Forms.BindingSource banksBindingSource;
         private FundsDBDataSetTableAdapters.BanksTableAdapter banksTableAdapter;
+        private System.Windows.Forms.Button cmdCancel;
     }
 }

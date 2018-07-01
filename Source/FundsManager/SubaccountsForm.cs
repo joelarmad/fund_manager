@@ -56,7 +56,8 @@ namespace FundsManager
 
                 manager.DeleteSubaccount(Convert.ToInt32(selectedRow.Cells[0].Value));
                 this.subaccountsTableAdapter.Fill(this.fundsDBDataSet.Subaccounts);
-                
+
+                cmdCancel_Click(null, null);
             }
         }
 

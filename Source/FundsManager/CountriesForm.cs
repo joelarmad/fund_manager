@@ -13,6 +13,9 @@ namespace FundsManager
     public partial class CountriesForm : Form
     {
         private MyFundsManager manager;
+
+        private bool fEditMode = false;
+
         public CountriesForm(MyFundsManager _manager)
         {
             manager = _manager;
@@ -21,13 +24,29 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Country _country = new Country();
-            _country.name = nameTextBox.Text;
-            _country.FK_Countries_Funds = manager.Selected;
-            manager.My_db.Countries.Add(_country);
-            manager.My_db.SaveChanges();
-            nameTextBox.Clear();
+
+            if (!fEditMode)
+            {
+                Country _country = new Country();
+                _country.name = txtName.Text;
+                _country.FK_Countries_Funds = manager.Selected;
+                manager.My_db.Countries.Add(_country);
+                manager.My_db.SaveChanges();
+            }
+            else
+            {
+                Country _selectedItem = manager.My_db.Countries.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                if (_selectedItem != null)
+                {
+                    _selectedItem.name = txtName.Text;
+                    manager.My_db.SaveChanges();
+                }
+            }
+
             this.countriesTableAdapter.Fill(this.fundsDBDataSet.Countries);
+
+            cmdCancel_Click(null, null);
         }
 
         private void CountriesForm_Load(object sender, EventArgs e)
@@ -46,9 +65,40 @@ namespace FundsManager
 
                 manager.DeleteCountry(Convert.ToInt32(listBox1.SelectedValue));
                 this.countriesTableAdapter.Fill(this.fundsDBDataSet.Countries);
-
+                cmdCancel_Click(null, null);
             }
 
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex >= 0)
+            {
+                fEditMode = true;
+                cmdAddOrSave.Text = "Save";
+
+                Country _selectedItem = manager.My_db.Countries.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                if (_selectedItem != null)
+                {
+                    txtName.Text = _selectedItem.name;
+                }
+
+                cmdCancel.Visible = true;
+            }
+            else
+            {
+                fEditMode = false;
+                cmdAddOrSave.Text = "Add";
+                txtName.Text = "";
+
+                cmdCancel.Visible = false;
+            }
+        }
+
+        private void cmdCancel_Click(object sender, EventArgs e)
+        {
+            listBox1.SelectedIndex = -1;
         }
     }
 }

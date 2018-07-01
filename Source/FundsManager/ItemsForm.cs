@@ -13,6 +13,9 @@ namespace FundsManager
     public partial class ItemsForm : Form
     {
         private MyFundsManager manager;
+
+        private bool fEditMode = false;
+
         public ItemsForm(MyFundsManager _manager)
         {
             manager = _manager;
@@ -21,13 +24,28 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Item _item = new Item();
-            _item.name = textBox1.Text;
-            _item.FK_Items_Funds = manager.Selected;
-            manager.My_db.Items.Add(_item);
-            manager.My_db.SaveChanges();
-            textBox1.Clear();
+            if (!fEditMode)
+            {
+                Item _item = new Item();
+                _item.name = txtName.Text;
+                _item.FK_Items_Funds = manager.Selected;
+                manager.My_db.Items.Add(_item);
+                manager.My_db.SaveChanges();
+            }
+            else
+            {
+                Item _selectedItem = manager.My_db.Items.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                if (_selectedItem != null)
+                {
+                    _selectedItem.name = txtName.Text;
+                    manager.My_db.SaveChanges();
+                }
+            }
+
             this.itemsTableAdapter.Fill(this.fundsDBDataSet.Items);
+
+            cmdCancel_Click(null, null);
         }
 
         private void ItemsForm_Load(object sender, EventArgs e)
@@ -48,6 +66,37 @@ namespace FundsManager
                 this.itemsTableAdapter.Fill(this.fundsDBDataSet.Items);
 
             }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex >= 0)
+            {
+                fEditMode = true;
+                cmdAddOrSave.Text = "Save";
+
+                Item _selectedItem = manager.My_db.Items.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                if (_selectedItem != null)
+                {
+                    txtName.Text = _selectedItem.name;
+                }
+
+                cmdCancel.Visible = true;
+            }
+            else
+            {
+                fEditMode = false;
+                cmdAddOrSave.Text = "Add";
+                txtName.Text = "";
+
+                cmdCancel.Visible = false;
+            }
+        }
+
+        private void cmdCancel_Click(object sender, EventArgs e)
+        {
+            listBox1.SelectedIndex = -1;
         }
     }
 }

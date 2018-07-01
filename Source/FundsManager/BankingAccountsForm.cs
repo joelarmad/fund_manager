@@ -14,14 +14,18 @@ namespace FundsManager
     public partial class BankingAccountsForm : Form
     {
         private MyFundsManager manager;
+
+        private bool fEditMode = false;
+        private int fEditIndex = -1;
+
         public BankingAccountsForm(MyFundsManager _manager)
         {
             manager = _manager;
             InitializeComponent();
 
-            comboBox2.DataSource = manager.OwnBanks();
-            comboBox2.DisplayMember = "Name";
-            comboBox2.ValueMember = "Id";
+            cbBank.DataSource = manager.OwnBanks();
+            cbBank.DisplayMember = "Name";
+            cbBank.ValueMember = "Id";
         }
 
         private void BankingAccountsForm_Load(object sender, EventArgs e)
@@ -41,23 +45,47 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
+
             try
             {
-                BankingAccount _banking = new BankingAccount();
-                _banking.name = textBox1.Text;
-                _banking.iban = textBox2.Text;
-                _banking.amount = Convert.ToDecimal(textBox3.Text);
-                _banking.FK_BankingAccounts_Funds = manager.Selected;
-                _banking.FK_BankingAccounts_Banks = Convert.ToInt32(comboBox2.SelectedValue);
-                _banking.FK_BankingAccounts_Currencies = Convert.ToInt32(comboBox1.SelectedValue);
+                if (!fEditMode)
+                {
+                    BankingAccount _banking = new BankingAccount();
+                    _banking.name = txtName.Text;
+                    _banking.iban = txtIBAN.Text;
+                    _banking.amount = Convert.ToDecimal(txtAmount.Text);
+                    _banking.FK_BankingAccounts_Funds = manager.Selected;
+                    _banking.FK_BankingAccounts_Banks = Convert.ToInt32(cbBank.SelectedValue);
+                    _banking.FK_BankingAccounts_Currencies = Convert.ToInt32(cbCurrency.SelectedValue);
 
-                manager.My_db.BankingAccounts.Add(_banking);
-                manager.My_db.SaveChanges();
-                textBox1.Clear();
-                textBox2.Clear();
-                textBox3.Clear();
+                    manager.My_db.BankingAccounts.Add(_banking);
+                    manager.My_db.SaveChanges();
+                    
+                }
+                else
+                {
+                    int _id = (int)dataGridView1.Rows[fEditIndex].Cells[0].Value;
+
+                    BankingAccount _selecteItem = manager.My_db.BankingAccounts.FirstOrDefault(x => x.Id == _id);
+
+                    if (_selecteItem != null)
+                    {
+                        _selecteItem.name = txtName.Text;
+                        _selecteItem.iban = txtIBAN.Text;
+                        _selecteItem.amount = Convert.ToDecimal(txtAmount.Text);
+                        _selecteItem.FK_BankingAccounts_Banks = Convert.ToInt32(cbBank.SelectedValue);
+                        _selecteItem.FK_BankingAccounts_Currencies = Convert.ToInt32(cbCurrency.SelectedValue);
+                        
+                        manager.My_db.SaveChanges();
+                    }
+                }
+                
                 this.bAccountsWithBanksCurrenciesTableAdapter.Fill(this.fundsDBDataSet.BAccountsWithBanksCurrencies);
                 this.bAccountsWithBanksCurrenciesTableAdapter.Fill(this.fundsDBDataSet1.BAccountsWithBanksCurrencies);
+
+                cmdCancel_Click(null, null);
+
             }
             catch (DbEntityValidationException ex)
             {
@@ -85,7 +113,58 @@ namespace FundsManager
                 manager.DeleteBankingAccount(Convert.ToInt32(selectedRow.Cells[0].Value));
                 this.bAccountsWithBanksCurrenciesTableAdapter.Fill(this.fundsDBDataSet.BAccountsWithBanksCurrencies);
                 this.bAccountsWithBanksCurrenciesTableAdapter.Fill(this.fundsDBDataSet1.BAccountsWithBanksCurrencies);
+
+                cmdCancel_Click(null, null);
             }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            fEditIndex = e.RowIndex;
+            int _id = (int)dataGridView1.Rows[fEditIndex].Cells[0].Value;
+
+            BankingAccount _selecteItem = manager.My_db.BankingAccounts.FirstOrDefault(x => x.Id == _id);
+
+            if (_selecteItem != null)
+            {
+                fEditMode = true;
+                cmdAddOrSave.Text = "Save";
+
+                txtName.Text = _selecteItem.name;
+                txtIBAN.Text = _selecteItem.iban;
+                txtAmount.Text = _selecteItem.amount.ToString();
+
+                Currency _currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == _selecteItem.FK_BankingAccounts_Currencies);
+
+                foreach (DataRowView _item in cbCurrency.Items)
+                {
+                    if (_item.Row[0].ToString() == _currency.Id.ToString())
+                    {
+                        cbCurrency.SelectedItem = _item;
+                        break;
+                    }
+                }
+
+                Bank _bank = manager.My_db.Banks.FirstOrDefault(x => x.Id == _selecteItem.FK_BankingAccounts_Banks);
+
+                cbBank.SelectedItem = _bank;
+
+                cmdCancel.Visible = true;
+            }
+        }
+
+        private void cmdCancel_Click(object sender, EventArgs e)
+        {
+            fEditMode = false;
+            cmdAddOrSave.Text = "Add";
+
+            txtName.Text = "";
+            txtIBAN.Text = "";
+            txtAmount.Text = "";
+            cbBank.SelectedIndex = 0;
+            cbCurrency.SelectedIndex = 0;
+
+            cmdCancel.Visible = false;
         }
     }
 }

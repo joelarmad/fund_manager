@@ -13,6 +13,10 @@ namespace FundsManager
     public partial class OtherDetailsForm : Form
     {
         private MyFundsManager manager;
+
+        private bool fEditMode = false;
+        private int fEditIndex = -1;
+
         public OtherDetailsForm(MyFundsManager _manager)
         {
             manager = _manager;
@@ -53,18 +57,37 @@ namespace FundsManager
                 manager.DeleteOtherDetails(Convert.ToInt32(selectedRow.Cells[0].Value));
                 this.otherDetailsTableAdapter.Fill(this.fundsDBDataSet.OtherDetails);
 
+                cmdCancel_Click(null, null);
             }
         }
 
         private void addDetail()
         {
-            OtherDetail _otherdetail = new OtherDetail();
-            _otherdetail.name = txtName.Text;
-            _otherdetail.subacct_id = Convert.ToInt32(cbSubAccount.SelectedValue);
-            _otherdetail.FK_OtherDetails_Funds = manager.Selected;
-            manager.My_db.OtherDetails.Add(_otherdetail);
-            manager.My_db.SaveChanges();
-            txtName.Clear();
+            if (!fEditMode)
+            {
+                OtherDetail _otherdetail = new OtherDetail();
+                _otherdetail.name = txtName.Text;
+                _otherdetail.subacct_id = Convert.ToInt32(cbSubAccount.SelectedValue);
+                _otherdetail.FK_OtherDetails_Funds = manager.Selected;
+                manager.My_db.OtherDetails.Add(_otherdetail);
+                manager.My_db.SaveChanges();
+            }
+            else
+            {
+                int _id = (int)dataGridView1.Rows[fEditIndex].Cells[0].Value;
+
+                OtherDetail _selectedDetail = manager.My_db.OtherDetails.FirstOrDefault(x => x.Id == _id);
+
+                if (_selectedDetail != null)
+                {
+                    _selectedDetail.name = txtName.Text;
+                    _selectedDetail.subacct_id = Convert.ToInt32(cbSubAccount.SelectedValue);
+
+
+                    manager.My_db.SaveChanges();
+                }
+
+            }
             
             this.otherDetailsTableAdapter.Fill(this.fundsDBDataSet.OtherDetails);
 
@@ -74,6 +97,8 @@ namespace FundsManager
                 _subaccount = manager.My_db.Subaccounts.Find(Convert.ToInt32(_row.Cells[3].Value));
                 _row.Cells[4].Value = _subaccount.name;
             }
+
+            cmdCancel_Click(null, null);
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -82,6 +107,46 @@ namespace FundsManager
             {
                 addDetail();
             }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            fEditIndex = e.RowIndex;
+            int _id = (int)dataGridView1.Rows[fEditIndex].Cells[0].Value;
+
+            OtherDetail _selectedDetail = manager.My_db.OtherDetails.FirstOrDefault(x => x.Id == _id);
+
+            if (_selectedDetail != null)
+            {
+                fEditMode = true;
+                cmdAddOrSave.Text = "Save";
+
+                txtName.Text = _selectedDetail.name;
+
+                Subaccount _subacct = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == _selectedDetail.subacct_id);
+
+                foreach (DataRowView _item in cbSubAccount.Items)
+                {
+                    if (_item.Row[0].ToString() == _subacct.Id.ToString())
+                    {
+                        cbSubAccount.SelectedItem = _item;
+                        break;
+                    }
+                }
+
+                cmdCancel.Visible = true;
+            }
+        }
+
+        private void cmdCancel_Click(object sender, EventArgs e)
+        {
+            fEditMode = false;
+            cmdAddOrSave.Text = "Add";
+
+            txtName.Text = "";
+            cbSubAccount.SelectedIndex = 0;
+
+            cmdCancel.Visible = false;
         }
     }
 }

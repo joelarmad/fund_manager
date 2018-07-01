@@ -14,6 +14,8 @@ namespace FundsManager
     {
         private MyFundsManager manager;
 
+        private bool fEditMode = false;
+
         public UnderlyingDebtorsForm(MyFundsManager _manager)
         {
             manager = _manager;
@@ -29,14 +31,28 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            UnderlyingDebtor _debtor = new UnderlyingDebtor();
-            _debtor.name = textBox1.Text;
-            _debtor.FK_UnderlyingDebtors_Funds = manager.Selected;
-            manager.My_db.UnderlyingDebtors.Add(_debtor);
-            manager.My_db.SaveChanges();
-            textBox1.Clear();
+            if (!fEditMode)
+            {
+                UnderlyingDebtor _debtor = new UnderlyingDebtor();
+                _debtor.name = txtName.Text;
+                _debtor.FK_UnderlyingDebtors_Funds = manager.Selected;
+                manager.My_db.UnderlyingDebtors.Add(_debtor);
+                manager.My_db.SaveChanges();
+            }
+            else
+            {
+                UnderlyingDebtor _selectedItem = manager.My_db.UnderlyingDebtors.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                if (_selectedItem != null)
+                {
+                    _selectedItem.name = txtName.Text;
+                    manager.My_db.SaveChanges();
+                }
+            }
 
             this.underlyingDebtorsTableAdapter.Fill(this.fundsDBDataSet.UnderlyingDebtors);
+
+            cmdCancel_Click(null, null);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -48,8 +64,41 @@ namespace FundsManager
 
                 manager.deleteUnderlyingDebtors(Convert.ToInt32(listBox1.SelectedValue));
                 this.underlyingDebtorsTableAdapter.Fill(this.fundsDBDataSet.UnderlyingDebtors);
-
+                cmdCancel_Click(null, null);
             }
         }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex >= 0)
+            {
+                fEditMode = true;
+                cmdAddOrSave.Text = "Save";
+
+                UnderlyingDebtor _selectedItem = manager.My_db.UnderlyingDebtors.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                if (_selectedItem != null)
+                {
+                    txtName.Text = _selectedItem.name;
+                }
+
+                cmdCancel.Visible = true;
+            }
+            else
+            {
+                fEditMode = false;
+                cmdAddOrSave.Text = "Add";
+                txtName.Text = "";
+
+                cmdCancel.Visible = false;
+            }
+        }
+
+        private void cmdCancel_Click(object sender, EventArgs e)
+        {
+            listBox1.SelectedIndex = -1;
+        }
+
+        
     }
 }

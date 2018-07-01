@@ -13,6 +13,9 @@ namespace FundsManager
     public partial class CreditorsForm : Form
     {
         private MyFundsManager manager;
+
+        private bool fEditMode = false;
+
         public CreditorsForm(MyFundsManager _manager)
         {
             manager = _manager;
@@ -28,13 +31,29 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Creditor _creditor = new Creditor();
-            _creditor.name = textBox1.Text;
-            _creditor.FK_Creditors_Funds = manager.Selected;
-            manager.My_db.Creditors.Add(_creditor);
-            manager.My_db.SaveChanges();
-            textBox1.Clear();
+            if (!fEditMode)
+            {
+                Creditor _creditor = new Creditor();
+                _creditor.name = txtName.Text;
+                _creditor.FK_Creditors_Funds = manager.Selected;
+                manager.My_db.Creditors.Add(_creditor);
+                manager.My_db.SaveChanges();
+            }
+            else
+            {
+                Creditor _selectedItem = manager.My_db.Creditors.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                if (_selectedItem != null)
+                {
+                    _selectedItem.name = txtName.Text;
+                    manager.My_db.SaveChanges();
+                }
+            }
+
             this.creditorsTableAdapter.Fill(this.fundsDBDataSet.Creditors);
+
+            cmdCancel_Click(null, null);
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -48,6 +67,37 @@ namespace FundsManager
                 this.creditorsTableAdapter.Fill(this.fundsDBDataSet.Creditors);
 
             }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex >= 0)
+            {
+                fEditMode = true;
+                cmdAddOrSave.Text = "Save";
+
+                Creditor _selectedItem = manager.My_db.Creditors.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                if (_selectedItem != null)
+                {
+                    txtName.Text = _selectedItem.name;
+                }
+
+                cmdCancel.Visible = true;
+            }
+            else
+            {
+                fEditMode = false;
+                cmdAddOrSave.Text = "Add";
+                txtName.Text = "";
+
+                cmdCancel.Visible = false;
+            }
+        }
+
+        private void cmdCancel_Click(object sender, EventArgs e)
+        {
+            listBox1.SelectedIndex = -1;
         }
     }
 }

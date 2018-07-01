@@ -14,6 +14,8 @@ namespace FundsManager
     {
         private MyFundsManager manager;
 
+        private bool fEditMode = false;
+
         public ClientsForm(MyFundsManager _manager)
         {
             manager = _manager;
@@ -29,13 +31,28 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Client _client = new Client();
-            _client.name = textBox1.Text;
-            _client.FK_Clients_Funds = manager.Selected;
-            manager.My_db.Clients.Add(_client);
-            manager.My_db.SaveChanges();
-            textBox1.Clear();
+            if (!fEditMode)
+            {
+                Client _client = new Client();
+                _client.name = txtName.Text;
+                _client.FK_Clients_Funds = manager.Selected;
+                manager.My_db.Clients.Add(_client);
+                manager.My_db.SaveChanges();
+            }
+            else
+            {
+                Client _selectedItem = manager.My_db.Clients.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                if (_selectedItem != null)
+                {
+                    _selectedItem.name = txtName.Text;
+                    manager.My_db.SaveChanges();
+                }
+            }
+            
             this.clientsTableAdapter.Fill(this.fundsDBDataSet.Clients);
+
+            cmdCancel_Click(null, null);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -48,7 +65,39 @@ namespace FundsManager
                 manager.DeleteClient(Convert.ToInt32(listBox1.SelectedValue));
                 this.clientsTableAdapter.Fill(this.fundsDBDataSet.Clients);
 
+                cmdCancel_Click(null, null);
             }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex >= 0)
+            {
+                fEditMode = true;
+                cmdAddOrSave.Text = "Save";
+
+                Client _selectedItem = manager.My_db.Clients.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                if (_selectedItem != null)
+                {
+                    txtName.Text = _selectedItem.name;
+                }
+
+                cmdCancel.Visible = true;
+            }
+            else
+            {
+                fEditMode = false;
+                cmdAddOrSave.Text = "Add";
+                txtName.Text = "";
+
+                cmdCancel.Visible = false;
+            }
+        }
+
+        private void cmdCancel_Click(object sender, EventArgs e)
+        {
+            listBox1.SelectedIndex = -1;
         }
     }
 }

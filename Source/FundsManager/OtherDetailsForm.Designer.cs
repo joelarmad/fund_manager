@@ -31,21 +31,22 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cmdAddOrSave = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.cbSubAccount = new System.Windows.Forms.ComboBox();
             this.subaccountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
-            this.subaccountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.SubaccountsTableAdapter();
-            this.otherDetailsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.otherDetailsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.OtherDetailsTableAdapter();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fKOtherDetailsFundsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subacctidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Sub_Account = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.otherDetailsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cmdDelete = new System.Windows.Forms.Button();
+            this.subaccountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.SubaccountsTableAdapter();
+            this.otherDetailsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.OtherDetailsTableAdapter();
+            this.cmdCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.subaccountsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -69,15 +70,15 @@
             this.txtName.TabIndex = 1;
             this.txtName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
-            // button1
+            // cmdAddOrSave
             // 
-            this.button1.Location = new System.Drawing.Point(239, 66);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.cmdAddOrSave.Location = new System.Drawing.Point(239, 66);
+            this.cmdAddOrSave.Name = "cmdAddOrSave";
+            this.cmdAddOrSave.Size = new System.Drawing.Size(75, 23);
+            this.cmdAddOrSave.TabIndex = 2;
+            this.cmdAddOrSave.Text = "Add";
+            this.cmdAddOrSave.UseVisualStyleBackColor = true;
+            this.cmdAddOrSave.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -128,29 +129,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(376, 278);
             this.dataGridView1.TabIndex = 6;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(317, 66);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Delete";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // subaccountsTableAdapter
-            // 
-            this.subaccountsTableAdapter.ClearBeforeFill = true;
-            // 
-            // otherDetailsBindingSource
-            // 
-            this.otherDetailsBindingSource.DataMember = "OtherDetails";
-            this.otherDetailsBindingSource.DataSource = this.fundsDBDataSet;
-            // 
-            // otherDetailsTableAdapter
-            // 
-            this.otherDetailsTableAdapter.ClearBeforeFill = true;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -191,16 +170,51 @@
             this.Sub_Account.ReadOnly = true;
             this.Sub_Account.Width = 200;
             // 
+            // otherDetailsBindingSource
+            // 
+            this.otherDetailsBindingSource.DataMember = "OtherDetails";
+            this.otherDetailsBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // cmdDelete
+            // 
+            this.cmdDelete.Location = new System.Drawing.Point(317, 409);
+            this.cmdDelete.Name = "cmdDelete";
+            this.cmdDelete.Size = new System.Drawing.Size(75, 23);
+            this.cmdDelete.TabIndex = 7;
+            this.cmdDelete.Text = "Delete";
+            this.cmdDelete.UseVisualStyleBackColor = true;
+            this.cmdDelete.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // subaccountsTableAdapter
+            // 
+            this.subaccountsTableAdapter.ClearBeforeFill = true;
+            // 
+            // otherDetailsTableAdapter
+            // 
+            this.otherDetailsTableAdapter.ClearBeforeFill = true;
+            // 
+            // cmdCancel
+            // 
+            this.cmdCancel.Location = new System.Drawing.Point(317, 66);
+            this.cmdCancel.Name = "cmdCancel";
+            this.cmdCancel.Size = new System.Drawing.Size(75, 23);
+            this.cmdCancel.TabIndex = 8;
+            this.cmdCancel.Text = "Cancel";
+            this.cmdCancel.UseVisualStyleBackColor = true;
+            this.cmdCancel.Visible = false;
+            this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
+            // 
             // OtherDetailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(409, 405);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(409, 458);
+            this.Controls.Add(this.cmdCancel);
+            this.Controls.Add(this.cmdDelete);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.cbSubAccount);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.cmdAddOrSave);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -222,13 +236,13 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cmdAddOrSave;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbSubAccount;
         private System.Windows.Forms.DataGridView dataGridView1;
         private FundsDBDataSet fundsDBDataSet;
         private System.Windows.Forms.DataGridViewTextBoxColumn fKOtherDetailsAccountsDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button cmdDelete;
         private System.Windows.Forms.BindingSource subaccountsBindingSource;
         private FundsDBDataSetTableAdapters.SubaccountsTableAdapter subaccountsTableAdapter;
         private System.Windows.Forms.BindingSource otherDetailsBindingSource;
@@ -238,5 +252,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fKOtherDetailsFundsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn subacctidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sub_Account;
+        private System.Windows.Forms.Button cmdCancel;
     }
 }

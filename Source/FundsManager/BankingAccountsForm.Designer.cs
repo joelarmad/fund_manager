@@ -35,16 +35,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.txtIBAN = new System.Windows.Forms.TextBox();
+            this.cbCurrency = new System.Windows.Forms.ComboBox();
             this.currenciesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cbBank = new System.Windows.Forms.ComboBox();
             this.banksBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.txtAmount = new System.Windows.Forms.TextBox();
+            this.cmdAddOrSave = new System.Windows.Forms.Button();
+            this.cmdDelete = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,6 +59,7 @@
             this.banksTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.BanksTableAdapter();
             this.currenciesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CurrenciesTableAdapter();
             this.bAccountsWithBanksCurrenciesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.BAccountsWithBanksCurrenciesTableAdapter();
+            this.cmdCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banksBindingSource)).BeginInit();
@@ -113,30 +114,30 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Amount:";
             // 
-            // textBox1
+            // txtName
             // 
-            this.textBox1.Location = new System.Drawing.Point(78, 32);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 20);
-            this.textBox1.TabIndex = 5;
+            this.txtName.Location = new System.Drawing.Point(78, 32);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(121, 20);
+            this.txtName.TabIndex = 5;
             // 
-            // textBox2
+            // txtIBAN
             // 
-            this.textBox2.Location = new System.Drawing.Point(78, 66);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 6;
+            this.txtIBAN.Location = new System.Drawing.Point(78, 66);
+            this.txtIBAN.Name = "txtIBAN";
+            this.txtIBAN.Size = new System.Drawing.Size(121, 20);
+            this.txtIBAN.TabIndex = 6;
             // 
-            // comboBox1
+            // cbCurrency
             // 
-            this.comboBox1.DataSource = this.currenciesBindingSource;
-            this.comboBox1.DisplayMember = "name";
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(293, 32);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 7;
-            this.comboBox1.ValueMember = "Id";
+            this.cbCurrency.DataSource = this.currenciesBindingSource;
+            this.cbCurrency.DisplayMember = "name";
+            this.cbCurrency.FormattingEnabled = true;
+            this.cbCurrency.Location = new System.Drawing.Point(293, 32);
+            this.cbCurrency.Name = "cbCurrency";
+            this.cbCurrency.Size = new System.Drawing.Size(121, 21);
+            this.cbCurrency.TabIndex = 7;
+            this.cbCurrency.ValueMember = "Id";
             // 
             // currenciesBindingSource
             // 
@@ -148,48 +149,48 @@
             this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
             this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // comboBox2
+            // cbBank
             // 
-            this.comboBox2.DataSource = this.banksBindingSource;
-            this.comboBox2.DisplayMember = "name";
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(293, 65);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 8;
-            this.comboBox2.ValueMember = "Id";
+            this.cbBank.DataSource = this.banksBindingSource;
+            this.cbBank.DisplayMember = "name";
+            this.cbBank.FormattingEnabled = true;
+            this.cbBank.Location = new System.Drawing.Point(293, 65);
+            this.cbBank.Name = "cbBank";
+            this.cbBank.Size = new System.Drawing.Size(121, 21);
+            this.cbBank.TabIndex = 8;
+            this.cbBank.ValueMember = "Id";
             // 
             // banksBindingSource
             // 
             this.banksBindingSource.DataMember = "Banks";
             this.banksBindingSource.DataSource = this.fundsDBDataSet;
             // 
-            // textBox3
+            // txtAmount
             // 
-            this.textBox3.Location = new System.Drawing.Point(78, 104);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(121, 20);
-            this.textBox3.TabIndex = 9;
+            this.txtAmount.Location = new System.Drawing.Point(78, 104);
+            this.txtAmount.Name = "txtAmount";
+            this.txtAmount.Size = new System.Drawing.Size(121, 20);
+            this.txtAmount.TabIndex = 9;
             // 
-            // button1
+            // cmdAddOrSave
             // 
-            this.button1.Location = new System.Drawing.Point(451, 107);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.cmdAddOrSave.Location = new System.Drawing.Point(415, 107);
+            this.cmdAddOrSave.Name = "cmdAddOrSave";
+            this.cmdAddOrSave.Size = new System.Drawing.Size(75, 23);
+            this.cmdAddOrSave.TabIndex = 10;
+            this.cmdAddOrSave.Text = "Add";
+            this.cmdAddOrSave.UseVisualStyleBackColor = true;
+            this.cmdAddOrSave.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // cmdDelete
             // 
-            this.button2.Location = new System.Drawing.Point(451, 547);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Delete";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.cmdDelete.Location = new System.Drawing.Point(451, 547);
+            this.cmdDelete.Name = "cmdDelete";
+            this.cmdDelete.Size = new System.Drawing.Size(75, 23);
+            this.cmdDelete.TabIndex = 11;
+            this.cmdDelete.Text = "Delete";
+            this.cmdDelete.UseVisualStyleBackColor = true;
+            this.cmdDelete.Click += new System.EventHandler(this.button2_Click);
             // 
             // dataGridView1
             // 
@@ -211,6 +212,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(543, 338);
             this.dataGridView1.TabIndex = 12;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -289,19 +291,31 @@
             // 
             this.bAccountsWithBanksCurrenciesTableAdapter.ClearBeforeFill = true;
             // 
+            // cmdCancel
+            // 
+            this.cmdCancel.Location = new System.Drawing.Point(496, 107);
+            this.cmdCancel.Name = "cmdCancel";
+            this.cmdCancel.Size = new System.Drawing.Size(75, 23);
+            this.cmdCancel.TabIndex = 13;
+            this.cmdCancel.Text = "Cancel";
+            this.cmdCancel.UseVisualStyleBackColor = true;
+            this.cmdCancel.Visible = false;
+            this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
+            // 
             // BankingAccountsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(598, 600);
+            this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.cmdDelete);
+            this.Controls.Add(this.cmdAddOrSave);
+            this.Controls.Add(this.txtAmount);
+            this.Controls.Add(this.cbBank);
+            this.Controls.Add(this.cbCurrency);
+            this.Controls.Add(this.txtIBAN);
+            this.Controls.Add(this.txtName);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -332,13 +346,13 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.TextBox txtIBAN;
+        private System.Windows.Forms.ComboBox cbCurrency;
+        private System.Windows.Forms.ComboBox cbBank;
+        private System.Windows.Forms.TextBox txtAmount;
+        private System.Windows.Forms.Button cmdAddOrSave;
+        private System.Windows.Forms.Button cmdDelete;
         private System.Windows.Forms.DataGridView dataGridView1;
         private FundsDBDataSet fundsDBDataSet;
         private System.Windows.Forms.BindingSource bankingAccountsBindingSource;
@@ -356,5 +370,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ibanDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn FK_BankingAccounts_Currencies;
+        private System.Windows.Forms.Button cmdCancel;
     }
 }

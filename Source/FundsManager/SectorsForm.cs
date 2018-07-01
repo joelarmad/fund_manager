@@ -13,6 +13,9 @@ namespace FundsManager
     public partial class SectorsForm : Form
     {
         private MyFundsManager manager;
+
+        private bool fEditMode = false;
+
         public SectorsForm(MyFundsManager _manager)
         {
             manager = _manager;
@@ -28,13 +31,29 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Sector _sector = new Sector();
-            _sector.name = textBox1.Text;
-            _sector.FK_Sectors_Funds = manager.Selected;
-            manager.My_db.Sectors.Add(_sector);
-            manager.My_db.SaveChanges();
-            textBox1.Clear();
+            if (!fEditMode)
+            {
+                Sector _sector = new Sector();
+                _sector.name = txtName.Text;
+                _sector.FK_Sectors_Funds = manager.Selected;
+                manager.My_db.Sectors.Add(_sector);
+                manager.My_db.SaveChanges();
+            }
+            else
+            {
+                Sector _selectedItem = manager.My_db.Sectors.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                if (_selectedItem != null)
+                {
+                    _selectedItem.name = txtName.Text;
+                    manager.My_db.SaveChanges();
+                }
+            }
+
             this.sectorsTableAdapter.Fill(this.fundsDBDataSet.Sectors);
+
+            cmdCancel_Click(null, null);
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -46,8 +65,39 @@ namespace FundsManager
 
                 manager.DeleteSector(Convert.ToInt32(listBox1.SelectedValue));
                 this.sectorsTableAdapter.Fill(this.fundsDBDataSet.Sectors);
-
+                cmdCancel_Click(null, null);
             }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex >= 0)
+            {
+                fEditMode = true;
+                cmdAddOrSave.Text = "Save";
+
+                Sector _selectedItem = manager.My_db.Sectors.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                if (_selectedItem != null)
+                {
+                    txtName.Text = _selectedItem.name;
+                }
+
+                cmdCancel.Visible = true;
+            }
+            else
+            {
+                fEditMode = false;
+                cmdAddOrSave.Text = "Add";
+                txtName.Text = "";
+
+                cmdCancel.Visible = false;
+            }
+        }
+
+        private void cmdCancel_Click(object sender, EventArgs e)
+        {
+            listBox1.SelectedIndex = -1;
         }
     }
 }
