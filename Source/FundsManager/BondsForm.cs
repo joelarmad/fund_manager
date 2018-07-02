@@ -23,11 +23,11 @@ namespace FundsManager
 
         private int fBondConsecutive = 0;
 
-        public BondsForm(MyFundsManager _manager)
+        public BondsForm()
         {
             try
             {
-                manager = _manager;
+                manager = MyFundsManager.SingletonInstance;
                 investors = new List<InvestorForBond>();
                 InitializeComponent();
                 listView1.FullRowSelect = true;
@@ -206,7 +206,9 @@ namespace FundsManager
                 bond.pieces = (float)Convert.ToDecimal(txtBondPieces.Text);
                 bond.interest_on_bond = Convert.ToInt32(txtBondInterest.Text);
                 bond.interest_tff_contribution = Convert.ToInt32(txtTFFInterest.Text);
+
                 bond.active = 1;
+
                 manager.My_db.Bonds.Add(bond);
                 manager.My_db.SaveChanges();
 
@@ -239,13 +241,73 @@ namespace FundsManager
                 cbInvestors.ResetText();
                 listView1.Items.Clear();
 
-                Account _account510 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "510");
+                //TODO: Crear un movimiento contable con un debito a 100 y un credito a 510 por el monto del bono
 
-                if (_account510 != null)
+                //Obtener nuevo numero de referencia
+                //Crear AccountingMovement
+                //Crear Movements_Accounts con un debito a 100
+                //Crear Movements_Accounts con un credito a 510
+
+                Account _CashAtBank = manager.My_db.Accounts.FirstOrDefault(x => x.number == "100");
+                Account _Bonds = manager.My_db.Accounts.FirstOrDefault(x => x.number == "510");
+                Subaccount _CashAtBankEUR = manager.My_db.Subaccounts.FirstOrDefault(x => x.name == "Cash at Bank EUR");
+                Subaccount _BondI = manager.My_db.Subaccounts.FirstOrDefault(x => x.name == "Bond I");
+
+                if (_CashAtBank != null 
+                    && _Bonds != null
+                    && _CashAtBankEUR != null
+                    && _BondI != null)
                 {
-                    _account510.amount += (decimal)bond.pieces * bond.price;
+                    AccountingMovement _movement = new AccountingMovement();
+                    _movement.FK_AccountingMovements_Funds = manager.Selected;
+                    //TODO: Poner description correcta cuando la manden
+                    _movement.description = "";
+                    _movement.date = bond.issued;
+                    _movement.reference = KeyDefinitions.NextAccountMovementReference;
+                    //TODO: Poner currency correcta cuando la manden
+                    _movement.FK_AccountingMovements_Currencies = manager.My_db.Currencies.FirstOrDefault().Id;
+                    //TODO: Poner ORIG cuando la manden
+                    _movement.original_reference = "";
+                    manager.My_db.AccountingMovements.Add(_movement);
+                    manager.My_db.SaveChanges();
+
+                    Movements_Accounts _movAcctCashAtBank = new Movements_Accounts();
+                    Movements_Accounts _movAcctBond = new Movements_Accounts();
+
+                    _movAcctCashAtBank.FK_Movements_Accounts_AccountingMovements = _movement.Id;
+                    _movAcctCashAtBank.FK_Movements_Accounts_Funds = manager.Selected;
+                    _movAcctCashAtBank.FK_Movements_Accounts_Accounts = _CashAtBank.Id;
+                    _movAcctCashAtBank.FK_Movements_Accounts_Subaccounts = _CashAtBankEUR.Id;
+                    //TODO: Poner subaccount type correcto cuando lo manden
+                    //_movAcctCashAtBank.subaccount_type = my_movement.Detail_type;
+                    //TODO: Poner subaccount type correcto cuando lo manden
+                    //_movAcctCashAtBank.subaccount = my_movement.Detail;
+
+                    _movAcctCashAtBank.debit = (decimal)bond.pieces * bond.price;
+                    _movAcctCashAtBank.credit = 0;
+                    
+                    manager.My_db.Movements_Accounts.Add(_movAcctCashAtBank);
+
+                    _movAcctBond.FK_Movements_Accounts_AccountingMovements = _movement.Id;
+                    _movAcctBond.FK_Movements_Accounts_Funds = manager.Selected;
+                    _movAcctBond.FK_Movements_Accounts_Accounts = _Bonds.Id;
+                    _movAcctBond.FK_Movements_Accounts_Subaccounts = _BondI.Id;
+                    //TODO: Poner subaccount type correcto cuando lo manden
+                    //_movAcctBond.subaccount_type = my_movement.Detail_type;
+                    //TODO: Poner subaccount type correcto cuando lo manden
+                    //_movAcctBond.subaccount = my_movement.Detail;
+
+                    _movAcctBond.debit = 0;
+                    _movAcctBond.credit = (decimal)bond.pieces * bond.price;
+
+                    manager.My_db.Movements_Accounts.Add(_movAcctBond);
+
+                    _CashAtBank.amount += (decimal)bond.pieces * bond.price;
+                    _Bonds.amount -= (decimal)bond.pieces * bond.price;
+                    
                     manager.My_db.SaveChanges();
                 }
+                
             }
             catch (Exception _ex)
             {

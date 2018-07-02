@@ -16,9 +16,9 @@ namespace FundsManager
 
         private MyFundsManager manager;
         private string[] tipos = new string[7] { "Asset", "Liability", "Equity", "Income", "Expense", "Contingency Asset","Contingency Liability" };
-        public AccountsForm(MyFundsManager _manager)
+        public AccountsForm()
         {
-            manager = _manager;
+            manager = MyFundsManager.SingletonInstance;
             InitializeComponent();
             
             cbType.DataSource = tipos;

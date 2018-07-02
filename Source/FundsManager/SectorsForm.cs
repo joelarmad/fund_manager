@@ -16,9 +16,9 @@ namespace FundsManager
 
         private bool fEditMode = false;
 
-        public SectorsForm(MyFundsManager _manager)
+        public SectorsForm()
         {
-            manager = _manager;
+            manager = MyFundsManager.SingletonInstance;
             InitializeComponent();
         }
 

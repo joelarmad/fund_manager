@@ -13,9 +13,9 @@ namespace FundsManager
     public partial class MovementReportForm : Form
     {
         private MyFundsManager manager;
-        public MovementReportForm(MyFundsManager _manager)
+        public MovementReportForm()
         {
-            manager = _manager;
+            manager = MyFundsManager.SingletonInstance;
             InitializeComponent();
             listView1.FullRowSelect = true;
             String[] row = new String[9];

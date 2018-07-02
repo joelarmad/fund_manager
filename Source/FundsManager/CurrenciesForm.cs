@@ -17,9 +17,9 @@ namespace FundsManager
         private bool fEditMode = false;
         private int fEditIndex = -1;
 
-        public CurrenciesForm(MyFundsManager _manager)
+        public CurrenciesForm()
         {
-            manager = _manager;
+            manager = MyFundsManager.SingletonInstance;
             InitializeComponent();
         }
 

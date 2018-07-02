@@ -16,12 +16,12 @@ namespace FundsManager
 
         private Double disbursement;
         private Double profit;
-        public InvestmentsForm(MyFundsManager _manager)
+        public InvestmentsForm()
         {
             disbursement = 0;
             profit = 0;
 
-            manager = _manager;
+            manager = MyFundsManager.SingletonInstance;
             InitializeComponent();
 
             textBox1.Text = manager.SelectedFund().contract_prefix;
@@ -36,7 +36,7 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DisbursementsForm disbursements_form = new DisbursementsForm(manager);
+            DisbursementsForm disbursements_form = new DisbursementsForm();
             disbursements_form.Show();
         }
 

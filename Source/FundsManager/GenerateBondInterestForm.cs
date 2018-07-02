@@ -15,9 +15,9 @@ namespace FundsManager
         private MyFundsManager manager;
         private Decimal total_tff_interest;
         private Decimal total_bond_interest;
-        public GenerateBondInterestForm(MyFundsManager _manager)
+        public GenerateBondInterestForm()
         {
-            manager = _manager;
+            manager = MyFundsManager.SingletonInstance;
             InitializeComponent();
             total_bond_interest = 0;
             total_tff_interest = 0;

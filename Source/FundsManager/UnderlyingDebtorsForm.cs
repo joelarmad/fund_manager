@@ -16,9 +16,9 @@ namespace FundsManager
 
         private bool fEditMode = false;
 
-        public UnderlyingDebtorsForm(MyFundsManager _manager)
+        public UnderlyingDebtorsForm()
         {
-            manager = _manager;
+            manager = MyFundsManager.SingletonInstance;
             InitializeComponent();
         }
 

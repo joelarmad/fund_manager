@@ -12,29 +12,34 @@ namespace FundsManager.Classes.Task
         /// <summary>
         /// Performs a bond profits update in related accounts if it is neccesary
         /// </summary>
-        public static void performBondProfitsUpdate(MyFundsManager aManager)
+        public static void performBondProfitsUpdate()
         {
             try
             {
-                Account _bondInterestAcruedAccount = aManager.My_db.Accounts.FirstOrDefault(x => x.number == "515");
-                Subaccount _bondInvestorInterestAcct = aManager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == _bondInterestAcruedAccount.Id && x.name == "Bond Investor Interests");
-                Subaccount _bondTFFInterestAcct = aManager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == _bondInterestAcruedAccount.Id && x.name == "Bond TFF Interests");
 
-                List<Bond> _bonds = aManager.My_db.Bonds.Where(x => x.active == 1).ToList();
+                MyFundsManager _manager = MyFundsManager.SingletonInstance;
+
+                Account _bondInterestAcruedAccount = _manager.My_db.Accounts.FirstOrDefault(x => x.number == "515");
+                Subaccount _bondInvestorInterestAcct = _manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == _bondInterestAcruedAccount.Id && x.name == "Bond Investor Interests");
+                Subaccount _bondTFFInterestAcct = _manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == _bondInterestAcruedAccount.Id && x.name == "Bond TFF Interests");
+
+                DateTime _now = DateTime.Now.Date;
+
+                List<Bond> _bonds = _manager.My_db.Bonds.Where(x => x.issued <= _now && x.active == 1).ToList();
 
                 foreach (Bond _bond in _bonds)
                 {
-                    List<BondsInvestor> _bondInvestors = aManager.My_db.BondsInvestors.Where(x => x.FK_BondsInvestors_Bonds == _bond.Id).ToList();
+                    List<BondsInvestor> _bondInvestors = _manager.My_db.BondsInvestors.Where(x => x.FK_BondsInvestors_Bonds == _bond.Id).ToList();
 
                     foreach (BondsInvestor _bondInvestor in _bondInvestors)
                     {                        
                         if (_bondInterestAcruedAccount != null)
                         {
-                            DateTime _profitDate = _bond.issued.AddDays(30);
+                            DateTime _profitDate = _bond.issued.AddMonths(1);
 
                             while (_profitDate <= _bond.expired && _profitDate <= DateTime.Now.Date)
                             {
-                                InvestorBondProfit _profit = aManager.My_db.InvestorBondProfits.FirstOrDefault(x => x.BondId == _bond.Id && x.InvestorId == _bondInvestor.FK_BondsInvestors_Investors && x.date == _profitDate);
+                                InvestorBondProfit _profit = _manager.My_db.InvestorBondProfits.FirstOrDefault(x => x.BondId == _bond.Id && x.InvestorId == _bondInvestor.FK_BondsInvestors_Investors && x.date == _profitDate);
 
                                 if (_profit == null)
                                 {
@@ -52,8 +57,8 @@ namespace FundsManager.Classes.Task
                                     _newFundBondProfit.BondId = _bond.Id;
                                     _newFundBondProfit.Income = _fundProfit;
 
-                                    aManager.My_db.InvestorBondProfits.Add(_newInvestorProfit);
-                                    aManager.My_db.FundBondProfits.Add(_newFundBondProfit);
+                                    _manager.My_db.InvestorBondProfits.Add(_newInvestorProfit);
+                                    _manager.My_db.FundBondProfits.Add(_newFundBondProfit);
 
                                     if (_bondInterestAcruedAccount != null)
                                     {
@@ -71,7 +76,7 @@ namespace FundsManager.Classes.Task
                                     }
                                 }
 
-                                _profitDate = _profitDate.AddDays(30);
+                                _profitDate = _profitDate.AddMonths(1);
                             }
                         }
                     }
@@ -82,7 +87,7 @@ namespace FundsManager.Classes.Task
                     }
                 }
 
-                aManager.My_db.SaveChanges();
+                _manager.My_db.SaveChanges();
             }
             catch (Exception _ex)
             {

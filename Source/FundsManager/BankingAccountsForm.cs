@@ -18,9 +18,9 @@ namespace FundsManager
         private bool fEditMode = false;
         private int fEditIndex = -1;
 
-        public BankingAccountsForm(MyFundsManager _manager)
+        public BankingAccountsForm()
         {
-            manager = _manager;
+            manager = MyFundsManager.SingletonInstance;
             InitializeComponent();
 
             cbBank.DataSource = manager.OwnBanks();

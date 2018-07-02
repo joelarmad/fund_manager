@@ -24,7 +24,7 @@ namespace FundsManager
 
         private DateTime fMaxDisbursementDate;
 
-        public DisbursementsForm(MyFundsManager _manager)
+        public DisbursementsForm()
         {
             try
             {
@@ -34,7 +34,7 @@ namespace FundsManager
                 //disbursements = new List<DisbursementForInvestement>();
                 disbursements = new List<Disbursement>();
 
-                manager = _manager;
+                manager = MyFundsManager.SingletonInstance;
                 InitializeComponent();
 
                 cbCurrency.SelectedValueChanged += getExchangeRate;

@@ -13,9 +13,9 @@ namespace FundsManager
     public partial class BondsList : Form
     {
         private MyFundsManager manager;
-        public BondsList(MyFundsManager _manager)
+        public BondsList()
         {
-            manager = _manager;
+            manager = MyFundsManager.SingletonInstance;
             InitializeComponent();
             listView1.FullRowSelect = true;
 

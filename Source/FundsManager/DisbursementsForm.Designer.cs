@@ -118,7 +118,7 @@
             // cbCurrency
             // 
             this.cbCurrency.DataSource = this.currenciesBindingSource;
-            this.cbCurrency.DisplayMember = "code";
+            this.cbCurrency.DisplayMember = "name";
             this.cbCurrency.FormattingEnabled = true;
             this.cbCurrency.Location = new System.Drawing.Point(94, 69);
             this.cbCurrency.Name = "cbCurrency";

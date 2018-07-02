@@ -13,17 +13,15 @@ namespace FundsManager
 {
     public partial class Form1 : Form
     {
-        private MyFundsManager manager;
         public Form1()
         {
-            manager = new MyFundsManager();
             InitializeComponent();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             try
             {
-                GlobalProcess.performBondProfitsUpdate(manager);
+                GlobalProcess.performBondProfitsUpdate();
             }
             catch (Exception _ex)
             {
@@ -34,7 +32,7 @@ namespace FundsManager
         private void fundsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            FundsForm funds_form = new FundsForm(manager);
+            FundsForm funds_form = new FundsForm();
             funds_form.MdiParent = this;
             funds_form.Show();
         }
@@ -42,7 +40,7 @@ namespace FundsManager
         private void countriesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            CountriesForm countries_form = new CountriesForm(manager);
+            CountriesForm countries_form = new CountriesForm();
             countries_form.MdiParent = this;
             countries_form.Show();
         }
@@ -50,7 +48,7 @@ namespace FundsManager
         private void itemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            ItemsForm items_form = new ItemsForm(manager);
+            ItemsForm items_form = new ItemsForm();
             items_form.MdiParent = this;
             items_form.Show();
         }
@@ -58,7 +56,7 @@ namespace FundsManager
         private void sectorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            SectorsForm sectors_form = new SectorsForm(manager);
+            SectorsForm sectors_form = new SectorsForm();
             sectors_form.MdiParent = this;
             sectors_form.Show();
         }
@@ -66,7 +64,7 @@ namespace FundsManager
         private void creditorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            CreditorsForm creditors_form = new CreditorsForm(manager);
+            CreditorsForm creditors_form = new CreditorsForm();
             creditors_form.MdiParent = this;
             creditors_form.Show();
         }
@@ -74,7 +72,7 @@ namespace FundsManager
         private void clientsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            ClientsForm clients_form = new ClientsForm(manager);
+            ClientsForm clients_form = new ClientsForm();
             clients_form.MdiParent = this;
             clients_form.Show();
         }
@@ -82,7 +80,7 @@ namespace FundsManager
         private void accountsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            AccountsForm accounts_form = new AccountsForm(manager);
+            AccountsForm accounts_form = new AccountsForm();
             accounts_form.MdiParent = this;
             accounts_form.Show();
         }
@@ -90,7 +88,7 @@ namespace FundsManager
         private void banksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            BanksForm banks_form = new BanksForm(manager);
+            BanksForm banks_form = new BanksForm();
             banks_form.MdiParent = this;
             banks_form.Show();
         }
@@ -98,7 +96,7 @@ namespace FundsManager
         private void bankingAccountsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            BankingAccountsForm banking_form = new BankingAccountsForm(manager);
+            BankingAccountsForm banking_form = new BankingAccountsForm();
             banking_form.MdiParent = this;
             banking_form.Show();
         }
@@ -106,7 +104,7 @@ namespace FundsManager
         private void currenciesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            CurrenciesForm currency_form = new CurrenciesForm(manager);
+            CurrenciesForm currency_form = new CurrenciesForm();
             currency_form.MdiParent = this;
             currency_form.Show();
         }
@@ -114,7 +112,7 @@ namespace FundsManager
         private void movementToolStripMenuItem_Click(object sender, EventArgs e)
         { 
             this.IsMdiContainer = true;
-            GeneralLedgerForm general_ledger_form = new GeneralLedgerForm(manager);
+            GeneralLedgerForm general_ledger_form = new GeneralLedgerForm();
             general_ledger_form.MdiParent = this;
             general_ledger_form.Show();
         }
@@ -122,7 +120,7 @@ namespace FundsManager
         private void employeesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            EmployeesForm employee_form = new EmployeesForm(manager);
+            EmployeesForm employee_form = new EmployeesForm();
             employee_form.MdiParent = this;
             employee_form.Show();
         }
@@ -130,7 +128,7 @@ namespace FundsManager
         private void movementsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            MovementReportForm mreport_form = new MovementReportForm(manager);
+            MovementReportForm mreport_form = new MovementReportForm();
             mreport_form.MdiParent = this;
             mreport_form.Show();
         }
@@ -138,7 +136,7 @@ namespace FundsManager
         private void subaccountsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            SubaccountsForm subaccount_form = new SubaccountsForm(manager);
+            SubaccountsForm subaccount_form = new SubaccountsForm();
             subaccount_form.MdiParent = this;
             subaccount_form.Show();
         }
@@ -146,7 +144,7 @@ namespace FundsManager
         private void otherDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            OtherDetailsForm otherdetail_form = new OtherDetailsForm(manager);
+            OtherDetailsForm otherdetail_form = new OtherDetailsForm();
             otherdetail_form.MdiParent = this;
             otherdetail_form.Show();
         }
@@ -154,7 +152,7 @@ namespace FundsManager
         private void investorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            InvestorsForm investor_form = new InvestorsForm(manager);
+            InvestorsForm investor_form = new InvestorsForm();
             investor_form.MdiParent = this;
             investor_form.Show();
         }
@@ -162,7 +160,7 @@ namespace FundsManager
         private void bondsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            BondsForm bond_form = new BondsForm(manager);
+            BondsForm bond_form = new BondsForm();
             bond_form.MdiParent = this;
             bond_form.Show();
         }
@@ -170,7 +168,7 @@ namespace FundsManager
         private void bondsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            BondsList bondlist_form = new BondsList(manager);
+            BondsList bondlist_form = new BondsList();
             bondlist_form.MdiParent = this;
             bondlist_form.Show();
         }
@@ -178,7 +176,7 @@ namespace FundsManager
         private void generateInterestsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            GenerateBondInterestForm interest_form = new GenerateBondInterestForm(manager);
+            GenerateBondInterestForm interest_form = new GenerateBondInterestForm();
             interest_form.MdiParent = this;
             interest_form.Show();
         }
@@ -186,7 +184,7 @@ namespace FundsManager
         private void investmentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            DisbursementsForm disbursements_form = new DisbursementsForm(manager);
+            DisbursementsForm disbursements_form = new DisbursementsForm();
             disbursements_form.MdiParent = this;
             disbursements_form.Show();
             /*
@@ -198,7 +196,7 @@ namespace FundsManager
         private void underlyingDebtorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            UnderlyingDebtorsForm underlyingdebtor_form = new UnderlyingDebtorsForm(manager);
+            UnderlyingDebtorsForm underlyingdebtor_form = new UnderlyingDebtorsForm();
             underlyingdebtor_form.MdiParent = this;
             underlyingdebtor_form.Show();
         }

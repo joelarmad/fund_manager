@@ -8,13 +8,28 @@ namespace FundsManager
 {
     public class MyFundsManager
     {
+        private static MyFundsManager fInstance;
+
         private FundsDBEntities my_db;
         private int selected;
 
         public int Selected { get => selected; set => selected = value; }
         public FundsDBEntities My_db { get => my_db; set => my_db = value; }
 
-        public MyFundsManager()
+        public static MyFundsManager SingletonInstance
+        {
+            get
+            {
+                if (fInstance == null)
+                {
+                    fInstance = new MyFundsManager();
+                }
+
+                return fInstance;
+            }
+        }
+
+        private MyFundsManager()
         {
             selected = 1;
             My_db = new FundsDBEntities();

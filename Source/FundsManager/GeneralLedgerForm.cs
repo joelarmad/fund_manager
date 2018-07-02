@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FundsManager.Classes.Utilities;
 
 namespace FundsManager
 {
@@ -25,9 +26,9 @@ namespace FundsManager
 
         private int fMovementIdReference = 0;
 
-        public GeneralLedgerForm(MyFundsManager _manager)
+        public GeneralLedgerForm()
         {
-            manager = _manager;
+            manager = MyFundsManager.SingletonInstance;
             movements = new List<Movement>();
             InitializeComponent();
             textBox1.Text = 0.ToString();
@@ -52,7 +53,7 @@ namespace FundsManager
                 comboBox3.SelectedItem = null;
                 comboBox3.SelectedIndex = -1;
                 comboBox3.SelectedText = "Select detail";
-                textBox3.Text = MyNewReference();
+                textBox3.Text = KeyDefinitions.NextAccountMovementReference;
 
                 fFloatingAccounts = manager.My_db.Accounts.ToList();
             }
@@ -163,35 +164,6 @@ namespace FundsManager
             catch (Exception _ex)
             {
                 Console.WriteLine("Error in GeneralLedgerForm.OnSubAccountChanged: " + _ex.Message);
-            }
-        }
-
-        private String MyNewReference()
-        {
-            try
-            {
-                DateTime moment = DateTime.Today;
-                String last_reference = "";
-
-                try
-                {
-                    last_reference = manager.My_db.AccountingMovements.OrderByDescending(ac => ac.Id).First().reference;
-                }
-                catch (Exception e)
-                {
-                    e.Source = "First time reference";
-                    last_reference = "GL170000";
-                }
-
-                last_reference = last_reference.Substring(4);
-                int reference_number = Convert.ToInt32(last_reference) + 1;
-                String new_reference = "GL" + moment.ToString("yy") + Convert.ToString(reference_number).PadLeft(4, '0'); ;
-                return new_reference;
-            }
-            catch (Exception _ex)
-            {
-                Console.WriteLine("Error in GeneralLedgerForm.MyNewReference: " + _ex.Message);
-                return "";
             }
         }
 
@@ -413,7 +385,7 @@ namespace FundsManager
                     manager.My_db.AccountingMovements.Add(_movement);
                     manager.My_db.SaveChanges();
 
-                    textBox3.Text = MyNewReference();
+                    textBox3.Text = KeyDefinitions.NextAccountMovementReference;
                     textBox4.Clear();
                     textBox5.Clear();
                     listView1.Items.Clear();
