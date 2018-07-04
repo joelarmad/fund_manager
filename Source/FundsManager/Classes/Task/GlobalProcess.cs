@@ -16,13 +16,8 @@ namespace FundsManager.Classes.Task
         {
             try
             {
-
                 MyFundsManager _manager = MyFundsManager.SingletonInstance;
-
-                Account _bondInterestAcruedAccount = _manager.My_db.Accounts.FirstOrDefault(x => x.number == "515");
-                Subaccount _bondInvestorInterestAcct = _manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == _bondInterestAcruedAccount.Id && x.name == "Bond Investor Interests");
-                Subaccount _bondTFFInterestAcct = _manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == _bondInterestAcruedAccount.Id && x.name == "Bond TFF Interests");
-
+                
                 DateTime _now = DateTime.Now.Date;
 
                 List<Bond> _bonds = _manager.My_db.Bonds.Where(x => x.issued <= _now && x.active == 1).ToList();
@@ -32,51 +27,40 @@ namespace FundsManager.Classes.Task
                     List<BondsInvestor> _bondInvestors = _manager.My_db.BondsInvestors.Where(x => x.FK_BondsInvestors_Bonds == _bond.Id).ToList();
 
                     foreach (BondsInvestor _bondInvestor in _bondInvestors)
-                    {                        
-                        if (_bondInterestAcruedAccount != null)
+                    {
+                        DateTime _interestDate = _bond.issued.AddMonths(1);
+
+                        while (_interestDate <= _bond.expired && _interestDate <= DateTime.Now.Date)
                         {
-                            DateTime _profitDate = _bond.issued.AddMonths(1);
+                            InvestorBondInterest _investorBondInterest = _manager.My_db.InvestorBondInterests.FirstOrDefault(x => x.BondId == _bond.Id && x.InvestorId == _bondInvestor.FK_BondsInvestors_Investors && x.InterestDate == _interestDate);
 
-                            while (_profitDate <= _bond.expired && _profitDate <= DateTime.Now.Date)
+                            if (_investorBondInterest == null)
                             {
-                                InvestorBondProfit _profit = _manager.My_db.InvestorBondProfits.FirstOrDefault(x => x.BondId == _bond.Id && x.InvestorId == _bondInvestor.FK_BondsInvestors_Investors && x.date == _profitDate);
+                                decimal _investorInterest = _bond.price * (decimal)_bondInvestor.quantity * (decimal)_bond.interest_on_bond / 100;
+                                decimal _fundInterest = _bond.price * (decimal)_bondInvestor.quantity * (decimal)_bond.interest_tff_contribution / 100;
 
-                                if (_profit == null)
-                                {
-                                    decimal _investorProfit = _bond.price * (decimal)_bondInvestor.quantity * (decimal)_bond.interest_on_bond / 100;
-                                    decimal _fundProfit = _bond.price * (decimal)_bondInvestor.quantity * (decimal)_bond.interest_tff_contribution / 100;
+                                generateAccountMovementForBondInterest(_bond, _bondInvestor, _interestDate, _investorInterest, _fundInterest);
+                            }
 
-                                    InvestorBondProfit _newInvestorProfit = new InvestorBondProfit();
-                                    _newInvestorProfit.date = _profitDate;
-                                    _newInvestorProfit.BondId = _bond.Id;
-                                    _newInvestorProfit.InvestorId = _bondInvestor.FK_BondsInvestors_Investors;
-                                    _newInvestorProfit.Income = _investorProfit;
+                            if (_interestDate == _bond.expired)
+                            {
+                                break;
+                            }
 
-                                    FundBondProfit _newFundBondProfit = new FundBondProfit();
-                                    _newFundBondProfit.date = _profitDate;
-                                    _newFundBondProfit.BondId = _bond.Id;
-                                    _newFundBondProfit.Income = _fundProfit;
+                            _interestDate = _interestDate.AddMonths(1);
 
-                                    _manager.My_db.InvestorBondProfits.Add(_newInvestorProfit);
-                                    _manager.My_db.FundBondProfits.Add(_newFundBondProfit);
+                            if (_interestDate > _bond.expired && _interestDate <= DateTime.Now.Date)
+                            {
+                                double _totalDays = (_bond.expired.Value - _bond.issued).TotalDays;
+                                double _daysExceeded = (_bond.expired.Value - _interestDate.AddMonths(-1)).TotalDays;
+                                decimal _factor = (decimal)(_daysExceeded / _totalDays);
 
-                                    if (_bondInterestAcruedAccount != null)
-                                    {
-                                        _bondInterestAcruedAccount.amount += _newInvestorProfit.Income + _newFundBondProfit.Income;
-                                    }
+                                decimal _investorInterest = _factor * _bond.price * (decimal)_bondInvestor.quantity * (decimal)_bond.interest_on_bond / 100;
+                                decimal _fundInterest = _factor * _bond.price * (decimal)_bondInvestor.quantity * (decimal)_bond.interest_tff_contribution / 100;
 
-                                    if (_bondInvestorInterestAcct != null)
-                                    {
-                                        _bondInvestorInterestAcct.amount += _newInvestorProfit.Income;
-                                    }
+                                generateAccountMovementForBondInterest(_bond, _bondInvestor, _bond.expired.Value, _investorInterest, _fundInterest);
 
-                                    if (_bondTFFInterestAcct != null)
-                                    {
-                                        _bondTFFInterestAcct.amount += _newFundBondProfit.Income;
-                                    }
-                                }
-
-                                _profitDate = _profitDate.AddMonths(1);
+                                break;
                             }
                         }
                     }
@@ -91,7 +75,58 @@ namespace FundsManager.Classes.Task
             }
             catch (Exception _ex)
             {
-                Console.WriteLine("Error in GlobalProcess: " + _ex.Message);
+                Console.WriteLine("Error in GlobalProcess.performBondProfitsUpdate: " + _ex.Message);
+            }
+        }
+
+        private static void generateAccountMovementForBondInterest(Bond aBond, BondsInvestor aInvestor, DateTime aInterestDate, decimal aInvestorAmount, decimal aFundAmount)
+        {
+            try
+            {
+                MyFundsManager _manager = MyFundsManager.SingletonInstance;
+
+                //TODO: esto deberia hacerse en el momento de cobrar los intereses
+                //Account _bondInterestAcruedAccount = _manager.My_db.Accounts.FirstOrDefault(x => x.number == "515");
+                //Subaccount _bondInvestorInterestAcct = _manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == _bondInterestAcruedAccount.Id && x.name == "Bond Investor Interests");
+                //Subaccount _bondTFFInterestAcct = _manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == _bondInterestAcruedAccount.Id && x.name == "Bond TFF Interests");
+                
+                
+
+                InvestorBondInterest _newInvestorInterest = new InvestorBondInterest();
+                _newInvestorInterest.InterestDate = aInterestDate;
+                _newInvestorInterest.BondId = aBond.Id;
+                _newInvestorInterest.InvestorId = aInvestor.FK_BondsInvestors_Investors;
+                _newInvestorInterest.Amount = aInvestorAmount;
+                _newInvestorInterest.Extracted = false;
+
+                FundBondInterest _newFundBondInterest = new FundBondInterest();
+                _newFundBondInterest.InterestDate = aInterestDate;
+                _newFundBondInterest.BondId = aBond.Id;
+                _newFundBondInterest.Amount = aFundAmount;
+                _newFundBondInterest.Extracted = false;
+
+                _manager.My_db.InvestorBondInterests.Add(_newInvestorInterest);
+                _manager.My_db.FundBondInterests.Add(_newFundBondInterest);
+
+                //TODO: esto deberia hacerse en el momento de cobrar los intereses
+                //if (_bondInterestAcruedAccount != null)
+                //{
+                //    _bondInterestAcruedAccount.amount += _newInvestorInterest.Income + _newFundBondInterest.Income;
+                //}
+
+                //if (_bondInvestorInterestAcct != null)
+                //{
+                //    _bondInvestorInterestAcct.amount += _newInvestorInterest.Income;
+                //}
+
+                //if (_bondTFFInterestAcct != null)
+                //{
+                //    _bondTFFInterestAcct.amount += _newFundBondInterest.Income;
+                //}
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error in GlobalProcess.performBondProfitsUpdate: " + _ex.Message);
             }
         }
     }
