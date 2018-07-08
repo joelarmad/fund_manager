@@ -76,8 +76,17 @@ namespace FundsManager
                 int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
 
-                manager.DeleteCurrency(Convert.ToInt32(selectedRow.Cells[0].Value));
-                this.currenciesTableAdapter.Fill(this.fundsDBDataSet.Currencies);
+                int _Id = Convert.ToInt32(selectedRow.Cells[0].Value);
+
+                if (_Id != 1)
+                {
+                    manager.DeleteCurrency(Convert.ToInt32(selectedRow.Cells[0].Value));
+                    this.currenciesTableAdapter.Fill(this.fundsDBDataSet.Currencies);
+                }
+                else
+                {
+                    alert = MessageBox.Show("This currency can't be deleted.", "Illegal operation");
+                }
 
                 cmdCancel_Click(null, null);
             }
@@ -100,6 +109,10 @@ namespace FundsManager
                 txtSymbol.Text = _selectedItem.symbol;
                 txtExchange.Text = _selectedItem.exchange.ToString();
 
+                txtName.Enabled = _id != 1;
+                txtCode.Enabled = _id != 1;
+                txtSymbol.Enabled = _id != 1;
+
                 cmdCancel.Visible = true;
             }
         }
@@ -113,6 +126,10 @@ namespace FundsManager
             txtCode.Text = "";
             txtSymbol.Text = "";
             txtExchange.Text = "";
+
+            txtName.Enabled = true;
+            txtCode.Enabled = true;
+            txtSymbol.Enabled = true;
 
             cmdCancel.Visible = false;
         }

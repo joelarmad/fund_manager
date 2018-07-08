@@ -264,7 +264,6 @@ namespace FundsManager
                     _movement.description = "";
                     _movement.date = bond.issued;
                     _movement.reference = KeyDefinitions.NextAccountMovementReference;
-                    //TODO: Poner currency correcta cuando la manden
                     _movement.FK_AccountingMovements_Currencies = manager.My_db.Currencies.FirstOrDefault().Id;
                     //TODO: Poner ORIG cuando la manden
                     _movement.original_reference = "";
