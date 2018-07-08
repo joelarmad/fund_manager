@@ -216,5 +216,13 @@ namespace FundsManager
             _returnsState.MdiParent = this;
             _returnsState.Show();
         }
+
+        private void makePaymentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            BondPayments _bondPayments = new BondPayments();
+            _bondPayments.MdiParent = this;
+            _bondPayments.Show();
+        }
     }
 }

@@ -233,13 +233,15 @@ namespace FundsManager
                 manager.My_db.SaveChanges();
 
                 txtNumber.Text = "Bond " + Conversions.toRomanNumeral(fBondConsecutive);
-                txtPrice.Text = "";
-                txtBondInterest.Text = "";
-                txtTFFInterest.Text = "";
-                txtInvestorPieces.Text = "";
-                txtBondPieces.Text = "";
-                cbInvestors.ResetText();
+                txtPrice.Text = "0";
+                txtBondInterest.Text = "10";
+                txtTFFInterest.Text = "1";
+                txtInvestorPieces.Text = "0";
+                txtBondPieces.Text = "0";
+                cbInvestors.SelectedText = "Select investor";
                 listView1.Items.Clear();
+                txtPrice.ReadOnly = false;
+                txtBondPieces.ReadOnly = false;
 
                 //TODO: Crear un movimiento contable con un debito a 100 y un credito a 510 por el monto del bono
 

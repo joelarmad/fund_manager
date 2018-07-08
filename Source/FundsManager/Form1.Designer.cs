@@ -256,6 +256,7 @@
             this.makePaymentsToolStripMenuItem.Name = "makePaymentsToolStripMenuItem";
             this.makePaymentsToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.makePaymentsToolStripMenuItem.Text = "Make Payments";
+            this.makePaymentsToolStripMenuItem.Click += new System.EventHandler(this.makePaymentsToolStripMenuItem_Click);
             // 
             // investmentsToolStripMenuItem
             // 
