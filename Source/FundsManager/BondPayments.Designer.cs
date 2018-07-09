@@ -37,11 +37,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cbBond = new System.Windows.Forms.ComboBox();
             this.lvGeneratedInterest = new System.Windows.Forms.ListView();
+            this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.InterestDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Amount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.PaymentState = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.PaymentDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
             this.cmdPayInterest = new System.Windows.Forms.Button();
             this.cmdPayBond = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblExpired = new System.Windows.Forms.Label();
             this.lblInvestorPieces = new System.Windows.Forms.Label();
             this.lblExpirationDate = new System.Windows.Forms.Label();
             this.lblIssuingDate = new System.Windows.Forms.Label();
@@ -59,13 +65,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.investorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.investorsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.InvestorsTableAdapter();
-            this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.InterestDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Amount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.PaymentState = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.PaymentDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button1 = new System.Windows.Forms.Button();
-            this.lblExpired = new System.Windows.Forms.Label();
+            this.cmdPayAllInterest = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.investorsBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
@@ -142,6 +142,32 @@
             this.lvGeneratedInterest.TabIndex = 4;
             this.lvGeneratedInterest.UseCompatibleStateImageBehavior = false;
             this.lvGeneratedInterest.View = System.Windows.Forms.View.Details;
+            this.lvGeneratedInterest.SelectedIndexChanged += new System.EventHandler(this.lvGeneratedInterest_SelectedIndexChanged);
+            // 
+            // Id
+            // 
+            this.Id.Text = "Id";
+            this.Id.Width = 30;
+            // 
+            // InterestDate
+            // 
+            this.InterestDate.Text = "Interest Date";
+            this.InterestDate.Width = 150;
+            // 
+            // Amount
+            // 
+            this.Amount.Text = "Amount";
+            this.Amount.Width = 80;
+            // 
+            // PaymentState
+            // 
+            this.PaymentState.Text = "Payment state";
+            this.PaymentState.Width = 120;
+            // 
+            // PaymentDate
+            // 
+            this.PaymentDate.Text = "PaymentDate";
+            this.PaymentDate.Width = 150;
             // 
             // label3
             // 
@@ -161,6 +187,7 @@
             this.cmdPayInterest.TabIndex = 6;
             this.cmdPayInterest.Text = "Pay selected interest";
             this.cmdPayInterest.UseVisualStyleBackColor = true;
+            this.cmdPayInterest.Click += new System.EventHandler(this.cmdPayInterest_Click);
             // 
             // cmdPayBond
             // 
@@ -171,6 +198,7 @@
             this.cmdPayBond.TabIndex = 7;
             this.cmdPayBond.Text = "Pay Bond";
             this.cmdPayBond.UseVisualStyleBackColor = true;
+            this.cmdPayBond.Click += new System.EventHandler(this.cmdPayBond_Click);
             // 
             // label4
             // 
@@ -206,6 +234,17 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Bond";
+            // 
+            // lblExpired
+            // 
+            this.lblExpired.AutoSize = true;
+            this.lblExpired.ForeColor = System.Drawing.Color.Red;
+            this.lblExpired.Location = new System.Drawing.Point(6, 143);
+            this.lblExpired.Name = "lblExpired";
+            this.lblExpired.Size = new System.Drawing.Size(169, 13);
+            this.lblExpired.TabIndex = 24;
+            this.lblExpired.Text = "Bond has reached expiration date.";
+            this.lblExpired.Visible = false;
             // 
             // lblInvestorPieces
             // 
@@ -343,58 +382,23 @@
             // 
             this.investorsTableAdapter.ClearBeforeFill = true;
             // 
-            // Id
+            // cmdPayAllInterest
             // 
-            this.Id.Text = "Id";
-            this.Id.Width = 30;
-            // 
-            // InterestDate
-            // 
-            this.InterestDate.Text = "Interest Date";
-            this.InterestDate.Width = 150;
-            // 
-            // Amount
-            // 
-            this.Amount.Text = "Amount";
-            this.Amount.Width = 80;
-            // 
-            // PaymentState
-            // 
-            this.PaymentState.Text = "Payment state";
-            this.PaymentState.Width = 120;
-            // 
-            // PaymentDate
-            // 
-            this.PaymentDate.Text = "PaymentDate";
-            this.PaymentDate.Width = 150;
-            // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(438, 248);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(127, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Pay ALL interests";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // lblExpired
-            // 
-            this.lblExpired.AutoSize = true;
-            this.lblExpired.ForeColor = System.Drawing.Color.Red;
-            this.lblExpired.Location = new System.Drawing.Point(6, 143);
-            this.lblExpired.Name = "lblExpired";
-            this.lblExpired.Size = new System.Drawing.Size(169, 13);
-            this.lblExpired.TabIndex = 24;
-            this.lblExpired.Text = "Bond has reached expiration date.";
-            this.lblExpired.Visible = false;
+            this.cmdPayAllInterest.Enabled = false;
+            this.cmdPayAllInterest.Location = new System.Drawing.Point(438, 248);
+            this.cmdPayAllInterest.Name = "cmdPayAllInterest";
+            this.cmdPayAllInterest.Size = new System.Drawing.Size(127, 23);
+            this.cmdPayAllInterest.TabIndex = 10;
+            this.cmdPayAllInterest.Text = "Pay ALL interests";
+            this.cmdPayAllInterest.UseVisualStyleBackColor = true;
+            this.cmdPayAllInterest.Click += new System.EventHandler(this.cmdPayAllInterest_Click);
             // 
             // BondPayments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(570, 478);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.cmdPayAllInterest);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cmdPayBond);
             this.Controls.Add(this.cmdPayInterest);
@@ -458,7 +462,7 @@
         private System.Windows.Forms.ColumnHeader Amount;
         private System.Windows.Forms.ColumnHeader PaymentState;
         private System.Windows.Forms.ColumnHeader PaymentDate;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cmdPayAllInterest;
         private System.Windows.Forms.Label lblExpired;
     }
 }

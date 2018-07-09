@@ -14,6 +14,9 @@ namespace FundsManager
     {
         private MyFundsManager manager = MyFundsManager.SingletonInstance;
 
+        private int fBondId = 0;
+        private int fInvestorId = 0;
+
         public BondPayments()
         {
             InitializeComponent();
@@ -38,7 +41,7 @@ namespace FundsManager
         {
             Dictionary<int, string> comboSource = new Dictionary<int, string>();
 
-            int _investorId = Convert.ToInt32(cbInvestor.SelectedValue);
+            int _investorId = fInvestorId = Convert.ToInt32(cbInvestor.SelectedValue);
 
             foreach (BondsInvestor _bondInvestor in manager.My_db.BondsInvestors.Where(x => x.FK_BondsInvestors_Investors == _investorId))
             {
@@ -74,14 +77,15 @@ namespace FundsManager
         {
             clearBondData();
 
-            int _investorId = Convert.ToInt32(cbInvestor.SelectedValue);
-            int _bondId = Convert.ToInt32(cbBond.SelectedValue);
+            int _investorId = fInvestorId = Convert.ToInt32(cbInvestor.SelectedValue);
+            int _bondId = fBondId = Convert.ToInt32(cbBond.SelectedValue);
 
             Bond _bond = manager.My_db.Bonds.FirstOrDefault(x => x.Id == _bondId);
             BondsInvestor _bondInvestor = manager.My_db.BondsInvestors.FirstOrDefault(x => x.FK_BondsInvestors_Bonds == _bondId && x.FK_BondsInvestors_Investors == _investorId);
-
+            
             if (_bond != null && _bondInvestor != null)
             {
+
                 lblNumber.Text = _bond.number;
                 lblPrice.Text = _bond.price.ToString();
                 lblPieces.Text = _bond.pieces.ToString();
@@ -91,18 +95,10 @@ namespace FundsManager
                 lblExpirationDate.Text = _bond.expired.HasValue ? _bond.expired.Value.ToLongDateString() : "";
                 lblInvestorPieces.Text = _bondInvestor.quantity.ToString();
 
-                List<InvestorBondInterest> _interests = manager.My_db.InvestorBondInterests.Where(x => x.BondId == _bondId && x.InvestorId == _investorId).ToList();
-
-                foreach (InvestorBondInterest _interest in _interests)
-                {
-                    string[] _row = { _interest.Id.ToString(), _interest.InterestDate.ToLongDateString(), String.Format("{0:0.00}", _interest.Amount), _interest.Extracted ? "PAID" : "Waitting", _interest.ExtractionDate.HasValue ? _interest.ExtractionDate.Value.ToLongDateString() : "" };
-
-                    ListViewItem _itemRow = new ListViewItem(_row);
-
-                    lvGeneratedInterest.Items.Add(_itemRow);
-                }
+                loadInterests();
 
                 lblExpired.Visible = _bond.active == 0;
+                
             }
         }
 
@@ -118,6 +114,112 @@ namespace FundsManager
             lblInvestorPieces.Text = "";
             lblExpired.Visible = false;
             lvGeneratedInterest.Items.Clear();
+        }
+
+        private void loadInterests()
+        {
+            if (fBondId > 0 && fInvestorId > 0)
+            {
+                lvGeneratedInterest.Items.Clear();
+
+                List<InvestorBondInterest> _interests = manager.My_db.InvestorBondInterests.Where(x => x.BondId == fBondId && x.InvestorId == fInvestorId).ToList();
+
+                foreach (InvestorBondInterest _interest in _interests)
+                {
+                    string[] _row = { _interest.Id.ToString(), _interest.InterestDate.ToLongDateString(), String.Format("{0:0.00}", _interest.Amount), _interest.Extracted ? "PAID" : "Waitting", _interest.ExtractionDate.HasValue ? _interest.ExtractionDate.Value.ToLongDateString() : "" };
+
+                    ListViewItem _itemRow = new ListViewItem(_row);
+
+                    lvGeneratedInterest.Items.Add(_itemRow);
+                }
+
+                checkEnablingPayAllInterestButton();
+            }
+
+            cmdPayInterest.Enabled = false;
+        }
+
+        private void lvGeneratedInterest_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmdPayInterest.Enabled = false;
+
+            if (lvGeneratedInterest.SelectedIndices.Count > 0 && lvGeneratedInterest.SelectedIndices[0] >= 0)
+            {
+                int _index = lvGeneratedInterest.SelectedIndices[0];
+
+                int _interestId = Convert.ToInt32(lvGeneratedInterest.Items[_index].Text);
+
+                InvestorBondInterest _interest = manager.My_db.InvestorBondInterests.FirstOrDefault(x => x.Id == _interestId);
+
+                if (_interest != null)
+                {
+                    cmdPayInterest.Enabled = !_interest.Extracted;
+                }
+
+            }
+        }
+
+        private void cmdPayInterest_Click(object sender, EventArgs e)
+        {
+            if (lvGeneratedInterest.SelectedIndices.Count > 0 && lvGeneratedInterest.SelectedIndices[0] >= 0)
+            {
+                int _index = lvGeneratedInterest.SelectedIndices[0];
+
+                int _interestId = Convert.ToInt32(lvGeneratedInterest.Items[_index].Text);
+
+                InvestorBondInterest _interest = manager.My_db.InvestorBondInterests.FirstOrDefault(x => x.Id == _interestId);
+
+                if (_interest != null && !_interest.Extracted)
+                {
+                    _interest.Extracted = true;
+                    _interest.ExtractionDate = DateTime.Now.Date;
+
+                    //TODO: Generar los movimientos de cuenta para el pago del interes.
+
+                    manager.My_db.SaveChanges();
+
+                    loadInterests();
+
+                    lvGeneratedInterest.SelectedIndices.Clear();
+                }
+
+            }
+        }
+
+        private void checkEnablingPayAllInterestButton()
+        {
+            if (fBondId > 0 && fInvestorId > 0)
+            {
+                
+                List<InvestorBondInterest> _interests = manager.My_db.InvestorBondInterests.Where(x => x.BondId == fBondId && x.InvestorId == fInvestorId && !x.Extracted).ToList();
+
+                cmdPayAllInterest.Enabled = _interests.Count > 0;
+            }
+        }
+
+        private void cmdPayAllInterest_Click(object sender, EventArgs e)
+        {
+            if (fBondId > 0 && fInvestorId > 0)
+            {
+
+                List<InvestorBondInterest> _interests = manager.My_db.InvestorBondInterests.Where(x => x.BondId == fBondId && x.InvestorId == fInvestorId && !x.Extracted).ToList();
+
+                foreach (InvestorBondInterest _interest in _interests) {
+                    _interest.Extracted = true;
+                    _interest.ExtractionDate = DateTime.Now.Date;
+
+                    //TODO: Generar el movimiento de cuenta necesario
+
+                    manager.My_db.SaveChanges();
+                }
+
+                loadInterests();
+            }
+        }
+
+        private void cmdPayBond_Click(object sender, EventArgs e)
+        {
+            //TODO: generar el movimiento de cuenta necesario
         }
     }
 }
