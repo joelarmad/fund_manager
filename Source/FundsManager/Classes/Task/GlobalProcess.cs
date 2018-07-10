@@ -53,10 +53,9 @@ namespace FundsManager.Classes.Task
                             {
                                 double _totalDays = (_bond.expired.Value - _bond.issued).TotalDays;
                                 double _daysExceeded = (_bond.expired.Value - _interestDate.AddMonths(-1)).TotalDays;
-                                decimal _factor = (decimal)(_daysExceeded / _totalDays);
 
-                                decimal _investorInterest = _factor * _bond.price * (decimal)_bondInvestor.quantity * (decimal)_bond.interest_on_bond / 100;
-                                decimal _fundInterest = _factor * _bond.price * (decimal)_bondInvestor.quantity * (decimal)_bond.interest_tff_contribution / 100;
+                                decimal _investorInterest = (decimal)_daysExceeded * _bond.price * (decimal)_bondInvestor.quantity * (decimal)_bond.interest_on_bond / 3000;
+                                decimal _fundInterest = (decimal)_daysExceeded * _bond.price * (decimal)_bondInvestor.quantity * (decimal)_bond.interest_tff_contribution / 3000;
 
                                 generateAccountMovementForBondInterest(_bond, _bondInvestor, _bond.expired.Value, _investorInterest, _fundInterest);
 

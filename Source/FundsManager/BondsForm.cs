@@ -70,6 +70,7 @@ namespace FundsManager
         {
             try
             {
+
                 if (listView1.Items.Count > 0)
                     listView1.Items.RemoveAt(listView1.Items.Count - 1);
                 InvestorForBond investor = new InvestorForBond();
@@ -77,13 +78,35 @@ namespace FundsManager
                 investor.Pieces = (float)Convert.ToDouble(txtInvestorPieces.Text);
                 investor.Id = Convert.ToInt32(cbInvestors.SelectedValue);
 
+                int _addedPieces = 0;
+                int _index = -1;
+
+                foreach (InvestorForBond _investorForBond in investors)
+                {
+                    _index++;
+
+                    if (_investorForBond.Id == investor.Id)
+                    {
+                        _addedPieces = (int)_investorForBond.Pieces;
+                        break;
+                    }
+                }
+
+                if (_addedPieces != 0)
+                {
+                    investor.Pieces += _addedPieces;
+                    investors.RemoveAt(_index);
+                    listView1.Items.RemoveAt(_index);
+                }
+                
                 investors.Add(investor);
+
                 Decimal pieces_price = Convert.ToDecimal(txtPrice.Text);
 
                 float investor_amount = (float)pieces_price * investor.Pieces;
 
 
-                string[] row = { cbInvestors.Text, txtInvestorPieces.Text, string.Format("€{0:N2}", investor_amount) };
+                string[] row = { cbInvestors.Text, investor.Pieces.ToString(), string.Format("€{0:N2}", investor_amount) };
                 ListViewItem my_item = new ListViewItem(row);
                 listView1.Items.Add(my_item);
 
@@ -232,16 +255,7 @@ namespace FundsManager
 
                 manager.My_db.SaveChanges();
 
-                txtNumber.Text = "Bond " + Conversions.toRomanNumeral(fBondConsecutive);
-                txtPrice.Text = "0";
-                txtBondInterest.Text = "10";
-                txtTFFInterest.Text = "1";
-                txtInvestorPieces.Text = "0";
-                txtBondPieces.Text = "0";
-                cbInvestors.SelectedText = "Select investor";
-                listView1.Items.Clear();
-                txtPrice.ReadOnly = false;
-                txtBondPieces.ReadOnly = false;
+                
 
                 //TODO: Crear un movimiento contable con un debito a 100 y un credito a 510 por el monto del bono
 
@@ -305,8 +319,20 @@ namespace FundsManager
 
                     _CashAtBank.amount += (decimal)bond.pieces * bond.price;
                     _Bonds.amount -= (decimal)bond.pieces * bond.price;
-                    
+
                     manager.My_db.SaveChanges();
+
+                    investors.Clear();
+                    check_pieces = 0;
+                    txtNumber.Text = "Bond " + Conversions.toRomanNumeral(fBondConsecutive);
+                    txtPrice.Text = "0";
+                    txtBondInterest.Text = "10";
+                    txtTFFInterest.Text = "1";
+                    txtInvestorPieces.Text = "0";
+                    txtBondPieces.Text = "0";
+                    listView1.Items.Clear();
+                    txtPrice.ReadOnly = false;
+                    txtBondPieces.ReadOnly = false;
                 }
                 
             }
