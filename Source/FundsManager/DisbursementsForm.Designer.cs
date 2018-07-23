@@ -78,6 +78,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.cmdCreateInvestment = new System.Windows.Forms.Button();
             this.cmdDeleteItem = new System.Windows.Forms.Button();
+            this.fillExcludingOwnBanksToolStrip = new System.Windows.Forms.ToolStrip();
+            this.fillExcludingOwnBanksToolStripButton = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
@@ -85,6 +87,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.banksBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sectorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).BeginInit();
+            this.fillExcludingOwnBanksToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -477,11 +480,31 @@
             this.cmdDeleteItem.UseVisualStyleBackColor = true;
             this.cmdDeleteItem.Click += new System.EventHandler(this.cmdDeleteItem_Click);
             // 
+            // fillExcludingOwnBanksToolStrip
+            // 
+            this.fillExcludingOwnBanksToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fillExcludingOwnBanksToolStripButton});
+            this.fillExcludingOwnBanksToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.fillExcludingOwnBanksToolStrip.Name = "fillExcludingOwnBanksToolStrip";
+            this.fillExcludingOwnBanksToolStrip.Size = new System.Drawing.Size(951, 25);
+            this.fillExcludingOwnBanksToolStrip.TabIndex = 29;
+            this.fillExcludingOwnBanksToolStrip.Text = "fillExcludingOwnBanksToolStrip";
+            this.fillExcludingOwnBanksToolStrip.Visible = false;
+            // 
+            // fillExcludingOwnBanksToolStripButton
+            // 
+            this.fillExcludingOwnBanksToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.fillExcludingOwnBanksToolStripButton.Name = "fillExcludingOwnBanksToolStripButton";
+            this.fillExcludingOwnBanksToolStripButton.Size = new System.Drawing.Size(133, 22);
+            this.fillExcludingOwnBanksToolStripButton.Text = "FillExcludingOwnBanks";
+            this.fillExcludingOwnBanksToolStripButton.Click += new System.EventHandler(this.fillExcludingOwnBanksToolStripButton_Click);
+            // 
             // DisbursementsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(947, 578);
+            this.ClientSize = new System.Drawing.Size(951, 578);
+            this.Controls.Add(this.fillExcludingOwnBanksToolStrip);
             this.Controls.Add(this.cmdDeleteItem);
             this.Controls.Add(this.cmdCreateInvestment);
             this.Controls.Add(this.label11);
@@ -524,6 +547,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.banksBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sectorsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).EndInit();
+            this.fillExcludingOwnBanksToolStrip.ResumeLayout(false);
+            this.fillExcludingOwnBanksToolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -580,5 +605,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Button cmdCreateInvestment;
         private System.Windows.Forms.Button cmdDeleteItem;
+        private System.Windows.Forms.ToolStrip fillExcludingOwnBanksToolStrip;
+        private System.Windows.Forms.ToolStripButton fillExcludingOwnBanksToolStripButton;
     }
 }

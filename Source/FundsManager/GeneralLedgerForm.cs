@@ -37,6 +37,7 @@ namespace FundsManager
             listView1.FullRowSelect = true;
             comboBox1.SelectedIndexChanged += OnAccountChanged;
             comboBox2.SelectedIndexChanged += OnSubAccountChanged;
+            
         }
 
         private void GeneralLedgerForm_Load(object sender, EventArgs e)
@@ -52,7 +53,6 @@ namespace FundsManager
                 comboBox2.SelectedIndex = -1;
                 comboBox3.SelectedItem = null;
                 comboBox3.SelectedIndex = -1;
-                comboBox3.SelectedText = "Select detail";
                 textBox3.Text = KeyDefinitions.NextAccountMovementReference;
 
                 fFloatingAccounts = manager.My_db.Accounts.ToList();
@@ -100,6 +100,8 @@ namespace FundsManager
                     comboBox3.SelectedText = "Select detail";
                     comboBox3.Enabled = false;
                 }
+
+                OnSubAccountChanged(null, null);
             }
             catch (Exception _ex)
             {
@@ -111,6 +113,13 @@ namespace FundsManager
         {
             try
             {
+                comboBox3.DataSource = null;
+                comboBox3.Items.Clear();
+                comboBox3.Text = "";
+                comboBox3.SelectedItem = null;
+                comboBox3.SelectedText = "Select detail";
+                comboBox3.Enabled = false;
+
                 Dictionary<int, string> comboSource = new Dictionary<int, string>();
 
                 //subaccount_type  1 -> Client, 2 -> Banking Account, 3 -> Employee, 4 -> Lender, 5 -> OtherDetail
@@ -141,14 +150,15 @@ namespace FundsManager
                     comboSource.Add(custom_id, _creditor.name);
                 }
 
+                int subacctId = Convert.ToInt32(comboBox2.SelectedValue);
 
-                foreach (OtherDetail _detail in manager.My_db.OtherDetails)
+                foreach (OtherDetail _detail in manager.My_db.OtherDetails.Where(x => x.subacct_id == subacctId).ToList())
                 {
                     int custom_id = int.Parse(5.ToString() + _detail.Id.ToString());
                     comboSource.Add(custom_id, _detail.name);
                 }
 
-                if (comboSource.Count > 0)
+                if (comboSource.Count > 0 && subacctId > 0)
                 {
                     comboBox3.DataSource = new BindingSource(comboSource, null);
                     comboBox3.DisplayMember = "Value";

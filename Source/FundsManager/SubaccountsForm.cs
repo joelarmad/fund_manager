@@ -26,17 +26,10 @@ namespace FundsManager
 
         private void SubaccountsForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'fundsDBDataSet.Subaccounts' table. You can move, or remove it, as needed.
-            this.subaccountsTableAdapter.Fill(this.fundsDBDataSet.Subaccounts);
             // TODO: This line of code loads data into the 'fundsDBDataSet.Accounts' table. You can move, or remove it, as needed.
             this.accountsTableAdapter.Fill(this.fundsDBDataSet.Accounts);
 
-            foreach (DataGridViewRow _row in dataGridView1.Rows)
-            {
-                Account _account = new Account();
-                _account = manager.My_db.Accounts.Find(Convert.ToInt32(_row.Cells[2].Value));
-                _row.Cells[3].Value = _account.name;
-            }
+            loadSubAccountData();
 
         }
 
@@ -55,7 +48,8 @@ namespace FundsManager
                 DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
 
                 manager.DeleteSubaccount(Convert.ToInt32(selectedRow.Cells[0].Value));
-                this.subaccountsTableAdapter.Fill(this.fundsDBDataSet.Subaccounts);
+
+                loadSubAccountData();
 
                 cmdCancel_Click(null, null);
             }
@@ -95,16 +89,8 @@ namespace FundsManager
                 }
             }
 
-
-            this.subaccountsTableAdapter.Fill(this.fundsDBDataSet.Subaccounts);
-
-            foreach (DataGridViewRow _row in dataGridView1.Rows)
-            {
-                Account _account = new Account();
-                _account = manager.My_db.Accounts.Find(Convert.ToInt32(_row.Cells[2].Value));
-                _row.Cells[3].Value = _account.name;
-            }
-
+            loadSubAccountData();
+            
             cmdCancel_Click(null, null);
         }
 
@@ -143,9 +129,43 @@ namespace FundsManager
             cmdAddOrSave.Text = "Add";
 
             txtName.Text = "";
-            cbAccount.SelectedIndex = 0;
 
             cmdCancel.Visible = false;
+        }
+
+        private void cbAccount_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadSubAccountData();
+
+            cmdCancel_Click(null, null);
+        }
+
+        private void loadSubAccountData()
+        {
+            if (fundsDBDataSet != null && cbAccount.SelectedValue != null)
+            {
+                this.subaccountsTableAdapter.FillByAcccountId(this.fundsDBDataSet.Subaccounts, int.Parse(cbAccount.SelectedValue.ToString()));
+
+                foreach (DataGridViewRow _row in dataGridView1.Rows)
+                {
+                    Account _account = new Account();
+                    _account = manager.My_db.Accounts.Find(Convert.ToInt32(_row.Cells[2].Value));
+                    _row.Cells[3].Value = _account.name;
+                }
+            }
+        }
+
+        private void fillByAcccountIdToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.subaccountsTableAdapter.FillByAcccountId(this.fundsDBDataSet.Subaccounts, ((int)(System.Convert.ChangeType(accountIdToolStripTextBox.Text, typeof(int)))));
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

@@ -54,7 +54,7 @@ namespace FundsManager
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Sectors' table. You can move, or remove it, as needed.
                 this.sectorsTableAdapter.Fill(this.fundsDBDataSet.Sectors);
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Banks' table. You can move, or remove it, as needed.
-                this.banksTableAdapter.Fill(this.fundsDBDataSet.Banks);
+                this.banksTableAdapter.FillExcludingOwnBanks(this.fundsDBDataSet.Banks);
                 // TODO: This line of code loads data into the 'fundsDBDataSet.UnderlyingDebtors' table. You can move, or remove it, as needed.
                 this.underlyingDebtorsTableAdapter.Fill(this.fundsDBDataSet.UnderlyingDebtors);
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Clients' table. You can move, or remove it, as needed.
@@ -606,6 +606,19 @@ namespace FundsManager
 
                 checkEnablingAddDisbursementButton();
             }
+        }
+
+        private void fillExcludingOwnBanksToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.banksTableAdapter.FillExcludingOwnBanks(this.fundsDBDataSet.Banks);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

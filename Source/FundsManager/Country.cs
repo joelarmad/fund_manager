@@ -18,6 +18,8 @@ namespace FundsManager
         public Country()
         {
             this.Banks = new HashSet<Bank>();
+            this.Clients = new HashSet<Client>();
+            this.UnderlyingDebtors = new HashSet<UnderlyingDebtor>();
         }
     
         public int Id { get; set; }
@@ -27,5 +29,9 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bank> Banks { get; set; }
         public virtual Fund Fund { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Client> Clients { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UnderlyingDebtor> UnderlyingDebtors { get; set; }
     }
 }

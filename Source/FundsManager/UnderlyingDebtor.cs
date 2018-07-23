@@ -24,10 +24,12 @@ namespace FundsManager
         public string name { get; set; }
         public Nullable<int> debtor_bank_id { get; set; }
         public int FK_UnderlyingDebtors_Funds { get; set; }
+        public int CountryId { get; set; }
     
         public virtual Bank Bank { get; set; }
-        public virtual Fund Fund { get; set; }
+        public virtual Country Country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disbursement> Disbursements { get; set; }
+        public virtual Fund Fund { get; set; }
     }
 }

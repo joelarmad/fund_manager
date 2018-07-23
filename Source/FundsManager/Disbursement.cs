@@ -35,15 +35,15 @@ namespace FundsManager
         public int sector_id { get; set; }
     
         public virtual Bank Bank { get; set; }
-        public virtual Client Client { get; set; }
         public virtual Currency Currency { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disbursement_dates> Disbursement_dates { get; set; }
         public virtual Fund Fund { get; set; }
         public virtual Investment Investment { get; set; }
         public virtual Sector Sector { get; set; }
-        public virtual UnderlyingDebtor UnderlyingDebtor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Item> Items { get; set; }
+        public virtual Client Client { get; set; }
+        public virtual UnderlyingDebtor UnderlyingDebtor { get; set; }
     }
 }

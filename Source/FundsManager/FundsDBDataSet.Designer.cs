@@ -242,6 +242,10 @@ namespace FundsManager {
         
         private global::System.Data.DataRelation relationFK_InvestorBondInterest_Investors;
         
+        private global::System.Data.DataRelation relationFK_Clients_Countries;
+        
+        private global::System.Data.DataRelation relationFK_UnderlyingDebtors_Countries;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1316,6 +1320,8 @@ namespace FundsManager {
             this.relationFK_FundBondInterest_Bonds = this.Relations["FK_FundBondInterest_Bonds"];
             this.relationFK_InvestorBondInterest_Bonds = this.Relations["FK_InvestorBondInterest_Bonds"];
             this.relationFK_InvestorBondInterest_Investors = this.Relations["FK_InvestorBondInterest_Investors"];
+            this.relationFK_Clients_Countries = this.Relations["FK_Clients_Countries"];
+            this.relationFK_UnderlyingDebtors_Countries = this.Relations["FK_UnderlyingDebtors_Countries"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1684,6 +1690,14 @@ namespace FundsManager {
                         this.tableInvestors.IdColumn}, new global::System.Data.DataColumn[] {
                         this.tableInvestorBondInterest.InvestorIdColumn}, false);
             this.Relations.Add(this.relationFK_InvestorBondInterest_Investors);
+            this.relationFK_Clients_Countries = new global::System.Data.DataRelation("FK_Clients_Countries", new global::System.Data.DataColumn[] {
+                        this.tableCountries.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableClients.CountryIdColumn}, false);
+            this.Relations.Add(this.relationFK_Clients_Countries);
+            this.relationFK_UnderlyingDebtors_Countries = new global::System.Data.DataRelation("FK_UnderlyingDebtors_Countries", new global::System.Data.DataColumn[] {
+                        this.tableCountries.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableUnderlyingDebtors.CountryIdColumn}, false);
+            this.Relations.Add(this.relationFK_UnderlyingDebtors_Countries);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2796,6 +2810,8 @@ namespace FundsManager {
             
             private global::System.Data.DataColumn columnFK_Clients_Funds;
             
+            private global::System.Data.DataColumn columnCountryId;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ClientsDataTable() {
@@ -2855,6 +2871,14 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CountryIdColumn {
+                get {
+                    return this.columnCountryId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2890,14 +2914,18 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ClientsRow AddClientsRow(string name, FundsRow parentFundsRowByFK_Clients_Funds1) {
+            public ClientsRow AddClientsRow(string name, FundsRow parentFundsRowByFK_Clients_Funds1, CountriesRow parentCountriesRowByFK_Clients_Countries) {
                 ClientsRow rowClientsRow = ((ClientsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         name,
+                        null,
                         null};
                 if ((parentFundsRowByFK_Clients_Funds1 != null)) {
                     columnValuesArray[2] = parentFundsRowByFK_Clients_Funds1[0];
+                }
+                if ((parentCountriesRowByFK_Clients_Countries != null)) {
+                    columnValuesArray[3] = parentCountriesRowByFK_Clients_Countries[0];
                 }
                 rowClientsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowClientsRow);
@@ -2931,6 +2959,7 @@ namespace FundsManager {
                 this.columnId = base.Columns["Id"];
                 this.columnname = base.Columns["name"];
                 this.columnFK_Clients_Funds = base.Columns["FK_Clients_Funds"];
+                this.columnCountryId = base.Columns["CountryId"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2942,6 +2971,8 @@ namespace FundsManager {
                 base.Columns.Add(this.columnname);
                 this.columnFK_Clients_Funds = new global::System.Data.DataColumn("FK_Clients_Funds", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFK_Clients_Funds);
+                this.columnCountryId = new global::System.Data.DataColumn("CountryId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCountryId);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
                 this.columnId.AutoIncrement = true;
@@ -2953,6 +2984,7 @@ namespace FundsManager {
                 this.columnname.AllowDBNull = false;
                 this.columnname.MaxLength = 2147483647;
                 this.columnFK_Clients_Funds.AllowDBNull = false;
+                this.columnCountryId.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12699,6 +12731,8 @@ namespace FundsManager {
             
             private global::System.Data.DataColumn columnFK_UnderlyingDebtors_Funds;
             
+            private global::System.Data.DataColumn columnCountryId;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public UnderlyingDebtorsDataTable() {
@@ -12766,6 +12800,14 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CountryIdColumn {
+                get {
+                    return this.columnCountryId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -12801,11 +12843,12 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public UnderlyingDebtorsRow AddUnderlyingDebtorsRow(string name, BanksRow parentBanksRowBydebtor_bank_id, FundsRow parentFundsRowByFK_UnderlyingDebtors_Funds) {
+            public UnderlyingDebtorsRow AddUnderlyingDebtorsRow(string name, BanksRow parentBanksRowBydebtor_bank_id, FundsRow parentFundsRowByFK_UnderlyingDebtors_Funds, CountriesRow parentCountriesRowByFK_UnderlyingDebtors_Countries) {
                 UnderlyingDebtorsRow rowUnderlyingDebtorsRow = ((UnderlyingDebtorsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         name,
+                        null,
                         null,
                         null};
                 if ((parentBanksRowBydebtor_bank_id != null)) {
@@ -12813,6 +12856,9 @@ namespace FundsManager {
                 }
                 if ((parentFundsRowByFK_UnderlyingDebtors_Funds != null)) {
                     columnValuesArray[3] = parentFundsRowByFK_UnderlyingDebtors_Funds[0];
+                }
+                if ((parentCountriesRowByFK_UnderlyingDebtors_Countries != null)) {
+                    columnValuesArray[4] = parentCountriesRowByFK_UnderlyingDebtors_Countries[0];
                 }
                 rowUnderlyingDebtorsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUnderlyingDebtorsRow);
@@ -12847,6 +12893,7 @@ namespace FundsManager {
                 this.columnname = base.Columns["name"];
                 this.columndebtor_bank_id = base.Columns["debtor_bank_id"];
                 this.columnFK_UnderlyingDebtors_Funds = base.Columns["FK_UnderlyingDebtors_Funds"];
+                this.columnCountryId = base.Columns["CountryId"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12860,6 +12907,8 @@ namespace FundsManager {
                 base.Columns.Add(this.columndebtor_bank_id);
                 this.columnFK_UnderlyingDebtors_Funds = new global::System.Data.DataColumn("FK_UnderlyingDebtors_Funds", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFK_UnderlyingDebtors_Funds);
+                this.columnCountryId = new global::System.Data.DataColumn("CountryId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCountryId);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
                 this.columnId.AutoIncrement = true;
@@ -12871,6 +12920,7 @@ namespace FundsManager {
                 this.columnname.AllowDBNull = false;
                 this.columnname.MaxLength = 2147483647;
                 this.columnFK_UnderlyingDebtors_Funds.AllowDBNull = false;
+                this.columnCountryId.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15459,6 +15509,17 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int CountryId {
+                get {
+                    return ((int)(this[this.tableClients.CountryIdColumn]));
+                }
+                set {
+                    this[this.tableClients.CountryIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public FundsRow FundsRow {
                 get {
                     return ((FundsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Clients_Funds"])));
@@ -15476,6 +15537,17 @@ namespace FundsManager {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_Clients_Funds1"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public CountriesRow CountriesRow {
+                get {
+                    return ((CountriesRow)(this.GetParentRow(this.Table.ParentRelations["FK_Clients_Countries"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Clients_Countries"]);
                 }
             }
             
@@ -15590,6 +15662,28 @@ namespace FundsManager {
                 }
                 else {
                     return ((BanksRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Banks_Countries"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ClientsRow[] GetClientsRows() {
+                if ((this.Table.ChildRelations["FK_Clients_Countries"] == null)) {
+                    return new ClientsRow[0];
+                }
+                else {
+                    return ((ClientsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Clients_Countries"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public UnderlyingDebtorsRow[] GetUnderlyingDebtorsRows() {
+                if ((this.Table.ChildRelations["FK_UnderlyingDebtors_Countries"] == null)) {
+                    return new UnderlyingDebtorsRow[0];
+                }
+                else {
+                    return ((UnderlyingDebtorsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_UnderlyingDebtors_Countries"])));
                 }
             }
         }
@@ -19057,6 +19151,17 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int CountryId {
+                get {
+                    return ((int)(this[this.tableUnderlyingDebtors.CountryIdColumn]));
+                }
+                set {
+                    this[this.tableUnderlyingDebtors.CountryIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public BanksRow BanksRow {
                 get {
                     return ((BanksRow)(this.GetParentRow(this.Table.ParentRelations["debtor_bank_id"])));
@@ -19074,6 +19179,17 @@ namespace FundsManager {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_UnderlyingDebtors_Funds"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public CountriesRow CountriesRow {
+                get {
+                    return ((CountriesRow)(this.GetParentRow(this.Table.ParentRelations["FK_UnderlyingDebtors_Countries"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_UnderlyingDebtors_Countries"]);
                 }
             }
             
@@ -21772,11 +21888,16 @@ SELECT Id, name, own, FK_Banks_Countries, FK_Banks_Funds FROM Banks WHERE (Id = 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Id, name, own, FK_Banks_Countries, FK_Banks_Funds FROM Banks";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT Id, name, own, FK_Banks_Countries, FK_Banks_Funds FROM Banks WHERE own = 0" +
+                "";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -21801,6 +21922,19 @@ SELECT Id, name, own, FK_Banks_Countries, FK_Banks_Funds FROM Banks WHERE (Id = 
             FundsDBDataSet.BanksDataTable dataTable = new FundsDBDataSet.BanksDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillExcludingOwnBanks(FundsDBDataSet.BanksDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -22055,32 +22189,36 @@ SELECT Id, name, own, FK_Banks_Countries, FK_Banks_Funds FROM Banks WHERE (Id = 
             tableMapping.ColumnMappings.Add("Id", "Id");
             tableMapping.ColumnMappings.Add("name", "name");
             tableMapping.ColumnMappings.Add("FK_Clients_Funds", "FK_Clients_Funds");
+            tableMapping.ColumnMappings.Add("CountryId", "CountryId");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
             this._adapter.DeleteCommand.CommandText = "DELETE FROM [Clients] WHERE (([Id] = @Original_Id) AND ([FK_Clients_Funds] = @Ori" +
-                "ginal_FK_Clients_Funds))";
+                "ginal_FK_Clients_Funds) AND ([CountryId] = @Original_CountryId))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FK_Clients_Funds", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Clients_Funds", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CountryId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CountryId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [Clients] ([name], [FK_Clients_Funds]) VALUES (@name, @FK_Clients_Fun" +
-                "ds);\r\nSELECT Id, name, FK_Clients_Funds FROM Clients WHERE (Id = SCOPE_IDENTITY(" +
-                "))";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [Clients] ([name], [FK_Clients_Funds], [CountryId]) VALUES (@name, @F" +
+                "K_Clients_Funds, @CountryId);\r\nSELECT Id, name, FK_Clients_Funds, CountryId FROM" +
+                " Clients WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FK_Clients_Funds", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Clients_Funds", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CountryId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CountryId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [Clients] SET [name] = @name, [FK_Clients_Funds] = @FK_Clients_Funds WHERE" +
-                " (([Id] = @Original_Id) AND ([FK_Clients_Funds] = @Original_FK_Clients_Funds));\r" +
-                "\nSELECT Id, name, FK_Clients_Funds FROM Clients WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Clients] SET [name] = @name, [FK_Clients_Funds] = @FK_Clients_Funds, [CountryId] = @CountryId WHERE (([Id] = @Original_Id) AND ([FK_Clients_Funds] = @Original_FK_Clients_Funds) AND ([CountryId] = @Original_CountryId));
+SELECT Id, name, FK_Clients_Funds, CountryId FROM Clients WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FK_Clients_Funds", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Clients_Funds", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CountryId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CountryId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FK_Clients_Funds", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Clients_Funds", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CountryId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CountryId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -22094,11 +22232,17 @@ SELECT Id, name, own, FK_Banks_Countries, FK_Banks_Funds FROM Banks WHERE (Id = 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Id, name, FK_Clients_Funds FROM Clients";
+            this._commandCollection[0].CommandText = "SELECT Id, name, FK_Clients_Funds, CountryId FROM Clients";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT Id, name, FK_Clients_Funds, CountryId FROM Clients WHERE CountryId = @Coun" +
+                "tryId";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CountryId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CountryId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -22123,6 +22267,20 @@ SELECT Id, name, own, FK_Banks_Countries, FK_Banks_Funds FROM Banks WHERE (Id = 
             FundsDBDataSet.ClientsDataTable dataTable = new FundsDBDataSet.ClientsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByCountryId(FundsDBDataSet.ClientsDataTable dataTable, int CountryId) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(CountryId));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -22158,9 +22316,10 @@ SELECT Id, name, own, FK_Banks_Countries, FK_Banks_Funds FROM Banks WHERE (Id = 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_Id, int Original_FK_Clients_Funds) {
+        public virtual int Delete(int Original_Id, int Original_FK_Clients_Funds, int Original_CountryId) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_FK_Clients_Funds));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_CountryId));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -22181,7 +22340,7 @@ SELECT Id, name, own, FK_Banks_Countries, FK_Banks_Funds FROM Banks WHERE (Id = 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string name, int FK_Clients_Funds) {
+        public virtual int Insert(string name, int FK_Clients_Funds, int CountryId) {
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
@@ -22189,6 +22348,7 @@ SELECT Id, name, own, FK_Banks_Countries, FK_Banks_Funds FROM Banks WHERE (Id = 
                 this.Adapter.InsertCommand.Parameters[0].Value = ((string)(name));
             }
             this.Adapter.InsertCommand.Parameters[1].Value = ((int)(FK_Clients_Funds));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(CountryId));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -22209,7 +22369,7 @@ SELECT Id, name, own, FK_Banks_Countries, FK_Banks_Funds FROM Banks WHERE (Id = 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int FK_Clients_Funds, int Original_Id, int Original_FK_Clients_Funds, int Id) {
+        public virtual int Update(string name, int FK_Clients_Funds, int CountryId, int Original_Id, int Original_FK_Clients_Funds, int Original_CountryId, int Id) {
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
@@ -22217,9 +22377,11 @@ SELECT Id, name, own, FK_Banks_Countries, FK_Banks_Funds FROM Banks WHERE (Id = 
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(name));
             }
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(FK_Clients_Funds));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Original_Id));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_FK_Clients_Funds));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Id));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(CountryId));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_Id));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_FK_Clients_Funds));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_CountryId));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -22240,8 +22402,8 @@ SELECT Id, name, own, FK_Banks_Countries, FK_Banks_Funds FROM Banks WHERE (Id = 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int FK_Clients_Funds, int Original_Id, int Original_FK_Clients_Funds) {
-            return this.Update(name, FK_Clients_Funds, Original_Id, Original_FK_Clients_Funds, Original_Id);
+        public virtual int Update(string name, int FK_Clients_Funds, int CountryId, int Original_Id, int Original_FK_Clients_Funds, int Original_CountryId) {
+            return this.Update(name, FK_Clients_Funds, CountryId, Original_Id, Original_FK_Clients_Funds, Original_CountryId, Original_Id);
         }
     }
     
@@ -27067,12 +27229,18 @@ SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds, amount FROM Subacco
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds, amount FROM Subaccou" +
                 "nts";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds, amount FROM Subaccou" +
+                "nts WHERE FK_Subaccounts_Accounts = @AccountId";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AccountId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Subaccounts_Accounts", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -27097,6 +27265,20 @@ SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds, amount FROM Subacco
             FundsDBDataSet.SubaccountsDataTable dataTable = new FundsDBDataSet.SubaccountsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByAcccountId(FundsDBDataSet.SubaccountsDataTable dataTable, int AccountId) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(AccountId));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -30984,38 +31166,40 @@ SELECT Id, date, day, disbursement_id, fund_id FROM Disbursement_dates WHERE (Id
             tableMapping.ColumnMappings.Add("name", "name");
             tableMapping.ColumnMappings.Add("debtor_bank_id", "debtor_bank_id");
             tableMapping.ColumnMappings.Add("FK_UnderlyingDebtors_Funds", "FK_UnderlyingDebtors_Funds");
+            tableMapping.ColumnMappings.Add("CountryId", "CountryId");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[UnderlyingDebtors] WHERE (([Id] = @Original_Id) AND ((@IsNull_" +
-                "debtor_bank_id = 1 AND [debtor_bank_id] IS NULL) OR ([debtor_bank_id] = @Origina" +
-                "l_debtor_bank_id)) AND ([FK_UnderlyingDebtors_Funds] = @Original_FK_UnderlyingDe" +
-                "btors_Funds))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [UnderlyingDebtors] WHERE (([Id] = @Original_Id) AND ((@IsNull_debtor_bank_id = 1 AND [debtor_bank_id] IS NULL) OR ([debtor_bank_id] = @Original_debtor_bank_id)) AND ([FK_UnderlyingDebtors_Funds] = @Original_FK_UnderlyingDebtors_Funds) AND ([CountryId] = @Original_CountryId))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_debtor_bank_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "debtor_bank_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_debtor_bank_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "debtor_bank_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FK_UnderlyingDebtors_Funds", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_UnderlyingDebtors_Funds", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CountryId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CountryId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[UnderlyingDebtors] ([name], [debtor_bank_id], [FK_UnderlyingDebtors_Funds]) VALUES (@name, @debtor_bank_id, @FK_UnderlyingDebtors_Funds);
-SELECT Id, name, debtor_bank_id, FK_UnderlyingDebtors_Funds FROM UnderlyingDebtors WHERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [UnderlyingDebtors] ([name], [debtor_bank_id], [FK_UnderlyingDebtors_Funds], [CountryId]) VALUES (@name, @debtor_bank_id, @FK_UnderlyingDebtors_Funds, @CountryId);
+SELECT Id, name, debtor_bank_id, FK_UnderlyingDebtors_Funds, CountryId FROM UnderlyingDebtors WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@debtor_bank_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "debtor_bank_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FK_UnderlyingDebtors_Funds", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_UnderlyingDebtors_Funds", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CountryId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CountryId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[UnderlyingDebtors] SET [name] = @name, [debtor_bank_id] = @debtor_bank_id, [FK_UnderlyingDebtors_Funds] = @FK_UnderlyingDebtors_Funds WHERE (([Id] = @Original_Id) AND ((@IsNull_debtor_bank_id = 1 AND [debtor_bank_id] IS NULL) OR ([debtor_bank_id] = @Original_debtor_bank_id)) AND ([FK_UnderlyingDebtors_Funds] = @Original_FK_UnderlyingDebtors_Funds));
-SELECT Id, name, debtor_bank_id, FK_UnderlyingDebtors_Funds FROM UnderlyingDebtors WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [UnderlyingDebtors] SET [name] = @name, [debtor_bank_id] = @debtor_bank_id, [FK_UnderlyingDebtors_Funds] = @FK_UnderlyingDebtors_Funds, [CountryId] = @CountryId WHERE (([Id] = @Original_Id) AND ((@IsNull_debtor_bank_id = 1 AND [debtor_bank_id] IS NULL) OR ([debtor_bank_id] = @Original_debtor_bank_id)) AND ([FK_UnderlyingDebtors_Funds] = @Original_FK_UnderlyingDebtors_Funds) AND ([CountryId] = @Original_CountryId));
+SELECT Id, name, debtor_bank_id, FK_UnderlyingDebtors_Funds, CountryId FROM UnderlyingDebtors WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@debtor_bank_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "debtor_bank_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FK_UnderlyingDebtors_Funds", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_UnderlyingDebtors_Funds", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CountryId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CountryId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_debtor_bank_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "debtor_bank_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_debtor_bank_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "debtor_bank_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FK_UnderlyingDebtors_Funds", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FK_UnderlyingDebtors_Funds", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CountryId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CountryId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -31029,12 +31213,18 @@ SELECT Id, name, debtor_bank_id, FK_UnderlyingDebtors_Funds FROM UnderlyingDebto
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Id, name, debtor_bank_id, FK_UnderlyingDebtors_Funds FROM dbo.UnderlyingDe" +
-                "btors";
+            this._commandCollection[0].CommandText = "SELECT Id, name, debtor_bank_id, FK_UnderlyingDebtors_Funds, CountryId FROM Under" +
+                "lyingDebtors";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT Id, name, debtor_bank_id, FK_UnderlyingDebtors_Funds, CountryId FROM Under" +
+                "lyingDebtors WHERE CountryId = @CountryId ";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CountryId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CountryId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -31059,6 +31249,20 @@ SELECT Id, name, debtor_bank_id, FK_UnderlyingDebtors_Funds FROM UnderlyingDebto
             FundsDBDataSet.UnderlyingDebtorsDataTable dataTable = new FundsDBDataSet.UnderlyingDebtorsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByCountryId(FundsDBDataSet.UnderlyingDebtorsDataTable dataTable, int CountryId) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(CountryId));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -31094,7 +31298,7 @@ SELECT Id, name, debtor_bank_id, FK_UnderlyingDebtors_Funds FROM UnderlyingDebto
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_Id, global::System.Nullable<int> Original_debtor_bank_id, int Original_FK_UnderlyingDebtors_Funds) {
+        public virtual int Delete(int Original_Id, global::System.Nullable<int> Original_debtor_bank_id, int Original_FK_UnderlyingDebtors_Funds, int Original_CountryId) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
             if ((Original_debtor_bank_id.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
@@ -31105,6 +31309,7 @@ SELECT Id, name, debtor_bank_id, FK_UnderlyingDebtors_Funds FROM UnderlyingDebto
                 this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_FK_UnderlyingDebtors_Funds));
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_CountryId));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -31125,7 +31330,7 @@ SELECT Id, name, debtor_bank_id, FK_UnderlyingDebtors_Funds FROM UnderlyingDebto
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string name, global::System.Nullable<int> debtor_bank_id, int FK_UnderlyingDebtors_Funds) {
+        public virtual int Insert(string name, global::System.Nullable<int> debtor_bank_id, int FK_UnderlyingDebtors_Funds, int CountryId) {
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
@@ -31139,6 +31344,7 @@ SELECT Id, name, debtor_bank_id, FK_UnderlyingDebtors_Funds FROM UnderlyingDebto
                 this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             this.Adapter.InsertCommand.Parameters[2].Value = ((int)(FK_UnderlyingDebtors_Funds));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(CountryId));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -31159,7 +31365,7 @@ SELECT Id, name, debtor_bank_id, FK_UnderlyingDebtors_Funds FROM UnderlyingDebto
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, global::System.Nullable<int> debtor_bank_id, int FK_UnderlyingDebtors_Funds, int Original_Id, global::System.Nullable<int> Original_debtor_bank_id, int Original_FK_UnderlyingDebtors_Funds, int Id) {
+        public virtual int Update(string name, global::System.Nullable<int> debtor_bank_id, int FK_UnderlyingDebtors_Funds, int CountryId, int Original_Id, global::System.Nullable<int> Original_debtor_bank_id, int Original_FK_UnderlyingDebtors_Funds, int Original_CountryId, int Id) {
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
@@ -31173,17 +31379,19 @@ SELECT Id, name, debtor_bank_id, FK_UnderlyingDebtors_Funds FROM UnderlyingDebto
                 this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(FK_UnderlyingDebtors_Funds));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_Id));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(CountryId));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_Id));
             if ((Original_debtor_bank_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_debtor_bank_id.Value));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_debtor_bank_id.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_FK_UnderlyingDebtors_Funds));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Id));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_FK_UnderlyingDebtors_Funds));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_CountryId));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -31204,8 +31412,8 @@ SELECT Id, name, debtor_bank_id, FK_UnderlyingDebtors_Funds FROM UnderlyingDebto
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, global::System.Nullable<int> debtor_bank_id, int FK_UnderlyingDebtors_Funds, int Original_Id, global::System.Nullable<int> Original_debtor_bank_id, int Original_FK_UnderlyingDebtors_Funds) {
-            return this.Update(name, debtor_bank_id, FK_UnderlyingDebtors_Funds, Original_Id, Original_debtor_bank_id, Original_FK_UnderlyingDebtors_Funds, Original_Id);
+        public virtual int Update(string name, global::System.Nullable<int> debtor_bank_id, int FK_UnderlyingDebtors_Funds, int CountryId, int Original_Id, global::System.Nullable<int> Original_debtor_bank_id, int Original_FK_UnderlyingDebtors_Funds, int Original_CountryId) {
+            return this.Update(name, debtor_bank_id, FK_UnderlyingDebtors_Funds, CountryId, Original_Id, Original_debtor_bank_id, Original_FK_UnderlyingDebtors_Funds, Original_CountryId, Original_Id);
         }
     }
     

@@ -24,9 +24,10 @@ namespace FundsManager
 
         private void ClientsForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'fundsDBDataSet.Clients' table. You can move, or remove it, as needed.
-            this.clientsTableAdapter.Fill(this.fundsDBDataSet.Clients);
+            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Countries' Puede moverla o quitarla según sea necesario.
+            this.countriesTableAdapter.Fill(this.fundsDBDataSet.Countries);
 
+            loadClientsData();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -36,6 +37,7 @@ namespace FundsManager
                 Client _client = new Client();
                 _client.name = txtName.Text;
                 _client.FK_Clients_Funds = manager.Selected;
+                _client.CountryId = int.Parse(cbCountry.SelectedValue.ToString());
                 manager.My_db.Clients.Add(_client);
                 manager.My_db.SaveChanges();
             }
@@ -49,8 +51,8 @@ namespace FundsManager
                     manager.My_db.SaveChanges();
                 }
             }
-            
-            this.clientsTableAdapter.Fill(this.fundsDBDataSet.Clients);
+
+            loadClientsData();
 
             cmdCancel_Click(null, null);
         }
@@ -63,7 +65,8 @@ namespace FundsManager
             {
 
                 manager.DeleteClient(Convert.ToInt32(listBox1.SelectedValue));
-                this.clientsTableAdapter.Fill(this.fundsDBDataSet.Clients);
+
+                loadClientsData();
 
                 cmdCancel_Click(null, null);
             }
@@ -98,6 +101,32 @@ namespace FundsManager
         private void cmdCancel_Click(object sender, EventArgs e)
         {
             listBox1.SelectedIndex = -1;
+        }
+
+        private void fillByCountryIdToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.clientsTableAdapter.FillByCountryId(this.fundsDBDataSet.Clients, ((int)(System.Convert.ChangeType(countryIdToolStripTextBox.Text, typeof(int)))));
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void loadClientsData()
+        {
+            if (fundsDBDataSet != null && cbCountry.SelectedValue != null)
+            {
+                this.clientsTableAdapter.FillByCountryId(this.fundsDBDataSet.Clients, int.Parse(cbCountry.SelectedValue.ToString()));
+            }
+        }
+
+        private void cbCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadClientsData();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace FundsManager
         public int FK_AccountsBankingAccount_Funds { get; set; }
     
         public virtual Account Account { get; set; }
-        public virtual Client Client { get; set; }
         public virtual Fund Fund { get; set; }
+        public virtual Client Client { get; set; }
     }
 }
