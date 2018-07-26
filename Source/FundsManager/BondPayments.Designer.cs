@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.cbInvestor = new System.Windows.Forms.ComboBox();
-            this.investorsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.investorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fundsDBDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.label2 = new System.Windows.Forms.Label();
@@ -63,14 +63,12 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.investorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.investorsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.InvestorsTableAdapter();
             this.cmdPayAllInterest = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.investorsBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.investorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.investorsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -84,7 +82,7 @@
             // 
             // cbInvestor
             // 
-            this.cbInvestor.DataSource = this.investorsBindingSource1;
+            this.cbInvestor.DataSource = this.investorsBindingSource;
             this.cbInvestor.DisplayMember = "name";
             this.cbInvestor.FormattingEnabled = true;
             this.cbInvestor.Location = new System.Drawing.Point(78, 19);
@@ -93,10 +91,10 @@
             this.cbInvestor.TabIndex = 1;
             this.cbInvestor.ValueMember = "Id";
             // 
-            // investorsBindingSource1
+            // investorsBindingSource
             // 
-            this.investorsBindingSource1.DataMember = "Investors";
-            this.investorsBindingSource1.DataSource = this.fundsDBDataSetBindingSource;
+            this.investorsBindingSource.DataMember = "Investors";
+            this.investorsBindingSource.DataSource = this.fundsDBDataSetBindingSource;
             // 
             // fundsDBDataSetBindingSource
             // 
@@ -373,11 +371,6 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "Price:";
             // 
-            // investorsBindingSource
-            // 
-            this.investorsBindingSource.DataMember = "Investors";
-            this.investorsBindingSource.DataSource = this.fundsDBDataSetBindingSource;
-            // 
             // investorsTableAdapter
             // 
             this.investorsTableAdapter.ClearBeforeFill = true;
@@ -397,7 +390,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 478);
+            this.ClientSize = new System.Drawing.Size(585, 495);
             this.Controls.Add(this.cmdPayAllInterest);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cmdPayBond);
@@ -414,12 +407,11 @@
             this.Name = "BondPayments";
             this.Text = "Bond Payments";
             this.Load += new System.EventHandler(this.BondPayments_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.investorsBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.investorsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.investorsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -456,7 +448,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.BindingSource investorsBindingSource;
         private FundsDBDataSetTableAdapters.InvestorsTableAdapter investorsTableAdapter;
-        private System.Windows.Forms.BindingSource investorsBindingSource1;
         private System.Windows.Forms.ColumnHeader Id;
         private System.Windows.Forms.ColumnHeader InterestDate;
         private System.Windows.Forms.ColumnHeader Amount;

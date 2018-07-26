@@ -26,11 +26,9 @@ namespace FundsManager
         private void OtherDetailsForm_Load(object sender, EventArgs e)
         {
             // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.OtherDetails' Puede moverla o quitarla según sea necesario.
-            this.otherDetailsTableAdapter.Fill(this.fundsDBDataSet.OtherDetails);
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.OtherDetails' Puede moverla o quitarla según sea necesario.
-            this.otherDetailsTableAdapter.Fill(this.fundsDBDataSet.OtherDetails);
+            this.otherDetailsTableAdapter.FillByFund(this.fundsDBDataSet.OtherDetails, manager.Selected);
             // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Subaccounts' Puede moverla o quitarla según sea necesario.
-            this.subaccountsTableAdapter.Fill(this.fundsDBDataSet.Subaccounts);
+            this.subaccountsTableAdapter.FillByFund(this.fundsDBDataSet.Subaccounts, manager.Selected);
 
             foreach (DataGridViewRow _row in dataGridView1.Rows)
             {
@@ -47,17 +45,24 @@ namespace FundsManager
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult alert;
-            alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-            if (alert == DialogResult.OK)
+            try
             {
-                int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
+                DialogResult alert;
+                alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (alert == DialogResult.OK)
+                {
+                    int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
+                    DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
 
-                manager.DeleteOtherDetails(Convert.ToInt32(selectedRow.Cells[0].Value));
-                this.otherDetailsTableAdapter.Fill(this.fundsDBDataSet.OtherDetails);
+                    manager.DeleteOtherDetails(Convert.ToInt32(selectedRow.Cells[0].Value));
+                    this.otherDetailsTableAdapter.FillByFund(this.fundsDBDataSet.OtherDetails, manager.Selected);
 
-                cmdCancel_Click(null, null);
+                    cmdCancel_Click(null, null);
+                }
+            }
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
             }
         }
 
@@ -89,7 +94,7 @@ namespace FundsManager
 
             }
             
-            this.otherDetailsTableAdapter.Fill(this.fundsDBDataSet.OtherDetails);
+            this.otherDetailsTableAdapter.FillByFund(this.fundsDBDataSet.OtherDetails, manager.Selected);
 
             foreach (DataGridViewRow _row in dataGridView1.Rows)
             {

@@ -40,18 +40,13 @@
             this.cmdCancel = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.cbCountry = new System.Windows.Forms.ComboBox();
-            this.fillByCountryIdToolStrip = new System.Windows.Forms.ToolStrip();
-            this.countryIdToolStripLabel = new System.Windows.Forms.ToolStripLabel();
-            this.countryIdToolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
-            this.fillByCountryIdToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.fundsDBDataSet1 = new FundsManager.FundsDBDataSet();
             this.countriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fundsDBDataSet1 = new FundsManager.FundsDBDataSet();
             this.countriesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CountriesTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.underlyingDebtorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
-            this.fillByCountryIdToolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.countriesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -148,47 +143,15 @@
             this.cbCountry.ValueMember = "Id";
             this.cbCountry.SelectedIndexChanged += new System.EventHandler(this.cbCountry_SelectedIndexChanged);
             // 
-            // fillByCountryIdToolStrip
+            // countriesBindingSource
             // 
-            this.fillByCountryIdToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.countryIdToolStripLabel,
-            this.countryIdToolStripTextBox,
-            this.fillByCountryIdToolStripButton});
-            this.fillByCountryIdToolStrip.Location = new System.Drawing.Point(0, 0);
-            this.fillByCountryIdToolStrip.Name = "fillByCountryIdToolStrip";
-            this.fillByCountryIdToolStrip.Size = new System.Drawing.Size(406, 25);
-            this.fillByCountryIdToolStrip.TabIndex = 8;
-            this.fillByCountryIdToolStrip.Text = "fillByCountryIdToolStrip";
-            this.fillByCountryIdToolStrip.Visible = false;
-            // 
-            // countryIdToolStripLabel
-            // 
-            this.countryIdToolStripLabel.Name = "countryIdToolStripLabel";
-            this.countryIdToolStripLabel.Size = new System.Drawing.Size(63, 22);
-            this.countryIdToolStripLabel.Text = "CountryId:";
-            // 
-            // countryIdToolStripTextBox
-            // 
-            this.countryIdToolStripTextBox.Name = "countryIdToolStripTextBox";
-            this.countryIdToolStripTextBox.Size = new System.Drawing.Size(100, 25);
-            // 
-            // fillByCountryIdToolStripButton
-            // 
-            this.fillByCountryIdToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.fillByCountryIdToolStripButton.Name = "fillByCountryIdToolStripButton";
-            this.fillByCountryIdToolStripButton.Size = new System.Drawing.Size(92, 22);
-            this.fillByCountryIdToolStripButton.Text = "FillByCountryId";
-            this.fillByCountryIdToolStripButton.Click += new System.EventHandler(this.fillByCountryIdToolStripButton_Click);
+            this.countriesBindingSource.DataMember = "Countries";
+            this.countriesBindingSource.DataSource = this.fundsDBDataSet1;
             // 
             // fundsDBDataSet1
             // 
             this.fundsDBDataSet1.DataSetName = "FundsDBDataSet";
             this.fundsDBDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // countriesBindingSource
-            // 
-            this.countriesBindingSource.DataMember = "Countries";
-            this.countriesBindingSource.DataSource = this.fundsDBDataSet1;
             // 
             // countriesTableAdapter
             // 
@@ -199,7 +162,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 369);
-            this.Controls.Add(this.fillByCountryIdToolStrip);
             this.Controls.Add(this.cbCountry);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmdCancel);
@@ -216,10 +178,8 @@
             this.Load += new System.EventHandler(this.UnderlyingDebtorsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.underlyingDebtorsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
-            this.fillByCountryIdToolStrip.ResumeLayout(false);
-            this.fillByCountryIdToolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.countriesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,10 +198,6 @@
         private System.Windows.Forms.Button cmdCancel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbCountry;
-        private System.Windows.Forms.ToolStrip fillByCountryIdToolStrip;
-        private System.Windows.Forms.ToolStripLabel countryIdToolStripLabel;
-        private System.Windows.Forms.ToolStripTextBox countryIdToolStripTextBox;
-        private System.Windows.Forms.ToolStripButton fillByCountryIdToolStripButton;
         private FundsDBDataSet fundsDBDataSet1;
         private System.Windows.Forms.BindingSource countriesBindingSource;
         private FundsDBDataSetTableAdapters.CountriesTableAdapter countriesTableAdapter;

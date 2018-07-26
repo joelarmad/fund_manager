@@ -45,9 +45,9 @@ namespace FundsManager
             try
             {
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Currencies' table. You can move, or remove it, as needed.
-                this.currenciesTableAdapter.Fill(this.fundsDBDataSet.Currencies);
+                this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Accounts' table. You can move, or remove it, as needed.
-                this.accountsTableAdapter.Fill(this.fundsDBDataSet.Accounts);
+                this.accountsTableAdapter.FillByFund(this.fundsDBDataSet.Accounts, manager.Selected);
                 comboBox1.SelectedItem = null;
                 comboBox1.SelectedText = "Select account";
                 comboBox2.SelectedIndex = -1;

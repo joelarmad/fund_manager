@@ -49,14 +49,10 @@
         <AssociationConnector Association="FundsDBModel.FK_Investors_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_Items_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_Sectors_Funds" />
-        <EntityTypeShape EntityType="FundsDBModel.Subaccount" Width="1.5" PointX="8.25" PointY="49.75" />
-        <AssociationConnector Association="FundsDBModel.FK_Subaccounts_Accounts" />
-        <AssociationConnector Association="FundsDBModel.FK_Subaccounts_Funds" />
         <EntityTypeShape EntityType="FundsDBModel.Movements_Accounts" Width="1.5" PointX="12.5" PointY="45.125" />
         <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_AccountingMovements" />
         <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_Accounts" />
         <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_Funds" />
-        <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_Subaccounts" />
         <EntityTypeShape EntityType="FundsDBModel.AccountType" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="FundsDBModel.Resource" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="FundsDBModel.Bond" Width="1.5" PointX="3" PointY="38.875" />
@@ -76,7 +72,6 @@
         <AssociationConnector Association="FundsDBModel.DisbursementItems" />
         <EntityTypeShape EntityType="FundsDBModel.OtherDetail" Width="1.5" PointX="13.5" PointY="40.875" />
         <AssociationConnector Association="FundsDBModel.FK_OtherDetails_Funds" />
-        <AssociationConnector Association="FundsDBModel.FK_OtherDetails_SubAcct" />
         <EntityTypeShape EntityType="FundsDBModel.FundBondInterest" Width="1.5" PointX="5.25" PointY="50.5" />
         <EntityTypeShape EntityType="FundsDBModel.InvestorBondInterest" Width="1.5" PointX="8.375" PointY="28.5" />
         <AssociationConnector Association="FundsDBModel.FK_FundBondInterest_Bonds" />
@@ -92,6 +87,11 @@
         <AssociationConnector Association="FundsDBModel.FK_UnderlyingDebtors_Countries" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_UnderlyingDebtors" />
         <AssociationConnector Association="FundsDBModel.FK_UnderlyingDebtors_Funds" />
+        <EntityTypeShape EntityType="FundsDBModel.Subaccount" Width="1.5" PointX="8.25" PointY="49.5" />
+        <AssociationConnector Association="FundsDBModel.FK_Subaccounts_Accounts" />
+        <AssociationConnector Association="FundsDBModel.FK_Subaccounts_Funds" />
+        <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_Subaccounts" />
+        <AssociationConnector Association="FundsDBModel.FK_OtherDetails_SubAcct" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

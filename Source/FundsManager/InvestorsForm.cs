@@ -25,7 +25,7 @@ namespace FundsManager
         private void InvestorsForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'fundsDBDataSet.Investors' table. You can move, or remove it, as needed.
-            this.investorsTableAdapter.Fill(this.fundsDBDataSet.Investors);
+            this.investorsTableAdapter.FillByFund(this.fundsDBDataSet.Investors, manager.Selected);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -49,7 +49,7 @@ namespace FundsManager
                 }
             }
 
-            this.investorsTableAdapter.Fill(this.fundsDBDataSet.Investors);
+            this.investorsTableAdapter.FillByFund(this.fundsDBDataSet.Investors, manager.Selected);
 
             cmdCancel_Click(null, null);
 
@@ -57,14 +57,21 @@ namespace FundsManager
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult alert;
-            alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-            if (alert == DialogResult.OK)
+            try
             {
+                DialogResult alert;
+                alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (alert == DialogResult.OK)
+                {
 
-                manager.DeleteInvestor(Convert.ToInt32(listBox1.SelectedValue));
-                this.investorsTableAdapter.Fill(this.fundsDBDataSet.Investors);
-                cmdCancel_Click(null, null);
+                    manager.DeleteInvestor(Convert.ToInt32(listBox1.SelectedValue));
+                    this.investorsTableAdapter.FillByFund(this.fundsDBDataSet.Investors, manager.Selected);
+                    cmdCancel_Click(null, null);
+                }
+            }
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
             }
         }
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)

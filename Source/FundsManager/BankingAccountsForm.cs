@@ -31,15 +31,15 @@ namespace FundsManager
         private void BankingAccountsForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'fundsDBDataSet1.BAccountsWithBanksCurrencies' table. You can move, or remove it, as needed.
-            this.bAccountsWithBanksCurrenciesTableAdapter.Fill(this.fundsDBDataSet1.BAccountsWithBanksCurrencies);
+            this.bAccountsWithBanksCurrenciesTableAdapter.FillByFund(this.fundsDBDataSet1.BAccountsWithBanksCurrencies, manager.Selected);
             // TODO: This line of code loads data into the 'fundsDBDataSet.BAccountsWithBanksCurrencies' table. You can move, or remove it, as needed.
-            this.bAccountsWithBanksCurrenciesTableAdapter.Fill(this.fundsDBDataSet.BAccountsWithBanksCurrencies);
+            this.bAccountsWithBanksCurrenciesTableAdapter.FillByFund(this.fundsDBDataSet.BAccountsWithBanksCurrencies, manager.Selected);
             // TODO: This line of code loads data into the 'fundsDBDataSet.Currencies' table. You can move, or remove it, as needed.
-            this.currenciesTableAdapter.Fill(this.fundsDBDataSet.Currencies);
+            this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
             // TODO: This line of code loads data into the 'fundsDBDataSet.Banks' table. You can move, or remove it, as needed.
-            this.banksTableAdapter.Fill(this.fundsDBDataSet.Banks);
+            this.banksTableAdapter.FillByFund(this.fundsDBDataSet.Banks, manager.Selected);
             // TODO: This line of code loads data into the 'fundsDBDataSet.BankingAccounts' table. You can move, or remove it, as needed.
-            this.bankingAccountsTableAdapter.Fill(this.fundsDBDataSet.BankingAccounts);
+            this.bankingAccountsTableAdapter.FillByFund(this.fundsDBDataSet.BankingAccounts, manager.Selected);
 
         }
 
@@ -81,8 +81,8 @@ namespace FundsManager
                     }
                 }
                 
-                this.bAccountsWithBanksCurrenciesTableAdapter.Fill(this.fundsDBDataSet.BAccountsWithBanksCurrencies);
-                this.bAccountsWithBanksCurrenciesTableAdapter.Fill(this.fundsDBDataSet1.BAccountsWithBanksCurrencies);
+                this.bAccountsWithBanksCurrenciesTableAdapter.FillByFund(this.fundsDBDataSet.BAccountsWithBanksCurrencies, manager.Selected);
+                this.bAccountsWithBanksCurrenciesTableAdapter.FillByFund(this.fundsDBDataSet1.BAccountsWithBanksCurrencies, manager.Selected);
 
                 cmdCancel_Click(null, null);
 
@@ -103,18 +103,25 @@ namespace FundsManager
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult alert;
-            alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-            if (alert == DialogResult.OK)
+            try
             {
-                int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
+                DialogResult alert;
+                alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (alert == DialogResult.OK)
+                {
+                    int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
+                    DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
 
-                manager.DeleteBankingAccount(Convert.ToInt32(selectedRow.Cells[0].Value));
-                this.bAccountsWithBanksCurrenciesTableAdapter.Fill(this.fundsDBDataSet.BAccountsWithBanksCurrencies);
-                this.bAccountsWithBanksCurrenciesTableAdapter.Fill(this.fundsDBDataSet1.BAccountsWithBanksCurrencies);
+                    manager.DeleteBankingAccount(Convert.ToInt32(selectedRow.Cells[0].Value));
+                    this.bAccountsWithBanksCurrenciesTableAdapter.FillByFund(this.fundsDBDataSet.BAccountsWithBanksCurrencies, manager.Selected);
+                    this.bAccountsWithBanksCurrenciesTableAdapter.FillByFund(this.fundsDBDataSet1.BAccountsWithBanksCurrencies, manager.Selected);
 
-                cmdCancel_Click(null, null);
+                    cmdCancel_Click(null, null);
+                }
+            }
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
             }
         }
 

@@ -28,7 +28,7 @@ namespace FundsManager
         private void BondPayments_Load(object sender, EventArgs e)
         {
             // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Investors' Puede moverla o quitarla según sea necesario.
-            this.investorsTableAdapter.Fill(this.fundsDBDataSet.Investors);
+            this.investorsTableAdapter.FillByFund(this.fundsDBDataSet.Investors, manager.Selected);
 
             if (cbInvestor.Items.Count > 0)
             {
@@ -45,7 +45,7 @@ namespace FundsManager
 
             foreach (BondsInvestor _bondInvestor in manager.My_db.BondsInvestors.Where(x => x.FK_BondsInvestors_Investors == _investorId))
             {
-                foreach (Bond _bond in manager.My_db.Bonds.Where(x => x.Id == _bondInvestor.FK_BondsInvestors_Bonds))
+                foreach (Bond _bond in manager.My_db.Bonds.Where(x => x.Id == _bondInvestor.FK_BondsInvestors_Bonds && x.FK_Bonds_Funds == manager.Selected))
                 {
                     comboSource.Add(_bond.Id, _bond.number);
                 }

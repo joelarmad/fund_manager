@@ -27,7 +27,7 @@ namespace FundsManager
         private void SubaccountsForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'fundsDBDataSet.Accounts' table. You can move, or remove it, as needed.
-            this.accountsTableAdapter.Fill(this.fundsDBDataSet.Accounts);
+            this.accountsTableAdapter.FillByFund(this.fundsDBDataSet.Accounts, manager.Selected);
 
             loadSubAccountData();
 
@@ -40,58 +40,66 @@ namespace FundsManager
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult alert;
-            alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-            if (alert == DialogResult.OK)
+            try
             {
-                int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
+                DialogResult alert;
+                alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (alert == DialogResult.OK)
+                {
+                    int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
+                    DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
 
-                manager.DeleteSubaccount(Convert.ToInt32(selectedRow.Cells[0].Value));
+                    manager.DeleteSubaccount(Convert.ToInt32(selectedRow.Cells[0].Value));
 
-                loadSubAccountData();
+                    loadSubAccountData();
 
-                cmdCancel_Click(null, null);
+                    cmdCancel_Click(null, null);
+                }
             }
-        }
-
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == '\b' || e.KeyChar == '\r')
+            catch (Exception _ex)
             {
-                addSubAccount();
+                MessageBox.Show("Error: " + _ex.Message);
             }
         }
 
         private void addSubAccount()
         {
-            if (!fEditMode)
+            try
             {
-                Subaccount _subaccount = new Subaccount();
-                _subaccount.name = txtName.Text;
-                _subaccount.FK_Subaccounts_Accounts = Convert.ToInt32(cbAccount.SelectedValue);
-                _subaccount.FK_Accounts_Funds = manager.Selected;
-                manager.My_db.Subaccounts.Add(_subaccount);
-                manager.My_db.SaveChanges();
-            }
-            else
-            {
-                int _id = (int)dataGridView1.Rows[fEditIndex].Cells[0].Value;
-
-                Subaccount _selectedSubAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == _id);
-
-                if (_selectedSubAccount != null)
+                if (!fEditMode)
                 {
-                    _selectedSubAccount.name = txtName.Text;
-                    _selectedSubAccount.FK_Subaccounts_Accounts = Convert.ToInt32(cbAccount.SelectedValue);
-
+                    Subaccount _subaccount = new Subaccount();
+                    _subaccount.name = txtName.Text;
+                    _subaccount.FK_Subaccounts_Accounts = Convert.ToInt32(cbAccount.SelectedValue);
+                    _subaccount.FK_Accounts_Funds = manager.Selected;
+                    _subaccount.number = txtNumber.Text;
+                    manager.My_db.Subaccounts.Add(_subaccount);
                     manager.My_db.SaveChanges();
                 }
-            }
+                else
+                {
+                    int _id = (int)dataGridView1.Rows[fEditIndex].Cells[0].Value;
 
-            loadSubAccountData();
-            
-            cmdCancel_Click(null, null);
+                    Subaccount _selectedSubAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == _id);
+
+                    if (_selectedSubAccount != null)
+                    {
+                        _selectedSubAccount.name = txtName.Text;
+                        _selectedSubAccount.number = txtNumber.Text;
+                        _selectedSubAccount.FK_Subaccounts_Accounts = Convert.ToInt32(cbAccount.SelectedValue);
+
+                        manager.My_db.SaveChanges();
+                    }
+                }
+
+                loadSubAccountData();
+
+                cmdCancel_Click(null, null);
+            }
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
+            }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -107,6 +115,7 @@ namespace FundsManager
                 cmdAddOrSave.Text = "Save";
 
                 txtName.Text = _selectedSubAccount.name;
+                txtNumber.Text = _selectedSubAccount.number;
 
                 Account _acct = manager.My_db.Accounts.FirstOrDefault(x => x.Id == _selectedSubAccount.FK_Subaccounts_Accounts);
 
@@ -129,6 +138,7 @@ namespace FundsManager
             cmdAddOrSave.Text = "Add";
 
             txtName.Text = "";
+            txtNumber.Text = "";
 
             cmdCancel.Visible = false;
         }
@@ -149,23 +159,10 @@ namespace FundsManager
                 foreach (DataGridViewRow _row in dataGridView1.Rows)
                 {
                     Account _account = new Account();
-                    _account = manager.My_db.Accounts.Find(Convert.ToInt32(_row.Cells[2].Value));
-                    _row.Cells[3].Value = _account.name;
+                    _account = manager.My_db.Accounts.Find(Convert.ToInt32(_row.Cells[3].Value));
+                    _row.Cells[4].Value = _account.name;
                 }
             }
-        }
-
-        private void fillByAcccountIdToolStripButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.subaccountsTableAdapter.FillByAcccountId(this.fundsDBDataSet.Subaccounts, ((int)(System.Convert.ChangeType(accountIdToolStripTextBox.Text, typeof(int)))));
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
-
         }
     }
 }

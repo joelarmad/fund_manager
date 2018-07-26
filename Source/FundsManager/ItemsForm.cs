@@ -43,7 +43,7 @@ namespace FundsManager
                 }
             }
 
-            this.itemsTableAdapter.Fill(this.fundsDBDataSet.Items);
+            this.itemsTableAdapter.FillByFund(this.fundsDBDataSet.Items, manager.Selected);
 
             cmdCancel_Click(null, null);
         }
@@ -51,20 +51,27 @@ namespace FundsManager
         private void ItemsForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'fundsDBDataSet.Items' table. You can move, or remove it, as needed.
-            this.itemsTableAdapter.Fill(this.fundsDBDataSet.Items);
+            this.itemsTableAdapter.FillByFund(this.fundsDBDataSet.Items, manager.Selected);
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult alert;
-            alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-            if (alert == DialogResult.OK)
+            try
             {
+                DialogResult alert;
+                alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (alert == DialogResult.OK)
+                {
 
-                manager.DeleteItem(Convert.ToInt32(listBox1.SelectedValue));
-                this.itemsTableAdapter.Fill(this.fundsDBDataSet.Items);
+                    manager.DeleteItem(Convert.ToInt32(listBox1.SelectedValue));
+                    this.itemsTableAdapter.FillByFund(this.fundsDBDataSet.Items, manager.Selected);
 
+                }
+            }
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
             }
         }
 

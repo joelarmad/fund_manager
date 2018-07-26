@@ -25,7 +25,7 @@ namespace FundsManager
         private void EmployeesForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'fundsDBDataSet.Employees' table. You can move, or remove it, as needed.
-            this.employeesTableAdapter.Fill(this.fundsDBDataSet.Employees);
+            this.employeesTableAdapter.FillByFund(this.fundsDBDataSet.Employees, manager.Selected);
 
         }
 
@@ -50,21 +50,28 @@ namespace FundsManager
                 }
             }
 
-            this.employeesTableAdapter.Fill(this.fundsDBDataSet.Employees);
+            this.employeesTableAdapter.FillByFund(this.fundsDBDataSet.Employees, manager.Selected);
 
             cmdCancel_Click(null, null);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult alert;
-            alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-            if (alert == DialogResult.OK)
+            try
             {
+                DialogResult alert;
+                alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (alert == DialogResult.OK)
+                {
 
-                manager.DeleteEmployee(Convert.ToInt32(listBox1.SelectedValue));
-                this.employeesTableAdapter.Fill(this.fundsDBDataSet.Employees);
-                cmdCancel_Click(null, null);
+                    manager.DeleteEmployee(Convert.ToInt32(listBox1.SelectedValue));
+                    this.employeesTableAdapter.FillByFund(this.fundsDBDataSet.Employees, manager.Selected);
+                    cmdCancel_Click(null, null);
+                }
+            }
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
             }
         }
 

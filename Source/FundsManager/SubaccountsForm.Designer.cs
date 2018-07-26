@@ -38,30 +38,28 @@
             this.cmdAddOrSave = new System.Windows.Forms.Button();
             this.accountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountsTableAdapter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fKSubaccountsAccountsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Account = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fKAccountsFundsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subaccountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.subaccountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.SubaccountsTableAdapter();
             this.cmdDelete = new System.Windows.Forms.Button();
             this.cmdCancel = new System.Windows.Forms.Button();
-            this.accountIdToolStripLabel = new System.Windows.Forms.ToolStripLabel();
-            this.accountIdToolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
-            this.fillByAcccountIdToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.fillByAcccountIdToolStrip = new System.Windows.Forms.ToolStrip();
+            this.txtNumber = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fKSubaccountsAccountsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Account = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fKAccountsFundsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subaccountsBindingSource)).BeginInit();
-            this.fillByAcccountIdToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(31, 42);
+            this.label1.Location = new System.Drawing.Point(86, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 0;
@@ -69,20 +67,19 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(75, 39);
+            this.txtName.Location = new System.Drawing.Point(124, 20);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(160, 20);
+            this.txtName.Size = new System.Drawing.Size(193, 20);
             this.txtName.TabIndex = 1;
-            this.txtName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // cbAccount
             // 
             this.cbAccount.DataSource = this.accountsBindingSource;
             this.cbAccount.DisplayMember = "name";
             this.cbAccount.FormattingEnabled = true;
-            this.cbAccount.Location = new System.Drawing.Point(75, 81);
+            this.cbAccount.Location = new System.Drawing.Point(124, 81);
             this.cbAccount.Name = "cbAccount";
-            this.cbAccount.Size = new System.Drawing.Size(190, 21);
+            this.cbAccount.Size = new System.Drawing.Size(193, 21);
             this.cbAccount.TabIndex = 2;
             this.cbAccount.ValueMember = "Id";
             this.cbAccount.SelectedIndexChanged += new System.EventHandler(this.cbAccount_SelectedIndexChanged);
@@ -100,7 +97,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 85);
+            this.label2.Location = new System.Drawing.Point(74, 84);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 13);
             this.label2.TabIndex = 3;
@@ -108,9 +105,9 @@
             // 
             // cmdAddOrSave
             // 
-            this.cmdAddOrSave.Location = new System.Drawing.Point(279, 80);
+            this.cmdAddOrSave.Location = new System.Drawing.Point(323, 80);
             this.cmdAddOrSave.Name = "cmdAddOrSave";
-            this.cmdAddOrSave.Size = new System.Drawing.Size(78, 23);
+            this.cmdAddOrSave.Size = new System.Drawing.Size(64, 23);
             this.cmdAddOrSave.TabIndex = 4;
             this.cmdAddOrSave.Text = "Add";
             this.cmdAddOrSave.UseVisualStyleBackColor = true;
@@ -129,17 +126,64 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
+            this.number,
             this.nameDataGridViewTextBoxColumn,
             this.fKSubaccountsAccountsDataGridViewTextBoxColumn,
             this.Account,
             this.fKAccountsFundsDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.subaccountsBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(34, 131);
+            this.dataGridView1.Location = new System.Drawing.Point(19, 126);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(406, 253);
+            this.dataGridView1.Size = new System.Drawing.Size(437, 258);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            // 
+            // subaccountsBindingSource
+            // 
+            this.subaccountsBindingSource.DataMember = "Subaccounts";
+            this.subaccountsBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // subaccountsTableAdapter
+            // 
+            this.subaccountsTableAdapter.ClearBeforeFill = true;
+            // 
+            // cmdDelete
+            // 
+            this.cmdDelete.Location = new System.Drawing.Point(347, 405);
+            this.cmdDelete.Name = "cmdDelete";
+            this.cmdDelete.Size = new System.Drawing.Size(108, 23);
+            this.cmdDelete.TabIndex = 6;
+            this.cmdDelete.Text = "Delete";
+            this.cmdDelete.UseVisualStyleBackColor = true;
+            this.cmdDelete.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // cmdCancel
+            // 
+            this.cmdCancel.Location = new System.Drawing.Point(391, 81);
+            this.cmdCancel.Name = "cmdCancel";
+            this.cmdCancel.Size = new System.Drawing.Size(66, 23);
+            this.cmdCancel.TabIndex = 7;
+            this.cmdCancel.Text = "Cancel";
+            this.cmdCancel.UseVisualStyleBackColor = true;
+            this.cmdCancel.Visible = false;
+            this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
+            // 
+            // txtNumber
+            // 
+            this.txtNumber.Location = new System.Drawing.Point(124, 50);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Size = new System.Drawing.Size(193, 20);
+            this.txtNumber.TabIndex = 9;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 53);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(108, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Subaccount Number:";
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -148,6 +192,15 @@
             this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             this.idDataGridViewTextBoxColumn.ReadOnly = true;
             this.idDataGridViewTextBoxColumn.Visible = false;
+            this.idDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // number
+            // 
+            this.number.DataPropertyName = "number";
+            this.number.HeaderText = "Number";
+            this.number.Name = "number";
+            this.number.ReadOnly = true;
+            this.number.Width = 70;
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -155,7 +208,7 @@
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nameDataGridViewTextBoxColumn.Width = 180;
+            this.nameDataGridViewTextBoxColumn.Width = 220;
             // 
             // fKSubaccountsAccountsDataGridViewTextBoxColumn
             // 
@@ -180,74 +233,13 @@
             this.fKAccountsFundsDataGridViewTextBoxColumn.ReadOnly = true;
             this.fKAccountsFundsDataGridViewTextBoxColumn.Visible = false;
             // 
-            // subaccountsBindingSource
-            // 
-            this.subaccountsBindingSource.DataMember = "Subaccounts";
-            this.subaccountsBindingSource.DataSource = this.fundsDBDataSet;
-            // 
-            // subaccountsTableAdapter
-            // 
-            this.subaccountsTableAdapter.ClearBeforeFill = true;
-            // 
-            // cmdDelete
-            // 
-            this.cmdDelete.Location = new System.Drawing.Point(293, 405);
-            this.cmdDelete.Name = "cmdDelete";
-            this.cmdDelete.Size = new System.Drawing.Size(108, 23);
-            this.cmdDelete.TabIndex = 6;
-            this.cmdDelete.Text = "Delete";
-            this.cmdDelete.UseVisualStyleBackColor = true;
-            this.cmdDelete.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // cmdCancel
-            // 
-            this.cmdCancel.Location = new System.Drawing.Point(363, 81);
-            this.cmdCancel.Name = "cmdCancel";
-            this.cmdCancel.Size = new System.Drawing.Size(78, 23);
-            this.cmdCancel.TabIndex = 7;
-            this.cmdCancel.Text = "Cancel";
-            this.cmdCancel.UseVisualStyleBackColor = true;
-            this.cmdCancel.Visible = false;
-            this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
-            // 
-            // accountIdToolStripLabel
-            // 
-            this.accountIdToolStripLabel.Name = "accountIdToolStripLabel";
-            this.accountIdToolStripLabel.Size = new System.Drawing.Size(65, 22);
-            this.accountIdToolStripLabel.Text = "AccountId:";
-            // 
-            // accountIdToolStripTextBox
-            // 
-            this.accountIdToolStripTextBox.Name = "accountIdToolStripTextBox";
-            this.accountIdToolStripTextBox.Size = new System.Drawing.Size(100, 25);
-            // 
-            // fillByAcccountIdToolStripButton
-            // 
-            this.fillByAcccountIdToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.fillByAcccountIdToolStripButton.Name = "fillByAcccountIdToolStripButton";
-            this.fillByAcccountIdToolStripButton.Size = new System.Drawing.Size(100, 22);
-            this.fillByAcccountIdToolStripButton.Text = "FillByAcccountId";
-            this.fillByAcccountIdToolStripButton.Click += new System.EventHandler(this.fillByAcccountIdToolStripButton_Click);
-            // 
-            // fillByAcccountIdToolStrip
-            // 
-            this.fillByAcccountIdToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.accountIdToolStripLabel,
-            this.accountIdToolStripTextBox,
-            this.fillByAcccountIdToolStripButton});
-            this.fillByAcccountIdToolStrip.Location = new System.Drawing.Point(0, 0);
-            this.fillByAcccountIdToolStrip.Name = "fillByAcccountIdToolStrip";
-            this.fillByAcccountIdToolStrip.Size = new System.Drawing.Size(478, 25);
-            this.fillByAcccountIdToolStrip.TabIndex = 8;
-            this.fillByAcccountIdToolStrip.Text = "fillByAcccountIdToolStrip";
-            this.fillByAcccountIdToolStrip.Visible = false;
-            // 
             // SubaccountsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(478, 473);
-            this.Controls.Add(this.fillByAcccountIdToolStrip);
+            this.Controls.Add(this.txtNumber);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.cmdDelete);
             this.Controls.Add(this.dataGridView1);
@@ -266,8 +258,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.subaccountsBindingSource)).EndInit();
-            this.fillByAcccountIdToolStrip.ResumeLayout(false);
-            this.fillByAcccountIdToolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,15 +277,14 @@
         private System.Windows.Forms.BindingSource subaccountsBindingSource;
         private FundsDBDataSetTableAdapters.SubaccountsTableAdapter subaccountsTableAdapter;
         private System.Windows.Forms.Button cmdDelete;
+        private System.Windows.Forms.Button cmdCancel;
+        private System.Windows.Forms.TextBox txtNumber;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn number;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fKSubaccountsAccountsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Account;
         private System.Windows.Forms.DataGridViewTextBoxColumn fKAccountsFundsDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button cmdCancel;
-        private System.Windows.Forms.ToolStripLabel accountIdToolStripLabel;
-        private System.Windows.Forms.ToolStripTextBox accountIdToolStripTextBox;
-        private System.Windows.Forms.ToolStripButton fillByAcccountIdToolStripButton;
-        private System.Windows.Forms.ToolStrip fillByAcccountIdToolStrip;
     }
 }

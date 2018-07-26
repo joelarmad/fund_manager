@@ -50,17 +50,17 @@ namespace FundsManager
             try
             {
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Items' table. You can move, or remove it, as needed.
-                this.itemsTableAdapter.Fill(this.fundsDBDataSet.Items);
+                this.itemsTableAdapter.FillByFund(this.fundsDBDataSet.Items, manager.Selected);
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Sectors' table. You can move, or remove it, as needed.
-                this.sectorsTableAdapter.Fill(this.fundsDBDataSet.Sectors);
+                this.sectorsTableAdapter.FillByFund(this.fundsDBDataSet.Sectors, manager.Selected);
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Banks' table. You can move, or remove it, as needed.
-                this.banksTableAdapter.FillExcludingOwnBanks(this.fundsDBDataSet.Banks);
+                this.banksTableAdapter.FillExcludingOwnBanks(this.fundsDBDataSet.Banks, manager.Selected);
                 // TODO: This line of code loads data into the 'fundsDBDataSet.UnderlyingDebtors' table. You can move, or remove it, as needed.
-                this.underlyingDebtorsTableAdapter.Fill(this.fundsDBDataSet.UnderlyingDebtors);
+                this.underlyingDebtorsTableAdapter.FillByFund(this.fundsDBDataSet.UnderlyingDebtors, manager.Selected);
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Clients' table. You can move, or remove it, as needed.
-                this.clientsTableAdapter.Fill(this.fundsDBDataSet.Clients);
+                this.clientsTableAdapter.FillByFund(this.fundsDBDataSet.Clients, manager.Selected);
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Currencies' table. You can move, or remove it, as needed.
-                this.currenciesTableAdapter.Fill(this.fundsDBDataSet.Currencies);
+                this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
 
             }
             catch (Exception _ex)
@@ -606,19 +606,6 @@ namespace FundsManager
 
                 checkEnablingAddDisbursementButton();
             }
-        }
-
-        private void fillExcludingOwnBanksToolStripButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.banksTableAdapter.FillExcludingOwnBanks(this.fundsDBDataSet.Banks);
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
-
         }
     }
 }

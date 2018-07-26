@@ -246,6 +246,9 @@
     <Compile Include="FundBondInterest.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="FundsDBDataSet.cs">
+      <DependentUpon>FundsDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="FundsDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

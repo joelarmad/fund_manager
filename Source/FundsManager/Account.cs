@@ -21,8 +21,8 @@ namespace FundsManager
             this.AccountsClients = new HashSet<AccountsClient>();
             this.AccountsCreditors = new HashSet<AccountsCreditor>();
             this.AccountsEmployees = new HashSet<AccountsEmployee>();
-            this.Subaccounts = new HashSet<Subaccount>();
             this.Movements_Accounts = new HashSet<Movements_Accounts>();
+            this.Subaccounts = new HashSet<Subaccount>();
         }
     
         public int Id { get; set; }
@@ -42,8 +42,8 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountsEmployee> AccountsEmployees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Subaccount> Subaccounts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movements_Accounts> Movements_Accounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Subaccount> Subaccounts { get; set; }
     }
 }

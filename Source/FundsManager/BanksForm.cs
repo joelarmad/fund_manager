@@ -25,9 +25,9 @@ namespace FundsManager
         private void BanksForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'fundsDBDataSet.Banks' table. You can move, or remove it, as needed.
-            this.banksTableAdapter.Fill(this.fundsDBDataSet.Banks);
+            this.banksTableAdapter.FillByFund(this.fundsDBDataSet.Banks, manager.Selected);
             // TODO: This line of code loads data into the 'fundsDBDataSet.Countries' table. You can move, or remove it, as needed.
-            this.countriesTableAdapter.Fill(this.fundsDBDataSet.Countries);
+            this.countriesTableAdapter.FillByFund(this.fundsDBDataSet.Countries, manager.Selected);
 
             listBox1.SelectedIndex = -1;
 
@@ -68,20 +68,27 @@ namespace FundsManager
 
             cmdCancel_Click(null, null);
 
-            this.banksTableAdapter.Fill(this.fundsDBDataSet.Banks);
+            this.banksTableAdapter.FillByFund(this.fundsDBDataSet.Banks, manager.Selected);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult alert;
-            alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-            if (alert == DialogResult.OK)
+            try
             {
+                DialogResult alert;
+                alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (alert == DialogResult.OK)
+                {
 
-                manager.DeleteBank(Convert.ToInt32(listBox1.SelectedValue));
-                this.banksTableAdapter.Fill(this.fundsDBDataSet.Banks);
+                    manager.DeleteBank(Convert.ToInt32(listBox1.SelectedValue));
+                    this.banksTableAdapter.FillByFund(this.fundsDBDataSet.Banks, manager.Selected);
 
-                cmdCancel_Click(null, null);
+                    cmdCancel_Click(null, null);
+                }
+            }
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
             }
         }
 

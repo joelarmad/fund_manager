@@ -44,7 +44,7 @@ namespace FundsManager
                 }
             }
 
-            this.countriesTableAdapter.Fill(this.fundsDBDataSet.Countries);
+            this.countriesTableAdapter.FillByFund(this.fundsDBDataSet.Countries, manager.Selected);
 
             cmdCancel_Click(null, null);
         }
@@ -52,22 +52,28 @@ namespace FundsManager
         private void CountriesForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'fundsDBDataSet.Countries' table. You can move, or remove it, as needed.
-            this.countriesTableAdapter.Fill(this.fundsDBDataSet.Countries);
+            this.countriesTableAdapter.FillByFund(this.fundsDBDataSet.Countries, manager.Selected);
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult alert;
-            alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-            if (alert == DialogResult.OK)
+            try
             {
+                DialogResult alert;
+                alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (alert == DialogResult.OK)
+                {
 
-                manager.DeleteCountry(Convert.ToInt32(listBox1.SelectedValue));
-                this.countriesTableAdapter.Fill(this.fundsDBDataSet.Countries);
-                cmdCancel_Click(null, null);
+                    manager.DeleteCountry(Convert.ToInt32(listBox1.SelectedValue));
+                    this.countriesTableAdapter.FillByFund(this.fundsDBDataSet.Countries, manager.Selected);
+                    cmdCancel_Click(null, null);
+                }
             }
-
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
+            }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)

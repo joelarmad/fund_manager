@@ -27,7 +27,7 @@ namespace FundsManager
         private void AccountsForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'fundsDBDataSet.Accounts' table. You can move, or remove it, as needed.
-            this.accountsTableAdapter.Fill(this.fundsDBDataSet.Accounts);
+            this.accountsTableAdapter.FillByFund(this.fundsDBDataSet.Accounts, manager.Selected);
 
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
@@ -68,57 +68,64 @@ namespace FundsManager
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult alert;
-            alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-            if (alert == DialogResult.OK)
+            try
             {
-                int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
-                
-                manager.DeleteAccount(Convert.ToInt32(selectedRow.Cells[0].Value));
-                this.accountsTableAdapter.Fill(this.fundsDBDataSet.Accounts);
-                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                DialogResult alert;
+                alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (alert == DialogResult.OK)
                 {
-                    string temp = dataGridView1.Rows[i].Cells[3].Value.ToString();
-                    switch (temp)
+                    int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
+                    DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
+
+                    manager.DeleteAccount(Convert.ToInt32(selectedRow.Cells[0].Value));
+                    this.accountsTableAdapter.FillByFund(this.fundsDBDataSet.Accounts, manager.Selected);
+                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
                     {
+                        string temp = dataGridView1.Rows[i].Cells[3].Value.ToString();
+                        switch (temp)
+                        {
 
-                        case "0":
-                            dataGridView1.Rows[i].Cells[4].Value = "Asset";
-                            break;
-                        case "1":
-                            dataGridView1.Rows[i].Cells[4].Value = "Liability";
-                            break;
-                        case "2":
-                            dataGridView1.Rows[i].Cells[4].Value = "Equity";
-                            break;
-                        case "3":
-                            dataGridView1.Rows[i].Cells[4].Value = "Income";
-                            break;
-                        case "4":
-                            dataGridView1.Rows[i].Cells[4].Value = "Expense";
-                            break;
-                        case "5":
-                            dataGridView1.Rows[i].Cells[4].Value = "Contingency Asset";
-                            break;
-                        case "6":
-                            dataGridView1.Rows[i].Cells[4].Value = "Contingency Liability";
-                            break;
+                            case "0":
+                                dataGridView1.Rows[i].Cells[4].Value = "Asset";
+                                break;
+                            case "1":
+                                dataGridView1.Rows[i].Cells[4].Value = "Liability";
+                                break;
+                            case "2":
+                                dataGridView1.Rows[i].Cells[4].Value = "Equity";
+                                break;
+                            case "3":
+                                dataGridView1.Rows[i].Cells[4].Value = "Income";
+                                break;
+                            case "4":
+                                dataGridView1.Rows[i].Cells[4].Value = "Expense";
+                                break;
+                            case "5":
+                                dataGridView1.Rows[i].Cells[4].Value = "Contingency Asset";
+                                break;
+                            case "6":
+                                dataGridView1.Rows[i].Cells[4].Value = "Contingency Liability";
+                                break;
+                        }
                     }
+
+                    fEditMode = false;
+
+                    cmdAddOrSave.Text = "Add";
+
+                    txtName.Text = "";
+                    txtAccountNumber.Text = "";
+                    txtAccountNumber.Enabled = true;
+
+                    cbType.SelectedIndex = 0;
+
+                    cmdCancel.Visible = false;
                 }
-
-                fEditMode = false;
-
-                cmdAddOrSave.Text = "Add";
-
-                txtName.Text = "";
-                txtAccountNumber.Text = "";
-                txtAccountNumber.Enabled = true;
-
-                cbType.SelectedIndex = 0;
-
-                cmdCancel.Visible = false;
             }
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
+            }            
         }
 
         private void addAccount()
@@ -158,7 +165,7 @@ namespace FundsManager
                     }
                 }
 
-                this.accountsTableAdapter.Fill(this.fundsDBDataSet.Accounts);
+                this.accountsTableAdapter.FillByFund(this.fundsDBDataSet.Accounts, manager.Selected);
 
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
@@ -197,14 +204,6 @@ namespace FundsManager
             catch (Exception _ex)
             {
                 Console.WriteLine("Error at AccountsForm.addAccount: " + _ex.Message);
-            }
-        }
-
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == '\r' || e.KeyChar == '\r')
-            {
-                addAccount();
             }
         }
 

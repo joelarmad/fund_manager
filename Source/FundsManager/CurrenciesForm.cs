@@ -26,7 +26,7 @@ namespace FundsManager
         private void CurrenciesForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'fundsDBDataSet.Currencies' table. You can move, or remove it, as needed.
-            this.currenciesTableAdapter.Fill(this.fundsDBDataSet.Currencies);
+            this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
 
         }
 
@@ -62,33 +62,40 @@ namespace FundsManager
             }
 
 
-            this.currenciesTableAdapter.Fill(this.fundsDBDataSet.Currencies);
+            this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
 
             cmdCancel_Click(null, null);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult alert;
-            alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-            if (alert == DialogResult.OK)
+            try
             {
-                int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
-
-                int _Id = Convert.ToInt32(selectedRow.Cells[0].Value);
-
-                if (_Id != 1)
+                DialogResult alert;
+                alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (alert == DialogResult.OK)
                 {
-                    manager.DeleteCurrency(Convert.ToInt32(selectedRow.Cells[0].Value));
-                    this.currenciesTableAdapter.Fill(this.fundsDBDataSet.Currencies);
-                }
-                else
-                {
-                    alert = MessageBox.Show("This currency can't be deleted.", "Illegal operation");
-                }
+                    int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
+                    DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
 
-                cmdCancel_Click(null, null);
+                    int _Id = Convert.ToInt32(selectedRow.Cells[0].Value);
+
+                    if (_Id != 1)
+                    {
+                        manager.DeleteCurrency(Convert.ToInt32(selectedRow.Cells[0].Value));
+                        this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
+                    }
+                    else
+                    {
+                        alert = MessageBox.Show("This currency can't be deleted.", "Illegal operation");
+                    }
+
+                    cmdCancel_Click(null, null);
+                }
+            }
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
             }
         }
 

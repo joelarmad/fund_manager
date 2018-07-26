@@ -25,7 +25,7 @@ namespace FundsManager
         private void ClientsForm_Load(object sender, EventArgs e)
         {
             // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Countries' Puede moverla o quitarla según sea necesario.
-            this.countriesTableAdapter.Fill(this.fundsDBDataSet.Countries);
+            this.countriesTableAdapter.FillByFund(this.fundsDBDataSet.Countries, manager.Selected);
 
             loadClientsData();
         }
@@ -59,16 +59,23 @@ namespace FundsManager
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult alert;
-            alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-            if (alert == DialogResult.OK)
+            try
             {
+                DialogResult alert;
+                alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (alert == DialogResult.OK)
+                {
 
-                manager.DeleteClient(Convert.ToInt32(listBox1.SelectedValue));
+                    manager.DeleteClient(Convert.ToInt32(listBox1.SelectedValue));
 
-                loadClientsData();
+                    loadClientsData();
 
-                cmdCancel_Click(null, null);
+                    cmdCancel_Click(null, null);
+                }
+            }
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
             }
         }
 
@@ -103,24 +110,11 @@ namespace FundsManager
             listBox1.SelectedIndex = -1;
         }
 
-        private void fillByCountryIdToolStripButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.clientsTableAdapter.FillByCountryId(this.fundsDBDataSet.Clients, ((int)(System.Convert.ChangeType(countryIdToolStripTextBox.Text, typeof(int)))));
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
-
-        }
-
         private void loadClientsData()
         {
             if (fundsDBDataSet != null && cbCountry.SelectedValue != null)
             {
-                this.clientsTableAdapter.FillByCountryId(this.fundsDBDataSet.Clients, int.Parse(cbCountry.SelectedValue.ToString()));
+                this.clientsTableAdapter.FillByCountryId(this.fundsDBDataSet.Clients, int.Parse(cbCountry.SelectedValue.ToString()), manager.Selected);
             }
         }
 

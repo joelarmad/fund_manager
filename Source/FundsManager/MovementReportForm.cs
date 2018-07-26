@@ -77,7 +77,7 @@ namespace FundsManager
         private void MovementReportForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'fundsDBDataSet.Accounts' table. You can move, or remove it, as needed.
-            this.accountsTableAdapter.Fill(this.fundsDBDataSet.Accounts);
+            this.accountsTableAdapter.FillByFund(this.fundsDBDataSet.Accounts, manager.Selected);
             comboBox1.SelectedIndex = -1;
 
         }

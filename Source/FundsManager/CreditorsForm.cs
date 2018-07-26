@@ -25,7 +25,7 @@ namespace FundsManager
         private void CreditorsForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'fundsDBDataSet.Creditors' table. You can move, or remove it, as needed.
-            this.creditorsTableAdapter.Fill(this.fundsDBDataSet.Creditors);
+            this.creditorsTableAdapter.FillByFund(this.fundsDBDataSet.Creditors, manager.Selected);
 
         }
 
@@ -50,7 +50,7 @@ namespace FundsManager
                 }
             }
 
-            this.creditorsTableAdapter.Fill(this.fundsDBDataSet.Creditors);
+            this.creditorsTableAdapter.FillByFund(this.fundsDBDataSet.Creditors, manager.Selected);
 
             cmdCancel_Click(null, null);
 
@@ -58,14 +58,21 @@ namespace FundsManager
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult alert;
-            alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-            if (alert == DialogResult.OK)
+            try
             {
+                DialogResult alert;
+                alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (alert == DialogResult.OK)
+                {
 
-                manager.DeleteCreditor(Convert.ToInt32(listBox1.SelectedValue));
-                this.creditorsTableAdapter.Fill(this.fundsDBDataSet.Creditors);
+                    manager.DeleteCreditor(Convert.ToInt32(listBox1.SelectedValue));
+                    this.creditorsTableAdapter.FillByFund(this.fundsDBDataSet.Creditors, manager.Selected);
 
+                }
+            }
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
             }
         }
 
@@ -99,5 +106,6 @@ namespace FundsManager
         {
             listBox1.SelectedIndex = -1;
         }
+        
     }
 }

@@ -26,6 +26,7 @@ namespace FundsManager
         public int FK_Subaccounts_Accounts { get; set; }
         public int FK_Accounts_Funds { get; set; }
         public decimal amount { get; set; }
+        public string number { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Fund Fund { get; set; }

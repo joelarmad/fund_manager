@@ -25,7 +25,7 @@ namespace FundsManager
         private void UnderlyingDebtorsForm_Load(object sender, EventArgs e)
         {
             // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet1.Countries' Puede moverla o quitarla según sea necesario.
-            this.countriesTableAdapter.Fill(this.fundsDBDataSet1.Countries);
+            this.countriesTableAdapter.FillByFund(this.fundsDBDataSet1.Countries, manager.Selected);
             loadUnderlyingDebtorsData();
         }
 
@@ -58,14 +58,21 @@ namespace FundsManager
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult alert;
-            alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-            if (alert == DialogResult.OK)
+            try
             {
+                DialogResult alert;
+                alert = MessageBox.Show("Warning, this action can not be undone. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (alert == DialogResult.OK)
+                {
 
-                manager.deleteUnderlyingDebtors(Convert.ToInt32(listBox1.SelectedValue));
-                loadUnderlyingDebtorsData();
-                cmdCancel_Click(null, null);
+                    manager.deleteUnderlyingDebtors(Convert.ToInt32(listBox1.SelectedValue));
+                    loadUnderlyingDebtorsData();
+                    cmdCancel_Click(null, null);
+                }
+            }
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
             }
         }
 
@@ -109,21 +116,8 @@ namespace FundsManager
         {
             if (fundsDBDataSet != null && cbCountry.SelectedValue != null)
             {
-                this.underlyingDebtorsTableAdapter.FillByCountryId(this.fundsDBDataSet.UnderlyingDebtors, int.Parse(cbCountry.SelectedValue.ToString()));
+                this.underlyingDebtorsTableAdapter.FillByCountryId(this.fundsDBDataSet.UnderlyingDebtors, int.Parse(cbCountry.SelectedValue.ToString()), manager.Selected);
             }
-        }
-
-        private void fillByCountryIdToolStripButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.underlyingDebtorsTableAdapter.FillByCountryId(this.fundsDBDataSet.UnderlyingDebtors, ((int)(System.Convert.ChangeType(countryIdToolStripTextBox.Text, typeof(int)))));
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
-
         }
     }
 }
