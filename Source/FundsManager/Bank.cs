@@ -18,8 +18,8 @@ namespace FundsManager
         public Bank()
         {
             this.BankingAccounts = new HashSet<BankingAccount>();
-            this.Disbursements = new HashSet<Disbursement>();
             this.UnderlyingDebtors = new HashSet<UnderlyingDebtor>();
+            this.Disbursements = new HashSet<Disbursement>();
         }
     
         public int Id { get; set; }
@@ -27,14 +27,15 @@ namespace FundsManager
         public int own { get; set; }
         public int FK_Banks_Funds { get; set; }
         public int FK_Banks_Countries { get; set; }
+        public string number { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BankingAccount> BankingAccounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UnderlyingDebtor> UnderlyingDebtors { get; set; }
         public virtual Country Country { get; set; }
         public virtual Fund Fund { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disbursement> Disbursements { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UnderlyingDebtor> UnderlyingDebtors { get; set; }
     }
 }

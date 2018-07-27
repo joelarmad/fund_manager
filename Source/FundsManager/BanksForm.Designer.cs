@@ -43,6 +43,8 @@
             this.countriesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CountriesTableAdapter();
             this.banksTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.BanksTableAdapter();
             this.cmdCancel = new System.Windows.Forms.Button();
+            this.txtNumber = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.countriesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banksBindingSource)).BeginInit();
@@ -60,7 +62,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 64);
+            this.label3.Location = new System.Drawing.Point(20, 101);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 13);
             this.label3.TabIndex = 2;
@@ -68,7 +70,7 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(72, 21);
+            this.txtName.Location = new System.Drawing.Point(72, 24);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(128, 20);
             this.txtName.TabIndex = 3;
@@ -78,7 +80,7 @@
             this.cbCountry.DataSource = this.countriesBindingSource;
             this.cbCountry.DisplayMember = "name";
             this.cbCountry.FormattingEnabled = true;
-            this.cbCountry.Location = new System.Drawing.Point(72, 56);
+            this.cbCountry.Location = new System.Drawing.Point(72, 93);
             this.cbCountry.Name = "cbCountry";
             this.cbCountry.Size = new System.Drawing.Size(128, 21);
             this.cbCountry.TabIndex = 4;
@@ -106,7 +108,7 @@
             // 
             // cmdAddOrSave
             // 
-            this.cmdAddOrSave.Location = new System.Drawing.Point(249, 56);
+            this.cmdAddOrSave.Location = new System.Drawing.Point(249, 49);
             this.cmdAddOrSave.Name = "cmdAddOrSave";
             this.cmdAddOrSave.Size = new System.Drawing.Size(75, 23);
             this.cmdAddOrSave.TabIndex = 6;
@@ -119,9 +121,9 @@
             this.listBox1.DataSource = this.banksBindingSource;
             this.listBox1.DisplayMember = "name";
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(27, 104);
+            this.listBox1.Location = new System.Drawing.Point(27, 141);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(196, 160);
+            this.listBox1.Size = new System.Drawing.Size(216, 160);
             this.listBox1.TabIndex = 7;
             this.listBox1.ValueMember = "Id";
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
@@ -133,7 +135,7 @@
             // 
             // cmdDelete
             // 
-            this.cmdDelete.Location = new System.Drawing.Point(249, 241);
+            this.cmdDelete.Location = new System.Drawing.Point(249, 141);
             this.cmdDelete.Name = "cmdDelete";
             this.cmdDelete.Size = new System.Drawing.Size(75, 23);
             this.cmdDelete.TabIndex = 8;
@@ -151,7 +153,7 @@
             // 
             // cmdCancel
             // 
-            this.cmdCancel.Location = new System.Drawing.Point(249, 104);
+            this.cmdCancel.Location = new System.Drawing.Point(249, 78);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(75, 23);
             this.cmdCancel.TabIndex = 9;
@@ -160,11 +162,29 @@
             this.cmdCancel.Visible = false;
             this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
             // 
+            // txtNumber
+            // 
+            this.txtNumber.Location = new System.Drawing.Point(72, 51);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Size = new System.Drawing.Size(128, 20);
+            this.txtNumber.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 54);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Number:";
+            // 
             // BanksForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(366, 305);
+            this.ClientSize = new System.Drawing.Size(366, 371);
+            this.Controls.Add(this.txtNumber);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.cmdDelete);
             this.Controls.Add(this.listBox1);
@@ -204,5 +224,7 @@
         private System.Windows.Forms.BindingSource banksBindingSource;
         private FundsDBDataSetTableAdapters.BanksTableAdapter banksTableAdapter;
         private System.Windows.Forms.Button cmdCancel;
+        private System.Windows.Forms.TextBox txtNumber;
+        private System.Windows.Forms.Label label2;
     }
 }

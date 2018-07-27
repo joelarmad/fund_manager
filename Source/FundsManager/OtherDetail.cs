@@ -18,6 +18,7 @@ namespace FundsManager
         public string name { get; set; }
         public int FK_OtherDetails_Funds { get; set; }
         public int subacct_id { get; set; }
+        public string number { get; set; }
     
         public virtual Fund Fund { get; set; }
         public virtual Subaccount Subaccount { get; set; }

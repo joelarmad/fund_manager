@@ -20,7 +20,7 @@ namespace FundsManager
         public int disbursement_id { get; set; }
         public int fund_id { get; set; }
     
-        public virtual Fund Fund { get; set; }
         public virtual Disbursement Disbursement { get; set; }
+        public virtual Fund Fund { get; set; }
     }
 }

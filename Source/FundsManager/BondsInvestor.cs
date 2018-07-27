@@ -19,7 +19,7 @@ namespace FundsManager
         public int FK_BondsInvestors_Investors { get; set; }
         public double quantity { get; set; }
     
-        public virtual Investor Investor { get; set; }
         public virtual Bond Bond { get; set; }
+        public virtual Investor Investor { get; set; }
     }
 }

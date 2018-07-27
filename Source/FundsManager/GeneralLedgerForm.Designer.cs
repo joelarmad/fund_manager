@@ -124,11 +124,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(436, 32);
+            this.label3.Location = new System.Drawing.Point(420, 32);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(102, 13);
+            this.label3.Size = new System.Drawing.Size(114, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Sub Account Detail:";
+            this.label3.Text = "Other Account Details:";
             // 
             // comboBox3
             // 
@@ -218,8 +218,8 @@
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "Detail";
-            this.columnHeader3.Width = 108;
+            this.columnHeader3.Text = "Other Account Details";
+            this.columnHeader3.Width = 150;
             // 
             // columnHeader4
             // 

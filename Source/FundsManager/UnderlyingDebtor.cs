@@ -25,6 +25,7 @@ namespace FundsManager
         public Nullable<int> debtor_bank_id { get; set; }
         public int FK_UnderlyingDebtors_Funds { get; set; }
         public int CountryId { get; set; }
+        public string number { get; set; }
     
         public virtual Bank Bank { get; set; }
         public virtual Country Country { get; set; }

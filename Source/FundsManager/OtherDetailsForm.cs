@@ -33,8 +33,8 @@ namespace FundsManager
             foreach (DataGridViewRow _row in dataGridView1.Rows)
             {
                 Subaccount _subaccount = new Subaccount();
-                _subaccount = manager.My_db.Subaccounts.Find(Convert.ToInt32(_row.Cells[3].Value));
-                _row.Cells[4].Value = _subaccount.name;
+                _subaccount = manager.My_db.Subaccounts.Find(Convert.ToInt32(_row.Cells[4].Value));
+                _row.Cells[5].Value = _subaccount.name;
             }
         }
 
@@ -74,6 +74,7 @@ namespace FundsManager
                 _otherdetail.name = txtName.Text;
                 _otherdetail.subacct_id = Convert.ToInt32(cbSubAccount.SelectedValue);
                 _otherdetail.FK_OtherDetails_Funds = manager.Selected;
+                _otherdetail.number = txtNumber.Text;
                 manager.My_db.OtherDetails.Add(_otherdetail);
                 manager.My_db.SaveChanges();
             }
@@ -87,7 +88,7 @@ namespace FundsManager
                 {
                     _selectedDetail.name = txtName.Text;
                     _selectedDetail.subacct_id = Convert.ToInt32(cbSubAccount.SelectedValue);
-
+                    _selectedDetail.number = txtNumber.Text;
 
                     manager.My_db.SaveChanges();
                 }
@@ -99,19 +100,11 @@ namespace FundsManager
             foreach (DataGridViewRow _row in dataGridView1.Rows)
             {
                 Subaccount _subaccount = new Subaccount();
-                _subaccount = manager.My_db.Subaccounts.Find(Convert.ToInt32(_row.Cells[3].Value));
-                _row.Cells[4].Value = _subaccount.name;
+                _subaccount = manager.My_db.Subaccounts.Find(Convert.ToInt32(_row.Cells[4].Value));
+                _row.Cells[5].Value = _subaccount.name;
             }
 
             cmdCancel_Click(null, null);
-        }
-
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == '\b' || e.KeyChar == '\r')
-            {
-                addDetail();
-            }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -127,6 +120,7 @@ namespace FundsManager
                 cmdAddOrSave.Text = "Save";
 
                 txtName.Text = _selectedDetail.name;
+                txtNumber.Text = _selectedDetail.number;
 
                 Subaccount _subacct = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == _selectedDetail.subacct_id);
 
@@ -150,6 +144,7 @@ namespace FundsManager
 
             txtName.Text = "";
             cbSubAccount.SelectedIndex = 0;
+            txtNumber.Text = "";
 
             cmdCancel.Visible = false;
         }

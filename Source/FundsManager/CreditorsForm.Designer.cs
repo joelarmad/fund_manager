@@ -38,6 +38,8 @@
             this.cmdDelete = new System.Windows.Forms.Button();
             this.creditorsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CreditorsTableAdapter();
             this.cmdCancel = new System.Windows.Forms.Button();
+            this.txtNumber = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.creditorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             this.SuspendLayout();
@@ -45,7 +47,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 44);
+            this.label1.Location = new System.Drawing.Point(33, 40);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 0;
@@ -63,9 +65,9 @@
             this.listBox1.DataSource = this.creditorsBindingSource;
             this.listBox1.DisplayMember = "name";
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(77, 81);
+            this.listBox1.Location = new System.Drawing.Point(77, 107);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(144, 173);
+            this.listBox1.Size = new System.Drawing.Size(144, 147);
             this.listBox1.TabIndex = 2;
             this.listBox1.ValueMember = "Id";
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
@@ -92,7 +94,7 @@
             // 
             // cmdDelete
             // 
-            this.cmdDelete.Location = new System.Drawing.Point(250, 231);
+            this.cmdDelete.Location = new System.Drawing.Point(250, 107);
             this.cmdDelete.Name = "cmdDelete";
             this.cmdDelete.Size = new System.Drawing.Size(75, 23);
             this.cmdDelete.TabIndex = 4;
@@ -106,7 +108,7 @@
             // 
             // cmdCancel
             // 
-            this.cmdCancel.Location = new System.Drawing.Point(250, 81);
+            this.cmdCancel.Location = new System.Drawing.Point(250, 67);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(75, 23);
             this.cmdCancel.TabIndex = 5;
@@ -115,11 +117,29 @@
             this.cmdCancel.Visible = false;
             this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
             // 
+            // txtNumber
+            // 
+            this.txtNumber.Location = new System.Drawing.Point(77, 63);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Size = new System.Drawing.Size(144, 20);
+            this.txtNumber.TabIndex = 7;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(24, 67);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Number:";
+            // 
             // CreditorsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(379, 305);
+            this.Controls.Add(this.txtNumber);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.cmdDelete);
             this.Controls.Add(this.cmdAddOrSave);
@@ -150,5 +170,7 @@
         private System.Windows.Forms.BindingSource creditorsBindingSource;
         private FundsDBDataSetTableAdapters.CreditorsTableAdapter creditorsTableAdapter;
         private System.Windows.Forms.Button cmdCancel;
+        private System.Windows.Forms.TextBox txtNumber;
+        private System.Windows.Forms.Label label2;
     }
 }

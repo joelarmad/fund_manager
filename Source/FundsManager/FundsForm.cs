@@ -24,34 +24,43 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!fEditMode)
+            try
             {
-                Fund _fund = new Fund();
-                _fund.name = txtName.Text;
-                _fund.contract_prefix = txtContractPrefix.Text;
-                manager.My_db.Funds.Add(_fund);
-                manager.My_db.SaveChanges();
-                txtName.Clear();
-                txtContractPrefix.Clear();
-                this.fundsTableAdapter.Fill(this.fundsDBDataSet.Funds);
-            }
-            else
-            {
-                Fund _selectedFund = manager.My_db.Funds.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
-
-                if (_selectedFund != null)
+                if (!fEditMode)
                 {
-                    _selectedFund.name = txtName.Text;
-                    _selectedFund.contract_prefix = txtContractPrefix.Text;
-
+                    Fund _fund = new Fund();
+                    _fund.name = txtName.Text;
+                    _fund.contract_prefix = txtContractPrefix.Text;
+                    _fund.number = txtNumber.Text;
+                    manager.My_db.Funds.Add(_fund);
                     manager.My_db.SaveChanges();
-
+                    txtName.Clear();
+                    txtContractPrefix.Clear();
                     this.fundsTableAdapter.Fill(this.fundsDBDataSet.Funds);
                 }
-            }
-            
+                else
+                {
+                    Fund _selectedFund = manager.My_db.Funds.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
 
-            listBox1.SelectedIndex = -1;
+                    if (_selectedFund != null)
+                    {
+                        _selectedFund.name = txtName.Text;
+                        _selectedFund.contract_prefix = txtContractPrefix.Text;
+                        _selectedFund.number = txtNumber.Text;
+
+                        manager.My_db.SaveChanges();
+
+                        this.fundsTableAdapter.Fill(this.fundsDBDataSet.Funds);
+                    }
+                }
+
+
+                listBox1.SelectedIndex = -1;
+            }
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -88,6 +97,7 @@ namespace FundsManager
                 if (_selectedFund != null)
                 {
                     txtName.Text = _selectedFund.name;
+                    txtNumber.Text = _selectedFund.number;
                     txtContractPrefix.Text = _selectedFund.contract_prefix;
                 }
 
@@ -99,6 +109,7 @@ namespace FundsManager
                 cmdAddOrUpdate.Text = "Add";
                 txtName.Text = "";
                 txtContractPrefix.Text = "";
+                txtNumber.Text = "";
 
                 cmdCancelEdit.Visible = false;
             }

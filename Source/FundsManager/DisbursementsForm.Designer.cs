@@ -78,6 +78,10 @@
             this.label11 = new System.Windows.Forms.Label();
             this.cmdCreateInvestment = new System.Windows.Forms.Button();
             this.cmdDeleteItem = new System.Windows.Forms.Button();
+            this.txtNumber = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtContract = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
@@ -90,7 +94,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(42, 37);
+            this.label1.Location = new System.Drawing.Point(46, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 0;
@@ -98,9 +102,9 @@
             // 
             // txtAmount
             // 
-            this.txtAmount.Location = new System.Drawing.Point(115, 34);
+            this.txtAmount.Location = new System.Drawing.Point(94, 34);
             this.txtAmount.Name = "txtAmount";
-            this.txtAmount.Size = new System.Drawing.Size(100, 20);
+            this.txtAmount.Size = new System.Drawing.Size(121, 20);
             this.txtAmount.TabIndex = 1;
             this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             this.txtAmount.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAmount_KeyUp);
@@ -109,7 +113,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(36, 72);
+            this.label2.Location = new System.Drawing.Point(40, 72);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 13);
             this.label2.TabIndex = 2;
@@ -140,7 +144,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 109);
+            this.label3.Location = new System.Drawing.Point(8, 109);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(84, 13);
             this.label3.TabIndex = 4;
@@ -148,16 +152,15 @@
             // 
             // txtExchangeRate
             // 
-            this.txtExchangeRate.Location = new System.Drawing.Point(115, 106);
+            this.txtExchangeRate.Location = new System.Drawing.Point(94, 106);
             this.txtExchangeRate.Name = "txtExchangeRate";
-            this.txtExchangeRate.ReadOnly = true;
-            this.txtExchangeRate.Size = new System.Drawing.Size(100, 20);
+            this.txtExchangeRate.Size = new System.Drawing.Size(121, 20);
             this.txtExchangeRate.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(305, 36);
+            this.label4.Location = new System.Drawing.Point(306, 72);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(36, 13);
             this.label4.TabIndex = 6;
@@ -168,7 +171,7 @@
             this.cbClient.DataSource = this.clientsBindingSource;
             this.cbClient.DisplayMember = "name";
             this.cbClient.FormattingEnabled = true;
-            this.cbClient.Location = new System.Drawing.Point(347, 33);
+            this.cbClient.Location = new System.Drawing.Point(348, 69);
             this.cbClient.Name = "cbClient";
             this.cbClient.Size = new System.Drawing.Size(121, 21);
             this.cbClient.TabIndex = 7;
@@ -183,7 +186,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(245, 72);
+            this.label5.Location = new System.Drawing.Point(246, 108);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(95, 13);
             this.label5.TabIndex = 8;
@@ -194,7 +197,7 @@
             this.cbUnderlyingDebtor.DataSource = this.underlyingDebtorsBindingSource;
             this.cbUnderlyingDebtor.DisplayMember = "name";
             this.cbUnderlyingDebtor.FormattingEnabled = true;
-            this.cbUnderlyingDebtor.Location = new System.Drawing.Point(347, 69);
+            this.cbUnderlyingDebtor.Location = new System.Drawing.Point(348, 105);
             this.cbUnderlyingDebtor.Name = "cbUnderlyingDebtor";
             this.cbUnderlyingDebtor.Size = new System.Drawing.Size(121, 21);
             this.cbUnderlyingDebtor.TabIndex = 9;
@@ -221,7 +224,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(306, 109);
+            this.label6.Location = new System.Drawing.Point(307, 145);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 13);
             this.label6.TabIndex = 10;
@@ -233,7 +236,7 @@
             this.cbBank.DataSource = this.banksBindingSource;
             this.cbBank.DisplayMember = "name";
             this.cbBank.FormattingEnabled = true;
-            this.cbBank.Location = new System.Drawing.Point(347, 106);
+            this.cbBank.Location = new System.Drawing.Point(348, 142);
             this.cbBank.Name = "cbBank";
             this.cbBank.Size = new System.Drawing.Size(121, 21);
             this.cbBank.TabIndex = 11;
@@ -252,7 +255,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(44, 146);
+            this.label7.Location = new System.Drawing.Point(27, 146);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(65, 13);
             this.label7.TabIndex = 12;
@@ -260,9 +263,9 @@
             // 
             // txtProfitShare
             // 
-            this.txtProfitShare.Location = new System.Drawing.Point(115, 143);
+            this.txtProfitShare.Location = new System.Drawing.Point(94, 143);
             this.txtProfitShare.Name = "txtProfitShare";
-            this.txtProfitShare.Size = new System.Drawing.Size(100, 20);
+            this.txtProfitShare.Size = new System.Drawing.Size(121, 20);
             this.txtProfitShare.TabIndex = 13;
             this.txtProfitShare.TextChanged += new System.EventHandler(this.txtProfitShare_TextChanged);
             this.txtProfitShare.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtProfitShare_KeyUp);
@@ -271,7 +274,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(299, 146);
+            this.label8.Location = new System.Drawing.Point(300, 182);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(41, 13);
             this.label8.TabIndex = 14;
@@ -282,7 +285,7 @@
             this.cbSector.DataSource = this.sectorsBindingSource;
             this.cbSector.DisplayMember = "name";
             this.cbSector.FormattingEnabled = true;
-            this.cbSector.Location = new System.Drawing.Point(347, 143);
+            this.cbSector.Location = new System.Drawing.Point(348, 179);
             this.cbSector.Name = "cbSector";
             this.cbSector.Size = new System.Drawing.Size(121, 21);
             this.cbSector.TabIndex = 15;
@@ -350,7 +353,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(28, 186);
+            this.label10.Location = new System.Drawing.Point(12, 219);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(108, 13);
             this.label10.TabIndex = 20;
@@ -358,7 +361,7 @@
             // 
             // txtTotalToBeCollected
             // 
-            this.txtTotalToBeCollected.Location = new System.Drawing.Point(142, 183);
+            this.txtTotalToBeCollected.Location = new System.Drawing.Point(122, 216);
             this.txtTotalToBeCollected.Name = "txtTotalToBeCollected";
             this.txtTotalToBeCollected.ReadOnly = true;
             this.txtTotalToBeCollected.Size = new System.Drawing.Size(100, 20);
@@ -367,7 +370,7 @@
             // cmdAddDisbursement
             // 
             this.cmdAddDisbursement.Enabled = false;
-            this.cmdAddDisbursement.Location = new System.Drawing.Point(689, 203);
+            this.cmdAddDisbursement.Location = new System.Drawing.Point(692, 214);
             this.cmdAddDisbursement.Name = "cmdAddDisbursement";
             this.cmdAddDisbursement.Size = new System.Drawing.Size(115, 23);
             this.cmdAddDisbursement.TabIndex = 22;
@@ -430,7 +433,7 @@
             // cmdDeleteDisbursement
             // 
             this.cmdDeleteDisbursement.Enabled = false;
-            this.cmdDeleteDisbursement.Location = new System.Drawing.Point(810, 203);
+            this.cmdDeleteDisbursement.Location = new System.Drawing.Point(813, 214);
             this.cmdDeleteDisbursement.Name = "cmdDeleteDisbursement";
             this.cmdDeleteDisbursement.Size = new System.Drawing.Size(121, 23);
             this.cmdDeleteDisbursement.TabIndex = 24;
@@ -440,7 +443,7 @@
             // 
             // dtpDisbursementDate
             // 
-            this.dtpDisbursementDate.Location = new System.Drawing.Point(483, 205);
+            this.dtpDisbursementDate.Location = new System.Drawing.Point(486, 216);
             this.dtpDisbursementDate.Name = "dtpDisbursementDate";
             this.dtpDisbursementDate.Size = new System.Drawing.Size(200, 20);
             this.dtpDisbursementDate.TabIndex = 25;
@@ -449,7 +452,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(444, 208);
+            this.label11.Location = new System.Drawing.Point(447, 219);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(33, 13);
             this.label11.TabIndex = 26;
@@ -477,11 +480,47 @@
             this.cmdDeleteItem.UseVisualStyleBackColor = true;
             this.cmdDeleteItem.Click += new System.EventHandler(this.cmdDeleteItem_Click);
             // 
+            // txtNumber
+            // 
+            this.txtNumber.Location = new System.Drawing.Point(94, 179);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Size = new System.Drawing.Size(121, 20);
+            this.txtNumber.TabIndex = 30;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(46, 182);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(47, 13);
+            this.label12.TabIndex = 29;
+            this.label12.Text = "Number:";
+            // 
+            // txtContract
+            // 
+            this.txtContract.Location = new System.Drawing.Point(348, 34);
+            this.txtContract.Name = "txtContract";
+            this.txtContract.Size = new System.Drawing.Size(121, 20);
+            this.txtContract.TabIndex = 32;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(293, 37);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(50, 13);
+            this.label13.TabIndex = 31;
+            this.label13.Text = "Contract:";
+            // 
             // DisbursementsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(951, 578);
+            this.Controls.Add(this.txtContract);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.txtNumber);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.cmdDeleteItem);
             this.Controls.Add(this.cmdCreateInvestment);
             this.Controls.Add(this.label11);
@@ -580,5 +619,9 @@
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Button cmdCreateInvestment;
         private System.Windows.Forms.Button cmdDeleteItem;
+        private System.Windows.Forms.TextBox txtNumber;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtContract;
+        private System.Windows.Forms.Label label13;
     }
 }

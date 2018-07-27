@@ -32,18 +32,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.txtCode = new System.Windows.Forms.TextBox();
+            this.txtNumber = new System.Windows.Forms.TextBox();
             this.txtSymbol = new System.Windows.Forms.TextBox();
-            this.txtExchange = new System.Windows.Forms.TextBox();
             this.cmdAddOrSave = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.symbolDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.exchangeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.currenciesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.currenciesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CurrenciesTableAdapter();
@@ -66,11 +62,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(242, 33);
+            this.label2.Location = new System.Drawing.Point(230, 33);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Code:";
+            this.label2.Text = "Number:";
             // 
             // label3
             // 
@@ -81,15 +77,6 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Symbol:";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(219, 73);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Exchange:";
-            // 
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(99, 30);
@@ -97,12 +84,12 @@
             this.txtName.Size = new System.Drawing.Size(100, 20);
             this.txtName.TabIndex = 4;
             // 
-            // txtCode
+            // txtNumber
             // 
-            this.txtCode.Location = new System.Drawing.Point(283, 30);
-            this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(100, 20);
-            this.txtCode.TabIndex = 5;
+            this.txtNumber.Location = new System.Drawing.Point(283, 30);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Size = new System.Drawing.Size(100, 20);
+            this.txtNumber.TabIndex = 5;
             // 
             // txtSymbol
             // 
@@ -110,13 +97,6 @@
             this.txtSymbol.Name = "txtSymbol";
             this.txtSymbol.Size = new System.Drawing.Size(100, 20);
             this.txtSymbol.TabIndex = 6;
-            // 
-            // txtExchange
-            // 
-            this.txtExchange.Location = new System.Drawing.Point(283, 70);
-            this.txtExchange.Name = "txtExchange";
-            this.txtExchange.Size = new System.Drawing.Size(100, 20);
-            this.txtExchange.TabIndex = 7;
             // 
             // cmdAddOrSave
             // 
@@ -138,9 +118,7 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.nameDataGridViewTextBoxColumn,
-            this.codeDataGridViewTextBoxColumn,
-            this.symbolDataGridViewTextBoxColumn,
-            this.exchangeDataGridViewTextBoxColumn});
+            this.symbolDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.currenciesBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(23, 164);
             this.dataGridView1.Name = "dataGridView1";
@@ -162,23 +140,11 @@
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             // 
-            // codeDataGridViewTextBoxColumn
-            // 
-            this.codeDataGridViewTextBoxColumn.DataPropertyName = "code";
-            this.codeDataGridViewTextBoxColumn.HeaderText = "Code";
-            this.codeDataGridViewTextBoxColumn.Name = "codeDataGridViewTextBoxColumn";
-            // 
             // symbolDataGridViewTextBoxColumn
             // 
             this.symbolDataGridViewTextBoxColumn.DataPropertyName = "symbol";
             this.symbolDataGridViewTextBoxColumn.HeaderText = "Symbol";
             this.symbolDataGridViewTextBoxColumn.Name = "symbolDataGridViewTextBoxColumn";
-            // 
-            // exchangeDataGridViewTextBoxColumn
-            // 
-            this.exchangeDataGridViewTextBoxColumn.DataPropertyName = "exchange";
-            this.exchangeDataGridViewTextBoxColumn.HeaderText = "Exchange";
-            this.exchangeDataGridViewTextBoxColumn.Name = "exchangeDataGridViewTextBoxColumn";
             // 
             // currenciesBindingSource
             // 
@@ -224,11 +190,9 @@
             this.Controls.Add(this.cmdDelete);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.cmdAddOrSave);
-            this.Controls.Add(this.txtExchange);
             this.Controls.Add(this.txtSymbol);
-            this.Controls.Add(this.txtCode);
+            this.Controls.Add(this.txtNumber);
             this.Controls.Add(this.txtName);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -251,11 +215,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.TextBox txtCode;
+        private System.Windows.Forms.TextBox txtNumber;
         private System.Windows.Forms.TextBox txtSymbol;
-        private System.Windows.Forms.TextBox txtExchange;
         private System.Windows.Forms.Button cmdAddOrSave;
         private System.Windows.Forms.DataGridView dataGridView1;
         private FundsDBDataSet fundsDBDataSet;

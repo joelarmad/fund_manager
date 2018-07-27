@@ -35,40 +35,49 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!fEditMode)
+            try
             {
-                Bank _bank = new Bank();
-                _bank.name = txtName.Text;
-                _bank.FK_Banks_Funds = manager.Selected;
-                _bank.FK_Banks_Countries = Convert.ToInt32(cbCountry.SelectedValue);
-
-                if (chkOurBank.Checked)
-                    _bank.own = 1;
-                else
-                    _bank.own = 0;
-
-
-                manager.My_db.Banks.Add(_bank);
-                manager.My_db.SaveChanges();
-            }
-            else
-            {
-                Bank _selectedItem = manager.My_db.Banks.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
-
-                if (_selectedItem != null)
+                if (!fEditMode)
                 {
-                    _selectedItem.name = txtName.Text;
-                    _selectedItem.FK_Banks_Countries = Convert.ToInt32(cbCountry.SelectedValue);
-                    _selectedItem.own = chkOurBank.Checked ? 1 : 0;
+                    Bank _bank = new Bank();
+                    _bank.name = txtName.Text;
+                    _bank.FK_Banks_Funds = manager.Selected;
+                    _bank.FK_Banks_Countries = Convert.ToInt32(cbCountry.SelectedValue);
+                    _bank.number = txtNumber.Text;
+    
+                if (chkOurBank.Checked)
+                        _bank.own = 1;
+                    else
+                        _bank.own = 0;
 
+
+                    manager.My_db.Banks.Add(_bank);
                     manager.My_db.SaveChanges();
                 }
+                else
+                {
+                    Bank _selectedItem = manager.My_db.Banks.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                    if (_selectedItem != null)
+                    {
+                        _selectedItem.name = txtName.Text;
+                        _selectedItem.FK_Banks_Countries = Convert.ToInt32(cbCountry.SelectedValue);
+                        _selectedItem.own = chkOurBank.Checked ? 1 : 0;
+                        _selectedItem.number = txtNumber.Text;
+
+                        manager.My_db.SaveChanges();
+                    }
+                }
+
+
+                cmdCancel_Click(null, null);
+
+                this.banksTableAdapter.FillByFund(this.fundsDBDataSet.Banks, manager.Selected);
             }
-
-
-            cmdCancel_Click(null, null);
-
-            this.banksTableAdapter.FillByFund(this.fundsDBDataSet.Banks, manager.Selected);
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -104,6 +113,7 @@ namespace FundsManager
                 if (_selectedItem != null)
                 {
                     txtName.Text = _selectedItem.name;
+                    txtNumber.Text = _selectedItem.number;
 
                     foreach (DataRowView _item in cbCountry.Items)
                     {
@@ -126,6 +136,7 @@ namespace FundsManager
                 txtName.Text = "";
                 cbCountry.SelectedIndex = 0;
                 chkOurBank.Checked = false;
+                txtNumber.Text = "";
 
                 cmdCancel.Visible = false;
             }

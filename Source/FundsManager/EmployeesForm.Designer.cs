@@ -39,6 +39,8 @@
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.employeesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.EmployeesTableAdapter();
             this.cmdCancel = new System.Windows.Forms.Button();
+            this.txtNumber = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.employeesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
@@ -65,7 +67,7 @@
             // 
             // cmdDelete
             // 
-            this.cmdDelete.Location = new System.Drawing.Point(252, 245);
+            this.cmdDelete.Location = new System.Drawing.Point(252, 101);
             this.cmdDelete.Name = "cmdDelete";
             this.cmdDelete.Size = new System.Drawing.Size(75, 23);
             this.cmdDelete.TabIndex = 2;
@@ -85,9 +87,9 @@
             this.listBox1.DataSource = this.employeesBindingSource;
             this.listBox1.DisplayMember = "name";
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(79, 75);
+            this.listBox1.Location = new System.Drawing.Point(79, 101);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(153, 199);
+            this.listBox1.Size = new System.Drawing.Size(153, 173);
             this.listBox1.TabIndex = 5;
             this.listBox1.ValueMember = "Id";
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
@@ -113,7 +115,7 @@
             // 
             // cmdCancel
             // 
-            this.cmdCancel.Location = new System.Drawing.Point(252, 75);
+            this.cmdCancel.Location = new System.Drawing.Point(252, 61);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(75, 23);
             this.cmdCancel.TabIndex = 6;
@@ -122,11 +124,29 @@
             this.cmdCancel.Visible = false;
             this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
             // 
+            // txtNumber
+            // 
+            this.txtNumber.Location = new System.Drawing.Point(79, 60);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Size = new System.Drawing.Size(153, 20);
+            this.txtNumber.TabIndex = 8;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(26, 63);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Number:";
+            // 
             // EmployeesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(374, 332);
+            this.Controls.Add(this.txtNumber);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.txtName);
@@ -159,5 +179,7 @@
         private System.Windows.Forms.BindingSource employeesBindingSource;
         private FundsDBDataSetTableAdapters.EmployeesTableAdapter employeesTableAdapter;
         private System.Windows.Forms.Button cmdCancel;
+        private System.Windows.Forms.TextBox txtNumber;
+        private System.Windows.Forms.Label label2;
     }
 }

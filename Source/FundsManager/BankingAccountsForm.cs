@@ -54,10 +54,11 @@ namespace FundsManager
                     BankingAccount _banking = new BankingAccount();
                     _banking.name = txtName.Text;
                     _banking.iban = txtIBAN.Text;
-                    _banking.amount = Convert.ToDecimal(txtAmount.Text);
+                    _banking.amount = 0;
                     _banking.FK_BankingAccounts_Funds = manager.Selected;
                     _banking.FK_BankingAccounts_Banks = Convert.ToInt32(cbBank.SelectedValue);
                     _banking.FK_BankingAccounts_Currencies = Convert.ToInt32(cbCurrency.SelectedValue);
+                    _banking.number = txtNumber.Text;
 
                     manager.My_db.BankingAccounts.Add(_banking);
                     manager.My_db.SaveChanges();
@@ -73,10 +74,10 @@ namespace FundsManager
                     {
                         _selecteItem.name = txtName.Text;
                         _selecteItem.iban = txtIBAN.Text;
-                        _selecteItem.amount = Convert.ToDecimal(txtAmount.Text);
                         _selecteItem.FK_BankingAccounts_Banks = Convert.ToInt32(cbBank.SelectedValue);
                         _selecteItem.FK_BankingAccounts_Currencies = Convert.ToInt32(cbCurrency.SelectedValue);
-                        
+                        _selecteItem.number = txtNumber.Text;
+
                         manager.My_db.SaveChanges();
                     }
                 }
@@ -139,7 +140,7 @@ namespace FundsManager
 
                 txtName.Text = _selecteItem.name;
                 txtIBAN.Text = _selecteItem.iban;
-                txtAmount.Text = _selecteItem.amount.ToString();
+                txtNumber.Text = _selecteItem.number;
 
                 Currency _currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == _selecteItem.FK_BankingAccounts_Currencies);
 
@@ -167,9 +168,9 @@ namespace FundsManager
 
             txtName.Text = "";
             txtIBAN.Text = "";
-            txtAmount.Text = "";
             cbBank.SelectedIndex = 0;
             cbCurrency.SelectedIndex = 0;
+            txtNumber.Text = "";
 
             cmdCancel.Visible = false;
         }

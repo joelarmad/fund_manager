@@ -43,6 +43,8 @@
             this.countriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fundsDBDataSet1 = new FundsManager.FundsDBDataSet();
             this.countriesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CountriesTableAdapter();
+            this.txtNumber = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.underlyingDebtorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.countriesBindingSource)).BeginInit();
@@ -70,9 +72,9 @@
             this.listBox1.DataSource = this.underlyingDebtorsBindingSource;
             this.listBox1.DisplayMember = "name";
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(118, 112);
+            this.listBox1.Location = new System.Drawing.Point(118, 125);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(157, 225);
+            this.listBox1.Size = new System.Drawing.Size(157, 212);
             this.listBox1.TabIndex = 2;
             this.listBox1.ValueMember = "Id";
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
@@ -125,7 +127,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(66, 73);
+            this.label2.Location = new System.Drawing.Point(66, 95);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 6;
@@ -136,7 +138,7 @@
             this.cbCountry.DataSource = this.countriesBindingSource;
             this.cbCountry.DisplayMember = "name";
             this.cbCountry.FormattingEnabled = true;
-            this.cbCountry.Location = new System.Drawing.Point(118, 70);
+            this.cbCountry.Location = new System.Drawing.Point(118, 92);
             this.cbCountry.Name = "cbCountry";
             this.cbCountry.Size = new System.Drawing.Size(157, 21);
             this.cbCountry.TabIndex = 7;
@@ -157,11 +159,29 @@
             // 
             this.countriesTableAdapter.ClearBeforeFill = true;
             // 
+            // txtNumber
+            // 
+            this.txtNumber.Location = new System.Drawing.Point(118, 64);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Size = new System.Drawing.Size(157, 20);
+            this.txtNumber.TabIndex = 9;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(65, 67);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(47, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Number:";
+            // 
             // UnderlyingDebtorsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 369);
+            this.Controls.Add(this.txtNumber);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.cbCountry);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmdCancel);
@@ -201,5 +221,7 @@
         private FundsDBDataSet fundsDBDataSet1;
         private System.Windows.Forms.BindingSource countriesBindingSource;
         private FundsDBDataSetTableAdapters.CountriesTableAdapter countriesTableAdapter;
+        private System.Windows.Forms.TextBox txtNumber;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -31,29 +31,37 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!fEditMode)
+            try
             {
-                Sector _sector = new Sector();
-                _sector.name = txtName.Text;
-                _sector.FK_Sectors_Funds = manager.Selected;
-                manager.My_db.Sectors.Add(_sector);
-                manager.My_db.SaveChanges();
-            }
-            else
-            {
-                Sector _selectedItem = manager.My_db.Sectors.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
-
-                if (_selectedItem != null)
+                if (!fEditMode)
                 {
-                    _selectedItem.name = txtName.Text;
+                    Sector _sector = new Sector();
+                    _sector.name = txtName.Text;
+                    _sector.FK_Sectors_Funds = manager.Selected;
+                    _sector.number = txtNumber.Text;
+                    manager.My_db.Sectors.Add(_sector);
                     manager.My_db.SaveChanges();
                 }
+                else
+                {
+                    Sector _selectedItem = manager.My_db.Sectors.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                    if (_selectedItem != null)
+                    {
+                        _selectedItem.name = txtName.Text;
+                        _selectedItem.number = txtNumber.Text;
+                        manager.My_db.SaveChanges();
+                    }
+                }
+
+                this.sectorsTableAdapter.FillByFund(this.fundsDBDataSet.Sectors, manager.Selected);
+
+                cmdCancel_Click(null, null);
             }
-
-            this.sectorsTableAdapter.FillByFund(this.fundsDBDataSet.Sectors, manager.Selected);
-
-            cmdCancel_Click(null, null);
-
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -88,6 +96,7 @@ namespace FundsManager
                 if (_selectedItem != null)
                 {
                     txtName.Text = _selectedItem.name;
+                    txtNumber.Text = _selectedItem.number;
                 }
 
                 cmdCancel.Visible = true;
@@ -97,6 +106,7 @@ namespace FundsManager
                 fEditMode = false;
                 cmdAddOrSave.Text = "Add";
                 txtName.Text = "";
+                txtNumber.Text = "";
 
                 cmdCancel.Visible = false;
             }

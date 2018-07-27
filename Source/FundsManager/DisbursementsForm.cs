@@ -111,6 +111,10 @@ namespace FundsManager
                 {
                     txtTotalToBeCollected.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", ((_amount + _profit) / _exchange));
                 }
+                else
+                {
+                    txtTotalToBeCollected.Text = "";
+                }
             }
             catch (Exception _ex)
             {
@@ -123,12 +127,15 @@ namespace FundsManager
             try
             {
                 Double value = 0;
-                if (cbCurrency.SelectedIndex != -1)
-                    txtExchangeRate.Text = manager.My_db.Currencies.Find(Convert.ToInt32(cbCurrency.SelectedValue)).exchange.ToString();
-                if (disbursement > 0 && profit > 0)
+
+                if (disbursement > 0 && profit > 0 && double.TryParse(txtExchangeRate.Text, out value))
                 {
-                    value = (disbursement + profit) / Convert.ToDouble(txtExchangeRate.Text);
+                    value = (disbursement + profit) / value;
                     txtTotalToBeCollected.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", value);
+                }
+                else
+                {
+                    txtTotalToBeCollected.Text = "";
                 }
             }
             catch (Exception _ex)
@@ -181,89 +188,98 @@ namespace FundsManager
                 Decimal total_profit = 0;
                 Decimal total_euro_collection = 0;
                 TimeSpan day = new TimeSpan();
+                float exchangeRate = 0;
 
-                Disbursement _disbursement = new Disbursement();
-
-                _disbursement.fund_id = manager.Selected;
-
-                _disbursement.amount = Convert.ToDecimal(txtAmount.Text);
-                _disbursement.exchange_rate = Convert.ToSingle(txtExchangeRate.Text);
-                _disbursement.profit_share = Convert.ToDecimal(txtProfitShare.Text);
-                _disbursement.currency_id = Convert.ToInt32(cbCurrency.SelectedValue);
-                _disbursement.bank_risk_id = Convert.ToInt32(cbBank.SelectedValue);
-                _disbursement.client_id = Convert.ToInt32(cbClient.SelectedValue);
-                _disbursement.underlying_debtor_id = Convert.ToInt32(cbUnderlyingDebtor.SelectedValue);
-                _disbursement.date = Convert.ToDateTime(dtpDisbursementDate.Text);
-                _disbursement.sector_id = Convert.ToInt32(cbSector.SelectedValue);
-
-                _disbursement.TextClient = cbClient.Text;
-                _disbursement.TextUnderlyingDebtor = cbUnderlyingDebtor.Text;
-
-                _disbursement.Euro_collection = Convert.ToDecimal((_disbursement.amount + _disbursement.profit_share) / (decimal)_disbursement.exchange_rate);
-
-                foreach (int _itemId in fItemIds)
+                if (float.TryParse(txtExchangeRate.Text, out exchangeRate) && exchangeRate > 0)
                 {
-                    _disbursement.ItemsIds.Add(_itemId);
-                }
+                    Disbursement _disbursement = new Disbursement();
 
-                int _index = -1;
+                    _disbursement.fund_id = manager.Selected;
 
-                for (int i = 0; i < disbursements.Count; i++)
-                {
-                    Disbursement _item = disbursements[i];
 
-                    if (_item.date > _disbursement.date)
+                    _disbursement.exchange_rate = exchangeRate;
+                    _disbursement.amount = Convert.ToDecimal(txtAmount.Text) / (decimal)exchangeRate;
+                    _disbursement.profit_share = Convert.ToDecimal(txtProfitShare.Text) / (decimal)exchangeRate;
+                    _disbursement.currency_id = Convert.ToInt32(cbCurrency.SelectedValue);
+                    _disbursement.bank_risk_id = Convert.ToInt32(cbBank.SelectedValue);
+                    _disbursement.client_id = Convert.ToInt32(cbClient.SelectedValue);
+                    _disbursement.underlying_debtor_id = Convert.ToInt32(cbUnderlyingDebtor.SelectedValue);
+                    _disbursement.date = Convert.ToDateTime(dtpDisbursementDate.Text);
+                    _disbursement.sector_id = Convert.ToInt32(cbSector.SelectedValue);
+
+                    _disbursement.TextClient = cbClient.Text;
+                    _disbursement.TextUnderlyingDebtor = cbUnderlyingDebtor.Text;
+
+                    _disbursement.Euro_collection = _disbursement.amount + _disbursement.profit_share;
+
+                    foreach (int _itemId in fItemIds)
                     {
-                        disbursements.Insert(i, _disbursement);
-                        _index = i;
-                        break;
+                        _disbursement.ItemsIds.Add(_itemId);
                     }
-                }
 
-                if (_index == -1)
-                {
-                    disbursements.Add(_disbursement);
-                }
+                    int _index = -1;
 
-                if (disbursements.First<Disbursement>().date != _disbursement.date)
-                    day = _disbursement.date.Subtract(disbursements.First<Disbursement>().date);
+                    for (int i = 0; i < disbursements.Count; i++)
+                    {
+                        Disbursement _item = disbursements[i];
 
-                if (lvDisbursements.Items.Count > 0)
-                    lvDisbursements.Items.RemoveAt(lvDisbursements.Items.Count - 1);
+                        if (_item.date > _disbursement.date)
+                        {
+                            disbursements.Insert(i, _disbursement);
+                            _index = i;
+                            break;
+                        }
+                    }
+
+                    if (_index == -1)
+                    {
+                        disbursements.Add(_disbursement);
+                    }
+
+                    if (disbursements.First<Disbursement>().date != _disbursement.date)
+                        day = _disbursement.date.Subtract(disbursements.First<Disbursement>().date);
+
+                    if (lvDisbursements.Items.Count > 0)
+                        lvDisbursements.Items.RemoveAt(lvDisbursements.Items.Count - 1);
 
 
-                string[] row = { cbClient.Text, cbUnderlyingDebtor.Text, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", txtAmount.Text), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", txtProfitShare.Text), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", txtTotalToBeCollected.Text), dtpDisbursementDate.Text, Convert.ToString(day.Days) };
-                ListViewItem my_item = new ListViewItem(row);
+                    string[] row = { cbClient.Text, cbUnderlyingDebtor.Text, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount.ToString()), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.profit_share.ToString()), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.Euro_collection.ToString()), dtpDisbursementDate.Text, Convert.ToString(day.Days) };
+                    ListViewItem my_item = new ListViewItem(row);
 
-                if (_index == -1)
-                {
-                    lvDisbursements.Items.Add(my_item);
+                    if (_index == -1)
+                    {
+                        lvDisbursements.Items.Add(my_item);
+                    }
+                    else
+                    {
+                        lvDisbursements.Items.Insert(_index, my_item);
+                    }
+
+                    foreach (Disbursement _dis in disbursements)
+                    {
+                        total_amount += _dis.amount;
+                        total_profit += _dis.profit_share;
+                        total_euro_collection += _dis.Euro_collection;
+                    }
+
+                    string[] totales = { "Total", "", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_profit), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_euro_collection) };
+                    ListViewItem listViewItemTotal = new ListViewItem(totales);
+                    lvDisbursements.Items.Add(listViewItemTotal);
+
+                    txtAmount.Clear();
+                    txtProfitShare.Clear();
+                    lbISelectedItems.Items.Clear();
+                    txtTotalToBeCollected.Clear();
+                    lbISelectedItems.Items.Clear();
+                    lbISelectedItems.Items.Clear();
+                    fItemIds.Clear();
+
+                    checkEnablingAddInvestmentButton();
                 }
                 else
                 {
-                    lvDisbursements.Items.Insert(_index, my_item);
+                    MessageBox.Show("Error in exchage rate data.");
                 }
-
-                foreach (Disbursement _dis in disbursements)
-                {
-                    total_amount += _dis.amount;
-                    total_profit += _dis.profit_share;
-                    total_euro_collection += _dis.Euro_collection;
-                }
-
-                string[] totales = { "Total", "", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_profit), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_euro_collection) };
-                ListViewItem listViewItemTotal = new ListViewItem(totales);
-                lvDisbursements.Items.Add(listViewItemTotal);
-
-                txtAmount.Clear();
-                txtProfitShare.Clear();
-                lbISelectedItems.Items.Clear();
-                txtTotalToBeCollected.Clear();
-                lbISelectedItems.Items.Clear();
-                lbISelectedItems.Items.Clear();
-                fItemIds.Clear();
-
-                checkEnablingAddInvestmentButton();
             }
             catch (Exception _ex)
             {
@@ -280,9 +296,10 @@ namespace FundsManager
 
                 Investment _newInvestment = new Investment();
 
-                _newInvestment.contract = "";
+                _newInvestment.contract = txtContract.Text;
                 _newInvestment.date = DateTime.Now.Date;
                 _newInvestment.fund_id = manager.Selected;
+                _newInvestment.number = txtNumber.Text;
 
                 manager.My_db.Investments.Add(_newInvestment);
                 manager.My_db.SaveChanges();
@@ -319,6 +336,8 @@ namespace FundsManager
                 fItemIds.Clear();
 
                 txtAmount.Text = "";
+                txtNumber.Text = "";
+                txtContract.Text = "";
                 txtProfitShare.Text = "";
                 txtTotalToBeCollected.Text = "";
                 lbISelectedItems.Items.Clear();
@@ -365,6 +384,7 @@ namespace FundsManager
                     && cbSector.SelectedIndex >= 0
                     && decimal.TryParse(txtAmount.Text, out _amount)
                     && decimal.TryParse(txtProfitShare.Text, out _profitShare)
+                    && txtNumber.Text.Trim() != ""
                     && (_amount > 0 || _profitShare >= 0);
             }
             catch (Exception _ex)
@@ -403,7 +423,7 @@ namespace FundsManager
 
                 foreach (Disbursement _disbursement in disbursements)
                 {
-                    decimal _totalToBeCollected = (_disbursement.amount + _disbursement.profit_share) / (decimal)_disbursement.exchange_rate;
+                    decimal _totalToBeCollected = _disbursement.amount + _disbursement.profit_share;
 
                     if (disbursements.First<Disbursement>().date != _disbursement.date)
                         day = _disbursement.date.Subtract(disbursements.First<Disbursement>().date);

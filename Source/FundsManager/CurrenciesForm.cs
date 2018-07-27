@@ -32,39 +32,44 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!fEditMode)
+            try
             {
-                Currency _currency = new Currency();
-                _currency.name = txtName.Text;
-                _currency.code = txtCode.Text;
-                _currency.symbol = txtSymbol.Text;
-                _currency.exchange = Convert.ToSingle(txtExchange.Text);
-                _currency.FK_Currencies_Funds = manager.Selected;
-
-                manager.My_db.Currencies.Add(_currency);
-                manager.My_db.SaveChanges();
-            }
-            else
-            {
-                int _id = (int)dataGridView1.Rows[fEditIndex].Cells[0].Value;
-
-                Currency _selectedItem = manager.My_db.Currencies.FirstOrDefault(x => x.Id == _id);
-
-                if (_selectedItem != null)
+                if (!fEditMode)
                 {
-                    _selectedItem.name = txtName.Text;
-                    _selectedItem.code = txtCode.Text;
-                    _selectedItem.symbol = txtSymbol.Text;
-                    _selectedItem.exchange = Convert.ToSingle(txtExchange.Text);
+                    Currency _currency = new Currency();
+                    _currency.name = txtName.Text;
+                    _currency.number = txtNumber.Text;
+                    _currency.symbol = txtSymbol.Text;
+                    _currency.FK_Currencies_Funds = manager.Selected;
 
+                    manager.My_db.Currencies.Add(_currency);
                     manager.My_db.SaveChanges();
                 }
+                else
+                {
+                    int _id = (int)dataGridView1.Rows[fEditIndex].Cells[0].Value;
+
+                    Currency _selectedItem = manager.My_db.Currencies.FirstOrDefault(x => x.Id == _id);
+
+                    if (_selectedItem != null)
+                    {
+                        _selectedItem.name = txtName.Text;
+                        _selectedItem.number = txtNumber.Text;
+                        _selectedItem.symbol = txtSymbol.Text;
+
+                        manager.My_db.SaveChanges();
+                    }
+                }
+
+
+                this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
+
+                cmdCancel_Click(null, null);
             }
-
-
-            this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
-
-            cmdCancel_Click(null, null);
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -112,12 +117,11 @@ namespace FundsManager
                 cmdAddOrSave.Text = "Save";
 
                 txtName.Text = _selectedItem.name;
-                txtCode.Text = _selectedItem.code.Trim();
+                txtNumber.Text = _selectedItem.number.Trim();
                 txtSymbol.Text = _selectedItem.symbol;
-                txtExchange.Text = _selectedItem.exchange.ToString();
 
                 txtName.Enabled = _id != 1;
-                txtCode.Enabled = _id != 1;
+                txtNumber.Enabled = _id != 1;
                 txtSymbol.Enabled = _id != 1;
 
                 cmdCancel.Visible = true;
@@ -130,12 +134,11 @@ namespace FundsManager
             cmdAddOrSave.Text = "Add";
 
             txtName.Text = "";
-            txtCode.Text = "";
+            txtNumber.Text = "";
             txtSymbol.Text = "";
-            txtExchange.Text = "";
 
             txtName.Enabled = true;
-            txtCode.Enabled = true;
+            txtNumber.Enabled = true;
             txtSymbol.Enabled = true;
 
             cmdCancel.Visible = false;

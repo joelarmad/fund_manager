@@ -36,6 +36,7 @@ namespace FundsManager
                 UnderlyingDebtor _debtor = new UnderlyingDebtor();
                 _debtor.name = txtName.Text;
                 _debtor.FK_UnderlyingDebtors_Funds = manager.Selected;
+                _debtor.number = txtNumber.Text;
                 _debtor.CountryId = int.Parse(cbCountry.SelectedValue.ToString());
                 manager.My_db.UnderlyingDebtors.Add(_debtor);
                 manager.My_db.SaveChanges();
@@ -47,6 +48,7 @@ namespace FundsManager
                 if (_selectedItem != null)
                 {
                     _selectedItem.name = txtName.Text;
+                    _selectedItem.number = txtNumber.Text;
                     manager.My_db.SaveChanges();
                 }
             }
@@ -88,6 +90,7 @@ namespace FundsManager
                 if (_selectedItem != null)
                 {
                     txtName.Text = _selectedItem.name;
+                    txtNumber.Text = _selectedItem.number;
                 }
 
                 cmdCancel.Visible = true;
@@ -97,6 +100,7 @@ namespace FundsManager
                 fEditMode = false;
                 cmdAddOrSave.Text = "Add";
                 txtName.Text = "";
+                txtNumber.Text = "";
 
                 cmdCancel.Visible = false;
             }

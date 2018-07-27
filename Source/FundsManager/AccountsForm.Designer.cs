@@ -36,6 +36,8 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtAccountNumber = new System.Windows.Forms.TextBox();
             this.cbType = new System.Windows.Forms.ComboBox();
+            this.accountTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.cmdAddOrSave = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -45,12 +47,13 @@
             this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeText = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.accountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.cmdCancel = new System.Windows.Forms.Button();
             this.accountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountsTableAdapter();
+            this.accountTypeTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountTypeTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.accountTypeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -65,7 +68,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(269, 37);
+            this.label2.Location = new System.Drawing.Point(256, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 1;
@@ -96,15 +99,28 @@
             // 
             // cbType
             // 
+            this.cbType.DataSource = this.accountTypeBindingSource;
+            this.cbType.DisplayMember = "AccountType";
             this.cbType.FormattingEnabled = true;
-            this.cbType.Location = new System.Drawing.Point(309, 33);
+            this.cbType.Location = new System.Drawing.Point(296, 33);
             this.cbType.Name = "cbType";
-            this.cbType.Size = new System.Drawing.Size(123, 21);
+            this.cbType.Size = new System.Drawing.Size(220, 21);
             this.cbType.TabIndex = 5;
+            this.cbType.ValueMember = "Id";
+            // 
+            // accountTypeBindingSource
+            // 
+            this.accountTypeBindingSource.DataMember = "AccountType";
+            this.accountTypeBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // fundsDBDataSet
+            // 
+            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
+            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // cmdAddOrSave
             // 
-            this.cmdAddOrSave.Location = new System.Drawing.Point(309, 78);
+            this.cmdAddOrSave.Location = new System.Drawing.Point(360, 78);
             this.cmdAddOrSave.Name = "cmdAddOrSave";
             this.cmdAddOrSave.Size = new System.Drawing.Size(75, 23);
             this.cmdAddOrSave.TabIndex = 6;
@@ -193,14 +209,9 @@
             this.accountsBindingSource.DataMember = "Accounts";
             this.accountsBindingSource.DataSource = this.fundsDBDataSet;
             // 
-            // fundsDBDataSet
-            // 
-            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
-            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // cmdCancel
             // 
-            this.cmdCancel.Location = new System.Drawing.Point(390, 78);
+            this.cmdCancel.Location = new System.Drawing.Point(441, 78);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(75, 23);
             this.cmdCancel.TabIndex = 10;
@@ -212,6 +223,10 @@
             // accountsTableAdapter
             // 
             this.accountsTableAdapter.ClearBeforeFill = true;
+            // 
+            // accountTypeTableAdapter
+            // 
+            this.accountTypeTableAdapter.ClearBeforeFill = true;
             // 
             // AccountsForm
             // 
@@ -234,9 +249,10 @@
             this.ShowInTaskbar = false;
             this.Text = "Accounting Accounts";
             this.Load += new System.EventHandler(this.AccountsForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.accountTypeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,5 +278,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeText;
         private System.Windows.Forms.Button cmdCancel;
+        private System.Windows.Forms.BindingSource accountTypeBindingSource;
+        private FundsDBDataSetTableAdapters.AccountTypeTableAdapter accountTypeTableAdapter;
     }
 }

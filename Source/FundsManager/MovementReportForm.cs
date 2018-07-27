@@ -62,7 +62,8 @@ namespace FundsManager
 
                         row[6] = String.Format("{0:c}", my_account.debit);
                         row[7] = String.Format("{0:c}", my_account.credit);
-                        row[8] = my_account.AccountingMovement.Currency.code;
+                        //TODO: pendiente a ajuste por eliminacion de currency.code
+                        row[8] = "-"; // my_account.AccountingMovement.Currency.code;
 
                         
                         ListViewItem my_item = new ListViewItem(row);
@@ -99,7 +100,8 @@ namespace FundsManager
                                _subaccount = _maccount.Subaccount1.name;
                             
                             //subaccount_type  1 -> Client, 2 -> Banking Account, 3 -> Employee, 4 -> Lender, 5 -> OtherDetail
-                            string[] row = { _amove.reference, _amove.date.ToString("dd/MM/yyyy"), _amove.description, _maccount.Account.name, _subaccount, "subaccount", string.Format("{0:c}", _maccount.debit), string.Format("{0:c}", _maccount.credit), _maccount.AccountingMovement.Currency.code };
+                            //TODO: pendiente a ajuste por eliminacion de Currency.code
+                            string[] row = { _amove.reference, _amove.date.ToString("dd/MM/yyyy"), _amove.description, _maccount.Account.name, _subaccount, "subaccount", string.Format("{0:c}", _maccount.debit), string.Format("{0:c}", _maccount.credit), "-" /*_maccount.AccountingMovement.Currency.code*/ };
                         
                             switch (_maccount.subaccount_type)
                             {

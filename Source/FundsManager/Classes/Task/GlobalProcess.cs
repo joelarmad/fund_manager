@@ -39,7 +39,7 @@ namespace FundsManager.Classes.Task
                                 decimal _investorInterest = _bond.price * (decimal)_bondInvestor.quantity * (decimal)_bond.interest_on_bond / 100;
                                 decimal _fundInterest = _bond.price * (decimal)_bondInvestor.quantity * (decimal)_bond.interest_tff_contribution / 100;
 
-                                generateAccountMovementForBondInterest(_bond, _bondInvestor, _interestDate, _investorInterest, _fundInterest);
+                                generateRegistryForBondInterest(_bond, _bondInvestor, _interestDate, _investorInterest, _fundInterest);
                             }
 
                             if (_interestDate == _bond.expired)
@@ -57,7 +57,7 @@ namespace FundsManager.Classes.Task
                                 decimal _investorInterest = (decimal)_daysExceeded * _bond.price * (decimal)_bondInvestor.quantity * (decimal)_bond.interest_on_bond / 3000;
                                 decimal _fundInterest = (decimal)_daysExceeded * _bond.price * (decimal)_bondInvestor.quantity * (decimal)_bond.interest_tff_contribution / 3000;
 
-                                generateAccountMovementForBondInterest(_bond, _bondInvestor, _bond.expired.Value, _investorInterest, _fundInterest);
+                                generateRegistryForBondInterest(_bond, _bondInvestor, _bond.expired.Value, _investorInterest, _fundInterest);
 
                                 break;
                             }
@@ -78,7 +78,7 @@ namespace FundsManager.Classes.Task
             }
         }
 
-        private static void generateAccountMovementForBondInterest(Bond aBond, BondsInvestor aInvestor, DateTime aInterestDate, decimal aInvestorAmount, decimal aFundAmount)
+        private static void generateRegistryForBondInterest(Bond aBond, BondsInvestor aInvestor, DateTime aInterestDate, decimal aInvestorAmount, decimal aFundAmount)
         {
             try
             {

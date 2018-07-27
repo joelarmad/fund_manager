@@ -25,6 +25,7 @@ namespace FundsManager
         public string name { get; set; }
         public int FK_Clients_Funds { get; set; }
         public int CountryId { get; set; }
+        public string number { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountsClient> AccountsClients { get; set; }

@@ -24,28 +24,37 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!fEditMode)
+            try
             {
-                Item _item = new Item();
-                _item.name = txtName.Text;
-                _item.FK_Items_Funds = manager.Selected;
-                manager.My_db.Items.Add(_item);
-                manager.My_db.SaveChanges();
-            }
-            else
-            {
-                Item _selectedItem = manager.My_db.Items.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
-
-                if (_selectedItem != null)
+                if (!fEditMode)
                 {
-                    _selectedItem.name = txtName.Text;
+                    Item _item = new Item();
+                    _item.name = txtName.Text;
+                    _item.FK_Items_Funds = manager.Selected;
+                    _item.number = txtNumber.Text;
+                    manager.My_db.Items.Add(_item);
                     manager.My_db.SaveChanges();
                 }
+                else
+                {
+                    Item _selectedItem = manager.My_db.Items.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                    if (_selectedItem != null)
+                    {
+                        _selectedItem.name = txtName.Text;
+                        _selectedItem.number = txtNumber.Text;
+                        manager.My_db.SaveChanges();
+                    }
+                }
+
+                this.itemsTableAdapter.FillByFund(this.fundsDBDataSet.Items, manager.Selected);
+
+                cmdCancel_Click(null, null);
             }
-
-            this.itemsTableAdapter.FillByFund(this.fundsDBDataSet.Items, manager.Selected);
-
-            cmdCancel_Click(null, null);
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
+            }
         }
 
         private void ItemsForm_Load(object sender, EventArgs e)
@@ -87,6 +96,7 @@ namespace FundsManager
                 if (_selectedItem != null)
                 {
                     txtName.Text = _selectedItem.name;
+                    txtNumber.Text = _selectedItem.number;
                 }
 
                 cmdCancel.Visible = true;
@@ -96,6 +106,7 @@ namespace FundsManager
                 fEditMode = false;
                 cmdAddOrSave.Text = "Add";
                 txtName.Text = "";
+                txtNumber.Text = "";
 
                 cmdCancel.Visible = false;
             }

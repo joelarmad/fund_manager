@@ -31,28 +31,37 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!fEditMode)
+            try
             {
-                Employee _employee = new Employee();
-                _employee.name = txtName.Text;
-                _employee.FK_Employees_Funds = manager.Selected;
-                manager.My_db.Employees.Add(_employee);
-                manager.My_db.SaveChanges();
-            }
-            else
-            {
-                Employee _selectedItem = manager.My_db.Employees.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
-
-                if (_selectedItem != null)
+                if (!fEditMode)
                 {
-                    _selectedItem.name = txtName.Text;
+                    Employee _employee = new Employee();
+                    _employee.name = txtName.Text;
+                    _employee.FK_Employees_Funds = manager.Selected;
+                    _employee.number = txtNumber.Text;
+                    manager.My_db.Employees.Add(_employee);
                     manager.My_db.SaveChanges();
                 }
+                else
+                {
+                    Employee _selectedItem = manager.My_db.Employees.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                    if (_selectedItem != null)
+                    {
+                        _selectedItem.name = txtName.Text;
+                        _selectedItem.number = txtNumber.Text;
+                        manager.My_db.SaveChanges();
+                    }
+                }
+
+                this.employeesTableAdapter.FillByFund(this.fundsDBDataSet.Employees, manager.Selected);
+
+                cmdCancel_Click(null, null);
             }
-
-            this.employeesTableAdapter.FillByFund(this.fundsDBDataSet.Employees, manager.Selected);
-
-            cmdCancel_Click(null, null);
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -87,6 +96,7 @@ namespace FundsManager
                 if (_selectedItem != null)
                 {
                     txtName.Text = _selectedItem.name;
+                    txtNumber.Text = _selectedItem.number;
                 }
 
                 cmdCancel.Visible = true;
@@ -96,6 +106,7 @@ namespace FundsManager
                 fEditMode = false;
                 cmdAddOrSave.Text = "Add";
                 txtName.Text = "";
+                txtNumber.Text = "";
 
                 cmdCancel.Visible = false;
             }

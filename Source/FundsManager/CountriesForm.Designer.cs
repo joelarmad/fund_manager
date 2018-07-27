@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Label nameLabel;
+            System.Windows.Forms.Label label1;
             this.txtName = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.countriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -38,7 +39,9 @@
             this.cmdDelete = new System.Windows.Forms.Button();
             this.countriesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CountriesTableAdapter();
             this.cmdCancel = new System.Windows.Forms.Button();
+            this.txtNumber = new System.Windows.Forms.TextBox();
             nameLabel = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.countriesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             this.SuspendLayout();
@@ -64,9 +67,9 @@
             this.listBox1.DataSource = this.countriesBindingSource;
             this.listBox1.DisplayMember = "name";
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(72, 80);
+            this.listBox1.Location = new System.Drawing.Point(72, 106);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(152, 199);
+            this.listBox1.Size = new System.Drawing.Size(152, 173);
             this.listBox1.TabIndex = 3;
             this.listBox1.ValueMember = "Id";
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
@@ -93,7 +96,7 @@
             // 
             // cmdDelete
             // 
-            this.cmdDelete.Location = new System.Drawing.Point(250, 255);
+            this.cmdDelete.Location = new System.Drawing.Point(250, 106);
             this.cmdDelete.Name = "cmdDelete";
             this.cmdDelete.Size = new System.Drawing.Size(75, 23);
             this.cmdDelete.TabIndex = 5;
@@ -107,7 +110,7 @@
             // 
             // cmdCancel
             // 
-            this.cmdCancel.Location = new System.Drawing.Point(250, 80);
+            this.cmdCancel.Location = new System.Drawing.Point(250, 66);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(75, 23);
             this.cmdCancel.TabIndex = 6;
@@ -116,11 +119,29 @@
             this.cmdCancel.Visible = false;
             this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(21, 66);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(47, 13);
+            label1.TabIndex = 7;
+            label1.Text = "Number:";
+            // 
+            // txtNumber
+            // 
+            this.txtNumber.Location = new System.Drawing.Point(72, 63);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Size = new System.Drawing.Size(152, 20);
+            this.txtNumber.TabIndex = 8;
+            // 
             // CountriesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(367, 328);
+            this.Controls.Add(label1);
+            this.Controls.Add(this.txtNumber);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.cmdDelete);
             this.Controls.Add(this.cmdAddOrSave);
@@ -148,5 +169,6 @@
         private System.Windows.Forms.BindingSource countriesBindingSource;
         private FundsDBDataSetTableAdapters.CountriesTableAdapter countriesTableAdapter;
         private System.Windows.Forms.Button cmdCancel;
+        private System.Windows.Forms.TextBox txtNumber;
     }
 }

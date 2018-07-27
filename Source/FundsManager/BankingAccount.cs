@@ -27,11 +27,12 @@ namespace FundsManager
         public int FK_BankingAccounts_Currencies { get; set; }
         public decimal amount { get; set; }
         public int FK_BankingAccounts_Funds { get; set; }
+        public string number { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountsBankingAccount> AccountsBankingAccounts { get; set; }
         public virtual Bank Bank { get; set; }
-        public virtual Currency Currency { get; set; }
         public virtual Fund Fund { get; set; }
+        public virtual Currency Currency { get; set; }
     }
 }

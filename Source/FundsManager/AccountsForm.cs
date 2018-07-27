@@ -15,17 +15,19 @@ namespace FundsManager
         private bool fEditMode = false;
 
         private MyFundsManager manager;
-        private string[] tipos = new string[7] { "Asset", "Liability", "Equity", "Income", "Expense", "Contingency Asset","Contingency Liability" };
+        //private string[] tipos = new string[7] { "Asset", "Liability", "Equity", "Income", "Expense", "Contingency Asset","Contingency Liability" };
         public AccountsForm()
         {
             manager = MyFundsManager.SingletonInstance;
             InitializeComponent();
             
-            cbType.DataSource = tipos;
+            //cbType.DataSource = tipos;
         }       
 
         private void AccountsForm_Load(object sender, EventArgs e)
         {
+            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.AccountType' Puede moverla o quitarla según sea necesario.
+            this.accountTypeTableAdapter.Fill(this.fundsDBDataSet.AccountType);
             // TODO: This line of code loads data into the 'fundsDBDataSet.Accounts' table. You can move, or remove it, as needed.
             this.accountsTableAdapter.FillByFund(this.fundsDBDataSet.Accounts, manager.Selected);
 

@@ -42,6 +42,8 @@
             this.cbCountry = new System.Windows.Forms.ComboBox();
             this.countriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.countriesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CountriesTableAdapter();
+            this.txtNumber = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.countriesBindingSource)).BeginInit();
@@ -68,9 +70,9 @@
             this.listBox1.DataSource = this.clientsBindingSource;
             this.listBox1.DisplayMember = "name";
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(77, 104);
+            this.listBox1.Location = new System.Drawing.Point(77, 130);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(158, 186);
+            this.listBox1.Size = new System.Drawing.Size(158, 199);
             this.listBox1.TabIndex = 2;
             this.listBox1.ValueMember = "Id";
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
@@ -97,7 +99,7 @@
             // 
             // cmdDelete
             // 
-            this.cmdDelete.Location = new System.Drawing.Point(265, 267);
+            this.cmdDelete.Location = new System.Drawing.Point(265, 130);
             this.cmdDelete.Name = "cmdDelete";
             this.cmdDelete.Size = new System.Drawing.Size(75, 23);
             this.cmdDelete.TabIndex = 4;
@@ -123,7 +125,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 69);
+            this.label2.Location = new System.Drawing.Point(25, 93);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 6;
@@ -134,7 +136,7 @@
             this.cbCountry.DataSource = this.countriesBindingSource;
             this.cbCountry.DisplayMember = "name";
             this.cbCountry.FormattingEnabled = true;
-            this.cbCountry.Location = new System.Drawing.Point(77, 66);
+            this.cbCountry.Location = new System.Drawing.Point(77, 90);
             this.cbCountry.Name = "cbCountry";
             this.cbCountry.Size = new System.Drawing.Size(158, 21);
             this.cbCountry.TabIndex = 7;
@@ -150,11 +152,29 @@
             // 
             this.countriesTableAdapter.ClearBeforeFill = true;
             // 
+            // txtNumber
+            // 
+            this.txtNumber.Location = new System.Drawing.Point(77, 63);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Size = new System.Drawing.Size(158, 20);
+            this.txtNumber.TabIndex = 9;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(24, 66);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(47, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Number:";
+            // 
             // ClientsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(375, 342);
+            this.Controls.Add(this.txtNumber);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.cbCountry);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmdCancel);
@@ -192,5 +212,7 @@
         private System.Windows.Forms.ComboBox cbCountry;
         private System.Windows.Forms.BindingSource countriesBindingSource;
         private FundsDBDataSetTableAdapters.CountriesTableAdapter countriesTableAdapter;
+        private System.Windows.Forms.TextBox txtNumber;
+        private System.Windows.Forms.Label label3;
     }
 }

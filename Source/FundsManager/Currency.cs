@@ -24,10 +24,9 @@ namespace FundsManager
     
         public int Id { get; set; }
         public string name { get; set; }
-        public string code { get; set; }
         public string symbol { get; set; }
-        public float exchange { get; set; }
         public int FK_Currencies_Funds { get; set; }
+        public string number { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountingMovement> AccountingMovements { get; set; }

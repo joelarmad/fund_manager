@@ -16,5 +16,6 @@ namespace FundsManager
     {
         public int Id { get; set; }
         public string AccountType1 { get; set; }
+        public int order { get; set; }
     }
 }
