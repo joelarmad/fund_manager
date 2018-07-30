@@ -62,8 +62,7 @@ namespace FundsManager
 
                         row[6] = String.Format("{0:c}", my_account.debit);
                         row[7] = String.Format("{0:c}", my_account.credit);
-                        //TODO: pendiente a ajuste por eliminacion de currency.code
-                        row[8] = "-"; // my_account.AccountingMovement.Currency.code;
+                        row[8] = my_account.AccountingMovement.Currency.name;
 
                         
                         ListViewItem my_item = new ListViewItem(row);
