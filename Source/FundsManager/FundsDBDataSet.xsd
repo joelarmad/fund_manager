@@ -819,9 +819,9 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
             <MainSource>
               <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>SELECT        BankingAccounts.Id, BankingAccounts.name, BankingAccounts.iban, BankingAccounts.FK_BankingAccounts_Banks, BankingAccounts.FK_BankingAccounts_Currencies, BankingAccounts.amount, 
-                         BankingAccounts.FK_BankingAccounts_Funds, Banks.name AS BankName, Currencies.code AS CurrencyCode
+                         BankingAccounts.FK_BankingAccounts_Funds, Banks.name AS BankName, Currencies.name AS CurrencyName 
 FROM            BankingAccounts INNER JOIN
                          Banks ON BankingAccounts.FK_BankingAccounts_Banks = Banks.Id INNER JOIN
                          Currencies ON BankingAccounts.FK_BankingAccounts_Currencies = Currencies.Id</CommandText>
@@ -839,14 +839,14 @@ FROM            BankingAccounts INNER JOIN
               <Mapping SourceColumn="amount" DataSetColumn="amount" />
               <Mapping SourceColumn="FK_BankingAccounts_Funds" DataSetColumn="FK_BankingAccounts_Funds" />
               <Mapping SourceColumn="BankName" DataSetColumn="BankName" />
-              <Mapping SourceColumn="CurrencyCode" DataSetColumn="CurrencyCode" />
+              <Mapping SourceColumn="CurrencyName" DataSetColumn="CurrencyName" />
             </Mappings>
             <Sources>
               <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByFund" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByFund" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByFund">
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        BankingAccounts.Id, BankingAccounts.name, BankingAccounts.iban, BankingAccounts.FK_BankingAccounts_Banks, BankingAccounts.FK_BankingAccounts_Currencies, BankingAccounts.amount, 
-                         BankingAccounts.FK_BankingAccounts_Funds, Banks.name AS BankName, Currencies.code AS CurrencyCode
+                         BankingAccounts.FK_BankingAccounts_Funds, Banks.name AS BankName, Currencies.name AS CurrencyName 
 FROM            BankingAccounts INNER JOIN
                          Banks ON BankingAccounts.FK_BankingAccounts_Banks = Banks.Id INNER JOIN
                          Currencies ON BankingAccounts.FK_BankingAccounts_Currencies = Currencies.Id
@@ -2703,10 +2703,10 @@ SELECT Id, BondId, InvestorId, Amount, InterestDate, Extracted, ExtractionDate F
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="CurrencyCode" msprop:Generator_ColumnVarNameInTable="columnCurrencyCode" msprop:Generator_ColumnPropNameInRow="CurrencyCode" msprop:Generator_ColumnPropNameInTable="CurrencyCodeColumn" msprop:Generator_UserColumnName="CurrencyCode">
+              <xs:element name="CurrencyName" msprop:Generator_ColumnVarNameInTable="columnCurrencyName" msprop:Generator_ColumnPropNameInRow="CurrencyName" msprop:Generator_ColumnPropNameInTable="CurrencyNameColumn" msprop:Generator_UserColumnName="CurrencyName">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
+                    <xs:maxLength value="2147483647" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

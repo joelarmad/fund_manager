@@ -15,7 +15,7 @@ namespace FundsManager
         private bool fEditMode = false;
 
         private MyFundsManager manager;
-        //private string[] tipos = new string[7] { "Asset", "Liability", "Equity", "Income", "Expense", "Contingency Asset","Contingency Liability" };
+
         public AccountsForm()
         {
             manager = MyFundsManager.SingletonInstance;
@@ -33,31 +33,16 @@ namespace FundsManager
 
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
-                string temp = dataGridView1.Rows[i].Cells[3].Value.ToString();
-                switch (temp)
-                {
+                int typeId = 0;
 
-                    case "0":
-                        dataGridView1.Rows[i].Cells[4].Value = "Asset";
-                        break;
-                    case "1":
-                        dataGridView1.Rows[i].Cells[4].Value = "Liability";
-                        break;
-                    case "2":
-                        dataGridView1.Rows[i].Cells[4].Value = "Equity";
-                        break;
-                    case "3":
-                        dataGridView1.Rows[i].Cells[4].Value = "Income";
-                        break;
-                    case "4":
-                        dataGridView1.Rows[i].Cells[4].Value = "Expense";
-                        break;
-                    case "5":
-                        dataGridView1.Rows[i].Cells[4].Value = "Contingency Asset";
-                        break;
-                    case "6":
-                        dataGridView1.Rows[i].Cells[4].Value = "Contingency Liability";
-                        break;
+                if (int.TryParse(dataGridView1.Rows[i].Cells[3].Value.ToString(), out typeId))
+                {
+                    AccountType accttype = manager.My_db.AccountTypes.FirstOrDefault(x => x.Id == typeId);
+
+                    if (accttype != null)
+                    {
+                        dataGridView1.Rows[i].Cells[4].Value = accttype.AccountType1;
+                    }
                 }
             }
 
@@ -83,31 +68,16 @@ namespace FundsManager
                     this.accountsTableAdapter.FillByFund(this.fundsDBDataSet.Accounts, manager.Selected);
                     for (int i = 0; i < dataGridView1.Rows.Count; i++)
                     {
-                        string temp = dataGridView1.Rows[i].Cells[3].Value.ToString();
-                        switch (temp)
-                        {
+                        int typeId = 0;
 
-                            case "0":
-                                dataGridView1.Rows[i].Cells[4].Value = "Asset";
-                                break;
-                            case "1":
-                                dataGridView1.Rows[i].Cells[4].Value = "Liability";
-                                break;
-                            case "2":
-                                dataGridView1.Rows[i].Cells[4].Value = "Equity";
-                                break;
-                            case "3":
-                                dataGridView1.Rows[i].Cells[4].Value = "Income";
-                                break;
-                            case "4":
-                                dataGridView1.Rows[i].Cells[4].Value = "Expense";
-                                break;
-                            case "5":
-                                dataGridView1.Rows[i].Cells[4].Value = "Contingency Asset";
-                                break;
-                            case "6":
-                                dataGridView1.Rows[i].Cells[4].Value = "Contingency Liability";
-                                break;
+                        if (int.TryParse(dataGridView1.Rows[i].Cells[3].Value.ToString(), out typeId))
+                        {
+                            AccountType accttype = manager.My_db.AccountTypes.FirstOrDefault(x => x.Id == typeId);
+
+                            if (accttype != null)
+                            {
+                                dataGridView1.Rows[i].Cells[4].Value = accttype.AccountType1;
+                            }
                         }
                     }
 
@@ -134,74 +104,66 @@ namespace FundsManager
         {
             try
             {
-                if (!fEditMode)
-                {
-                    Account _validationAccount = manager.My_db.Accounts.FirstOrDefault(x => x.number == txtAccountNumber.Text);
+                int typeId = 0;
 
-                    if (_validationAccount != null)
+                if (cbType.SelectedValue != null && int.TryParse(cbType.SelectedValue.ToString(), out typeId))
+                {
+                    if (!fEditMode)
                     {
-                        MessageBox.Show("Duplicated account number.");
-                        return;
+                        Account _validationAccount = manager.My_db.Accounts.FirstOrDefault(x => x.number == txtAccountNumber.Text);
+
+                        if (_validationAccount != null)
+                        {
+                            MessageBox.Show("Duplicated account number.");
+                            return;
+                        }
+
+                        Account _account = new Account();
+                        _account.name = txtName.Text;
+                        _account.amount = 0;
+                        _account.number = txtAccountNumber.Text;
+                        _account.FK_Accounts_Funds = manager.Selected;
+                        _account.type = typeId;
+                        manager.My_db.Accounts.Add(_account);
+                        manager.My_db.SaveChanges();
+                    }
+                    else
+                    {
+                        Account _selectedAccount = manager.My_db.Accounts.FirstOrDefault(x => x.number == txtAccountNumber.Text);
+
+                        if (_selectedAccount != null)
+                        {
+                            _selectedAccount.name = txtName.Text;
+                            _selectedAccount.type = typeId;
+
+                            manager.My_db.SaveChanges();
+                        }
                     }
 
-                    Account _account = new Account();
-                    _account.name = txtName.Text;
-                    _account.amount = 0;
-                    _account.number = txtAccountNumber.Text;
-                    _account.FK_Accounts_Funds = manager.Selected;
-                    _account.type = cbType.SelectedIndex;
-                    manager.My_db.Accounts.Add(_account);
-                    manager.My_db.SaveChanges();
-                    
+                    this.accountsTableAdapter.FillByFund(this.fundsDBDataSet.Accounts, manager.Selected);
+
+                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                    {
+                        if (int.TryParse(dataGridView1.Rows[i].Cells[3].Value.ToString(), out typeId))
+                        {
+                            AccountType accttype = manager.My_db.AccountTypes.FirstOrDefault(x => x.Id == typeId);
+
+                            if (accttype != null)
+                            {
+                                dataGridView1.Rows[i].Cells[4].Value = accttype.AccountType1;
+                            }
+                        }
+                    }
+
+                    cmdCancel_Click(null, null);
+
+                    txtName.Focus();
                 }
                 else
                 {
-                    Account _selectedAccount = manager.My_db.Accounts.FirstOrDefault(x => x.number == txtAccountNumber.Text);
-
-                    if (_selectedAccount != null)
-                    {
-                        _selectedAccount.name = txtName.Text;
-                        _selectedAccount.type = cbType.SelectedIndex;
-
-                        manager.My_db.SaveChanges();
-                    }
+                    MessageBox.Show("Error selecting account type.");
+                    return;
                 }
-
-                this.accountsTableAdapter.FillByFund(this.fundsDBDataSet.Accounts, manager.Selected);
-
-                for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                {
-                    string temp = dataGridView1.Rows[i].Cells[3].Value.ToString();
-                    switch (temp)
-                    {
-
-                        case "0":
-                            dataGridView1.Rows[i].Cells[4].Value = "Asset";
-                            break;
-                        case "1":
-                            dataGridView1.Rows[i].Cells[4].Value = "Liability";
-                            break;
-                        case "2":
-                            dataGridView1.Rows[i].Cells[4].Value = "Equity";
-                            break;
-                        case "3":
-                            dataGridView1.Rows[i].Cells[4].Value = "Income";
-                            break;
-                        case "4":
-                            dataGridView1.Rows[i].Cells[4].Value = "Expense";
-                            break;
-                        case "5":
-                            dataGridView1.Rows[i].Cells[4].Value = "Contingency Asset";
-                            break;
-                        case "6":
-                            dataGridView1.Rows[i].Cells[4].Value = "Contingency Liability";
-                            break;
-                    }
-                }
-
-                cmdCancel_Click(null, null);
-
-                txtName.Focus();
             }
             catch (Exception _ex)
             {

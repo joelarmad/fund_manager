@@ -5852,7 +5852,7 @@ namespace FundsManager {
             
             private global::System.Data.DataColumn columnBankName;
             
-            private global::System.Data.DataColumn columnCurrencyCode;
+            private global::System.Data.DataColumn columnCurrencyName;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -5953,9 +5953,9 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CurrencyCodeColumn {
+            public global::System.Data.DataColumn CurrencyNameColumn {
                 get {
-                    return this.columnCurrencyCode;
+                    return this.columnCurrencyName;
                 }
             }
             
@@ -5996,7 +5996,7 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public BAccountsWithBanksCurrenciesRow AddBAccountsWithBanksCurrenciesRow(string name, string iban, BanksRow parentBanksRowByFK_BankingAccounts_Banks1, CurrenciesRow parentCurrenciesRowByFK_BankingAccounts_Currencies1, decimal amount, FundsRow parentFundsRowByFK_BankingAccounts_Funds2, string BankName, string CurrencyCode) {
+            public BAccountsWithBanksCurrenciesRow AddBAccountsWithBanksCurrenciesRow(string name, string iban, BanksRow parentBanksRowByFK_BankingAccounts_Banks1, CurrenciesRow parentCurrenciesRowByFK_BankingAccounts_Currencies1, decimal amount, FundsRow parentFundsRowByFK_BankingAccounts_Funds2, string BankName, string CurrencyName) {
                 BAccountsWithBanksCurrenciesRow rowBAccountsWithBanksCurrenciesRow = ((BAccountsWithBanksCurrenciesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -6007,7 +6007,7 @@ namespace FundsManager {
                         amount,
                         null,
                         BankName,
-                        CurrencyCode};
+                        CurrencyName};
                 if ((parentBanksRowByFK_BankingAccounts_Banks1 != null)) {
                     columnValuesArray[3] = parentBanksRowByFK_BankingAccounts_Banks1[0];
                 }
@@ -6054,7 +6054,7 @@ namespace FundsManager {
                 this.columnamount = base.Columns["amount"];
                 this.columnFK_BankingAccounts_Funds = base.Columns["FK_BankingAccounts_Funds"];
                 this.columnBankName = base.Columns["BankName"];
-                this.columnCurrencyCode = base.Columns["CurrencyCode"];
+                this.columnCurrencyName = base.Columns["CurrencyName"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6076,8 +6076,8 @@ namespace FundsManager {
                 base.Columns.Add(this.columnFK_BankingAccounts_Funds);
                 this.columnBankName = new global::System.Data.DataColumn("BankName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnBankName);
-                this.columnCurrencyCode = new global::System.Data.DataColumn("CurrencyCode", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCurrencyCode);
+                this.columnCurrencyName = new global::System.Data.DataColumn("CurrencyName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCurrencyName);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
                 this.columnId.AutoIncrement = true;
@@ -6096,8 +6096,8 @@ namespace FundsManager {
                 this.columnFK_BankingAccounts_Funds.AllowDBNull = false;
                 this.columnBankName.AllowDBNull = false;
                 this.columnBankName.MaxLength = 2147483647;
-                this.columnCurrencyCode.AllowDBNull = false;
-                this.columnCurrencyCode.MaxLength = 10;
+                this.columnCurrencyName.AllowDBNull = false;
+                this.columnCurrencyName.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -17228,12 +17228,12 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string CurrencyCode {
+            public string CurrencyName {
                 get {
-                    return ((string)(this[this.tableBAccountsWithBanksCurrencies.CurrencyCodeColumn]));
+                    return ((string)(this[this.tableBAccountsWithBanksCurrencies.CurrencyNameColumn]));
                 }
                 set {
-                    this[this.tableBAccountsWithBanksCurrencies.CurrencyCodeColumn] = value;
+                    this[this.tableBAccountsWithBanksCurrencies.CurrencyNameColumn] = value;
                 }
             }
             
@@ -26162,7 +26162,7 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
             tableMapping.ColumnMappings.Add("amount", "amount");
             tableMapping.ColumnMappings.Add("FK_BankingAccounts_Funds", "FK_BankingAccounts_Funds");
             tableMapping.ColumnMappings.Add("BankName", "BankName");
-            tableMapping.ColumnMappings.Add("CurrencyCode", "CurrencyCode");
+            tableMapping.ColumnMappings.Add("CurrencyName", "CurrencyName");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -26180,7 +26180,7 @@ SELECT Id, FK_Movements_Accounts_AccountingMovements, credit, debit, FK_Movement
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = @"SELECT        BankingAccounts.Id, BankingAccounts.name, BankingAccounts.iban, BankingAccounts.FK_BankingAccounts_Banks, BankingAccounts.FK_BankingAccounts_Currencies, BankingAccounts.amount, 
-                         BankingAccounts.FK_BankingAccounts_Funds, Banks.name AS BankName, Currencies.code AS CurrencyCode
+                         BankingAccounts.FK_BankingAccounts_Funds, Banks.name AS BankName, Currencies.name AS CurrencyName 
 FROM            BankingAccounts INNER JOIN
                          Banks ON BankingAccounts.FK_BankingAccounts_Banks = Banks.Id INNER JOIN
                          Currencies ON BankingAccounts.FK_BankingAccounts_Currencies = Currencies.Id";
@@ -26188,7 +26188,7 @@ FROM            BankingAccounts INNER JOIN
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
             this._commandCollection[1].CommandText = @"SELECT        BankingAccounts.Id, BankingAccounts.name, BankingAccounts.iban, BankingAccounts.FK_BankingAccounts_Banks, BankingAccounts.FK_BankingAccounts_Currencies, BankingAccounts.amount, 
-                         BankingAccounts.FK_BankingAccounts_Funds, Banks.name AS BankName, Currencies.code AS CurrencyCode
+                         BankingAccounts.FK_BankingAccounts_Funds, Banks.name AS BankName, Currencies.name AS CurrencyName 
 FROM            BankingAccounts INNER JOIN
                          Banks ON BankingAccounts.FK_BankingAccounts_Banks = Banks.Id INNER JOIN
                          Currencies ON BankingAccounts.FK_BankingAccounts_Currencies = Currencies.Id

@@ -44,12 +44,6 @@
             this.cmdAddOrSave = new System.Windows.Forms.Button();
             this.cmdDelete = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FK_BankingAccounts_Banks = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ibanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FK_BankingAccounts_Currencies = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bAccountsWithBanksCurrenciesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fundsDBDataSet1 = new FundsManager.FundsDBDataSet();
             this.bankingAccountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -60,6 +54,12 @@
             this.cmdCancel = new System.Windows.Forms.Button();
             this.txtNumber = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FK_BankingAccounts_Banks = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ibanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FK_BankingAccounts_Currencies = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banksBindingSource)).BeginInit();
@@ -198,52 +198,6 @@
             this.dataGridView1.TabIndex = 12;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // FK_BankingAccounts_Banks
-            // 
-            this.FK_BankingAccounts_Banks.DataPropertyName = "BankName";
-            this.FK_BankingAccounts_Banks.HeaderText = "Bank";
-            this.FK_BankingAccounts_Banks.Name = "FK_BankingAccounts_Banks";
-            this.FK_BankingAccounts_Banks.ReadOnly = true;
-            // 
-            // ibanDataGridViewTextBoxColumn
-            // 
-            this.ibanDataGridViewTextBoxColumn.DataPropertyName = "iban";
-            this.ibanDataGridViewTextBoxColumn.HeaderText = "Iban";
-            this.ibanDataGridViewTextBoxColumn.Name = "ibanDataGridViewTextBoxColumn";
-            this.ibanDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // amountDataGridViewTextBoxColumn
-            // 
-            this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount";
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = "0";
-            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.amountDataGridViewTextBoxColumn.HeaderText = "Amount";
-            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
-            this.amountDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // FK_BankingAccounts_Currencies
-            // 
-            this.FK_BankingAccounts_Currencies.DataPropertyName = "CurrencyCode";
-            this.FK_BankingAccounts_Currencies.HeaderText = "Currency";
-            this.FK_BankingAccounts_Currencies.Name = "FK_BankingAccounts_Currencies";
-            this.FK_BankingAccounts_Currencies.ReadOnly = true;
-            // 
             // bAccountsWithBanksCurrenciesBindingSource
             // 
             this.bAccountsWithBanksCurrenciesBindingSource.DataMember = "BAccountsWithBanksCurrencies";
@@ -301,6 +255,52 @@
             this.label6.Size = new System.Drawing.Size(47, 13);
             this.label6.TabIndex = 14;
             this.label6.Text = "Number:";
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // FK_BankingAccounts_Banks
+            // 
+            this.FK_BankingAccounts_Banks.DataPropertyName = "BankName";
+            this.FK_BankingAccounts_Banks.HeaderText = "Bank";
+            this.FK_BankingAccounts_Banks.Name = "FK_BankingAccounts_Banks";
+            this.FK_BankingAccounts_Banks.ReadOnly = true;
+            // 
+            // ibanDataGridViewTextBoxColumn
+            // 
+            this.ibanDataGridViewTextBoxColumn.DataPropertyName = "iban";
+            this.ibanDataGridViewTextBoxColumn.HeaderText = "Iban";
+            this.ibanDataGridViewTextBoxColumn.Name = "ibanDataGridViewTextBoxColumn";
+            this.ibanDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // amountDataGridViewTextBoxColumn
+            // 
+            this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount";
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = "0";
+            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.amountDataGridViewTextBoxColumn.HeaderText = "Amount";
+            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
+            this.amountDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // FK_BankingAccounts_Currencies
+            // 
+            this.FK_BankingAccounts_Currencies.DataPropertyName = "CurrencyName";
+            this.FK_BankingAccounts_Currencies.HeaderText = "Currency";
+            this.FK_BankingAccounts_Currencies.Name = "FK_BankingAccounts_Currencies";
+            this.FK_BankingAccounts_Currencies.ReadOnly = true;
             // 
             // BankingAccountsForm
             // 
@@ -362,14 +362,14 @@
         private FundsDBDataSet fundsDBDataSet1;
         private System.Windows.Forms.BindingSource bAccountsWithBanksCurrenciesBindingSource;
         private FundsDBDataSetTableAdapters.BAccountsWithBanksCurrenciesTableAdapter bAccountsWithBanksCurrenciesTableAdapter;
+        private System.Windows.Forms.Button cmdCancel;
+        private System.Windows.Forms.TextBox txtNumber;
+        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn FK_BankingAccounts_Banks;
         private System.Windows.Forms.DataGridViewTextBoxColumn ibanDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn FK_BankingAccounts_Currencies;
-        private System.Windows.Forms.Button cmdCancel;
-        private System.Windows.Forms.TextBox txtNumber;
-        private System.Windows.Forms.Label label6;
     }
 }
