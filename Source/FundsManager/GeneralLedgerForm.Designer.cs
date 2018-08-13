@@ -30,10 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.accountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cbAccount = new System.Windows.Forms.ComboBox();
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
-            this.accountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountsTableAdapter();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -64,9 +62,13 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
+            this.lblContract = new System.Windows.Forms.Label();
+            this.txtContract = new System.Windows.Forms.TextBox();
+            this.accountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.accountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountsTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -78,35 +80,26 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Account:";
             // 
-            // comboBox1
+            // cbAccount
             // 
-            this.comboBox1.DataSource = this.accountsBindingSource;
-            this.comboBox1.DisplayMember = "name";
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(65, 29);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 1;
-            this.comboBox1.ValueMember = "Id";
-            // 
-            // accountsBindingSource
-            // 
-            this.accountsBindingSource.DataMember = "Accounts";
-            this.accountsBindingSource.DataSource = this.fundsDBDataSet;
+            this.cbAccount.DataSource = this.accountsBindingSource;
+            this.cbAccount.DisplayMember = "name";
+            this.cbAccount.FormattingEnabled = true;
+            this.cbAccount.Location = new System.Drawing.Point(65, 29);
+            this.cbAccount.Name = "cbAccount";
+            this.cbAccount.Size = new System.Drawing.Size(186, 21);
+            this.cbAccount.TabIndex = 1;
+            this.cbAccount.ValueMember = "Id";
             // 
             // fundsDBDataSet
             // 
             this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
             this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // accountsTableAdapter
-            // 
-            this.accountsTableAdapter.ClearBeforeFill = true;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(211, 32);
+            this.label2.Location = new System.Drawing.Point(262, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 13);
             this.label2.TabIndex = 2;
@@ -116,15 +109,15 @@
             // 
             this.comboBox2.Enabled = false;
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(284, 29);
+            this.comboBox2.Location = new System.Drawing.Point(335, 29);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.Size = new System.Drawing.Size(138, 21);
             this.comboBox2.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(420, 32);
+            this.label3.Location = new System.Drawing.Point(492, 33);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(114, 13);
             this.label3.TabIndex = 4;
@@ -134,9 +127,9 @@
             // 
             this.comboBox3.Enabled = false;
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(540, 29);
+            this.comboBox3.Location = new System.Drawing.Point(612, 30);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 21);
+            this.comboBox3.Size = new System.Drawing.Size(164, 21);
             this.comboBox3.TabIndex = 5;
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
@@ -352,11 +345,40 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // lblContract
+            // 
+            this.lblContract.AutoSize = true;
+            this.lblContract.Location = new System.Drawing.Point(12, 85);
+            this.lblContract.Name = "lblContract";
+            this.lblContract.Size = new System.Drawing.Size(50, 13);
+            this.lblContract.TabIndex = 24;
+            this.lblContract.Text = "Contract:";
+            this.lblContract.Visible = false;
+            // 
+            // txtContract
+            // 
+            this.txtContract.Location = new System.Drawing.Point(65, 81);
+            this.txtContract.Name = "txtContract";
+            this.txtContract.Size = new System.Drawing.Size(121, 20);
+            this.txtContract.TabIndex = 25;
+            this.txtContract.Visible = false;
+            // 
+            // accountsBindingSource
+            // 
+            this.accountsBindingSource.DataMember = "Accounts";
+            this.accountsBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // accountsTableAdapter
+            // 
+            this.accountsTableAdapter.ClearBeforeFill = true;
+            // 
             // GeneralLedgerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(911, 533);
+            this.Controls.Add(this.txtContract);
+            this.Controls.Add(this.lblContract);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.label10);
@@ -379,7 +401,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbAccount);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "GeneralLedgerForm";
@@ -387,9 +409,9 @@
             this.ShowInTaskbar = false;
             this.Text = "General Ledger";
             this.Load += new System.EventHandler(this.GeneralLedgerForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -398,10 +420,8 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbAccount;
         private FundsDBDataSet fundsDBDataSet;
-        private System.Windows.Forms.BindingSource accountsBindingSource;
-        private FundsDBDataSetTableAdapters.AccountsTableAdapter accountsTableAdapter;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label3;
@@ -432,5 +452,9 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label lblContract;
+        private System.Windows.Forms.TextBox txtContract;
+        private System.Windows.Forms.BindingSource accountsBindingSource;
+        private FundsDBDataSetTableAdapters.AccountsTableAdapter accountsTableAdapter;
     }
 }

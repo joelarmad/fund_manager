@@ -47,6 +47,7 @@
             this.investorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bondsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.underlyingDebtorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.shareholdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bondsToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,16 +55,16 @@
             this.generateInterestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makePaymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.investmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.disbursemetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.collectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.profitShareAccruedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.delayInterestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bondsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.disbursemetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.collectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.profitShareAccruedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.delayInterestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,7 +99,8 @@
             this.fundsToolStripMenuItem,
             this.investorsToolStripMenuItem,
             this.bondsToolStripMenuItem,
-            this.underlyingDebtorsToolStripMenuItem});
+            this.underlyingDebtorsToolStripMenuItem,
+            this.shareholdersToolStripMenuItem});
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.addToolStripMenuItem.Text = "New";
@@ -215,6 +217,13 @@
             this.underlyingDebtorsToolStripMenuItem.Text = "Underlying Debtors";
             this.underlyingDebtorsToolStripMenuItem.Click += new System.EventHandler(this.underlyingDebtorsToolStripMenuItem_Click);
             // 
+            // shareholdersToolStripMenuItem
+            // 
+            this.shareholdersToolStripMenuItem.Name = "shareholdersToolStripMenuItem";
+            this.shareholdersToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.shareholdersToolStripMenuItem.Text = "Shareholders";
+            this.shareholdersToolStripMenuItem.Click += new System.EventHandler(this.shareholdersToolStripMenuItem_Click);
+            // 
             // operationsToolStripMenuItem
             // 
             this.operationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -274,6 +283,31 @@
             this.investmentsToolStripMenuItem.Text = "Investments";
             this.investmentsToolStripMenuItem.Click += new System.EventHandler(this.investmentsToolStripMenuItem_Click);
             // 
+            // disbursemetToolStripMenuItem
+            // 
+            this.disbursemetToolStripMenuItem.Name = "disbursemetToolStripMenuItem";
+            this.disbursemetToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.disbursemetToolStripMenuItem.Text = "Disbursemet";
+            this.disbursemetToolStripMenuItem.Click += new System.EventHandler(this.disbursemetToolStripMenuItem_Click);
+            // 
+            // collectionToolStripMenuItem
+            // 
+            this.collectionToolStripMenuItem.Name = "collectionToolStripMenuItem";
+            this.collectionToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.collectionToolStripMenuItem.Text = "Collection";
+            // 
+            // profitShareAccruedToolStripMenuItem
+            // 
+            this.profitShareAccruedToolStripMenuItem.Name = "profitShareAccruedToolStripMenuItem";
+            this.profitShareAccruedToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.profitShareAccruedToolStripMenuItem.Text = "Profit Share Accrued";
+            // 
+            // delayInterestToolStripMenuItem
+            // 
+            this.delayInterestToolStripMenuItem.Name = "delayInterestToolStripMenuItem";
+            this.delayInterestToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.delayInterestToolStripMenuItem.Text = "Delay Interest - Addendum";
+            // 
             // reportsToolStripMenuItem
             // 
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -319,30 +353,6 @@
             this.returnsStateToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.returnsStateToolStripMenuItem.Text = "Profit && Loss Statement";
             this.returnsStateToolStripMenuItem.Click += new System.EventHandler(this.returnsStateToolStripMenuItem_Click);
-            // 
-            // disbursemetToolStripMenuItem
-            // 
-            this.disbursemetToolStripMenuItem.Name = "disbursemetToolStripMenuItem";
-            this.disbursemetToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.disbursemetToolStripMenuItem.Text = "Disbursemet";
-            // 
-            // collectionToolStripMenuItem
-            // 
-            this.collectionToolStripMenuItem.Name = "collectionToolStripMenuItem";
-            this.collectionToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.collectionToolStripMenuItem.Text = "Collection";
-            // 
-            // profitShareAccruedToolStripMenuItem
-            // 
-            this.profitShareAccruedToolStripMenuItem.Name = "profitShareAccruedToolStripMenuItem";
-            this.profitShareAccruedToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.profitShareAccruedToolStripMenuItem.Text = "Profit Share Accrued";
-            // 
-            // delayInterestToolStripMenuItem
-            // 
-            this.delayInterestToolStripMenuItem.Name = "delayInterestToolStripMenuItem";
-            this.delayInterestToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.delayInterestToolStripMenuItem.Text = "Delay Interest";
             // 
             // Form1
             // 
@@ -403,6 +413,7 @@
         private System.Windows.Forms.ToolStripMenuItem collectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem profitShareAccruedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem delayInterestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem shareholdersToolStripMenuItem;
     }
 }
 

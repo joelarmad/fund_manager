@@ -35,7 +35,7 @@ namespace FundsManager
             textBox2.Text = 0.ToString();
             _color = new Color();
             listView1.FullRowSelect = true;
-            comboBox1.SelectedIndexChanged += OnAccountChanged;
+            cbAccount.SelectedIndexChanged += OnAccountChanged;
             comboBox2.SelectedIndexChanged += OnSubAccountChanged;
             
         }
@@ -48,14 +48,16 @@ namespace FundsManager
                 this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Accounts' table. You can move, or remove it, as needed.
                 this.accountsTableAdapter.FillByFund(this.fundsDBDataSet.Accounts, manager.Selected);
-                comboBox1.SelectedItem = null;
-                comboBox1.SelectedText = "Select account";
+                cbAccount.SelectedItem = null;
+                cbAccount.SelectedText = "Select account";
                 comboBox2.SelectedIndex = -1;
                 comboBox3.SelectedItem = null;
                 comboBox3.SelectedIndex = -1;
                 textBox3.Text = KeyDefinitions.NextAccountMovementReference;
 
                 fFloatingAccounts = manager.My_db.Accounts.ToList();
+
+                txtContract.Text = "";
             }
             catch (Exception _ex)
             {
@@ -71,7 +73,7 @@ namespace FundsManager
 
                 foreach (Subaccount _subaccount in manager.My_db.Subaccounts)
                 {
-                    if (_subaccount.FK_Subaccounts_Accounts == Convert.ToInt32(comboBox1.SelectedValue))
+                    if (_subaccount.FK_Subaccounts_Accounts == Convert.ToInt32(cbAccount.SelectedValue))
                     {
                         comboSource.Add(_subaccount.Id, _subaccount.name);
                     }
@@ -102,6 +104,8 @@ namespace FundsManager
                 }
 
                 OnSubAccountChanged(null, null);
+
+                checkForContractVisibility();
             }
             catch (Exception _ex)
             {
@@ -121,34 +125,32 @@ namespace FundsManager
                 comboBox3.Enabled = false;
 
                 Dictionary<int, string> comboSource = new Dictionary<int, string>();
-
-                //subaccount_type  1 -> Client, 2 -> Banking Account, 3 -> Employee, 4 -> Lender, 5 -> OtherDetail
-
+                                
                 comboSource.Add(-1, "Select Detail");
 
-                foreach (Client _client in manager.My_db.Clients)
-                {
-                    int custom_id = int.Parse(1.ToString() + _client.Id.ToString());
-                    comboSource.Add(custom_id, _client.name);
-                }
+                //foreach (Client _client in manager.My_db.Clients)
+                //{
+                //    int custom_id = int.Parse(1.ToString() + _client.Id.ToString());
+                //    comboSource.Add(custom_id, _client.name);
+                //}
 
-                foreach (BankingAccount _bankingaccount in manager.My_db.BankingAccounts)
-                {
-                    int custom_id = int.Parse(2.ToString() + _bankingaccount.Id.ToString());
-                    comboSource.Add(custom_id, _bankingaccount.name);
-                }
+                //foreach (BankingAccount _bankingaccount in manager.My_db.BankingAccounts)
+                //{
+                //    int custom_id = int.Parse(2.ToString() + _bankingaccount.Id.ToString());
+                //    comboSource.Add(custom_id, _bankingaccount.name);
+                //}
 
-                foreach (Employee _employee in manager.My_db.Employees)
-                {
-                    int custom_id = int.Parse(3.ToString() + _employee.Id.ToString());
-                    comboSource.Add(custom_id, _employee.name);
-                }
+                //foreach (Employee _employee in manager.My_db.Employees)
+                //{
+                //    int custom_id = int.Parse(3.ToString() + _employee.Id.ToString());
+                //    comboSource.Add(custom_id, _employee.name);
+                //}
 
-                foreach (Creditor _creditor in manager.My_db.Creditors)
-                {
-                    int custom_id = int.Parse(4.ToString() + _creditor.Id.ToString());
-                    comboSource.Add(custom_id, _creditor.name);
-                }
+                //foreach (Creditor _creditor in manager.My_db.Creditors)
+                //{
+                //    int custom_id = int.Parse(4.ToString() + _creditor.Id.ToString());
+                //    comboSource.Add(custom_id, _creditor.name);
+                //}
 
                 int subacctId = Convert.ToInt32(comboBox2.SelectedValue);
 
@@ -185,7 +187,7 @@ namespace FundsManager
 
                 movement.Id = fMovementIdReference++;
 
-                movement.Account = Convert.ToInt32(comboBox1.SelectedValue);
+                movement.Account = Convert.ToInt32(cbAccount.SelectedValue);
 
                 if (comboBox2.SelectedIndex != -1)
                     movement.Subaccount = Convert.ToInt32(comboBox2.SelectedValue);
@@ -232,7 +234,7 @@ namespace FundsManager
                 if (listView1.Items.Count > 0)
                     listView1.Items.RemoveAt(listView1.Items.Count - 1);
 
-                string[] row = { comboBox1.Text, comboBox2.Text, comboBox3.Text, String.Format("{0:0.00}", movement.Debit), String.Format("{0:0.00}", movement.Credit), String.Format("{0:0.00}", movement.AccountBalance) };
+                string[] row = { cbAccount.Text, comboBox2.Text, comboBox3.Text, String.Format("{0:0.00}", movement.Debit), String.Format("{0:0.00}", movement.Credit), String.Format("{0:0.00}", movement.AccountBalance) };
                 ListViewItem my_item = new ListViewItem(row);
 
                 if (movement.AccountBalance < 0)
@@ -262,6 +264,8 @@ namespace FundsManager
 
                 textBox1.Text = 0.ToString();
                 textBox2.Text = 0.ToString();
+
+                checkForContractVisibility();
             }
             catch (Exception _ex)
             {
@@ -372,6 +376,8 @@ namespace FundsManager
                 }
 
                 button3.Enabled = false;
+
+                checkForContractVisibility();
             }
             catch (Exception _ex)
             {
@@ -392,12 +398,19 @@ namespace FundsManager
                     _movement.reference = textBox3.Text;
                     _movement.FK_AccountingMovements_Currencies = Convert.ToInt32(comboBox4.SelectedValue);
                     _movement.original_reference = textBox5.Text;
+
+                    if (txtContract.Visible)
+                    {
+                        _movement.contract = txtContract.Text;
+                    }
+
                     manager.My_db.AccountingMovements.Add(_movement);
                     manager.My_db.SaveChanges();
-
+                    
                     textBox3.Text = KeyDefinitions.NextAccountMovementReference;
                     textBox4.Clear();
                     textBox5.Clear();
+                    txtContract.Clear();
                     listView1.Items.Clear();
                     textBox1.Text = 0.ToString();
                     textBox2.Text = 0.ToString();
@@ -447,6 +460,8 @@ namespace FundsManager
                         manager.My_db.SaveChanges();
                     }
                     movements.Clear();
+
+                    checkForContractVisibility();
                 }
                 else
                 {
@@ -696,6 +711,42 @@ namespace FundsManager
         private bool leftAccountingIncrement(int accountType)
         {
             return (accountType == 0 || accountType == 4 || accountType == 5 || accountType == 7 || accountType == 8 || accountType == 9);
+        }
+
+        private void checkForContractVisibility()
+        {
+
+            int accountId = 0;
+
+            if (cbAccount.SelectedValue != null && int.TryParse(cbAccount.SelectedValue.ToString(), out accountId))
+            {
+                Account acct = manager.My_db.Accounts.FirstOrDefault(x => x.Id == accountId);
+
+                if (acct != null && (acct.number == "125" || acct.number == "128" || acct.number == "130"))
+                {
+                    lblContract.Visible = true;
+                    txtContract.Visible = true;
+                    return;
+                }
+            }
+
+            foreach (Movement movement in movements)
+            {
+                Account account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == movement.Account);
+
+                if (account != null)
+                {
+                    if (account.number == "125" || account.number == "128" || account.number == "130")
+                    {
+                        lblContract.Visible = true;
+                        txtContract.Visible = true;
+                        return;
+                    }
+                }
+            }
+            
+            lblContract.Visible = false;
+            txtContract.Visible = false;
         }
     }
 }

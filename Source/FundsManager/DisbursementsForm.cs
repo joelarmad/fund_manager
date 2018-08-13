@@ -24,6 +24,9 @@ namespace FundsManager
 
         private DateTime fMaxDisbursementDate;
 
+        private string fContractPreffix = "";
+        private string fContractSuffix = "";
+
         public DisbursementsForm()
         {
             try
@@ -62,6 +65,14 @@ namespace FundsManager
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Currencies' table. You can move, or remove it, as needed.
                 this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
 
+                Fund fund = manager.My_db.Funds.FirstOrDefault(x => x.Id == manager.Selected);
+
+                if (fund != null)
+                {
+                    fContractPreffix = fund.contract_prefix + " - ";
+                    lblContractPrefix.Text = "Contract:  " + fContractPreffix;
+                    fContractSuffix = lblContractSuffix.Text = "/" + DateTime.Now.Year.ToString().Substring(2);
+                }
             }
             catch (Exception _ex)
             {
@@ -107,13 +118,13 @@ namespace FundsManager
 
                 if (decimal.TryParse(txtAmount.Text, out _amount)
                     && decimal.TryParse(txtProfitShare.Text, out _profit)
-                    && decimal.TryParse(txtExchangeRate.Text, out _exchange))
+                    && decimal.TryParse(txtExchangeRate.Text, out _exchange) && _exchange > 0)
                 {
                     txtTotalToBeCollected.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", ((_amount + _profit) / _exchange));
                 }
                 else
                 {
-                    txtTotalToBeCollected.Text = "";
+                    txtTotalToBeCollected.Text = "0.0";
                 }
             }
             catch (Exception _ex)
@@ -135,7 +146,7 @@ namespace FundsManager
                 }
                 else
                 {
-                    txtTotalToBeCollected.Text = "";
+                    txtTotalToBeCollected.Text = "0.0";
                 }
             }
             catch (Exception _ex)
@@ -206,6 +217,7 @@ namespace FundsManager
                     _disbursement.underlying_debtor_id = Convert.ToInt32(cbUnderlyingDebtor.SelectedValue);
                     _disbursement.date = Convert.ToDateTime(dtpDisbursementDate.Text);
                     _disbursement.sector_id = Convert.ToInt32(cbSector.SelectedValue);
+                    _disbursement.number = txtNumber.Text;
 
                     _disbursement.TextClient = cbClient.Text;
                     _disbursement.TextUnderlyingDebtor = cbUnderlyingDebtor.Text;
@@ -241,9 +253,13 @@ namespace FundsManager
 
                     if (lvDisbursements.Items.Count > 0)
                         lvDisbursements.Items.RemoveAt(lvDisbursements.Items.Count - 1);
-
-
-                    string[] row = { cbClient.Text, cbUnderlyingDebtor.Text, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount.ToString()), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.profit_share.ToString()), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.Euro_collection.ToString()), dtpDisbursementDate.Text, Convert.ToString(day.Days) };
+                    
+                    string[] row = { cbClient.Text, cbUnderlyingDebtor.Text,
+                        String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount),
+                        String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.profit_share),
+                        String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.Euro_collection),
+                        dtpDisbursementDate.Text,
+                        Convert.ToString(day.Days) };
                     ListViewItem my_item = new ListViewItem(row);
 
                     if (_index == -1)
@@ -262,18 +278,24 @@ namespace FundsManager
                         total_euro_collection += _dis.Euro_collection;
                     }
 
-                    string[] totales = { "Total", "", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_profit), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_euro_collection) };
+                    string[] totales = { "Total", "",
+                        String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_amount),
+                        String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_profit),
+                        String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_euro_collection) };
                     ListViewItem listViewItemTotal = new ListViewItem(totales);
                     lvDisbursements.Items.Add(listViewItemTotal);
 
-                    txtAmount.Clear();
-                    txtProfitShare.Clear();
+                    txtAmount.Text = "0";
+                    txtProfitShare.Text = "0";
+                    txtExchangeRate.Text = "0.0";
+                    txtTotalToBeCollected.Text = "0.0";
                     lbISelectedItems.Items.Clear();
-                    txtTotalToBeCollected.Clear();
                     lbISelectedItems.Items.Clear();
                     lbISelectedItems.Items.Clear();
                     fItemIds.Clear();
-
+                    txtNumber.Clear();
+                    cmdAddDisbursement.Enabled = false;
+                    
                     checkEnablingAddInvestmentButton();
                 }
                 else
@@ -296,10 +318,11 @@ namespace FundsManager
 
                 Investment _newInvestment = new Investment();
 
-                _newInvestment.contract = txtContract.Text;
+                _newInvestment.contract = fContractPreffix + txtContract.Text + fContractSuffix;
                 _newInvestment.date = DateTime.Now.Date;
                 _newInvestment.fund_id = manager.Selected;
-                _newInvestment.number = txtNumber.Text;
+                //TODO: definir cual number debe ir en Investment
+                _newInvestment.number = DateTime.Now.Ticks.ToString();
 
                 manager.My_db.Investments.Add(_newInvestment);
                 manager.My_db.SaveChanges();
@@ -335,11 +358,12 @@ namespace FundsManager
 
                 fItemIds.Clear();
 
-                txtAmount.Text = "";
+                txtAmount.Text = "0";
                 txtNumber.Text = "";
                 txtContract.Text = "";
-                txtProfitShare.Text = "";
-                txtTotalToBeCollected.Text = "";
+                txtProfitShare.Text = "0";
+                txtExchangeRate.Text = "0.0";
+                txtTotalToBeCollected.Text = "0.0";
                 lbISelectedItems.Items.Clear();
                 lvDisbursements.Items.Clear();
 
@@ -428,7 +452,7 @@ namespace FundsManager
                     if (disbursements.First<Disbursement>().date != _disbursement.date)
                         day = _disbursement.date.Subtract(disbursements.First<Disbursement>().date);
 
-                    string[] row = { _disbursement.TextClient, _disbursement.TextUnderlyingDebtor, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount.ToString()), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.profit_share.ToString()), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _totalToBeCollected), _disbursement.date.ToLongDateString(), Convert.ToString(day.Days) };
+                    string[] row = { _disbursement.TextClient, _disbursement.TextUnderlyingDebtor, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.profit_share), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _totalToBeCollected), _disbursement.date.ToLongDateString(), Convert.ToString(day.Days) };
                     ListViewItem my_item = new ListViewItem(row);
                     lvDisbursements.Items.Add(my_item);
 
@@ -626,6 +650,24 @@ namespace FundsManager
 
                 checkEnablingAddDisbursementButton();
             }
+        }
+
+        private void txtExchangeRate_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                calculate_total_collection();
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error in DisbursementsForm.txtExchangeRate_KeyUp: " + _ex.Message);
+            }
+        }
+
+        private void DisbursementsForm_Click(object sender, EventArgs e)
+        {
+            checkEnablingAddDisbursementButton();
+            checkEnablingAddInvestmentButton();
         }
     }
 }

@@ -38,7 +38,6 @@ namespace FundsManager
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Creditor> Creditors { get; set; }
         public virtual DbSet<Disbursement_dates> Disbursement_dates { get; set; }
-        public virtual DbSet<Disbursement> Disbursements { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<FundBondInterest> FundBondInterests { get; set; }
         public virtual DbSet<FundBondProfit> FundBondProfits { get; set; }
@@ -52,9 +51,11 @@ namespace FundsManager
         public virtual DbSet<Sector> Sectors { get; set; }
         public virtual DbSet<Subaccount> Subaccounts { get; set; }
         public virtual DbSet<UnderlyingDebtor> UnderlyingDebtors { get; set; }
-        public virtual DbSet<AccountingMovement> AccountingMovements { get; set; }
         public virtual DbSet<Investment> Investments { get; set; }
         public virtual DbSet<AccountType> AccountTypes { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
+        public virtual DbSet<AccountingMovement> AccountingMovements { get; set; }
+        public virtual DbSet<Shareholder> Shareholders { get; set; }
+        public virtual DbSet<Disbursement> Disbursements { get; set; }
     }
 }

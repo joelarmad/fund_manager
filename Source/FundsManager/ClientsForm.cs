@@ -52,6 +52,7 @@ namespace FundsManager
                     {
                         _selectedItem.name = txtName.Text;
                         _selectedItem.number = txtNumber.Text;
+                        _selectedItem.CountryId = int.Parse(cbCountry.SelectedValue.ToString());
                         manager.My_db.SaveChanges();
                     }
                 }
@@ -127,11 +128,16 @@ namespace FundsManager
             {
                 this.clientsTableAdapter.FillByCountryId(this.fundsDBDataSet.Clients, int.Parse(cbCountry.SelectedValue.ToString()), manager.Selected);
             }
+
+            listBox1.SelectedIndex = -1;
         }
 
         private void cbCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
-            loadClientsData();
+            if (!fEditMode)
+            {
+                loadClientsData();
+            }
         }
     }
 }

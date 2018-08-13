@@ -90,6 +90,14 @@ namespace FundsManager
             My_db.SaveChanges();
         }
 
+        public void DeleteShareholder(int _id)
+        {
+            Shareholder _shareholder = new Shareholder();
+            _shareholder = My_db.Shareholders.Find(_id);
+            My_db.Shareholders.Remove(_shareholder);
+            My_db.SaveChanges();
+        }
+
         public void DeleteInvestor(int _id)
         {
             Investor _investor = new Investor();

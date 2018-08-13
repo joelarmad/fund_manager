@@ -81,7 +81,8 @@
             this.txtNumber = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.txtContract = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.lblContractPrefix = new System.Windows.Forms.Label();
+            this.lblContractSuffix = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
@@ -106,6 +107,7 @@
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(121, 20);
             this.txtAmount.TabIndex = 1;
+            this.txtAmount.Text = "0";
             this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             this.txtAmount.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAmount_KeyUp);
             this.txtAmount.Leave += new System.EventHandler(this.txtAmount_Leave);
@@ -156,6 +158,8 @@
             this.txtExchangeRate.Name = "txtExchangeRate";
             this.txtExchangeRate.Size = new System.Drawing.Size(121, 20);
             this.txtExchangeRate.TabIndex = 5;
+            this.txtExchangeRate.Text = "0.0";
+            this.txtExchangeRate.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtExchangeRate_KeyUp);
             // 
             // label4
             // 
@@ -224,11 +228,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(307, 145);
+            this.label6.Location = new System.Drawing.Point(253, 146);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.Size = new System.Drawing.Size(88, 13);
             this.label6.TabIndex = 10;
-            this.label6.Text = "Bank:";
+            this.label6.Text = "Underlying Bank:";
             this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // cbBank
@@ -267,6 +271,7 @@
             this.txtProfitShare.Name = "txtProfitShare";
             this.txtProfitShare.Size = new System.Drawing.Size(121, 20);
             this.txtProfitShare.TabIndex = 13;
+            this.txtProfitShare.Text = "0";
             this.txtProfitShare.TextChanged += new System.EventHandler(this.txtProfitShare_TextChanged);
             this.txtProfitShare.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtProfitShare_KeyUp);
             this.txtProfitShare.Leave += new System.EventHandler(this.txtProfitShare_Leave);
@@ -366,6 +371,7 @@
             this.txtTotalToBeCollected.ReadOnly = true;
             this.txtTotalToBeCollected.Size = new System.Drawing.Size(100, 20);
             this.txtTotalToBeCollected.TabIndex = 21;
+            this.txtTotalToBeCollected.Text = "0.0";
             // 
             // cmdAddDisbursement
             // 
@@ -452,11 +458,11 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(447, 219);
+            this.label11.Location = new System.Drawing.Point(382, 219);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(33, 13);
+            this.label11.Size = new System.Drawing.Size(100, 13);
             this.label11.TabIndex = 26;
-            this.label11.Text = "Date:";
+            this.label11.Text = "Disbursement Date:";
             // 
             // cmdCreateInvestment
             // 
@@ -498,27 +504,38 @@
             // 
             // txtContract
             // 
-            this.txtContract.Location = new System.Drawing.Point(348, 34);
+            this.txtContract.Location = new System.Drawing.Point(348, 33);
             this.txtContract.Name = "txtContract";
-            this.txtContract.Size = new System.Drawing.Size(121, 20);
+            this.txtContract.Size = new System.Drawing.Size(92, 20);
             this.txtContract.TabIndex = 32;
             // 
-            // label13
+            // lblContractPrefix
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(293, 37);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(50, 13);
-            this.label13.TabIndex = 31;
-            this.label13.Text = "Contract:";
+            this.lblContractPrefix.Location = new System.Drawing.Point(221, 37);
+            this.lblContractPrefix.Name = "lblContractPrefix";
+            this.lblContractPrefix.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblContractPrefix.Size = new System.Drawing.Size(122, 13);
+            this.lblContractPrefix.TabIndex = 31;
+            this.lblContractPrefix.Text = "Contract:";
+            this.lblContractPrefix.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lblContractSuffix
+            // 
+            this.lblContractSuffix.AutoSize = true;
+            this.lblContractSuffix.Location = new System.Drawing.Point(446, 37);
+            this.lblContractSuffix.Name = "lblContractSuffix";
+            this.lblContractSuffix.Size = new System.Drawing.Size(19, 13);
+            this.lblContractSuffix.TabIndex = 33;
+            this.lblContractSuffix.Text = "18";
             // 
             // DisbursementsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(951, 578);
+            this.Controls.Add(this.lblContractSuffix);
             this.Controls.Add(this.txtContract);
-            this.Controls.Add(this.label13);
+            this.Controls.Add(this.lblContractPrefix);
             this.Controls.Add(this.txtNumber);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.cmdDeleteItem);
@@ -556,6 +573,7 @@
             this.ShowInTaskbar = false;
             this.Text = "Disbursements";
             this.Load += new System.EventHandler(this.DisbursementsForm_Load);
+            this.Click += new System.EventHandler(this.DisbursementsForm_Click);
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).EndInit();
@@ -622,6 +640,7 @@
         private System.Windows.Forms.TextBox txtNumber;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtContract;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lblContractPrefix;
+        private System.Windows.Forms.Label lblContractSuffix;
     }
 }

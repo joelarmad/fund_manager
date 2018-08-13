@@ -182,11 +182,7 @@ namespace FundsManager
         }
 
         private void investmentsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.IsMdiContainer = true;
-            DisbursementsForm disbursements_form = new DisbursementsForm();
-            disbursements_form.MdiParent = this;
-            disbursements_form.Show();
+        {            
             /*
             InvestmentsForm investments_form = new InvestmentsForm(manager);
             investments_form.MdiParent = this;
@@ -223,6 +219,22 @@ namespace FundsManager
             BondPayments _bondPayments = new BondPayments();
             _bondPayments.MdiParent = this;
             _bondPayments.Show();
+        }
+
+        private void shareholdersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            ShareholdersForm _shareholdersForm = new ShareholdersForm();
+            _shareholdersForm.MdiParent = this;
+            _shareholdersForm.Show();
+        }
+
+        private void disbursemetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            DisbursementsForm disbursements_form = new DisbursementsForm();
+            disbursements_form.MdiParent = this;
+            disbursements_form.Show();
         }
     }
 }

@@ -49,6 +49,7 @@ namespace FundsManager
                 {
                     _selectedItem.name = txtName.Text;
                     _selectedItem.number = txtNumber.Text;
+                    _selectedItem.CountryId = int.Parse(cbCountry.SelectedValue.ToString());
                     manager.My_db.SaveChanges();
                 }
             }
@@ -113,7 +114,10 @@ namespace FundsManager
 
         private void cbCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
-            loadUnderlyingDebtorsData();
+            if (!fEditMode)
+            {
+                loadUnderlyingDebtorsData();
+            }
         }
 
         private void loadUnderlyingDebtorsData()
@@ -122,6 +126,8 @@ namespace FundsManager
             {
                 this.underlyingDebtorsTableAdapter.FillByCountryId(this.fundsDBDataSet.UnderlyingDebtors, int.Parse(cbCountry.SelectedValue.ToString()), manager.Selected);
             }
+
+            listBox1.SelectedIndex = -1;
         }
     }
 }
