@@ -188,7 +188,18 @@ namespace FundsManager
                 txtAccountNumber.Text = _selectedAccount.number;
                 txtAccountNumber.Enabled = false;
 
-                cbType.SelectedIndex = _selectedAccount.type;
+                AccountType accType = manager.My_db.AccountTypes.FirstOrDefault(x => x.Id == _selectedAccount.type);
+
+                for (int i = 0; i < cbType.Items.Count; i++)
+                {
+                    int id = ((FundsManager.FundsDBDataSet.AccountTypeRow)((System.Data.DataRowView)cbType.Items[i]).Row).Id;
+
+                    if (id == _selectedAccount.type)
+                    {
+                        cbType.SelectedIndex = i;
+                        break;
+                    }
+                }
 
                 cmdCancel.Visible = true;
             }
