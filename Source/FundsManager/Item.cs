@@ -17,7 +17,7 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Item()
         {
-            this.Disbursements = new HashSet<Disbursement>();
+            this.DisbursementItems = new HashSet<DisbursementItem>();
         }
     
         public int Id { get; set; }
@@ -27,6 +27,6 @@ namespace FundsManager
     
         public virtual Fund Fund { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Disbursement> Disbursements { get; set; }
+        public virtual ICollection<DisbursementItem> DisbursementItems { get; set; }
     }
 }

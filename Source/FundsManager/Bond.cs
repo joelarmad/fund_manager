@@ -34,7 +34,6 @@ namespace FundsManager
         public int active { get; set; }
         public Nullable<System.DateTime> expired { get; set; }
     
-        public virtual Fund Fund { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BondsInvestor> BondsInvestors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -43,5 +42,6 @@ namespace FundsManager
         public virtual ICollection<FundBondProfit> FundBondProfits { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InvestorBondInterest> InvestorBondInterests { get; set; }
+        public virtual Fund Fund { get; set; }
     }
 }

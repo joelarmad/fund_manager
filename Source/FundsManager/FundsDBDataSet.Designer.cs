@@ -13609,6 +13609,8 @@ namespace FundsManager {
             
             private global::System.Data.DataColumn columnnumber;
             
+            private global::System.Data.DataColumn columncollection_date;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DisbursementsDataTable() {
@@ -13748,6 +13750,14 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn collection_dateColumn {
+                get {
+                    return this.columncollection_date;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -13783,7 +13793,7 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DisbursementsRow AddDisbursementsRow(InvestmentsRow parentInvestmentsRowByFK_Disbursements_Investments, CurrenciesRow parentCurrenciesRowByFK_Disbursements_Currencies, float exchange_rate, ClientsRow parentClientsRowByFK_Disbursements_Clients, UnderlyingDebtorsRow parentUnderlyingDebtorsRowByFK_Disbursements_UnderlyingDebtors, BanksRow parentBanksRowByFK_Disbursements_Banks, decimal profit_share, decimal amount, FundsRow parentFundsRowByFK_Disbursements_Funds, System.DateTime date, SectorsRow parentSectorsRowByFK_Disbursements_Sector, string number) {
+            public DisbursementsRow AddDisbursementsRow(InvestmentsRow parentInvestmentsRowByFK_Disbursements_Investments, CurrenciesRow parentCurrenciesRowByFK_Disbursements_Currencies, float exchange_rate, ClientsRow parentClientsRowByFK_Disbursements_Clients, UnderlyingDebtorsRow parentUnderlyingDebtorsRowByFK_Disbursements_UnderlyingDebtors, BanksRow parentBanksRowByFK_Disbursements_Banks, decimal profit_share, decimal amount, FundsRow parentFundsRowByFK_Disbursements_Funds, System.DateTime date, SectorsRow parentSectorsRowByFK_Disbursements_Sector, string number, System.DateTime collection_date) {
                 DisbursementsRow rowDisbursementsRow = ((DisbursementsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -13798,7 +13808,8 @@ namespace FundsManager {
                         null,
                         date,
                         null,
-                        number};
+                        number,
+                        collection_date};
                 if ((parentInvestmentsRowByFK_Disbursements_Investments != null)) {
                     columnValuesArray[1] = parentInvestmentsRowByFK_Disbursements_Investments[0];
                 }
@@ -13862,6 +13873,7 @@ namespace FundsManager {
                 this.columndate = base.Columns["date"];
                 this.columnsector_id = base.Columns["sector_id"];
                 this.columnnumber = base.Columns["number"];
+                this.columncollection_date = base.Columns["collection_date"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13893,6 +13905,8 @@ namespace FundsManager {
                 base.Columns.Add(this.columnsector_id);
                 this.columnnumber = new global::System.Data.DataColumn("number", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnnumber);
+                this.columncollection_date = new global::System.Data.DataColumn("collection_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncollection_date);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
                 this.columnId.AutoIncrement = true;
@@ -13912,6 +13926,7 @@ namespace FundsManager {
                 this.columnsector_id.AllowDBNull = false;
                 this.columnnumber.AllowDBNull = false;
                 this.columnnumber.MaxLength = 50;
+                this.columncollection_date.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -20221,6 +20236,17 @@ namespace FundsManager {
                 }
                 set {
                     this[this.tableDisbursements.numberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime collection_date {
+                get {
+                    return ((global::System.DateTime)(this[this.tableDisbursements.collection_dateColumn]));
+                }
+                set {
+                    this[this.tableDisbursements.collection_dateColumn] = value;
                 }
             }
             
@@ -28670,13 +28696,15 @@ SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds, amount, number FROM
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
             this._commandCollection[1].CommandText = "SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds, amount, number FROM " +
-                "Subaccounts WHERE (FK_Subaccounts_Accounts = @AccountId)";
+                "Subaccounts WHERE FK_Subaccounts_Accounts = @AccountId AND FK_Accounts_Funds = @" +
+                "FundId";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AccountId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Subaccounts_Accounts", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Accounts_Funds", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
             this._commandCollection[2].CommandText = "SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds, amount, number FROM " +
-                "Subaccounts WHERE (FK_Accounts_Funds = @FundId)";
+                "Subaccounts WHERE FK_Accounts_Funds = @FundId";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Accounts_Funds", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -28709,9 +28737,10 @@ SELECT Id, name, FK_Subaccounts_Accounts, FK_Accounts_Funds, amount, number FROM
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByAcccountId(FundsDBDataSet.SubaccountsDataTable dataTable, int AccountId) {
+        public virtual int FillByAccount(FundsDBDataSet.SubaccountsDataTable dataTable, int AccountId, int FundId) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(AccountId));
+            this.Adapter.SelectCommand.Parameters[1].Value = ((int)(FundId));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -33455,10 +33484,11 @@ SELECT DisbursementId, ItemId FROM DisbursementItems WHERE (DisbursementId = @Di
             tableMapping.ColumnMappings.Add("date", "date");
             tableMapping.ColumnMappings.Add("sector_id", "sector_id");
             tableMapping.ColumnMappings.Add("number", "number");
+            tableMapping.ColumnMappings.Add("collection_date", "collection_date");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Disbursements] WHERE (([Id] = @Original_Id) AND ([investment_id] = @Original_investment_id) AND ([currency_id] = @Original_currency_id) AND ([exchange_rate] = @Original_exchange_rate) AND ([client_id] = @Original_client_id) AND ((@IsNull_underlying_debtor_id = 1 AND [underlying_debtor_id] IS NULL) OR ([underlying_debtor_id] = @Original_underlying_debtor_id)) AND ((@IsNull_bank_risk_id = 1 AND [bank_risk_id] IS NULL) OR ([bank_risk_id] = @Original_bank_risk_id)) AND ([profit_share] = @Original_profit_share) AND ([amount] = @Original_amount) AND ([fund_id] = @Original_fund_id) AND ([date] = @Original_date) AND ([sector_id] = @Original_sector_id) AND ([number] = @Original_number))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Disbursements] WHERE (([Id] = @Original_Id) AND ([investment_id] = @Original_investment_id) AND ([currency_id] = @Original_currency_id) AND ([exchange_rate] = @Original_exchange_rate) AND ([client_id] = @Original_client_id) AND ((@IsNull_underlying_debtor_id = 1 AND [underlying_debtor_id] IS NULL) OR ([underlying_debtor_id] = @Original_underlying_debtor_id)) AND ((@IsNull_bank_risk_id = 1 AND [bank_risk_id] IS NULL) OR ([bank_risk_id] = @Original_bank_risk_id)) AND ([profit_share] = @Original_profit_share) AND ([amount] = @Original_amount) AND ([fund_id] = @Original_fund_id) AND ([date] = @Original_date) AND ([sector_id] = @Original_sector_id) AND ([number] = @Original_number) AND ([collection_date] = @Original_collection_date))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_investment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -33475,10 +33505,11 @@ SELECT DisbursementId, ItemId FROM DisbursementItems WHERE (DisbursementId = @Di
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_sector_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sector_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_number", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "number", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_collection_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collection_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Disbursements] ([investment_id], [currency_id], [exchange_rate], [client_id], [underlying_debtor_id], [bank_risk_id], [profit_share], [amount], [fund_id], [date], [sector_id], [number]) VALUES (@investment_id, @currency_id, @exchange_rate, @client_id, @underlying_debtor_id, @bank_risk_id, @profit_share, @amount, @fund_id, @date, @sector_id, @number);
-SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number FROM Disbursements WHERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Disbursements] ([investment_id], [currency_id], [exchange_rate], [client_id], [underlying_debtor_id], [bank_risk_id], [profit_share], [amount], [fund_id], [date], [sector_id], [number], [collection_date]) VALUES (@investment_id, @currency_id, @exchange_rate, @client_id, @underlying_debtor_id, @bank_risk_id, @profit_share, @amount, @fund_id, @date, @sector_id, @number, @collection_date);
+SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, collection_date FROM Disbursements WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@investment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@currency_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "currency_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -33492,10 +33523,11 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sector_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sector_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@number", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@collection_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collection_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [Disbursements] SET [investment_id] = @investment_id, [currency_id] = @currency_id, [exchange_rate] = @exchange_rate, [client_id] = @client_id, [underlying_debtor_id] = @underlying_debtor_id, [bank_risk_id] = @bank_risk_id, [profit_share] = @profit_share, [amount] = @amount, [fund_id] = @fund_id, [date] = @date, [sector_id] = @sector_id, [number] = @number WHERE (([Id] = @Original_Id) AND ([investment_id] = @Original_investment_id) AND ([currency_id] = @Original_currency_id) AND ([exchange_rate] = @Original_exchange_rate) AND ([client_id] = @Original_client_id) AND ((@IsNull_underlying_debtor_id = 1 AND [underlying_debtor_id] IS NULL) OR ([underlying_debtor_id] = @Original_underlying_debtor_id)) AND ((@IsNull_bank_risk_id = 1 AND [bank_risk_id] IS NULL) OR ([bank_risk_id] = @Original_bank_risk_id)) AND ([profit_share] = @Original_profit_share) AND ([amount] = @Original_amount) AND ([fund_id] = @Original_fund_id) AND ([date] = @Original_date) AND ([sector_id] = @Original_sector_id) AND ([number] = @Original_number));
-SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number FROM Disbursements WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Disbursements] SET [investment_id] = @investment_id, [currency_id] = @currency_id, [exchange_rate] = @exchange_rate, [client_id] = @client_id, [underlying_debtor_id] = @underlying_debtor_id, [bank_risk_id] = @bank_risk_id, [profit_share] = @profit_share, [amount] = @amount, [fund_id] = @fund_id, [date] = @date, [sector_id] = @sector_id, [number] = @number, [collection_date] = @collection_date WHERE (([Id] = @Original_Id) AND ([investment_id] = @Original_investment_id) AND ([currency_id] = @Original_currency_id) AND ([exchange_rate] = @Original_exchange_rate) AND ([client_id] = @Original_client_id) AND ((@IsNull_underlying_debtor_id = 1 AND [underlying_debtor_id] IS NULL) OR ([underlying_debtor_id] = @Original_underlying_debtor_id)) AND ((@IsNull_bank_risk_id = 1 AND [bank_risk_id] IS NULL) OR ([bank_risk_id] = @Original_bank_risk_id)) AND ([profit_share] = @Original_profit_share) AND ([amount] = @Original_amount) AND ([fund_id] = @Original_fund_id) AND ([date] = @Original_date) AND ([sector_id] = @Original_sector_id) AND ([number] = @Original_number) AND ([collection_date] = @Original_collection_date));
+SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, collection_date FROM Disbursements WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@investment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@currency_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "currency_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -33509,6 +33541,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sector_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sector_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@number", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@collection_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collection_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_investment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_currency_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "currency_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -33524,6 +33557,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_sector_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sector_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_number", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "number", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_collection_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collection_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -33541,8 +33575,8 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debto" +
-                "r_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number FROM " +
-                "Disbursements";
+                "r_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, coll" +
+                "ection_date FROM Disbursements";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -33603,7 +33637,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_Id, int Original_investment_id, int Original_currency_id, float Original_exchange_rate, int Original_client_id, global::System.Nullable<int> Original_underlying_debtor_id, global::System.Nullable<int> Original_bank_risk_id, decimal Original_profit_share, decimal Original_amount, int Original_fund_id, System.DateTime Original_date, int Original_sector_id, string Original_number) {
+        public virtual int Delete(int Original_Id, int Original_investment_id, int Original_currency_id, float Original_exchange_rate, int Original_client_id, global::System.Nullable<int> Original_underlying_debtor_id, global::System.Nullable<int> Original_bank_risk_id, decimal Original_profit_share, decimal Original_amount, int Original_fund_id, System.DateTime Original_date, int Original_sector_id, string Original_number, System.DateTime Original_collection_date) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_investment_id));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_currency_id));
@@ -33636,6 +33670,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             else {
                 this.Adapter.DeleteCommand.Parameters[14].Value = ((string)(Original_number));
             }
+            this.Adapter.DeleteCommand.Parameters[15].Value = ((System.DateTime)(Original_collection_date));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -33656,7 +33691,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int investment_id, int currency_id, float exchange_rate, int client_id, global::System.Nullable<int> underlying_debtor_id, global::System.Nullable<int> bank_risk_id, decimal profit_share, decimal amount, int fund_id, System.DateTime date, int sector_id, string number) {
+        public virtual int Insert(int investment_id, int currency_id, float exchange_rate, int client_id, global::System.Nullable<int> underlying_debtor_id, global::System.Nullable<int> bank_risk_id, decimal profit_share, decimal amount, int fund_id, System.DateTime date, int sector_id, string number, System.DateTime collection_date) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(investment_id));
             this.Adapter.InsertCommand.Parameters[1].Value = ((int)(currency_id));
             this.Adapter.InsertCommand.Parameters[2].Value = ((float)(exchange_rate));
@@ -33684,6 +33719,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             else {
                 this.Adapter.InsertCommand.Parameters[11].Value = ((string)(number));
             }
+            this.Adapter.InsertCommand.Parameters[12].Value = ((System.DateTime)(collection_date));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -33717,6 +33753,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                     System.DateTime date, 
                     int sector_id, 
                     string number, 
+                    System.DateTime collection_date, 
                     int Original_Id, 
                     int Original_investment_id, 
                     int Original_currency_id, 
@@ -33730,6 +33767,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                     System.DateTime Original_date, 
                     int Original_sector_id, 
                     string Original_number, 
+                    System.DateTime Original_collection_date, 
                     int Id) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(investment_id));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(currency_id));
@@ -33758,39 +33796,41 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             else {
                 this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(number));
             }
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_Id));
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_investment_id));
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_currency_id));
-            this.Adapter.UpdateCommand.Parameters[15].Value = ((float)(Original_exchange_rate));
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_client_id));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((System.DateTime)(collection_date));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_Id));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_investment_id));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_currency_id));
+            this.Adapter.UpdateCommand.Parameters[16].Value = ((float)(Original_exchange_rate));
+            this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_client_id));
             if ((Original_underlying_debtor_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_underlying_debtor_id.Value));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_underlying_debtor_id.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
             }
             if ((Original_bank_risk_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((int)(Original_bank_risk_id.Value));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Original_bank_risk_id.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[21].Value = ((decimal)(Original_profit_share));
-            this.Adapter.UpdateCommand.Parameters[22].Value = ((decimal)(Original_amount));
-            this.Adapter.UpdateCommand.Parameters[23].Value = ((int)(Original_fund_id));
-            this.Adapter.UpdateCommand.Parameters[24].Value = ((System.DateTime)(Original_date));
-            this.Adapter.UpdateCommand.Parameters[25].Value = ((int)(Original_sector_id));
+            this.Adapter.UpdateCommand.Parameters[22].Value = ((decimal)(Original_profit_share));
+            this.Adapter.UpdateCommand.Parameters[23].Value = ((decimal)(Original_amount));
+            this.Adapter.UpdateCommand.Parameters[24].Value = ((int)(Original_fund_id));
+            this.Adapter.UpdateCommand.Parameters[25].Value = ((System.DateTime)(Original_date));
+            this.Adapter.UpdateCommand.Parameters[26].Value = ((int)(Original_sector_id));
             if ((Original_number == null)) {
                 throw new global::System.ArgumentNullException("Original_number");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((string)(Original_number));
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((string)(Original_number));
             }
-            this.Adapter.UpdateCommand.Parameters[27].Value = ((int)(Id));
+            this.Adapter.UpdateCommand.Parameters[28].Value = ((System.DateTime)(Original_collection_date));
+            this.Adapter.UpdateCommand.Parameters[29].Value = ((int)(Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -33824,6 +33864,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                     System.DateTime date, 
                     int sector_id, 
                     string number, 
+                    System.DateTime collection_date, 
                     int Original_Id, 
                     int Original_investment_id, 
                     int Original_currency_id, 
@@ -33836,8 +33877,9 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                     int Original_fund_id, 
                     System.DateTime Original_date, 
                     int Original_sector_id, 
-                    string Original_number) {
-            return this.Update(investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, Original_Id, Original_investment_id, Original_currency_id, Original_exchange_rate, Original_client_id, Original_underlying_debtor_id, Original_bank_risk_id, Original_profit_share, Original_amount, Original_fund_id, Original_date, Original_sector_id, Original_number, Original_Id);
+                    string Original_number, 
+                    System.DateTime Original_collection_date) {
+            return this.Update(investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, collection_date, Original_Id, Original_investment_id, Original_currency_id, Original_exchange_rate, Original_client_id, Original_underlying_debtor_id, Original_bank_risk_id, Original_profit_share, Original_amount, Original_fund_id, Original_date, Original_sector_id, Original_number, Original_collection_date, Original_Id);
         }
     }
     
@@ -34435,7 +34477,7 @@ SELECT Id, name, FK_OtherDetails_Funds, subacct_id, number FROM OtherDetails WHE
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Id, name, FK_OtherDetails_Funds, subacct_id, number FROM OtherDetails";
@@ -34446,6 +34488,13 @@ SELECT Id, name, FK_OtherDetails_Funds, subacct_id, number FROM OtherDetails WHE
                 "E (FK_OtherDetails_Funds = @FundId)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FK_OtherDetails_Funds", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT Id, name, FK_OtherDetails_Funds, subacct_id, number FROM OtherDetails WHER" +
+                "E subacct_id = @SubaccountId AND FK_OtherDetails_Funds = @FundId";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SubaccountId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "subacct_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FK_OtherDetails_Funds", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -34479,6 +34528,21 @@ SELECT Id, name, FK_OtherDetails_Funds, subacct_id, number FROM OtherDetails WHE
         public virtual int FillByFund(FundsDBDataSet.OtherDetailsDataTable dataTable, int FundId) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(FundId));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillBySubaccount(FundsDBDataSet.OtherDetailsDataTable dataTable, int SubaccountId, int FundId) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(SubaccountId));
+            this.Adapter.SelectCommand.Parameters[1].Value = ((int)(FundId));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }

@@ -21,7 +21,7 @@ namespace FundsManager
         public decimal amount { get; set; }
     
         public virtual Account Account { get; set; }
-        public virtual Fund Fund { get; set; }
         public virtual BankingAccount BankingAccount { get; set; }
+        public virtual Fund Fund { get; set; }
     }
 }

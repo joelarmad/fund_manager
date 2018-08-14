@@ -182,11 +182,11 @@ namespace FundsManager
         }
 
         private void investmentsToolStripMenuItem_Click(object sender, EventArgs e)
-        {            
-            /*
-            InvestmentsForm investments_form = new InvestmentsForm(manager);
+        {
+            this.IsMdiContainer = true;
+            InvestmentsForm investments_form = new InvestmentsForm();
             investments_form.MdiParent = this;
-            investments_form.Show();*/
+            investments_form.Show();
         }
 
         private void underlyingDebtorsToolStripMenuItem_Click(object sender, EventArgs e)

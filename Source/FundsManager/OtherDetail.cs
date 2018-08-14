@@ -20,7 +20,7 @@ namespace FundsManager
         public int subacct_id { get; set; }
         public string number { get; set; }
     
-        public virtual Fund Fund { get; set; }
         public virtual Subaccount Subaccount { get; set; }
+        public virtual Fund Fund { get; set; }
     }
 }

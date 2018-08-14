@@ -154,7 +154,7 @@ namespace FundsManager
         {
             if (fundsDBDataSet != null && cbAccount.SelectedValue != null)
             {
-                this.subaccountsTableAdapter.FillByAcccountId(this.fundsDBDataSet.Subaccounts, int.Parse(cbAccount.SelectedValue.ToString()));
+                this.subaccountsTableAdapter.FillByAccount(this.fundsDBDataSet.Subaccounts, int.Parse(cbAccount.SelectedValue.ToString()), manager.Selected);
 
                 foreach (DataGridViewRow _row in dataGridView1.Rows)
                 {

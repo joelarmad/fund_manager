@@ -41,7 +41,6 @@ namespace FundsManager
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<FundBondInterest> FundBondInterests { get; set; }
         public virtual DbSet<FundBondProfit> FundBondProfits { get; set; }
-        public virtual DbSet<Fund> Funds { get; set; }
         public virtual DbSet<InvestorBondInterest> InvestorBondInterests { get; set; }
         public virtual DbSet<Investor> Investors { get; set; }
         public virtual DbSet<Item> Items { get; set; }
@@ -51,11 +50,13 @@ namespace FundsManager
         public virtual DbSet<Sector> Sectors { get; set; }
         public virtual DbSet<Subaccount> Subaccounts { get; set; }
         public virtual DbSet<UnderlyingDebtor> UnderlyingDebtors { get; set; }
-        public virtual DbSet<Investment> Investments { get; set; }
         public virtual DbSet<AccountType> AccountTypes { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
         public virtual DbSet<AccountingMovement> AccountingMovements { get; set; }
         public virtual DbSet<Shareholder> Shareholders { get; set; }
+        public virtual DbSet<Fund> Funds { get; set; }
+        public virtual DbSet<Investment> Investments { get; set; }
+        public virtual DbSet<DisbursementItem> DisbursementItems { get; set; }
         public virtual DbSet<Disbursement> Disbursements { get; set; }
     }
 }

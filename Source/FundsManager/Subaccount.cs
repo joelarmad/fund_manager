@@ -29,10 +29,10 @@ namespace FundsManager
         public string number { get; set; }
     
         public virtual Account Account { get; set; }
-        public virtual Fund Fund { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movements_Accounts> Movements_Accounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OtherDetail> OtherDetails { get; set; }
+        public virtual Fund Fund { get; set; }
     }
 }
