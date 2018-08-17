@@ -301,6 +301,7 @@
             this.profitShareAccruedToolStripMenuItem.Name = "profitShareAccruedToolStripMenuItem";
             this.profitShareAccruedToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.profitShareAccruedToolStripMenuItem.Text = "Profit Share Accrued";
+            this.profitShareAccruedToolStripMenuItem.Click += new System.EventHandler(this.profitShareAccruedToolStripMenuItem_Click);
             // 
             // delayInterestToolStripMenuItem
             // 
@@ -320,14 +321,14 @@
             // movementsToolStripMenuItem
             // 
             this.movementsToolStripMenuItem.Name = "movementsToolStripMenuItem";
-            this.movementsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.movementsToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.movementsToolStripMenuItem.Text = "Movements";
             this.movementsToolStripMenuItem.Click += new System.EventHandler(this.movementsToolStripMenuItem_Click);
             // 
             // bondsToolStripMenuItem1
             // 
             this.bondsToolStripMenuItem1.Name = "bondsToolStripMenuItem1";
-            this.bondsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.bondsToolStripMenuItem1.Size = new System.Drawing.Size(137, 22);
             this.bondsToolStripMenuItem1.Text = "Bonds";
             this.bondsToolStripMenuItem1.Click += new System.EventHandler(this.bondsToolStripMenuItem1_Click);
             // 

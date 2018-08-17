@@ -237,5 +237,13 @@ namespace FundsManager
             disbursements_form.MdiParent = this;
             disbursements_form.Show();
         }
+
+        private void profitShareAccruedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            ProfitShareToAccrueForm profit_share_to_accrue_form = new ProfitShareToAccrueForm();
+            profit_share_to_accrue_form.MdiParent = this;
+            profit_share_to_accrue_form.Show();
+        }
     }
 }

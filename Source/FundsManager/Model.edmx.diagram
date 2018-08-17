@@ -100,6 +100,11 @@
         <EntityTypeShape EntityType="FundsDBModel.DisbursementPayment" Width="1.5" PointX="18" PointY="49.75" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementPayments_Investments" />
         <AssociationConnector Association="FundsDBModel.DisbursementPaymentDetails" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementGeneratedInterestDetail" Width="1.5" PointX="18" PointY="53" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementGeneratedInterest" Width="1.5" PointX="15.75" PointY="55.25" />
+        <EntityTypeShape EntityType="FundsDBModel.ProfitShareToAccrue" Width="1.5" PointX="5.375" PointY="0.75" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_Disbursements" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
