@@ -170,6 +170,7 @@
     <Compile Include="BondsList.Designer.cs">
       <DependentUpon>BondsList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classes\DataModel\Account.cs" />
     <Compile Include="Classes\DataModel\Bond.cs" />
     <Compile Include="Classes\DataModel\BondInvestor.cs" />
     <Compile Include="Classes\DataModel\Disbursement.cs" />
@@ -358,6 +359,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportForms\DisbursementPaymentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForms\DisbursementPaymentForm.Designer.cs">
+      <DependentUpon>DisbursementPaymentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportForms\GeneralBalanceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -488,12 +495,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ReportForms\DisbursementPaymentForm.resx">
+      <DependentUpon>DisbursementPaymentForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\GeneralBalanceForm.resx">
       <DependentUpon>GeneralBalanceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\ReturnsState.resx">
       <DependentUpon>ReturnsState.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DisbursementPaymentReport.rdlc" />
     <EmbeddedResource Include="Reports\GeneralBalance.rdlc" />
     <EmbeddedResource Include="Reports\ProfitsState.rdlc" />
     <EmbeddedResource Include="SectorsForm.resx">

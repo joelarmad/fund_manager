@@ -218,7 +218,7 @@ namespace FundsManager
                 int _creditFactor = 1;
                 int _debitFactor = -1;
 
-                if (leftAccountingIncrement(_account.type))
+                if (Account.leftAccountingIncrement(_account.type))
                 {
                     _creditFactor = -1;
                     _debitFactor = 1;
@@ -316,7 +316,7 @@ namespace FundsManager
                     int _creditFactor = 1;
                     int _debitFactor = -1;
 
-                    if (leftAccountingIncrement(_account.type))
+                    if (Account.leftAccountingIncrement(_account.type))
                     {
                         _creditFactor = -1;
                         _debitFactor = 1;
@@ -440,7 +440,7 @@ namespace FundsManager
                         int _creditFactor = 1;
                         int _debitFactor = -1;
 
-                        if (leftAccountingIncrement(_account.type))
+                        if (Account.leftAccountingIncrement(_account.type))
                         {
                             _creditFactor = -1;
                             _debitFactor = 1;
@@ -689,7 +689,7 @@ namespace FundsManager
                 {
                     Account _account = manager.My_db.Accounts.First(x => x.Id == _movement.Account);
 
-                    if (leftAccountingIncrement(_account.type))
+                    if (Account.leftAccountingIncrement(_account.type))
                     {
                         _leftAccount += _movement.AccountBalance;
                     }
@@ -706,11 +706,6 @@ namespace FundsManager
                 Console.WriteLine("Error in GeneralLedgerForm.canMakeMovement: " + _ex.Message);
                 return false;
             }
-        }
-
-        private bool leftAccountingIncrement(int accountType)
-        {
-            return (accountType == 0 || accountType == 4 || accountType == 5 || accountType == 7 || accountType == 8 || accountType == 9);
         }
 
         private void checkForContractVisibility()

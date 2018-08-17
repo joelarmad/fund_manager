@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
+using FundsManager.ReportForms;
 
 namespace FundsManager
 {
@@ -188,26 +189,113 @@ namespace FundsManager
                                 dPayment.Disbursements.Add(toPay);
 
                                 manager.My_db.SaveChanges();
+                                
+                                AccountingMovement _movement = new AccountingMovement();
+                                _movement.FK_AccountingMovements_Funds = manager.Selected;
+                                //TODO: buscar valor correcto
+                                _movement.description = "";
+                                _movement.date = dPayment.payment_date;
+                                //TODO: buscar valor correcto, debe ser unico
+                                _movement.reference = DateTime.Now.Ticks.ToString();
+                                _movement.FK_AccountingMovements_Currencies = toPay.currency_id;
+                                //TODO: buscar valor correcto
+                                _movement.original_reference = "";
+                                _movement.contract = cbContract.SelectedText;
 
-                                //TODO: Generar movimiento de cuenta si es uno por disbursemet
+                                manager.My_db.AccountingMovements.Add(_movement);
+                                manager.My_db.SaveChanges();
+
+                                Movements_Accounts _maccountCashAtBank = new Movements_Accounts();
+
+                                _maccountCashAtBank.FK_Movements_Accounts_AccountingMovements = _movement.Id;
+                                _maccountCashAtBank.FK_Movements_Accounts_Funds = manager.Selected;
+                                _maccountCashAtBank.FK_Movements_Accounts_Accounts = cashAtBank.Id;
+                                _maccountCashAtBank.FK_Movements_Accounts_Subaccounts = int.Parse(cbSubAccount.SelectedValue.ToString());
+                                _maccountCashAtBank.subaccount = int.Parse(cbOtherDetails.SelectedValue.ToString());
+                                _maccountCashAtBank.subaccount_type = 1;
+                                //TODO: VERIFICAR si es correcto. Aqui amount ya esta dividido por el exchange rate.
+                                _maccountCashAtBank.debit = 0;
+                                _maccountCashAtBank.credit = toPay.amount + toPay.profit_share;
+                                
+                                Subaccount _subAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == _maccountCashAtBank.FK_Movements_Accounts_Subaccounts);
+
+                                int _creditFactor = 1;
+                                int _debitFactor = -1;
+
+                                if (Account.leftAccountingIncrement(cashAtBank.type))
+                                {
+                                    _creditFactor = -1;
+                                    _debitFactor = 1;
+                                }
+
+                                cashAtBank.amount += _debitFactor * _maccountCashAtBank.debit;
+                                cashAtBank.amount += _creditFactor * _maccountCashAtBank.credit;
+
+                                _subAccount.amount += _debitFactor * _maccountCashAtBank.debit;
+                                _subAccount.amount += _creditFactor * _maccountCashAtBank.credit;
+
+                                _maccountCashAtBank.acc_amount = cashAtBank.amount;
+                                _maccountCashAtBank.subacc_amount = _subAccount.amount;
+
+                                manager.My_db.Movements_Accounts.Add(_maccountCashAtBank);
+
+
+                                Account account125 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "125" && x.FK_Accounts_Funds == manager.Selected);
+                                Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == toPay.currency_id && x.FK_Currencies_Funds == manager.Selected);
+                                Subaccount subacct125 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account125.Id && x.name == "INV " + currency.symbol );
+                                
+                                Movements_Accounts _maccount125 = new Movements_Accounts();
+
+                                _maccount125.FK_Movements_Accounts_AccountingMovements = _movement.Id;
+                                _maccount125.FK_Movements_Accounts_Funds = manager.Selected;
+                                _maccount125.FK_Movements_Accounts_Accounts = account125.Id;
+                                _maccount125.FK_Movements_Accounts_Subaccounts = subacct125.Id;
+                                _maccount125.subaccount = int.Parse(cbContract.SelectedValue.ToString());
+                                _maccount125.subaccount_type = 1;
+                                //TODO: VERIFICAR si es correcto. Aqui amount ya esta dividido por el exchange rate.
+                                _maccount125.debit = toPay.amount + toPay.profit_share;
+                                _maccount125.credit = 0;
+
+                                _creditFactor = 1;
+                                _debitFactor = -1;
+
+                                if (Account.leftAccountingIncrement(account125.type))
+                                {
+                                    _creditFactor = -1;
+                                    _debitFactor = 1;
+                                }
+
+                                account125.amount += _debitFactor * _maccount125.debit;
+                                account125.amount += _creditFactor * _maccount125.credit;
+
+                                subacct125.amount += _debitFactor * _maccount125.debit;
+                                subacct125.amount += _creditFactor * _maccount125.credit;
+
+                                _maccount125.acc_amount = account125.amount;
+                                _maccount125.subacc_amount = subacct125.amount;
+
+                                manager.My_db.Movements_Accounts.Add(_maccount125);
+
+                                manager.My_db.SaveChanges();
                             }
                         }
                     }
 
-                    //TODO: Generar movimiento de cuenta si es uno x operacion
-
                     manager.My_db.SaveChanges();
-
-                    //TODO: Generar y mostrar comprobante.
 
                     lvDisbursements.SelectedIndices.Clear();
 
                     loadDisbursements();
+
+                    DisbursementPaymentForm disbursement_payments = new DisbursementPaymentForm();
+                    disbursement_payments.paymentId = dPayment.id;
+                    disbursement_payments.Show();
                 }
             }
             catch (Exception _ex)
             {
                 Console.WriteLine("Error in DisbursementsForm.cmdPay_Click: " + _ex.Message);
+                MessageBox.Show("Error!! It is probably that rollback will be needed!!");
             }
         }
     }
