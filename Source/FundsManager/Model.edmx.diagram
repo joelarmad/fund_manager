@@ -96,6 +96,10 @@
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Investments" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Sector" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_UnderlyingDebtors" />
+        <EntityTypeShape EntityType="FundsDBModel.ClientContract" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementPayment" Width="1.5" PointX="18" PointY="49.75" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementPayments_Investments" />
+        <AssociationConnector Association="FundsDBModel.DisbursementPaymentDetails" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

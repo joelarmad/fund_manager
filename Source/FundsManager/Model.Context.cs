@@ -58,5 +58,7 @@ namespace FundsManager
         public virtual DbSet<Investment> Investments { get; set; }
         public virtual DbSet<DisbursementItem> DisbursementItems { get; set; }
         public virtual DbSet<Disbursement> Disbursements { get; set; }
+        public virtual DbSet<ClientContract> ClientContracts { get; set; }
+        public virtual DbSet<DisbursementPayment> DisbursementPayments { get; set; }
     }
 }

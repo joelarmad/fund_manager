@@ -373,6 +373,9 @@ namespace FundsManager
                 lvDisbursements.Items.Clear();
 
                 fMaxDisbursementDate = DateTime.MinValue;
+
+                disbursements.Clear();
+                
             }
             catch (Exception _ex)
             {

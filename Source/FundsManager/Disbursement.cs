@@ -14,6 +14,12 @@ namespace FundsManager
     
     public partial class Disbursement
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Disbursement()
+        {
+            this.DisbursementPayments = new HashSet<DisbursementPayment>();
+        }
+    
         public int Id { get; set; }
         public int investment_id { get; set; }
         public int currency_id { get; set; }
@@ -28,6 +34,7 @@ namespace FundsManager
         public int sector_id { get; set; }
         public string number { get; set; }
         public System.DateTime collection_date { get; set; }
+        public Nullable<System.DateTime> pay_date { get; set; }
     
         public virtual Bank Bank { get; set; }
         public virtual Client Client { get; set; }
@@ -36,5 +43,7 @@ namespace FundsManager
         public virtual Investment Investment { get; set; }
         public virtual Sector Sector { get; set; }
         public virtual UnderlyingDebtor UnderlyingDebtor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementPayment> DisbursementPayments { get; set; }
     }
 }
