@@ -55,7 +55,7 @@ namespace FundsManager
                 comboBox3.SelectedIndex = -1;
                 textBox3.Text = KeyDefinitions.NextAccountMovementReference;
 
-                fFloatingAccounts = manager.My_db.Accounts.ToList();
+                fFloatingAccounts = manager.My_db.Accounts.Where(x => x.FK_Accounts_Funds == manager.Selected).ToList();
 
                 txtContract.Text = "";
             }

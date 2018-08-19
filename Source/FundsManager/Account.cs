@@ -32,6 +32,7 @@ namespace FundsManager
         public int FK_Accounts_Funds { get; set; }
         public string number { get; set; }
     
+        public virtual Fund Fund { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountsBankingAccount> AccountsBankingAccounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -44,6 +45,5 @@ namespace FundsManager
         public virtual ICollection<Movements_Accounts> Movements_Accounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Subaccount> Subaccounts { get; set; }
-        public virtual Fund Fund { get; set; }
     }
 }

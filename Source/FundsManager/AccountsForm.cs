@@ -110,7 +110,7 @@ namespace FundsManager
                 {
                     if (!fEditMode)
                     {
-                        Account _validationAccount = manager.My_db.Accounts.FirstOrDefault(x => x.number == txtAccountNumber.Text);
+                        Account _validationAccount = manager.My_db.Accounts.FirstOrDefault(x => x.number == txtAccountNumber.Text && x.FK_Accounts_Funds == manager.Selected);
 
                         if (_validationAccount != null)
                         {
@@ -129,7 +129,7 @@ namespace FundsManager
                     }
                     else
                     {
-                        Account _selectedAccount = manager.My_db.Accounts.FirstOrDefault(x => x.number == txtAccountNumber.Text);
+                        Account _selectedAccount = manager.My_db.Accounts.FirstOrDefault(x => x.number == txtAccountNumber.Text && x.FK_Accounts_Funds == manager.Selected);
 
                         if (_selectedAccount != null)
                         {
@@ -177,7 +177,7 @@ namespace FundsManager
 
             string _accountNumber = _row.Cells[1].Value.ToString();
 
-            Account _selectedAccount = manager.My_db.Accounts.FirstOrDefault(x => x.number == _accountNumber);
+            Account _selectedAccount = manager.My_db.Accounts.FirstOrDefault(x => x.number == _accountNumber && x.FK_Accounts_Funds == manager.Selected);
 
             if (_selectedAccount != null)
             {

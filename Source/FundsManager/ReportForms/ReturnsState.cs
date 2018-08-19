@@ -14,19 +14,24 @@ namespace FundsManager.ReportForms
 {
     public partial class ReturnsState : Form
     {
+        private MyFundsManager manager = MyFundsManager.SingletonInstance;
+
         public ReturnsState()
         {
             InitializeComponent();
         }
 
         private void ReturnsState_Load(object sender, EventArgs e)
-        {
-            // TODO: This line of code loads data into the 'fundsDBDataSet.ProfitsResume' table. You can move, or remove it, as needed.
-            this.profitsResumeTableAdapter.Fill(this.fundsDBDataSet.ProfitsResume);
-            // TODO: This line of code loads data into the 'fundsDBDataSet.ProfitResults' table. You can move, or remove it, as needed.
-            this.profitResultsTableAdapter.Fill(this.fundsDBDataSet.ProfitResults);
+        { 
+            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.ProfitsResumeView' Puede moverla o quitarla según sea necesario.
+            this.profitsResumeViewTableAdapter.FillByFund(this.fundsDBDataSet.ProfitsResumeView, manager.Selected);
+            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.ProfitResultsView' Puede moverla o quitarla según sea necesario.
+            this.profitResultsViewTableAdapter.FillByFund(this.fundsDBDataSet.ProfitResultsView, manager.Selected);
+            
 
             this.reportViewer1.RefreshReport();
         }
+
+        
     }
 }

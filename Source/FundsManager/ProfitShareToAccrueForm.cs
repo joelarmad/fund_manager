@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FundsManager.ReportForms;
 
 namespace FundsManager
 {
@@ -23,6 +24,8 @@ namespace FundsManager
         {
             try
             {
+                cmdGenerateInterest.Enabled = false;
+
                 DateTime _date = Convert.ToDateTime(dtpDate.Text);
 
                 List<ProfitShareToAccrue> _profitShareToAccrueList = manager.My_db.ProfitShareToAccrues.Where(x => x.pay_date <= _date).ToList();
@@ -53,18 +56,23 @@ namespace FundsManager
                     }
 
                     //TODO: Generar movimientos de cuenta
-
-                    MessageBox.Show("Interest generated.");
+                    
+                    DisbursementGeneratedInterestForm disbursement_generated_interest_form = new DisbursementGeneratedInterestForm();
+                    disbursement_generated_interest_form.generated_interest_id = _generatedInterest.Id;
+                    disbursement_generated_interest_form.Show();
                 }
                 else
                 {
                     MessageBox.Show("Disbursements not found.");
                 }
+
             }
             catch (Exception _ex)
             {
                 Console.WriteLine("Error at ProfitShareToAccrueForm.cmdGenerateInterest_Click: " + _ex.Message);
             }
+
+            cmdGenerateInterest.Enabled = true;
         }
 
         private decimal AccrueInterest(ProfitShareToAccrue aProfitShareToAccrue)

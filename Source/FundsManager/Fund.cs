@@ -18,7 +18,6 @@ namespace FundsManager
         public Fund()
         {
             this.AccountingMovements = new HashSet<AccountingMovement>();
-            this.Accounts = new HashSet<Account>();
             this.AccountsBankingAccounts = new HashSet<AccountsBankingAccount>();
             this.AccountsClients = new HashSet<AccountsClient>();
             this.AccountsCreditors = new HashSet<AccountsCreditor>();
@@ -42,6 +41,7 @@ namespace FundsManager
             this.UnderlyingDebtors = new HashSet<UnderlyingDebtor>();
             this.Investments = new HashSet<Investment>();
             this.Disbursements = new HashSet<Disbursement>();
+            this.Accounts = new HashSet<Account>();
         }
     
         public int Id { get; set; }
@@ -51,8 +51,6 @@ namespace FundsManager
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountingMovement> AccountingMovements { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountsBankingAccount> AccountsBankingAccounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -99,5 +97,7 @@ namespace FundsManager
         public virtual ICollection<Investment> Investments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disbursement> Disbursements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Account> Accounts { get; set; }
     }
 }

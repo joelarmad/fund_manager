@@ -25,7 +25,6 @@ namespace FundsManager
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<AccountsBankingAccount> AccountsBankingAccounts { get; set; }
         public virtual DbSet<AccountsClient> AccountsClients { get; set; }
         public virtual DbSet<AccountsCreditor> AccountsCreditors { get; set; }
@@ -63,5 +62,6 @@ namespace FundsManager
         public virtual DbSet<DisbursementGeneratedInterestDetail> DisbursementGeneratedInterestDetails { get; set; }
         public virtual DbSet<DisbursementGeneratedInterest> DisbursementGeneratedInterests { get; set; }
         public virtual DbSet<ProfitShareToAccrue> ProfitShareToAccrues { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
     }
 }

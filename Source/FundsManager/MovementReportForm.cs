@@ -15,64 +15,70 @@ namespace FundsManager
         private MyFundsManager manager;
         public MovementReportForm()
         {
-            manager = MyFundsManager.SingletonInstance;
-            InitializeComponent();
-            listView1.FullRowSelect = true;
-            String[] row = new String[9];
-            
-            foreach (AccountingMovement _amove in manager.My_db.AccountingMovements)
+            try
             {
-                foreach (Movements_Accounts my_account in manager.My_db.Movements_Accounts)
+                manager = MyFundsManager.SingletonInstance;
+                InitializeComponent();
+                listView1.FullRowSelect = true;
+                String[] row = new String[9];
+
+                foreach (AccountingMovement _amove in manager.My_db.AccountingMovements)
                 {
-                    if (my_account.FK_Movements_Accounts_AccountingMovements == _amove.Id)
+                    foreach (Movements_Accounts my_account in manager.My_db.Movements_Accounts)
                     {
-                        row[0] = _amove.reference;
-                        row[1] = _amove.date.ToString("dd/MM/yyyy");
-                        row[2] = _amove.description;
-                        row[3] = my_account.Account.name;
-
-                        if (my_account.Subaccount1 != null)
-                            row[4] = my_account.Subaccount1.name;
-                        else
-                            row[4] = "No Subaccount";
-
-                        //subaccount_type  1 -> Client, 2 -> Banking Account, 3 -> Employee, 4 -> Lender, 5 -> OtherDetail
-                        
-                        switch (my_account.subaccount_type)
+                        if (my_account.FK_Movements_Accounts_AccountingMovements == _amove.Id)
                         {
-                            case -1:
-                                row[5] = "No Detail";
-                                break;
-                            case 1:
-                                row[5] = manager.My_db.Clients.Find(my_account.subaccount).name;
-                                break;
-                            case 2:
-                                row[5] = manager.My_db.BankingAccounts.Find(my_account.subaccount).name;
-                                break;
-                            case 3:
-                                row[5] = manager.My_db.Employees.Find(my_account.subaccount).name;
-                                break;
-                            case 4:
-                                row[5] = manager.My_db.Creditors.Find(my_account.subaccount).name;
-                                break;
-                            case 5:
-                                row[5] = manager.My_db.OtherDetails.Find(my_account.subaccount).name;
-                                break;
+                            row[0] = _amove.reference;
+                            row[1] = _amove.date.ToString("dd/MM/yyyy");
+                            row[2] = _amove.description;
+                            row[3] = my_account.Account.name;
+
+                            if (my_account.Subaccount1 != null)
+                                row[4] = my_account.Subaccount1.name;
+                            else
+                                row[4] = "No Subaccount";
+
+                            //subaccount_type  1 -> Client, 2 -> Banking Account, 3 -> Employee, 4 -> Lender, 5 -> OtherDetail
+
+                            switch (my_account.subaccount_type)
+                            {
+                                case -1:
+                                    row[5] = "No Detail";
+                                    break;
+                                case 1:
+                                    row[5] = manager.My_db.Clients.Find(my_account.subaccount).name;
+                                    break;
+                                case 2:
+                                    row[5] = manager.My_db.BankingAccounts.Find(my_account.subaccount).name;
+                                    break;
+                                case 3:
+                                    row[5] = manager.My_db.Employees.Find(my_account.subaccount).name;
+                                    break;
+                                case 4:
+                                    row[5] = manager.My_db.Creditors.Find(my_account.subaccount).name;
+                                    break;
+                                case 5:
+                                    row[5] = manager.My_db.OtherDetails.Find(my_account.subaccount).name;
+                                    break;
+                            }
+
+                            row[6] = String.Format("{0:c}", my_account.debit);
+                            row[7] = String.Format("{0:c}", my_account.credit);
+                            row[8] = my_account.AccountingMovement.Currency.name;
+
+
+                            ListViewItem my_item = new ListViewItem(row);
+                            listView1.Items.Add(my_item);
+
                         }
 
-                        row[6] = String.Format("{0:c}", my_account.debit);
-                        row[7] = String.Format("{0:c}", my_account.credit);
-                        row[8] = my_account.AccountingMovement.Currency.name;
-
-                        
-                        ListViewItem my_item = new ListViewItem(row);
-                        listView1.Items.Add(my_item);
-
-                    }             
-
+                    }
                 }
             }
-
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error at MovementReportForm.MovementReportForm: " + _ex.Message);
+            }
         }
         private void MovementReportForm_Load(object sender, EventArgs e)
         {

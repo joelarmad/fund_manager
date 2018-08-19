@@ -245,5 +245,6 @@ namespace FundsManager
             profit_share_to_accrue_form.MdiParent = this;
             profit_share_to_accrue_form.Show();
         }
+        
     }
 }

@@ -158,8 +158,9 @@ namespace FundsManager
 
                 foreach (DataGridViewRow _row in dataGridView1.Rows)
                 {
+                    int id = Convert.ToInt32(_row.Cells[3].Value);
                     Account _account = new Account();
-                    _account = manager.My_db.Accounts.Find(Convert.ToInt32(_row.Cells[3].Value));
+                    _account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == id);
                     _row.Cells[4].Value = _account.name;
                 }
             }

@@ -35,8 +35,7 @@ namespace FundsManager
 
         private void DisbursementsForm_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.ClientContracts' Puede moverla o quitarla según sea necesario.
-            this.clientContractsTableAdapter.Fill(this.fundsDBDataSet.ClientContracts);
+            
             // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Clients' Puede moverla o quitarla según sea necesario.
             this.clientsTableAdapter.FillByFund(this.fundsDBDataSet.Clients, manager.Selected);
            
@@ -46,7 +45,7 @@ namespace FundsManager
 
             try
             {
-                cashAtBank = manager.My_db.Accounts.FirstOrDefault(x => x.number == "110");
+                cashAtBank = manager.My_db.Accounts.FirstOrDefault(x => x.number == "110" && x.FK_Accounts_Funds == manager.Selected);
 
                 if (cashAtBank != null)
                 {

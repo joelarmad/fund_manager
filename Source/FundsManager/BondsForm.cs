@@ -264,8 +264,8 @@ namespace FundsManager
                 //Crear Movements_Accounts con un debito a 100
                 //Crear Movements_Accounts con un credito a 510
 
-                Account _CashAtBank = manager.My_db.Accounts.FirstOrDefault(x => x.number == "100");
-                Account _Bonds = manager.My_db.Accounts.FirstOrDefault(x => x.number == "510");
+                Account _CashAtBank = manager.My_db.Accounts.FirstOrDefault(x => x.number == "100" && x.FK_Accounts_Funds == manager.Selected);
+                Account _Bonds = manager.My_db.Accounts.FirstOrDefault(x => x.number == "510" && x.FK_Accounts_Funds == manager.Selected);
                 Subaccount _CashAtBankEUR = manager.My_db.Subaccounts.FirstOrDefault(x => x.name == "Cash at Bank EUR");
                 Subaccount _BondI = manager.My_db.Subaccounts.FirstOrDefault(x => x.name == "Bond I");
 

@@ -85,11 +85,11 @@ namespace FundsManager.Classes.Task
                 MyFundsManager _manager = MyFundsManager.SingletonInstance;
 
                 //TODO: esto deberia hacerse en el momento de cobrar los intereses
-                //Account _bondInterestAcruedAccount = _manager.My_db.Accounts.FirstOrDefault(x => x.number == "515");
+                //Account _bondInterestAcruedAccount = _manager.My_db.Accounts.FirstOrDefault(x => x.number == "515" && x.FK_Accounts_Funds == manager.Selected);
                 //Subaccount _bondInvestorInterestAcct = _manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == _bondInterestAcruedAccount.Id && x.name == "Bond Investor Interests");
                 //Subaccount _bondTFFInterestAcct = _manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == _bondInterestAcruedAccount.Id && x.name == "Bond TFF Interests");
-                
-                
+
+
 
                 InvestorBondInterest _newInvestorInterest = new InvestorBondInterest();
                 _newInvestorInterest.InterestDate = aInterestDate;

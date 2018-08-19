@@ -29,42 +29,27 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.profitResultsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
-            this.profitsResumeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource3 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource4 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.profitResultsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ProfitResultsTableAdapter();
-            this.profitsResumeTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ProfitsResumeTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.profitResultsBindingSource)).BeginInit();
+            this.profitResultsViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
+            this.profitsResumeViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.profitResultsViewTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ProfitResultsViewTableAdapter();
+            this.profitsResumeViewTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ProfitsResumeViewTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.profitResultsViewBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.profitsResumeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.profitsResumeViewBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // profitResultsBindingSource
-            // 
-            this.profitResultsBindingSource.DataMember = "ProfitResults";
-            this.profitResultsBindingSource.DataSource = this.fundsDBDataSet;
-            // 
-            // fundsDBDataSet
-            // 
-            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
-            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // profitsResumeBindingSource
-            // 
-            this.profitsResumeBindingSource.DataMember = "ProfitsResume";
-            this.profitsResumeBindingSource.DataSource = this.fundsDBDataSet;
             // 
             // reportViewer1
             // 
-            reportDataSource1.Name = "DataSet1";
-            reportDataSource1.Value = this.profitResultsBindingSource;
-            reportDataSource2.Name = "DataSet2";
-            reportDataSource2.Value = this.profitsResumeBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource2);
+            reportDataSource3.Name = "DataSet1";
+            reportDataSource3.Value = this.profitResultsViewBindingSource;
+            reportDataSource4.Name = "DataSet2";
+            reportDataSource4.Value = this.profitsResumeViewBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource3);
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource4);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "FundsManager.Reports.ProfitsState.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(12, 12);
             this.reportViewer1.Name = "reportViewer1";
@@ -72,19 +57,34 @@
             this.reportViewer1.Size = new System.Drawing.Size(732, 410);
             this.reportViewer1.TabIndex = 3;
             // 
-            // profitResultsTableAdapter
+            // profitResultsViewBindingSource
             // 
-            this.profitResultsTableAdapter.ClearBeforeFill = true;
+            this.profitResultsViewBindingSource.DataMember = "ProfitResultsView";
+            this.profitResultsViewBindingSource.DataSource = this.fundsDBDataSet;
             // 
-            // profitsResumeTableAdapter
+            // fundsDBDataSet
             // 
-            this.profitsResumeTableAdapter.ClearBeforeFill = true;
+            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
+            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // profitsResumeViewBindingSource
+            // 
+            this.profitsResumeViewBindingSource.DataMember = "ProfitsResumeView";
+            this.profitsResumeViewBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // profitResultsViewTableAdapter
+            // 
+            this.profitResultsViewTableAdapter.ClearBeforeFill = true;
+            // 
+            // profitsResumeViewTableAdapter
+            // 
+            this.profitsResumeViewTableAdapter.ClearBeforeFill = true;
             // 
             // ReturnsState
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(756, 434);
+            this.ClientSize = new System.Drawing.Size(764, 442);
             this.Controls.Add(this.reportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
@@ -92,9 +92,9 @@
             this.Name = "ReturnsState";
             this.Text = "Profit & Loss Statement";
             this.Load += new System.EventHandler(this.ReturnsState_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.profitResultsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.profitResultsViewBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.profitsResumeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.profitsResumeViewBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -102,9 +102,9 @@
         #endregion
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private FundsDBDataSet fundsDBDataSet;
-        private System.Windows.Forms.BindingSource profitResultsBindingSource;
-        private FundsDBDataSetTableAdapters.ProfitResultsTableAdapter profitResultsTableAdapter;
-        private System.Windows.Forms.BindingSource profitsResumeBindingSource;
-        private FundsDBDataSetTableAdapters.ProfitsResumeTableAdapter profitsResumeTableAdapter;
+        private System.Windows.Forms.BindingSource profitResultsViewBindingSource;
+        private FundsDBDataSetTableAdapters.ProfitResultsViewTableAdapter profitResultsViewTableAdapter;
+        private System.Windows.Forms.BindingSource profitsResumeViewBindingSource;
+        private FundsDBDataSetTableAdapters.ProfitsResumeViewTableAdapter profitsResumeViewTableAdapter;
     }
 }
