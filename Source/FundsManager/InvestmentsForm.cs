@@ -25,7 +25,6 @@ namespace FundsManager
         private DateTime fMaxDisbursementDate;
 
         private string fContractPreffix = "";
-        private string fContractSuffix = "";
 
         public InvestmentsForm()
         {
@@ -71,8 +70,10 @@ namespace FundsManager
                 {
                     fContractPreffix = fund.contract_prefix + " - ";
                     lblContractPrefix.Text = "Contract:  " + fContractPreffix;
-                    fContractSuffix = lblContractSuffix.Text = "/" + DateTime.Now.Year.ToString().Substring(2);
                 }
+
+
+                txtContract.Text = "xxx/" + DateTime.Now.Year.ToString().Substring(2,2);
             }
             catch (Exception _ex)
             {
@@ -319,7 +320,7 @@ namespace FundsManager
 
                 Investment _newInvestment = new Investment();
 
-                _newInvestment.contract = fContractPreffix + txtContract.Text + fContractSuffix;
+                _newInvestment.contract = fContractPreffix + txtContract.Text;
                 _newInvestment.date = DateTime.Now.Date;
                 _newInvestment.fund_id = manager.Selected;
                 //TODO: definir cual number debe ir en Investment
@@ -365,7 +366,7 @@ namespace FundsManager
 
                 txtAmount.Text = "0";
                 txtNumber.Text = "";
-                txtContract.Text = "";
+                txtContract.Text = "xxx/" + DateTime.Now.Year.ToString().Substring(2, 2);
                 txtProfitShare.Text = "0";
                 txtExchangeRate.Text = "0.0";
                 txtTotalToBeCollected.Text = "0.0";
@@ -380,26 +381,6 @@ namespace FundsManager
             catch (Exception _ex)
             {
                 Console.WriteLine("Error in InvestmentsForm.cmdCreate_Click: " + _ex.Message);
-            }
-        }
-
-        private void txtAmount_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                decimal _result = 0;
-                if (!decimal.TryParse(txtAmount.Text, out _result) || _result <= 0)
-                {
-                    txtAmount.Text = "";
-                }
-                else
-                {
-                    txtAmount.Text = String.Format("{0:0.00}", _result);
-                }
-            }
-            catch (Exception _ex)
-            {
-                Console.WriteLine("Error in InvestmentsForm.txtAmount_Leave: " + _ex.Message);
             }
         }
 
@@ -484,18 +465,6 @@ namespace FundsManager
             }
         }
 
-        private void txtAmount_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                checkEnablingAddDisbursementButton();
-            }
-            catch (Exception _ex)
-            {
-                Console.WriteLine("Error in InvestmentsForm.txtAmount_TextChanged: " + _ex.Message);
-            }
-        }
-
         private void cbCurrency_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -505,18 +474,6 @@ namespace FundsManager
             catch (Exception _ex)
             {
                 Console.WriteLine("Error in InvestmentsForm.cbCurrency_SelectedIndexChanged: " + _ex.Message);
-            }
-        }
-
-        private void txtProfitShare_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                checkEnablingAddDisbursementButton();
-            }
-            catch (Exception _ex)
-            {
-                Console.WriteLine("Error in InvestmentsForm.txtProfitShare_TextChanged: " + _ex.Message);
             }
         }
 
@@ -580,6 +537,146 @@ namespace FundsManager
             }
         }
 
+        
+
+        private void lvDisbursements_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (int _index in lvDisbursements.SelectedIndices)
+                {
+                    if (_index == lvDisbursements.Items.Count - 1)
+                    {
+                        lvDisbursements.SelectedIndices.Remove(_index);
+                    }
+                }
+
+                cmdDeleteDisbursement.Enabled = lvDisbursements.SelectedIndices.Count > 0;
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error in InvestmentsForm.lvDisbursements_SelectedIndexChanged: " + _ex.Message);
+            }
+        }
+
+        private void lbISelectedItems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmdDeleteItem.Enabled = lbISelectedItems.SelectedIndex >= 0;
+        }
+
+        private void cmdDeleteItem_Click(object sender, EventArgs e)
+        {
+            if (lbISelectedItems.SelectedIndex >= 0)
+            {
+                fItemIds.RemoveAt(lbISelectedItems.SelectedIndex);
+                lbISelectedItems.Items.RemoveAt(lbISelectedItems.SelectedIndex);
+
+                checkEnablingAddDisbursementButton();
+            }
+        }
+
+        private void DisbursementsForm_Click(object sender, EventArgs e)
+        {
+            checkEnablingAddDisbursementButton();
+            checkEnablingAddInvestmentButton();
+        }
+
+        
+
+
+
+
+        private void txtAmount_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                calculate_total_collection();
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error in InvestmentsForm.txtAmount_KeyUp: " + _ex.Message);
+            }
+        }
+        
+        private void txtAmount_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal _result = 0;
+                if (!decimal.TryParse(txtAmount.Text, out _result) || _result <= 0)
+                {
+                    txtAmount.Text = "0";
+                }
+                else
+                {
+                    txtAmount.Text = String.Format("{0:0.00}", _result);
+                }
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error in InvestmentsForm.txtAmount_Leave: " + _ex.Message);
+            }
+        }
+
+        private void txtAmount_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                checkEnablingAddDisbursementButton();
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error in InvestmentsForm.txtAmount_TextChanged: " + _ex.Message);
+            }
+        }
+
+        private void txtAmount_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).SelectAll();
+        }
+
+        private void txtExchangeRate_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                calculate_total_collection();
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error in InvestmentsForm.txtExchangeRate_KeyUp: " + _ex.Message);
+            }
+        }
+
+        private void txtExchangeRate_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal _result = 0;
+                if (!decimal.TryParse(txtExchangeRate.Text, out _result) || _result <= 0)
+                {
+                    txtExchangeRate.Text = "0.00";
+                }
+                else
+                {
+                    txtExchangeRate.Text = String.Format("{0:0.00}", _result);
+                }
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error in InvestmentsForm.txtExchangeRate_Leave: " + _ex.Message);
+            }
+        }
+
+        private void txtExchangeRate_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).SelectAll();
+        }
+
+        private void txtProfitShare_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).SelectAll();
+        }
+
         private void txtProfitShare_Leave(object sender, EventArgs e)
         {
             try
@@ -587,7 +684,7 @@ namespace FundsManager
                 decimal _result = 0;
                 if (!decimal.TryParse(txtProfitShare.Text, out _result) || _result <= 0)
                 {
-                    txtProfitShare.Text = "";
+                    txtProfitShare.Text = "0";
                 }
                 else
                 {
@@ -612,70 +709,36 @@ namespace FundsManager
             }
         }
 
-        private void lvDisbursements_SelectedIndexChanged(object sender, EventArgs e)
+        private void txtProfitShare_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                foreach (int _index in lvDisbursements.SelectedIndices)
-                {
-                    if (_index == lvDisbursements.Items.Count - 1)
-                    {
-                        lvDisbursements.SelectedIndices.Remove(_index);
-                    }
-                }
-
-                cmdDeleteDisbursement.Enabled = lvDisbursements.SelectedIndices.Count > 0;
-            }
-            catch (Exception _ex)
-            {
-                Console.WriteLine("Error in InvestmentsForm.lvDisbursements_SelectedIndexChanged: " + _ex.Message);
-            }
-        }
-
-        private void txtAmount_KeyUp(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                calculate_total_collection();
-            }
-            catch (Exception _ex)
-            {
-                Console.WriteLine("Error in InvestmentsForm.txtAmount_KeyUp: " + _ex.Message);
-            }
-        }
-
-        private void lbISelectedItems_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cmdDeleteItem.Enabled = lbISelectedItems.SelectedIndex >= 0;
-        }
-
-        private void cmdDeleteItem_Click(object sender, EventArgs e)
-        {
-            if (lbISelectedItems.SelectedIndex >= 0)
-            {
-                fItemIds.RemoveAt(lbISelectedItems.SelectedIndex);
-                lbISelectedItems.Items.RemoveAt(lbISelectedItems.SelectedIndex);
-
                 checkEnablingAddDisbursementButton();
             }
-        }
-
-        private void txtExchangeRate_KeyUp(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                calculate_total_collection();
-            }
             catch (Exception _ex)
             {
-                Console.WriteLine("Error in InvestmentsForm.txtExchangeRate_KeyUp: " + _ex.Message);
+                Console.WriteLine("Error in InvestmentsForm.txtProfitShare_TextChanged: " + _ex.Message);
             }
         }
 
-        private void DisbursementsForm_Click(object sender, EventArgs e)
+        private void txtContract_Enter(object sender, EventArgs e)
         {
-            checkEnablingAddDisbursementButton();
-            checkEnablingAddInvestmentButton();
+            if (txtContract.Text == "xxx/" + DateTime.Now.Year.ToString().Substring(2, 2))
+            {
+                txtContract.SelectionStart = 0;
+                txtContract.SelectionLength = 3;
+                txtContract.Select();
+            }
+        }
+
+        private void txtContract_Click(object sender, EventArgs e)
+        {
+            if (txtContract.Text == "xxx/" + DateTime.Now.Year.ToString().Substring(2, 2))
+            {
+                txtContract.SelectionStart = 0;
+                txtContract.SelectionLength = 3;
+                txtContract.Select();
+            }
         }
     }
 }

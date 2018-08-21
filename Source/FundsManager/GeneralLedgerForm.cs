@@ -743,5 +743,15 @@ namespace FundsManager
             lblContract.Visible = false;
             txtContract.Visible = false;
         }
+
+        private void textBox1_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).SelectAll();
+        }
+
+        private void textBox2_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).SelectAll();
+        }
     }
 }

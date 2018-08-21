@@ -82,7 +82,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtContract = new System.Windows.Forms.TextBox();
             this.lblContractPrefix = new System.Windows.Forms.Label();
-            this.lblContractSuffix = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.dtpCollectionDate = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
@@ -110,6 +109,7 @@
             this.txtAmount.Size = new System.Drawing.Size(121, 20);
             this.txtAmount.TabIndex = 1;
             this.txtAmount.Text = "0";
+            this.txtAmount.Click += new System.EventHandler(this.txtAmount_Click);
             this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             this.txtAmount.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAmount_KeyUp);
             this.txtAmount.Leave += new System.EventHandler(this.txtAmount_Leave);
@@ -131,7 +131,7 @@
             this.cbCurrency.Location = new System.Drawing.Point(94, 51);
             this.cbCurrency.Name = "cbCurrency";
             this.cbCurrency.Size = new System.Drawing.Size(121, 21);
-            this.cbCurrency.TabIndex = 3;
+            this.cbCurrency.TabIndex = 2;
             this.cbCurrency.ValueMember = "Id";
             this.cbCurrency.SelectedIndexChanged += new System.EventHandler(this.cbCurrency_SelectedIndexChanged);
             // 
@@ -159,9 +159,11 @@
             this.txtExchangeRate.Location = new System.Drawing.Point(94, 88);
             this.txtExchangeRate.Name = "txtExchangeRate";
             this.txtExchangeRate.Size = new System.Drawing.Size(121, 20);
-            this.txtExchangeRate.TabIndex = 5;
+            this.txtExchangeRate.TabIndex = 3;
             this.txtExchangeRate.Text = "0.0";
+            this.txtExchangeRate.Click += new System.EventHandler(this.txtExchangeRate_Click);
             this.txtExchangeRate.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtExchangeRate_KeyUp);
+            this.txtExchangeRate.Leave += new System.EventHandler(this.txtExchangeRate_Leave);
             // 
             // label4
             // 
@@ -206,7 +208,7 @@
             this.cbUnderlyingDebtor.Location = new System.Drawing.Point(348, 87);
             this.cbUnderlyingDebtor.Name = "cbUnderlyingDebtor";
             this.cbUnderlyingDebtor.Size = new System.Drawing.Size(121, 21);
-            this.cbUnderlyingDebtor.TabIndex = 9;
+            this.cbUnderlyingDebtor.TabIndex = 8;
             this.cbUnderlyingDebtor.ValueMember = "Id";
             this.cbUnderlyingDebtor.SelectedIndexChanged += new System.EventHandler(this.cbUnderlyingDebtor_SelectedIndexChanged);
             // 
@@ -245,7 +247,7 @@
             this.cbBank.Location = new System.Drawing.Point(348, 124);
             this.cbBank.Name = "cbBank";
             this.cbBank.Size = new System.Drawing.Size(121, 21);
-            this.cbBank.TabIndex = 11;
+            this.cbBank.TabIndex = 9;
             this.cbBank.ValueMember = "Id";
             this.cbBank.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
             // 
@@ -272,8 +274,9 @@
             this.txtProfitShare.Location = new System.Drawing.Point(94, 125);
             this.txtProfitShare.Name = "txtProfitShare";
             this.txtProfitShare.Size = new System.Drawing.Size(121, 20);
-            this.txtProfitShare.TabIndex = 13;
+            this.txtProfitShare.TabIndex = 4;
             this.txtProfitShare.Text = "0";
+            this.txtProfitShare.Click += new System.EventHandler(this.txtProfitShare_Click);
             this.txtProfitShare.TextChanged += new System.EventHandler(this.txtProfitShare_TextChanged);
             this.txtProfitShare.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtProfitShare_KeyUp);
             this.txtProfitShare.Leave += new System.EventHandler(this.txtProfitShare_Leave);
@@ -295,7 +298,7 @@
             this.cbSector.Location = new System.Drawing.Point(348, 161);
             this.cbSector.Name = "cbSector";
             this.cbSector.Size = new System.Drawing.Size(121, 21);
-            this.cbSector.TabIndex = 15;
+            this.cbSector.TabIndex = 10;
             this.cbSector.ValueMember = "Id";
             this.cbSector.SelectedIndexChanged += new System.EventHandler(this.cbSector_SelectedIndexChanged);
             // 
@@ -325,7 +328,7 @@
             this.cbItems.Location = new System.Drawing.Point(566, 15);
             this.cbItems.Name = "cbItems";
             this.cbItems.Size = new System.Drawing.Size(121, 21);
-            this.cbItems.TabIndex = 17;
+            this.cbItems.TabIndex = 11;
             this.cbItems.ValueMember = "Id";
             this.cbItems.SelectedIndexChanged += new System.EventHandler(this.cbItems_SelectedIndexChanged);
             // 
@@ -343,7 +346,7 @@
             this.cmdAddItem.Location = new System.Drawing.Point(702, 13);
             this.cmdAddItem.Name = "cmdAddItem";
             this.cmdAddItem.Size = new System.Drawing.Size(75, 23);
-            this.cmdAddItem.TabIndex = 18;
+            this.cmdAddItem.TabIndex = 12;
             this.cmdAddItem.Text = "Add Item";
             this.cmdAddItem.UseVisualStyleBackColor = true;
             this.cmdAddItem.Click += new System.EventHandler(this.button1_Click);
@@ -354,7 +357,7 @@
             this.lbISelectedItems.Location = new System.Drawing.Point(566, 54);
             this.lbISelectedItems.Name = "lbISelectedItems";
             this.lbISelectedItems.Size = new System.Drawing.Size(120, 95);
-            this.lbISelectedItems.TabIndex = 19;
+            this.lbISelectedItems.TabIndex = 190;
             this.lbISelectedItems.SelectedIndexChanged += new System.EventHandler(this.lbISelectedItems_SelectedIndexChanged);
             // 
             // label10
@@ -381,7 +384,7 @@
             this.cmdAddDisbursement.Location = new System.Drawing.Point(692, 223);
             this.cmdAddDisbursement.Name = "cmdAddDisbursement";
             this.cmdAddDisbursement.Size = new System.Drawing.Size(115, 23);
-            this.cmdAddDisbursement.TabIndex = 22;
+            this.cmdAddDisbursement.TabIndex = 15;
             this.cmdAddDisbursement.Text = "Add Disbursement";
             this.cmdAddDisbursement.UseVisualStyleBackColor = true;
             this.cmdAddDisbursement.Click += new System.EventHandler(this.button2_Click);
@@ -399,7 +402,7 @@
             this.lvDisbursements.Location = new System.Drawing.Point(12, 260);
             this.lvDisbursements.Name = "lvDisbursements";
             this.lvDisbursements.Size = new System.Drawing.Size(919, 270);
-            this.lvDisbursements.TabIndex = 23;
+            this.lvDisbursements.TabIndex = 230;
             this.lvDisbursements.UseCompatibleStateImageBehavior = false;
             this.lvDisbursements.View = System.Windows.Forms.View.Details;
             this.lvDisbursements.SelectedIndexChanged += new System.EventHandler(this.lvDisbursements_SelectedIndexChanged);
@@ -454,7 +457,7 @@
             this.dtpDisbursementDate.Location = new System.Drawing.Point(486, 196);
             this.dtpDisbursementDate.Name = "dtpDisbursementDate";
             this.dtpDisbursementDate.Size = new System.Drawing.Size(200, 20);
-            this.dtpDisbursementDate.TabIndex = 25;
+            this.dtpDisbursementDate.TabIndex = 13;
             this.dtpDisbursementDate.ValueChanged += new System.EventHandler(this.dtpDisbursementDate_ValueChanged);
             // 
             // label11
@@ -493,7 +496,7 @@
             this.txtNumber.Location = new System.Drawing.Point(94, 161);
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Size = new System.Drawing.Size(121, 20);
-            this.txtNumber.TabIndex = 30;
+            this.txtNumber.TabIndex = 5;
             // 
             // label12
             // 
@@ -508,8 +511,10 @@
             // 
             this.txtContract.Location = new System.Drawing.Point(348, 15);
             this.txtContract.Name = "txtContract";
-            this.txtContract.Size = new System.Drawing.Size(92, 20);
-            this.txtContract.TabIndex = 32;
+            this.txtContract.Size = new System.Drawing.Size(121, 20);
+            this.txtContract.TabIndex = 6;
+            this.txtContract.Click += new System.EventHandler(this.txtContract_Click);
+            this.txtContract.Enter += new System.EventHandler(this.txtContract_Enter);
             // 
             // lblContractPrefix
             // 
@@ -520,15 +525,6 @@
             this.lblContractPrefix.TabIndex = 31;
             this.lblContractPrefix.Text = "Contract:";
             this.lblContractPrefix.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // lblContractSuffix
-            // 
-            this.lblContractSuffix.AutoSize = true;
-            this.lblContractSuffix.Location = new System.Drawing.Point(446, 19);
-            this.lblContractSuffix.Name = "lblContractSuffix";
-            this.lblContractSuffix.Size = new System.Drawing.Size(19, 13);
-            this.lblContractSuffix.TabIndex = 33;
-            this.lblContractSuffix.Text = "18";
             // 
             // label13
             // 
@@ -544,7 +540,7 @@
             this.dtpCollectionDate.Location = new System.Drawing.Point(486, 224);
             this.dtpCollectionDate.Name = "dtpCollectionDate";
             this.dtpCollectionDate.Size = new System.Drawing.Size(200, 20);
-            this.dtpCollectionDate.TabIndex = 34;
+            this.dtpCollectionDate.TabIndex = 14;
             // 
             // InvestmentsForm
             // 
@@ -553,7 +549,6 @@
             this.ClientSize = new System.Drawing.Size(951, 578);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.dtpCollectionDate);
-            this.Controls.Add(this.lblContractSuffix);
             this.Controls.Add(this.txtContract);
             this.Controls.Add(this.lblContractPrefix);
             this.Controls.Add(this.txtNumber);
@@ -661,7 +656,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtContract;
         private System.Windows.Forms.Label lblContractPrefix;
-        private System.Windows.Forms.Label lblContractSuffix;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.DateTimePicker dtpCollectionDate;
     }

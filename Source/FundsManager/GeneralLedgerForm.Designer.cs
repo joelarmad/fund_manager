@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.cbAccount = new System.Windows.Forms.ComboBox();
+            this.accountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -64,11 +65,10 @@
             this.button3 = new System.Windows.Forms.Button();
             this.lblContract = new System.Windows.Forms.Label();
             this.txtContract = new System.Windows.Forms.TextBox();
-            this.accountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.accountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountsTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -91,6 +91,11 @@
             this.cbAccount.TabIndex = 1;
             this.cbAccount.ValueMember = "Id";
             // 
+            // accountsBindingSource
+            // 
+            this.accountsBindingSource.DataMember = "Accounts";
+            this.accountsBindingSource.DataSource = this.fundsDBDataSet;
+            // 
             // fundsDBDataSet
             // 
             this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
@@ -112,7 +117,7 @@
             this.comboBox2.Location = new System.Drawing.Point(335, 29);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(138, 21);
-            this.comboBox2.TabIndex = 3;
+            this.comboBox2.TabIndex = 2;
             // 
             // label3
             // 
@@ -130,7 +135,7 @@
             this.comboBox3.Location = new System.Drawing.Point(612, 30);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(164, 21);
-            this.comboBox3.TabIndex = 5;
+            this.comboBox3.TabIndex = 3;
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // label4
@@ -147,7 +152,8 @@
             this.textBox1.Location = new System.Drawing.Point(299, 82);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(121, 20);
-            this.textBox1.TabIndex = 7;
+            this.textBox1.TabIndex = 5;
+            this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.Enter += new System.EventHandler(this.textBox1_Enter);
             this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
@@ -166,7 +172,8 @@
             this.textBox2.Location = new System.Drawing.Point(479, 82);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 9;
+            this.textBox2.TabIndex = 6;
+            this.textBox2.Click += new System.EventHandler(this.textBox2_Click);
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.Enter += new System.EventHandler(this.textBox2_Enter);
             this.textBox2.Leave += new System.EventHandler(this.textBox2_Leave);
@@ -177,7 +184,7 @@
             this.button1.Location = new System.Drawing.Point(620, 79);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 10;
+            this.button1.TabIndex = 7;
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -194,7 +201,7 @@
             this.listView1.Location = new System.Drawing.Point(15, 129);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(862, 221);
-            this.listView1.TabIndex = 11;
+            this.listView1.TabIndex = 70;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
@@ -237,7 +244,7 @@
             this.comboBox4.Location = new System.Drawing.Point(87, 367);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(121, 21);
-            this.comboBox4.TabIndex = 12;
+            this.comboBox4.TabIndex = 8;
             this.comboBox4.ValueMember = "Id";
             // 
             // currenciesBindingSource
@@ -277,14 +284,14 @@
             this.dateTimePicker1.Location = new System.Drawing.Point(284, 368);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(221, 20);
-            this.dateTimePicker1.TabIndex = 16;
+            this.dateTimePicker1.TabIndex = 9;
             // 
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(601, 371);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(121, 20);
-            this.textBox3.TabIndex = 17;
+            this.textBox3.TabIndex = 10;
             // 
             // label9
             // 
@@ -301,7 +308,7 @@
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(418, 91);
-            this.textBox4.TabIndex = 19;
+            this.textBox4.TabIndex = 11;
             // 
             // button2
             // 
@@ -309,7 +316,7 @@
             this.button2.Location = new System.Drawing.Point(759, 374);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(118, 126);
-            this.button2.TabIndex = 20;
+            this.button2.TabIndex = 13;
             this.button2.Text = "Make Movement";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -332,7 +339,7 @@
             this.textBox5.Location = new System.Drawing.Point(601, 417);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(121, 20);
-            this.textBox5.TabIndex = 22;
+            this.textBox5.TabIndex = 12;
             // 
             // button3
             // 
@@ -360,13 +367,8 @@
             this.txtContract.Location = new System.Drawing.Point(65, 81);
             this.txtContract.Name = "txtContract";
             this.txtContract.Size = new System.Drawing.Size(121, 20);
-            this.txtContract.TabIndex = 25;
+            this.txtContract.TabIndex = 4;
             this.txtContract.Visible = false;
-            // 
-            // accountsBindingSource
-            // 
-            this.accountsBindingSource.DataMember = "Accounts";
-            this.accountsBindingSource.DataSource = this.fundsDBDataSet;
             // 
             // accountsTableAdapter
             // 
@@ -409,9 +411,9 @@
             this.ShowInTaskbar = false;
             this.Text = "General Ledger";
             this.Load += new System.EventHandler(this.GeneralLedgerForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

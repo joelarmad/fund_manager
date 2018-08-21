@@ -98,38 +98,57 @@ namespace FundsManager
             }
             catch (Exception _ex)
             {
-                MessageBox.Show("Error: " + _ex.Message);
+                string msg = "";
+
+                Exception inner = _ex.InnerException;
+
+                while (inner != null)
+                {
+                    msg += inner.Message;
+                    msg += "\r";
+                    inner = inner.InnerException;
+                }
+
+                MessageBox.Show("Error: " + msg);
             }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            fEditIndex = e.RowIndex;
-            int _id = (int)dataGridView1.Rows[fEditIndex].Cells[0].Value;
-
-            Subaccount _selectedSubAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == _id);
-
-            if (_selectedSubAccount != null)
+            try
             {
-                fEditMode = true;
-                cmdAddOrSave.Text = "Save";
+                fEditIndex = e.RowIndex;
+                int _id = (int)dataGridView1.Rows[fEditIndex].Cells[0].Value;
 
-                txtName.Text = _selectedSubAccount.name;
-                txtNumber.Text = _selectedSubAccount.number;
+                Subaccount _selectedSubAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == _id);
 
-                Account _acct = manager.My_db.Accounts.FirstOrDefault(x => x.Id == _selectedSubAccount.FK_Subaccounts_Accounts);
-
-                foreach (DataRowView _item in cbAccount.Items)
+                if (_selectedSubAccount != null)
                 {
-                    if (_item.Row[0].ToString() == _acct.Id.ToString())
-                    {
-                        cbAccount.SelectedItem = _item;
-                        break;
-                    }
-                }
+                    fEditMode = true;
+                    cmdAddOrSave.Text = "Save";
 
-                cmdCancel.Visible = true;
+                    txtName.Text = _selectedSubAccount.name;
+                    txtNumber.Text = _selectedSubAccount.number;
+
+                    Account _acct = manager.My_db.Accounts.FirstOrDefault(x => x.Id == _selectedSubAccount.FK_Subaccounts_Accounts);
+
+                    foreach (DataRowView _item in cbAccount.Items)
+                    {
+                        if (_item.Row[0].ToString() == _acct.Id.ToString())
+                        {
+                            cbAccount.SelectedItem = _item;
+                            break;
+                        }
+                    }
+
+                    cmdCancel.Visible = true;
+                }
             }
+            catch (Exception _ex)
+            {
+                MessageBox.Show("Error: " + _ex.Message);
+            }
+            
         }
 
         private void cmdCancel_Click(object sender, EventArgs e)
