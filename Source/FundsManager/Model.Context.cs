@@ -39,7 +39,6 @@ namespace FundsManager
         public virtual DbSet<Disbursement_dates> Disbursement_dates { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<FundBondInterest> FundBondInterests { get; set; }
-        public virtual DbSet<FundBondProfit> FundBondProfits { get; set; }
         public virtual DbSet<InvestorBondInterest> InvestorBondInterests { get; set; }
         public virtual DbSet<Investor> Investors { get; set; }
         public virtual DbSet<Item> Items { get; set; }

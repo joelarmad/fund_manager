@@ -35,35 +35,60 @@ namespace FundsManager
                     DisbursementGeneratedInterest _generatedInterest = new DisbursementGeneratedInterest();
                     _generatedInterest.GeneratedDate = Convert.ToDateTime(dtpDate.Text);
 
-                    manager.My_db.DisbursementGeneratedInterests.Add(_generatedInterest);
-                    manager.My_db.SaveChanges();
+                    bool interestCreated = false;
 
                     decimal _totalInterest = 0;
 
                     foreach (ProfitShareToAccrue _profitShareToAccrue in _profitShareToAccrueList)
                     {
-                        decimal _interest = AccrueInterest(_profitShareToAccrue);
+                        DisbursementGeneratedInterestDetail interestDetail = manager.My_db.DisbursementGeneratedInterestDetails.FirstOrDefault(x => x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
 
-                        _totalInterest += _interest;
+                        if (interestDetail == null)
+                        {
+                            if (!interestCreated)
+                            {
+                                manager.My_db.DisbursementGeneratedInterests.Add(_generatedInterest);
+                                manager.My_db.SaveChanges();
+                                interestCreated = true;
+                            }
 
-                        DisbursementGeneratedInterestDetail _detail = new DisbursementGeneratedInterestDetail();
-                        _detail.disbursement_generated_interest_id = _generatedInterest.Id;
-                        _detail.disbursement_id = _profitShareToAccrue.Id;
-                        _detail.generated_interest = _interest;
+                            decimal _interest = AccrueInterest(_profitShareToAccrue);
 
-                        manager.My_db.DisbursementGeneratedInterestDetails.Add(_detail);
-                        manager.My_db.SaveChanges();
+                            _totalInterest += _interest;
+
+                            DisbursementGeneratedInterestDetail _detail = new DisbursementGeneratedInterestDetail();
+                            _detail.disbursement_generated_interest_id = _generatedInterest.Id;
+                            _detail.disbursement_id = _profitShareToAccrue.Id;
+                            _detail.generated_interest = _interest;
+                            _detail.generated_interest_date = _date;
+
+                            manager.My_db.DisbursementGeneratedInterestDetails.Add(_detail);
+                            manager.My_db.SaveChanges();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Attempt to duplicate disbursement interest generation.");
+                        }
+                        
                     }
 
-                    //TODO: Generar movimientos de cuenta
+                    if (interestCreated)
+                    {
+                        //TODO: Generar movimientos de cuenta
+
+                        DisbursementGeneratedInterestForm disbursement_generated_interest_form = new DisbursementGeneratedInterestForm();
+                        disbursement_generated_interest_form.generated_interest_id = _generatedInterest.Id;
+                        disbursement_generated_interest_form.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No actions performed.");
+                    }
                     
-                    DisbursementGeneratedInterestForm disbursement_generated_interest_form = new DisbursementGeneratedInterestForm();
-                    disbursement_generated_interest_form.generated_interest_id = _generatedInterest.Id;
-                    disbursement_generated_interest_form.Show();
                 }
                 else
                 {
-                    MessageBox.Show("Disbursements not found.");
+                    MessageBox.Show("No disbursement found for interest generation.");
                 }
 
             }

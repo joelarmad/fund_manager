@@ -220,6 +220,7 @@ namespace FundsManager
                     _disbursement.collection_date = Convert.ToDateTime(dtpCollectionDate.Text);
                     _disbursement.sector_id = Convert.ToInt32(cbSector.SelectedValue);
                     _disbursement.number = txtNumber.Text;
+                    _disbursement.can_generate_interest = false;
 
                     _disbursement.TextClient = cbClient.Text;
                     _disbursement.TextUnderlyingDebtor = cbUnderlyingDebtor.Text;

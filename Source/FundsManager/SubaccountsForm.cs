@@ -66,11 +66,21 @@ namespace FundsManager
         {
             try
             {
+                int accountId = Convert.ToInt32(cbAccount.SelectedValue);
+
                 if (!fEditMode)
                 {
+                    Subaccount _validationSubAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.number == txtNumber.Text && x.FK_Subaccounts_Accounts == accountId && x.FK_Accounts_Funds == manager.Selected);
+
+                    if (_validationSubAccount != null)
+                    {
+                        MessageBox.Show("Duplicated Subaccount number.");
+                        return;
+                    }
+
                     Subaccount _subaccount = new Subaccount();
                     _subaccount.name = txtName.Text;
-                    _subaccount.FK_Subaccounts_Accounts = Convert.ToInt32(cbAccount.SelectedValue);
+                    _subaccount.FK_Subaccounts_Accounts = accountId;
                     _subaccount.FK_Accounts_Funds = manager.Selected;
                     _subaccount.number = txtNumber.Text;
                     manager.My_db.Subaccounts.Add(_subaccount);
@@ -79,6 +89,14 @@ namespace FundsManager
                 else
                 {
                     int _id = (int)dataGridView1.Rows[fEditIndex].Cells[0].Value;
+
+                    Subaccount _validationSubAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id != _id && x.number == txtNumber.Text && x.FK_Subaccounts_Accounts == accountId && x.FK_Accounts_Funds == manager.Selected);
+
+                    if (_validationSubAccount != null)
+                    {
+                        MessageBox.Show("Duplicated Subaccount number.");
+                        return;
+                    }
 
                     Subaccount _selectedSubAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == _id);
 

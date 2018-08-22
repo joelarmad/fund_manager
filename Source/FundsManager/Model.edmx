@@ -181,6 +181,7 @@
           <Property Name="disbursement_generated_interest_id" Type="int" Nullable="false" />
           <Property Name="disbursement_id" Type="int" Nullable="false" />
           <Property Name="generated_interest" Type="money" Nullable="false" />
+          <Property Name="generated_interest_date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="DisbursementGeneratedInterests">
           <Key>
@@ -232,6 +233,7 @@
           <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="collection_date" Type="date" Nullable="false" />
           <Property Name="pay_date" Type="date" />
+          <Property Name="can_generate_interest" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -252,15 +254,6 @@
           <Property Name="InterestDate" Type="date" Nullable="false" />
           <Property Name="Extracted" Type="bit" Nullable="false" />
           <Property Name="ExtractionDate" Type="date" />
-        </EntityType>
-        <EntityType Name="FundBondProfits">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BondId" Type="int" Nullable="false" />
-          <Property Name="Income" Type="money" Nullable="false" />
-          <Property Name="date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Funds">
           <Key>
@@ -419,6 +412,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <PropertyRef Name="sector_id" />
             <PropertyRef Name="number" />
             <PropertyRef Name="collection_date" />
+            <PropertyRef Name="can_generate_interest" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="investment_id" Type="int" Nullable="false" />
@@ -435,6 +429,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="collection_date" Type="date" Nullable="false" />
           <Property Name="pay_date" Type="date" />
+          <Property Name="can_generate_interest" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="debtor_bank_id">
           <End Role="Banks" Type="Self.Banks" Multiplicity="0..1" />
@@ -976,18 +971,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FundBondProfits_Bonds">
-          <End Role="Bonds" Type="Self.Bonds" Multiplicity="1" />
-          <End Role="FundBondProfits" Type="Self.FundBondProfits" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Bonds">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FundBondProfits">
-              <PropertyRef Name="BondId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Investments_Funds">
           <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
           <End Role="Investments" Type="Self.Investments" Multiplicity="*" />
@@ -1217,7 +1200,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySet Name="Disbursements" EntityType="Self.Disbursements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FundBondInterest" EntityType="Self.FundBondInterest" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FundBondProfits" EntityType="Self.FundBondProfits" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Funds" EntityType="Self.Funds" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Investments" EntityType="Self.Investments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InvestorBondInterest" EntityType="Self.InvestorBondInterest" Schema="dbo" store:Type="Tables" />
@@ -1255,7 +1237,8 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
     [ProfitShareToAccrue].[sector_id] AS [sector_id], 
     [ProfitShareToAccrue].[number] AS [number], 
     [ProfitShareToAccrue].[collection_date] AS [collection_date], 
-    [ProfitShareToAccrue].[pay_date] AS [pay_date]
+    [ProfitShareToAccrue].[pay_date] AS [pay_date], 
+    [ProfitShareToAccrue].[can_generate_interest] AS [can_generate_interest]
     FROM [dbo].[ProfitShareToAccrue] AS [ProfitShareToAccrue]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="debtor_bank_id" Association="Self.debtor_bank_id">
@@ -1438,10 +1421,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="Bonds" EntitySet="Bonds" />
             <End Role="FundBondInterest" EntitySet="FundBondInterest" />
           </AssociationSet>
-          <AssociationSet Name="FK_FundBondProfits_Bonds" Association="Self.FK_FundBondProfits_Bonds">
-            <End Role="Bonds" EntitySet="Bonds" />
-            <End Role="FundBondProfits" EntitySet="FundBondProfits" />
-          </AssociationSet>
           <AssociationSet Name="FK_Investments_Funds" Association="Self.FK_Investments_Funds">
             <End Role="Funds" EntitySet="Funds" />
             <End Role="Investments" EntitySet="Investments" />
@@ -1530,7 +1509,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySet Name="Disbursement_dates" EntityType="FundsDBModel.Disbursement_dates" />
           <EntitySet Name="Employees" EntityType="FundsDBModel.Employee" />
           <EntitySet Name="FundBondInterests" EntityType="FundsDBModel.FundBondInterest" />
-          <EntitySet Name="FundBondProfits" EntityType="FundsDBModel.FundBondProfit" />
           <EntitySet Name="InvestorBondInterests" EntityType="FundsDBModel.InvestorBondInterest" />
           <EntitySet Name="Investors" EntityType="FundsDBModel.Investor" />
           <EntitySet Name="Items" EntityType="FundsDBModel.Item" />
@@ -1575,10 +1553,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <AssociationSet Name="FK_FundBondInterest_Bonds" Association="FundsDBModel.FK_FundBondInterest_Bonds">
             <End Role="Bond" EntitySet="Bonds" />
             <End Role="FundBondInterest" EntitySet="FundBondInterests" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FundBondProfits_Bonds" Association="FundsDBModel.FK_FundBondProfits_Bonds">
-            <End Role="Bond" EntitySet="Bonds" />
-            <End Role="FundBondProfit" EntitySet="FundBondProfits" />
           </AssociationSet>
           <AssociationSet Name="FK_InvestorBondInterest_Bonds" Association="FundsDBModel.FK_InvestorBondInterest_Bonds">
             <End Role="Bond" EntitySet="Bonds" />
@@ -1904,7 +1878,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="expired" Type="DateTime" Precision="0" />
           <NavigationProperty Name="BondsInvestors" Relationship="FundsDBModel.FK_BondsInvestors_Bonds" FromRole="Bond" ToRole="BondsInvestor" />
           <NavigationProperty Name="FundBondInterests" Relationship="FundsDBModel.FK_FundBondInterest_Bonds" FromRole="Bond" ToRole="FundBondInterest" />
-          <NavigationProperty Name="FundBondProfits" Relationship="FundsDBModel.FK_FundBondProfits_Bonds" FromRole="Bond" ToRole="FundBondProfit" />
           <NavigationProperty Name="InvestorBondInterests" Relationship="FundsDBModel.FK_InvestorBondInterest_Bonds" FromRole="Bond" ToRole="InvestorBondInterest" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Bonds_Funds" FromRole="Bond" ToRole="Fund" />
         </EntityType>
@@ -1990,16 +1963,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="Extracted" Type="Boolean" Nullable="false" />
           <Property Name="ExtractionDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Bond" Relationship="FundsDBModel.FK_FundBondInterest_Bonds" FromRole="FundBondInterest" ToRole="Bond" />
-        </EntityType>
-        <EntityType Name="FundBondProfit">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BondId" Type="Int32" Nullable="false" />
-          <Property Name="Income" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Bond" Relationship="FundsDBModel.FK_FundBondProfits_Bonds" FromRole="FundBondProfit" ToRole="Bond" />
         </EntityType>
         <EntityType Name="InvestorBondInterest">
           <Key>
@@ -2223,18 +2186,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="FundBondInterest">
-              <PropertyRef Name="BondId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FundBondProfits_Bonds">
-          <End Type="FundsDBModel.Bond" Role="Bond" Multiplicity="1" />
-          <End Type="FundsDBModel.FundBondProfit" Role="FundBondProfit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Bond">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FundBondProfit">
               <PropertyRef Name="BondId" />
             </Dependent>
           </ReferentialConstraint>
@@ -2769,6 +2720,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="pay_date" Type="DateTime" Precision="0" />
           <NavigationProperty Name="DisbursementPayments" Relationship="FundsDBModel.DisbursementPaymentDetails" FromRole="Disbursement" ToRole="DisbursementPayment" />
           <NavigationProperty Name="DisbursementGeneratedInterestDetails" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_Disbursements" FromRole="Disbursement" ToRole="DisbursementGeneratedInterestDetail" />
+          <Property Name="can_generate_interest" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Disbursements_Banks">
           <End Type="FundsDBModel.Bank" Role="Bank" Multiplicity="0..1" />
@@ -2916,6 +2868,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="generated_interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <NavigationProperty Name="DisbursementGeneratedInterest" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests" FromRole="DisbursementGeneratedInterestDetail" ToRole="DisbursementGeneratedInterest" />
           <NavigationProperty Name="Disbursement" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_Disbursements" FromRole="DisbursementGeneratedInterestDetail" ToRole="Disbursement" />
+          <Property Name="generated_interest_date" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="DisbursementGeneratedInterest">
           <Key>
@@ -2939,6 +2892,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <PropertyRef Name="sector_id" />
             <PropertyRef Name="number" />
             <PropertyRef Name="collection_date" />
+            <PropertyRef Name="can_generate_interest" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="investment_id" Type="Int32" Nullable="false" />
@@ -2955,6 +2909,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="collection_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="pay_date" Type="DateTime" Precision="0" />
+          <Property Name="can_generate_interest" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests">
           <End Type="FundsDBModel.DisbursementGeneratedInterest" Role="DisbursementGeneratedInterest" Multiplicity="1" />
@@ -3248,16 +3203,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FundBondProfits">
-            <EntityTypeMapping TypeName="FundsDBModel.FundBondProfit">
-              <MappingFragment StoreEntitySet="FundBondProfits">
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="Income" ColumnName="Income" />
-                <ScalarProperty Name="BondId" ColumnName="BondId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="InvestorBondInterests">
             <EntityTypeMapping TypeName="FundsDBModel.InvestorBondInterest">
               <MappingFragment StoreEntitySet="InvestorBondInterest">
@@ -3440,6 +3385,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySetMapping Name="Disbursements">
             <EntityTypeMapping TypeName="FundsDBModel.Disbursement">
               <MappingFragment StoreEntitySet="Disbursements">
+                <ScalarProperty Name="can_generate_interest" ColumnName="can_generate_interest" />
                 <ScalarProperty Name="pay_date" ColumnName="pay_date" />
                 <ScalarProperty Name="collection_date" ColumnName="collection_date" />
                 <ScalarProperty Name="number" ColumnName="number" />
@@ -3489,6 +3435,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySetMapping Name="DisbursementGeneratedInterestDetails">
             <EntityTypeMapping TypeName="FundsDBModel.DisbursementGeneratedInterestDetail">
               <MappingFragment StoreEntitySet="DisbursementGeneratedInterestDetails">
+                <ScalarProperty Name="generated_interest_date" ColumnName="generated_interest_date" />
                 <ScalarProperty Name="generated_interest" ColumnName="generated_interest" />
                 <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
                 <ScalarProperty Name="disbursement_generated_interest_id" ColumnName="disbursement_generated_interest_id" />
@@ -3507,6 +3454,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySetMapping Name="ProfitShareToAccrues">
             <EntityTypeMapping TypeName="FundsDBModel.ProfitShareToAccrue">
               <MappingFragment StoreEntitySet="ProfitShareToAccrue">
+                <ScalarProperty Name="can_generate_interest" ColumnName="can_generate_interest" />
                 <ScalarProperty Name="pay_date" ColumnName="pay_date" />
                 <ScalarProperty Name="collection_date" ColumnName="collection_date" />
                 <ScalarProperty Name="number" ColumnName="number" />

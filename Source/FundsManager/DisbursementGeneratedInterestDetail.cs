@@ -18,6 +18,7 @@ namespace FundsManager
         public int disbursement_generated_interest_id { get; set; }
         public int disbursement_id { get; set; }
         public decimal generated_interest { get; set; }
+        public System.DateTime generated_interest_date { get; set; }
     
         public virtual DisbursementGeneratedInterest DisbursementGeneratedInterest { get; set; }
         public virtual Disbursement Disbursement { get; set; }

@@ -19,7 +19,6 @@
         <EntityTypeShape EntityType="FundsDBModel.Disbursement_dates" Width="1.5" PointX="19" PointY="42.75" />
         <EntityTypeShape EntityType="FundsDBModel.Employee" Width="1.5" PointX="3" PointY="48" />
         <EntityTypeShape EntityType="FundsDBModel.FundBondInterest" Width="1.5" PointX="5.25" PointY="71.125" />
-        <EntityTypeShape EntityType="FundsDBModel.FundBondProfit" Width="1.5" PointX="5.25" PointY="74.25" />
         <EntityTypeShape EntityType="FundsDBModel.InvestorBondInterest" Width="1.5" PointX="5.25" PointY="50.75" />
         <EntityTypeShape EntityType="FundsDBModel.Investor" Width="1.5" PointX="3" PointY="23" />
         <EntityTypeShape EntityType="FundsDBModel.Item" Width="1.5" PointX="18" PointY="45.875" />
@@ -38,7 +37,6 @@
         <AssociationConnector Association="FundsDBModel.FK_Banks_Countries" />
         <AssociationConnector Association="FundsDBModel.FK_BondsInvestors_Bonds" />
         <AssociationConnector Association="FundsDBModel.FK_FundBondInterest_Bonds" />
-        <AssociationConnector Association="FundsDBModel.FK_FundBondProfits_Bonds" />
         <AssociationConnector Association="FundsDBModel.FK_InvestorBondInterest_Bonds" />
         <AssociationConnector Association="FundsDBModel.FK_BondsInvestors_Investors" />
         <AssociationConnector Association="FundsDBModel.FK_Clients_Countries" />

@@ -184,6 +184,7 @@ namespace FundsManager
                             if (toPay != null)
                             {
                                 toPay.pay_date = dPayment.payment_date;
+                                toPay.can_generate_interest = true;
 
                                 dPayment.Disbursements.Add(toPay);
 
