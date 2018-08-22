@@ -77,9 +77,22 @@ namespace FundsManager
 
         private decimal AccrueInterest(ProfitShareToAccrue aProfitShareToAccrue)
         {
-            //TODO: Calcular la acumulacion de intereses
+            try
+            {
+                int financingDays = (aProfitShareToAccrue.pay_date.Value - aProfitShareToAccrue.collection_date).Days;
 
-            return 1;
+                if (financingDays > 0)
+                {
+                    decimal profitSharePerDay = aProfitShareToAccrue.profit_share / financingDays;
+                    return financingDays * profitSharePerDay;
+                }
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error at ProfitShareToAccrueForm.AccrueInterest: " + _ex.Message);
+            }
+            
+            return 0;
         }
     }
 }
