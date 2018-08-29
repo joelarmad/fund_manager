@@ -44,12 +44,9 @@
             this.cbUnderlyingDebtor = new System.Windows.Forms.ComboBox();
             this.underlyingDebtorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.currenciesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CurrenciesTableAdapter();
-            this.clientsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientsTableAdapter();
-            this.underlyingDebtorsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.UnderlyingDebtorsTableAdapter();
             this.label6 = new System.Windows.Forms.Label();
             this.cbBank = new System.Windows.Forms.ComboBox();
             this.banksBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.banksTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.BanksTableAdapter();
             this.label7 = new System.Windows.Forms.Label();
             this.txtProfitShare = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -84,6 +81,10 @@
             this.lblContractPrefix = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.dtpCollectionDate = new System.Windows.Forms.DateTimePicker();
+            this.clientsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientsTableAdapter();
+            this.underlyingDebtorsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.UnderlyingDebtorsTableAdapter();
+            this.banksTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.BanksTableAdapter();
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
@@ -134,6 +135,7 @@
             this.cbCurrency.TabIndex = 2;
             this.cbCurrency.ValueMember = "Id";
             this.cbCurrency.SelectedIndexChanged += new System.EventHandler(this.cbCurrency_SelectedIndexChanged);
+            this.cbCurrency.Leave += new System.EventHandler(this.cbCurrency_Leave);
             // 
             // currenciesBindingSource
             // 
@@ -185,6 +187,7 @@
             this.cbClient.TabIndex = 7;
             this.cbClient.ValueMember = "Id";
             this.cbClient.SelectedIndexChanged += new System.EventHandler(this.cbClient_SelectedIndexChanged);
+            this.cbClient.Leave += new System.EventHandler(this.cbClient_Leave);
             // 
             // clientsBindingSource
             // 
@@ -211,6 +214,7 @@
             this.cbUnderlyingDebtor.TabIndex = 8;
             this.cbUnderlyingDebtor.ValueMember = "Id";
             this.cbUnderlyingDebtor.SelectedIndexChanged += new System.EventHandler(this.cbUnderlyingDebtor_SelectedIndexChanged);
+            this.cbUnderlyingDebtor.Leave += new System.EventHandler(this.cbUnderlyingDebtor_Leave);
             // 
             // underlyingDebtorsBindingSource
             // 
@@ -220,14 +224,6 @@
             // currenciesTableAdapter
             // 
             this.currenciesTableAdapter.ClearBeforeFill = true;
-            // 
-            // clientsTableAdapter
-            // 
-            this.clientsTableAdapter.ClearBeforeFill = true;
-            // 
-            // underlyingDebtorsTableAdapter
-            // 
-            this.underlyingDebtorsTableAdapter.ClearBeforeFill = true;
             // 
             // label6
             // 
@@ -250,15 +246,12 @@
             this.cbBank.TabIndex = 9;
             this.cbBank.ValueMember = "Id";
             this.cbBank.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
+            this.cbBank.Leave += new System.EventHandler(this.cbBank_Leave);
             // 
             // banksBindingSource
             // 
             this.banksBindingSource.DataMember = "Banks";
             this.banksBindingSource.DataSource = this.fundsDBDataSet;
-            // 
-            // banksTableAdapter
-            // 
-            this.banksTableAdapter.ClearBeforeFill = true;
             // 
             // label7
             // 
@@ -301,6 +294,7 @@
             this.cbSector.TabIndex = 10;
             this.cbSector.ValueMember = "Id";
             this.cbSector.SelectedIndexChanged += new System.EventHandler(this.cbSector_SelectedIndexChanged);
+            this.cbSector.Leave += new System.EventHandler(this.cbSector_Leave);
             // 
             // sectorsBindingSource
             // 
@@ -331,6 +325,7 @@
             this.cbItems.TabIndex = 11;
             this.cbItems.ValueMember = "Id";
             this.cbItems.SelectedIndexChanged += new System.EventHandler(this.cbItems_SelectedIndexChanged);
+            this.cbItems.Leave += new System.EventHandler(this.cbItems_Leave);
             // 
             // itemsBindingSource
             // 
@@ -359,6 +354,7 @@
             this.lbISelectedItems.Size = new System.Drawing.Size(120, 95);
             this.lbISelectedItems.TabIndex = 190;
             this.lbISelectedItems.SelectedIndexChanged += new System.EventHandler(this.lbISelectedItems_SelectedIndexChanged);
+            this.lbISelectedItems.Leave += new System.EventHandler(this.lbISelectedItems_Leave);
             // 
             // label10
             // 
@@ -397,6 +393,7 @@
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5,
+            this.columnHeader8,
             this.columnHeader6,
             this.columnHeader7});
             this.lvDisbursements.Location = new System.Drawing.Point(12, 260);
@@ -410,32 +407,32 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Client";
-            this.columnHeader1.Width = 86;
+            this.columnHeader1.Width = 120;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Underlying Debtor";
-            this.columnHeader2.Width = 172;
+            this.columnHeader2.Width = 120;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Amount";
-            this.columnHeader3.Width = 111;
+            this.columnHeader3.Width = 80;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Profit Share";
-            this.columnHeader4.Width = 120;
+            this.columnHeader4.Width = 70;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Total to Collect";
-            this.columnHeader5.Width = 128;
+            this.columnHeader5.Width = 80;
             // 
             // columnHeader6
             // 
-            this.columnHeader6.Text = "Date";
-            this.columnHeader6.Width = 183;
+            this.columnHeader6.Text = "Disbursement Date";
+            this.columnHeader6.Width = 180;
             // 
             // columnHeader7
             // 
@@ -459,6 +456,7 @@
             this.dtpDisbursementDate.Size = new System.Drawing.Size(200, 20);
             this.dtpDisbursementDate.TabIndex = 13;
             this.dtpDisbursementDate.ValueChanged += new System.EventHandler(this.dtpDisbursementDate_ValueChanged);
+            this.dtpDisbursementDate.Leave += new System.EventHandler(this.dtpDisbursementDate_Leave);
             // 
             // label11
             // 
@@ -497,6 +495,7 @@
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Size = new System.Drawing.Size(121, 20);
             this.txtNumber.TabIndex = 5;
+            this.txtNumber.Leave += new System.EventHandler(this.txtNumber_Leave);
             // 
             // label12
             // 
@@ -541,12 +540,30 @@
             this.dtpCollectionDate.Name = "dtpCollectionDate";
             this.dtpCollectionDate.Size = new System.Drawing.Size(200, 20);
             this.dtpCollectionDate.TabIndex = 14;
+            this.dtpCollectionDate.Leave += new System.EventHandler(this.dtpCollectionDate_Leave);
+            // 
+            // clientsTableAdapter
+            // 
+            this.clientsTableAdapter.ClearBeforeFill = true;
+            // 
+            // underlyingDebtorsTableAdapter
+            // 
+            this.underlyingDebtorsTableAdapter.ClearBeforeFill = true;
+            // 
+            // banksTableAdapter
+            // 
+            this.banksTableAdapter.ClearBeforeFill = true;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Collection Date";
+            this.columnHeader8.Width = 180;
             // 
             // InvestmentsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(951, 578);
+            this.ClientSize = new System.Drawing.Size(954, 579);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.dtpCollectionDate);
             this.Controls.Add(this.txtContract);
@@ -587,7 +604,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Investments";
-            this.Load += new System.EventHandler(this.DisbursementsForm_Load);
+            this.Load += new System.EventHandler(this.InvestmentsForm_Load);
             this.Click += new System.EventHandler(this.DisbursementsForm_Click);
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
@@ -616,14 +633,8 @@
         private FundsDBDataSet fundsDBDataSet;
         private System.Windows.Forms.BindingSource currenciesBindingSource;
         private FundsDBDataSetTableAdapters.CurrenciesTableAdapter currenciesTableAdapter;
-        private System.Windows.Forms.BindingSource clientsBindingSource;
-        private FundsDBDataSetTableAdapters.ClientsTableAdapter clientsTableAdapter;
-        private System.Windows.Forms.BindingSource underlyingDebtorsBindingSource;
-        private FundsDBDataSetTableAdapters.UnderlyingDebtorsTableAdapter underlyingDebtorsTableAdapter;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbBank;
-        private System.Windows.Forms.BindingSource banksBindingSource;
-        private FundsDBDataSetTableAdapters.BanksTableAdapter banksTableAdapter;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtProfitShare;
         private System.Windows.Forms.Label label8;
@@ -658,5 +669,12 @@
         private System.Windows.Forms.Label lblContractPrefix;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.DateTimePicker dtpCollectionDate;
+        private System.Windows.Forms.BindingSource clientsBindingSource;
+        private FundsDBDataSetTableAdapters.ClientsTableAdapter clientsTableAdapter;
+        private System.Windows.Forms.BindingSource underlyingDebtorsBindingSource;
+        private FundsDBDataSetTableAdapters.UnderlyingDebtorsTableAdapter underlyingDebtorsTableAdapter;
+        private System.Windows.Forms.BindingSource banksBindingSource;
+        private FundsDBDataSetTableAdapters.BanksTableAdapter banksTableAdapter;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
     }
 }

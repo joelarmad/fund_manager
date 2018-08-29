@@ -160,6 +160,12 @@ namespace FundsManager
                     comboSource.Add(custom_id, _detail.name);
                 }
 
+                foreach (Shareholder _shareholder in manager.My_db.Shareholders)
+                {
+                    int custom_id = int.Parse(6.ToString() + _shareholder.Id.ToString());
+                    comboSource.Add(custom_id, _shareholder.name);
+                }
+
                 if (comboSource.Count > 0 && subacctId > 0)
                 {
                     comboBox3.DataSource = new BindingSource(comboSource, null);

@@ -55,6 +55,7 @@
             this.generateInterestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makePaymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.investmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createInvestmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disbursemetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.collectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.profitShareAccruedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -274,6 +275,7 @@
             // investmentsToolStripMenuItem
             // 
             this.investmentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createInvestmentToolStripMenuItem,
             this.disbursemetToolStripMenuItem,
             this.collectionToolStripMenuItem,
             this.profitShareAccruedToolStripMenuItem,
@@ -281,7 +283,13 @@
             this.investmentsToolStripMenuItem.Name = "investmentsToolStripMenuItem";
             this.investmentsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.investmentsToolStripMenuItem.Text = "Investments";
-            this.investmentsToolStripMenuItem.Click += new System.EventHandler(this.investmentsToolStripMenuItem_Click);
+            // 
+            // createInvestmentToolStripMenuItem
+            // 
+            this.createInvestmentToolStripMenuItem.Name = "createInvestmentToolStripMenuItem";
+            this.createInvestmentToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.createInvestmentToolStripMenuItem.Text = "Create Investment";
+            this.createInvestmentToolStripMenuItem.Click += new System.EventHandler(this.createInvestmentToolStripMenuItem_Click);
             // 
             // disbursemetToolStripMenuItem
             // 
@@ -370,6 +378,7 @@
             this.Text = "Funds Manager";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Shown += new System.EventHandler(this.Form1_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -415,6 +424,7 @@
         private System.Windows.Forms.ToolStripMenuItem profitShareAccruedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem delayInterestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem shareholdersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createInvestmentToolStripMenuItem;
     }
 }
 

@@ -119,6 +119,7 @@ namespace FundsManager
                         disbursement.Id.ToString(),
                         disbursement.number,
                         String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", disbursement.amount),
+                        disbursement.collection_date.ToLongDateString(),
                         disbursement.date.ToLongDateString(),
                         paid_date
                     };

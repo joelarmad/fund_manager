@@ -47,22 +47,24 @@ namespace FundsManager
             }
         }
 
-        private void DisbursementsForm_Load(object sender, EventArgs e)
+        private void InvestmentsForm_Load(object sender, EventArgs e)
         {
+
             try
             {
+
+                // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Clients' Puede moverla o quitarla según sea necesario.
+                this.clientsTableAdapter.FillByFund(this.fundsDBDataSet.Clients, manager.Selected);
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Items' table. You can move, or remove it, as needed.
                 this.itemsTableAdapter.FillByFund(this.fundsDBDataSet.Items, manager.Selected);
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Sectors' table. You can move, or remove it, as needed.
                 this.sectorsTableAdapter.FillByFund(this.fundsDBDataSet.Sectors, manager.Selected);
-                // TODO: This line of code loads data into the 'fundsDBDataSet.Banks' table. You can move, or remove it, as needed.
-                this.banksTableAdapter.FillExcludingOwnBanks(this.fundsDBDataSet.Banks, manager.Selected);
-                // TODO: This line of code loads data into the 'fundsDBDataSet.UnderlyingDebtors' table. You can move, or remove it, as needed.
-                this.underlyingDebtorsTableAdapter.FillByFund(this.fundsDBDataSet.UnderlyingDebtors, manager.Selected);
-                // TODO: This line of code loads data into the 'fundsDBDataSet.Clients' table. You can move, or remove it, as needed.
-                this.clientsTableAdapter.FillByFund(this.fundsDBDataSet.Clients, manager.Selected);
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Currencies' table. You can move, or remove it, as needed.
                 this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
+                // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.UnderlyingDebtors' Puede moverla o quitarla según sea necesario.
+                this.underlyingDebtorsTableAdapter.FillAddingEmptyRow(this.fundsDBDataSet.UnderlyingDebtors, manager.Selected);
+                // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Banks' Puede moverla o quitarla según sea necesario.
+                this.banksTableAdapter.FillExcludingOwnBanks(this.fundsDBDataSet.Banks, manager.Selected);
 
                 Fund fund = manager.My_db.Funds.FirstOrDefault(x => x.Id == manager.Selected);
 
@@ -73,7 +75,7 @@ namespace FundsManager
                 }
 
 
-                txtContract.Text = "xxx/" + DateTime.Now.Year.ToString().Substring(2,2);
+                txtContract.Text = "xxx/" + DateTime.Now.Year.ToString().Substring(2, 2);
             }
             catch (Exception _ex)
             {
@@ -196,6 +198,13 @@ namespace FundsManager
         {
             try
             {
+                checkEnablingAddDisbursementButton();
+
+                if (!cmdAddDisbursement.Enabled)
+                {
+                    return;
+                }
+
                 Decimal total_amount = 0;
                 Decimal total_profit = 0;
                 Decimal total_euro_collection = 0;
@@ -208,14 +217,27 @@ namespace FundsManager
 
                     _disbursement.fund_id = manager.Selected;
 
+                    int bankId = Convert.ToInt32(cbBank.SelectedValue);
+
+                    int underDebtorId = Convert.ToInt32(cbUnderlyingDebtor.SelectedValue);
 
                     _disbursement.exchange_rate = exchangeRate;
                     _disbursement.amount = Convert.ToDecimal(txtAmount.Text) / (decimal)exchangeRate;
                     _disbursement.profit_share = Convert.ToDecimal(txtProfitShare.Text) / (decimal)exchangeRate;
                     _disbursement.currency_id = Convert.ToInt32(cbCurrency.SelectedValue);
-                    _disbursement.bank_risk_id = Convert.ToInt32(cbBank.SelectedValue);
+
+                    if (bankId > 0)
+                    {
+                        _disbursement.bank_risk_id = bankId;
+                    }
+
                     _disbursement.client_id = Convert.ToInt32(cbClient.SelectedValue);
-                    _disbursement.underlying_debtor_id = Convert.ToInt32(cbUnderlyingDebtor.SelectedValue);
+
+                    if (underDebtorId > 0)
+                    {
+                        _disbursement.underlying_debtor_id = underDebtorId;
+                    }
+                                        
                     _disbursement.date = Convert.ToDateTime(dtpDisbursementDate.Text);
                     _disbursement.collection_date = Convert.ToDateTime(dtpCollectionDate.Text);
                     _disbursement.sector_id = Convert.ToInt32(cbSector.SelectedValue);
@@ -261,6 +283,7 @@ namespace FundsManager
                         String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount),
                         String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.profit_share),
                         String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.Euro_collection),
+                        dtpCollectionDate.Text,
                         dtpDisbursementDate.Text,
                         Convert.ToString(day.Days) };
                     ListViewItem my_item = new ListViewItem(row);
@@ -378,6 +401,10 @@ namespace FundsManager
 
                 disbursements.Clear();
                 
+                FundsManager.ReportForms.DibursementCreatedForm createdDisbursementsForm = new ReportForms.DibursementCreatedForm();
+                createdDisbursementsForm.investmentId = _newInvestment.Id;
+                createdDisbursementsForm.Show();
+                
             }
             catch (Exception _ex)
             {
@@ -394,7 +421,6 @@ namespace FundsManager
 
                 cmdAddDisbursement.Enabled = cbCurrency.SelectedIndex >= 0
                     && cbClient.SelectedIndex >= 0
-                    && cbBank.SelectedIndex >= 0
                     && cbSector.SelectedIndex >= 0
                     && decimal.TryParse(txtAmount.Text, out _amount)
                     && decimal.TryParse(txtProfitShare.Text, out _profitShare)
@@ -442,7 +468,7 @@ namespace FundsManager
                     if (disbursements.First<Disbursement>().date != _disbursement.date)
                         day = _disbursement.date.Subtract(disbursements.First<Disbursement>().date);
 
-                    string[] row = { _disbursement.TextClient, _disbursement.TextUnderlyingDebtor, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.profit_share), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _totalToBeCollected), _disbursement.date.ToLongDateString(), Convert.ToString(day.Days) };
+                    string[] row = { _disbursement.TextClient, _disbursement.TextUnderlyingDebtor, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.profit_share), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _totalToBeCollected), _disbursement.collection_date.ToLongDateString(), _disbursement.date.ToLongDateString(), Convert.ToString(day.Days) };
                     ListViewItem my_item = new ListViewItem(row);
                     lvDisbursements.Items.Add(my_item);
 
@@ -612,6 +638,8 @@ namespace FundsManager
                 {
                     txtAmount.Text = String.Format("{0:0.00}", _result);
                 }
+
+                checkEnablingAddDisbursementButton();
             }
             catch (Exception _ex)
             {
@@ -661,6 +689,8 @@ namespace FundsManager
                 {
                     txtExchangeRate.Text = String.Format("{0:0.00}", _result);
                 }
+
+                checkEnablingAddDisbursementButton();
             }
             catch (Exception _ex)
             {
@@ -691,6 +721,8 @@ namespace FundsManager
                 {
                     txtProfitShare.Text = String.Format("{0:0.00}", _result);
                 }
+
+                checkEnablingAddDisbursementButton();
             }
             catch (Exception _ex)
             {
@@ -740,6 +772,56 @@ namespace FundsManager
                 txtContract.SelectionLength = 3;
                 txtContract.Select();
             }
+        }
+
+        private void cbCurrency_Leave(object sender, EventArgs e)
+        {
+            checkEnablingAddDisbursementButton();
+        }
+
+        private void txtNumber_Leave(object sender, EventArgs e)
+        {
+            checkEnablingAddDisbursementButton();
+        }
+
+        private void cbClient_Leave(object sender, EventArgs e)
+        {
+            checkEnablingAddDisbursementButton();
+        }
+
+        private void cbUnderlyingDebtor_Leave(object sender, EventArgs e)
+        {
+            checkEnablingAddDisbursementButton();
+        }
+
+        private void cbBank_Leave(object sender, EventArgs e)
+        {
+            checkEnablingAddDisbursementButton();
+        }
+
+        private void cbSector_Leave(object sender, EventArgs e)
+        {
+            checkEnablingAddDisbursementButton();
+        }
+
+        private void cbItems_Leave(object sender, EventArgs e)
+        {
+            checkEnablingAddDisbursementButton();
+        }
+
+        private void lbISelectedItems_Leave(object sender, EventArgs e)
+        {
+            checkEnablingAddDisbursementButton();
+        }
+
+        private void dtpDisbursementDate_Leave(object sender, EventArgs e)
+        {
+            checkEnablingAddDisbursementButton();
+        }
+
+        private void dtpCollectionDate_Leave(object sender, EventArgs e)
+        {
+            checkEnablingAddDisbursementButton();
         }
     }
 }

@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblAccount = new System.Windows.Forms.Label();
             this.cbOtherDetails = new System.Windows.Forms.ComboBox();
+            this.otherDetailsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.label3 = new System.Windows.Forms.Label();
             this.cbSubAccount = new System.Windows.Forms.ComboBox();
@@ -56,14 +57,14 @@
             this.label6 = new System.Windows.Forms.Label();
             this.dtpPayDate = new System.Windows.Forms.DateTimePicker();
             this.cmdPay = new System.Windows.Forms.Button();
-            this.otherDetailsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.otherDetailsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.OtherDetailsTableAdapter();
+            this.CollectionDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            ((System.ComponentModel.ISupportInitialize)(this.otherDetailsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subaccountsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientContractsBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.otherDetailsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -95,6 +96,11 @@
             this.cbOtherDetails.Size = new System.Drawing.Size(164, 21);
             this.cbOtherDetails.TabIndex = 9;
             this.cbOtherDetails.ValueMember = "Id";
+            // 
+            // otherDetailsBindingSource
+            // 
+            this.otherDetailsBindingSource.DataMember = "OtherDetails";
+            this.otherDetailsBindingSource.DataSource = this.fundsDBDataSet;
             // 
             // fundsDBDataSet
             // 
@@ -217,6 +223,7 @@
             this.Id,
             this.Number,
             this.Amount,
+            this.CollectionDate,
             this.DisbursementDate,
             this.PaidDate});
             this.lvDisbursements.FullRowSelect = true;
@@ -237,7 +244,6 @@
             // Number
             // 
             this.Number.Text = "Number";
-            this.Number.Width = 100;
             // 
             // Amount
             // 
@@ -247,12 +253,12 @@
             // DisbursementDate
             // 
             this.DisbursementDate.Text = "Disbursement Date";
-            this.DisbursementDate.Width = 200;
+            this.DisbursementDate.Width = 180;
             // 
             // PaidDate
             // 
             this.PaidDate.Text = "Paid Date";
-            this.PaidDate.Width = 200;
+            this.PaidDate.Width = 180;
             // 
             // label6
             // 
@@ -281,14 +287,14 @@
             this.cmdPay.UseVisualStyleBackColor = true;
             this.cmdPay.Click += new System.EventHandler(this.cmdPay_Click);
             // 
-            // otherDetailsBindingSource
-            // 
-            this.otherDetailsBindingSource.DataMember = "OtherDetails";
-            this.otherDetailsBindingSource.DataSource = this.fundsDBDataSet;
-            // 
             // otherDetailsTableAdapter
             // 
             this.otherDetailsTableAdapter.ClearBeforeFill = true;
+            // 
+            // CollectionDate
+            // 
+            this.CollectionDate.Text = "Collection Date";
+            this.CollectionDate.Width = 180;
             // 
             // DisbursementsForm
             // 
@@ -315,12 +321,12 @@
             this.ShowInTaskbar = false;
             this.Text = "Disbursements";
             this.Load += new System.EventHandler(this.DisbursementsForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.otherDetailsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.subaccountsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientContractsBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.otherDetailsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -362,5 +368,6 @@
         private System.Windows.Forms.Button cmdPay;
         private System.Windows.Forms.BindingSource otherDetailsBindingSource;
         private FundsDBDataSetTableAdapters.OtherDetailsTableAdapter otherDetailsTableAdapter;
+        private System.Windows.Forms.ColumnHeader CollectionDate;
     }
 }

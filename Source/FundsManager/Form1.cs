@@ -182,14 +182,6 @@ namespace FundsManager
             interest_form.Show();
         }
 
-        private void investmentsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.IsMdiContainer = true;
-            InvestmentsForm investments_form = new InvestmentsForm();
-            investments_form.MdiParent = this;
-            investments_form.Show();
-        }
-
         private void underlyingDebtorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
@@ -245,6 +237,19 @@ namespace FundsManager
             profit_share_to_accrue_form.MdiParent = this;
             profit_share_to_accrue_form.Show();
         }
-        
+
+        private void createInvestmentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            InvestmentsForm investments_form = new InvestmentsForm();
+            investments_form.MdiParent = this;
+            investments_form.Show();
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            FundSelectionForm fundSelection = new FundSelectionForm();
+            fundSelection.ShowDialog();
+        }
     }
 }
