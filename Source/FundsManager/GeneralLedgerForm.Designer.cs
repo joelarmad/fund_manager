@@ -34,9 +34,9 @@
             this.accountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cbSubaccount = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cbOtherDetail = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -48,7 +48,6 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.currenciesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label6 = new System.Windows.Forms.Label();
@@ -90,6 +89,7 @@
             this.cbAccount.Size = new System.Drawing.Size(186, 21);
             this.cbAccount.TabIndex = 1;
             this.cbAccount.ValueMember = "Id";
+            this.cbAccount.SelectedIndexChanged += new System.EventHandler(this.cbAccount_SelectedIndexChanged);
             // 
             // accountsBindingSource
             // 
@@ -110,14 +110,13 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "SubAccount:";
             // 
-            // comboBox2
+            // cbSubaccount
             // 
-            this.comboBox2.Enabled = false;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(335, 29);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(138, 21);
-            this.comboBox2.TabIndex = 2;
+            this.cbSubaccount.FormattingEnabled = true;
+            this.cbSubaccount.Location = new System.Drawing.Point(335, 29);
+            this.cbSubaccount.Name = "cbSubaccount";
+            this.cbSubaccount.Size = new System.Drawing.Size(138, 21);
+            this.cbSubaccount.TabIndex = 2;
             // 
             // label3
             // 
@@ -128,15 +127,14 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Other Account Details:";
             // 
-            // comboBox3
+            // cbOtherDetail
             // 
-            this.comboBox3.Enabled = false;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(612, 30);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(164, 21);
-            this.comboBox3.TabIndex = 3;
-            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            this.cbOtherDetail.FormattingEnabled = true;
+            this.cbOtherDetail.Location = new System.Drawing.Point(612, 30);
+            this.cbOtherDetail.Name = "cbOtherDetail";
+            this.cbOtherDetail.Size = new System.Drawing.Size(164, 21);
+            this.cbOtherDetail.TabIndex = 3;
+            this.cbOtherDetail.SelectedIndexChanged += new System.EventHandler(this.cbOtherDetail_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -196,8 +194,7 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader6});
+            this.columnHeader5});
             this.listView1.Location = new System.Drawing.Point(15, 129);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(862, 221);
@@ -209,12 +206,12 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Account";
-            this.columnHeader1.Width = 93;
+            this.columnHeader1.Width = 180;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "SubAccount";
-            this.columnHeader2.Width = 101;
+            this.columnHeader2.Width = 180;
             // 
             // columnHeader3
             // 
@@ -230,11 +227,6 @@
             // 
             this.columnHeader5.Text = "Credit";
             this.columnHeader5.Width = 97;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Balance";
-            this.columnHeader6.Width = 91;
             // 
             // comboBox4
             // 
@@ -399,9 +391,9 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.cbOtherDetail);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.cbSubaccount);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbAccount);
             this.Controls.Add(this.label1);
@@ -425,9 +417,9 @@
         private System.Windows.Forms.ComboBox cbAccount;
         private FundsDBDataSet fundsDBDataSet;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cbSubaccount;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox cbOtherDetail;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label5;
@@ -439,7 +431,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;

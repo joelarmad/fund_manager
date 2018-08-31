@@ -75,8 +75,21 @@ namespace FundsManager
         {
             try
             {
+                editModeAccountIndex = cbAccount.SelectedIndex;
+                editModeSubaccountIndex = cbSubAccount.SelectedIndex;
+
+                int subacctId = Convert.ToInt32(cbSubAccount.SelectedValue);
+
                 if (!fEditMode)
                 {
+                    OtherDetail _validationOtherDetail = manager.My_db.OtherDetails.FirstOrDefault(x => x.number == txtNumber.Text && x.subacct_id == subacctId && x.FK_OtherDetails_Funds == manager.Selected);
+
+                    if (_validationOtherDetail != null)
+                    {
+                        MessageBox.Show("Duplicated number.");
+                        return;
+                    }
+
                     OtherDetail _otherdetail = new OtherDetail();
                     _otherdetail.name = txtName.Text;
                     _otherdetail.subacct_id = Convert.ToInt32(cbSubAccount.SelectedValue);
@@ -88,6 +101,14 @@ namespace FundsManager
                 else
                 {
                     int _id = (int)dataGridView1.Rows[fEditIndex].Cells[0].Value;
+
+                    OtherDetail _validationOtherDetail = manager.My_db.OtherDetails.FirstOrDefault(x => x.Id != _id && x.number == txtNumber.Text && x.subacct_id == subacctId && x.FK_OtherDetails_Funds == manager.Selected);
+
+                    if (_validationOtherDetail != null)
+                    {
+                        MessageBox.Show("Duplicated number.");
+                        return;
+                    }
 
                     OtherDetail _selectedDetail = manager.My_db.OtherDetails.FirstOrDefault(x => x.Id == _id);
 

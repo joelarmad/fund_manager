@@ -36783,7 +36783,7 @@ SELECT Id, name, type, amount, FK_Accounts_Funds, number FROM Accounts WHERE (Id
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT        Id, name, type, amount, FK_Accounts_Funds, number
+            this._commandCollection[1].CommandText = @"SELECT        Id, number + ' - ' + name AS name, type, amount, FK_Accounts_Funds, number
 FROM            Accounts
 WHERE        (Id IN
                              (SELECT        FK_Subaccounts_Accounts

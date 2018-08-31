@@ -37,12 +37,6 @@
             this.subaccountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fKOtherDetailsFundsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subacctidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sub_Account = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.otherDetailsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cmdDelete = new System.Windows.Forms.Button();
             this.subaccountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.SubaccountsTableAdapter();
@@ -54,6 +48,12 @@
             this.accountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.accountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountsTableAdapter();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fKOtherDetailsFundsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subacctidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sub_Account = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.subaccountsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -79,7 +79,7 @@
             // 
             // cmdAddOrSave
             // 
-            this.cmdAddOrSave.Location = new System.Drawing.Point(379, 136);
+            this.cmdAddOrSave.Location = new System.Drawing.Point(235, 142);
             this.cmdAddOrSave.Name = "cmdAddOrSave";
             this.cmdAddOrSave.Size = new System.Drawing.Size(75, 23);
             this.cmdAddOrSave.TabIndex = 2;
@@ -137,55 +137,9 @@
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(516, 278);
+            this.dataGridView1.Size = new System.Drawing.Size(370, 195);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // number
-            // 
-            this.number.DataPropertyName = "number";
-            this.number.HeaderText = "Number";
-            this.number.Name = "number";
-            this.number.ReadOnly = true;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nameDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // fKOtherDetailsFundsDataGridViewTextBoxColumn
-            // 
-            this.fKOtherDetailsFundsDataGridViewTextBoxColumn.DataPropertyName = "FK_OtherDetails_Funds";
-            this.fKOtherDetailsFundsDataGridViewTextBoxColumn.HeaderText = "FK_OtherDetails_Funds";
-            this.fKOtherDetailsFundsDataGridViewTextBoxColumn.Name = "fKOtherDetailsFundsDataGridViewTextBoxColumn";
-            this.fKOtherDetailsFundsDataGridViewTextBoxColumn.ReadOnly = true;
-            this.fKOtherDetailsFundsDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // subacctidDataGridViewTextBoxColumn
-            // 
-            this.subacctidDataGridViewTextBoxColumn.DataPropertyName = "subacct_id";
-            this.subacctidDataGridViewTextBoxColumn.HeaderText = "subacct_id";
-            this.subacctidDataGridViewTextBoxColumn.Name = "subacctidDataGridViewTextBoxColumn";
-            this.subacctidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.subacctidDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // Sub_Account
-            // 
-            this.Sub_Account.HeaderText = "Sub Account";
-            this.Sub_Account.Name = "Sub_Account";
-            this.Sub_Account.ReadOnly = true;
-            this.Sub_Account.Width = 200;
             // 
             // otherDetailsBindingSource
             // 
@@ -212,7 +166,7 @@
             // 
             // cmdCancel
             // 
-            this.cmdCancel.Location = new System.Drawing.Point(457, 136);
+            this.cmdCancel.Location = new System.Drawing.Point(313, 142);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(75, 23);
             this.cmdCancel.TabIndex = 8;
@@ -267,11 +221,58 @@
             // 
             this.accountsTableAdapter.ClearBeforeFill = true;
             // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // number
+            // 
+            this.number.DataPropertyName = "number";
+            this.number.HeaderText = "Number";
+            this.number.Name = "number";
+            this.number.ReadOnly = true;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nameDataGridViewTextBoxColumn.Width = 200;
+            // 
+            // fKOtherDetailsFundsDataGridViewTextBoxColumn
+            // 
+            this.fKOtherDetailsFundsDataGridViewTextBoxColumn.DataPropertyName = "FK_OtherDetails_Funds";
+            this.fKOtherDetailsFundsDataGridViewTextBoxColumn.HeaderText = "FK_OtherDetails_Funds";
+            this.fKOtherDetailsFundsDataGridViewTextBoxColumn.Name = "fKOtherDetailsFundsDataGridViewTextBoxColumn";
+            this.fKOtherDetailsFundsDataGridViewTextBoxColumn.ReadOnly = true;
+            this.fKOtherDetailsFundsDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // subacctidDataGridViewTextBoxColumn
+            // 
+            this.subacctidDataGridViewTextBoxColumn.DataPropertyName = "subacct_id";
+            this.subacctidDataGridViewTextBoxColumn.HeaderText = "subacct_id";
+            this.subacctidDataGridViewTextBoxColumn.Name = "subacctidDataGridViewTextBoxColumn";
+            this.subacctidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.subacctidDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // Sub_Account
+            // 
+            this.Sub_Account.HeaderText = "Sub Account";
+            this.Sub_Account.Name = "Sub_Account";
+            this.Sub_Account.ReadOnly = true;
+            this.Sub_Account.Visible = false;
+            this.Sub_Account.Width = 200;
+            // 
             // OtherDetailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(552, 498);
+            this.ClientSize = new System.Drawing.Size(401, 378);
             this.Controls.Add(this.cbAccount);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtNumber);
@@ -317,15 +318,15 @@
         private System.Windows.Forms.Button cmdCancel;
         private System.Windows.Forms.TextBox txtNumber;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cbAccount;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.BindingSource accountsBindingSource;
+        private FundsDBDataSetTableAdapters.AccountsTableAdapter accountsTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn number;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fKOtherDetailsFundsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn subacctidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sub_Account;
-        private System.Windows.Forms.ComboBox cbAccount;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.BindingSource accountsBindingSource;
-        private FundsDBDataSetTableAdapters.AccountsTableAdapter accountsTableAdapter;
     }
 }
