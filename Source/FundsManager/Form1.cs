@@ -251,5 +251,21 @@ namespace FundsManager
             FundSelectionForm fundSelection = new FundSelectionForm();
             fundSelection.ShowDialog();
         }
+
+        private void letterOfCreditToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            LetterOfCreditForm letter_form = new LetterOfCreditForm();
+            letter_form.MdiParent = this;
+            letter_form.Show();
+        }
+
+        private void shipmentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            ShipmentForm Shipment_form = new ShipmentForm();
+            Shipment_form.MdiParent = this;
+            Shipment_form.Show();
+        }
     }
 }

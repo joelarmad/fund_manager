@@ -331,6 +331,15 @@
     <Compile Include="ItemsForm.Designer.cs">
       <DependentUpon>ItemsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LetterOfCreditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LetterOfCreditForm.Designer.cs">
+      <DependentUpon>LetterOfCreditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="letter_of_credits.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -428,6 +437,15 @@
     <Compile Include="ShareholdersForm.Designer.cs">
       <DependentUpon>ShareholdersForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Shipment.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShipmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShipmentForm.Designer.cs">
+      <DependentUpon>ShipmentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Subaccount.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -513,6 +531,9 @@
     <EmbeddedResource Include="ItemsForm.resx">
       <DependentUpon>ItemsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LetterOfCreditForm.resx">
+      <DependentUpon>LetterOfCreditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MovementReportForm.resx">
       <DependentUpon>MovementReportForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -556,6 +577,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ShareholdersForm.resx">
       <DependentUpon>ShareholdersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShipmentForm.resx">
+      <DependentUpon>ShipmentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SubaccountsForm.resx">
       <DependentUpon>SubaccountsForm.cs</DependentUpon>

@@ -98,6 +98,22 @@ namespace FundsManager
             My_db.SaveChanges();
         }
 
+        public void DeleteLetter(int _id)
+        {
+            letter_of_credits _letter = new letter_of_credits();
+            _letter = My_db.letter_of_credits.Find(_id);
+            My_db.letter_of_credits.Remove(_letter);
+            My_db.SaveChanges();
+        }
+
+        public void DeleteShipment(int _id)
+        {
+            Shipment _shipment = new Shipment();
+            _shipment = My_db.Shipments.Find(_id);
+            My_db.Shipments.Remove(_shipment);
+            My_db.SaveChanges();
+        }
+
         public void DeleteInvestor(int _id)
         {
             Investor _investor = new Investor();
@@ -170,6 +186,15 @@ namespace FundsManager
             Subaccount _subaccount = new Subaccount();
             _subaccount = My_db.Subaccounts.Find(_id);
             My_db.Subaccounts.Remove(_subaccount);
+            My_db.SaveChanges();
+        }
+
+
+        public void DeleteMovementAccount(int _id)
+        {
+            Movements_Accounts _maccount = new Movements_Accounts();
+            _maccount = My_db.Movements_Accounts.Find(_id);
+            My_db.Movements_Accounts.Remove(_maccount);
             My_db.SaveChanges();
         }
 

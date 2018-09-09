@@ -234,6 +234,7 @@
           <Property Name="collection_date" Type="date" Nullable="false" />
           <Property Name="pay_date" Type="date" />
           <Property Name="can_generate_interest" Type="bit" Nullable="false" />
+          <Property Name="shipment_id" Type="int" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -306,6 +307,16 @@
           <Property Name="FK_Items_Funds" Type="int" Nullable="false" />
           <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="letter_of_credits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FundId" Type="int" Nullable="false" />
+          <Property Name="BankId" Type="int" Nullable="false" />
+          <Property Name="Reference" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+        </EntityType>
         <EntityType Name="Movements_Accounts">
           <Key>
             <PropertyRef Name="Id" />
@@ -357,6 +368,15 @@
           <Property Name="name" Type="text" Nullable="false" />
           <Property Name="FK_Creditors_Funds" Type="int" Nullable="false" />
           <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shipments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LetterOfCreditId" Type="int" />
+          <Property Name="Number" Type="varchar" MaxLength="50" />
+          <Property Name="Value" Type="money" />
         </EntityType>
         <EntityType Name="Subaccounts">
           <Key>
@@ -935,6 +955,18 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Disbursements_Shipments">
+          <End Role="Shipments" Type="Self.Shipments" Multiplicity="0..1" />
+          <End Role="Disbursements" Type="Self.Disbursements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursements">
+              <PropertyRef Name="shipment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Disbursements_UnderlyingDebtors">
           <End Role="UnderlyingDebtors" Type="Self.UnderlyingDebtors" Multiplicity="0..1" />
           <End Role="Disbursements" Type="Self.Disbursements" Multiplicity="*" />
@@ -1028,6 +1060,30 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Principal>
             <Dependent Role="Items">
               <PropertyRef Name="FK_Items_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_letter_of_credits_Banks">
+          <End Role="Banks" Type="Self.Banks" Multiplicity="1" />
+          <End Role="letter_of_credits" Type="Self.letter_of_credits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="letter_of_credits">
+              <PropertyRef Name="BankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_letter_of_credits_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="letter_of_credits" Type="Self.letter_of_credits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="letter_of_credits">
+              <PropertyRef Name="FundId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1127,6 +1183,18 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Shipments_LetterOfCredits">
+          <End Role="letter_of_credits" Type="Self.letter_of_credits" Multiplicity="0..1" />
+          <End Role="Shipments" Type="Self.Shipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="letter_of_credits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shipments">
+              <PropertyRef Name="LetterOfCreditId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Subaccounts_Accounts">
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
           <End Role="Subaccounts" Type="Self.Subaccounts" Multiplicity="*" />
@@ -1205,11 +1273,13 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySet Name="InvestorBondInterest" EntityType="Self.InvestorBondInterest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Investors" EntityType="Self.Investors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="letter_of_credits" EntityType="Self.letter_of_credits" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movements_Accounts" EntityType="Self.Movements_Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OtherDetails" EntityType="Self.OtherDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resources" EntityType="Self.Resources" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sectors" EntityType="Self.Sectors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shareholders" EntityType="Self.Shareholders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shipments" EntityType="Self.Shipments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subaccounts" EntityType="Self.Subaccounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnderlyingDebtors" EntityType="Self.UnderlyingDebtors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClientContracts" EntityType="Self.ClientContracts" store:Type="Views" store:Schema="dbo">
@@ -1409,6 +1479,10 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="Sectors" EntitySet="Sectors" />
             <End Role="Disbursements" EntitySet="Disbursements" />
           </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Shipments" Association="Self.FK_Disbursements_Shipments">
+            <End Role="Shipments" EntitySet="Shipments" />
+            <End Role="Disbursements" EntitySet="Disbursements" />
+          </AssociationSet>
           <AssociationSet Name="FK_Disbursements_UnderlyingDebtors" Association="Self.FK_Disbursements_UnderlyingDebtors">
             <End Role="UnderlyingDebtors" EntitySet="UnderlyingDebtors" />
             <End Role="Disbursements" EntitySet="Disbursements" />
@@ -1441,6 +1515,14 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="Funds" EntitySet="Funds" />
             <End Role="Items" EntitySet="Items" />
           </AssociationSet>
+          <AssociationSet Name="FK_letter_of_credits_Banks" Association="Self.FK_letter_of_credits_Banks">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="letter_of_credits" EntitySet="letter_of_credits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_letter_of_credits_Funds" Association="Self.FK_letter_of_credits_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="letter_of_credits" EntitySet="letter_of_credits" />
+          </AssociationSet>
           <AssociationSet Name="FK_Movements_Accounts_AccountingMovements" Association="Self.FK_Movements_Accounts_AccountingMovements">
             <End Role="AccountingMovements" EntitySet="AccountingMovements" />
             <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
@@ -1472,6 +1554,10 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <AssociationSet Name="FK_Shareholders_Funds" Association="Self.FK_Shareholders_Funds">
             <End Role="Funds" EntitySet="Funds" />
             <End Role="Shareholders" EntitySet="Shareholders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shipments_LetterOfCredits" Association="Self.FK_Shipments_LetterOfCredits">
+            <End Role="letter_of_credits" EntitySet="letter_of_credits" />
+            <End Role="Shipments" EntitySet="Shipments" />
           </AssociationSet>
           <AssociationSet Name="FK_Subaccounts_Accounts" Association="Self.FK_Subaccounts_Accounts">
             <End Role="Accounts" EntitySet="Accounts" />
@@ -1776,6 +1862,24 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Subaccount" EntitySet="Subaccounts" />
           </AssociationSet>
+          <EntitySet Name="letter_of_credits" EntityType="FundsDBModel.letter_of_credits" />
+          <EntitySet Name="Shipments" EntityType="FundsDBModel.Shipment" />
+          <AssociationSet Name="FK_letter_of_credits_Banks" Association="FundsDBModel.FK_letter_of_credits_Banks">
+            <End Role="Bank" EntitySet="Banks" />
+            <End Role="letter_of_credits" EntitySet="letter_of_credits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Shipments" Association="FundsDBModel.FK_Disbursements_Shipments">
+            <End Role="Shipment" EntitySet="Shipments" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_letter_of_credits_Funds" Association="FundsDBModel.FK_letter_of_credits_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="letter_of_credits" EntitySet="letter_of_credits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shipments_LetterOfCredits" Association="FundsDBModel.FK_Shipments_LetterOfCredits">
+            <End Role="letter_of_credits" EntitySet="letter_of_credits" />
+            <End Role="Shipment" EntitySet="Shipments" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccountsBankingAccount">
           <Key>
@@ -1861,6 +1965,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <NavigationProperty Name="Country" Relationship="FundsDBModel.FK_Banks_Countries" FromRole="Bank" ToRole="Country" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Banks_Funds" FromRole="Bank" ToRole="Fund" />
           <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Banks" FromRole="Bank" ToRole="Disbursement" />
+          <NavigationProperty Name="letter_of_credits" Relationship="FundsDBModel.FK_letter_of_credits_Banks" FromRole="Bank" ToRole="letter_of_credits" />
         </EntityType>
         <EntityType Name="Bond">
           <Key>
@@ -2391,6 +2496,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <NavigationProperty Name="Investments" Relationship="FundsDBModel.FK_Investments_Funds" FromRole="Fund" ToRole="Investment" />
           <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Funds" FromRole="Fund" ToRole="Disbursement" />
           <NavigationProperty Name="Accounts" Relationship="FundsDBModel.FK_Accounts_Funds" FromRole="Fund" ToRole="Account" />
+          <NavigationProperty Name="letter_of_credits" Relationship="FundsDBModel.FK_letter_of_credits_Funds" FromRole="Fund" ToRole="letter_of_credits" />
         </EntityType>
         <Association Name="FK_AccountingMovements_Funds">
           <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
@@ -2721,6 +2827,8 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <NavigationProperty Name="DisbursementPayments" Relationship="FundsDBModel.DisbursementPaymentDetails" FromRole="Disbursement" ToRole="DisbursementPayment" />
           <NavigationProperty Name="DisbursementGeneratedInterestDetails" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_Disbursements" FromRole="Disbursement" ToRole="DisbursementGeneratedInterestDetail" />
           <Property Name="can_generate_interest" Type="Boolean" Nullable="false" />
+          <Property Name="shipment_id" Type="Int32" />
+          <NavigationProperty Name="Shipment" Relationship="FundsDBModel.FK_Disbursements_Shipments" FromRole="Disbursement" ToRole="Shipment" />
         </EntityType>
         <Association Name="FK_Disbursements_Banks">
           <End Type="FundsDBModel.Bank" Role="Bank" Multiplicity="0..1" />
@@ -3034,6 +3142,78 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Principal>
             <Dependent Role="Subaccount">
               <PropertyRef Name="FK_Subaccounts_Accounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="letter_of_credits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FundId" Type="Int32" Nullable="false" />
+          <Property Name="BankId" Type="Int32" Nullable="false" />
+          <Property Name="Reference" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Bank" Relationship="FundsDBModel.FK_letter_of_credits_Banks" FromRole="letter_of_credits" ToRole="Bank" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_letter_of_credits_Funds" FromRole="letter_of_credits" ToRole="Fund" />
+          <NavigationProperty Name="Shipments" Relationship="FundsDBModel.FK_Shipments_LetterOfCredits" FromRole="letter_of_credits" ToRole="Shipment" />
+        </EntityType>
+        <EntityType Name="Shipment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LetterOfCreditId" Type="Int32" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Shipments" FromRole="Shipment" ToRole="Disbursement" />
+          <NavigationProperty Name="letter_of_credits" Relationship="FundsDBModel.FK_Shipments_LetterOfCredits" FromRole="Shipment" ToRole="letter_of_credits" />
+        </EntityType>
+        <Association Name="FK_letter_of_credits_Banks">
+          <End Type="FundsDBModel.Bank" Role="Bank" Multiplicity="1" />
+          <End Type="FundsDBModel.letter_of_credits" Role="letter_of_credits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="letter_of_credits">
+              <PropertyRef Name="BankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Shipments">
+          <End Type="FundsDBModel.Shipment" Role="Shipment" Multiplicity="0..1" />
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="shipment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_letter_of_credits_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.letter_of_credits" Role="letter_of_credits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="letter_of_credits">
+              <PropertyRef Name="FundId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shipments_LetterOfCredits">
+          <End Type="FundsDBModel.letter_of_credits" Role="letter_of_credits" Multiplicity="0..1" />
+          <End Type="FundsDBModel.Shipment" Role="Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="letter_of_credits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shipment">
+              <PropertyRef Name="LetterOfCreditId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3385,6 +3565,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySetMapping Name="Disbursements">
             <EntityTypeMapping TypeName="FundsDBModel.Disbursement">
               <MappingFragment StoreEntitySet="Disbursements">
+                <ScalarProperty Name="shipment_id" ColumnName="shipment_id" />
                 <ScalarProperty Name="can_generate_interest" ColumnName="can_generate_interest" />
                 <ScalarProperty Name="pay_date" ColumnName="pay_date" />
                 <ScalarProperty Name="collection_date" ColumnName="collection_date" />
@@ -3481,6 +3662,27 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
                 <ScalarProperty Name="amount" ColumnName="amount" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="letter_of_credits">
+            <EntityTypeMapping TypeName="FundsDBModel.letter_of_credits">
+              <MappingFragment StoreEntitySet="letter_of_credits">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="BankId" ColumnName="BankId" />
+                <ScalarProperty Name="FundId" ColumnName="FundId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shipments">
+            <EntityTypeMapping TypeName="FundsDBModel.Shipment">
+              <MappingFragment StoreEntitySet="Shipments">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="LetterOfCreditId" ColumnName="LetterOfCreditId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

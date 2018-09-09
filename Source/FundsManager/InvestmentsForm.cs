@@ -49,6 +49,8 @@ namespace FundsManager
 
         private void InvestmentsForm_Load(object sender, EventArgs e)
         {
+            
+
 
             try
             {
@@ -65,6 +67,10 @@ namespace FundsManager
                 this.underlyingDebtorsTableAdapter.FillAddingEmptyRow(this.fundsDBDataSet.UnderlyingDebtors, manager.Selected);
                 // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Banks' Puede moverla o quitarla según sea necesario.
                 this.banksTableAdapter.FillExcludingOwnBanks(this.fundsDBDataSet.Banks, manager.Selected);
+                // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.letter_of_credits' Puede moverla o quitarla según sea necesario.
+                this.letter_of_creditsTableAdapter.FillByBank(this.fundsDBDataSet.letter_of_credits, manager.Selected, int.Parse(cbBank.SelectedValue.ToString()));
+                // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Shipments' Puede moverla o quitarla según sea necesario.
+                this.shipmentsTableAdapter.FillByLetterWithEmpty(this.fundsDBDataSet.Shipments, int.Parse(cbLetterOfCredit.SelectedValue.ToString()));
 
                 Fund fund = manager.My_db.Funds.FirstOrDefault(x => x.Id == manager.Selected);
 
@@ -162,6 +168,18 @@ namespace FundsManager
         {
             try
             {
+                if (cbBank.SelectedValue != null)
+                {
+                    // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.letter_of_credits' Puede moverla o quitarla según sea necesario.
+                    this.letter_of_creditsTableAdapter.FillByBank(this.fundsDBDataSet.letter_of_credits, manager.Selected, int.Parse(cbBank.SelectedValue.ToString()));
+                }
+
+                if (cbLetterOfCredit.SelectedValue != null)
+                {
+                    // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Shipments' Puede moverla o quitarla según sea necesario.
+                    this.shipmentsTableAdapter.FillByLetterWithEmpty(this.fundsDBDataSet.Shipments, int.Parse(cbLetterOfCredit.SelectedValue.ToString()));
+                }
+
                 checkEnablingAddDisbursementButton();
             }
             catch (Exception _ex)
@@ -221,10 +239,12 @@ namespace FundsManager
 
                     int underDebtorId = Convert.ToInt32(cbUnderlyingDebtor.SelectedValue);
 
+                    int shipmentId = Convert.ToInt32(cbShipment.SelectedValue);
+
                     _disbursement.exchange_rate = exchangeRate;
                     _disbursement.amount = Convert.ToDecimal(txtAmount.Text) / (decimal)exchangeRate;
                     _disbursement.profit_share = Convert.ToDecimal(txtProfitShare.Text) / (decimal)exchangeRate;
-                    _disbursement.currency_id = Convert.ToInt32(cbCurrency.SelectedValue);
+                    _disbursement.currency_id = Convert.ToInt32(cbCurrency.SelectedValue);                    
 
                     if (bankId > 0)
                     {
@@ -248,6 +268,11 @@ namespace FundsManager
                     _disbursement.TextUnderlyingDebtor = cbUnderlyingDebtor.Text;
 
                     _disbursement.Euro_collection = _disbursement.amount + _disbursement.profit_share;
+
+                    if (shipmentId > 0)
+                    {
+                        _disbursement.shipment_id = shipmentId;
+                    }
 
                     foreach (int _itemId in fItemIds)
                     {
@@ -315,8 +340,6 @@ namespace FundsManager
                     txtProfitShare.Text = "0";
                     txtExchangeRate.Text = "0.0";
                     txtTotalToBeCollected.Text = "0.0";
-                    lbISelectedItems.Items.Clear();
-                    lbISelectedItems.Items.Clear();
                     lbISelectedItems.Items.Clear();
                     fItemIds.Clear();
                     txtNumber.Clear();
@@ -820,6 +843,21 @@ namespace FundsManager
         }
 
         private void dtpCollectionDate_Leave(object sender, EventArgs e)
+        {
+            checkEnablingAddDisbursementButton();
+        }
+
+        private void cbLetterOfCredit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbLetterOfCredit.SelectedValue != null)
+            {
+                // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Shipments' Puede moverla o quitarla según sea necesario.
+                this.shipmentsTableAdapter.FillByLetterWithEmpty(this.fundsDBDataSet.Shipments, int.Parse(cbLetterOfCredit.SelectedValue.ToString()));
+            }
+            checkEnablingAddDisbursementButton();
+        }
+
+        private void cbShipment_SelectedIndexChanged(object sender, EventArgs e)
         {
             checkEnablingAddDisbursementButton();
         }

@@ -21,15 +21,32 @@ namespace FundsManager.ReportForms
 
         private void GeneralBalanceForm_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.BalanceResumeView' Puede moverla o quitarla según sea necesario.
-            this.balanceResumeViewTableAdapter.FillByFund(this.fundsDBDataSet.BalanceResumeView, manager.Selected);
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.AccountBalanceView' Puede moverla o quitarla según sea necesario.
-            this.accountBalanceViewTableAdapter.FillByFund(this.fundsDBDataSet.AccountBalanceView, manager.Selected);
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.BalanceResume' Puede moverla o quitarla según sea necesario.
-            
-            this.reportViewer1.RefreshReport();
+            dtpFrom.Value = new DateTime(DateTime.Now.Year, 1, 1);
+            dtpTo.Value = DateTime.Now;
+
+            refreshData();
         }
 
-        
+        private void cmdFilter_Click(object sender, EventArgs e)
+        {
+            refreshData();
+        }
+
+        private void refreshData()
+        {
+            try
+            {
+                DateTime from = Convert.ToDateTime(dtpFrom.Text);
+                DateTime to = Convert.ToDateTime(dtpTo.Text);
+
+                this.accountBalanceViewTableAdapter.FillByDateInterval(this.fundsDBDataSet.AccountBalanceView, manager.Selected, from, to);
+
+                reportViewer1.RefreshReport();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error at GeneralBalanceForm.refreshData: " + ex.Message);
+            }
+        }
     }
 }

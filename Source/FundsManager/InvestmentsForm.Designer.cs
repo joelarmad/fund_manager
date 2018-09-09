@@ -68,6 +68,7 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cmdDeleteDisbursement = new System.Windows.Forms.Button();
@@ -84,7 +85,15 @@
             this.clientsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientsTableAdapter();
             this.underlyingDebtorsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.UnderlyingDebtorsTableAdapter();
             this.banksTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.BanksTableAdapter();
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cbLetterOfCredit = new System.Windows.Forms.ComboBox();
+            this.letterofcreditsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fundsDBDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label14 = new System.Windows.Forms.Label();
+            this.cbShipment = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.letter_of_creditsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.letter_of_creditsTableAdapter();
+            this.shipmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.shipmentsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ShipmentsTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
@@ -92,6 +101,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.banksBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sectorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.letterofcreditsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shipmentsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -170,7 +182,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(306, 54);
+            this.label4.Location = new System.Drawing.Point(306, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(36, 13);
             this.label4.TabIndex = 6;
@@ -181,7 +193,7 @@
             this.cbClient.DataSource = this.clientsBindingSource;
             this.cbClient.DisplayMember = "name";
             this.cbClient.FormattingEnabled = true;
-            this.cbClient.Location = new System.Drawing.Point(348, 51);
+            this.cbClient.Location = new System.Drawing.Point(348, 49);
             this.cbClient.Name = "cbClient";
             this.cbClient.Size = new System.Drawing.Size(121, 21);
             this.cbClient.TabIndex = 7;
@@ -197,7 +209,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(246, 90);
+            this.label5.Location = new System.Drawing.Point(246, 88);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(95, 13);
             this.label5.TabIndex = 8;
@@ -208,7 +220,7 @@
             this.cbUnderlyingDebtor.DataSource = this.underlyingDebtorsBindingSource;
             this.cbUnderlyingDebtor.DisplayMember = "name";
             this.cbUnderlyingDebtor.FormattingEnabled = true;
-            this.cbUnderlyingDebtor.Location = new System.Drawing.Point(348, 87);
+            this.cbUnderlyingDebtor.Location = new System.Drawing.Point(348, 84);
             this.cbUnderlyingDebtor.Name = "cbUnderlyingDebtor";
             this.cbUnderlyingDebtor.Size = new System.Drawing.Size(121, 21);
             this.cbUnderlyingDebtor.TabIndex = 8;
@@ -228,7 +240,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(253, 128);
+            this.label6.Location = new System.Drawing.Point(253, 123);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 13);
             this.label6.TabIndex = 10;
@@ -240,7 +252,7 @@
             this.cbBank.DataSource = this.banksBindingSource;
             this.cbBank.DisplayMember = "name";
             this.cbBank.FormattingEnabled = true;
-            this.cbBank.Location = new System.Drawing.Point(348, 124);
+            this.cbBank.Location = new System.Drawing.Point(348, 119);
             this.cbBank.Name = "cbBank";
             this.cbBank.Size = new System.Drawing.Size(121, 21);
             this.cbBank.TabIndex = 9;
@@ -277,7 +289,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(300, 164);
+            this.label8.Location = new System.Drawing.Point(300, 223);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(41, 13);
             this.label8.TabIndex = 14;
@@ -288,7 +300,7 @@
             this.cbSector.DataSource = this.sectorsBindingSource;
             this.cbSector.DisplayMember = "name";
             this.cbSector.FormattingEnabled = true;
-            this.cbSector.Location = new System.Drawing.Point(348, 161);
+            this.cbSector.Location = new System.Drawing.Point(348, 224);
             this.cbSector.Name = "cbSector";
             this.cbSector.Size = new System.Drawing.Size(121, 21);
             this.cbSector.TabIndex = 10;
@@ -308,7 +320,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(525, 19);
+            this.label9.Location = new System.Drawing.Point(545, 19);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(35, 13);
             this.label9.TabIndex = 16;
@@ -319,7 +331,7 @@
             this.cbItems.DataSource = this.itemsBindingSource;
             this.cbItems.DisplayMember = "name";
             this.cbItems.FormattingEnabled = true;
-            this.cbItems.Location = new System.Drawing.Point(566, 15);
+            this.cbItems.Location = new System.Drawing.Point(586, 15);
             this.cbItems.Name = "cbItems";
             this.cbItems.Size = new System.Drawing.Size(121, 21);
             this.cbItems.TabIndex = 11;
@@ -338,7 +350,7 @@
             // 
             // cmdAddItem
             // 
-            this.cmdAddItem.Location = new System.Drawing.Point(702, 13);
+            this.cmdAddItem.Location = new System.Drawing.Point(722, 13);
             this.cmdAddItem.Name = "cmdAddItem";
             this.cmdAddItem.Size = new System.Drawing.Size(75, 23);
             this.cmdAddItem.TabIndex = 12;
@@ -349,7 +361,7 @@
             // lbISelectedItems
             // 
             this.lbISelectedItems.FormattingEnabled = true;
-            this.lbISelectedItems.Location = new System.Drawing.Point(566, 54);
+            this.lbISelectedItems.Location = new System.Drawing.Point(586, 54);
             this.lbISelectedItems.Name = "lbISelectedItems";
             this.lbISelectedItems.Size = new System.Drawing.Size(120, 95);
             this.lbISelectedItems.TabIndex = 190;
@@ -377,7 +389,7 @@
             // cmdAddDisbursement
             // 
             this.cmdAddDisbursement.Enabled = false;
-            this.cmdAddDisbursement.Location = new System.Drawing.Point(692, 223);
+            this.cmdAddDisbursement.Location = new System.Drawing.Point(672, 223);
             this.cmdAddDisbursement.Name = "cmdAddDisbursement";
             this.cmdAddDisbursement.Size = new System.Drawing.Size(115, 23);
             this.cmdAddDisbursement.TabIndex = 15;
@@ -429,6 +441,11 @@
             this.columnHeader5.Text = "Total to Collect";
             this.columnHeader5.Width = 80;
             // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Collection Date";
+            this.columnHeader8.Width = 180;
+            // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "Disbursement Date";
@@ -441,7 +458,7 @@
             // cmdDeleteDisbursement
             // 
             this.cmdDeleteDisbursement.Enabled = false;
-            this.cmdDeleteDisbursement.Location = new System.Drawing.Point(813, 223);
+            this.cmdDeleteDisbursement.Location = new System.Drawing.Point(793, 223);
             this.cmdDeleteDisbursement.Name = "cmdDeleteDisbursement";
             this.cmdDeleteDisbursement.Size = new System.Drawing.Size(121, 23);
             this.cmdDeleteDisbursement.TabIndex = 24;
@@ -451,7 +468,7 @@
             // 
             // dtpDisbursementDate
             // 
-            this.dtpDisbursementDate.Location = new System.Drawing.Point(486, 196);
+            this.dtpDisbursementDate.Location = new System.Drawing.Point(586, 162);
             this.dtpDisbursementDate.Name = "dtpDisbursementDate";
             this.dtpDisbursementDate.Size = new System.Drawing.Size(200, 20);
             this.dtpDisbursementDate.TabIndex = 13;
@@ -461,7 +478,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(382, 199);
+            this.label11.Location = new System.Drawing.Point(482, 165);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(100, 13);
             this.label11.TabIndex = 26;
@@ -481,7 +498,7 @@
             // cmdDeleteItem
             // 
             this.cmdDeleteItem.Enabled = false;
-            this.cmdDeleteItem.Location = new System.Drawing.Point(702, 54);
+            this.cmdDeleteItem.Location = new System.Drawing.Point(722, 54);
             this.cmdDeleteItem.Name = "cmdDeleteItem";
             this.cmdDeleteItem.Size = new System.Drawing.Size(75, 23);
             this.cmdDeleteItem.TabIndex = 28;
@@ -528,7 +545,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(398, 227);
+            this.label13.Location = new System.Drawing.Point(498, 193);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(82, 13);
             this.label13.TabIndex = 35;
@@ -536,7 +553,7 @@
             // 
             // dtpCollectionDate
             // 
-            this.dtpCollectionDate.Location = new System.Drawing.Point(486, 224);
+            this.dtpCollectionDate.Location = new System.Drawing.Point(586, 190);
             this.dtpCollectionDate.Name = "dtpCollectionDate";
             this.dtpCollectionDate.Size = new System.Drawing.Size(200, 20);
             this.dtpCollectionDate.TabIndex = 14;
@@ -554,16 +571,80 @@
             // 
             this.banksTableAdapter.ClearBeforeFill = true;
             // 
-            // columnHeader8
+            // cbLetterOfCredit
             // 
-            this.columnHeader8.Text = "Collection Date";
-            this.columnHeader8.Width = 180;
+            this.cbLetterOfCredit.DataSource = this.letterofcreditsBindingSource;
+            this.cbLetterOfCredit.DisplayMember = "Reference";
+            this.cbLetterOfCredit.FormattingEnabled = true;
+            this.cbLetterOfCredit.Location = new System.Drawing.Point(348, 154);
+            this.cbLetterOfCredit.Name = "cbLetterOfCredit";
+            this.cbLetterOfCredit.Size = new System.Drawing.Size(121, 21);
+            this.cbLetterOfCredit.TabIndex = 231;
+            this.cbLetterOfCredit.ValueMember = "Id";
+            this.cbLetterOfCredit.SelectedIndexChanged += new System.EventHandler(this.cbLetterOfCredit_SelectedIndexChanged);
+            // 
+            // letterofcreditsBindingSource
+            // 
+            this.letterofcreditsBindingSource.DataMember = "letter_of_credits";
+            this.letterofcreditsBindingSource.DataSource = this.fundsDBDataSetBindingSource;
+            // 
+            // fundsDBDataSetBindingSource
+            // 
+            this.fundsDBDataSetBindingSource.DataSource = this.fundsDBDataSet;
+            this.fundsDBDataSetBindingSource.Position = 0;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(261, 158);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(79, 13);
+            this.label14.TabIndex = 232;
+            this.label14.Text = "Letter of Credit:";
+            // 
+            // cbShipment
+            // 
+            this.cbShipment.DataSource = this.shipmentsBindingSource;
+            this.cbShipment.DisplayMember = "Number";
+            this.cbShipment.FormattingEnabled = true;
+            this.cbShipment.Location = new System.Drawing.Point(348, 189);
+            this.cbShipment.Name = "cbShipment";
+            this.cbShipment.Size = new System.Drawing.Size(121, 21);
+            this.cbShipment.TabIndex = 233;
+            this.cbShipment.ValueMember = "Id";
+            this.cbShipment.SelectedIndexChanged += new System.EventHandler(this.cbShipment_SelectedIndexChanged);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(286, 193);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(54, 13);
+            this.label15.TabIndex = 234;
+            this.label15.Text = "Shipment:";
+            // 
+            // letter_of_creditsTableAdapter
+            // 
+            this.letter_of_creditsTableAdapter.ClearBeforeFill = true;
+            // 
+            // shipmentsBindingSource
+            // 
+            this.shipmentsBindingSource.DataMember = "Shipments";
+            this.shipmentsBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // shipmentsTableAdapter
+            // 
+            this.shipmentsTableAdapter.ClearBeforeFill = true;
             // 
             // InvestmentsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(954, 579);
+            this.Controls.Add(this.cbShipment);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.cbLetterOfCredit);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.dtpCollectionDate);
             this.Controls.Add(this.txtContract);
@@ -613,6 +694,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.banksBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sectorsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.letterofcreditsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shipmentsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -676,5 +760,14 @@
         private System.Windows.Forms.BindingSource banksBindingSource;
         private FundsDBDataSetTableAdapters.BanksTableAdapter banksTableAdapter;
         private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ComboBox cbLetterOfCredit;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox cbShipment;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.BindingSource fundsDBDataSetBindingSource;
+        private System.Windows.Forms.BindingSource letterofcreditsBindingSource;
+        private FundsDBDataSetTableAdapters.letter_of_creditsTableAdapter letter_of_creditsTableAdapter;
+        private System.Windows.Forms.BindingSource shipmentsBindingSource;
+        private FundsDBDataSetTableAdapters.ShipmentsTableAdapter shipmentsTableAdapter;
     }
 }

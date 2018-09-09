@@ -6,3 +6,10 @@
     {
     }
 }
+
+namespace FundsManager.FundsDBDataSetTableAdapters {
+    
+    
+    public partial class letter_of_creditsTableAdapter {
+    }
+}

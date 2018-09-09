@@ -103,6 +103,12 @@
         <AssociationConnector Association="FundsDBModel.FK_AccountsEmployees_Accounts" />
         <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_Accounts" />
         <AssociationConnector Association="FundsDBModel.FK_Subaccounts_Accounts" />
+        <EntityTypeShape EntityType="FundsDBModel.letter_of_credits" Width="1.5" PointX="12.5" PointY="50" />
+        <EntityTypeShape EntityType="FundsDBModel.Shipment" Width="1.5" PointX="14.75" PointY="58.125" />
+        <AssociationConnector Association="FundsDBModel.FK_letter_of_credits_Banks" />
+        <AssociationConnector Association="FundsDBModel.FK_Disbursements_Shipments" />
+        <AssociationConnector Association="FundsDBModel.FK_letter_of_credits_Funds" />
+        <AssociationConnector Association="FundsDBModel.FK_Shipments_LetterOfCredits" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

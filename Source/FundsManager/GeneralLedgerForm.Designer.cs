@@ -117,6 +117,7 @@
             this.cbSubaccount.Name = "cbSubaccount";
             this.cbSubaccount.Size = new System.Drawing.Size(138, 21);
             this.cbSubaccount.TabIndex = 2;
+            this.cbSubaccount.SelectedIndexChanged += new System.EventHandler(this.cbSubaccount_SelectedIndexChanged_1);
             // 
             // label3
             // 
@@ -196,6 +197,7 @@
             this.columnHeader4,
             this.columnHeader5});
             this.listView1.Location = new System.Drawing.Point(15, 129);
+            this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(862, 221);
             this.listView1.TabIndex = 70;

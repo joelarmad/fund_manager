@@ -48,6 +48,7 @@
             this.bondsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.underlyingDebtorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shareholdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.letterOfCreditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bondsToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,6 +67,7 @@
             this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.shipmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,7 +103,9 @@
             this.investorsToolStripMenuItem,
             this.bondsToolStripMenuItem,
             this.underlyingDebtorsToolStripMenuItem,
-            this.shareholdersToolStripMenuItem});
+            this.shareholdersToolStripMenuItem,
+            this.letterOfCreditToolStripMenuItem,
+            this.shipmentsToolStripMenuItem});
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.addToolStripMenuItem.Text = "New";
@@ -224,6 +228,13 @@
             this.shareholdersToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.shareholdersToolStripMenuItem.Text = "Shareholders";
             this.shareholdersToolStripMenuItem.Click += new System.EventHandler(this.shareholdersToolStripMenuItem_Click);
+            // 
+            // letterOfCreditToolStripMenuItem
+            // 
+            this.letterOfCreditToolStripMenuItem.Name = "letterOfCreditToolStripMenuItem";
+            this.letterOfCreditToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.letterOfCreditToolStripMenuItem.Text = "Letter of Credit";
+            this.letterOfCreditToolStripMenuItem.Click += new System.EventHandler(this.letterOfCreditToolStripMenuItem_Click);
             // 
             // operationsToolStripMenuItem
             // 
@@ -363,6 +374,13 @@
             this.returnsStateToolStripMenuItem.Text = "Profit && Loss Statement";
             this.returnsStateToolStripMenuItem.Click += new System.EventHandler(this.returnsStateToolStripMenuItem_Click);
             // 
+            // shipmentsToolStripMenuItem
+            // 
+            this.shipmentsToolStripMenuItem.Name = "shipmentsToolStripMenuItem";
+            this.shipmentsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.shipmentsToolStripMenuItem.Text = "Shipments";
+            this.shipmentsToolStripMenuItem.Click += new System.EventHandler(this.shipmentsToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -425,6 +443,8 @@
         private System.Windows.Forms.ToolStripMenuItem delayInterestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem shareholdersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createInvestmentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem letterOfCreditToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem shipmentsToolStripMenuItem;
     }
 }
 

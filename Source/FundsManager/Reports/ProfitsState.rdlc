@@ -545,7 +545,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="Profits: " + CStr(Sum(Fields!Income.Value, "DataSet2") - Sum(Fields!Expense.Value, "DataSet2"))</Value>
+                <Value>="Profits: " + CStr(Sum(Fields!TotalIncome.Value, "DataSet1") - Sum(Fields!TotalExpense.Value, "DataSet1"))</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -710,6 +710,10 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
+        <Field Name="FundId">
+          <DataField>FundId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="Id">
           <DataField>Id</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
@@ -722,9 +726,9 @@
           <DataField>description</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="AccountType">
-          <DataField>AccountType</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+        <Field Name="TypeId">
+          <DataField>TypeId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="Account">
           <DataField>Account</DataField>
@@ -734,16 +738,12 @@
           <DataField>SubAccount</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Date">
-          <DataField>Date</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="Debit">
-          <DataField>Debit</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
         <Field Name="Credit">
           <DataField>Credit</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Shift_Amount">
+          <DataField>Shift_Amount</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="Acc_Amount">
@@ -754,46 +754,38 @@
           <DataField>SubAcc_amount</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="TypeId">
-          <DataField>TypeId</DataField>
+        <Field Name="account_id">
+          <DataField>account_id</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="Shift_Amount">
-          <DataField>Shift_Amount</DataField>
+        <Field Name="AccountType">
+          <DataField>AccountType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Date">
+          <DataField>Date</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Debit">
+          <DataField>Debit</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="TotalIncome">
+          <DataField>TotalIncome</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="TotalExpense">
+          <DataField>TotalExpense</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>FundsDBDataSet</rd:DataSetName>
         <rd:SchemaPath>D:\00_Proyectos\Others\fund_manager\Source\FundsManager\FundsDBDataSet.xsd</rd:SchemaPath>
-        <rd:TableName>Movements</rd:TableName>
+        <rd:TableName>ProfitResultsView</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>MovementsTableAdapter</rd:TableAdapterName>
-      </rd:DataSetInfo>
-    </DataSet>
-    <DataSet Name="DataSet2">
-      <Query>
-        <DataSourceName>FundsDBDataSet</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="Income">
-          <DataField>Income</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Expense">
-          <DataField>Expense</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-      <rd:DataSetInfo>
-        <rd:DataSetName>FundsDBDataSet</rd:DataSetName>
-        <rd:SchemaPath>D:\00_Proyectos\Others\fund_manager\Source\FundsManager\FundsDBDataSet.xsd</rd:SchemaPath>
-        <rd:TableName>ProfitsResume</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>ProfitsResumeTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterName>ProfitResultsViewTableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

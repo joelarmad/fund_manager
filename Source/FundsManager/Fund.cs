@@ -42,6 +42,7 @@ namespace FundsManager
             this.Investments = new HashSet<Investment>();
             this.Disbursements = new HashSet<Disbursement>();
             this.Accounts = new HashSet<Account>();
+            this.letter_of_credits = new HashSet<letter_of_credits>();
         }
     
         public int Id { get; set; }
@@ -99,5 +100,7 @@ namespace FundsManager
         public virtual ICollection<Disbursement> Disbursements { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<letter_of_credits> letter_of_credits { get; set; }
     }
 }

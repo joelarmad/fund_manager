@@ -22,16 +22,33 @@ namespace FundsManager.ReportForms
         }
 
         private void ReturnsState_Load(object sender, EventArgs e)
-        { 
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.ProfitsResumeView' Puede moverla o quitarla según sea necesario.
-            this.profitsResumeViewTableAdapter.FillByFund(this.fundsDBDataSet.ProfitsResumeView, manager.Selected);
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.ProfitResultsView' Puede moverla o quitarla según sea necesario.
-            this.profitResultsViewTableAdapter.FillByFund(this.fundsDBDataSet.ProfitResultsView, manager.Selected);
-            
+        {
+            dtpFrom.Value = new DateTime(DateTime.Now.Year, 1, 1);
+            dtpTo.Value = DateTime.Now;
 
-            this.reportViewer1.RefreshReport();
+            refreshData();
         }
 
-        
+        private void refreshData()
+        {
+            try
+            {
+                DateTime from = Convert.ToDateTime(dtpFrom.Text);
+                DateTime to = Convert.ToDateTime(dtpTo.Text);
+
+                this.profitResultsViewTableAdapter.FillByFund(this.fundsDBDataSet.ProfitResultsView, manager.Selected, from, to);
+
+                reportViewer1.RefreshReport();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error at ReturnsState.refreshData: " + ex.Message);
+            }
+        }
+
+        private void cmdFilter_Click(object sender, EventArgs e)
+        {
+            refreshData();
+        }
     }
 }

@@ -37,6 +37,7 @@ namespace FundsManager
         public System.DateTime collection_date { get; set; }
         public Nullable<System.DateTime> pay_date { get; set; }
         public bool can_generate_interest { get; set; }
+        public Nullable<int> shipment_id { get; set; }
     
         public virtual Bank Bank { get; set; }
         public virtual Client Client { get; set; }
@@ -49,5 +50,6 @@ namespace FundsManager
         public virtual ICollection<DisbursementPayment> DisbursementPayments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementGeneratedInterestDetail> DisbursementGeneratedInterestDetails { get; set; }
+        public virtual Shipment Shipment { get; set; }
     }
 }
