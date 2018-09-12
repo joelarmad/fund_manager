@@ -20,8 +20,8 @@ namespace FundsManager
         public int creditor_id { get; set; }
         public decimal amount { get; set; }
     
+        public virtual Account Account { get; set; }
         public virtual Creditor Creditor { get; set; }
         public virtual Fund Fund { get; set; }
-        public virtual Account Account { get; set; }
     }
 }

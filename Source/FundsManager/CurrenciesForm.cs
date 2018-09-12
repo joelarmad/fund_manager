@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FundsManager.Classes.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -68,7 +69,7 @@ namespace FundsManager
             }
             catch (Exception _ex)
             {
-                MessageBox.Show("Error: " + _ex.Message);
+                ErrorMessage.showErrorMessage(_ex);
             }
         }
 
@@ -100,7 +101,7 @@ namespace FundsManager
             }
             catch (Exception _ex)
             {
-                MessageBox.Show("Error: " + _ex.Message);
+                ErrorMessage.showErrorMessage(_ex);
             }
         }
 

@@ -35,6 +35,15 @@ namespace FundsManager
             My_db = new FundsDBEntities();
         }
 
+        public void Reset()
+        {
+            
+            if (fInstance != null)
+            {
+                My_db.discardChangesDbContextLevel();
+            }
+        }
+
         public Fund SelectedFund()
         {
             return my_db.Funds.Find(selected);

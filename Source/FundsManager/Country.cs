@@ -31,8 +31,8 @@ namespace FundsManager
         public virtual ICollection<Bank> Banks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Client> Clients { get; set; }
+        public virtual Fund Fund { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UnderlyingDebtor> UnderlyingDebtors { get; set; }
-        public virtual Fund Fund { get; set; }
     }
 }

@@ -590,14 +590,16 @@ namespace FundsManager
                     makeMovement();
                 }
             }
-            catch (Exception _ex)
+            catch (Exception ex)
             {
-                Console.WriteLine("Error in GeneralLedgerForm.button2_Click: " + _ex.Message);
+                ErrorMessage.showErrorMessage(ex);
             }
         }
 
         private void makeMovement()
         {
+            int created_movement_id = 0;
+
             try
             {
                 if (!EditMode)
@@ -617,6 +619,8 @@ namespace FundsManager
 
                     manager.My_db.AccountingMovements.Add(_movement);
                     manager.My_db.SaveChanges();
+
+                    created_movement_id = _movement.Id;
 
                     textBox3.Text = KeyDefinitions.NextAccountMovementReference;
                     textBox4.Clear();
@@ -764,7 +768,22 @@ namespace FundsManager
             }
             catch (Exception _ex)
             {
-                Console.WriteLine("Error in GeneralLedgerForm.makeMovement: " + _ex.Message);
+                ErrorMessage.showErrorMessage(_ex);
+
+                //Try to rollback
+                try
+                {
+                    if (!EditMode)
+                    {
+                        manager.Reset();
+
+                        //TODO: analizar rollback
+                    }
+                }
+                catch (Exception _ex2)
+                {
+                    ErrorMessage.showErrorMessage(_ex2);
+                }
             }
         }
 

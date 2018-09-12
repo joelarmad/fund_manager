@@ -17,5 +17,8 @@ namespace FundsManager
         public int Id { get; set; }
         public string Name { get; set; }
         public string Value { get; set; }
+        public Nullable<int> FundId { get; set; }
+    
+        public virtual Fund Fund { get; set; }
     }
 }

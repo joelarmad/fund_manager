@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FundsManager.Classes.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -64,7 +65,7 @@ namespace FundsManager
             }
             catch (Exception _ex)
             {
-                MessageBox.Show("Error: " + _ex.Message);
+                ErrorMessage.showErrorMessage(_ex);
             }
         }
 
@@ -181,18 +182,7 @@ namespace FundsManager
             }
             catch (Exception _ex)
             {
-                string msg = "";
-
-                Exception inner = _ex.InnerException;
-
-                while (inner != null)
-                {
-                    msg += inner.Message;
-                    msg += "\r";
-                    inner = inner.InnerException;
-                }
-
-                MessageBox.Show("Error: " + msg);
+                ErrorMessage.showErrorMessage(_ex);
             }
         }
     }

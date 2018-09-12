@@ -17,8 +17,8 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Disbursement()
         {
-            this.DisbursementPayments = new HashSet<DisbursementPayment>();
             this.DisbursementGeneratedInterestDetails = new HashSet<DisbursementGeneratedInterestDetail>();
+            this.DisbursementPayments = new HashSet<DisbursementPayment>();
         }
     
         public int Id { get; set; }
@@ -42,14 +42,14 @@ namespace FundsManager
         public virtual Bank Bank { get; set; }
         public virtual Client Client { get; set; }
         public virtual Currency Currency { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementGeneratedInterestDetail> DisbursementGeneratedInterestDetails { get; set; }
         public virtual Fund Fund { get; set; }
         public virtual Investment Investment { get; set; }
         public virtual Sector Sector { get; set; }
+        public virtual Shipment Shipment { get; set; }
         public virtual UnderlyingDebtor UnderlyingDebtor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementPayment> DisbursementPayments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DisbursementGeneratedInterestDetail> DisbursementGeneratedInterestDetails { get; set; }
-        public virtual Shipment Shipment { get; set; }
     }
 }

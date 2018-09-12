@@ -174,13 +174,12 @@
     <Compile Include="Classes\DataModel\Bond.cs" />
     <Compile Include="Classes\DataModel\BondInvestor.cs" />
     <Compile Include="Classes\DataModel\Disbursement.cs" />
+    <Compile Include="Classes\DataModel\FundsDBEntities.cs" />
     <Compile Include="Classes\Task\GlobalProcess.cs" />
     <Compile Include="Classes\Utilities\Conversions.cs" />
+    <Compile Include="Classes\Utilities\ErrorMessage.cs" />
     <Compile Include="Classes\Utilities\KeyDefinitions.cs" />
     <Compile Include="Client.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ClientContract.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ClientsForm.cs">

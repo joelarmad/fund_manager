@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
+using FundsManager.Classes.Utilities;
 
 namespace FundsManager
 {
@@ -360,6 +361,8 @@ namespace FundsManager
 
         private void cmdCreate_Click(object sender, EventArgs e)
         {
+            int created_investment_id = 0;
+
             try
             {
                 decimal _totalDisbursement = 0;
@@ -376,6 +379,8 @@ namespace FundsManager
                 manager.My_db.Investments.Add(_newInvestment);
                 manager.My_db.SaveChanges();
 
+                created_investment_id = _newInvestment.Id;
+
                 foreach (Disbursement _disbursement in disbursements)
                 {
                     _disbursement.investment_id = _newInvestment.Id;
@@ -384,7 +389,6 @@ namespace FundsManager
                     _totalProfitShare += _disbursement.profit_share;
 
                     manager.My_db.Disbursements.Add(_disbursement);
-
                     manager.My_db.SaveChanges();
 
                     foreach (int _itemId in _disbursement.ItemsIds)
@@ -398,10 +402,11 @@ namespace FundsManager
                             _disbursementItem.DisbursementId = _disbursement.Id;
 
                             manager.My_db.DisbursementItems.Add(_disbursementItem);
+                            manager.My_db.SaveChanges();
                         }
                     }
 
-                    manager.My_db.SaveChanges();
+                    
                 }
 
                 _newInvestment.total_disbursement = _totalDisbursement;
@@ -431,7 +436,47 @@ namespace FundsManager
             }
             catch (Exception _ex)
             {
-                Console.WriteLine("Error in InvestmentsForm.cmdCreate_Click: " + _ex.Message);
+                ErrorMessage.showErrorMessage(_ex);
+
+                //rollback
+                try
+                {
+                    manager.Reset();
+
+                    Investment inv = manager.My_db.Investments.FirstOrDefault(x => x.Id == created_investment_id);
+
+
+                    if (inv != null)
+                    {
+                        foreach (Disbursement disb in inv.Disbursements)
+                        {
+
+                            if (disb != null)
+                            {
+                                List<DisbursementItem> disbItms = manager.My_db.DisbursementItems.Where(x => x.DisbursementId == disb.Id).ToList();
+
+                                foreach (DisbursementItem disbItem in disbItms)
+                                {
+                                    manager.My_db.DisbursementItems.Remove(disbItem);
+                                }
+
+                                manager.My_db.SaveChanges();
+
+                                manager.My_db.Disbursements.Remove(disb);
+
+                                manager.My_db.SaveChanges();
+                            }
+                        }
+
+                        manager.My_db.Investments.Remove(inv);
+                        manager.My_db.SaveChanges();
+                    }
+
+                }
+                catch (Exception _ex2)
+                {
+                    ErrorMessage.showErrorMessage(_ex2);
+                }
             }
         }
 

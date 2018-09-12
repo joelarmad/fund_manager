@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
 using FundsManager.ReportForms;
+using FundsManager.Classes.Utilities;
 
 namespace FundsManager
 {
@@ -296,7 +297,7 @@ namespace FundsManager
             catch (Exception _ex)
             {
                 Console.WriteLine("Error in DisbursementsForm.cmdPay_Click: " + _ex.Message);
-                MessageBox.Show("Error!! It is probably that rollback will be needed!!");
+                ErrorMessage.showErrorMessage(_ex);
             }
         }
     }

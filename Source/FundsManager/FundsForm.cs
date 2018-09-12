@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FundsManager.Classes.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -59,20 +60,27 @@ namespace FundsManager
             }
             catch (Exception _ex)
             {
-                MessageBox.Show("Error: " + _ex.Message);
+                ErrorMessage.showErrorMessage(_ex);
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult alert;
-            alert = MessageBox.Show("Warning, this action would delete all the operations of this fund. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-            if (alert == DialogResult.OK)
+            try
             {
-                
-                manager.DeleteFund(Convert.ToInt32(listBox1.SelectedValue));                
-                this.fundsTableAdapter.Fill(this.fundsDBDataSet.Funds);
-                listBox1.SelectedIndex = -1;
+                DialogResult alert;
+                alert = MessageBox.Show("Warning, this action would delete all the operations of this fund. Are you sure that´s what you want?", "Delete Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (alert == DialogResult.OK)
+                {
+
+                    manager.DeleteFund(Convert.ToInt32(listBox1.SelectedValue));
+                    this.fundsTableAdapter.Fill(this.fundsDBDataSet.Funds);
+                    listBox1.SelectedIndex = -1;
+                }
+            }
+            catch (Exception _ex)
+            {
+                ErrorMessage.showErrorMessage(_ex);
             }
         }
 

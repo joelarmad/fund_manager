@@ -18,6 +18,7 @@ namespace FundsManager
         public Fund()
         {
             this.AccountingMovements = new HashSet<AccountingMovement>();
+            this.Accounts = new HashSet<Account>();
             this.AccountsBankingAccounts = new HashSet<AccountsBankingAccount>();
             this.AccountsClients = new HashSet<AccountsClient>();
             this.AccountsCreditors = new HashSet<AccountsCreditor>();
@@ -30,19 +31,19 @@ namespace FundsManager
             this.Creditors = new HashSet<Creditor>();
             this.Currencies = new HashSet<Currency>();
             this.Disbursement_dates = new HashSet<Disbursement_dates>();
+            this.Disbursements = new HashSet<Disbursement>();
             this.Employees = new HashSet<Employee>();
+            this.Investments = new HashSet<Investment>();
             this.Investors = new HashSet<Investor>();
             this.Items = new HashSet<Item>();
+            this.letter_of_credits = new HashSet<letter_of_credits>();
             this.Movements_Accounts = new HashSet<Movements_Accounts>();
             this.OtherDetails = new HashSet<OtherDetail>();
+            this.Resources = new HashSet<Resource>();
             this.Sectors = new HashSet<Sector>();
             this.Shareholders = new HashSet<Shareholder>();
             this.Subaccounts = new HashSet<Subaccount>();
             this.UnderlyingDebtors = new HashSet<UnderlyingDebtor>();
-            this.Investments = new HashSet<Investment>();
-            this.Disbursements = new HashSet<Disbursement>();
-            this.Accounts = new HashSet<Account>();
-            this.letter_of_credits = new HashSet<letter_of_credits>();
         }
     
         public int Id { get; set; }
@@ -52,6 +53,8 @@ namespace FundsManager
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountingMovement> AccountingMovements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Account> Accounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountsBankingAccount> AccountsBankingAccounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -77,15 +80,23 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disbursement_dates> Disbursement_dates { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Disbursement> Disbursements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Investment> Investments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Investor> Investors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Item> Items { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<letter_of_credits> letter_of_credits { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movements_Accounts> Movements_Accounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OtherDetail> OtherDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Resource> Resources { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sector> Sectors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -94,13 +105,5 @@ namespace FundsManager
         public virtual ICollection<Subaccount> Subaccounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UnderlyingDebtor> UnderlyingDebtors { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Investment> Investments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Disbursement> Disbursements { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<letter_of_credits> letter_of_credits { get; set; }
     }
 }

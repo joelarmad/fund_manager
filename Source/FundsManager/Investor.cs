@@ -28,8 +28,8 @@ namespace FundsManager
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BondsInvestor> BondsInvestors { get; set; }
+        public virtual Fund Fund { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InvestorBondInterest> InvestorBondInterests { get; set; }
-        public virtual Fund Fund { get; set; }
     }
 }

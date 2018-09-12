@@ -338,7 +338,7 @@ namespace FundsManager
             }
             catch (Exception _ex)
             {
-                Console.WriteLine("Error in BondsForm.button2_Click: " + _ex.Message);
+                ErrorMessage.showErrorMessage(_ex);
             }
         }
 

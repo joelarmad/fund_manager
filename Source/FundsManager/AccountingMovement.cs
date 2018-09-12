@@ -30,8 +30,8 @@ namespace FundsManager
         public string contract { get; set; }
     
         public virtual Currency Currency { get; set; }
+        public virtual Fund Fund { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movements_Accounts> Movements_Accounts { get; set; }
-        public virtual Fund Fund { get; set; }
     }
 }

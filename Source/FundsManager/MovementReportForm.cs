@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FundsManager.Classes.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -111,9 +112,9 @@ namespace FundsManager
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception _ex)
             {
-                Console.WriteLine(ex.Message);
+                ErrorMessage.showErrorMessage(_ex);
             }
         }
 

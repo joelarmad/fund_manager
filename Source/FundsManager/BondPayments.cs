@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FundsManager.Classes.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -161,28 +162,35 @@ namespace FundsManager
 
         private void cmdPayInterest_Click(object sender, EventArgs e)
         {
-            if (lvGeneratedInterest.SelectedIndices.Count > 0 && lvGeneratedInterest.SelectedIndices[0] >= 0)
+            try
             {
-                int _index = lvGeneratedInterest.SelectedIndices[0];
-
-                int _interestId = Convert.ToInt32(lvGeneratedInterest.Items[_index].Text);
-
-                InvestorBondInterest _interest = manager.My_db.InvestorBondInterests.FirstOrDefault(x => x.Id == _interestId);
-
-                if (_interest != null && !_interest.Extracted)
+                if (lvGeneratedInterest.SelectedIndices.Count > 0 && lvGeneratedInterest.SelectedIndices[0] >= 0)
                 {
-                    _interest.Extracted = true;
-                    _interest.ExtractionDate = DateTime.Now.Date;
+                    int _index = lvGeneratedInterest.SelectedIndices[0];
 
-                    //TODO: Generar los movimientos de cuenta para el pago del interes.
+                    int _interestId = Convert.ToInt32(lvGeneratedInterest.Items[_index].Text);
 
-                    manager.My_db.SaveChanges();
+                    InvestorBondInterest _interest = manager.My_db.InvestorBondInterests.FirstOrDefault(x => x.Id == _interestId);
 
-                    loadInterests();
+                    if (_interest != null && !_interest.Extracted)
+                    {
+                        _interest.Extracted = true;
+                        _interest.ExtractionDate = DateTime.Now.Date;
 
-                    lvGeneratedInterest.SelectedIndices.Clear();
+                        //TODO: Generar los movimientos de cuenta para el pago del interes.
+
+                        manager.My_db.SaveChanges();
+
+                        loadInterests();
+
+                        lvGeneratedInterest.SelectedIndices.Clear();
+                    }
+
                 }
-
+            }
+            catch (Exception _ex)
+            {
+                ErrorMessage.showErrorMessage(_ex);
             }
         }
 
@@ -199,21 +207,29 @@ namespace FundsManager
 
         private void cmdPayAllInterest_Click(object sender, EventArgs e)
         {
-            if (fBondId > 0 && fInvestorId > 0)
+            try
             {
+                if (fBondId > 0 && fInvestorId > 0)
+                {
 
-                List<InvestorBondInterest> _interests = manager.My_db.InvestorBondInterests.Where(x => x.BondId == fBondId && x.InvestorId == fInvestorId && !x.Extracted).ToList();
+                    List<InvestorBondInterest> _interests = manager.My_db.InvestorBondInterests.Where(x => x.BondId == fBondId && x.InvestorId == fInvestorId && !x.Extracted).ToList();
 
-                foreach (InvestorBondInterest _interest in _interests) {
-                    _interest.Extracted = true;
-                    _interest.ExtractionDate = DateTime.Now.Date;
+                    foreach (InvestorBondInterest _interest in _interests)
+                    {
+                        _interest.Extracted = true;
+                        _interest.ExtractionDate = DateTime.Now.Date;
 
-                    //TODO: Generar el movimiento de cuenta necesario
+                        //TODO: Generar el movimiento de cuenta necesario
 
-                    manager.My_db.SaveChanges();
+                        manager.My_db.SaveChanges();
+                    }
+
+                    loadInterests();
                 }
-
-                loadInterests();
+            }
+            catch (Exception _ex)
+            {
+                ErrorMessage.showErrorMessage(_ex);
             }
         }
 

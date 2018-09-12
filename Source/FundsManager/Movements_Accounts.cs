@@ -26,9 +26,9 @@ namespace FundsManager
         public decimal acc_amount { get; set; }
         public decimal subacc_amount { get; set; }
     
-        public virtual Subaccount Subaccount1 { get; set; }
         public virtual AccountingMovement AccountingMovement { get; set; }
-        public virtual Fund Fund { get; set; }
         public virtual Account Account { get; set; }
+        public virtual Fund Fund { get; set; }
+        public virtual Subaccount Subaccount1 { get; set; }
     }
 }

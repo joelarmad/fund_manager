@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FundsManager.Classes.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,32 +32,40 @@ namespace FundsManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!fEditMode)
+            try
             {
-                UnderlyingDebtor _debtor = new UnderlyingDebtor();
-                _debtor.name = txtName.Text;
-                _debtor.FK_UnderlyingDebtors_Funds = manager.Selected;
-                _debtor.number = txtNumber.Text;
-                _debtor.CountryId = int.Parse(cbCountry.SelectedValue.ToString());
-                manager.My_db.UnderlyingDebtors.Add(_debtor);
-                manager.My_db.SaveChanges();
-            }
-            else
-            {
-                UnderlyingDebtor _selectedItem = manager.My_db.UnderlyingDebtors.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
-
-                if (_selectedItem != null)
+                if (!fEditMode)
                 {
-                    _selectedItem.name = txtName.Text;
-                    _selectedItem.number = txtNumber.Text;
-                    _selectedItem.CountryId = int.Parse(cbCountry.SelectedValue.ToString());
+                    UnderlyingDebtor _debtor = new UnderlyingDebtor();
+                    _debtor.name = txtName.Text;
+                    _debtor.FK_UnderlyingDebtors_Funds = manager.Selected;
+                    _debtor.number = txtNumber.Text;
+                    _debtor.CountryId = int.Parse(cbCountry.SelectedValue.ToString());
+                    manager.My_db.UnderlyingDebtors.Add(_debtor);
                     manager.My_db.SaveChanges();
                 }
+                else
+                {
+                    UnderlyingDebtor _selectedItem = manager.My_db.UnderlyingDebtors.FirstOrDefault(x => x.Id == (int)listBox1.SelectedValue);
+
+                    if (_selectedItem != null)
+                    {
+                        _selectedItem.name = txtName.Text;
+                        _selectedItem.number = txtNumber.Text;
+                        _selectedItem.CountryId = int.Parse(cbCountry.SelectedValue.ToString());
+                        manager.My_db.SaveChanges();
+                    }
+                }
+
+                loadUnderlyingDebtorsData();
+
+                cmdCancel_Click(null, null);
             }
-
-            loadUnderlyingDebtorsData();
-
-            cmdCancel_Click(null, null);
+            catch (Exception _ex)
+            {
+                ErrorMessage.showErrorMessage(_ex);
+            }
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -75,7 +84,7 @@ namespace FundsManager
             }
             catch (Exception _ex)
             {
-                MessageBox.Show("Error: " + _ex.Message);
+                ErrorMessage.showErrorMessage(_ex);
             }
         }
 

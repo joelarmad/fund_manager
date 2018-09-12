@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FundsManager.ReportForms;
+using FundsManager.Classes.Utilities;
 
 namespace FundsManager
 {
@@ -94,7 +95,7 @@ namespace FundsManager
             }
             catch (Exception _ex)
             {
-                Console.WriteLine("Error at ProfitShareToAccrueForm.cmdGenerateInterest_Click: " + _ex.Message);
+                ErrorMessage.showErrorMessage(_ex);
             }
 
             cmdGenerateInterest.Enabled = true;
