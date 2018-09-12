@@ -775,7 +775,6 @@ namespace FundsManager
                 {
                     if (!EditMode)
                     {
-                        manager.Reset();
 
                         //TODO: analizar rollback
                     }

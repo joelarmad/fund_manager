@@ -12,6 +12,8 @@ namespace FundsManager.Classes.Utilities
 
         public static void showErrorMessage(Exception ex)
         {
+            MyFundsManager.SingletonInstance.Reset();
+
             string msg = ex.Message + "\r";
 
             Exception inner = ex.InnerException;

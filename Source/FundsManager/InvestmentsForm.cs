@@ -441,7 +441,6 @@ namespace FundsManager
                 //rollback
                 try
                 {
-                    manager.Reset();
 
                     Investment inv = manager.My_db.Investments.FirstOrDefault(x => x.Id == created_investment_id);
 

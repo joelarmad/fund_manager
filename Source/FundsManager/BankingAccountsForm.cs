@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FundsManager.Classes.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -88,17 +89,9 @@ namespace FundsManager
                 cmdCancel_Click(null, null);
 
             }
-            catch (DbEntityValidationException ex)
+            catch (Exception _ex)
             {
-                var errorMessages = ex.EntityValidationErrors
-                        .SelectMany(x => x.ValidationErrors)
-                        .Select(x => x.ErrorMessage);
-
-                var fullErrorMessage = string.Join("; ", errorMessages);
-
-                var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
-
-                throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+                ErrorMessage.showErrorMessage(_ex);
             }            
         }
 
@@ -122,7 +115,7 @@ namespace FundsManager
             }
             catch (Exception _ex)
             {
-                MessageBox.Show("Error: " + _ex.Message);
+                ErrorMessage.showErrorMessage(_ex);
             }
         }
 
