@@ -14,6 +14,7 @@ namespace FundsManager
 {
     public partial class GeneralLedgerForm : Form
     {
+        public bool AvoidAccountBalanceValidation = false;
 
         public bool EditMode = false;
         public int EditAccountMovementId = 0;
@@ -289,7 +290,7 @@ namespace FundsManager
                     string[] totales = { "", "", "Total", String.Format("{0:n}", total_debit), String.Format("{0:n}", total_credit) };
                     var listViewItemTotal = new ListViewItem(totales);
 
-                    if (total_credit == total_debit)
+                    if (total_credit == total_debit || AvoidAccountBalanceValidation)
                     {
                         _color = Color.FromName("Green");
                         button2.Enabled = true;
@@ -503,7 +504,7 @@ namespace FundsManager
                         string[] totales = { "", "", "Total", String.Format("{0:n}", total_debit), String.Format("{0:n}", total_credit) };
                         var listViewItemTotal = new ListViewItem(totales);
 
-                        if (total_credit == total_debit)
+                        if (total_credit == total_debit || AvoidAccountBalanceValidation)
                         {
                             _color = Color.FromName("Green");
                             button2.Enabled = true;
@@ -1041,6 +1042,14 @@ namespace FundsManager
         {
             try
             {
+                if (AvoidAccountBalanceValidation)
+                {
+                    leftAccount = 0;
+                    rightAccount = 0;
+                    canMakeMovement = true;
+                    return true;
+                }
+
                 decimal _leftAccount = 0;   //Asset + Expense
                 decimal _rigthAccount = 0;  //Liability + Equity + Income
 

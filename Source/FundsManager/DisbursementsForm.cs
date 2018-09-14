@@ -208,8 +208,7 @@ namespace FundsManager
                                     //TODO: buscar valor correcto
                                     _accountingMovement.description = "";
                                     _accountingMovement.date = dPayment.payment_date;
-                                    //TODO: buscar valor correcto, debe ser unico
-                                    _accountingMovement.reference = DateTime.Now.Ticks.ToString();
+                                    _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference;
                                     _accountingMovement.FK_AccountingMovements_Currencies = toPay.currency_id;
                                     //TODO: buscar valor correcto
                                     _accountingMovement.original_reference = "";
@@ -277,6 +276,7 @@ namespace FundsManager
 
                         GeneralLedgerForm gledger = new GeneralLedgerForm();
                         gledger.StartPosition = FormStartPosition.CenterScreen;
+                        gledger.AvoidAccountBalanceValidation = true;
                         gledger.ShowDialog();
 
                         DisbursementPaymentForm disbursement_payments = new DisbursementPaymentForm();
