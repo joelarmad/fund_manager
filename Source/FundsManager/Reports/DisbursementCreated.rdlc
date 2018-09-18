@@ -236,7 +236,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=FormatNumber(Sum(Fields!profit_share.Value), 2)</Value>
+                              <Value>=FormatNumber(Sum(Fields!profit_share.Value), 7)</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Color>#666666</Color>

@@ -29,7 +29,7 @@ namespace FundsManager.Classes.Utilities
 
                     try
                     {
-                        last_reference = _manager.My_db.AccountingMovements.OrderByDescending(ac => ac.Id).First().reference;
+                        last_reference = _manager.My_db.AccountingMovements.OrderByDescending(ac => ac.Id).Where(x => x.reference.Substring(0, 2) == "GL").First().reference;
                     }
                     catch (Exception e)
                     {

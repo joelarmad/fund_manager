@@ -46289,29 +46289,23 @@ WHERE        (TypeId IN (3, 4)) AND (FundId = @FundId) AND (Date >= @BeginDate) 
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EndDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT        a.FK_Accounts_Funds AS FundId, a.number AS acct_number, \r\n         " +
-                "                CASE WHEN at.Id = 0 THEN \'Asset\' WHEN at.Id = 1 THEN \'Liability\'" +
-                " WHEN at.Id = 5 THEN \'Asset\' WHEN at.Id = 6 THEN \'Liability\' WHEN at.Id = 7 THEN" +
-                " \'Asset\' WHEN at.Id = 8 THEN \'Asset\' WHEN at.Id = 9 THEN \'Asset\' WHEN at.Id\r\n   " +
-                "                       = 10 THEN \'Liability\' WHEN at.Id = 11 THEN \'Liability\' EL" +
-                "SE \'\' END AS acct_type, a.name AS acct_name,\r\n                             (SELE" +
-                "CT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n                               " +
-                "FROM            MovementsView AS m\r\n                               WHERE        " +
-                "(account_id = a.Id) AND (Date >= @BeginDate) AND (Date < @EndDate)) AS acct_amou" +
-                "nt,\r\n                             (SELECT        ISNULL(SUM(Shift_Amount), 0) AS" +
-                " Expr1\r\n                               FROM            MovementsView AS m\r\n     " +
-                "                          WHERE        (Date >= @BeginDate) AND (Date < @EndDate" +
-                ") AND (TypeId IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalAsset,\r\n   " +
-                "                          (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n" +
-                "                               FROM            MovementsView AS m\r\n             " +
-                "                  WHERE        (Date >= @BeginDate) AND (Date < @EndDate) AND (T" +
-                "ypeId NOT IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalLiability\r\nFROM" +
-                "            Accounts AS a INNER JOIN\r\n                         AccountType AS at" +
-                " ON a.type = at.Id AND at.Id IN (0, 1, 5, 6, 7, 8, 9, 10, 11)\r\nWHERE        (a.F" +
-                "K_Accounts_Funds = @FundId)";
+            this._commandCollection[1].CommandText = @"SELECT        a.FK_Accounts_Funds AS FundId, a.number AS acct_number, 
+                         CASE WHEN at.Id = 0 THEN 'Asset' WHEN at.Id = 1 THEN 'Liability' WHEN at.Id = 5 THEN 'Asset' WHEN at.Id = 6 THEN 'Liability' WHEN at.Id = 7 THEN 'Asset' WHEN at.Id = 8 THEN 'Asset' WHEN at.Id = 9 THEN 'Asset' WHEN at.Id
+                          = 10 THEN 'Liability' WHEN at.Id = 11 THEN 'Liability' ELSE '' END AS acct_type, a.name AS acct_name,
+                             (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1
+                               FROM            MovementsView AS m
+                               WHERE        (account_id = a.Id) AND (Date <= @EndDate)) AS acct_amount,
+                             (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1
+                               FROM            MovementsView AS m
+                               WHERE        (Date <= @EndDate) AND (TypeId IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalAsset,
+                             (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1
+                               FROM            MovementsView AS m
+                               WHERE        (Date <= @EndDate) AND (TypeId NOT IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalLiability
+FROM            Accounts AS a INNER JOIN
+                         AccountType AS at ON a.type = at.Id AND at.Id IN (0, 1, 5, 6, 7, 8, 9, 10, 11)
+WHERE        (a.FK_Accounts_Funds = @FundId)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FundId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BeginDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EndDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
@@ -46375,11 +46369,10 @@ WHERE        (TypeId IN (3, 4)) AND (FundId = @FundId) AND (Date >= @BeginDate) 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByDateInterval(FundsDBDataSet.AccountBalanceViewDataTable dataTable, int FundId, System.DateTime BeginDate, System.DateTime EndDate) {
+        public virtual int FillByDateInterval(FundsDBDataSet.AccountBalanceViewDataTable dataTable, int FundId, System.DateTime EndDate) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(FundId));
-            this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(BeginDate));
-            this.Adapter.SelectCommand.Parameters[2].Value = ((System.DateTime)(EndDate));
+            this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(EndDate));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }

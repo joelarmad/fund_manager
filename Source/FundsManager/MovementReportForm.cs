@@ -78,7 +78,7 @@ namespace FundsManager
                         else
                             row[4] = "No Subaccount";
 
-                        //subaccount_type  1 -> Client, 2 -> Banking Account, 3 -> Employee, 4 -> Lender, 5 -> OtherDetail
+                        //subaccount_type  1 -> Client, 2 -> Banking Account, 3 -> Employee, 4 -> Lender, 5 -> OtherDetail, 6 -> Shareholder
 
                         switch (my_account.subaccount_type)
                         {
@@ -99,6 +99,9 @@ namespace FundsManager
                                 break;
                             case 5:
                                 row[5] = manager.My_db.OtherDetails.Find(my_account.subaccount).name;
+                                break;
+                            case 6:
+                                row[5] = manager.My_db.Shareholders.Find(my_account.subaccount).name;
                                 break;
                         }
 

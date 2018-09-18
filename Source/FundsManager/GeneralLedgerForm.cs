@@ -19,6 +19,8 @@ namespace FundsManager
         public bool EditMode = false;
         public int EditAccountMovementId = 0;
 
+        public string InjectedReference = "";
+
 
         private MyFundsManager manager;
         private AccountingMovement AccountingMovementToEdit;
@@ -26,7 +28,7 @@ namespace FundsManager
         private List<Movement> movementsToDelete;
         private List<Account> fFloatingAccounts;
 
-        //subaccount_type  1 -> Client, 2 -> Banking Account, 3 -> Employee, 4 -> Lender, 5 -> OtherDetail
+        //subaccount_type  1 -> Client, 2 -> Banking Account, 3 -> Employee, 4 -> Lender, 5 -> OtherDetail, 6 -> Shareholder
 
         private Decimal total_credit;
         private Decimal total_debit;
@@ -64,7 +66,7 @@ namespace FundsManager
                 cbSubaccount.SelectedIndex = -1;
                 cbOtherDetail.SelectedItem = null;
                 cbOtherDetail.SelectedIndex = -1;
-                textBox3.Text = KeyDefinitions.NextAccountMovementReference;
+                textBox3.Text = InjectedReference != "" ? InjectedReference : KeyDefinitions.NextAccountMovementReference;
 
                 fFloatingAccounts = manager.My_db.Accounts.Where(x => x.FK_Accounts_Funds == manager.Selected).ToList();
 
@@ -233,6 +235,9 @@ namespace FundsManager
             {
                 if (!EditMode)
                 {
+                    if (cbAccount.SelectedValue == null)
+                        return;
+
                     Movement movement = new Movement();
 
                     movement.Id = fMovementIdReference++;
@@ -599,191 +604,205 @@ namespace FundsManager
 
         private void makeMovement()
         {
-            int created_movement_id = 0;
-
-            try
+            if (listView1.Items.Count >= 0)
             {
-                if (!EditMode)
-                {
-                    AccountingMovement _movement = new AccountingMovement();
-                    _movement.FK_AccountingMovements_Funds = manager.Selected;
-                    _movement.description = textBox4.Text;
-                    _movement.date = Convert.ToDateTime(dateTimePicker1.Text);
-                    _movement.reference = textBox3.Text;
-                    _movement.FK_AccountingMovements_Currencies = Convert.ToInt32(comboBox4.SelectedValue);
-                    _movement.original_reference = textBox5.Text;
+                int created_movement_id = 0;
 
-                    if (txtContract.Visible)
-                    {
-                        _movement.contract = txtContract.Text;
-                    }
-
-                    manager.My_db.AccountingMovements.Add(_movement);
-                    manager.My_db.SaveChanges();
-
-                    created_movement_id = _movement.Id;
-
-                    textBox3.Text = KeyDefinitions.NextAccountMovementReference;
-                    textBox4.Clear();
-                    textBox5.Clear();
-                    txtContract.Clear();
-                    listView1.Items.Clear();
-                    textBox1.Text = 0.ToString();
-                    textBox2.Text = 0.ToString();
-                    total_credit = 0;
-                    total_debit = 0;
-
-                    foreach (Movement my_movement in movements)
-                    {
-                        //subaccount_type  1 -> Client, 2 -> Banking Account, 3 -> Employee, 4 -> Lender, 5 -> OtherDetail
-                        Movements_Accounts _maccount = new Movements_Accounts();
-
-                        _maccount.FK_Movements_Accounts_AccountingMovements = _movement.Id;
-                        _maccount.FK_Movements_Accounts_Funds = manager.Selected;
-                        _maccount.FK_Movements_Accounts_Accounts = my_movement.Account;
-                        if (my_movement.Subaccount != -1)
-                            _maccount.FK_Movements_Accounts_Subaccounts = my_movement.Subaccount;
-                        /*WARNING en la tabla Movements_Accounts los campos subaccount y subaccount_type se refieren a detail y detail_type respectivamente*/
-                        _maccount.subaccount_type = my_movement.Detail_type;
-                        if (my_movement.Detail != -1)
-                            _maccount.subaccount = my_movement.Detail;
-                        _maccount.debit = my_movement.Debit;
-                        _maccount.credit = my_movement.Credit;
-
-                        Account _account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == my_movement.Account);
-                        Subaccount _subAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == my_movement.Subaccount);
-
-                        int _creditFactor = 1;
-                        int _debitFactor = -1;
-
-                        if (Account.leftAccountingIncrement(_account.type))
-                        {
-                            _creditFactor = -1;
-                            _debitFactor = 1;
-                        }
-
-                        _account.amount += _debitFactor * my_movement.Debit;
-                        _account.amount += _creditFactor * my_movement.Credit;
-                        _maccount.acc_amount = _account.amount;
-
-                        if (_subAccount != null)
-                        {
-                            _subAccount.amount += _debitFactor * my_movement.Debit;
-                            _subAccount.amount += _creditFactor * my_movement.Credit;
-                            _maccount.subacc_amount = _subAccount.amount;
-                        }
-                        else
-                        {
-                            _maccount.subacc_amount = 0;
-                        }
-
-                        manager.My_db.Movements_Accounts.Add(_maccount);
-
-                        manager.My_db.SaveChanges();
-                    }
-                    movements.Clear();
-
-                    checkForContractVisibility();
-                }
-                else
-                {
-
-                    AccountingMovementToEdit.FK_AccountingMovements_Funds = manager.Selected;
-                    AccountingMovementToEdit.description = textBox4.Text;
-                    AccountingMovementToEdit.date = Convert.ToDateTime(dateTimePicker1.Text);
-                    AccountingMovementToEdit.reference = textBox3.Text;
-                    AccountingMovementToEdit.FK_AccountingMovements_Currencies = Convert.ToInt32(comboBox4.SelectedValue);
-                    AccountingMovementToEdit.original_reference = textBox5.Text;
-
-                    if (txtContract.Visible)
-                    {
-                        AccountingMovementToEdit.contract = txtContract.Text;
-                    }
-
-                    manager.My_db.SaveChanges();
-
-                    textBox3.Text = KeyDefinitions.NextAccountMovementReference;
-                    textBox4.Clear();
-                    textBox5.Clear();
-                    txtContract.Clear();
-                    listView1.Items.Clear();
-                    textBox1.Text = 0.ToString();
-                    textBox2.Text = 0.ToString();
-                    total_credit = 0;
-                    total_debit = 0;
-
-                    foreach (Movement my_movement in movements)
-                    {
-                        Movements_Accounts _maccount = manager.My_db.Movements_Accounts.FirstOrDefault(x => x.Id == my_movement.Id);
-                        
-                        _maccount.FK_Movements_Accounts_Accounts = my_movement.Account;
-                        if (my_movement.Subaccount != -1)
-                            _maccount.FK_Movements_Accounts_Subaccounts = my_movement.Subaccount;
-                        /*WARNING en la tabla Movements_Accounts los campos subaccount y subaccount_type se refieren a detail y detail_type respectivamente*/
-                        _maccount.subaccount_type = my_movement.Detail_type;
-                        if (my_movement.Detail != -1)
-                            _maccount.subaccount = my_movement.Detail;
-                        _maccount.debit = my_movement.Debit;
-                        _maccount.credit = my_movement.Credit;
-
-                        Account _account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == my_movement.Account);
-                        Subaccount _subAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == my_movement.Subaccount);
-
-                        int _creditFactor = 1;
-                        int _debitFactor = -1;
-
-                        if (Account.leftAccountingIncrement(_account.type))
-                        {
-                            _creditFactor = -1;
-                            _debitFactor = 1;
-                        }
-
-                        _account.amount += _debitFactor * my_movement.Debit;
-                        _account.amount += _creditFactor * my_movement.Credit;
-                        _maccount.acc_amount = _account.amount;
-
-                        if (_subAccount != null)
-                        {
-                            _subAccount.amount += _debitFactor * my_movement.Debit;
-                            _subAccount.amount += _creditFactor * my_movement.Credit;
-                            _maccount.subacc_amount = _subAccount.amount;
-                        }
-                        else
-                        {
-                            _maccount.subacc_amount = 0;
-                        }
-
-                        manager.My_db.SaveChanges();
-                    }
-
-                    foreach (Movement toDelete in movementsToDelete)
-                    {
-                        manager.DeleteMovementAccount(toDelete.Id);
-                    }
-
-                    movements.Clear();
-                    movementsToDelete.Clear();
-
-                    this.Close();
-                }
-            }
-            catch (Exception _ex)
-            {
-                ErrorMessage.showErrorMessage(_ex);
-
-                //Try to rollback
                 try
                 {
                     if (!EditMode)
                     {
+                        AccountingMovement _movement = new AccountingMovement();
+                        _movement.FK_AccountingMovements_Funds = manager.Selected;
+                        _movement.description = textBox4.Text;
+                        _movement.date = Convert.ToDateTime(dateTimePicker1.Text);
+                        _movement.reference = textBox3.Text;
+                        _movement.FK_AccountingMovements_Currencies = Convert.ToInt32(comboBox4.SelectedValue);
+                        _movement.original_reference = textBox5.Text;
 
-                        //TODO: analizar rollback
+                        if (txtContract.Visible)
+                        {
+                            _movement.contract = txtContract.Text;
+                        }
+
+                        manager.My_db.AccountingMovements.Add(_movement);
+                        manager.My_db.SaveChanges();
+
+                        created_movement_id = _movement.Id;
+
+                        textBox3.Text = KeyDefinitions.NextAccountMovementReference;
+                        textBox4.Clear();
+                        textBox5.Clear();
+                        txtContract.Clear();
+                        listView1.Items.Clear();
+                        textBox1.Text = 0.ToString();
+                        textBox2.Text = 0.ToString();
+                        total_credit = 0;
+                        total_debit = 0;
+
+                        foreach (Movement my_movement in movements)
+                        {
+                            //subaccount_type  1 -> Client, 2 -> Banking Account, 3 -> Employee, 4 -> Lender, 5 -> OtherDetail, 6 -> Shareholder
+                            Movements_Accounts _maccount = new Movements_Accounts();
+
+                            _maccount.FK_Movements_Accounts_AccountingMovements = _movement.Id;
+                            _maccount.FK_Movements_Accounts_Funds = manager.Selected;
+                            _maccount.FK_Movements_Accounts_Accounts = my_movement.Account;
+                            if (my_movement.Subaccount != -1)
+                                _maccount.FK_Movements_Accounts_Subaccounts = my_movement.Subaccount;
+                            /*WARNING en la tabla Movements_Accounts los campos subaccount y subaccount_type se refieren a detail y detail_type respectivamente*/
+                            _maccount.subaccount_type = my_movement.Detail_type;
+                            if (my_movement.Detail != -1)
+                                _maccount.subaccount = my_movement.Detail;
+                            _maccount.debit = my_movement.Debit;
+                            _maccount.credit = my_movement.Credit;
+
+                            Account _account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == my_movement.Account);
+                            Subaccount _subAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == my_movement.Subaccount);
+
+                            int _creditFactor = 1;
+                            int _debitFactor = -1;
+
+                            if (Account.leftAccountingIncrement(_account.type))
+                            {
+                                _creditFactor = -1;
+                                _debitFactor = 1;
+                            }
+
+                            _account.amount += _debitFactor * my_movement.Debit;
+                            _account.amount += _creditFactor * my_movement.Credit;
+                            _maccount.acc_amount = _account.amount;
+
+                            if (_subAccount != null)
+                            {
+                                _subAccount.amount += _debitFactor * my_movement.Debit;
+                                _subAccount.amount += _creditFactor * my_movement.Credit;
+                                _maccount.subacc_amount = _subAccount.amount;
+                            }
+                            else
+                            {
+                                _maccount.subacc_amount = 0;
+                            }
+
+                            manager.My_db.Movements_Accounts.Add(_maccount);
+
+                            manager.My_db.SaveChanges();
+                        }
+                        movements.Clear();
+
+                        checkForContractVisibility();
+
+                        button2.Enabled = false;
+
+                        if (InjectedReference != "")
+                        {
+                            this.Close();
+                        }
+                    }
+                    else
+                    {
+
+                        AccountingMovementToEdit.FK_AccountingMovements_Funds = manager.Selected;
+                        AccountingMovementToEdit.description = textBox4.Text;
+                        AccountingMovementToEdit.date = Convert.ToDateTime(dateTimePicker1.Text);
+                        AccountingMovementToEdit.reference = textBox3.Text;
+                        AccountingMovementToEdit.FK_AccountingMovements_Currencies = Convert.ToInt32(comboBox4.SelectedValue);
+                        AccountingMovementToEdit.original_reference = textBox5.Text;
+
+                        if (txtContract.Visible)
+                        {
+                            AccountingMovementToEdit.contract = txtContract.Text;
+                        }
+
+                        manager.My_db.SaveChanges();
+
+                        textBox3.Text = KeyDefinitions.NextAccountMovementReference;
+                        textBox4.Clear();
+                        textBox5.Clear();
+                        txtContract.Clear();
+                        listView1.Items.Clear();
+                        textBox1.Text = 0.ToString();
+                        textBox2.Text = 0.ToString();
+                        total_credit = 0;
+                        total_debit = 0;
+
+                        foreach (Movement my_movement in movements)
+                        {
+                            Movements_Accounts _maccount = manager.My_db.Movements_Accounts.FirstOrDefault(x => x.Id == my_movement.Id);
+
+                            _maccount.FK_Movements_Accounts_Accounts = my_movement.Account;
+                            if (my_movement.Subaccount != -1)
+                                _maccount.FK_Movements_Accounts_Subaccounts = my_movement.Subaccount;
+                            /*WARNING en la tabla Movements_Accounts los campos subaccount y subaccount_type se refieren a detail y detail_type respectivamente*/
+                            _maccount.subaccount_type = my_movement.Detail_type;
+                            if (my_movement.Detail != -1)
+                                _maccount.subaccount = my_movement.Detail;
+                            _maccount.debit = my_movement.Debit;
+                            _maccount.credit = my_movement.Credit;
+
+                            Account _account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == my_movement.Account);
+                            Subaccount _subAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == my_movement.Subaccount);
+
+                            int _creditFactor = 1;
+                            int _debitFactor = -1;
+
+                            if (Account.leftAccountingIncrement(_account.type))
+                            {
+                                _creditFactor = -1;
+                                _debitFactor = 1;
+                            }
+
+                            _account.amount += _debitFactor * my_movement.Debit;
+                            _account.amount += _creditFactor * my_movement.Credit;
+                            _maccount.acc_amount = _account.amount;
+
+                            if (_subAccount != null)
+                            {
+                                _subAccount.amount += _debitFactor * my_movement.Debit;
+                                _subAccount.amount += _creditFactor * my_movement.Credit;
+                                _maccount.subacc_amount = _subAccount.amount;
+                            }
+                            else
+                            {
+                                _maccount.subacc_amount = 0;
+                            }
+
+                            manager.My_db.SaveChanges();
+                        }
+
+                        foreach (Movement toDelete in movementsToDelete)
+                        {
+                            manager.DeleteMovementAccount(toDelete.Id);
+                        }
+
+                        movements.Clear();
+                        movementsToDelete.Clear();
+
+                        this.Close();
                     }
                 }
-                catch (Exception _ex2)
+                catch (Exception _ex)
                 {
-                    ErrorMessage.showErrorMessage(_ex2);
+                    ErrorMessage.showErrorMessage(_ex);
+
+                    //Try to rollback
+                    try
+                    {
+                        if (!EditMode)
+                        {
+
+                            //TODO: analizar rollback
+                        }
+                    }
+                    catch (Exception _ex2)
+                    {
+                        ErrorMessage.showErrorMessage(_ex2);
+                    }
                 }
+            }
+            else
+            {
+                ErrorMessage.showErrorMessage(new Exception("Sorry, yo must add a movement account first."));
             }
         }
 

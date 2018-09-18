@@ -21,7 +21,6 @@ namespace FundsManager.ReportForms
 
         private void GeneralBalanceForm_Load(object sender, EventArgs e)
         {
-            dtpFrom.Value = new DateTime(DateTime.Now.Year, 1, 1);
             dtpTo.Value = DateTime.Now;
 
             refreshData();
@@ -36,10 +35,9 @@ namespace FundsManager.ReportForms
         {
             try
             {
-                DateTime from = Convert.ToDateTime(dtpFrom.Text);
                 DateTime to = Convert.ToDateTime(dtpTo.Text);
 
-                this.accountBalanceViewTableAdapter.FillByDateInterval(this.fundsDBDataSet.AccountBalanceView, manager.Selected, from, to);
+                this.accountBalanceViewTableAdapter.FillByDateInterval(this.fundsDBDataSet.AccountBalanceView, manager.Selected, to);
 
                 reportViewer1.RefreshReport();
             }

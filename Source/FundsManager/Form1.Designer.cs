@@ -49,6 +49,7 @@
             this.underlyingDebtorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shareholdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.letterOfCreditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.shipmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bondsToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +68,6 @@
             this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shipmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -177,7 +177,7 @@
             // 
             this.employeesToolStripMenuItem.Name = "employeesToolStripMenuItem";
             this.employeesToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.employeesToolStripMenuItem.Text = "Employees";
+            this.employeesToolStripMenuItem.Text = "Consultants";
             this.employeesToolStripMenuItem.Click += new System.EventHandler(this.employeesToolStripMenuItem_Click);
             // 
             // itemsToolStripMenuItem
@@ -235,6 +235,13 @@
             this.letterOfCreditToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.letterOfCreditToolStripMenuItem.Text = "Letter of Credit";
             this.letterOfCreditToolStripMenuItem.Click += new System.EventHandler(this.letterOfCreditToolStripMenuItem_Click);
+            // 
+            // shipmentsToolStripMenuItem
+            // 
+            this.shipmentsToolStripMenuItem.Name = "shipmentsToolStripMenuItem";
+            this.shipmentsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.shipmentsToolStripMenuItem.Text = "Shipments";
+            this.shipmentsToolStripMenuItem.Click += new System.EventHandler(this.shipmentsToolStripMenuItem_Click);
             // 
             // operationsToolStripMenuItem
             // 
@@ -373,13 +380,6 @@
             this.returnsStateToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.returnsStateToolStripMenuItem.Text = "Profit && Loss Statement";
             this.returnsStateToolStripMenuItem.Click += new System.EventHandler(this.returnsStateToolStripMenuItem_Click);
-            // 
-            // shipmentsToolStripMenuItem
-            // 
-            this.shipmentsToolStripMenuItem.Name = "shipmentsToolStripMenuItem";
-            this.shipmentsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.shipmentsToolStripMenuItem.Text = "Shipments";
-            this.shipmentsToolStripMenuItem.Click += new System.EventHandler(this.shipmentsToolStripMenuItem_Click);
             // 
             // Form1
             // 

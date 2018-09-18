@@ -90,9 +90,9 @@
             this.fundsDBDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label14 = new System.Windows.Forms.Label();
             this.cbShipment = new System.Windows.Forms.ComboBox();
+            this.shipmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label15 = new System.Windows.Forms.Label();
             this.letter_of_creditsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.letter_of_creditsTableAdapter();
-            this.shipmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.shipmentsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ShipmentsTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
@@ -280,7 +280,7 @@
             this.txtProfitShare.Name = "txtProfitShare";
             this.txtProfitShare.Size = new System.Drawing.Size(121, 20);
             this.txtProfitShare.TabIndex = 4;
-            this.txtProfitShare.Text = "0";
+            this.txtProfitShare.Text = "1";
             this.txtProfitShare.Click += new System.EventHandler(this.txtProfitShare_Click);
             this.txtProfitShare.TextChanged += new System.EventHandler(this.txtProfitShare_TextChanged);
             this.txtProfitShare.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtProfitShare_KeyUp);
@@ -434,26 +434,27 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "Profit Share";
-            this.columnHeader4.Width = 70;
+            this.columnHeader4.Width = 100;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Total to Collect";
-            this.columnHeader5.Width = 80;
+            this.columnHeader5.Width = 100;
             // 
             // columnHeader8
             // 
             this.columnHeader8.Text = "Collection Date";
-            this.columnHeader8.Width = 180;
+            this.columnHeader8.Width = 170;
             // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "Disbursement Date";
-            this.columnHeader6.Width = 180;
+            this.columnHeader6.Width = 170;
             // 
             // columnHeader7
             // 
             this.columnHeader7.Text = "Day";
+            this.columnHeader7.Width = 50;
             // 
             // cmdDeleteDisbursement
             // 
@@ -614,6 +615,11 @@
             this.cbShipment.ValueMember = "Id";
             this.cbShipment.SelectedIndexChanged += new System.EventHandler(this.cbShipment_SelectedIndexChanged);
             // 
+            // shipmentsBindingSource
+            // 
+            this.shipmentsBindingSource.DataMember = "Shipments";
+            this.shipmentsBindingSource.DataSource = this.fundsDBDataSet;
+            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -626,11 +632,6 @@
             // letter_of_creditsTableAdapter
             // 
             this.letter_of_creditsTableAdapter.ClearBeforeFill = true;
-            // 
-            // shipmentsBindingSource
-            // 
-            this.shipmentsBindingSource.DataMember = "Shipments";
-            this.shipmentsBindingSource.DataSource = this.fundsDBDataSet;
             // 
             // shipmentsTableAdapter
             // 
