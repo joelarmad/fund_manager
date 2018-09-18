@@ -22,7 +22,7 @@ namespace FundsManager.ReportForms
         private void DisbursementGeneratedInterestForm_Load(object sender, EventArgs e)
         {
             // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.DisbursementGeneratedInterestView' Puede moverla o quitarla según sea necesario.
-            this.disbursementGeneratedInterestViewTableAdapter.FillByGeneratedId(this.fundsDBDataSet.DisbursementGeneratedInterestView, generated_interest_id);
+            this.disbursementGeneratedInterestViewTableAdapter.FillByGeneratedInterestId(this.fundsDBDataSet.DisbursementGeneratedInterestView, generated_interest_id);
 
             this.reportViewer1.RefreshReport();
         }

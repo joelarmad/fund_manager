@@ -19,17 +19,123 @@ namespace FundsManager
         public ProfitShareToAccrueForm()
         {
             InitializeComponent();
+
+            loadDisbursements();
         }
 
-        private void cmdGenerateInterest_Click(object sender, EventArgs e)
+        private decimal AccrueInterest(ProfitShareToAccrue aProfitShareToAccrue)
         {
             try
             {
-                cmdGenerateInterest.Enabled = false;
+                int financingDays = (aProfitShareToAccrue.pay_date.Value - aProfitShareToAccrue.collection_date).Days;
 
-                DateTime _date = Convert.ToDateTime(dtpDate.Text);
+                if (financingDays > 0)
+                {
+                    decimal profitSharePerDay = aProfitShareToAccrue.profit_share / financingDays;
+                    return financingDays * profitSharePerDay;
+                }
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error at ProfitShareToAccrueForm.AccrueInterest: " + _ex.Message);
+            }
+            
+            return 0;
+        }
+
+        private void loadDisbursements()
+        {
+            try
+            {
+                lvDisbursements.Items.Clear();
+
+                DateTime _date = dtpDate.Value;
 
                 List<ProfitShareToAccrue> _profitShareToAccrueList = manager.My_db.ProfitShareToAccrues.Where(x => x.pay_date <= _date).ToList();
+
+                foreach (ProfitShareToAccrue _profitShareToAccrue in _profitShareToAccrueList)
+                {
+
+                    DisbursementGeneratedInterestDetail interestDetail = manager.My_db.DisbursementGeneratedInterestDetails.FirstOrDefault(x => x.disbursement_id == _profitShareToAccrue.Id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
+
+                    if (interestDetail == null)
+                    {
+                        string paid_date = _profitShareToAccrue.pay_date != null ? _profitShareToAccrue.pay_date.Value.ToLongDateString() : "";
+
+                        string[] row = {
+                            _profitShareToAccrue.Id.ToString(),
+                            _profitShareToAccrue.number,
+                            String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _profitShareToAccrue.amount),
+                            _profitShareToAccrue.collection_date.ToLongDateString(),
+                            _profitShareToAccrue.date.ToLongDateString(),
+                            paid_date
+                        };
+
+                        ListViewItem my_item = new ListViewItem(row);
+                        lvDisbursements.Items.Add(my_item);
+                    }
+                    
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            
+
+        }
+
+        private void dtpDate_ValueChanged(object sender, EventArgs e)
+        {
+            loadDisbursements();
+        }
+
+        private void generateInterest(bool forAll)
+        {
+            cmdGenerateInterest.Enabled = false;
+            cmdGenerateAllInterest.Enabled = false;
+
+            try
+            {
+                DateTime _date = Convert.ToDateTime(dtpDate.Text);
+
+                List<ProfitShareToAccrue> _profitShareToAccrueList = new List<ProfitShareToAccrue>();
+
+                if (!forAll)
+                {
+                    foreach (ListViewItem _item in lvDisbursements.SelectedItems)
+                    {
+                        int disbursementId = 0;
+
+                        if (int.TryParse(_item.Text, out disbursementId))
+                        {
+                            ProfitShareToAccrue toAcrue = manager.My_db.ProfitShareToAccrues.FirstOrDefault(x => x.Id == disbursementId);
+
+                            if (toAcrue != null)
+                            {
+                                _profitShareToAccrueList.Add(toAcrue);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (ListViewItem _item in lvDisbursements.Items)
+                    {
+                        int disbursementId = 0;
+
+                        if (int.TryParse(_item.Text, out disbursementId))
+                        {
+                            ProfitShareToAccrue toAcrue = manager.My_db.ProfitShareToAccrues.FirstOrDefault(x => x.Id == disbursementId);
+
+                            if (toAcrue != null)
+                            {
+                                _profitShareToAccrueList.Add(toAcrue);
+                            }
+                        }
+                    }
+                }
+
 
                 if (_profitShareToAccrueList.Count > 0)
                 {
@@ -42,7 +148,7 @@ namespace FundsManager
 
                     foreach (ProfitShareToAccrue _profitShareToAccrue in _profitShareToAccrueList)
                     {
-                        DisbursementGeneratedInterestDetail interestDetail = manager.My_db.DisbursementGeneratedInterestDetails.FirstOrDefault(x => x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
+                        DisbursementGeneratedInterestDetail interestDetail = manager.My_db.DisbursementGeneratedInterestDetails.FirstOrDefault(x => x.disbursement_id == _profitShareToAccrue.Id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
 
                         if (interestDetail == null)
                         {
@@ -70,7 +176,7 @@ namespace FundsManager
                         {
                             Console.WriteLine("Attempt to duplicate disbursement interest generation.");
                         }
-                        
+
                     }
 
                     if (interestCreated)
@@ -85,7 +191,7 @@ namespace FundsManager
                     {
                         MessageBox.Show("No actions performed.");
                     }
-                    
+
                 }
                 else
                 {
@@ -99,26 +205,21 @@ namespace FundsManager
             }
 
             cmdGenerateInterest.Enabled = true;
+            cmdGenerateAllInterest.Enabled = true;
         }
 
-        private decimal AccrueInterest(ProfitShareToAccrue aProfitShareToAccrue)
+        private void cmdGenerateAllInterest_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int financingDays = (aProfitShareToAccrue.pay_date.Value - aProfitShareToAccrue.collection_date).Days;
+            generateInterest(true);
 
-                if (financingDays > 0)
-                {
-                    decimal profitSharePerDay = aProfitShareToAccrue.profit_share / financingDays;
-                    return financingDays * profitSharePerDay;
-                }
-            }
-            catch (Exception _ex)
-            {
-                Console.WriteLine("Error at ProfitShareToAccrueForm.AccrueInterest: " + _ex.Message);
-            }
-            
-            return 0;
+            loadDisbursements();
+        }
+
+        private void cmdGenerateInterest_Click(object sender, EventArgs e)
+        {
+            generateInterest(false);
+
+            loadDisbursements();
         }
     }
 }

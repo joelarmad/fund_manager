@@ -27,6 +27,8 @@ namespace FundsManager
 
         private string fContractPreffix = "";
 
+        private bool fEditMode;
+
         public InvestmentsForm()
         {
             try
@@ -224,127 +226,24 @@ namespace FundsManager
                     return;
                 }
 
-                Decimal total_amount = 0;
-                Decimal total_profit = 0;
-                Decimal total_euro_collection = 0;
-                TimeSpan day = new TimeSpan();
                 float exchangeRate = 0;
 
                 if (float.TryParse(txtExchangeRate.Text, out exchangeRate) && exchangeRate > 0)
                 {
-                    Disbursement _disbursement = new Disbursement();
-
-                    _disbursement.fund_id = manager.Selected;
-
-                    int bankId = Convert.ToInt32(cbBank.SelectedValue);
-
-                    int underDebtorId = Convert.ToInt32(cbUnderlyingDebtor.SelectedValue);
-
-                    int shipmentId = Convert.ToInt32(cbShipment.SelectedValue);
-
-                    _disbursement.exchange_rate = exchangeRate;
-                    _disbursement.amount = Convert.ToDecimal(txtAmount.Text) / (decimal)exchangeRate;
-                    _disbursement.profit_share = Convert.ToDecimal(txtProfitShare.Text) / (decimal)exchangeRate;
-                    _disbursement.currency_id = Convert.ToInt32(cbCurrency.SelectedValue);                    
-
-                    if (bankId > 0)
+                    if (!fEditMode)
                     {
-                        _disbursement.bank_risk_id = bankId;
-                    }
-
-                    _disbursement.client_id = Convert.ToInt32(cbClient.SelectedValue);
-
-                    if (underDebtorId > 0)
-                    {
-                        _disbursement.underlying_debtor_id = underDebtorId;
-                    }
-                                        
-                    _disbursement.date = Convert.ToDateTime(dtpDisbursementDate.Text);
-                    _disbursement.collection_date = Convert.ToDateTime(dtpCollectionDate.Text);
-                    _disbursement.sector_id = Convert.ToInt32(cbSector.SelectedValue);
-                    _disbursement.number = txtNumber.Text;
-                    _disbursement.can_generate_interest = false;
-
-                    _disbursement.TextClient = cbClient.Text;
-                    _disbursement.TextUnderlyingDebtor = cbUnderlyingDebtor.Text;
-
-                    _disbursement.Euro_collection = _disbursement.amount + _disbursement.profit_share;
-
-                    if (shipmentId > 0)
-                    {
-                        _disbursement.shipment_id = shipmentId;
-                    }
-
-                    foreach (int _itemId in fItemIds)
-                    {
-                        _disbursement.ItemsIds.Add(_itemId);
-                    }
-
-                    int _index = -1;
-
-                    for (int i = 0; i < disbursements.Count; i++)
-                    {
-                        Disbursement _item = disbursements[i];
-
-                        if (_item.date > _disbursement.date)
-                        {
-                            disbursements.Insert(i, _disbursement);
-                            _index = i;
-                            break;
-                        }
-                    }
-
-                    if (_index == -1)
-                    {
-                        disbursements.Add(_disbursement);
-                    }
-
-                    if (disbursements.First<Disbursement>().date != _disbursement.date)
-                        day = _disbursement.date.Subtract(disbursements.First<Disbursement>().date);
-
-                    if (lvDisbursements.Items.Count > 0)
-                        lvDisbursements.Items.RemoveAt(lvDisbursements.Items.Count - 1);
-
-                    string[] row = { cbClient.Text, cbUnderlyingDebtor.Text,
-                        String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount),
-                        String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", _disbursement.profit_share),
-                        String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", _disbursement.Euro_collection),
-                        dtpCollectionDate.Text,
-                        dtpDisbursementDate.Text,
-                        Convert.ToString(day.Days) };
-                    ListViewItem my_item = new ListViewItem(row);
-
-                    if (_index == -1)
-                    {
-                        lvDisbursements.Items.Add(my_item);
+                        addDisbursement();
                     }
                     else
                     {
-                        lvDisbursements.Items.Insert(_index, my_item);
+                        deleteSelectedDisbursement();
+
+                        addDisbursement();
                     }
 
-                    foreach (Disbursement _dis in disbursements)
-                    {
-                        total_amount += _dis.amount;
-                        total_profit += _dis.profit_share;
-                        total_euro_collection += _dis.Euro_collection;
-                    }
+                    loadDisbursements();
 
-                    string[] totales = { "Total", "",
-                        String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_amount),
-                        String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", total_profit),
-                        String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", total_euro_collection) };
-                    ListViewItem listViewItemTotal = new ListViewItem(totales);
-                    lvDisbursements.Items.Add(listViewItemTotal);
-
-                    txtAmount.Text = "0";
-                    txtProfitShare.Text = "1";
-                    txtExchangeRate.Text = "0.0";
-                    txtTotalToBeCollected.Text = "0.0";
-                    lbISelectedItems.Items.Clear();
-                    fItemIds.Clear();
-                    txtNumber.Clear();
-                    cmdAddDisbursement.Enabled = false;
+                    cmdCancel_Click(null, null);
 
                     checkEnablingAddInvestmentButton();
                 }
@@ -356,6 +255,46 @@ namespace FundsManager
             catch (Exception _ex)
             {
                 Console.WriteLine("Error in InvestmentsForm.button2_Click: " + _ex.Message);
+            }
+        }
+
+        private void loadDisbursements()
+        {
+            try
+            {
+                lvDisbursements.Items.Clear();
+
+                Decimal total_amount = 0;
+                Decimal total_profit = 0;
+                Decimal total_euro_collection = 0;
+                TimeSpan day = new TimeSpan();
+
+                foreach (Disbursement _disbursement in disbursements)
+                {
+                    decimal _totalToBeCollected = _disbursement.amount + _disbursement.profit_share;
+
+                    if (disbursements.First<Disbursement>().date != _disbursement.date)
+                        day = _disbursement.date.Subtract(disbursements.First<Disbursement>().date);
+
+                    string[] row = { _disbursement.TextClient, _disbursement.TextUnderlyingDebtor, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", _disbursement.profit_share), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", _totalToBeCollected), _disbursement.collection_date.ToLongDateString(), _disbursement.date.ToLongDateString(), Convert.ToString(day.Days) };
+                    ListViewItem my_item = new ListViewItem(row);
+                    lvDisbursements.Items.Add(my_item);
+
+                    total_amount += _disbursement.amount;
+                    total_profit += _disbursement.profit_share;
+                    total_euro_collection += _disbursement.Euro_collection;
+                }
+
+                if (disbursements.Count > 0)
+                {
+                    string[] totales = { "Total", "", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", total_profit), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", total_euro_collection) };
+                    ListViewItem listViewItemTotal = new ListViewItem(totales);
+                    lvDisbursements.Items.Add(listViewItemTotal);
+                }                
+            }
+            catch (Exception)
+            {
+                
             }
         }
 
@@ -428,11 +367,12 @@ namespace FundsManager
                 fMaxDisbursementDate = DateTime.MinValue;
 
                 disbursements.Clear();
+
+                cmdCancel_Click(null, null);
                 
                 FundsManager.ReportForms.DibursementCreatedForm createdDisbursementsForm = new ReportForms.DibursementCreatedForm();
                 createdDisbursementsForm.investmentId = _newInvestment.Id;
                 createdDisbursementsForm.Show();
-                
             }
             catch (Exception _ex)
             {
@@ -509,49 +449,13 @@ namespace FundsManager
         {
             try
             {
-                ArrayList _disbursementToDelete = new ArrayList();
+                deleteSelectedDisbursement();
 
-                foreach (int _index in lvDisbursements.SelectedIndices)
-                {
-                    _disbursementToDelete.Add(disbursements[_index]);
-                }
-
-                foreach (Disbursement _disbursement in _disbursementToDelete)
-                {
-                    disbursements.Remove(_disbursement);
-                }
-
-                lvDisbursements.Items.Clear();
-
-                Decimal total_amount = 0;
-                Decimal total_profit = 0;
-                Decimal total_euro_collection = 0;
-                TimeSpan day = new TimeSpan();
-
-                foreach (Disbursement _disbursement in disbursements)
-                {
-                    decimal _totalToBeCollected = _disbursement.amount + _disbursement.profit_share;
-
-                    if (disbursements.First<Disbursement>().date != _disbursement.date)
-                        day = _disbursement.date.Subtract(disbursements.First<Disbursement>().date);
-
-                    string[] row = { _disbursement.TextClient, _disbursement.TextUnderlyingDebtor, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", _disbursement.profit_share), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", _totalToBeCollected), _disbursement.collection_date.ToLongDateString(), _disbursement.date.ToLongDateString(), Convert.ToString(day.Days) };
-                    ListViewItem my_item = new ListViewItem(row);
-                    lvDisbursements.Items.Add(my_item);
-
-                    total_amount += _disbursement.amount;
-                    total_profit += _disbursement.profit_share;
-                    total_euro_collection += _disbursement.Euro_collection;
-                }
-
-                if (disbursements.Count > 0)
-                {
-                    string[] totales = { "Total", "", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", total_profit), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", total_euro_collection) };
-                    ListViewItem listViewItemTotal = new ListViewItem(totales);
-                    lvDisbursements.Items.Add(listViewItemTotal);
-                }
+                loadDisbursements();
 
                 checkEnablingAddInvestmentButton();
+
+                cmdCancel_Click(null, null);
             }
             catch (Exception _ex)
             {
@@ -644,8 +548,144 @@ namespace FundsManager
                         lvDisbursements.SelectedIndices.Remove(_index);
                     }
                 }
+                      
 
-                cmdDeleteDisbursement.Enabled = lvDisbursements.SelectedIndices.Count > 0;
+                if (lvDisbursements.SelectedIndices.Count > 0)
+                {
+                    fEditMode = true;
+                    cmdDeleteDisbursement.Enabled = true;
+                    cmdAddDisbursement.Enabled = true;
+                    cmdAddDisbursement.Text = "Save Disbursement";
+                    cmdCancel.Visible = true;
+
+                    Disbursement selected = disbursements[lvDisbursements.SelectedIndices[0]];
+
+                    txtAmount.Text = String.Format("{0:0.00}", selected.amount * (decimal)selected.exchange_rate);
+
+                    if (selected.currency_id > 0)
+                    {
+                        for (int i = 0; i < cbCurrency.Items.Count; i++)
+                        {
+                            cbCurrency.SelectedIndex = i;
+
+                            if (cbCurrency.SelectedValue.ToString() == selected.currency_id.ToString())
+                                break;
+                        }
+                    }
+
+                    txtExchangeRate.Text = String.Format("{0:0.0}", selected.exchange_rate);
+                    txtProfitShare.Text = String.Format("{0:0.0000000}", selected.profit_share);
+                    txtNumber.Text = selected.number;
+                    txtTotalToBeCollected.Text = String.Format("{0:0.0000000}", selected.Euro_collection);
+
+                    if (selected.client_id > 0)
+                    {
+                        for (int i = 0; i < cbClient.Items.Count; i++)
+                        {
+                            cbClient.SelectedIndex = i;
+
+                            if (cbClient.SelectedValue.ToString() == selected.client_id.ToString())
+                                break;
+                        }
+                    }
+
+                    if (selected.underlying_debtor_id > 0)
+                    {
+                        for (int i = 0; i < cbUnderlyingDebtor.Items.Count; i++)
+                        {
+                            cbUnderlyingDebtor.SelectedIndex = i;
+
+                            if (cbUnderlyingDebtor.SelectedValue.ToString() == selected.underlying_debtor_id.ToString())
+                                break;
+                        }
+                    }
+
+                    if (selected.bank_risk_id > 0)
+                    {
+                        for (int i = 0; i < cbBank.Items.Count; i++)
+                        {
+                            cbBank.SelectedIndex = i;
+
+                            if (cbBank.SelectedValue.ToString() == selected.bank_risk_id.ToString())
+                                break;
+                        }
+                    }
+
+                    if (selected.shipment_id > 0)
+                    {
+                        Shipment shipment = manager.My_db.Shipments.FirstOrDefault(x => x.Id == selected.shipment_id);
+
+                        if (shipment != null)
+                        {
+                            letter_of_credits letter = manager.My_db.letter_of_credits.FirstOrDefault(x => x.Id == shipment.LetterOfCreditId);
+
+                            if (letter != null)
+                            {
+                                this.letter_of_creditsTableAdapter.FillByBank(this.fundsDBDataSet.letter_of_credits, manager.Selected, int.Parse(cbBank.SelectedValue.ToString()));
+
+                                for (int i = 0; i < cbLetterOfCredit.Items.Count; i++)
+                                {
+                                    cbLetterOfCredit.SelectedIndex = i;
+
+                                    if (cbLetterOfCredit.SelectedValue.ToString() == letter.Id.ToString())
+                                    {
+                                        this.shipmentsTableAdapter.FillByLetterWithEmpty(this.fundsDBDataSet.Shipments, int.Parse(cbLetterOfCredit.SelectedValue.ToString()));
+
+                                        for (int j = 0; j < cbShipment.Items.Count; j++)
+                                        {
+                                            cbShipment.SelectedIndex = j;
+
+                                            if (cbShipment.SelectedValue.ToString() == shipment.Id.ToString())
+                                                break;
+                                        }
+
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (selected.sector_id > 0)
+                    {
+                        for (int i = 0; i < cbSector.Items.Count; i++)
+                        {
+                            cbSector.SelectedIndex = i;
+
+                            if (cbSector.SelectedValue.ToString() == selected.sector_id.ToString())
+                                break;
+                        }
+                    }
+
+                    lbISelectedItems.Items.Clear();
+
+                    foreach (int itemId in selected.ItemsIds)
+                    {
+                        fItemIds.Add(itemId);
+
+                        for (int i = 0; i < cbItems.Items.Count; i++)
+                        {
+                            cbItems.SelectedIndex = i;
+
+                            if (cbItems.SelectedValue.ToString() == itemId.ToString())
+                            {
+                                string name = ((FundsManager.FundsDBDataSet.ItemsRow)((System.Data.DataRowView)cbItems.Items[i]).Row).name;
+                                lbISelectedItems.Items.Add(name);
+                            }
+                        }                        
+                    }
+
+                    dtpCollectionDate.Value = selected.collection_date;
+
+                    dtpDisbursementDate.Value = selected.date;
+                }
+                else
+                {
+                    fEditMode = false;
+                    cmdDeleteDisbursement.Enabled = false;
+                    cmdAddDisbursement.Text = "Add Disbursement";
+                    cmdCancel.Visible = false;
+                }
             }
             catch (Exception _ex)
             {
@@ -904,6 +944,121 @@ namespace FundsManager
         private void cbShipment_SelectedIndexChanged(object sender, EventArgs e)
         {
             checkEnablingAddDisbursementButton();
+        }
+
+        private void cmdCancel_Click(object sender, EventArgs e)
+        {
+            lvDisbursements.SelectedIndices.Clear();
+            lvDisbursements_SelectedIndexChanged(null, null);
+            cmdAddDisbursement.Enabled = false;
+            txtAmount.Text = "0";
+            cbCurrency.SelectedIndex = 0;
+            txtExchangeRate.Text = "0.0";
+            txtProfitShare.Text = "1";
+            txtNumber.Text = "";
+            txtTotalToBeCollected.Text = "0.0";
+            cbClient.SelectedIndex = 0;
+            cbUnderlyingDebtor.SelectedIndex = 0;
+            cbBank.SelectedIndex = 0;
+            cbLetterOfCredit.SelectedIndex = 0;
+            cbShipment.SelectedIndex = 0;
+            cbSector.SelectedIndex = 0;
+            cbItems.SelectedIndex = 0;
+            lbISelectedItems.Items.Clear();
+            dtpDisbursementDate.Value = DateTime.Now;
+            dtpCollectionDate.Value = DateTime.Now;
+            cmdDeleteItem.Enabled = false;
+            fItemIds.Clear();
+        }
+
+        private void addDisbursement()
+        {
+            float exchangeRate = 0;
+
+            if (float.TryParse(txtExchangeRate.Text, out exchangeRate) && exchangeRate > 0)
+            {
+                Disbursement _disbursement = new Disbursement();
+
+                _disbursement.fund_id = manager.Selected;
+
+                int bankId = Convert.ToInt32(cbBank.SelectedValue);
+
+                int underDebtorId = Convert.ToInt32(cbUnderlyingDebtor.SelectedValue);
+
+                int shipmentId = Convert.ToInt32(cbShipment.SelectedValue);
+
+                _disbursement.exchange_rate = exchangeRate;
+                _disbursement.amount = Convert.ToDecimal(txtAmount.Text) / (decimal)exchangeRate;
+                _disbursement.profit_share = Convert.ToDecimal(txtProfitShare.Text) / (decimal)exchangeRate;
+                _disbursement.currency_id = Convert.ToInt32(cbCurrency.SelectedValue);
+
+                if (bankId > 0)
+                {
+                    _disbursement.bank_risk_id = bankId;
+                }
+
+                _disbursement.client_id = Convert.ToInt32(cbClient.SelectedValue);
+
+                if (underDebtorId > 0)
+                {
+                    _disbursement.underlying_debtor_id = underDebtorId;
+                }
+
+                _disbursement.date = Convert.ToDateTime(dtpDisbursementDate.Text);
+                _disbursement.collection_date = Convert.ToDateTime(dtpCollectionDate.Text);
+                _disbursement.sector_id = Convert.ToInt32(cbSector.SelectedValue);
+                _disbursement.number = txtNumber.Text;
+                _disbursement.can_generate_interest = false;
+
+                _disbursement.TextClient = cbClient.Text;
+                _disbursement.TextUnderlyingDebtor = cbUnderlyingDebtor.Text;
+
+                _disbursement.Euro_collection = _disbursement.amount + _disbursement.profit_share;
+
+                if (shipmentId > 0)
+                {
+                    _disbursement.shipment_id = shipmentId;
+                }
+
+                foreach (int _itemId in fItemIds)
+                {
+                    _disbursement.ItemsIds.Add(_itemId);
+                }
+
+                int _index = -1;
+
+                for (int i = 0; i < disbursements.Count; i++)
+                {
+                    Disbursement _item = disbursements[i];
+
+                    if (_item.date > _disbursement.date)
+                    {
+                        disbursements.Insert(i, _disbursement);
+                        _index = i;
+                        break;
+                    }
+                }
+
+                if (_index == -1)
+                {
+                    disbursements.Add(_disbursement);
+                }
+            }
+        }
+
+        private void deleteSelectedDisbursement()
+        {
+            ArrayList _disbursementToDelete = new ArrayList();
+
+            foreach (int _index in lvDisbursements.SelectedIndices)
+            {
+                _disbursementToDelete.Add(disbursements[_index]);
+            }
+
+            foreach (Disbursement _disbursement in _disbursementToDelete)
+            {
+                disbursements.Remove(_disbursement);
+            }
         }
     }
 }

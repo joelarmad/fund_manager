@@ -94,6 +94,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.letter_of_creditsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.letter_of_creditsTableAdapter();
             this.shipmentsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ShipmentsTableAdapter();
+            this.cmdCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
@@ -409,6 +410,7 @@
             this.columnHeader6,
             this.columnHeader7});
             this.lvDisbursements.Location = new System.Drawing.Point(12, 260);
+            this.lvDisbursements.MultiSelect = false;
             this.lvDisbursements.Name = "lvDisbursements";
             this.lvDisbursements.Size = new System.Drawing.Size(919, 270);
             this.lvDisbursements.TabIndex = 230;
@@ -637,11 +639,23 @@
             // 
             this.shipmentsTableAdapter.ClearBeforeFill = true;
             // 
+            // cmdCancel
+            // 
+            this.cmdCancel.Location = new System.Drawing.Point(571, 223);
+            this.cmdCancel.Name = "cmdCancel";
+            this.cmdCancel.Size = new System.Drawing.Size(92, 23);
+            this.cmdCancel.TabIndex = 235;
+            this.cmdCancel.Text = "Cancel Edition";
+            this.cmdCancel.UseVisualStyleBackColor = true;
+            this.cmdCancel.Visible = false;
+            this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
+            // 
             // InvestmentsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(954, 579);
+            this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.cbShipment);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.cbLetterOfCredit);
@@ -770,5 +784,6 @@
         private FundsDBDataSetTableAdapters.letter_of_creditsTableAdapter letter_of_creditsTableAdapter;
         private System.Windows.Forms.BindingSource shipmentsBindingSource;
         private FundsDBDataSetTableAdapters.ShipmentsTableAdapter shipmentsTableAdapter;
+        private System.Windows.Forms.Button cmdCancel;
     }
 }
