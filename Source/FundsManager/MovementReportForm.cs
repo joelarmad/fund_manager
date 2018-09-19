@@ -144,8 +144,8 @@ namespace FundsManager
                 if (accMov != null)
                 {
                     GeneralLedgerForm ledger = new GeneralLedgerForm();
-                    ledger.EditMode = true;
-                    ledger.EditAccountMovementId = accMov.Id;
+                    ledger.FormInEditAccountingMovement = true;
+                    ledger.IdOfAccountingMovementToEdit = accMov.Id;
                     ledger.StartPosition = FormStartPosition.CenterScreen;
                     ledger.ShowDialog();
 

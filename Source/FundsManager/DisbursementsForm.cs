@@ -277,7 +277,7 @@ namespace FundsManager
                         GeneralLedgerForm gledger = new GeneralLedgerForm();
                         gledger.StartPosition = FormStartPosition.CenterScreen;
                         gledger.AvoidAccountBalanceValidation = true;
-                        gledger.InjectedReference = cbContract.Text;
+                        gledger.CustomReferenceInjected = cbContract.Text;
                         gledger.ShowDialog();
 
                         DisbursementPaymentForm disbursement_payments = new DisbursementPaymentForm();

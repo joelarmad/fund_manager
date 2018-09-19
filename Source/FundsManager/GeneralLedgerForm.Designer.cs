@@ -65,6 +65,7 @@
             this.lblContract = new System.Windows.Forms.Label();
             this.txtContract = new System.Windows.Forms.TextBox();
             this.accountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountsTableAdapter();
+            this.cmdCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
@@ -368,11 +369,23 @@
             // 
             this.accountsTableAdapter.ClearBeforeFill = true;
             // 
+            // cmdCancel
+            // 
+            this.cmdCancel.Location = new System.Drawing.Point(782, 79);
+            this.cmdCancel.Name = "cmdCancel";
+            this.cmdCancel.Size = new System.Drawing.Size(75, 23);
+            this.cmdCancel.TabIndex = 71;
+            this.cmdCancel.Text = "Cancel";
+            this.cmdCancel.UseVisualStyleBackColor = true;
+            this.cmdCancel.Visible = false;
+            this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
+            // 
             // GeneralLedgerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(911, 533);
+            this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.txtContract);
             this.Controls.Add(this.lblContract);
             this.Controls.Add(this.button3);
@@ -451,5 +464,6 @@
         private System.Windows.Forms.TextBox txtContract;
         private System.Windows.Forms.BindingSource accountsBindingSource;
         private FundsDBDataSetTableAdapters.AccountsTableAdapter accountsTableAdapter;
+        private System.Windows.Forms.Button cmdCancel;
     }
 }
