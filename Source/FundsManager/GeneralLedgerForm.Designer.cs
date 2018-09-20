@@ -66,6 +66,7 @@
             this.txtContract = new System.Windows.Forms.TextBox();
             this.accountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountsTableAdapter();
             this.cmdCancel = new System.Windows.Forms.Button();
+            this.cmdDeleteMovement = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
@@ -380,11 +381,23 @@
             this.cmdCancel.Visible = false;
             this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
             // 
+            // cmdDeleteMovement
+            // 
+            this.cmdDeleteMovement.Location = new System.Drawing.Point(601, 477);
+            this.cmdDeleteMovement.Name = "cmdDeleteMovement";
+            this.cmdDeleteMovement.Size = new System.Drawing.Size(121, 23);
+            this.cmdDeleteMovement.TabIndex = 72;
+            this.cmdDeleteMovement.Text = "Delete Movement";
+            this.cmdDeleteMovement.UseVisualStyleBackColor = true;
+            this.cmdDeleteMovement.Visible = false;
+            this.cmdDeleteMovement.Click += new System.EventHandler(this.cmdDeleteMovement_Click);
+            // 
             // GeneralLedgerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(911, 533);
+            this.Controls.Add(this.cmdDeleteMovement);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.txtContract);
             this.Controls.Add(this.lblContract);
@@ -465,5 +478,6 @@
         private System.Windows.Forms.BindingSource accountsBindingSource;
         private FundsDBDataSetTableAdapters.AccountsTableAdapter accountsTableAdapter;
         private System.Windows.Forms.Button cmdCancel;
+        private System.Windows.Forms.Button cmdDeleteMovement;
     }
 }

@@ -27,11 +27,17 @@ namespace FundsManager
         {
             try
             {
+                if (txtContractPrefix.Text.Trim().ToUpper().StartsWith("GL"))
+                {
+                    ErrorMessage.showErrorMessage(new Exception("The contract prefix can not begin with \"GL\"."));
+                    return;
+                }
+
                 if (!fEditMode)
                 {
                     Fund _fund = new Fund();
                     _fund.name = txtName.Text;
-                    _fund.contract_prefix = txtContractPrefix.Text;
+                    _fund.contract_prefix = txtContractPrefix.Text.Trim();
                     _fund.number = txtNumber.Text;
                     manager.My_db.Funds.Add(_fund);
                     manager.My_db.SaveChanges();

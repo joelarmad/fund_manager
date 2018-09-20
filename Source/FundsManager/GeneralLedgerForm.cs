@@ -120,6 +120,11 @@ namespace FundsManager
 
                         checkForContractVisibility();
                     }
+
+                    if (movementCanBeDeleted())
+                    {
+                        cmdDeleteMovement.Visible = true;
+                    }
                 }
             }
             catch (Exception _ex)
@@ -485,6 +490,8 @@ namespace FundsManager
                         ErrorMessage.showErrorMessage(_ex2);
                     }
                 }
+
+                cmdDeleteMovement.Visible = false;
             }
             else
             {
@@ -1102,6 +1109,51 @@ namespace FundsManager
             }
 
             manager.My_db.SaveChanges();
+        }
+
+        private void cmdDeleteMovement_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (movementCanBeDeleted())
+                {
+                    if (MessageBox.Show("This operation can not be undone. Do you wish to proceed?", "Warning", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
+                        AccountingMovement toAccountingMovementDelete = manager.My_db.AccountingMovements.FirstOrDefault(x => x.Id == IdOfAccountingMovementToEdit);
+
+                        if (toAccountingMovementDelete != null)
+                        {
+
+                            List<Movements_Accounts> movementsToDelete = manager.My_db.Movements_Accounts.Where(x => x.FK_Movements_Accounts_AccountingMovements == IdOfAccountingMovementToEdit).ToList();
+
+                            foreach (Movements_Accounts movToDelete in movementsToDelete)
+                            {
+                                manager.My_db.Movements_Accounts.Remove(movToDelete);
+                            }
+
+                            manager.My_db.AccountingMovements.Remove(toAccountingMovementDelete);
+
+                            manager.My_db.SaveChanges();
+
+                            this.Close();
+                        }
+                    }
+                }
+                else
+                {
+                    ErrorMessage.showErrorMessage(new Exception("This accounting movement can not be deleted."));
+                }
+            }
+            catch (Exception _ex)
+            {
+                ErrorMessage.showErrorMessage(_ex);
+            }
+        }
+
+        private bool movementCanBeDeleted()
+        {
+            //TODO: implementar
+            return true;
         }
     }
 }
