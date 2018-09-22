@@ -175,7 +175,7 @@
             this.txtExchangeRate.Name = "txtExchangeRate";
             this.txtExchangeRate.Size = new System.Drawing.Size(121, 20);
             this.txtExchangeRate.TabIndex = 3;
-            this.txtExchangeRate.Text = "0.0";
+            this.txtExchangeRate.Text = "1.0000000";
             this.txtExchangeRate.Click += new System.EventHandler(this.txtExchangeRate_Click);
             this.txtExchangeRate.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtExchangeRate_KeyUp);
             this.txtExchangeRate.Leave += new System.EventHandler(this.txtExchangeRate_Leave);
@@ -281,7 +281,7 @@
             this.txtProfitShare.Name = "txtProfitShare";
             this.txtProfitShare.Size = new System.Drawing.Size(121, 20);
             this.txtProfitShare.TabIndex = 4;
-            this.txtProfitShare.Text = "1";
+            this.txtProfitShare.Text = "0.00";
             this.txtProfitShare.Click += new System.EventHandler(this.txtProfitShare_Click);
             this.txtProfitShare.TextChanged += new System.EventHandler(this.txtProfitShare_TextChanged);
             this.txtProfitShare.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtProfitShare_KeyUp);

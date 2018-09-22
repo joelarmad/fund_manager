@@ -358,8 +358,8 @@ namespace FundsManager
                 txtAmount.Text = "0";
                 txtNumber.Text = "";
                 txtContract.Text = "xxx/" + DateTime.Now.Year.ToString().Substring(2, 2);
-                txtProfitShare.Text = "1";
-                txtExchangeRate.Text = "0.0";
+                txtProfitShare.Text = "0.00";
+                txtExchangeRate.Text = "1.0000000";
                 txtTotalToBeCollected.Text = "0.0";
                 lbISelectedItems.Items.Clear();
                 lvDisbursements.Items.Clear();
@@ -573,8 +573,8 @@ namespace FundsManager
                         }
                     }
 
-                    txtExchangeRate.Text = String.Format("{0:0.0}", selected.exchange_rate);
-                    txtProfitShare.Text = String.Format("{0:0.0000000}", selected.profit_share);
+                    txtExchangeRate.Text = String.Format("{0:0.0000000}", selected.exchange_rate);
+                    txtProfitShare.Text = String.Format("{0:0.00}", selected.profit_share);
                     txtNumber.Text = selected.number;
                     txtTotalToBeCollected.Text = String.Format("{0:0.0000000}", selected.Euro_collection);
 
@@ -790,11 +790,11 @@ namespace FundsManager
                 decimal _result = 0;
                 if (!decimal.TryParse(txtExchangeRate.Text, out _result) || _result <= 0)
                 {
-                    txtExchangeRate.Text = "0.00";
+                    txtExchangeRate.Text = "1.0000000";
                 }
                 else
                 {
-                    txtExchangeRate.Text = String.Format("{0:0.00}", _result);
+                    txtExchangeRate.Text = String.Format("{0:0.0000000}", _result);
                 }
 
                 checkEnablingAddDisbursementButton();
@@ -822,11 +822,11 @@ namespace FundsManager
                 decimal _result = 0;
                 if (!decimal.TryParse(txtProfitShare.Text, out _result) || _result < 0)
                 {
-                    txtProfitShare.Text = "1";
+                    txtProfitShare.Text = "0.00";
                 }
                 else
                 {
-                    txtProfitShare.Text = String.Format("{0:0.0000000}", _result);
+                    txtProfitShare.Text = String.Format("{0:0.00}", _result);
                 }
 
                 checkEnablingAddDisbursementButton();
@@ -953,8 +953,8 @@ namespace FundsManager
             cmdAddDisbursement.Enabled = false;
             txtAmount.Text = "0";
             cbCurrency.SelectedIndex = 0;
-            txtExchangeRate.Text = "0.0";
-            txtProfitShare.Text = "1";
+            txtExchangeRate.Text = "1.0000000";
+            txtProfitShare.Text = "0.00";
             txtNumber.Text = "";
             txtTotalToBeCollected.Text = "0.0";
             cbClient.SelectedIndex = 0;
