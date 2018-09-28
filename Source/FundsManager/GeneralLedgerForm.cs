@@ -20,6 +20,7 @@ namespace FundsManager
         public int IdOfAccountingMovementToEdit = 0;
 
         public string CustomReferenceInjected = "";
+        public DateTime CustomDateInjected = DateTime.MinValue;
 
 
         private MyFundsManager manager;
@@ -67,6 +68,10 @@ namespace FundsManager
                 cbOtherDetail.SelectedItem = null;
                 cbOtherDetail.SelectedIndex = -1;
                 textBox3.Text = CustomReferenceInjected != "" ? CustomReferenceInjected : KeyDefinitions.NextAccountMovementReference;
+                if (CustomDateInjected != DateTime.MinValue)
+                {
+                    dateTimePicker1.Value = CustomDateInjected;
+                }
 
                 fFloatingAccounts = manager.My_db.Accounts.Where(x => x.FK_Accounts_Funds == manager.Selected).ToList();
 

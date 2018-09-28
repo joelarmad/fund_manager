@@ -231,7 +231,7 @@ namespace FundsManager
                                         _maccount125.FK_Movements_Accounts_Subaccounts = subacct125.Id;
                                     _maccount125.subaccount = toPay.client_id;
                                     _maccount125.subaccount_type = 1;
-                                    _maccount125.debit = toPay.amount + toPay.profit_share;
+                                    _maccount125.debit = toPay.amount;
                                     _maccount125.credit = 0;
 
                                     int _creditFactor = 1;
@@ -278,6 +278,7 @@ namespace FundsManager
                         gledger.StartPosition = FormStartPosition.CenterScreen;
                         gledger.AvoidAccountBalanceValidation = true;
                         gledger.CustomReferenceInjected = cbContract.Text;
+                        gledger.CustomDateInjected = dtpPayDate.Value;
                         gledger.ShowDialog();
 
                         DisbursementPaymentForm disbursement_payments = new DisbursementPaymentForm();
