@@ -194,6 +194,8 @@ namespace FundsManager
                             {
                                 Disbursement toPay = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == disbursementId);
 
+                                string reference = toPay.Investment.contract;
+
                                 if (toPay != null)
                                 {
                                     toPay.pay_date = dPayment.payment_date;
@@ -208,7 +210,7 @@ namespace FundsManager
                                     //TODO: buscar valor correcto
                                     _accountingMovement.description = "";
                                     _accountingMovement.date = dPayment.payment_date;
-                                    _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference;
+                                    _accountingMovement.reference = reference;
                                     _accountingMovement.FK_AccountingMovements_Currencies = toPay.currency_id;
                                     //TODO: buscar valor correcto
                                     _accountingMovement.original_reference = "";
