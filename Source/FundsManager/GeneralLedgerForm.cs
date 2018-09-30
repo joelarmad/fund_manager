@@ -14,14 +14,14 @@ namespace FundsManager
 {
     public partial class GeneralLedgerForm : Form
     {
-        public bool AvoidAccountBalanceValidation = false;
+
+        public bool FromDisbursementPayment = false;
+        public AccountingMovement AcctMovFromDisbursement = null;
+
+        private bool AvoidAccountBalanceValidation = false;
 
         public bool FormInEditAccountingMovement = false;
         public int IdOfAccountingMovementToEdit = 0;
-
-        public string CustomReferenceInjected = "";
-        public DateTime CustomDateInjected = DateTime.MinValue;
-
 
         private MyFundsManager manager;
         private AccountingMovement AccountingMovementToEdit;
@@ -67,11 +67,7 @@ namespace FundsManager
                 cbSubaccount.SelectedIndex = -1;
                 cbOtherDetail.SelectedItem = null;
                 cbOtherDetail.SelectedIndex = -1;
-                textBox3.Text = CustomReferenceInjected != "" ? CustomReferenceInjected : KeyDefinitions.NextAccountMovementReference;
-                if (CustomDateInjected != DateTime.MinValue)
-                {
-                    dateTimePicker1.Value = CustomDateInjected;
-                }
+                textBox3.Text = KeyDefinitions.NextAccountMovementReference;
 
                 fFloatingAccounts = manager.My_db.Accounts.Where(x => x.FK_Accounts_Funds == manager.Selected).ToList();
 
@@ -130,6 +126,33 @@ namespace FundsManager
                     {
                         cmdDeleteMovement.Visible = true;
                     }
+                }
+
+                if (FromDisbursementPayment && AcctMovFromDisbursement != null)
+                {
+                    AvoidAccountBalanceValidation = true;
+
+                    textBox3.Text = AcctMovFromDisbursement.reference;
+
+                    textBox5.Text = AcctMovFromDisbursement.original_reference;
+
+                    dateTimePicker1.Value = AcctMovFromDisbursement.date;
+
+                    textBox4.Text = AcctMovFromDisbursement.description;
+
+                    for (int i = 0; i < comboBox4.Items.Count; i++)
+                    {
+                        int currency_id = ((FundsManager.FundsDBDataSet.CurrenciesRow)((System.Data.DataRowView)comboBox4.Items[i]).Row).Id;
+
+                        if (currency_id == AcctMovFromDisbursement.FK_AccountingMovements_Currencies)
+                        {
+                            comboBox4.SelectedIndex = i;
+                            break;
+                        }
+                    }
+
+                    textBox3.Enabled = false;
+                    textBox5.Enabled = false;
                 }
             }
             catch (Exception _ex)
@@ -387,19 +410,32 @@ namespace FundsManager
                     if (!FormInEditAccountingMovement)
                     {
                         AccountingMovement newAccountingMovement = new AccountingMovement();
-                        newAccountingMovement.FK_AccountingMovements_Funds = manager.Selected;
+
+                        if (!FromDisbursementPayment)
+                        {
+                            newAccountingMovement.FK_AccountingMovements_Funds = manager.Selected;
+                            newAccountingMovement.reference = textBox3.Text;
+                            newAccountingMovement.original_reference = textBox5.Text;
+                        }
+                        else
+                        {
+                            newAccountingMovement = AcctMovFromDisbursement;
+                        }
+
                         newAccountingMovement.description = textBox4.Text;
                         newAccountingMovement.date = Convert.ToDateTime(dateTimePicker1.Text);
-                        newAccountingMovement.reference = textBox3.Text;
                         newAccountingMovement.FK_AccountingMovements_Currencies = Convert.ToInt32(comboBox4.SelectedValue);
-                        newAccountingMovement.original_reference = textBox5.Text;
 
                         if (txtContract.Visible)
                         {
                             newAccountingMovement.contract = txtContract.Text;
                         }
 
-                        manager.My_db.AccountingMovements.Add(newAccountingMovement);
+                        if (!FromDisbursementPayment)
+                        {
+                            manager.My_db.AccountingMovements.Add(newAccountingMovement);
+                        }
+
                         manager.My_db.SaveChanges();
 
                         created_movement_id = newAccountingMovement.Id;
@@ -426,7 +462,7 @@ namespace FundsManager
 
                         button2.Enabled = false;
 
-                        if (CustomReferenceInjected != "")
+                        if (FromDisbursementPayment)
                         {
                             this.Close();
                         }

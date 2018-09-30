@@ -168,6 +168,8 @@ namespace FundsManager
 
             Account account125 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "125" && x.FK_Accounts_Funds == manager.Selected);
 
+            AccountingMovement _accountingMovement = new AccountingMovement();
+
             try
             {
                 if (account125 != null)
@@ -177,115 +179,124 @@ namespace FundsManager
                     if (cbContract.SelectedValue != null
                         && int.TryParse(cbContract.SelectedValue.ToString(), out investmentId))
                     {
-                        DisbursementPayment dPayment = new DisbursementPayment();
-                        dPayment.investment_id = investmentId;
-                        dPayment.payment_date = Convert.ToDateTime(dtpPayDate.Text);
-
-                        manager.My_db.DisbursementPayments.Add(dPayment);
-                        manager.My_db.SaveChanges();
-
-                        disbursementPaymentId = dPayment.id;
-
-                        foreach (ListViewItem _item in lvDisbursements.SelectedItems)
+                        if (lvDisbursements.SelectedItems.Count > 0)
                         {
-                            int disbursementId = 0;
+                            DisbursementPayment dPayment = new DisbursementPayment();
+                            dPayment.investment_id = investmentId;
+                            dPayment.payment_date = Convert.ToDateTime(dtpPayDate.Text);
 
-                            if (int.TryParse(_item.Text, out disbursementId))
+                            manager.My_db.DisbursementPayments.Add(dPayment);
+                            manager.My_db.SaveChanges();
+
+                            disbursementPaymentId = dPayment.id;
+
+                            foreach (ListViewItem _item in lvDisbursements.SelectedItems)
                             {
-                                Disbursement toPay = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == disbursementId);
+                                int disbursementId = 0;
 
-                                string reference = toPay.Investment.contract;
-
-                                if (toPay != null)
+                                if (int.TryParse(_item.Text, out disbursementId))
                                 {
-                                    toPay.pay_date = dPayment.payment_date;
-                                    toPay.can_generate_interest = true;
+                                    Disbursement toPay = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == disbursementId);
 
-                                    dPayment.Disbursements.Add(toPay);
-
-                                    manager.My_db.SaveChanges();
-
-                                    AccountingMovement _accountingMovement = new AccountingMovement();
-                                    _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
-                                    //TODO: buscar valor correcto
-                                    _accountingMovement.description = "";
-                                    _accountingMovement.date = dPayment.payment_date;
-                                    _accountingMovement.reference = reference;
-                                    _accountingMovement.FK_AccountingMovements_Currencies = toPay.currency_id;
-                                    //TODO: buscar valor correcto
-                                    _accountingMovement.original_reference = "";
-                                    _accountingMovement.contract = cbContract.SelectedText;
-
-                                    manager.My_db.AccountingMovements.Add(_accountingMovement);
-                                    manager.My_db.SaveChanges();
-
-                                    accountingMovementId = _accountingMovement.Id;
-
-                                    Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == toPay.currency_id && x.FK_Currencies_Funds == manager.Selected);
-                                    Subaccount subacct125 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account125.Id && x.name == "INV " + currency.symbol);
-
-                                    Movements_Accounts _maccount125 = new Movements_Accounts();
-
-                                    _maccount125.FK_Movements_Accounts_AccountingMovements = _accountingMovement.Id;
-                                    _maccount125.FK_Movements_Accounts_Funds = manager.Selected;
-                                    _maccount125.FK_Movements_Accounts_Accounts = account125.Id;
-                                    if(subacct125 != null)
-                                        _maccount125.FK_Movements_Accounts_Subaccounts = subacct125.Id;
-                                    _maccount125.subaccount = toPay.client_id;
-                                    _maccount125.subaccount_type = 1;
-                                    _maccount125.debit = toPay.amount;
-                                    _maccount125.credit = 0;
-
-                                    int _creditFactor = 1;
-                                    int _debitFactor = -1;
-
-                                    if (Account.leftAccountingIncrement(account125.type))
+                                    if (toPay != null)
                                     {
-                                        _creditFactor = -1;
-                                        _debitFactor = 1;
-                                    }
+                                        toPay.pay_date = dPayment.payment_date;
+                                        toPay.can_generate_interest = true;
 
-                                    account125.amount += _debitFactor * _maccount125.debit;
-                                    account125.amount += _creditFactor * _maccount125.credit;
+                                        dPayment.Disbursements.Add(toPay);
 
-                                    _maccount125.acc_amount = account125.amount;
+                                        manager.My_db.SaveChanges();
 
-                                    if (subacct125 != null)
-                                    {
-                                        if (!subaccountsIds.Contains(subacct125.Id))
+                                        _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
+                                        //TODO: buscar valor correcto
+                                        _accountingMovement.description = "";
+                                        _accountingMovement.date = dPayment.payment_date;
+                                        _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference;
+                                        _accountingMovement.FK_AccountingMovements_Currencies = toPay.currency_id;
+                                        _accountingMovement.original_reference = cbContract.Text;
+                                        _accountingMovement.contract = cbContract.SelectedText;
+
+                                        manager.My_db.AccountingMovements.Add(_accountingMovement);
+                                        manager.My_db.SaveChanges();
+
+                                        accountingMovementId = _accountingMovement.Id;
+
+                                        Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == toPay.currency_id && x.FK_Currencies_Funds == manager.Selected);
+                                        Subaccount subacct125 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account125.Id && x.name == "INV " + currency.symbol);
+
+                                        Movements_Accounts _maccount125 = new Movements_Accounts();
+
+                                        _maccount125.FK_Movements_Accounts_AccountingMovements = _accountingMovement.Id;
+                                        _maccount125.FK_Movements_Accounts_Funds = manager.Selected;
+                                        _maccount125.FK_Movements_Accounts_Accounts = account125.Id;
+                                        if (subacct125 != null)
+                                            _maccount125.FK_Movements_Accounts_Subaccounts = subacct125.Id;
+                                        _maccount125.subaccount = toPay.client_id;
+                                        _maccount125.subaccount_type = 1;
+                                        _maccount125.debit = toPay.amount;
+                                        _maccount125.credit = 0;
+
+                                        int _creditFactor = 1;
+                                        int _debitFactor = -1;
+
+                                        if (Account.leftAccountingIncrement(account125.type))
                                         {
-                                            subaccountsIds.Add(subacct125.Id);
-                                            subaccountAmounts.Add(subacct125.amount);
+                                            _creditFactor = -1;
+                                            _debitFactor = 1;
                                         }
 
-                                        subacct125.amount += _debitFactor * _maccount125.debit;
-                                        subacct125.amount += _creditFactor * _maccount125.credit;
-                                        _maccount125.subacc_amount = subacct125.amount;
-                                    }
-                                    
-                                    manager.My_db.Movements_Accounts.Add(_maccount125);
+                                        account125.amount += _debitFactor * _maccount125.debit;
+                                        account125.amount += _creditFactor * _maccount125.credit;
 
-                                    manager.My_db.SaveChanges();
+                                        _maccount125.acc_amount = account125.amount;
+
+                                        if (subacct125 != null)
+                                        {
+                                            if (!subaccountsIds.Contains(subacct125.Id))
+                                            {
+                                                subaccountsIds.Add(subacct125.Id);
+                                                subaccountAmounts.Add(subacct125.amount);
+                                            }
+
+                                            subacct125.amount += _debitFactor * _maccount125.debit;
+                                            subacct125.amount += _creditFactor * _maccount125.credit;
+                                            _maccount125.subacc_amount = subacct125.amount;
+                                        }
+
+                                        manager.My_db.Movements_Accounts.Add(_maccount125);
+
+                                        manager.My_db.SaveChanges();
+                                    }
                                 }
                             }
+
+                            manager.My_db.SaveChanges();
+
+                            lvDisbursements.SelectedIndices.Clear();
+
+                            loadDisbursements();
+
+                            if (_accountingMovement.Id > 0)
+                            {
+                                GeneralLedgerForm gledger = new GeneralLedgerForm();
+                                gledger.StartPosition = FormStartPosition.CenterScreen;
+                                gledger.FromDisbursementPayment = true;
+                                gledger.AcctMovFromDisbursement = _accountingMovement;
+                                gledger.ShowDialog();
+
+                                DisbursementPaymentForm disbursement_payments = new DisbursementPaymentForm();
+                                disbursement_payments.paymentId = dPayment.id;
+                                disbursement_payments.Show();
+                            }
+                            else
+                            {
+                                throw new Exception("Relative accounting movement, to account 125, has not been created.");
+                            }
                         }
-
-                        manager.My_db.SaveChanges();
-
-                        lvDisbursements.SelectedIndices.Clear();
-
-                        loadDisbursements();
-
-                        GeneralLedgerForm gledger = new GeneralLedgerForm();
-                        gledger.StartPosition = FormStartPosition.CenterScreen;
-                        gledger.AvoidAccountBalanceValidation = true;
-                        gledger.CustomReferenceInjected = cbContract.Text;
-                        gledger.CustomDateInjected = dtpPayDate.Value;
-                        gledger.ShowDialog();
-
-                        DisbursementPaymentForm disbursement_payments = new DisbursementPaymentForm();
-                        disbursement_payments.paymentId = dPayment.id;
-                        disbursement_payments.Show();
+                        else
+                        {
+                            ErrorMessage.showErrorMessage(new Exception("No disbursement to pay was selected."));
+                        }
                     }
                     else
                     {
