@@ -63,5 +63,7 @@ namespace FundsManager
         public virtual DbSet<Subaccount> Subaccounts { get; set; }
         public virtual DbSet<UnderlyingDebtor> UnderlyingDebtors { get; set; }
         public virtual DbSet<ProfitShareToAccrue> ProfitShareToAccrues { get; set; }
+        public virtual DbSet<DisbursementCollection> DisbursementCollections { get; set; }
+        public virtual DbSet<DisbursementCollectionsDetail> DisbursementCollectionsDetails { get; set; }
     }
 }

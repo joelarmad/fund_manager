@@ -271,7 +271,7 @@ namespace FundsManager
         private void collectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            DisbursementCollection disbCollection = new DisbursementCollection();
+            DisbursementCollectionForm disbCollection = new DisbursementCollectionForm();
             disbCollection.MdiParent = this;
             disbCollection.Show();
         }

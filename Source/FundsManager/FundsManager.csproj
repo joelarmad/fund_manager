@@ -219,10 +219,16 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DisbursementCollection.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DisbursementCollectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DisbursementCollection.Designer.cs">
-      <DependentUpon>DisbursementCollection.cs</DependentUpon>
+    <Compile Include="DisbursementCollectionForm.Designer.cs">
+      <DependentUpon>DisbursementCollectionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DisbursementCollectionsDetail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DisbursementForInvestement.cs" />
     <Compile Include="DisbursementGeneratedInterest.cs">
@@ -503,8 +509,8 @@
     <EmbeddedResource Include="CurrenciesForm.resx">
       <DependentUpon>CurrenciesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DisbursementCollection.resx">
-      <DependentUpon>DisbursementCollection.cs</DependentUpon>
+    <EmbeddedResource Include="DisbursementCollectionForm.resx">
+      <DependentUpon>DisbursementCollectionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DisbursementsForm.resx">
       <DependentUpon>DisbursementsForm.cs</DependentUpon>

@@ -109,6 +109,11 @@
         <AssociationConnector Association="FundsDBModel.FK_OtherDetails_SubAcct" />
         <AssociationConnector Association="FundsDBModel.DisbursementPaymentDetails" />
         <EntityTypeShape EntityType="FundsDBModel.ProfitShareToAccrue" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementCollection" Width="1.5" PointX="5.25" PointY="74.125" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementCollectionsDetail" Width="1.5" PointX="17.25" PointY="67.875" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementCollections_Investments" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_DisbursementCollection" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
