@@ -20,7 +20,7 @@ namespace FundsManager
         int AmountIndex = 2;
         int ProfitShareIndex = 3;
         int CollectedIndex = 4;
-        int ToBeCollectedIndex = 5;
+        int ToBeCollectedIndex = 6;
 
         public DisbursementCollectionForm()
         {

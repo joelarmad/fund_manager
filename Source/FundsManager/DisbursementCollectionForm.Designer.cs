@@ -32,12 +32,6 @@
             this.cmdCollect = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.disbursementidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.profitshareDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.collectedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Collect = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.disbursementsToBeCollectedBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.cbContract = new System.Windows.Forms.ComboBox();
@@ -51,6 +45,13 @@
             this.clientContractsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientContractsTableAdapter();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
+            this.disbursementidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.profitshareDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.collectedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DelayInterest = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Collect = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.disbursementsToBeCollectedBindingSource)).BeginInit();
@@ -91,53 +92,13 @@
             this.amountDataGridViewTextBoxColumn,
             this.profitshareDataGridViewTextBoxColumn,
             this.collectedDataGridViewTextBoxColumn,
+            this.DelayInterest,
             this.Collect});
             this.dataGridView1.DataSource = this.disbursementsToBeCollectedBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(14, 19);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(722, 212);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // disbursementidDataGridViewTextBoxColumn
-            // 
-            this.disbursementidDataGridViewTextBoxColumn.DataPropertyName = "disbursement_id";
-            this.disbursementidDataGridViewTextBoxColumn.HeaderText = "disbursement_id";
-            this.disbursementidDataGridViewTextBoxColumn.Name = "disbursementidDataGridViewTextBoxColumn";
-            this.disbursementidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.disbursementidDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // numberDataGridViewTextBoxColumn
-            // 
-            this.numberDataGridViewTextBoxColumn.DataPropertyName = "number";
-            this.numberDataGridViewTextBoxColumn.HeaderText = "number";
-            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
-            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // amountDataGridViewTextBoxColumn
-            // 
-            this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount";
-            this.amountDataGridViewTextBoxColumn.HeaderText = "amount";
-            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
-            this.amountDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // profitshareDataGridViewTextBoxColumn
-            // 
-            this.profitshareDataGridViewTextBoxColumn.DataPropertyName = "profit_share";
-            this.profitshareDataGridViewTextBoxColumn.HeaderText = "profit_share";
-            this.profitshareDataGridViewTextBoxColumn.Name = "profitshareDataGridViewTextBoxColumn";
-            this.profitshareDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // collectedDataGridViewTextBoxColumn
-            // 
-            this.collectedDataGridViewTextBoxColumn.DataPropertyName = "collected";
-            this.collectedDataGridViewTextBoxColumn.HeaderText = "collected";
-            this.collectedDataGridViewTextBoxColumn.Name = "collectedDataGridViewTextBoxColumn";
-            this.collectedDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // Collect
-            // 
-            this.Collect.HeaderText = "Collect";
-            this.Collect.Name = "Collect";
             // 
             // disbursementsToBeCollectedBindingSource
             // 
@@ -229,6 +190,52 @@
             this.label1.TabIndex = 26;
             this.label1.Text = "Collection Date:";
             // 
+            // disbursementidDataGridViewTextBoxColumn
+            // 
+            this.disbursementidDataGridViewTextBoxColumn.DataPropertyName = "disbursement_id";
+            this.disbursementidDataGridViewTextBoxColumn.HeaderText = "disbursement_id";
+            this.disbursementidDataGridViewTextBoxColumn.Name = "disbursementidDataGridViewTextBoxColumn";
+            this.disbursementidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.disbursementidDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // numberDataGridViewTextBoxColumn
+            // 
+            this.numberDataGridViewTextBoxColumn.DataPropertyName = "number";
+            this.numberDataGridViewTextBoxColumn.HeaderText = "number";
+            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
+            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // amountDataGridViewTextBoxColumn
+            // 
+            this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount";
+            this.amountDataGridViewTextBoxColumn.HeaderText = "amount";
+            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
+            this.amountDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // profitshareDataGridViewTextBoxColumn
+            // 
+            this.profitshareDataGridViewTextBoxColumn.DataPropertyName = "profit_share";
+            this.profitshareDataGridViewTextBoxColumn.HeaderText = "profit_share";
+            this.profitshareDataGridViewTextBoxColumn.Name = "profitshareDataGridViewTextBoxColumn";
+            this.profitshareDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // collectedDataGridViewTextBoxColumn
+            // 
+            this.collectedDataGridViewTextBoxColumn.DataPropertyName = "collected";
+            this.collectedDataGridViewTextBoxColumn.HeaderText = "collected";
+            this.collectedDataGridViewTextBoxColumn.Name = "collectedDataGridViewTextBoxColumn";
+            this.collectedDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // DelayInterest
+            // 
+            this.DelayInterest.HeaderText = "Delay Interest";
+            this.DelayInterest.Name = "DelayInterest";
+            // 
+            // Collect
+            // 
+            this.Collect.HeaderText = "Collect";
+            this.Collect.Name = "Collect";
+            // 
             // DisbursementCollectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -273,13 +280,14 @@
         private FundsDBDataSetTableAdapters.ClientsTableAdapter clientsTableAdapter;
         private System.Windows.Forms.BindingSource clientContractsBindingSource;
         private FundsDBDataSetTableAdapters.ClientContractsTableAdapter clientContractsTableAdapter;
+        private System.Windows.Forms.DateTimePicker dtpDate;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn disbursementidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn profitshareDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn collectedDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DelayInterest;
         private System.Windows.Forms.DataGridViewTextBoxColumn Collect;
-        private System.Windows.Forms.DateTimePicker dtpDate;
-        private System.Windows.Forms.Label label1;
     }
 }
