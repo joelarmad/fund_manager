@@ -267,5 +267,13 @@ namespace FundsManager
             Shipment_form.MdiParent = this;
             Shipment_form.Show();
         }
+
+        private void collectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            DisbursementCollection disbCollection = new DisbursementCollection();
+            disbCollection.MdiParent = this;
+            disbCollection.Show();
+        }
     }
 }

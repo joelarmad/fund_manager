@@ -321,6 +321,7 @@
             this.collectionToolStripMenuItem.Name = "collectionToolStripMenuItem";
             this.collectionToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.collectionToolStripMenuItem.Text = "Collection";
+            this.collectionToolStripMenuItem.Click += new System.EventHandler(this.collectionToolStripMenuItem_Click);
             // 
             // profitShareAccruedToolStripMenuItem
             // 
