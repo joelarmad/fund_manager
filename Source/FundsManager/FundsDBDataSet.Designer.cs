@@ -33147,7 +33147,7 @@ SELECT Id, name, FK_Clients_Funds, CountryId, number FROM Clients WHERE (Id = @I
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Id, name, FK_Clients_Funds, CountryId, number FROM Clients";
@@ -33165,6 +33165,13 @@ SELECT Id, name, FK_Clients_Funds, CountryId, number FROM Clients WHERE (Id = @I
                 "ts_Funds = @FundId)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Clients_Funds", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "SELECT 0 as Id, \'\' as name, (select top 1 id from Funds) as FK_Clients_Funds, (se" +
+                "lect top 1 id from Countries) as CountryId, \'\' as number UNION SELECT Id, name, " +
+                "FK_Clients_Funds, CountryId, number FROM Clients where FK_Clients_Funds=@FundId";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Clients_Funds", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -33212,6 +33219,20 @@ SELECT Id, name, FK_Clients_Funds, CountryId, number FROM Clients WHERE (Id = @I
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
         public virtual int FillByFund(FundsDBDataSet.ClientsDataTable dataTable, int FundId) {
             this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(FundId));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillWithEmpty(FundsDBDataSet.ClientsDataTable dataTable, int FundId) {
+            this.Adapter.SelectCommand = this.CommandCollection[3];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(FundId));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -34265,7 +34286,7 @@ SELECT Id, name, symbol, FK_Currencies_Funds, number FROM Currencies WHERE (Id =
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Id, name, symbol, FK_Currencies_Funds, number FROM Currencies";
@@ -34276,6 +34297,13 @@ SELECT Id, name, symbol, FK_Currencies_Funds, number FROM Currencies WHERE (Id =
                 "rrencies_Funds = @FundId)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Currencies_Funds", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT 0 as Id, \'\' as name, \'\' as symbol,  (select top 1 id from Funds) as FK_Cur" +
+                "rencies_Funds, \'\' as number UNION SELECT Id, name, symbol, FK_Currencies_Funds, " +
+                "number FROM Currencies where FK_Currencies_Funds=@FundId";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Currencies_Funds", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -34308,6 +34336,20 @@ SELECT Id, name, symbol, FK_Currencies_Funds, number FROM Currencies WHERE (Id =
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
         public virtual int FillByFund(FundsDBDataSet.CurrenciesDataTable dataTable, int FundId) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(FundId));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillWithEmpty(FundsDBDataSet.CurrenciesDataTable dataTable, int FundId) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(FundId));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -35362,7 +35404,7 @@ SELECT Id, name, FK_Sectors_Funds, number FROM Sectors WHERE (Id = @Id)";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Id, name, FK_Sectors_Funds, number FROM Sectors";
@@ -35373,6 +35415,13 @@ SELECT Id, name, FK_Sectors_Funds, number FROM Sectors WHERE (Id = @Id)";
                 "@FundId)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Sectors_Funds", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT 0 as Id, \'\' as name, (select top 1 id from Funds) as FK_Sectors_Funds, \'\' " +
+                "as number UNION SELECT Id, name, FK_Sectors_Funds, number FROM Sectors where FK_" +
+                "Sectors_Funds=@FundId";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FK_Sectors_Funds", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -35405,6 +35454,20 @@ SELECT Id, name, FK_Sectors_Funds, number FROM Sectors WHERE (Id = @Id)";
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
         public virtual int FillByFund(FundsDBDataSet.SectorsDataTable dataTable, int FundId) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(FundId));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillWithEmpty(FundsDBDataSet.SectorsDataTable dataTable, int FundId) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(FundId));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -48507,27 +48570,40 @@ WHERE        (a.FK_Accounts_Funds = @FundId)";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[5];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector FROM dbo.InvestmentsView";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector FROM dbo.InvestmentsView  WHERE fund_id = @FundId";
+            this._commandCollection[1].CommandText = @"SELECT        fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, 
+                         profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector
+FROM            InvestmentsView
+WHERE        (client_id = @ClientId) AND (bank_risk_id = @BankId) AND (fund_id = @fund_id) OR
+                         (client_id = @ClientId) AND (fund_id = @fund_id) AND (@BankId = 0) OR
+                         (bank_risk_id = @BankId) AND (fund_id = @fund_id) AND (@ClientId = 0) OR
+                         (fund_id = @fund_id) AND (@BankId = 0) AND (@ClientId = 0)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ClientId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "client_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BankId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "bank_risk_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fund_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector FROM dbo.InvestmentsView WHERE investment_id = @InvestmentId";
+            this._commandCollection[2].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector FROM dbo.InvestmentsView  WHERE fund_id = @FundId";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InvestmentId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector FROM dbo.InvestmentsView WHERE payment_id = @PaymentId AND fund_id = @FundId";
+            this._commandCollection[3].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector FROM dbo.InvestmentsView WHERE investment_id = @InvestmentId";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PaymentId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "payment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InvestmentId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[4].Connection = this.Connection;
+            this._commandCollection[4].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector FROM dbo.InvestmentsView WHERE payment_id = @PaymentId AND fund_id = @FundId";
+            this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PaymentId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "payment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -48558,8 +48634,29 @@ WHERE        (a.FK_Accounts_Funds = @FundId)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByFundId(FundsDBDataSet.InvestmentsViewDataTable dataTable, int FundId) {
+        public virtual int FillByFilters(FundsDBDataSet.InvestmentsViewDataTable dataTable, int ClientId, global::System.Nullable<int> BankId, int fund_id) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ClientId));
+            if ((BankId.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(BankId.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.SelectCommand.Parameters[2].Value = ((int)(fund_id));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByFundId(FundsDBDataSet.InvestmentsViewDataTable dataTable, int FundId) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(FundId));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -48573,7 +48670,7 @@ WHERE        (a.FK_Accounts_Funds = @FundId)";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
         public virtual FundsDBDataSet.InvestmentsViewDataTable GetDataByFundId(int FundId) {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand = this.CommandCollection[2];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(FundId));
             FundsDBDataSet.InvestmentsViewDataTable dataTable = new FundsDBDataSet.InvestmentsViewDataTable();
             this.Adapter.Fill(dataTable);
@@ -48585,7 +48682,7 @@ WHERE        (a.FK_Accounts_Funds = @FundId)";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
         public virtual int FillByInvestment(FundsDBDataSet.InvestmentsViewDataTable dataTable, int InvestmentId) {
-            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand = this.CommandCollection[3];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(InvestmentId));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -48599,7 +48696,7 @@ WHERE        (a.FK_Accounts_Funds = @FundId)";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
         public virtual int FillByPaymentId(FundsDBDataSet.InvestmentsViewDataTable dataTable, global::System.Nullable<int> PaymentId, int FundId) {
-            this.Adapter.SelectCommand = this.CommandCollection[3];
+            this.Adapter.SelectCommand = this.CommandCollection[4];
             if ((PaymentId.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((int)(PaymentId.Value));
             }

@@ -16,11 +16,15 @@ namespace FundsManager
     {
         private MyFundsManager manager;
 
+        public bool EditingExistingInvestment = false;
+        public Investment InvestmenToEdit = null;
+
         private Double disbursement;
         private Double profit;
 
         //private List<DisbursementForInvestement> disbursements;
         private List<Disbursement> disbursements;
+        private List<Disbursement> toDelete;
         private List<int> fItemIds = new List<int>();
 
         private DateTime fMaxDisbursementDate;
@@ -39,6 +43,8 @@ namespace FundsManager
                 //disbursements = new List<DisbursementForInvestement>();
                 disbursements = new List<Disbursement>();
 
+                toDelete = new List<Disbursement>();
+
                 manager = MyFundsManager.SingletonInstance;
                 InitializeComponent();
 
@@ -52,9 +58,6 @@ namespace FundsManager
 
         private void InvestmentsForm_Load(object sender, EventArgs e)
         {
-            
-
-
             try
             {
 
@@ -83,8 +86,30 @@ namespace FundsManager
                     lblContractPrefix.Text = "Contract:  " + fContractPreffix;
                 }
 
-
                 txtContract.Text = "xxx/" + DateTime.Now.Year.ToString().Substring(2, 2);
+
+                if (EditingExistingInvestment && InvestmenToEdit != null)
+                {
+                    cmdCreateInvestment.Text = "Save Investment";
+                    cmdCreateInvestment.Enabled = true;
+
+                    txtContract.Text = InvestmenToEdit.contract.Substring(fContractPreffix.Length);
+                    txtContract.Enabled = false;
+
+                    disbursements = manager.My_db.Disbursements.Where(x => x.investment_id == InvestmenToEdit.Id).ToList();
+
+                    foreach (Disbursement disb in disbursements)
+                    {
+                        List<DisbursementItem> items = manager.My_db.DisbursementItems.Where(x => x.DisbursementId == disb.Id).ToList();
+
+                        foreach (DisbursementItem item in items)
+                        {
+                            disb.ItemsIds.Add(item.ItemId);
+                        }
+                    }
+
+                    loadDisbursements();
+                }
             }
             catch (Exception _ex)
             {
@@ -215,6 +240,21 @@ namespace FundsManager
             }
         }
 
+        private bool duplicatedDisbursementNumber()
+        {
+            foreach (Disbursement disb in disbursements)
+            {
+                if (disb.number == txtNumber.Text)
+                {
+                    return true;
+                }
+            }
+
+            Disbursement found = manager.My_db.Disbursements.FirstOrDefault(x => x.number == txtNumber.Text);
+
+            return found != null;
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             try
@@ -230,22 +270,27 @@ namespace FundsManager
 
                 if (float.TryParse(txtExchangeRate.Text, out exchangeRate) && exchangeRate > 0)
                 {
-                    if (!fEditMode)
+                    if (!duplicatedDisbursementNumber())
                     {
-                        addDisbursement();
+                        Disbursement toAdd = getDisbursementFromGUI();
+
+                        if (fEditMode)
+                        {
+                            disbursements.RemoveAt(lvDisbursements.SelectedIndices[0]);
+                        }
+
+                        addDisbursement(toAdd);
+
+                        loadDisbursements();
+
+                        cmdCancel_Click(null, null);
+
+                        checkEnablingAddInvestmentButton();
                     }
                     else
                     {
-                        deleteSelectedDisbursement();
-
-                        addDisbursement();
+                        MessageBox.Show("Duplicated disbursement number.");
                     }
-
-                    loadDisbursements();
-
-                    cmdCancel_Click(null, null);
-
-                    checkEnablingAddInvestmentButton();
                 }
                 else
                 {
@@ -276,7 +321,10 @@ namespace FundsManager
                     if (disbursements.First<Disbursement>().date != _disbursement.date)
                         day = _disbursement.date.Subtract(disbursements.First<Disbursement>().date);
 
-                    string[] row = { _disbursement.TextClient, _disbursement.TextUnderlyingDebtor, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", _disbursement.profit_share), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", _totalToBeCollected), _disbursement.collection_date.ToLongDateString(), _disbursement.date.ToLongDateString(), Convert.ToString(day.Days) };
+                    string clientName = _disbursement.Client != null ? _disbursement.Client.name : _disbursement.TextClient;
+                    string underlyingDebtorName = _disbursement.UnderlyingDebtor != null ? _disbursement.UnderlyingDebtor.name : _disbursement.TextUnderlyingDebtor;
+
+                    string[] row = { clientName, underlyingDebtorName, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", _disbursement.profit_share), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", _totalToBeCollected), _disbursement.collection_date.ToLongDateString(), _disbursement.date.ToLongDateString(), Convert.ToString(day.Days) };
                     ListViewItem my_item = new ListViewItem(row);
                     lvDisbursements.Items.Add(my_item);
 
@@ -309,16 +357,31 @@ namespace FundsManager
 
                 Investment _newInvestment = new Investment();
 
-                _newInvestment.contract = fContractPreffix + txtContract.Text;
-                _newInvestment.date = DateTime.Now.Date;
-                _newInvestment.fund_id = manager.Selected;
-                //TODO: definir cual number debe ir en Investment
-                _newInvestment.number = DateTime.Now.Ticks.ToString();
+                if (EditingExistingInvestment && InvestmenToEdit != null)
+                {
+                    _newInvestment = InvestmenToEdit;
+                }
+                else
+                {
+                    _newInvestment.contract = fContractPreffix + txtContract.Text;
+                    _newInvestment.date = DateTime.Now.Date;
+                    _newInvestment.fund_id = manager.Selected;
+                    _newInvestment.number = DateTime.Now.Ticks.ToString();
 
-                manager.My_db.Investments.Add(_newInvestment);
-                manager.My_db.SaveChanges();
+                    manager.My_db.Investments.Add(_newInvestment);
+                    manager.My_db.SaveChanges();
 
-                created_investment_id = _newInvestment.Id;
+                    created_investment_id = _newInvestment.Id;
+                }
+
+                foreach (Disbursement disbToDelete in toDelete)
+                {
+                    if (disbToDelete.Id > 0)
+                    {
+                        manager.My_db.Disbursements.Remove(disbToDelete);
+                        manager.My_db.SaveChanges();
+                    }
+                }
 
                 foreach (Disbursement _disbursement in disbursements)
                 {
@@ -327,13 +390,26 @@ namespace FundsManager
                     _totalDisbursement += _disbursement.Euro_collection;
                     _totalProfitShare += _disbursement.profit_share;
 
-                    manager.My_db.Disbursements.Add(_disbursement);
+                    if (_disbursement.Id == 0)
+                    {
+                        manager.My_db.Disbursements.Add(_disbursement);
+                    }
+                    else
+                    {
+                        List<DisbursementItem> items = manager.My_db.DisbursementItems.Where(x => x.DisbursementId == _disbursement.Id).ToList();
+
+                        foreach (DisbursementItem item in items)
+                        {
+                            manager.My_db.DisbursementItems.Remove(item);
+                        }
+                    }
+
                     manager.My_db.SaveChanges();
 
                     foreach (int _itemId in _disbursement.ItemsIds)
                     {
                         Item _item = manager.My_db.Items.FirstOrDefault(x => x.Id == _itemId);
-                        
+
                         if (_item != null)
                         {
                             DisbursementItem _disbursementItem = new DisbursementItem();
@@ -344,8 +420,6 @@ namespace FundsManager
                             manager.My_db.SaveChanges();
                         }
                     }
-
-                    
                 }
 
                 _newInvestment.total_disbursement = _totalDisbursement;
@@ -369,53 +443,60 @@ namespace FundsManager
                 disbursements.Clear();
 
                 cmdCancel_Click(null, null);
-                
-                FundsManager.ReportForms.DibursementCreatedForm createdDisbursementsForm = new ReportForms.DibursementCreatedForm();
-                createdDisbursementsForm.investmentId = _newInvestment.Id;
-                createdDisbursementsForm.Show();
+
+                if (!EditingExistingInvestment)
+                {
+                    FundsManager.ReportForms.DibursementCreatedForm createdDisbursementsForm = new ReportForms.DibursementCreatedForm();
+                    createdDisbursementsForm.investmentId = _newInvestment.Id;
+                    createdDisbursementsForm.Show();
+                }
+                else
+                {
+                    this.Close();
+                }
             }
             catch (Exception _ex)
             {
                 ErrorMessage.showErrorMessage(_ex);
 
                 //rollback
-                try
-                {
+                //try
+                //{
 
-                    Investment inv = manager.My_db.Investments.FirstOrDefault(x => x.Id == created_investment_id);
+                //    Investment inv = manager.My_db.Investments.FirstOrDefault(x => x.Id == created_investment_id);
 
 
-                    if (inv != null)
-                    {
-                        foreach (Disbursement disb in inv.Disbursements)
-                        {
+                //    if (inv != null)
+                //    {
+                //        foreach (Disbursement disb in inv.Disbursements)
+                //        {
 
-                            if (disb != null)
-                            {
-                                List<DisbursementItem> disbItms = manager.My_db.DisbursementItems.Where(x => x.DisbursementId == disb.Id).ToList();
+                //            if (disb != null)
+                //            {
+                //                List<DisbursementItem> disbItms = manager.My_db.DisbursementItems.Where(x => x.DisbursementId == disb.Id).ToList();
 
-                                foreach (DisbursementItem disbItem in disbItms)
-                                {
-                                    manager.My_db.DisbursementItems.Remove(disbItem);
-                                }
+                //                foreach (DisbursementItem disbItem in disbItms)
+                //                {
+                //                    manager.My_db.DisbursementItems.Remove(disbItem);
+                //                }
 
-                                manager.My_db.SaveChanges();
+                //                manager.My_db.SaveChanges();
 
-                                manager.My_db.Disbursements.Remove(disb);
+                //                manager.My_db.Disbursements.Remove(disb);
 
-                                manager.My_db.SaveChanges();
-                            }
-                        }
+                //                manager.My_db.SaveChanges();
+                //            }
+                //        }
 
-                        manager.My_db.Investments.Remove(inv);
-                        manager.My_db.SaveChanges();
-                    }
+                //        manager.My_db.Investments.Remove(inv);
+                //        manager.My_db.SaveChanges();
+                //    }
 
-                }
-                catch (Exception _ex2)
-                {
-                    ErrorMessage.showErrorMessage(_ex2);
-                }
+                //}
+                //catch (Exception _ex2)
+                //{
+                //    ErrorMessage.showErrorMessage(_ex2);
+                //}
             }
         }
 
@@ -449,7 +530,11 @@ namespace FundsManager
         {
             try
             {
-                deleteSelectedDisbursement();
+                if (lvDisbursements.SelectedIndices.Count > 0)
+                {
+                    toDelete.Add(disbursements[lvDisbursements.SelectedIndices[0]]);
+                    disbursements.RemoveAt(lvDisbursements.SelectedIndices[0]);
+                }
 
                 loadDisbursements();
 
@@ -657,7 +742,9 @@ namespace FundsManager
                         }
                     }
 
+                    fItemIds.Clear();
                     lbISelectedItems.Items.Clear();
+                    lbISelectedItems.Text = "";
 
                     foreach (int itemId in selected.ItemsIds)
                     {
@@ -971,69 +1058,101 @@ namespace FundsManager
             fItemIds.Clear();
         }
 
-        private void addDisbursement()
+        private Disbursement getDisbursementFromGUI()
         {
-            float exchangeRate = 0;
-
-            if (float.TryParse(txtExchangeRate.Text, out exchangeRate) && exchangeRate > 0)
+            try
             {
                 Disbursement _disbursement = new Disbursement();
 
-                _disbursement.fund_id = manager.Selected;
+                float exchangeRate = 0;
 
-                int bankId = Convert.ToInt32(cbBank.SelectedValue);
-
-                int underDebtorId = Convert.ToInt32(cbUnderlyingDebtor.SelectedValue);
-
-                int shipmentId = Convert.ToInt32(cbShipment.SelectedValue);
-
-                _disbursement.exchange_rate = exchangeRate;
-                _disbursement.amount = Convert.ToDecimal(txtAmount.Text) / (decimal)exchangeRate;
-                _disbursement.profit_share = Convert.ToDecimal(txtProfitShare.Text) / (decimal)exchangeRate;
-                _disbursement.currency_id = Convert.ToInt32(cbCurrency.SelectedValue);
-
-                if (bankId > 0)
+                if (float.TryParse(txtExchangeRate.Text, out exchangeRate) && exchangeRate > 0)
                 {
+                    if (fEditMode && lvDisbursements.SelectedIndices.Count > 0)
+                    {
+                        _disbursement = disbursements[lvDisbursements.SelectedIndices[0]];
+                    }
+
+                    _disbursement.fund_id = manager.Selected;
+
+                    int? bankId = null;
+
+                    if (cbBank.SelectedValue.ToString() != "0")
+                    {
+                        bankId = Convert.ToInt32(cbBank.SelectedValue);
+                    }
+
+                    int? underDebtorId = null;
+
+                    if (cbUnderlyingDebtor.SelectedValue.ToString() != "0")
+                    {
+                        underDebtorId = Convert.ToInt32(cbUnderlyingDebtor.SelectedValue);
+                    }
+
+                    int? shipmentId = null;
+
+                    if (cbShipment.SelectedValue.ToString() != "0")
+                    {
+                        shipmentId = Convert.ToInt32(cbShipment.SelectedValue);
+                    }
+
+                    _disbursement.exchange_rate = exchangeRate;
+                    _disbursement.amount = Convert.ToDecimal(txtAmount.Text) / (decimal)exchangeRate;
+                    _disbursement.profit_share = Convert.ToDecimal(txtProfitShare.Text) / (decimal)exchangeRate;
+                    _disbursement.currency_id = Convert.ToInt32(cbCurrency.SelectedValue);
+
                     _disbursement.bank_risk_id = bankId;
-                }
 
-                _disbursement.client_id = Convert.ToInt32(cbClient.SelectedValue);
+                    _disbursement.client_id = Convert.ToInt32(cbClient.SelectedValue);
 
-                if (underDebtorId > 0)
-                {
                     _disbursement.underlying_debtor_id = underDebtorId;
-                }
 
-                _disbursement.date = Convert.ToDateTime(dtpDisbursementDate.Text);
-                _disbursement.collection_date = Convert.ToDateTime(dtpCollectionDate.Text);
-                _disbursement.sector_id = Convert.ToInt32(cbSector.SelectedValue);
-                _disbursement.number = txtNumber.Text;
-                _disbursement.can_generate_interest = false;
+                    _disbursement.date = Convert.ToDateTime(dtpDisbursementDate.Text);
+                    _disbursement.collection_date = Convert.ToDateTime(dtpCollectionDate.Text);
+                    _disbursement.sector_id = Convert.ToInt32(cbSector.SelectedValue);
+                    _disbursement.number = txtNumber.Text;
+                    _disbursement.can_generate_interest = false;
 
-                _disbursement.TextClient = cbClient.Text;
-                _disbursement.TextUnderlyingDebtor = cbUnderlyingDebtor.Text;
+                    _disbursement.TextClient = cbClient.Text;
+                    _disbursement.TextUnderlyingDebtor = cbUnderlyingDebtor.Text;
 
-                _disbursement.Euro_collection = _disbursement.amount + _disbursement.profit_share;
+                    _disbursement.Euro_collection = _disbursement.amount + _disbursement.profit_share;
 
-                if (shipmentId > 0)
-                {
                     _disbursement.shipment_id = shipmentId;
-                }
 
-                foreach (int _itemId in fItemIds)
+                    _disbursement.ItemsIds.Clear();
+
+                    foreach (int _itemId in fItemIds)
+                    {
+                        _disbursement.ItemsIds.Add(_itemId);
+                    }
+
+                    return _disbursement;
+                }
+                else
                 {
-                    _disbursement.ItemsIds.Add(_itemId);
+                    return null;
                 }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
+        private void addDisbursement(Disbursement toAdd)
+        {
+            if (toAdd != null)
+            {
                 int _index = -1;
 
                 for (int i = 0; i < disbursements.Count; i++)
                 {
                     Disbursement _item = disbursements[i];
 
-                    if (_item.date > _disbursement.date)
+                    if (_item.date > toAdd.date)
                     {
-                        disbursements.Insert(i, _disbursement);
+                        disbursements.Insert(i, toAdd);
                         _index = i;
                         break;
                     }
@@ -1041,23 +1160,8 @@ namespace FundsManager
 
                 if (_index == -1)
                 {
-                    disbursements.Add(_disbursement);
+                    disbursements.Add(toAdd);
                 }
-            }
-        }
-
-        private void deleteSelectedDisbursement()
-        {
-            ArrayList _disbursementToDelete = new ArrayList();
-
-            foreach (int _index in lvDisbursements.SelectedIndices)
-            {
-                _disbursementToDelete.Add(disbursements[_index]);
-            }
-
-            foreach (Disbursement _disbursement in _disbursementToDelete)
-            {
-                disbursements.Remove(_disbursement);
             }
         }
     }

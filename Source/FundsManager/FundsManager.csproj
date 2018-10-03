@@ -311,6 +311,12 @@
     <Compile Include="InterestConfirmationForm.Designer.cs">
       <DependentUpon>InterestConfirmationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InvesmentReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InvesmentReportForm.Designer.cs">
+      <DependentUpon>InvesmentReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Investment.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -535,6 +541,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InterestConfirmationForm.resx">
       <DependentUpon>InterestConfirmationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InvesmentReportForm.resx">
+      <DependentUpon>InvesmentReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InvestmentsForm.resx">
       <DependentUpon>InvestmentsForm.cs</DependentUpon>

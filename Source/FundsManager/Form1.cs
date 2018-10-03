@@ -275,5 +275,13 @@ namespace FundsManager
             disbCollection.MdiParent = this;
             disbCollection.Show();
         }
+
+        private void investmentsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            InvesmentReportForm inv = new InvesmentReportForm();
+            inv.MdiParent = this;
+            inv.Show();
+        }
     }
 }
