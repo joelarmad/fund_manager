@@ -156,25 +156,25 @@ namespace FundsManager
 
                         if (interestDetail == null)
                         {
-                            //if (!interestCreated)
-                            //{
-                            //    manager.My_db.DisbursementGeneratedInterests.Add(_generatedInterest);
-                            //    manager.My_db.SaveChanges();
-                            //    interestCreated = true;
-                            //}
+                            if (!interestCreated)
+                            {
+                                manager.My_db.DisbursementGeneratedInterests.Add(_generatedInterest);
+                                manager.My_db.SaveChanges();
+                                interestCreated = true;
+                            }
 
                             decimal _interest = AccrueInterest(_profitShareToAccrue);
 
                             _totalInterest += _interest;
 
-                            //DisbursementGeneratedInterestDetail _detail = new DisbursementGeneratedInterestDetail();
-                            //_detail.disbursement_generated_interest_id = _generatedInterest.Id;
-                            //_detail.disbursement_id = _profitShareToAccrue.Id;
-                            //_detail.generated_interest = _interest;
-                            //_detail.generated_interest_date = _date;
+                            DisbursementGeneratedInterestDetail _detail = new DisbursementGeneratedInterestDetail();
+                            _detail.disbursement_generated_interest_id = _generatedInterest.Id;
+                            _detail.disbursement_id = _profitShareToAccrue.Id;
+                            _detail.generated_interest = _interest;
+                            _detail.generated_interest_date = _date;
 
-                            //manager.My_db.DisbursementGeneratedInterestDetails.Add(_detail);
-                            //manager.My_db.SaveChanges();
+                            manager.My_db.DisbursementGeneratedInterestDetails.Add(_detail);
+                            manager.My_db.SaveChanges();
                         }
                         else
                         {
