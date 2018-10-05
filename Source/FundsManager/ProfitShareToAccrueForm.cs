@@ -91,7 +91,7 @@ namespace FundsManager
 
         private void dtpDate_ValueChanged(object sender, EventArgs e)
         {
-            loadDisbursements();
+            
         }
 
         private void generateInterest(bool forAll)
@@ -99,117 +99,189 @@ namespace FundsManager
             cmdGenerateInterest.Enabled = false;
             cmdGenerateAllInterest.Enabled = false;
 
-            try
+            Account account128 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "128" && x.FK_Accounts_Funds == manager.Selected);
+
+            if (account128 != null)
             {
-                DateTime _date = Convert.ToDateTime(dtpDate.Text);
-
-                List<ProfitShareToAccrue> _profitShareToAccrueList = new List<ProfitShareToAccrue>();
-
-                if (!forAll)
+                try
                 {
-                    foreach (ListViewItem _item in lvDisbursements.SelectedItems)
+                    DateTime _date = Convert.ToDateTime(dtpDate.Text);
+
+                    List<ProfitShareToAccrue> _profitShareToAccrueList = new List<ProfitShareToAccrue>();
+
+                    if (!forAll)
                     {
-                        int disbursementId = 0;
-
-                        if (int.TryParse(_item.Text, out disbursementId))
+                        foreach (ListViewItem _item in lvDisbursements.SelectedItems)
                         {
-                            ProfitShareToAccrue toAcrue = manager.My_db.ProfitShareToAccrues.FirstOrDefault(x => x.Id == disbursementId);
+                            int disbursementId = 0;
 
-                            if (toAcrue != null)
+                            if (int.TryParse(_item.Text, out disbursementId))
                             {
-                                _profitShareToAccrueList.Add(toAcrue);
+                                ProfitShareToAccrue toAcrue = manager.My_db.ProfitShareToAccrues.FirstOrDefault(x => x.Id == disbursementId);
+
+                                if (toAcrue != null)
+                                {
+                                    _profitShareToAccrueList.Add(toAcrue);
+                                }
                             }
                         }
-                    }
-                }
-                else
-                {
-                    foreach (ListViewItem _item in lvDisbursements.Items)
-                    {
-                        int disbursementId = 0;
-
-                        if (int.TryParse(_item.Text, out disbursementId))
-                        {
-                            ProfitShareToAccrue toAcrue = manager.My_db.ProfitShareToAccrues.FirstOrDefault(x => x.Id == disbursementId);
-
-                            if (toAcrue != null)
-                            {
-                                _profitShareToAccrueList.Add(toAcrue);
-                            }
-                        }
-                    }
-                }
-
-
-                if (_profitShareToAccrueList.Count > 0)
-                {
-                    DisbursementGeneratedInterest _generatedInterest = new DisbursementGeneratedInterest();
-                    _generatedInterest.GeneratedDate = Convert.ToDateTime(dtpDate.Text);
-
-                    bool interestCreated = false;
-
-                    decimal _totalInterest = 0;
-
-                    foreach (ProfitShareToAccrue _profitShareToAccrue in _profitShareToAccrueList)
-                    {
-                        DisbursementGeneratedInterestDetail interestDetail = manager.My_db.DisbursementGeneratedInterestDetails.FirstOrDefault(x => x.disbursement_id == _profitShareToAccrue.Id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
-
-                        if (interestDetail == null)
-                        {
-                            if (!interestCreated)
-                            {
-                                manager.My_db.DisbursementGeneratedInterests.Add(_generatedInterest);
-                                manager.My_db.SaveChanges();
-                                interestCreated = true;
-                            }
-
-                            decimal _interest = AccrueInterest(_profitShareToAccrue);
-
-                            _totalInterest += _interest;
-
-                            DisbursementGeneratedInterestDetail _detail = new DisbursementGeneratedInterestDetail();
-                            _detail.disbursement_generated_interest_id = _generatedInterest.Id;
-                            _detail.disbursement_id = _profitShareToAccrue.Id;
-                            _detail.generated_interest = _interest;
-                            _detail.generated_interest_date = _date;
-
-                            manager.My_db.DisbursementGeneratedInterestDetails.Add(_detail);
-                            manager.My_db.SaveChanges();
-                        }
-                        else
-                        {
-                            Console.WriteLine("Attempt to duplicate disbursement interest generation.");
-                        }
-
-                    }
-
-                    if (interestCreated)
-                    {
-                        //TODO: Generar movimientos de cuenta
-
-                        DisbursementGeneratedInterestForm disbursement_generated_interest_form = new DisbursementGeneratedInterestForm();
-                        disbursement_generated_interest_form.generated_interest_id = _generatedInterest.Id;
-                        disbursement_generated_interest_form.Show();
                     }
                     else
                     {
-                        MessageBox.Show("No actions performed.");
+                        foreach (ListViewItem _item in lvDisbursements.Items)
+                        {
+                            int disbursementId = 0;
+
+                            if (int.TryParse(_item.Text, out disbursementId))
+                            {
+                                ProfitShareToAccrue toAcrue = manager.My_db.ProfitShareToAccrues.FirstOrDefault(x => x.Id == disbursementId);
+
+                                if (toAcrue != null)
+                                {
+                                    _profitShareToAccrueList.Add(toAcrue);
+                                }
+                            }
+                        }
+                    }
+
+
+                    if (_profitShareToAccrueList.Count > 0)
+                    {
+                        DisbursementGeneratedInterest _generatedInterest = new DisbursementGeneratedInterest();
+                        _generatedInterest.GeneratedDate = Convert.ToDateTime(dtpDate.Text);
+
+                        bool interestCreated = false;
+
+                        decimal _totalInterest = 0;
+
+                        bool someDataMissed = false;
+
+                        foreach (ProfitShareToAccrue _profitShareToAccrue in _profitShareToAccrueList)
+                        {
+                            Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == _profitShareToAccrue.currency_id && x.FK_Currencies_Funds == manager.Selected);
+                            Subaccount subacct128 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account128.Id && x.name == "INV " + currency.symbol);
+                            Investment investment = manager.My_db.Investments.FirstOrDefault(x => x.Id == _profitShareToAccrue.investment_id);
+
+                            if (currency != null && subacct128 != null && investment != null)
+                            {
+                                DisbursementGeneratedInterestDetail interestDetail = manager.My_db.DisbursementGeneratedInterestDetails.FirstOrDefault(x => x.disbursement_id == _profitShareToAccrue.Id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
+
+                                if (interestDetail == null)
+                                {
+                                    if (!interestCreated)
+                                    {
+                                        manager.My_db.DisbursementGeneratedInterests.Add(_generatedInterest);
+                                        manager.My_db.SaveChanges();
+                                        interestCreated = true;
+                                    }
+
+                                    decimal _interest = AccrueInterest(_profitShareToAccrue);
+
+                                    _totalInterest += _interest;
+
+                                    DisbursementGeneratedInterestDetail _detail = new DisbursementGeneratedInterestDetail();
+                                    _detail.disbursement_generated_interest_id = _generatedInterest.Id;
+                                    _detail.disbursement_id = _profitShareToAccrue.Id;
+                                    _detail.generated_interest = _interest;
+                                    _detail.generated_interest_date = _date;
+
+                                    manager.My_db.DisbursementGeneratedInterestDetails.Add(_detail);
+                                    manager.My_db.SaveChanges();
+
+
+                                    AccountingMovement _accountingMovement = new AccountingMovement();
+
+                                    _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
+                                    _accountingMovement.description = "";
+                                    _accountingMovement.date = dtpDate.Value;
+                                    _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference;
+                                    _accountingMovement.FK_AccountingMovements_Currencies = _profitShareToAccrue.currency_id;
+                                    _accountingMovement.original_reference = investment.contract;
+                                    _accountingMovement.contract = investment.contract;
+
+                                    manager.My_db.AccountingMovements.Add(_accountingMovement);
+                                    manager.My_db.SaveChanges();
+
+                                    Movements_Accounts _maccount128 = new Movements_Accounts();
+
+                                    _maccount128.FK_Movements_Accounts_AccountingMovements = _accountingMovement.Id;
+                                    _maccount128.FK_Movements_Accounts_Funds = manager.Selected;
+                                    _maccount128.FK_Movements_Accounts_Accounts = account128.Id;
+                                    if (subacct128 != null)
+                                        _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
+                                    _maccount128.subaccount = _profitShareToAccrue.client_id;
+                                    _maccount128.subaccount_type = 1;
+                                    _maccount128.debit = _interest;
+                                    _maccount128.credit = 0;
+
+                                    int _creditFactor = 1;
+                                    int _debitFactor = -1;
+
+                                    if (Account.leftAccountingIncrement(account128.type))
+                                    {
+                                        _creditFactor = -1;
+                                        _debitFactor = 1;
+                                    }
+
+                                    account128.amount += _debitFactor * _maccount128.debit;
+                                    account128.amount += _creditFactor * _maccount128.credit;
+
+                                    _maccount128.acc_amount = account128.amount;
+
+                                    subacct128.amount += _debitFactor * _maccount128.debit;
+                                    subacct128.amount += _creditFactor * _maccount128.credit;
+                                    _maccount128.subacc_amount = subacct128.amount;
+
+                                    manager.My_db.Movements_Accounts.Add(_maccount128);
+
+                                    manager.My_db.SaveChanges();
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Attempt to duplicate disbursement interest generation.");
+                                }
+                            }
+                            else
+                            {
+                                someDataMissed = true;
+                            }
+                        }
+
+                        if (someDataMissed)
+                        {
+                            ErrorMessage.showErrorMessage(new Exception("Some interests has not been generated dued missing related data. \rPlease, contact with your system administrator in order to find and fix missed data."));
+                        }
+
+                        if (interestCreated)
+                        {
+                            DisbursementGeneratedInterestForm disbursement_generated_interest_form = new DisbursementGeneratedInterestForm();
+                            disbursement_generated_interest_form.generated_interest_id = _generatedInterest.Id;
+                            disbursement_generated_interest_form.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No actions performed.");
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("No disbursement found for interest generation.");
                     }
 
                 }
-                else
+                catch (Exception _ex)
                 {
-                    MessageBox.Show("No disbursement found for interest generation.");
+                    ErrorMessage.showErrorMessage(_ex);
                 }
 
+                cmdGenerateInterest.Enabled = true;
+                cmdGenerateAllInterest.Enabled = true;
             }
-            catch (Exception _ex)
+            else
             {
-                ErrorMessage.showErrorMessage(_ex);
+                ErrorMessage.showErrorMessage(new Exception("No account 128 found."));
             }
-
-            cmdGenerateInterest.Enabled = true;
-            cmdGenerateAllInterest.Enabled = true;
         }
 
         private void cmdGenerateAllInterest_Click(object sender, EventArgs e)
@@ -223,6 +295,11 @@ namespace FundsManager
         {
             generateInterest(false);
 
+            loadDisbursements();
+        }
+
+        private void cmdSearch_Click(object sender, EventArgs e)
+        {
             loadDisbursements();
         }
     }

@@ -41,6 +41,7 @@
             this.PaidDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cmdGenerateAllInterest = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cmdSearch = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -75,9 +76,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.lvDisbursements);
-            this.groupBox1.Location = new System.Drawing.Point(12, 73);
+            this.groupBox1.Location = new System.Drawing.Point(12, 85);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(751, 248);
+            this.groupBox1.Size = new System.Drawing.Size(751, 366);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Disbursements";
@@ -95,7 +96,7 @@
             this.lvDisbursements.HideSelection = false;
             this.lvDisbursements.Location = new System.Drawing.Point(14, 28);
             this.lvDisbursements.Name = "lvDisbursements";
-            this.lvDisbursements.Size = new System.Drawing.Size(718, 200);
+            this.lvDisbursements.Size = new System.Drawing.Size(718, 319);
             this.lvDisbursements.TabIndex = 0;
             this.lvDisbursements.UseCompatibleStateImageBehavior = false;
             this.lvDisbursements.View = System.Windows.Forms.View.Details;
@@ -150,11 +151,22 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Generate Interest";
             // 
+            // cmdSearch
+            // 
+            this.cmdSearch.Location = new System.Drawing.Point(205, 49);
+            this.cmdSearch.Name = "cmdSearch";
+            this.cmdSearch.Size = new System.Drawing.Size(75, 23);
+            this.cmdSearch.TabIndex = 18;
+            this.cmdSearch.Text = "Search";
+            this.cmdSearch.UseVisualStyleBackColor = true;
+            this.cmdSearch.Click += new System.EventHandler(this.cmdSearch_Click);
+            // 
             // ProfitShareToAccrueForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(783, 463);
+            this.Controls.Add(this.cmdSearch);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dtpDate);
@@ -184,5 +196,6 @@
         private System.Windows.Forms.ColumnHeader PaidDate;
         private System.Windows.Forms.Button cmdGenerateAllInterest;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button cmdSearch;
     }
 }
