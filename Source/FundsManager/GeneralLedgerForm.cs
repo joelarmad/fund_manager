@@ -17,6 +17,8 @@ namespace FundsManager
 
         public bool FromDisbursementPayment = false;
         public AccountingMovement AcctMovFromDisbursement = null;
+        public decimal CreditFromDisbursemet = 0;
+        public bool OperationCompleted = false;
 
         private bool AvoidAccountBalanceValidation = false;
 
@@ -153,6 +155,8 @@ namespace FundsManager
 
                     textBox3.Enabled = false;
                     textBox5.Enabled = false;
+
+                    textBox2.Text = String.Format("{0:0.00}", CreditFromDisbursemet);
                 }
             }
             catch (Exception _ex)
@@ -464,6 +468,7 @@ namespace FundsManager
 
                         if (FromDisbursementPayment)
                         {
+                            OperationCompleted = true;
                             this.Close();
                         }
                     }
@@ -510,8 +515,11 @@ namespace FundsManager
                         movements.Clear();
                         movementsToDelete.Clear();
 
+                        OperationCompleted = true;
                         this.Close();
                     }
+
+                    OperationCompleted = true;
                 }
                 catch (Exception _ex)
                 {
@@ -530,6 +538,8 @@ namespace FundsManager
                     {
                         ErrorMessage.showErrorMessage(_ex2);
                     }
+
+                    OperationCompleted = false;
                 }
 
                 cmdDeleteMovement.Visible = false;
@@ -1191,7 +1201,7 @@ namespace FundsManager
             }
         }
 
-        private bool movementCanBeDeleted()
+        public bool movementCanBeDeleted()
         {
             //TODO: implementar
             return true;

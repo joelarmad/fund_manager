@@ -159,6 +159,8 @@ namespace FundsManager
 
         private void cmdPay_Click(object sender, EventArgs e)
         {
+            decimal totalPaid = 0;
+
             int investmentId = 0;
             int disbursementPaymentId = 0;
             int accountingMovementId = 0;
@@ -207,17 +209,19 @@ namespace FundsManager
 
                                         manager.My_db.SaveChanges();
 
-                                        _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
-                                        //TODO: buscar valor correcto
-                                        _accountingMovement.description = "";
-                                        _accountingMovement.date = dPayment.payment_date;
-                                        _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference;
-                                        _accountingMovement.FK_AccountingMovements_Currencies = toPay.currency_id;
-                                        _accountingMovement.original_reference = cbContract.Text;
-                                        _accountingMovement.contract = cbContract.SelectedText;
+                                        if (_accountingMovement.Id == 0)
+                                        {
+                                            _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
+                                            _accountingMovement.description = "";
+                                            _accountingMovement.date = dPayment.payment_date;
+                                            _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference;
+                                            _accountingMovement.FK_AccountingMovements_Currencies = toPay.currency_id;
+                                            _accountingMovement.original_reference = cbContract.Text;
+                                            _accountingMovement.contract = cbContract.SelectedText;
 
-                                        manager.My_db.AccountingMovements.Add(_accountingMovement);
-                                        manager.My_db.SaveChanges();
+                                            manager.My_db.AccountingMovements.Add(_accountingMovement);
+                                            manager.My_db.SaveChanges();
+                                        }
 
                                         accountingMovementId = _accountingMovement.Id;
 
@@ -235,6 +239,8 @@ namespace FundsManager
                                         _maccount125.subaccount_type = 1;
                                         _maccount125.debit = toPay.amount;
                                         _maccount125.credit = 0;
+
+                                        totalPaid += toPay.amount;
 
                                         int _creditFactor = 1;
                                         int _debitFactor = -1;
@@ -274,15 +280,20 @@ namespace FundsManager
 
                             lvDisbursements.SelectedIndices.Clear();
 
-                            loadDisbursements();
-
                             if (_accountingMovement.Id > 0)
                             {
                                 GeneralLedgerForm gledger = new GeneralLedgerForm();
                                 gledger.StartPosition = FormStartPosition.CenterScreen;
                                 gledger.FromDisbursementPayment = true;
                                 gledger.AcctMovFromDisbursement = _accountingMovement;
+                                gledger.CreditFromDisbursemet = totalPaid;
+                                gledger.ControlBox = false;
                                 gledger.ShowDialog();
+
+                                if (!gledger.OperationCompleted)
+                                {
+                                    throw new Exception("Ledger operation has been failed. The disbursements payment will be rolled back.");
+                                }
 
                                 DisbursementPaymentForm disbursement_payments = new DisbursementPaymentForm();
                                 disbursement_payments.paymentId = dPayment.id;
@@ -365,6 +376,8 @@ namespace FundsManager
                     ErrorMessage.showErrorMessage(new Exception("Error rolling back operation.", _ex2));
                 }
             }
+
+            loadDisbursements();
         }
     }
 }

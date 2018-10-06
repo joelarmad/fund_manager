@@ -54,7 +54,6 @@ namespace FundsManager
             {
                 if (cbContract.SelectedValue != null)
                 {
-                    //TODO: corregir exception cuando contract is empty
                     string contract = ((FundsManager.FundsDBDataSet.ClientContractsRow)((System.Data.DataRowView)cbContract.SelectedItem).Row).contract;
 
                     if (contract != "")
@@ -110,7 +109,6 @@ namespace FundsManager
                         {
                             if (amount - collected - amountToBeCollected >= 0)
                             {
-                                //TODO: consultar si se puede cobrar mas que el resto del collected
                                 ids.Add(id);
                                 amounts.Add(amount);
                                 collecteds.Add(collected);
