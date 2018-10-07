@@ -41,14 +41,25 @@ namespace FundsManager
                     if (interestDetail == null)
                     {
                         string paid_date = _profitShareToAccrue.pay_date != null ? _profitShareToAccrue.pay_date.Value.ToLongDateString() : "";
+                        
+                        DateTime? fromDate = getLastGeneratedInterestDateFor(_profitShareToAccrue.Id);
 
+                        if (fromDate == null)
+                        {
+                            fromDate = _profitShareToAccrue.pay_date;
+                        }
+
+                        DateTime toDate = dtpDate.Value <= _profitShareToAccrue.collection_date ? dtpDate.Value : _profitShareToAccrue.collection_date;
+
+                        int financingDays = (toDate - fromDate.Value).Days;
+                        
                         string[] row = {
                             _profitShareToAccrue.Id.ToString(),
                             _profitShareToAccrue.number,
                             String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _profitShareToAccrue.amount),
                             _profitShareToAccrue.collection_date.ToLongDateString(),
-                            _profitShareToAccrue.date.ToLongDateString(),
-                            paid_date
+                            paid_date,
+                            financingDays.ToString()
                         };
 
                         ListViewItem my_item = new ListViewItem(row);
@@ -252,7 +263,7 @@ namespace FundsManager
                                         _detail.disbursement_generated_interest_id = _generatedInterest.Id;
                                         _detail.disbursement_id = _profitShareToAccrue.Id;
                                         _detail.generated_interest = _interest;
-                                        _detail.generated_interest_date = _date;
+                                        _detail.generated_interest_date = toDate;
 
                                         manager.My_db.DisbursementGeneratedInterestDetails.Add(_detail);
                                         manager.My_db.SaveChanges();
@@ -400,6 +411,11 @@ namespace FundsManager
         private void cmdSearch_Click(object sender, EventArgs e)
         {
             loadDisbursements();
+        }
+
+        private void ProfitShareToAccrueForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

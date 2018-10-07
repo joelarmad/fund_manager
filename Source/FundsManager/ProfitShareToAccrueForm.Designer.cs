@@ -37,7 +37,7 @@
             this.Number = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Amount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CollectionDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.DisbursementDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PaidDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cmdGenerateAllInterest = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -90,8 +90,8 @@
             this.Number,
             this.Amount,
             this.CollectionDate,
-            this.DisbursementDate,
-            this.PaidDate});
+            this.PaidDate,
+            this.Days});
             this.lvDisbursements.FullRowSelect = true;
             this.lvDisbursements.HideSelection = false;
             this.lvDisbursements.Location = new System.Drawing.Point(14, 28);
@@ -120,10 +120,10 @@
             this.CollectionDate.Text = "Collection Date";
             this.CollectionDate.Width = 180;
             // 
-            // DisbursementDate
+            // Days
             // 
-            this.DisbursementDate.Text = "Disbursement Date";
-            this.DisbursementDate.Width = 180;
+            this.Days.Text = "Days";
+            this.Days.Width = 180;
             // 
             // PaidDate
             // 
@@ -174,6 +174,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ProfitShareToAccrueForm";
             this.Text = "Profit Share To Accrue";
+            this.Load += new System.EventHandler(this.ProfitShareToAccrueForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -192,7 +193,7 @@
         private System.Windows.Forms.ColumnHeader Number;
         private System.Windows.Forms.ColumnHeader Amount;
         private System.Windows.Forms.ColumnHeader CollectionDate;
-        private System.Windows.Forms.ColumnHeader DisbursementDate;
+        private System.Windows.Forms.ColumnHeader Days;
         private System.Windows.Forms.ColumnHeader PaidDate;
         private System.Windows.Forms.Button cmdGenerateAllInterest;
         private System.Windows.Forms.GroupBox groupBox2;
