@@ -31,7 +31,7 @@ namespace FundsManager
 
                 DateTime _date = dtpDate.Value;
 
-                List<ProfitShareToAccrue> _profitShareToAccrueList = manager.My_db.ProfitShareToAccrues.Where(x => x.pay_date <= _date).ToList();
+                List<ProfitShareToAccrue> _profitShareToAccrueList = manager.My_db.ProfitShareToAccrues.Where(x => x.pay_date <= _date).OrderBy(x => x.contract).ToList();
 
                 foreach (ProfitShareToAccrue _profitShareToAccrue in _profitShareToAccrueList)
                 {
@@ -55,8 +55,9 @@ namespace FundsManager
                         
                         string[] row = {
                             _profitShareToAccrue.Id.ToString(),
+                            _profitShareToAccrue.contract,
                             _profitShareToAccrue.number,
-                            String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _profitShareToAccrue.amount),
+                            String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _profitShareToAccrue.profit_share),
                             _profitShareToAccrue.collection_date.ToLongDateString(),
                             paid_date,
                             financingDays.ToString()

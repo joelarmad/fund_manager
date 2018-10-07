@@ -35,13 +35,14 @@
             this.lvDisbursements = new System.Windows.Forms.ListView();
             this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Number = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Amount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ProfitShare = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CollectionDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PaidDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cmdGenerateAllInterest = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cmdSearch = new System.Windows.Forms.Button();
+            this.Contract = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -87,8 +88,9 @@
             // 
             this.lvDisbursements.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Id,
+            this.Contract,
             this.Number,
-            this.Amount,
+            this.ProfitShare,
             this.CollectionDate,
             this.PaidDate,
             this.Days});
@@ -110,25 +112,25 @@
             // 
             this.Number.Text = "Number";
             // 
-            // Amount
+            // ProfitShare
             // 
-            this.Amount.Text = "Amount";
-            this.Amount.Width = 100;
+            this.ProfitShare.Text = "Profit Share";
+            this.ProfitShare.Width = 100;
             // 
             // CollectionDate
             // 
             this.CollectionDate.Text = "Collection Date";
             this.CollectionDate.Width = 180;
             // 
-            // Days
-            // 
-            this.Days.Text = "Days";
-            this.Days.Width = 180;
-            // 
             // PaidDate
             // 
             this.PaidDate.Text = "Paid Date";
             this.PaidDate.Width = 180;
+            // 
+            // Days
+            // 
+            this.Days.Text = "Days";
+            this.Days.Width = 180;
             // 
             // cmdGenerateAllInterest
             // 
@@ -161,6 +163,11 @@
             this.cmdSearch.UseVisualStyleBackColor = true;
             this.cmdSearch.Click += new System.EventHandler(this.cmdSearch_Click);
             // 
+            // Contract
+            // 
+            this.Contract.Text = "Contract";
+            this.Contract.Width = 100;
+            // 
             // ProfitShareToAccrueForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -191,12 +198,13 @@
         private System.Windows.Forms.ListView lvDisbursements;
         private System.Windows.Forms.ColumnHeader Id;
         private System.Windows.Forms.ColumnHeader Number;
-        private System.Windows.Forms.ColumnHeader Amount;
+        private System.Windows.Forms.ColumnHeader ProfitShare;
         private System.Windows.Forms.ColumnHeader CollectionDate;
         private System.Windows.Forms.ColumnHeader Days;
         private System.Windows.Forms.ColumnHeader PaidDate;
         private System.Windows.Forms.Button cmdGenerateAllInterest;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button cmdSearch;
+        private System.Windows.Forms.ColumnHeader Contract;
     }
 }

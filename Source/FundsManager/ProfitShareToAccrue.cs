@@ -30,5 +30,7 @@ namespace FundsManager
         public System.DateTime collection_date { get; set; }
         public Nullable<System.DateTime> pay_date { get; set; }
         public bool can_generate_interest { get; set; }
+        public Nullable<int> shipment_id { get; set; }
+        public string contract { get; set; }
     }
 }

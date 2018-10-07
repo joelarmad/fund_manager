@@ -21,7 +21,7 @@ namespace FundsManager
                 manager = MyFundsManager.SingletonInstance;
                 InitializeComponent();
 
-                dateTimePicker1.Value = new DateTime(DateTime.Now.Year, 1, 1);
+                dateTimePicker1.Value = DateTime.Now.AddMonths(-1);
                 dateTimePicker2.Value = DateTime.Now;
 
                 listView1.FullRowSelect = true;

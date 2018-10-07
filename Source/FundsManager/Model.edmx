@@ -158,7 +158,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="symbol" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="FK_Currencies_Funds" Type="int" Nullable="false" />
           <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
@@ -374,7 +374,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FK_Sectors_Funds" Type="int" Nullable="false" />
           <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -435,8 +435,9 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <PropertyRef Name="number" />
             <PropertyRef Name="collection_date" />
             <PropertyRef Name="can_generate_interest" />
+            <PropertyRef Name="contract" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="investment_id" Type="int" Nullable="false" />
           <Property Name="currency_id" Type="int" Nullable="false" />
           <Property Name="exchange_rate" Type="real" Nullable="false" />
@@ -452,6 +453,8 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="collection_date" Type="date" Nullable="false" />
           <Property Name="pay_date" Type="date" />
           <Property Name="can_generate_interest" Type="bit" Nullable="false" />
+          <Property Name="shipment_id" Type="int" />
+          <Property Name="contract" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="debtor_bank_id">
           <End Role="Banks" Type="Self.Banks" Multiplicity="0..1" />
@@ -1351,7 +1354,9 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
     [ProfitShareToAccrue].[number] AS [number], 
     [ProfitShareToAccrue].[collection_date] AS [collection_date], 
     [ProfitShareToAccrue].[pay_date] AS [pay_date], 
-    [ProfitShareToAccrue].[can_generate_interest] AS [can_generate_interest]
+    [ProfitShareToAccrue].[can_generate_interest] AS [can_generate_interest], 
+    [ProfitShareToAccrue].[shipment_id] AS [shipment_id], 
+    [ProfitShareToAccrue].[contract] AS [contract]
     FROM [dbo].[ProfitShareToAccrue] AS [ProfitShareToAccrue]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="debtor_bank_id" Association="Self.debtor_bank_id">
@@ -2158,7 +2163,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="symbol" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="FK_Currencies_Funds" Type="Int32" Nullable="false" />
           <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -2422,7 +2427,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FK_Sectors_Funds" Type="Int32" Nullable="false" />
           <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Sector" FromRole="Sector" ToRole="Disbursement" />
@@ -3278,6 +3283,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <PropertyRef Name="number" />
             <PropertyRef Name="collection_date" />
             <PropertyRef Name="can_generate_interest" />
+            <PropertyRef Name="contract" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="investment_id" Type="Int32" Nullable="false" />
@@ -3295,6 +3301,8 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="collection_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="pay_date" Type="DateTime" Precision="0" />
           <Property Name="can_generate_interest" Type="Boolean" Nullable="false" />
+          <Property Name="shipment_id" Type="Int32" />
+          <Property Name="contract" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DisbursementCollection">
           <Key>
@@ -3794,6 +3802,8 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySetMapping Name="ProfitShareToAccrues">
             <EntityTypeMapping TypeName="FundsDBModel.ProfitShareToAccrue">
               <MappingFragment StoreEntitySet="ProfitShareToAccrue">
+                <ScalarProperty Name="contract" ColumnName="contract" />
+                <ScalarProperty Name="shipment_id" ColumnName="shipment_id" />
                 <ScalarProperty Name="can_generate_interest" ColumnName="can_generate_interest" />
                 <ScalarProperty Name="pay_date" ColumnName="pay_date" />
                 <ScalarProperty Name="collection_date" ColumnName="collection_date" />
