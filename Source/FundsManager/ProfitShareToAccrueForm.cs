@@ -283,6 +283,8 @@ namespace FundsManager
                                         manager.My_db.AccountingMovements.Add(_accountingMovement);
                                         manager.My_db.SaveChanges();
 
+                                        _detail.accounting_movement_id = _accountingMovement.Id;
+
                                         Movements_Accounts _maccount128 = new Movements_Accounts();
 
                                         _maccount128.FK_Movements_Accounts_AccountingMovements = _accountingMovement.Id;
@@ -345,6 +347,7 @@ namespace FundsManager
                                         manager.My_db.Movements_Accounts.Add(_maccount901);
 
                                         manager.My_db.SaveChanges();
+                                        
                                     }
                                 }
                                 else
