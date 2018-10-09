@@ -221,6 +221,8 @@ namespace FundsManager
 
                                             manager.My_db.AccountingMovements.Add(_accountingMovement);
                                             manager.My_db.SaveChanges();
+
+                                            dPayment.accounting_movement_id = _accountingMovement.Id;
                                         }
 
                                         accountingMovementId = _accountingMovement.Id;

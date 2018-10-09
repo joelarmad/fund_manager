@@ -115,6 +115,7 @@
         <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_DisbursementCollection" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_AccountingMovements" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementPayments_AccountingMovements" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
