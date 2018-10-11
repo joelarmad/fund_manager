@@ -95,6 +95,7 @@
             this.letter_of_creditsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.letter_of_creditsTableAdapter();
             this.shipmentsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ShipmentsTableAdapter();
             this.cmdCancel = new System.Windows.Forms.Button();
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
@@ -401,6 +402,7 @@
             // lvDisbursements
             // 
             this.lvDisbursements.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader9,
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
@@ -412,7 +414,7 @@
             this.lvDisbursements.Location = new System.Drawing.Point(12, 260);
             this.lvDisbursements.MultiSelect = false;
             this.lvDisbursements.Name = "lvDisbursements";
-            this.lvDisbursements.Size = new System.Drawing.Size(919, 270);
+            this.lvDisbursements.Size = new System.Drawing.Size(1020, 270);
             this.lvDisbursements.TabIndex = 230;
             this.lvDisbursements.UseCompatibleStateImageBehavior = false;
             this.lvDisbursements.View = System.Windows.Forms.View.Details;
@@ -650,11 +652,16 @@
             this.cmdCancel.Visible = false;
             this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
             // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Number";
+            this.columnHeader9.Width = 70;
+            // 
             // InvestmentsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(954, 579);
+            this.ClientSize = new System.Drawing.Size(1047, 579);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.cbShipment);
             this.Controls.Add(this.label15);
@@ -785,5 +792,6 @@
         private System.Windows.Forms.BindingSource shipmentsBindingSource;
         private FundsDBDataSetTableAdapters.ShipmentsTableAdapter shipmentsTableAdapter;
         private System.Windows.Forms.Button cmdCancel;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
     }
 }

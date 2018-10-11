@@ -324,7 +324,7 @@ namespace FundsManager
                     string clientName = _disbursement.Client != null ? _disbursement.Client.name : _disbursement.TextClient;
                     string underlyingDebtorName = _disbursement.UnderlyingDebtor != null ? _disbursement.UnderlyingDebtor.name : _disbursement.TextUnderlyingDebtor;
 
-                    string[] row = { clientName, underlyingDebtorName, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", _disbursement.profit_share), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", _totalToBeCollected), _disbursement.collection_date.ToLongDateString(), _disbursement.date.ToLongDateString(), Convert.ToString(day.Days) };
+                    string[] row = { _disbursement.number, clientName, underlyingDebtorName, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", _disbursement.profit_share), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", _totalToBeCollected), _disbursement.collection_date.ToLongDateString(), _disbursement.date.ToLongDateString(), Convert.ToString(day.Days) };
                     ListViewItem my_item = new ListViewItem(row);
                     lvDisbursements.Items.Add(my_item);
 
@@ -335,7 +335,7 @@ namespace FundsManager
 
                 if (disbursements.Count > 0)
                 {
-                    string[] totales = { "Total", "", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", total_profit), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", total_euro_collection) };
+                    string[] totales = { "Total", "", "", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", total_profit), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", total_euro_collection) };
                     ListViewItem listViewItemTotal = new ListViewItem(totales);
                     lvDisbursements.Items.Add(listViewItemTotal);
                 }                
@@ -626,14 +626,23 @@ namespace FundsManager
         {
             try
             {
-                foreach (int _index in lvDisbursements.SelectedIndices)
+                if (lvDisbursements.SelectedIndices.Count > 0)
                 {
-                    if (_index == lvDisbursements.Items.Count - 1)
+                    if (lvDisbursements.SelectedIndices[0] == lvDisbursements.Items.Count - 1)
                     {
-                        lvDisbursements.SelectedIndices.Remove(_index);
+                        lvDisbursements.SelectedIndices.Clear();
                     }
-                }
-                      
+                    else
+                    {
+                        Disbursement selected = disbursements[lvDisbursements.SelectedIndices[0]];
+
+                        if (selected.pay_date.HasValue)
+                        {
+                            lvDisbursements.SelectedIndices.Clear();
+                            MessageBox.Show("This disbursement has been already paid.");
+                        }
+                    }
+                }   
 
                 if (lvDisbursements.SelectedIndices.Count > 0)
                 {
