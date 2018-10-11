@@ -180,6 +180,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="investment_id" Type="int" Nullable="false" />
           <Property Name="collection_date" Type="date" Nullable="false" />
+          <Property Name="accounting_movement_id" Type="int" />
         </EntityType>
         <EntityType Name="DisbursementCollectionsDetails">
           <Key>
@@ -815,6 +816,18 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Principal>
             <Dependent Role="Disbursement_dates">
               <PropertyRef Name="fund_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementCollections_AccoutingMovements">
+          <End Role="AccountingMovements" Type="Self.AccountingMovements" Multiplicity="0..1" />
+          <End Role="DisbursementCollections" Type="Self.DisbursementCollections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingMovements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementCollections">
+              <PropertyRef Name="accounting_movement_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1505,6 +1518,10 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="Funds" EntitySet="Funds" />
             <End Role="Disbursement_dates" EntitySet="Disbursement_dates" />
           </AssociationSet>
+          <AssociationSet Name="FK_DisbursementCollections_AccoutingMovements" Association="Self.FK_DisbursementCollections_AccoutingMovements">
+            <End Role="AccountingMovements" EntitySet="AccountingMovements" />
+            <End Role="DisbursementCollections" EntitySet="DisbursementCollections" />
+          </AssociationSet>
           <AssociationSet Name="FK_DisbursementCollections_Investments" Association="Self.FK_DisbursementCollections_Investments">
             <End Role="Investments" EntitySet="Investments" />
             <End Role="DisbursementCollections" EntitySet="DisbursementCollections" />
@@ -2003,6 +2020,10 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="AccountingMovement" EntitySet="AccountingMovements" />
             <End Role="DisbursementPayment" EntitySet="DisbursementPayments" />
           </AssociationSet>
+          <AssociationSet Name="FK_DisbursementCollections_AccoutingMovements" Association="FundsDBModel.FK_DisbursementCollections_AccoutingMovements">
+            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
+            <End Role="DisbursementCollection" EntitySet="DisbursementCollections" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AccountingMovement">
           <Key>
@@ -2021,6 +2042,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_AccountingMovements" FromRole="AccountingMovement" ToRole="Movements_Accounts" />
           <NavigationProperty Name="DisbursementGeneratedInterestDetails1" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_AccountingMovements" FromRole="AccountingMovement" ToRole="DisbursementGeneratedInterestDetail" />
           <NavigationProperty Name="DisbursementPayments" Relationship="FundsDBModel.FK_DisbursementPayments_AccountingMovements" FromRole="AccountingMovement" ToRole="DisbursementPayment" />
+          <NavigationProperty Name="DisbursementCollections" Relationship="FundsDBModel.FK_DisbursementCollections_AccoutingMovements" FromRole="AccountingMovement" ToRole="DisbursementCollection" />
         </EntityType>
         <EntityType Name="Account">
           <Key>
@@ -3361,6 +3383,8 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="collection_date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Investment" Relationship="FundsDBModel.FK_DisbursementCollections_Investments" FromRole="DisbursementCollection" ToRole="Investment" />
           <NavigationProperty Name="DisbursementCollectionsDetails" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_DisbursementCollection" FromRole="DisbursementCollection" ToRole="DisbursementCollectionsDetail" />
+          <Property Name="accounting_movement_id" Type="Int32" />
+          <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_DisbursementCollections_AccoutingMovements" FromRole="DisbursementCollection" ToRole="AccountingMovement" />
         </EntityType>
         <EntityType Name="DisbursementCollectionsDetail">
           <Key>
@@ -3429,6 +3453,18 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="DisbursementPayment">
+              <PropertyRef Name="accounting_movement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementCollections_AccoutingMovements">
+          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="0..1" />
+          <End Type="FundsDBModel.DisbursementCollection" Role="DisbursementCollection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingMovement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementCollection">
               <PropertyRef Name="accounting_movement_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -3900,6 +3936,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySetMapping Name="DisbursementCollections">
             <EntityTypeMapping TypeName="FundsDBModel.DisbursementCollection">
               <MappingFragment StoreEntitySet="DisbursementCollections">
+                <ScalarProperty Name="accounting_movement_id" ColumnName="accounting_movement_id" />
                 <ScalarProperty Name="collection_date" ColumnName="collection_date" />
                 <ScalarProperty Name="investment_id" ColumnName="investment_id" />
                 <ScalarProperty Name="id" ColumnName="id" />

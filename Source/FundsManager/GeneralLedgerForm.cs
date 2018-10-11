@@ -15,9 +15,10 @@ namespace FundsManager
     public partial class GeneralLedgerForm : Form
     {
 
-        public bool FromDisbursementPayment = false;
+        public bool FromDisbursementOperation = false;
         public AccountingMovement AcctMovFromDisbursement = null;
         public decimal CreditFromDisbursemet = 0;
+        public decimal DebitFromDisbursemet = 0;
         public bool OperationCompleted = false;
 
         private bool AvoidAccountBalanceValidation = false;
@@ -130,7 +131,7 @@ namespace FundsManager
                     }
                 }
 
-                if (FromDisbursementPayment && AcctMovFromDisbursement != null)
+                if (FromDisbursementOperation && AcctMovFromDisbursement != null)
                 {
                     AvoidAccountBalanceValidation = true;
 
@@ -156,6 +157,7 @@ namespace FundsManager
                     textBox3.Enabled = false;
                     textBox5.Enabled = false;
 
+                    textBox1.Text = String.Format("{0:0.00}", DebitFromDisbursemet);
                     textBox2.Text = String.Format("{0:0.00}", CreditFromDisbursemet);
                 }
             }
@@ -415,7 +417,7 @@ namespace FundsManager
                     {
                         AccountingMovement newAccountingMovement = new AccountingMovement();
 
-                        if (!FromDisbursementPayment)
+                        if (!FromDisbursementOperation)
                         {
                             newAccountingMovement.FK_AccountingMovements_Funds = manager.Selected;
                             newAccountingMovement.reference = textBox3.Text;
@@ -435,7 +437,7 @@ namespace FundsManager
                             newAccountingMovement.contract = txtContract.Text;
                         }
 
-                        if (!FromDisbursementPayment)
+                        if (!FromDisbursementOperation)
                         {
                             manager.My_db.AccountingMovements.Add(newAccountingMovement);
                         }
@@ -466,7 +468,7 @@ namespace FundsManager
 
                         button2.Enabled = false;
 
-                        if (FromDisbursementPayment)
+                        if (FromDisbursementOperation)
                         {
                             OperationCompleted = true;
                             this.Close();

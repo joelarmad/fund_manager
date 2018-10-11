@@ -22122,6 +22122,8 @@ namespace FundsManager {
             
             private global::System.Data.DataColumn columncollected;
             
+            private global::System.Data.DataColumn columntoBeCollected;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DisbursementsToBeCollectedDataTable() {
@@ -22253,6 +22255,14 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn toBeCollectedColumn {
+                get {
+                    return this.columntoBeCollected;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -22288,7 +22298,7 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DisbursementsToBeCollectedRow AddDisbursementsToBeCollectedRow(int fund_id, string contract, int disbursement_id, int investment_id, string number, System.DateTime collection_date, System.DateTime date, System.DateTime pay_date, bool can_generate_interest, decimal amount, decimal profit_share, decimal collected) {
+            public DisbursementsToBeCollectedRow AddDisbursementsToBeCollectedRow(int fund_id, string contract, int disbursement_id, int investment_id, string number, System.DateTime collection_date, System.DateTime date, System.DateTime pay_date, bool can_generate_interest, decimal amount, decimal profit_share, decimal collected, decimal toBeCollected) {
                 DisbursementsToBeCollectedRow rowDisbursementsToBeCollectedRow = ((DisbursementsToBeCollectedRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         fund_id,
@@ -22302,7 +22312,8 @@ namespace FundsManager {
                         can_generate_interest,
                         amount,
                         profit_share,
-                        collected};
+                        collected,
+                        toBeCollected};
                 rowDisbursementsToBeCollectedRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDisbursementsToBeCollectedRow);
                 return rowDisbursementsToBeCollectedRow;
@@ -22344,6 +22355,7 @@ namespace FundsManager {
                 this.columnamount = base.Columns["amount"];
                 this.columnprofit_share = base.Columns["profit_share"];
                 this.columncollected = base.Columns["collected"];
+                this.columntoBeCollected = base.Columns["toBeCollected"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -22373,6 +22385,8 @@ namespace FundsManager {
                 base.Columns.Add(this.columnprofit_share);
                 this.columncollected = new global::System.Data.DataColumn("collected", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncollected);
+                this.columntoBeCollected = new global::System.Data.DataColumn("toBeCollected", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntoBeCollected);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columndisbursement_id}, true));
                 this.columnfund_id.AllowDBNull = false;
@@ -22389,6 +22403,7 @@ namespace FundsManager {
                 this.columnamount.AllowDBNull = false;
                 this.columnprofit_share.AllowDBNull = false;
                 this.columncollected.ReadOnly = true;
+                this.columntoBeCollected.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -30166,6 +30181,23 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal toBeCollected {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableDisbursementsToBeCollected.toBeCollectedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'toBeCollected\' de la tabla \'DisbursementsToBeCollected\' e" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDisbursementsToBeCollected.toBeCollectedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool Ispay_dateNull() {
                 return this.IsNull(this.tableDisbursementsToBeCollected.pay_dateColumn);
             }
@@ -30186,6 +30218,18 @@ namespace FundsManager {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetcollectedNull() {
                 this[this.tableDisbursementsToBeCollected.collectedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IstoBeCollectedNull() {
+                return this.IsNull(this.tableDisbursementsToBeCollected.toBeCollectedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SettoBeCollectedNull() {
+                this[this.tableDisbursementsToBeCollected.toBeCollectedColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -50562,6 +50606,7 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected FROM Disbur
             tableMapping.ColumnMappings.Add("amount", "amount");
             tableMapping.ColumnMappings.Add("profit_share", "profit_share");
             tableMapping.ColumnMappings.Add("collected", "collected");
+            tableMapping.ColumnMappings.Add("toBeCollected", "toBeCollected");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -50579,14 +50624,15 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected FROM Disbur
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT fund_id, contract, disbursement_id, investment_id, number, collection_date" +
-                ", date, pay_date, can_generate_interest, amount, profit_share, collected FROM db" +
-                "o.DisbursementsToBeCollected";
+                ", date, pay_date, can_generate_interest, amount, profit_share, collected, toBeCo" +
+                "llected FROM DisbursementsToBeCollected";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
             this._commandCollection[1].CommandText = "SELECT fund_id, contract, disbursement_id, investment_id, number, collection_date" +
-                ", date, pay_date, can_generate_interest, amount, profit_share, collected FROM db" +
-                "o.DisbursementsToBeCollected Where contract = @contract and fund_id = @fundId";
+                ", date, pay_date, can_generate_interest, amount, profit_share, collected, toBeCo" +
+                "llected FROM DisbursementsToBeCollected WHERE (contract = @contract) AND (fund_i" +
+                "d = @fundId)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contract", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "contract", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));

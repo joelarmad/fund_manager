@@ -49,6 +49,7 @@
             this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.profitshareDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toBeCollected = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.collectedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DelayInterest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Collect = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,7 +76,7 @@
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Location = new System.Drawing.Point(8, 78);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(752, 248);
+            this.groupBox1.Size = new System.Drawing.Size(775, 248);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Disbursements";
@@ -91,13 +92,14 @@
             this.numberDataGridViewTextBoxColumn,
             this.amountDataGridViewTextBoxColumn,
             this.profitshareDataGridViewTextBoxColumn,
+            this.toBeCollected,
             this.collectedDataGridViewTextBoxColumn,
             this.DelayInterest,
             this.Collect});
             this.dataGridView1.DataSource = this.disbursementsToBeCollectedBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(14, 19);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(722, 212);
+            this.dataGridView1.Size = new System.Drawing.Size(748, 212);
             this.dataGridView1.TabIndex = 0;
             // 
             // disbursementsToBeCollectedBindingSource
@@ -204,6 +206,7 @@
             this.numberDataGridViewTextBoxColumn.HeaderText = "number";
             this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
             this.numberDataGridViewTextBoxColumn.ReadOnly = true;
+            this.numberDataGridViewTextBoxColumn.Width = 80;
             // 
             // amountDataGridViewTextBoxColumn
             // 
@@ -211,6 +214,7 @@
             this.amountDataGridViewTextBoxColumn.HeaderText = "amount";
             this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
             this.amountDataGridViewTextBoxColumn.ReadOnly = true;
+            this.amountDataGridViewTextBoxColumn.Width = 80;
             // 
             // profitshareDataGridViewTextBoxColumn
             // 
@@ -218,6 +222,14 @@
             this.profitshareDataGridViewTextBoxColumn.HeaderText = "profit_share";
             this.profitshareDataGridViewTextBoxColumn.Name = "profitshareDataGridViewTextBoxColumn";
             this.profitshareDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // toBeCollected
+            // 
+            this.toBeCollected.DataPropertyName = "toBeCollected";
+            this.toBeCollected.HeaderText = "To be Collected";
+            this.toBeCollected.Name = "toBeCollected";
+            this.toBeCollected.ReadOnly = true;
+            this.toBeCollected.Width = 140;
             // 
             // collectedDataGridViewTextBoxColumn
             // 
@@ -240,7 +252,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(775, 339);
+            this.ClientSize = new System.Drawing.Size(798, 339);
             this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdCollect);
@@ -286,6 +298,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn profitshareDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn toBeCollected;
         private System.Windows.Forms.DataGridViewTextBoxColumn collectedDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DelayInterest;
         private System.Windows.Forms.DataGridViewTextBoxColumn Collect;
