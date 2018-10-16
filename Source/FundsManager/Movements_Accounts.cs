@@ -14,6 +14,14 @@ namespace FundsManager
     
     public partial class Movements_Accounts
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Movements_Accounts()
+        {
+            this.DisbursementCollectionsDetails = new HashSet<DisbursementCollectionsDetail>();
+            this.DisbursementCollectionsDetails1 = new HashSet<DisbursementCollectionsDetail>();
+            this.DisbursementCollectionsDetails2 = new HashSet<DisbursementCollectionsDetail>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> FK_Movements_Accounts_Subaccounts { get; set; }
         public int FK_Movements_Accounts_AccountingMovements { get; set; }
@@ -30,5 +38,11 @@ namespace FundsManager
         public virtual Account Account { get; set; }
         public virtual Fund Fund { get; set; }
         public virtual Subaccount Subaccount1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementCollectionsDetail> DisbursementCollectionsDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementCollectionsDetail> DisbursementCollectionsDetails1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementCollectionsDetail> DisbursementCollectionsDetails2 { get; set; }
     }
 }

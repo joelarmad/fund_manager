@@ -17,8 +17,14 @@ namespace FundsManager
         public int disbursement_collection_id { get; set; }
         public int disbursement_id { get; set; }
         public decimal amount_collected { get; set; }
+        public Nullable<int> movement125_id { get; set; }
+        public Nullable<int> movement128_id { get; set; }
+        public Nullable<int> movement130_id { get; set; }
     
         public virtual DisbursementCollection DisbursementCollection { get; set; }
         public virtual Disbursement Disbursement { get; set; }
+        public virtual Movements_Accounts Movements_Accounts { get; set; }
+        public virtual Movements_Accounts Movements_Accounts1 { get; set; }
+        public virtual Movements_Accounts Movements_Accounts2 { get; set; }
     }
 }

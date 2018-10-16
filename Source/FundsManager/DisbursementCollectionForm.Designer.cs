@@ -52,7 +52,9 @@
             this.toBeCollected = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.collectedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DelayInterest = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Collect = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Collect125 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Collect128 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Collect130 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.disbursementsToBeCollectedBindingSource)).BeginInit();
@@ -76,7 +78,7 @@
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Location = new System.Drawing.Point(8, 78);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(775, 248);
+            this.groupBox1.Size = new System.Drawing.Size(889, 248);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Disbursements";
@@ -95,11 +97,13 @@
             this.toBeCollected,
             this.collectedDataGridViewTextBoxColumn,
             this.DelayInterest,
-            this.Collect});
+            this.Collect125,
+            this.Collect128,
+            this.Collect130});
             this.dataGridView1.DataSource = this.disbursementsToBeCollectedBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(14, 19);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(748, 212);
+            this.dataGridView1.Size = new System.Drawing.Size(860, 212);
             this.dataGridView1.TabIndex = 0;
             // 
             // disbursementsToBeCollectedBindingSource
@@ -206,7 +210,7 @@
             this.numberDataGridViewTextBoxColumn.HeaderText = "number";
             this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
             this.numberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.numberDataGridViewTextBoxColumn.Width = 80;
+            this.numberDataGridViewTextBoxColumn.Width = 60;
             // 
             // amountDataGridViewTextBoxColumn
             // 
@@ -214,7 +218,7 @@
             this.amountDataGridViewTextBoxColumn.HeaderText = "amount";
             this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
             this.amountDataGridViewTextBoxColumn.ReadOnly = true;
-            this.amountDataGridViewTextBoxColumn.Width = 80;
+            this.amountDataGridViewTextBoxColumn.Width = 70;
             // 
             // profitshareDataGridViewTextBoxColumn
             // 
@@ -222,6 +226,7 @@
             this.profitshareDataGridViewTextBoxColumn.HeaderText = "profit_share";
             this.profitshareDataGridViewTextBoxColumn.Name = "profitshareDataGridViewTextBoxColumn";
             this.profitshareDataGridViewTextBoxColumn.ReadOnly = true;
+            this.profitshareDataGridViewTextBoxColumn.Width = 80;
             // 
             // toBeCollected
             // 
@@ -229,7 +234,6 @@
             this.toBeCollected.HeaderText = "To be Collected";
             this.toBeCollected.Name = "toBeCollected";
             this.toBeCollected.ReadOnly = true;
-            this.toBeCollected.Width = 140;
             // 
             // collectedDataGridViewTextBoxColumn
             // 
@@ -243,16 +247,26 @@
             this.DelayInterest.HeaderText = "Delay Interest";
             this.DelayInterest.Name = "DelayInterest";
             // 
-            // Collect
+            // Collect125
             // 
-            this.Collect.HeaderText = "Collect";
-            this.Collect.Name = "Collect";
+            this.Collect125.HeaderText = "Collect to 125";
+            this.Collect125.Name = "Collect125";
+            // 
+            // Collect128
+            // 
+            this.Collect128.HeaderText = "Collect to 128";
+            this.Collect128.Name = "Collect128";
+            // 
+            // Collect130
+            // 
+            this.Collect130.HeaderText = "Collect to 130";
+            this.Collect130.Name = "Collect130";
             // 
             // DisbursementCollectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(798, 339);
+            this.ClientSize = new System.Drawing.Size(914, 339);
             this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdCollect);
@@ -301,6 +315,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn toBeCollected;
         private System.Windows.Forms.DataGridViewTextBoxColumn collectedDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DelayInterest;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Collect;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Collect125;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Collect128;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Collect130;
     }
 }

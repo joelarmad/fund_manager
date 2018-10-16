@@ -21,7 +21,9 @@ namespace FundsManager
         int ProfitShareIndex = 3;
         int ToBeCollectedIndex = 4;
         int CollectedIndex = 5;
-        int ToBeCollectedNowIndex = 7;
+        int CollectTo125Index = 7;
+        int CollectTo128Index = 8;
+        int CollectTo130Index = 9;
 
         public DisbursementCollectionForm()
         {
@@ -84,13 +86,20 @@ namespace FundsManager
 
         private void cmdCollect_Click(object sender, EventArgs e)
         {
+            //For rolling back
+            int accounting_movement_id = 0;
+            int disbursement_collection_id = 0;
+            List<int> disbsCheckedAsFullCollected = new List<int>();
+
             try
             {
                 List<int> ids = new List<int>();
                 List<decimal> amounts = new List<decimal>();
                 List<decimal> totalsToBeCollected = new List<decimal>();
                 List<decimal> collecteds = new List<decimal>();
-                List<decimal> toBeCollectedNow = new List<decimal>();
+                List<decimal> collect125 = new List<decimal>();
+                List<decimal> collect128 = new List<decimal>();
+                List<decimal> collect130 = new List<decimal>();
 
                 String errors = "";
 
@@ -102,30 +111,38 @@ namespace FundsManager
                     decimal profitShare = decimal.Parse(row.Cells[ProfitShareIndex].Value.ToString());
                     decimal totalToBeCollected = decimal.Parse(row.Cells[ToBeCollectedIndex].Value.ToString());
                     decimal collected = decimal.Parse(row.Cells[CollectedIndex].Value.ToString());
-                    string amountToBeCollectedStr = row.Cells[ToBeCollectedNowIndex].Value != null ? row.Cells[ToBeCollectedNowIndex].Value.ToString() : "";
+                    string amountToBeCollected125Str = row.Cells[CollectTo125Index].Value != null ? row.Cells[CollectTo125Index].Value.ToString() : "0";
+                    string amountToBeCollected128Str = row.Cells[CollectTo128Index].Value != null ? row.Cells[CollectTo128Index].Value.ToString() : "0";
+                    string amountToBeCollected130Str = row.Cells[CollectTo130Index].Value != null ? row.Cells[CollectTo130Index].Value.ToString() : "0";
 
-                    if (amountToBeCollectedStr != "")
+                    if (amountToBeCollected125Str != "0" || amountToBeCollected128Str != "0" || amountToBeCollected130Str != "0")
                     {
-                        decimal amountToBeCollected = 0;
+                        decimal amountToBeCollected125 = 0;
+                        decimal amountToBeCollected128 = 0;
+                        decimal amountToBeCollected130 = 0;
 
-                        if (decimal.TryParse(amountToBeCollectedStr, out amountToBeCollected) && amountToBeCollected > 0)
+                        if (decimal.TryParse(amountToBeCollected125Str, out amountToBeCollected125) &&
+                            decimal.TryParse(amountToBeCollected128Str, out amountToBeCollected128) &&
+                            decimal.TryParse(amountToBeCollected130Str, out amountToBeCollected130))
                         {
-                            if (totalToBeCollected - collected - amountToBeCollected >= 0)
+                            if (totalToBeCollected - collected - amountToBeCollected125 - amountToBeCollected128 - amountToBeCollected130 >= 0)
                             {
                                 ids.Add(id);
                                 amounts.Add(amount);
                                 totalsToBeCollected.Add(totalToBeCollected);
                                 collecteds.Add(collected);
-                                toBeCollectedNow.Add(amountToBeCollected);
+                                collect125.Add(amountToBeCollected125);
+                                collect128.Add(amountToBeCollected128);
+                                collect130.Add(amountToBeCollected130);
                             }
                             else
                             {
-                                errors += "\r\tDisbursement " + number + " has too much collection value: " + amountToBeCollectedStr;
+                                errors += "\r\tDisbursement " + number + " has too much collection value.";
                             }
                         }
                         else
                         {
-                            errors += "\r  Disbursement " + number + " has wrong collection value: " + amountToBeCollectedStr;
+                            errors += "\r  Disbursement " + number + " has wrong collection value.";
                         }
                     }
                 }
@@ -158,6 +175,8 @@ namespace FundsManager
                                 manager.My_db.DisbursementCollections.Add(collection);
                                 manager.My_db.SaveChanges();
 
+                                disbursement_collection_id = collection.id;
+
                                 AccountingMovement accountingMovement = new AccountingMovement();
 
                                 accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
@@ -177,7 +196,9 @@ namespace FundsManager
                                     decimal amount = amounts[i];
                                     decimal totalToBeCollected = totalsToBeCollected[i];
                                     decimal collected = collecteds[i];
-                                    decimal toBeCollected = toBeCollectedNow[i];
+                                    decimal toBeCollected125 = collect125[i];
+                                    decimal toBeCollected128 = collect128[i];
+                                    decimal toBeCollected130 = collect130[i];
 
                                     Disbursement disb = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == disbId);
 
@@ -203,17 +224,20 @@ namespace FundsManager
                                                     collection.accounting_movement_id = accountingMovement.Id;
 
                                                     manager.My_db.SaveChanges();
+
+                                                    accounting_movement_id = accountingMovement.Id;
                                                 }
 
-                                                if (totalToBeCollected - collected - toBeCollected <= 0 && !disb.can_generate_interest)
+                                                if (totalToBeCollected - collected - toBeCollected125 - toBeCollected128 - toBeCollected130 <= 0 && !disb.can_generate_interest)
                                                 {
                                                     //TODO: marcar como completed_collected
+                                                    disbsCheckedAsFullCollected.Add(disbId);
                                                 }
 
                                                 DisbursementCollectionsDetail collectionDetail = new DisbursementCollectionsDetail();
                                                 collectionDetail.disbursement_collection_id = collection.id;
                                                 collectionDetail.disbursement_id = disbId;
-                                                collectionDetail.amount_collected = toBeCollected;
+                                                collectionDetail.amount_collected = toBeCollected125 + toBeCollected128 + toBeCollected130;
 
                                                 manager.My_db.DisbursementCollectionsDetails.Add(collectionDetail);
                                                 manager.My_db.SaveChanges();
@@ -228,7 +252,7 @@ namespace FundsManager
                                                 _maccount125.subaccount = disb.client_id;
                                                 _maccount125.subaccount_type = 1;
                                                 _maccount125.debit = 0;
-                                                _maccount125.credit = toBeCollected;
+                                                _maccount125.credit = toBeCollected125;
 
                                                 int _creditFactor = 1;
                                                 int _debitFactor = -1;
@@ -249,6 +273,9 @@ namespace FundsManager
                                                 _maccount125.subacc_amount = subacct125.amount;
 
                                                 manager.My_db.Movements_Accounts.Add(_maccount125);
+                                                manager.My_db.SaveChanges();
+
+                                                collectionDetail.movement125_id = _maccount125.Id;
 
                                                 Movements_Accounts _maccount128 = new Movements_Accounts();
 
@@ -260,7 +287,7 @@ namespace FundsManager
                                                 _maccount128.subaccount = disb.client_id;
                                                 _maccount128.subaccount_type = 1;
                                                 _maccount128.debit = 0;
-                                                _maccount128.credit = toBeCollected;
+                                                _maccount128.credit = toBeCollected128;
 
                                                 _creditFactor = 1;
                                                 _debitFactor = -1;
@@ -281,6 +308,9 @@ namespace FundsManager
                                                 _maccount128.subacc_amount = subacct128.amount;
 
                                                 manager.My_db.Movements_Accounts.Add(_maccount128);
+                                                manager.My_db.SaveChanges();
+
+                                                collectionDetail.movement128_id = _maccount128.Id;
 
                                                 Movements_Accounts _maccount130 = new Movements_Accounts();
 
@@ -292,7 +322,7 @@ namespace FundsManager
                                                 _maccount130.subaccount = disb.client_id;
                                                 _maccount130.subaccount_type = 1;
                                                 _maccount130.debit = 0;
-                                                _maccount130.credit = toBeCollected;
+                                                _maccount130.credit = toBeCollected130;
 
                                                 _creditFactor = 1;
                                                 _debitFactor = -1;
@@ -313,10 +343,13 @@ namespace FundsManager
                                                 _maccount130.subacc_amount = subacct130.amount;
 
                                                 manager.My_db.Movements_Accounts.Add(_maccount130);
+                                                manager.My_db.SaveChanges();
+
+                                                collectionDetail.movement130_id = _maccount130.Id;
 
                                                 manager.My_db.SaveChanges();
 
-                                                totalPaid += toBeCollected;
+                                                totalPaid += toBeCollected125 + toBeCollected128 + toBeCollected130;
 
                                                 showGL = true;
                                             }
@@ -380,7 +413,49 @@ namespace FundsManager
             catch (Exception _ex)
             {
                 ErrorMessage.showErrorMessage(_ex);
-                //TODO: hacer roolback
+
+                try
+                {
+                    AccountingMovement acctMov = manager.My_db.AccountingMovements.FirstOrDefault(x => x.Id == accounting_movement_id);
+
+                    if (acctMov != null)
+                    {
+                        List<Movements_Accounts> movements = manager.My_db.Movements_Accounts.Where(x => x.FK_Movements_Accounts_AccountingMovements == accounting_movement_id).ToList();
+
+                        foreach (Movements_Accounts movement in movements)
+                        {
+                            manager.My_db.Movements_Accounts.Remove(movement);
+                        }
+
+                        manager.My_db.SaveChanges();
+
+                        manager.My_db.AccountingMovements.Remove(acctMov);
+
+                        manager.My_db.SaveChanges();
+                    }
+
+                    DisbursementCollection disbCollection = manager.My_db.DisbursementCollections.FirstOrDefault(x => x.id == disbursement_collection_id);
+
+                    if (disbCollection != null)
+                    {
+                        List<DisbursementCollectionsDetail> details = manager.My_db.DisbursementCollectionsDetails.Where(x => x.disbursement_collection_id == disbursement_collection_id).ToList();
+
+                        foreach (DisbursementCollectionsDetail detail in details)
+                        {
+                            manager.My_db.DisbursementCollectionsDetails.Remove(detail);
+                        }
+
+                        manager.My_db.SaveChanges();
+
+                        manager.My_db.DisbursementCollections.Remove(disbCollection);
+
+                        manager.My_db.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ErrorMessage.showErrorMessage(ex);
+                }
             }
         }
     }

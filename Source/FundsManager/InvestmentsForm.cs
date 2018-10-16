@@ -250,9 +250,7 @@ namespace FundsManager
                 }
             }
 
-            Disbursement found = manager.My_db.Disbursements.FirstOrDefault(x => x.number == txtNumber.Text);
-
-            return found != null;
+            return false;
         }
 
         private void button2_Click(object sender, EventArgs e)

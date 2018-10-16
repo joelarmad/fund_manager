@@ -190,6 +190,9 @@
           <Property Name="disbursement_collection_id" Type="int" Nullable="false" />
           <Property Name="disbursement_id" Type="int" Nullable="false" />
           <Property Name="amount_collected" Type="money" Nullable="false" />
+          <Property Name="movement125_id" Type="int" />
+          <Property Name="movement128_id" Type="int" />
+          <Property Name="movement130_id" Type="int" />
         </EntityType>
         <EntityType Name="DisbursementGeneratedInterestDetails">
           <Key>
@@ -867,6 +870,42 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DisbursementCollectionsDetails_Mov125">
+          <End Role="Movements_Accounts" Type="Self.Movements_Accounts" Multiplicity="0..1" />
+          <End Role="DisbursementCollectionsDetails" Type="Self.DisbursementCollectionsDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movements_Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementCollectionsDetails">
+              <PropertyRef Name="movement125_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementCollectionsDetails_Mov128">
+          <End Role="Movements_Accounts" Type="Self.Movements_Accounts" Multiplicity="0..1" />
+          <End Role="DisbursementCollectionsDetails" Type="Self.DisbursementCollectionsDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movements_Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementCollectionsDetails">
+              <PropertyRef Name="movement128_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementCollectionsDetails_Mov130">
+          <End Role="Movements_Accounts" Type="Self.Movements_Accounts" Multiplicity="0..1" />
+          <End Role="DisbursementCollectionsDetails" Type="Self.DisbursementCollectionsDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movements_Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementCollectionsDetails">
+              <PropertyRef Name="movement130_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DisbursementGeneratedInterestDetails_AccountingMovements">
           <End Role="AccountingMovements" Type="Self.AccountingMovements" Multiplicity="0..1" />
           <End Role="DisbursementGeneratedInterestDetails" Type="Self.DisbursementGeneratedInterestDetails" Multiplicity="*" />
@@ -1534,6 +1573,18 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="DisbursementCollections" EntitySet="DisbursementCollections" />
             <End Role="DisbursementCollectionsDetails" EntitySet="DisbursementCollectionsDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_DisbursementCollectionsDetails_Mov125" Association="Self.FK_DisbursementCollectionsDetails_Mov125">
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+            <End Role="DisbursementCollectionsDetails" EntitySet="DisbursementCollectionsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementCollectionsDetails_Mov128" Association="Self.FK_DisbursementCollectionsDetails_Mov128">
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+            <End Role="DisbursementCollectionsDetails" EntitySet="DisbursementCollectionsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementCollectionsDetails_Mov130" Association="Self.FK_DisbursementCollectionsDetails_Mov130">
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+            <End Role="DisbursementCollectionsDetails" EntitySet="DisbursementCollectionsDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_DisbursementGeneratedInterestDetails_AccountingMovements" Association="Self.FK_DisbursementGeneratedInterestDetails_AccountingMovements">
             <End Role="AccountingMovements" EntitySet="AccountingMovements" />
             <End Role="DisbursementGeneratedInterestDetails" EntitySet="DisbursementGeneratedInterestDetails" />
@@ -2024,6 +2075,18 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="AccountingMovement" EntitySet="AccountingMovements" />
             <End Role="DisbursementCollection" EntitySet="DisbursementCollections" />
           </AssociationSet>
+          <AssociationSet Name="FK_DisbursementCollectionsDetails_Mov125" Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125">
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+            <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementCollectionsDetails_Mov128" Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov128">
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+            <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementCollectionsDetails_Mov130" Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130">
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+            <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AccountingMovement">
           <Key>
@@ -2469,6 +2532,9 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <NavigationProperty Name="Account" Relationship="FundsDBModel.FK_Movements_Accounts_Accounts" FromRole="Movements_Accounts" ToRole="Account" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Movements_Accounts_Funds" FromRole="Movements_Accounts" ToRole="Fund" />
           <NavigationProperty Name="Subaccount1" Relationship="FundsDBModel.FK_Movements_Accounts_Subaccounts" FromRole="Movements_Accounts" ToRole="Subaccount" />
+          <NavigationProperty Name="DisbursementCollectionsDetails" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125" FromRole="Movements_Accounts" ToRole="DisbursementCollectionsDetail" />
+          <NavigationProperty Name="DisbursementCollectionsDetails1" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov128" FromRole="Movements_Accounts" ToRole="DisbursementCollectionsDetail" />
+          <NavigationProperty Name="DisbursementCollectionsDetails2" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130" FromRole="Movements_Accounts" ToRole="DisbursementCollectionsDetail" />
         </EntityType>
         <EntityType Name="OtherDetail">
           <Key>
@@ -3396,6 +3462,12 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="amount_collected" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <NavigationProperty Name="DisbursementCollection" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_DisbursementCollection" FromRole="DisbursementCollectionsDetail" ToRole="DisbursementCollection" />
           <NavigationProperty Name="Disbursement" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement" FromRole="DisbursementCollectionsDetail" ToRole="Disbursement" />
+          <Property Name="movement125_id" Type="Int32" />
+          <Property Name="movement128_id" Type="Int32" />
+          <Property Name="movement130_id" Type="Int32" />
+          <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
+          <NavigationProperty Name="Movements_Accounts1" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov128" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
+          <NavigationProperty Name="Movements_Accounts2" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
         </EntityType>
         <Association Name="FK_DisbursementCollections_Investments">
           <End Type="FundsDBModel.Investment" Role="Investment" Multiplicity="1" />
@@ -3466,6 +3538,42 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Principal>
             <Dependent Role="DisbursementCollection">
               <PropertyRef Name="accounting_movement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementCollectionsDetails_Mov125">
+          <End Type="FundsDBModel.Movements_Accounts" Role="Movements_Accounts" Multiplicity="0..1" />
+          <End Type="FundsDBModel.DisbursementCollectionsDetail" Role="DisbursementCollectionsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movements_Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementCollectionsDetail">
+              <PropertyRef Name="movement125_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementCollectionsDetails_Mov128">
+          <End Type="FundsDBModel.Movements_Accounts" Role="Movements_Accounts" Multiplicity="0..1" />
+          <End Type="FundsDBModel.DisbursementCollectionsDetail" Role="DisbursementCollectionsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movements_Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementCollectionsDetail">
+              <PropertyRef Name="movement128_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementCollectionsDetails_Mov130">
+          <End Type="FundsDBModel.Movements_Accounts" Role="Movements_Accounts" Multiplicity="0..1" />
+          <End Type="FundsDBModel.DisbursementCollectionsDetail" Role="DisbursementCollectionsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movements_Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementCollectionsDetail">
+              <PropertyRef Name="movement130_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3946,6 +4054,9 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySetMapping Name="DisbursementCollectionsDetails">
             <EntityTypeMapping TypeName="FundsDBModel.DisbursementCollectionsDetail">
               <MappingFragment StoreEntitySet="DisbursementCollectionsDetails">
+                <ScalarProperty Name="movement130_id" ColumnName="movement130_id" />
+                <ScalarProperty Name="movement128_id" ColumnName="movement128_id" />
+                <ScalarProperty Name="movement125_id" ColumnName="movement125_id" />
                 <ScalarProperty Name="amount_collected" ColumnName="amount_collected" />
                 <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
                 <ScalarProperty Name="disbursement_collection_id" ColumnName="disbursement_collection_id" />
