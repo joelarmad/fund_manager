@@ -40,6 +40,7 @@ namespace FundsManager
 
                     if (interestDetail == null)
                     {
+
                         string paid_date = _profitShareToAccrue.pay_date != null ? _profitShareToAccrue.pay_date.Value.ToLongDateString() : "";
                         
                         DateTime? fromDate = getLastGeneratedInterestDateFor(_profitShareToAccrue.Id);
@@ -51,7 +52,7 @@ namespace FundsManager
 
                         DateTime toDate = dtpDate.Value <= _profitShareToAccrue.collection_date ? dtpDate.Value : _profitShareToAccrue.collection_date;
 
-                        int financingDays = (toDate - fromDate.Value).Days;
+                        int financingDays = (toDate.Date - fromDate.Value.Date).Days;
                         
                         string[] row = {
                             _profitShareToAccrue.Id.ToString(),
@@ -224,11 +225,11 @@ namespace FundsManager
 
                                     decimal _interest = 0;
 
-                                    int totalFinancingDays = (_profitShareToAccrue.collection_date - _profitShareToAccrue.pay_date.Value).Days;
+                                    int totalFinancingDays = (_profitShareToAccrue.collection_date.Date - _profitShareToAccrue.pay_date.Value.Date).Days;
 
                                     DateTime toDate = dtpDate.Value <= _profitShareToAccrue.collection_date ? dtpDate.Value : _profitShareToAccrue.collection_date;
 
-                                    int financingDays = (toDate - fromDate.Value).Days;
+                                    int financingDays = (toDate.Date - fromDate.Value.Date).Days;
 
                                     if (totalFinancingDays > 0 && financingDays > 0)
                                     {
