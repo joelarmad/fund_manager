@@ -89,7 +89,6 @@ namespace FundsManager
             //For rolling back
             int accounting_movement_id = 0;
             int disbursement_collection_id = 0;
-            List<int> disbsCheckedAsFullCollected = new List<int>();
 
             try
             {
@@ -228,10 +227,9 @@ namespace FundsManager
                                                     accounting_movement_id = accountingMovement.Id;
                                                 }
 
-                                                if (totalToBeCollected - collected - toBeCollected125 - toBeCollected128 - toBeCollected130 <= 0 && !disb.can_generate_interest)
+                                                if (totalToBeCollected - collected - toBeCollected125 - toBeCollected128 - toBeCollected130 <= 0)
                                                 {
                                                     //TODO: marcar como completed_collected
-                                                    disbsCheckedAsFullCollected.Add(disbId);
                                                 }
 
                                                 DisbursementCollectionsDetail collectionDetail = new DisbursementCollectionsDetail();
