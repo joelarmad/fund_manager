@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmdCollect = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -78,7 +82,7 @@
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Location = new System.Drawing.Point(8, 78);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(889, 248);
+            this.groupBox1.Size = new System.Drawing.Size(891, 248);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Disbursements";
@@ -105,6 +109,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(860, 212);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // disbursementsToBeCollectedBindingSource
             // 
@@ -215,6 +220,9 @@
             // amountDataGridViewTextBoxColumn
             // 
             this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount";
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.amountDataGridViewTextBoxColumn.HeaderText = "amount";
             this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
             this.amountDataGridViewTextBoxColumn.ReadOnly = true;
@@ -223,6 +231,9 @@
             // profitshareDataGridViewTextBoxColumn
             // 
             this.profitshareDataGridViewTextBoxColumn.DataPropertyName = "profit_share";
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.profitshareDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.profitshareDataGridViewTextBoxColumn.HeaderText = "profit_share";
             this.profitshareDataGridViewTextBoxColumn.Name = "profitshareDataGridViewTextBoxColumn";
             this.profitshareDataGridViewTextBoxColumn.ReadOnly = true;
@@ -231,6 +242,9 @@
             // toBeCollected
             // 
             this.toBeCollected.DataPropertyName = "toBeCollected";
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.toBeCollected.DefaultCellStyle = dataGridViewCellStyle3;
             this.toBeCollected.HeaderText = "To be Collected";
             this.toBeCollected.Name = "toBeCollected";
             this.toBeCollected.ReadOnly = true;
@@ -238,6 +252,9 @@
             // collectedDataGridViewTextBoxColumn
             // 
             this.collectedDataGridViewTextBoxColumn.DataPropertyName = "collected";
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.collectedDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
             this.collectedDataGridViewTextBoxColumn.HeaderText = "collected";
             this.collectedDataGridViewTextBoxColumn.Name = "collectedDataGridViewTextBoxColumn";
             this.collectedDataGridViewTextBoxColumn.ReadOnly = true;
@@ -266,7 +283,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(914, 339);
+            this.ClientSize = new System.Drawing.Size(912, 339);
             this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdCollect);

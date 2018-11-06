@@ -63,6 +63,7 @@
             this.txtTotalToBeCollected = new System.Windows.Forms.TextBox();
             this.cmdAddDisbursement = new System.Windows.Forms.Button();
             this.lvDisbursements = new System.Windows.Forms.ListView();
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -95,7 +96,6 @@
             this.letter_of_creditsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.letter_of_creditsTableAdapter();
             this.shipmentsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ShipmentsTableAdapter();
             this.cmdCancel = new System.Windows.Forms.Button();
-            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
@@ -386,7 +386,7 @@
             this.txtTotalToBeCollected.ReadOnly = true;
             this.txtTotalToBeCollected.Size = new System.Drawing.Size(100, 20);
             this.txtTotalToBeCollected.TabIndex = 21;
-            this.txtTotalToBeCollected.Text = "0.0";
+            this.txtTotalToBeCollected.Text = "0.00";
             // 
             // cmdAddDisbursement
             // 
@@ -419,6 +419,11 @@
             this.lvDisbursements.UseCompatibleStateImageBehavior = false;
             this.lvDisbursements.View = System.Windows.Forms.View.Details;
             this.lvDisbursements.SelectedIndexChanged += new System.EventHandler(this.lvDisbursements_SelectedIndexChanged);
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Number";
+            this.columnHeader9.Width = 70;
             // 
             // columnHeader1
             // 
@@ -651,11 +656,6 @@
             this.cmdCancel.UseVisualStyleBackColor = true;
             this.cmdCancel.Visible = false;
             this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
-            // 
-            // columnHeader9
-            // 
-            this.columnHeader9.Text = "Number";
-            this.columnHeader9.Width = 70;
             // 
             // InvestmentsForm
             // 

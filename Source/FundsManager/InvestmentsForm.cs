@@ -157,11 +157,11 @@ namespace FundsManager
                     && decimal.TryParse(txtProfitShare.Text, out _profit)
                     && decimal.TryParse(txtExchangeRate.Text, out _exchange) && _exchange > 0)
                 {
-                    txtTotalToBeCollected.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", ((_amount + _profit) / _exchange));
+                    txtTotalToBeCollected.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", ((_amount + _profit) / _exchange));
                 }
                 else
                 {
-                    txtTotalToBeCollected.Text = "0.0";
+                    txtTotalToBeCollected.Text = "0.00";
                 }
             }
             catch (Exception _ex)
@@ -179,11 +179,11 @@ namespace FundsManager
                 if (disbursement > 0 && profit > 0 && double.TryParse(txtExchangeRate.Text, out value))
                 {
                     value = (disbursement + profit) / value;
-                    txtTotalToBeCollected.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", value);
+                    txtTotalToBeCollected.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", value);
                 }
                 else
                 {
-                    txtTotalToBeCollected.Text = "0.0";
+                    txtTotalToBeCollected.Text = "0.00";
                 }
             }
             catch (Exception _ex)
@@ -322,7 +322,7 @@ namespace FundsManager
                     string clientName = _disbursement.Client != null ? _disbursement.Client.name : _disbursement.TextClient;
                     string underlyingDebtorName = _disbursement.UnderlyingDebtor != null ? _disbursement.UnderlyingDebtor.name : _disbursement.TextUnderlyingDebtor;
 
-                    string[] row = { _disbursement.number, clientName, underlyingDebtorName, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", _disbursement.profit_share), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", _totalToBeCollected), _disbursement.collection_date.ToLongDateString(), _disbursement.date.ToLongDateString(), Convert.ToString(day.Days) };
+                    string[] row = { _disbursement.number, clientName, underlyingDebtorName, String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _disbursement.profit_share), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _totalToBeCollected), _disbursement.collection_date.ToLongDateString(), _disbursement.date.ToLongDateString(), Convert.ToString(day.Days) };
                     ListViewItem my_item = new ListViewItem(row);
                     lvDisbursements.Items.Add(my_item);
 
@@ -333,7 +333,7 @@ namespace FundsManager
 
                 if (disbursements.Count > 0)
                 {
-                    string[] totales = { "Total", "", "", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", total_profit), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C7}", total_euro_collection) };
+                    string[] totales = { "Total", "", "", String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_profit), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", total_euro_collection) };
                     ListViewItem listViewItemTotal = new ListViewItem(totales);
                     lvDisbursements.Items.Add(listViewItemTotal);
                 }                
@@ -432,7 +432,7 @@ namespace FundsManager
                 txtContract.Text = "xxx/" + DateTime.Now.Year.ToString().Substring(2, 2);
                 txtProfitShare.Text = "0.00";
                 txtExchangeRate.Text = "1.0000000";
-                txtTotalToBeCollected.Text = "0.0";
+                txtTotalToBeCollected.Text = "0.00";
                 lbISelectedItems.Items.Clear();
                 lvDisbursements.Items.Clear();
 
@@ -668,7 +668,7 @@ namespace FundsManager
                     txtExchangeRate.Text = String.Format("{0:0.0000000}", selected.exchange_rate);
                     txtProfitShare.Text = String.Format("{0:0.00}", selected.profit_share);
                     txtNumber.Text = selected.number;
-                    txtTotalToBeCollected.Text = String.Format("{0:0.0000000}", selected.Euro_collection);
+                    txtTotalToBeCollected.Text = String.Format("{0:0.00}", selected.Euro_collection);
 
                     if (selected.client_id > 0)
                     {
@@ -1050,7 +1050,7 @@ namespace FundsManager
             txtExchangeRate.Text = "1.0000000";
             txtProfitShare.Text = "0.00";
             txtNumber.Text = "";
-            txtTotalToBeCollected.Text = "0.0";
+            txtTotalToBeCollected.Text = "0.00";
             cbClient.SelectedIndex = 0;
             cbUnderlyingDebtor.SelectedIndex = 0;
             cbBank.SelectedIndex = 0;

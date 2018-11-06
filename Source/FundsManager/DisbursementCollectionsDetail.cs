@@ -20,6 +20,7 @@ namespace FundsManager
         public Nullable<int> movement125_id { get; set; }
         public Nullable<int> movement128_id { get; set; }
         public Nullable<int> movement130_id { get; set; }
+        public Nullable<System.DateTime> collection_date { get; set; }
     
         public virtual DisbursementCollection DisbursementCollection { get; set; }
         public virtual Disbursement Disbursement { get; set; }

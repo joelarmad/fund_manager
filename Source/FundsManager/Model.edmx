@@ -193,6 +193,7 @@
           <Property Name="movement125_id" Type="int" />
           <Property Name="movement128_id" Type="int" />
           <Property Name="movement130_id" Type="int" />
+          <Property Name="collection_date" Type="date" />
         </EntityType>
         <EntityType Name="DisbursementGeneratedInterestDetails">
           <Key>
@@ -3468,6 +3469,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
           <NavigationProperty Name="Movements_Accounts1" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov128" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
           <NavigationProperty Name="Movements_Accounts2" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
+          <Property Name="collection_date" Type="DateTime" Precision="0" />
         </EntityType>
         <Association Name="FK_DisbursementCollections_Investments">
           <End Type="FundsDBModel.Investment" Role="Investment" Multiplicity="1" />
@@ -4054,6 +4056,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySetMapping Name="DisbursementCollectionsDetails">
             <EntityTypeMapping TypeName="FundsDBModel.DisbursementCollectionsDetail">
               <MappingFragment StoreEntitySet="DisbursementCollectionsDetails">
+                <ScalarProperty Name="collection_date" ColumnName="collection_date" />
                 <ScalarProperty Name="movement130_id" ColumnName="movement130_id" />
                 <ScalarProperty Name="movement128_id" ColumnName="movement128_id" />
                 <ScalarProperty Name="movement125_id" ColumnName="movement125_id" />
