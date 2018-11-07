@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmdCollect = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -59,6 +59,7 @@
             this.Collect125 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Collect128 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Collect130 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.disbursementsToBeCollectedBindingSource)).BeginInit();
@@ -82,7 +83,7 @@
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Location = new System.Drawing.Point(8, 78);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(891, 248);
+            this.groupBox1.Size = new System.Drawing.Size(1001, 248);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Disbursements";
@@ -103,11 +104,12 @@
             this.DelayInterest,
             this.Collect125,
             this.Collect128,
-            this.Collect130});
+            this.Collect130,
+            this.Date});
             this.dataGridView1.DataSource = this.disbursementsToBeCollectedBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(14, 19);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(860, 212);
+            this.dataGridView1.Size = new System.Drawing.Size(973, 212);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -220,9 +222,9 @@
             // amountDataGridViewTextBoxColumn
             // 
             this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount";
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
             this.amountDataGridViewTextBoxColumn.HeaderText = "amount";
             this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
             this.amountDataGridViewTextBoxColumn.ReadOnly = true;
@@ -231,9 +233,9 @@
             // profitshareDataGridViewTextBoxColumn
             // 
             this.profitshareDataGridViewTextBoxColumn.DataPropertyName = "profit_share";
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.profitshareDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.profitshareDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
             this.profitshareDataGridViewTextBoxColumn.HeaderText = "profit_share";
             this.profitshareDataGridViewTextBoxColumn.Name = "profitshareDataGridViewTextBoxColumn";
             this.profitshareDataGridViewTextBoxColumn.ReadOnly = true;
@@ -242,9 +244,9 @@
             // toBeCollected
             // 
             this.toBeCollected.DataPropertyName = "toBeCollected";
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.toBeCollected.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.toBeCollected.DefaultCellStyle = dataGridViewCellStyle7;
             this.toBeCollected.HeaderText = "To be Collected";
             this.toBeCollected.Name = "toBeCollected";
             this.toBeCollected.ReadOnly = true;
@@ -252,9 +254,9 @@
             // collectedDataGridViewTextBoxColumn
             // 
             this.collectedDataGridViewTextBoxColumn.DataPropertyName = "collected";
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.collectedDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.collectedDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
             this.collectedDataGridViewTextBoxColumn.HeaderText = "collected";
             this.collectedDataGridViewTextBoxColumn.Name = "collectedDataGridViewTextBoxColumn";
             this.collectedDataGridViewTextBoxColumn.ReadOnly = true;
@@ -279,11 +281,17 @@
             this.Collect130.HeaderText = "Collect to 130";
             this.Collect130.Name = "Collect130";
             // 
+            // Date
+            // 
+            this.Date.HeaderText = "Date";
+            this.Date.Name = "Date";
+            this.Date.ReadOnly = true;
+            // 
             // DisbursementCollectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(912, 339);
+            this.ClientSize = new System.Drawing.Size(1021, 339);
             this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdCollect);
@@ -335,5 +343,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Collect125;
         private System.Windows.Forms.DataGridViewTextBoxColumn Collect128;
         private System.Windows.Forms.DataGridViewTextBoxColumn Collect130;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
     }
 }

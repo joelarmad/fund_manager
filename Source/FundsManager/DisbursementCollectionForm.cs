@@ -24,6 +24,7 @@ namespace FundsManager
         int CollectTo125Index = 7;
         int CollectTo128Index = 8;
         int CollectTo130Index = 9;
+        int DateIndex = 10;
 
         public DisbursementCollectionForm()
         {
@@ -99,6 +100,7 @@ namespace FundsManager
                 List<decimal> collect125 = new List<decimal>();
                 List<decimal> collect128 = new List<decimal>();
                 List<decimal> collect130 = new List<decimal>();
+                List<DateTime> dates = new List<DateTime>();
 
                 String errors = "";
 
@@ -113,35 +115,45 @@ namespace FundsManager
                     string amountToBeCollected125Str = row.Cells[CollectTo125Index].Value != null ? row.Cells[CollectTo125Index].Value.ToString() : "0";
                     string amountToBeCollected128Str = row.Cells[CollectTo128Index].Value != null ? row.Cells[CollectTo128Index].Value.ToString() : "0";
                     string amountToBeCollected130Str = row.Cells[CollectTo130Index].Value != null ? row.Cells[CollectTo130Index].Value.ToString() : "0";
+                    string dateStr = row.Cells[DateIndex].Value != null ? row.Cells[DateIndex].Value.ToString() : "";
 
                     if (amountToBeCollected125Str != "0" || amountToBeCollected128Str != "0" || amountToBeCollected130Str != "0")
                     {
                         decimal amountToBeCollected125 = 0;
                         decimal amountToBeCollected128 = 0;
                         decimal amountToBeCollected130 = 0;
+                        DateTime date = DateTime.MinValue;
 
-                        if (decimal.TryParse(amountToBeCollected125Str, out amountToBeCollected125) &&
-                            decimal.TryParse(amountToBeCollected128Str, out amountToBeCollected128) &&
-                            decimal.TryParse(amountToBeCollected130Str, out amountToBeCollected130))
+                        if (DateTime.TryParse(dateStr, out date))
                         {
-                            if (totalToBeCollected - collected - amountToBeCollected125 - amountToBeCollected128 - amountToBeCollected130 >= 0)
+                            if (decimal.TryParse(amountToBeCollected125Str, out amountToBeCollected125) &&
+                                decimal.TryParse(amountToBeCollected128Str, out amountToBeCollected128) &&
+                                decimal.TryParse(amountToBeCollected130Str, out amountToBeCollected130))
                             {
-                                ids.Add(id);
-                                amounts.Add(amount);
-                                totalsToBeCollected.Add(totalToBeCollected);
-                                collecteds.Add(collected);
-                                collect125.Add(amountToBeCollected125);
-                                collect128.Add(amountToBeCollected128);
-                                collect130.Add(amountToBeCollected130);
+                                if (totalToBeCollected - collected - amountToBeCollected125 - amountToBeCollected128 - amountToBeCollected130 >= 0)
+                                {
+                                    ids.Add(id);
+                                    amounts.Add(amount);
+                                    totalsToBeCollected.Add(totalToBeCollected);
+                                    collecteds.Add(collected);
+                                    collect125.Add(amountToBeCollected125);
+                                    collect128.Add(amountToBeCollected128);
+                                    collect130.Add(amountToBeCollected130);
+                                    dates.Add(date);
+                                }
+                                else
+                                {
+                                    errors += "\r\tDisbursement " + number + " has too much collection value.";
+                                }
                             }
                             else
                             {
-                                errors += "\r\tDisbursement " + number + " has too much collection value.";
+                                errors += "\r  Disbursement " + number + " has wrong collection value.";
                             }
                         }
                         else
                         {
-                            errors += "\r  Disbursement " + number + " has wrong collection value.";
+                            errors += "\r  Disbursement " + number + " has wrong collection date.";
                         }
                     }
                 }
@@ -198,6 +210,7 @@ namespace FundsManager
                                     decimal toBeCollected125 = collect125[i];
                                     decimal toBeCollected128 = collect128[i];
                                     decimal toBeCollected130 = collect130[i];
+                                    DateTime date = dates[i];
 
                                     Disbursement disb = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == disbId);
 
@@ -236,6 +249,7 @@ namespace FundsManager
                                                 collectionDetail.disbursement_collection_id = collection.id;
                                                 collectionDetail.disbursement_id = disbId;
                                                 collectionDetail.amount_collected = toBeCollected125 + toBeCollected128 + toBeCollected130;
+                                                collectionDetail.collection_date = date;
 
                                                 manager.My_db.DisbursementCollectionsDetails.Add(collectionDetail);
                                                 manager.My_db.SaveChanges();
@@ -459,8 +473,12 @@ namespace FundsManager
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 10) {
-                
+            if (e.ColumnIndex == DateIndex) {
+                DateSelection dateSelection = new DateSelection();
+                dateSelection.ShowDialog(this);
+
+                dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = dateSelection.selectedDate.HasValue ? dateSelection.selectedDate.Value.ToShortDateString() : "";
+
             }
         }
     }
