@@ -64,11 +64,12 @@
             this.delayInterestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.investmentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.bondsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.investmentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,7 +79,8 @@
             this.addToolStripMenuItem,
             this.operationsToolStripMenuItem,
             this.reportsToolStripMenuItem,
-            this.reportsToolStripMenuItem1});
+            this.reportsToolStripMenuItem1,
+            this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(818, 24);
@@ -350,14 +352,21 @@
             // movementsToolStripMenuItem
             // 
             this.movementsToolStripMenuItem.Name = "movementsToolStripMenuItem";
-            this.movementsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.movementsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.movementsToolStripMenuItem.Text = "Movements";
             this.movementsToolStripMenuItem.Click += new System.EventHandler(this.movementsToolStripMenuItem_Click);
+            // 
+            // investmentsToolStripMenuItem1
+            // 
+            this.investmentsToolStripMenuItem1.Name = "investmentsToolStripMenuItem1";
+            this.investmentsToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
+            this.investmentsToolStripMenuItem1.Text = "Investments";
+            this.investmentsToolStripMenuItem1.Click += new System.EventHandler(this.investmentsToolStripMenuItem1_Click);
             // 
             // bondsToolStripMenuItem1
             // 
             this.bondsToolStripMenuItem1.Name = "bondsToolStripMenuItem1";
-            this.bondsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.bondsToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
             this.bondsToolStripMenuItem1.Text = "Bonds";
             this.bondsToolStripMenuItem1.Click += new System.EventHandler(this.bondsToolStripMenuItem1_Click);
             // 
@@ -384,12 +393,12 @@
             this.returnsStateToolStripMenuItem.Text = "Profit && Loss Statement";
             this.returnsStateToolStripMenuItem.Click += new System.EventHandler(this.returnsStateToolStripMenuItem_Click);
             // 
-            // investmentsToolStripMenuItem1
+            // settingsToolStripMenuItem
             // 
-            this.investmentsToolStripMenuItem1.Name = "investmentsToolStripMenuItem1";
-            this.investmentsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.investmentsToolStripMenuItem1.Text = "Investments";
-            this.investmentsToolStripMenuItem1.Click += new System.EventHandler(this.investmentsToolStripMenuItem1_Click);
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -405,6 +414,7 @@
             this.Name = "Form1";
             this.Text = "Funds Manager";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.menuStrip1.ResumeLayout(false);
@@ -456,6 +466,7 @@
         private System.Windows.Forms.ToolStripMenuItem letterOfCreditToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem shipmentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem investmentsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
     }
 }
 

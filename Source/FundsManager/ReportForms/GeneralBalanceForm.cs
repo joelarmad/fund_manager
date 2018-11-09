@@ -1,10 +1,13 @@
-﻿using System;
+﻿using FundsManager.Classes;
+using Microsoft.Reporting.WinForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -38,6 +41,11 @@ namespace FundsManager.ReportForms
                 DateTime to = Convert.ToDateTime(dtpTo.Text);
 
                 this.accountBalanceViewTableAdapter.FillByDateInterval(this.fundsDBDataSet.AccountBalanceView, manager.Selected, to);
+
+                ReportParameter reportLanguage = new ReportParameter("ReportLanguage", KeyDefinitions.reportLanguage);
+
+                reportViewer1.LocalReport.SetParameters(reportLanguage);
+
 
                 reportViewer1.RefreshReport();
             }

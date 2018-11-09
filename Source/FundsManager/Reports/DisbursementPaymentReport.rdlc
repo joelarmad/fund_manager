@@ -159,6 +159,7 @@
                               <Value>=FormatNumber(Sum(Fields!amount.Value), 2)</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
+                                <Format>#,0.00</Format>
                                 <Color>#666666</Color>
                               </Style>
                             </TextRun>
@@ -199,6 +200,7 @@
                               <Value>=FormatNumber(Sum(Fields!exchange_rate.Value), 2)</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
+                                <Format>#,0.0000000</Format>
                                 <Color>#666666</Color>
                               </Style>
                             </TextRun>
@@ -239,6 +241,7 @@
                               <Value>=FormatNumber(Sum(Fields!profit_share.Value), 2)</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
+                                <Format>#,0.00</Format>
                                 <Color>#666666</Color>
                               </Style>
                             </TextRun>
@@ -265,6 +268,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>

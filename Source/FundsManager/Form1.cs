@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FundsManager.Classes.Task;
 using FundsManager.ReportForms;
+using System.Threading;
+using System.Globalization;
 
 namespace FundsManager
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
@@ -22,6 +25,7 @@ namespace FundsManager
         {
             try
             {
+
                 GlobalProcess.performBondProfitsUpdate();
             }
             catch (Exception _ex)
@@ -282,6 +286,19 @@ namespace FundsManager
             InvesmentReportForm inv = new InvesmentReportForm();
             inv.MdiParent = this;
             inv.Show();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            Settings settings = new Settings();
+            settings.MdiParent = this;
+            settings.Show();
         }
     }
 }

@@ -71,6 +71,7 @@
                               <Value>=Sum(Fields!Shift_Amount.Value)</Value>
                               <Style>
                                 <FontWeight>Normal</FontWeight>
+                                <Format>#,0.00</Format>
                                 <Color>#333333</Color>
                               </Style>
                             </TextRun>
@@ -90,6 +91,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
