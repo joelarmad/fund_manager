@@ -25,7 +25,6 @@ namespace FundsManager
         {
             try
             {
-
                 GlobalProcess.performBondProfitsUpdate();
             }
             catch (Exception _ex)
@@ -291,14 +290,6 @@ namespace FundsManager
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
 
-        }
-
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.IsMdiContainer = true;
-            Settings settings = new Settings();
-            settings.MdiParent = this;
-            settings.Show();
         }
     }
 }

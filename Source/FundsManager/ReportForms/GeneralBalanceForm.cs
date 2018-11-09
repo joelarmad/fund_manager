@@ -42,10 +42,9 @@ namespace FundsManager.ReportForms
 
                 this.accountBalanceViewTableAdapter.FillByDateInterval(this.fundsDBDataSet.AccountBalanceView, manager.Selected, to);
 
-                ReportParameter reportLanguage = new ReportParameter("ReportLanguage", KeyDefinitions.reportLanguage);
+                ReportParameter language = new ReportParameter("Language", Thread.CurrentThread.CurrentCulture.Name);
 
-                reportViewer1.LocalReport.SetParameters(reportLanguage);
-
+                reportViewer1.LocalReport.SetParameters(language);
 
                 reportViewer1.RefreshReport();
             }

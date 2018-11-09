@@ -150,7 +150,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>="Total: " + CStr(Sum(Fields!acct_amount.Value))</Value>
+                                  <Value>=Sum(Fields!acct_amount.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00</Format>
@@ -598,9 +598,9 @@
                                   <Paragraph>
                                     <TextRuns>
                                       <TextRun>
-                                        <Value />
+                                        <Value>Total:</Value>
                                         <Style>
-                                          <FontWeight>Normal</FontWeight>
+                                          <FontWeight>Bold</FontWeight>
                                           <Color>#333333</Color>
                                         </Style>
                                       </TextRun>
@@ -1009,7 +1009,7 @@
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="ReportLanguage">
+    <ReportParameter Name="Language">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
@@ -1022,12 +1022,12 @@
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>ReportLanguage</ParameterName>
+          <ParameterName>Language</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
-  <Language>=Parameters!ReportLanguage.Value</Language>
+  <Language>=Parameters!Language.Value</Language>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>f496d7c0-4c39-4c72-aa42-d79ca3f31cf3</rd:ReportID>
 </Report>

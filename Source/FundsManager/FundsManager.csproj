@@ -175,7 +175,6 @@
     <Compile Include="Classes\DataModel\BondInvestor.cs" />
     <Compile Include="Classes\DataModel\Disbursement.cs" />
     <Compile Include="Classes\DataModel\FundsDBEntities.cs" />
-    <Compile Include="Classes\KeyDefinitions.cs" />
     <Compile Include="Classes\Task\GlobalProcess.cs" />
     <Compile Include="Classes\Utilities\Conversions.cs" />
     <Compile Include="Classes\Utilities\ErrorMessage.cs" />
@@ -452,12 +451,6 @@
     <Compile Include="SectorsForm.Designer.cs">
       <DependentUpon>SectorsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Settings.Designer.cs">
-      <DependentUpon>Settings.cs</DependentUpon>
-    </Compile>
     <Compile Include="Shareholder.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -613,9 +606,6 @@
     <EmbeddedResource Include="Reports\ProfitsState.rdlc" />
     <EmbeddedResource Include="SectorsForm.resx">
       <DependentUpon>SectorsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Settings.resx">
-      <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShareholdersForm.resx">
       <DependentUpon>ShareholdersForm.cs</DependentUpon>

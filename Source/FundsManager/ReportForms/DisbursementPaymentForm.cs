@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.Reporting.WinForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -36,6 +38,10 @@ namespace FundsManager.ReportForms
                 // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.InvestmentsView' Puede moverla o quitarla según sea necesario.
                 this.investmentsViewTableAdapter.FillByPaymentId(this.fundsDBDataSet.InvestmentsView, paymentId, manager.Selected);
             }
+
+            ReportParameter language = new ReportParameter("Language", Thread.CurrentThread.CurrentCulture.Name);
+
+            reportViewer1.LocalReport.SetParameters(language);
 
             this.reportViewer1.RefreshReport();
 

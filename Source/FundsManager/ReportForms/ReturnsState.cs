@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -37,6 +38,10 @@ namespace FundsManager.ReportForms
                 DateTime to = Convert.ToDateTime(dtpTo.Text);
 
                 this.profitResultsViewTableAdapter.FillByFund(this.fundsDBDataSet.ProfitResultsView, manager.Selected, from, to);
+
+                ReportParameter language = new ReportParameter("Language", Thread.CurrentThread.CurrentCulture.Name);
+
+                reportViewer1.LocalReport.SetParameters(language);
 
                 reportViewer1.RefreshReport();
             }
