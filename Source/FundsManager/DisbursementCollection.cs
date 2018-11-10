@@ -26,8 +26,8 @@ namespace FundsManager
         public Nullable<int> accounting_movement_id { get; set; }
     
         public virtual Investment Investment { get; set; }
+        public virtual AccountingMovement AccountingMovement { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementCollectionsDetail> DisbursementCollectionsDetails { get; set; }
-        public virtual AccountingMovement AccountingMovement { get; set; }
     }
 }

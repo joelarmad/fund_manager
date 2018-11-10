@@ -157,7 +157,8 @@ namespace FundsManager
                     && decimal.TryParse(txtProfitShare.Text, out _profit)
                     && decimal.TryParse(txtExchangeRate.Text, out _exchange) && _exchange > 0)
                 {
-                    txtTotalToBeCollected.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", ((_amount + _profit) / _exchange));
+                    decimal toBeColected = Math.Round((_amount + _profit) / _exchange, 2);
+                    txtTotalToBeCollected.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", toBeColected);
                 }
                 else
                 {
@@ -178,7 +179,8 @@ namespace FundsManager
 
                 if (disbursement > 0 && profit > 0 && double.TryParse(txtExchangeRate.Text, out value))
                 {
-                    value = (disbursement + profit) / value;
+                    value = Math.Round((disbursement + profit) / value, 2);
+                    
                     txtTotalToBeCollected.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", value);
                 }
                 else
@@ -1104,8 +1106,8 @@ namespace FundsManager
                     }
 
                     _disbursement.exchange_rate = exchangeRate;
-                    _disbursement.amount = Convert.ToDecimal(txtAmount.Text) / (decimal)exchangeRate;
-                    _disbursement.profit_share = Convert.ToDecimal(txtProfitShare.Text) / (decimal)exchangeRate;
+                    _disbursement.amount = Math.Round(Convert.ToDecimal(txtAmount.Text) / (decimal)exchangeRate, 2);
+                    _disbursement.profit_share = Math.Round(Convert.ToDecimal(txtProfitShare.Text) / (decimal)exchangeRate, 2);
                     _disbursement.currency_id = Convert.ToInt32(cbCurrency.SelectedValue);
 
                     _disbursement.bank_risk_id = bankId;

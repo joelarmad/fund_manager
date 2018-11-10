@@ -234,7 +234,7 @@ namespace FundsManager
                                     if (totalFinancingDays > 0 && financingDays > 0)
                                     {
                                         decimal profitSharePerDay = _profitShareToAccrue.profit_share / totalFinancingDays;
-                                        _interest = financingDays * profitSharePerDay;
+                                        _interest = Math.Round(financingDays * profitSharePerDay, 2);
                                     }
 
                                     canContinueGeneratingInterest = toDate < _profitShareToAccrue.collection_date;

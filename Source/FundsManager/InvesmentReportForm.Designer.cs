@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmdSearch = new System.Windows.Forms.Button();
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.cbBank = new System.Windows.Forms.ComboBox();
@@ -40,6 +42,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.currenciesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.investmentsViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.investmentsViewTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.InvestmentsViewTableAdapter();
+            this.currenciesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CurrenciesTableAdapter();
+            this.clientsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientsTableAdapter();
+            this.underlyingDebtorsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.UnderlyingDebtorsTableAdapter();
+            this.banksTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.BanksTableAdapter();
             this.disbursementidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contractDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,12 +58,6 @@
             this.disbursementdateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.collectiondateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.disbursementpaydateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.investmentsViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.investmentsViewTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.InvestmentsViewTableAdapter();
-            this.currenciesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CurrenciesTableAdapter();
-            this.clientsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientsTableAdapter();
-            this.underlyingDebtorsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.UnderlyingDebtorsTableAdapter();
-            this.banksTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.BanksTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banksBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.underlyingDebtorsBindingSource)).BeginInit();
@@ -165,6 +167,31 @@
             this.dataGridView1.TabIndex = 274;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
+            // investmentsViewBindingSource
+            // 
+            this.investmentsViewBindingSource.DataMember = "InvestmentsView";
+            this.investmentsViewBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // investmentsViewTableAdapter
+            // 
+            this.investmentsViewTableAdapter.ClearBeforeFill = true;
+            // 
+            // currenciesTableAdapter
+            // 
+            this.currenciesTableAdapter.ClearBeforeFill = true;
+            // 
+            // clientsTableAdapter
+            // 
+            this.clientsTableAdapter.ClearBeforeFill = true;
+            // 
+            // underlyingDebtorsTableAdapter
+            // 
+            this.underlyingDebtorsTableAdapter.ClearBeforeFill = true;
+            // 
+            // banksTableAdapter
+            // 
+            this.banksTableAdapter.ClearBeforeFill = true;
+            // 
             // disbursementidDataGridViewTextBoxColumn
             // 
             this.disbursementidDataGridViewTextBoxColumn.DataPropertyName = "disbursement_id";
@@ -183,6 +210,9 @@
             // amountDataGridViewTextBoxColumn
             // 
             this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount";
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.amountDataGridViewTextBoxColumn.HeaderText = "amount";
             this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
             this.amountDataGridViewTextBoxColumn.ReadOnly = true;
@@ -190,6 +220,9 @@
             // profitshareDataGridViewTextBoxColumn
             // 
             this.profitshareDataGridViewTextBoxColumn.DataPropertyName = "profit_share";
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.profitshareDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.profitshareDataGridViewTextBoxColumn.HeaderText = "profit share";
             this.profitshareDataGridViewTextBoxColumn.Name = "profitshareDataGridViewTextBoxColumn";
             this.profitshareDataGridViewTextBoxColumn.ReadOnly = true;
@@ -236,31 +269,6 @@
             this.disbursementpaydateDataGridViewTextBoxColumn.Name = "disbursementpaydateDataGridViewTextBoxColumn";
             this.disbursementpaydateDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // investmentsViewBindingSource
-            // 
-            this.investmentsViewBindingSource.DataMember = "InvestmentsView";
-            this.investmentsViewBindingSource.DataSource = this.fundsDBDataSet;
-            // 
-            // investmentsViewTableAdapter
-            // 
-            this.investmentsViewTableAdapter.ClearBeforeFill = true;
-            // 
-            // currenciesTableAdapter
-            // 
-            this.currenciesTableAdapter.ClearBeforeFill = true;
-            // 
-            // clientsTableAdapter
-            // 
-            this.clientsTableAdapter.ClearBeforeFill = true;
-            // 
-            // underlyingDebtorsTableAdapter
-            // 
-            this.underlyingDebtorsTableAdapter.ClearBeforeFill = true;
-            // 
-            // banksTableAdapter
-            // 
-            this.banksTableAdapter.ClearBeforeFill = true;
-            // 
             // InvesmentReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -298,6 +306,14 @@
         private FundsDBDataSet fundsDBDataSet;
         private System.Windows.Forms.BindingSource investmentsViewBindingSource;
         private FundsDBDataSetTableAdapters.InvestmentsViewTableAdapter investmentsViewTableAdapter;
+        private System.Windows.Forms.BindingSource currenciesBindingSource;
+        private FundsDBDataSetTableAdapters.CurrenciesTableAdapter currenciesTableAdapter;
+        private System.Windows.Forms.BindingSource clientsBindingSource;
+        private FundsDBDataSetTableAdapters.ClientsTableAdapter clientsTableAdapter;
+        private System.Windows.Forms.BindingSource underlyingDebtorsBindingSource;
+        private FundsDBDataSetTableAdapters.UnderlyingDebtorsTableAdapter underlyingDebtorsTableAdapter;
+        private System.Windows.Forms.BindingSource banksBindingSource;
+        private FundsDBDataSetTableAdapters.BanksTableAdapter banksTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn disbursementidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn contractDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
@@ -308,13 +324,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn disbursementdateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn collectiondateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn disbursementpaydateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource currenciesBindingSource;
-        private FundsDBDataSetTableAdapters.CurrenciesTableAdapter currenciesTableAdapter;
-        private System.Windows.Forms.BindingSource clientsBindingSource;
-        private FundsDBDataSetTableAdapters.ClientsTableAdapter clientsTableAdapter;
-        private System.Windows.Forms.BindingSource underlyingDebtorsBindingSource;
-        private FundsDBDataSetTableAdapters.UnderlyingDebtorsTableAdapter underlyingDebtorsTableAdapter;
-        private System.Windows.Forms.BindingSource banksBindingSource;
-        private FundsDBDataSetTableAdapters.BanksTableAdapter banksTableAdapter;
     }
 }

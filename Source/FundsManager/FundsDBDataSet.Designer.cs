@@ -21908,8 +21908,6 @@ namespace FundsManager {
             
             private global::System.Data.DataColumn columnmovement130_id;
             
-            private global::System.Data.DataColumn columncollection_date;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DisbursementCollectionsDetailsDataTable() {
@@ -21993,14 +21991,6 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn collection_dateColumn {
-                get {
-                    return this.columncollection_date;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -22036,7 +22026,7 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DisbursementCollectionsDetailsRow AddDisbursementCollectionsDetailsRow(DisbursementCollectionsRow parentDisbursementCollectionsRowByFK_DisbursementCollectionsDetails_DisbursementCollection, DisbursementsRow parentDisbursementsRowByFK_DisbursementCollectionsDetails_Disbursement, decimal amount_collected, Movements_AccountsRow parentMovements_AccountsRowByFK_DisbursementCollectionsDetails_Mov125, Movements_AccountsRow parentMovements_AccountsRowByFK_DisbursementCollectionsDetails_Mov128, Movements_AccountsRow parentMovements_AccountsRowByFK_DisbursementCollectionsDetails_Mov130, System.DateTime collection_date) {
+            public DisbursementCollectionsDetailsRow AddDisbursementCollectionsDetailsRow(DisbursementCollectionsRow parentDisbursementCollectionsRowByFK_DisbursementCollectionsDetails_DisbursementCollection, DisbursementsRow parentDisbursementsRowByFK_DisbursementCollectionsDetails_Disbursement, decimal amount_collected, Movements_AccountsRow parentMovements_AccountsRowByFK_DisbursementCollectionsDetails_Mov125, Movements_AccountsRow parentMovements_AccountsRowByFK_DisbursementCollectionsDetails_Mov128, Movements_AccountsRow parentMovements_AccountsRowByFK_DisbursementCollectionsDetails_Mov130) {
                 DisbursementCollectionsDetailsRow rowDisbursementCollectionsDetailsRow = ((DisbursementCollectionsDetailsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -22044,8 +22034,7 @@ namespace FundsManager {
                         amount_collected,
                         null,
                         null,
-                        null,
-                        collection_date};
+                        null};
                 if ((parentDisbursementCollectionsRowByFK_DisbursementCollectionsDetails_DisbursementCollection != null)) {
                     columnValuesArray[0] = parentDisbursementCollectionsRowByFK_DisbursementCollectionsDetails_DisbursementCollection[0];
                 }
@@ -22097,7 +22086,6 @@ namespace FundsManager {
                 this.columnmovement125_id = base.Columns["movement125_id"];
                 this.columnmovement128_id = base.Columns["movement128_id"];
                 this.columnmovement130_id = base.Columns["movement130_id"];
-                this.columncollection_date = base.Columns["collection_date"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -22115,8 +22103,6 @@ namespace FundsManager {
                 base.Columns.Add(this.columnmovement128_id);
                 this.columnmovement130_id = new global::System.Data.DataColumn("movement130_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnmovement130_id);
-                this.columncollection_date = new global::System.Data.DataColumn("collection_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncollection_date);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columndisbursement_collection_id,
                                 this.columndisbursement_id}, true));
@@ -30395,23 +30381,6 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime collection_date {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableDisbursementCollectionsDetails.collection_dateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'collection_date\' de la tabla \'DisbursementCollectionsDeta" +
-                                "ils\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDisbursementCollectionsDetails.collection_dateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DisbursementsRow DisbursementsRow {
                 get {
                     return ((DisbursementsRow)(this.GetParentRow(this.Table.ParentRelations["FK_DisbursementCollectionsDetails_Disbursement"])));
@@ -30499,18 +30468,6 @@ namespace FundsManager {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Setmovement130_idNull() {
                 this[this.tableDisbursementCollectionsDetails.movement130_idColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Iscollection_dateNull() {
-                return this.IsNull(this.tableDisbursementCollectionsDetails.collection_dateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setcollection_dateNull() {
-                this[this.tableDisbursementCollectionsDetails.collection_dateColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -50885,11 +50842,10 @@ SELECT id, investment_id, collection_date, accounting_movement_id FROM Disbursem
             tableMapping.ColumnMappings.Add("movement125_id", "movement125_id");
             tableMapping.ColumnMappings.Add("movement128_id", "movement128_id");
             tableMapping.ColumnMappings.Add("movement130_id", "movement130_id");
-            tableMapping.ColumnMappings.Add("collection_date", "collection_date");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [DisbursementCollectionsDetails] WHERE (([disbursement_collection_id] = @Original_disbursement_collection_id) AND ([disbursement_id] = @Original_disbursement_id) AND ([amount_collected] = @Original_amount_collected) AND ((@IsNull_movement125_id = 1 AND [movement125_id] IS NULL) OR ([movement125_id] = @Original_movement125_id)) AND ((@IsNull_movement128_id = 1 AND [movement128_id] IS NULL) OR ([movement128_id] = @Original_movement128_id)) AND ((@IsNull_movement130_id = 1 AND [movement130_id] IS NULL) OR ([movement130_id] = @Original_movement130_id)) AND ((@IsNull_collection_date = 1 AND [collection_date] IS NULL) OR ([collection_date] = @Original_collection_date)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [DisbursementCollectionsDetails] WHERE (([disbursement_collection_id] = @Original_disbursement_collection_id) AND ([disbursement_id] = @Original_disbursement_id) AND ([amount_collected] = @Original_amount_collected) AND ((@IsNull_movement125_id = 1 AND [movement125_id] IS NULL) OR ([movement125_id] = @Original_movement125_id)) AND ((@IsNull_movement128_id = 1 AND [movement128_id] IS NULL) OR ([movement128_id] = @Original_movement128_id)) AND ((@IsNull_movement130_id = 1 AND [movement130_id] IS NULL) OR ([movement130_id] = @Original_movement130_id)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_disbursement_collection_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_collection_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_disbursement_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -50900,12 +50856,10 @@ SELECT id, investment_id, collection_date, accounting_movement_id FROM Disbursem
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_movement128_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "movement128_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_movement130_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "movement130_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_movement130_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "movement130_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_collection_date", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collection_date", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_collection_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collection_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [DisbursementCollectionsDetails] ([disbursement_collection_id], [disbursement_id], [amount_collected], [movement125_id], [movement128_id], [movement130_id], [collection_date]) VALUES (@disbursement_collection_id, @disbursement_id, @amount_collected, @movement125_id, @movement128_id, @movement130_id, @collection_date);
-SELECT disbursement_collection_id, disbursement_id, amount_collected, movement125_id, movement128_id, movement130_id, collection_date FROM DisbursementCollectionsDetails WHERE (disbursement_collection_id = @disbursement_collection_id) AND (disbursement_id = @disbursement_id)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [DisbursementCollectionsDetails] ([disbursement_collection_id], [disbursement_id], [amount_collected], [movement125_id], [movement128_id], [movement130_id]) VALUES (@disbursement_collection_id, @disbursement_id, @amount_collected, @movement125_id, @movement128_id, @movement130_id);
+SELECT disbursement_collection_id, disbursement_id, amount_collected, movement125_id, movement128_id, movement130_id FROM DisbursementCollectionsDetails WHERE (disbursement_collection_id = @disbursement_collection_id) AND (disbursement_id = @disbursement_id)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@disbursement_collection_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_collection_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@disbursement_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -50913,11 +50867,10 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@movement125_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "movement125_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@movement128_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "movement128_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@movement130_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "movement130_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@collection_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collection_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [DisbursementCollectionsDetails] SET [disbursement_collection_id] = @disbursement_collection_id, [disbursement_id] = @disbursement_id, [amount_collected] = @amount_collected, [movement125_id] = @movement125_id, [movement128_id] = @movement128_id, [movement130_id] = @movement130_id, [collection_date] = @collection_date WHERE (([disbursement_collection_id] = @Original_disbursement_collection_id) AND ([disbursement_id] = @Original_disbursement_id) AND ([amount_collected] = @Original_amount_collected) AND ((@IsNull_movement125_id = 1 AND [movement125_id] IS NULL) OR ([movement125_id] = @Original_movement125_id)) AND ((@IsNull_movement128_id = 1 AND [movement128_id] IS NULL) OR ([movement128_id] = @Original_movement128_id)) AND ((@IsNull_movement130_id = 1 AND [movement130_id] IS NULL) OR ([movement130_id] = @Original_movement130_id)) AND ((@IsNull_collection_date = 1 AND [collection_date] IS NULL) OR ([collection_date] = @Original_collection_date)));
-SELECT disbursement_collection_id, disbursement_id, amount_collected, movement125_id, movement128_id, movement130_id, collection_date FROM DisbursementCollectionsDetails WHERE (disbursement_collection_id = @disbursement_collection_id) AND (disbursement_id = @disbursement_id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [DisbursementCollectionsDetails] SET [disbursement_collection_id] = @disbursement_collection_id, [disbursement_id] = @disbursement_id, [amount_collected] = @amount_collected, [movement125_id] = @movement125_id, [movement128_id] = @movement128_id, [movement130_id] = @movement130_id WHERE (([disbursement_collection_id] = @Original_disbursement_collection_id) AND ([disbursement_id] = @Original_disbursement_id) AND ([amount_collected] = @Original_amount_collected) AND ((@IsNull_movement125_id = 1 AND [movement125_id] IS NULL) OR ([movement125_id] = @Original_movement125_id)) AND ((@IsNull_movement128_id = 1 AND [movement128_id] IS NULL) OR ([movement128_id] = @Original_movement128_id)) AND ((@IsNull_movement130_id = 1 AND [movement130_id] IS NULL) OR ([movement130_id] = @Original_movement130_id)));
+SELECT disbursement_collection_id, disbursement_id, amount_collected, movement125_id, movement128_id, movement130_id FROM DisbursementCollectionsDetails WHERE (disbursement_collection_id = @disbursement_collection_id) AND (disbursement_id = @disbursement_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@disbursement_collection_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_collection_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@disbursement_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -50925,7 +50878,6 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@movement125_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "movement125_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@movement128_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "movement128_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@movement130_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "movement130_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@collection_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collection_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_disbursement_collection_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_collection_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_disbursement_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_amount_collected", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "amount_collected", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -50935,8 +50887,6 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_movement128_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "movement128_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_movement130_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "movement130_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_movement130_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "movement130_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_collection_date", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collection_date", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_collection_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collection_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -50953,8 +50903,7 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT disbursement_collection_id, disbursement_id, amount_collected, movement125" +
-                "_id, movement128_id, movement130_id, collection_date FROM DisbursementCollection" +
-                "sDetails";
+                "_id, movement128_id, movement130_id FROM DisbursementCollectionsDetails";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -51015,7 +50964,7 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_disbursement_collection_id, int Original_disbursement_id, decimal Original_amount_collected, global::System.Nullable<int> Original_movement125_id, global::System.Nullable<int> Original_movement128_id, global::System.Nullable<int> Original_movement130_id, global::System.Nullable<global::System.DateTime> Original_collection_date) {
+        public virtual int Delete(int Original_disbursement_collection_id, int Original_disbursement_id, decimal Original_amount_collected, global::System.Nullable<int> Original_movement125_id, global::System.Nullable<int> Original_movement128_id, global::System.Nullable<int> Original_movement130_id) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_disbursement_collection_id));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_disbursement_id));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_amount_collected));
@@ -51043,14 +50992,6 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                 this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
-            if ((Original_collection_date.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((System.DateTime)(Original_collection_date.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -51071,7 +51012,7 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int disbursement_collection_id, int disbursement_id, decimal amount_collected, global::System.Nullable<int> movement125_id, global::System.Nullable<int> movement128_id, global::System.Nullable<int> movement130_id, global::System.Nullable<global::System.DateTime> collection_date) {
+        public virtual int Insert(int disbursement_collection_id, int disbursement_id, decimal amount_collected, global::System.Nullable<int> movement125_id, global::System.Nullable<int> movement128_id, global::System.Nullable<int> movement130_id) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(disbursement_collection_id));
             this.Adapter.InsertCommand.Parameters[1].Value = ((int)(disbursement_id));
             this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(amount_collected));
@@ -51093,12 +51034,6 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
             else {
                 this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
-            if ((collection_date.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((System.DateTime)(collection_date.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -51119,7 +51054,7 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int disbursement_collection_id, int disbursement_id, decimal amount_collected, global::System.Nullable<int> movement125_id, global::System.Nullable<int> movement128_id, global::System.Nullable<int> movement130_id, global::System.Nullable<global::System.DateTime> collection_date, int Original_disbursement_collection_id, int Original_disbursement_id, decimal Original_amount_collected, global::System.Nullable<int> Original_movement125_id, global::System.Nullable<int> Original_movement128_id, global::System.Nullable<int> Original_movement130_id, global::System.Nullable<global::System.DateTime> Original_collection_date) {
+        public virtual int Update(int disbursement_collection_id, int disbursement_id, decimal amount_collected, global::System.Nullable<int> movement125_id, global::System.Nullable<int> movement128_id, global::System.Nullable<int> movement130_id, int Original_disbursement_collection_id, int Original_disbursement_id, decimal Original_amount_collected, global::System.Nullable<int> Original_movement125_id, global::System.Nullable<int> Original_movement128_id, global::System.Nullable<int> Original_movement130_id) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(disbursement_collection_id));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(disbursement_id));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(amount_collected));
@@ -51141,46 +51076,32 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
             else {
                 this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
-            if ((collection_date.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(collection_date.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_disbursement_collection_id));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_disbursement_id));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(Original_amount_collected));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_disbursement_collection_id));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_disbursement_id));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_amount_collected));
             if ((Original_movement125_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_movement125_id.Value));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_movement125_id.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
             if ((Original_movement128_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_movement128_id.Value));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_movement128_id.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
             if ((Original_movement130_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_movement130_id.Value));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_movement130_id.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            if ((Original_collection_date.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((System.DateTime)(Original_collection_date.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -51202,8 +51123,8 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal amount_collected, global::System.Nullable<int> movement125_id, global::System.Nullable<int> movement128_id, global::System.Nullable<int> movement130_id, global::System.Nullable<global::System.DateTime> collection_date, int Original_disbursement_collection_id, int Original_disbursement_id, decimal Original_amount_collected, global::System.Nullable<int> Original_movement125_id, global::System.Nullable<int> Original_movement128_id, global::System.Nullable<int> Original_movement130_id, global::System.Nullable<global::System.DateTime> Original_collection_date) {
-            return this.Update(Original_disbursement_collection_id, Original_disbursement_id, amount_collected, movement125_id, movement128_id, movement130_id, collection_date, Original_disbursement_collection_id, Original_disbursement_id, Original_amount_collected, Original_movement125_id, Original_movement128_id, Original_movement130_id, Original_collection_date);
+        public virtual int Update(decimal amount_collected, global::System.Nullable<int> movement125_id, global::System.Nullable<int> movement128_id, global::System.Nullable<int> movement130_id, int Original_disbursement_collection_id, int Original_disbursement_id, decimal Original_amount_collected, global::System.Nullable<int> Original_movement125_id, global::System.Nullable<int> Original_movement128_id, global::System.Nullable<int> Original_movement130_id) {
+            return this.Update(Original_disbursement_collection_id, Original_disbursement_id, amount_collected, movement125_id, movement128_id, movement130_id, Original_disbursement_collection_id, Original_disbursement_id, Original_amount_collected, Original_movement125_id, Original_movement128_id, Original_movement130_id);
         }
     }
     
