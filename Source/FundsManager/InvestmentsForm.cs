@@ -422,8 +422,8 @@ namespace FundsManager
                     }
                 }
 
-                _newInvestment.total_disbursement = _totalDisbursement;
-                _newInvestment.profit_share = _totalProfitShare;
+                _newInvestment.total_disbursement = Math.Round(_totalDisbursement, 2);
+                _newInvestment.profit_share = Math.Round(_totalProfitShare, 2);
 
                 manager.My_db.SaveChanges();
 

@@ -229,15 +229,10 @@ namespace FundsManager
                                                     accounting_movement_id = accountingMovement.Id;
                                                 }
 
-                                                if (totalToBeCollected - collected - toBeCollected125 - toBeCollected128 - toBeCollected130 <= 0)
-                                                {
-                                                    //TODO: marcar como completed_collected
-                                                }
-
                                                 DisbursementCollectionsDetail collectionDetail = new DisbursementCollectionsDetail();
                                                 collectionDetail.disbursement_collection_id = collection.id;
                                                 collectionDetail.disbursement_id = disbId;
-                                                collectionDetail.amount_collected = toBeCollected125 + toBeCollected128 + toBeCollected130;
+                                                collectionDetail.amount_collected = Math.Round(toBeCollected125 + toBeCollected128 + toBeCollected130, 2);
 
                                                 manager.My_db.DisbursementCollectionsDetails.Add(collectionDetail);
                                                 manager.My_db.SaveChanges();
@@ -252,7 +247,7 @@ namespace FundsManager
                                                 _maccount125.subaccount = disb.client_id;
                                                 _maccount125.subaccount_type = 1;
                                                 _maccount125.debit = 0;
-                                                _maccount125.credit = toBeCollected125;
+                                                _maccount125.credit = Math.Round(toBeCollected125, 2);
 
                                                 int _creditFactor = 1;
                                                 int _debitFactor = -1;
@@ -266,11 +261,11 @@ namespace FundsManager
                                                 account125.amount += _debitFactor * _maccount125.debit;
                                                 account125.amount += _creditFactor * _maccount125.credit;
 
-                                                _maccount125.acc_amount = account125.amount;
+                                                _maccount125.acc_amount = Math.Round(account125.amount, 2);
 
                                                 subacct125.amount += _debitFactor * _maccount125.debit;
                                                 subacct125.amount += _creditFactor * _maccount125.credit;
-                                                _maccount125.subacc_amount = subacct125.amount;
+                                                _maccount125.subacc_amount = Math.Round(subacct125.amount, 2);
 
                                                 manager.My_db.Movements_Accounts.Add(_maccount125);
                                                 manager.My_db.SaveChanges();
@@ -287,7 +282,7 @@ namespace FundsManager
                                                 _maccount128.subaccount = disb.client_id;
                                                 _maccount128.subaccount_type = 1;
                                                 _maccount128.debit = 0;
-                                                _maccount128.credit = toBeCollected128;
+                                                _maccount128.credit = Math.Round(toBeCollected128, 2);
 
                                                 _creditFactor = 1;
                                                 _debitFactor = -1;
@@ -301,11 +296,11 @@ namespace FundsManager
                                                 account128.amount += _debitFactor * _maccount128.debit;
                                                 account128.amount += _creditFactor * _maccount128.credit;
 
-                                                _maccount128.acc_amount = account128.amount;
+                                                _maccount128.acc_amount = Math.Round(account128.amount, 2);
 
                                                 subacct128.amount += _debitFactor * _maccount128.debit;
                                                 subacct128.amount += _creditFactor * _maccount128.credit;
-                                                _maccount128.subacc_amount = subacct128.amount;
+                                                _maccount128.subacc_amount = Math.Round(subacct128.amount, 2);
 
                                                 manager.My_db.Movements_Accounts.Add(_maccount128);
                                                 manager.My_db.SaveChanges();
@@ -322,7 +317,7 @@ namespace FundsManager
                                                 _maccount130.subaccount = disb.client_id;
                                                 _maccount130.subaccount_type = 1;
                                                 _maccount130.debit = 0;
-                                                _maccount130.credit = toBeCollected130;
+                                                _maccount130.credit = Math.Round(toBeCollected130, 2);
 
                                                 _creditFactor = 1;
                                                 _debitFactor = -1;
@@ -336,11 +331,11 @@ namespace FundsManager
                                                 account130.amount += _debitFactor * _maccount130.debit;
                                                 account130.amount += _creditFactor * _maccount130.credit;
 
-                                                _maccount130.acc_amount = account130.amount;
+                                                _maccount130.acc_amount = Math.Round(account130.amount, 2);
 
                                                 subacct130.amount += _debitFactor * _maccount130.debit;
                                                 subacct130.amount += _creditFactor * _maccount130.credit;
-                                                _maccount130.subacc_amount = subacct130.amount;
+                                                _maccount130.subacc_amount = Math.Round(subacct130.amount, 2);
 
                                                 manager.My_db.Movements_Accounts.Add(_maccount130);
                                                 manager.My_db.SaveChanges();

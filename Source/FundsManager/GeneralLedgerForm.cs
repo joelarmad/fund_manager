@@ -292,9 +292,9 @@ namespace FundsManager
                         movement.Detail = -1;
                     }
 
-                    movement.Debit = decimal.Parse(textBox1.Text);
+                    movement.Debit = Math.Round(decimal.Parse(textBox1.Text), 2);
 
-                    movement.Credit = decimal.Parse(textBox2.Text);
+                    movement.Credit = Math.Round(decimal.Parse(textBox2.Text), 2);
 
                     Account _account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == movement.Account);
                     Subaccount _subAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == movement.Subaccount);
@@ -1069,9 +1069,9 @@ namespace FundsManager
                     toEdit.Detail = -1;
                 }
 
-                toEdit.Debit = decimal.Parse(textBox1.Text);
+                toEdit.Debit = Math.Round(decimal.Parse(textBox1.Text), 2);
 
-                toEdit.Credit = decimal.Parse(textBox2.Text);
+                toEdit.Credit = Math.Round(decimal.Parse(textBox2.Text), 2);
 
                 Account _account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == toEdit.Account);
                 Subaccount _subAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == toEdit.Subaccount);
@@ -1126,8 +1126,8 @@ namespace FundsManager
             else
                 movementAccountToSave.subaccount = nullReference;
 
-            movementAccountToSave.debit = toSave.Debit;
-            movementAccountToSave.credit = toSave.Credit;
+            movementAccountToSave.debit = Math.Round(toSave.Debit, 2);
+            movementAccountToSave.credit = Math.Round(toSave.Credit, 2);
 
             Account _account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == toSave.Account);
             Subaccount _subAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == toSave.Subaccount);
@@ -1143,13 +1143,13 @@ namespace FundsManager
 
             _account.amount += _debitFactor * toSave.Debit;
             _account.amount += _creditFactor * toSave.Credit;
-            movementAccountToSave.acc_amount = _account.amount;
+            movementAccountToSave.acc_amount = Math.Round(_account.amount, 2);
 
             if (_subAccount != null)
             {
                 _subAccount.amount += _debitFactor * toSave.Debit;
                 _subAccount.amount += _creditFactor * toSave.Credit;
-                movementAccountToSave.subacc_amount = _subAccount.amount;
+                movementAccountToSave.subacc_amount = Math.Round(_subAccount.amount, 2);
             }
             else
             {

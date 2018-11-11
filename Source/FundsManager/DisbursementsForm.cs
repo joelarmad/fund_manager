@@ -239,7 +239,7 @@ namespace FundsManager
                                             _maccount125.FK_Movements_Accounts_Subaccounts = subacct125.Id;
                                         _maccount125.subaccount = toPay.client_id;
                                         _maccount125.subaccount_type = 1;
-                                        _maccount125.debit = toPay.amount;
+                                        _maccount125.debit = Math.Round(toPay.amount, 2);
                                         _maccount125.credit = 0;
 
                                         totalPaid += toPay.amount;
@@ -256,7 +256,7 @@ namespace FundsManager
                                         account125.amount += _debitFactor * _maccount125.debit;
                                         account125.amount += _creditFactor * _maccount125.credit;
 
-                                        _maccount125.acc_amount = account125.amount;
+                                        _maccount125.acc_amount = Math.Round(account125.amount, 2);
 
                                         if (subacct125 != null)
                                         {
@@ -268,7 +268,7 @@ namespace FundsManager
 
                                             subacct125.amount += _debitFactor * _maccount125.debit;
                                             subacct125.amount += _creditFactor * _maccount125.credit;
-                                            _maccount125.subacc_amount = subacct125.amount;
+                                            _maccount125.subacc_amount = Math.Round(subacct125.amount, 2);
                                         }
 
                                         manager.My_db.Movements_Accounts.Add(_maccount125);
@@ -339,7 +339,7 @@ namespace FundsManager
 
                         if (subacct != null)
                         {
-                            subacct.amount = subaccountAmounts[i];
+                            subacct.amount = Math.Round(subaccountAmounts[i], 2);
 
                             manager.My_db.SaveChanges();
                         }
@@ -347,7 +347,7 @@ namespace FundsManager
 
                     if (account125 != null && account125Amount.HasValue)
                     {
-                        account125.amount = account125Amount.Value;
+                        account125.amount = Math.Round(account125Amount.Value, 2);
 
                         manager.My_db.SaveChanges();
                     }

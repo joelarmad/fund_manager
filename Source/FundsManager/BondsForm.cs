@@ -225,7 +225,7 @@ namespace FundsManager
                 bond.issued = Convert.ToDateTime(dtpIssuingDate.Text);
                 bond.expired = Convert.ToDateTime(dtpExpirationDate.Text);
                 bond.FK_Bonds_Funds = manager.Selected;
-                bond.price = Convert.ToDecimal(txtPrice.Text);
+                bond.price = Math.Round(Convert.ToDecimal(txtPrice.Text), 2);
                 bond.pieces = (float)Convert.ToDecimal(txtBondPieces.Text);
                 bond.interest_on_bond = Convert.ToInt32(txtBondInterest.Text);
                 bond.interest_tff_contribution = Convert.ToInt32(txtTFFInterest.Text);
@@ -298,7 +298,7 @@ namespace FundsManager
                     //TODO: Poner subaccount type correcto cuando lo manden
                     //_movAcctCashAtBank.subaccount = my_movement.Detail;
 
-                    _movAcctCashAtBank.debit = (decimal)bond.pieces * bond.price;
+                    _movAcctCashAtBank.debit = Math.Round((decimal)bond.pieces * bond.price, 2);
                     _movAcctCashAtBank.credit = 0;
                     
                     manager.My_db.Movements_Accounts.Add(_movAcctCashAtBank);
@@ -313,7 +313,7 @@ namespace FundsManager
                     //_movAcctBond.subaccount = my_movement.Detail;
 
                     _movAcctBond.debit = 0;
-                    _movAcctBond.credit = (decimal)bond.pieces * bond.price;
+                    _movAcctBond.credit = Math.Round((decimal)bond.pieces * bond.price, 2);
 
                     manager.My_db.Movements_Accounts.Add(_movAcctBond);
 

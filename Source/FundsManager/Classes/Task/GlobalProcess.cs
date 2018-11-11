@@ -95,13 +95,13 @@ namespace FundsManager.Classes.Task
                 _newInvestorInterest.InterestDate = aInterestDate;
                 _newInvestorInterest.BondId = aBond.Id;
                 _newInvestorInterest.InvestorId = aInvestor.FK_BondsInvestors_Investors;
-                _newInvestorInterest.Amount = aInvestorAmount;
+                _newInvestorInterest.Amount = Math.Round(aInvestorAmount, 2);
                 _newInvestorInterest.Extracted = false;
 
                 FundBondInterest _newFundBondInterest = new FundBondInterest();
                 _newFundBondInterest.InterestDate = aInterestDate;
                 _newFundBondInterest.BondId = aBond.Id;
-                _newFundBondInterest.Amount = aFundAmount;
+                _newFundBondInterest.Amount = Math.Round(aFundAmount, 2);
                 _newFundBondInterest.Extracted = false;
 
                 _manager.My_db.InvestorBondInterests.Add(_newInvestorInterest);

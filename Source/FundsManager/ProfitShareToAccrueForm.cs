@@ -264,7 +264,7 @@ namespace FundsManager
                                         DisbursementGeneratedInterestDetail _detail = new DisbursementGeneratedInterestDetail();
                                         _detail.disbursement_generated_interest_id = _generatedInterest.Id;
                                         _detail.disbursement_id = _profitShareToAccrue.Id;
-                                        _detail.generated_interest = _interest;
+                                        _detail.generated_interest = Math.Round(_interest, 2);
                                         _detail.generated_interest_date = toDate;
 
                                         manager.My_db.DisbursementGeneratedInterestDetails.Add(_detail);
@@ -295,7 +295,7 @@ namespace FundsManager
                                             _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
                                         _maccount128.subaccount = _profitShareToAccrue.client_id;
                                         _maccount128.subaccount_type = 1;
-                                        _maccount128.debit = _interest;
+                                        _maccount128.debit = Math.Round(_interest, 2);
                                         _maccount128.credit = 0;
 
                                         int _creditFactor = 1;
@@ -310,11 +310,11 @@ namespace FundsManager
                                         account128.amount += _debitFactor * _maccount128.debit;
                                         account128.amount += _creditFactor * _maccount128.credit;
 
-                                        _maccount128.acc_amount = account128.amount;
+                                        _maccount128.acc_amount = Math.Round(account128.amount, 2);
 
                                         subacct128.amount += _debitFactor * _maccount128.debit;
                                         subacct128.amount += _creditFactor * _maccount128.credit;
-                                        _maccount128.subacc_amount = subacct128.amount;
+                                        _maccount128.subacc_amount = Math.Round(subacct128.amount, 2);
 
                                         manager.My_db.Movements_Accounts.Add(_maccount128);
 
@@ -329,7 +329,7 @@ namespace FundsManager
                                         _maccount901.subaccount = _profitShareToAccrue.client_id;
                                         _maccount901.subaccount_type = 1;
                                         _maccount901.debit = 0;
-                                        _maccount901.credit = _interest;
+                                        _maccount901.credit = Math.Round(_interest, 2);
 
                                         _creditFactor = 1;
                                         _debitFactor = -1;
@@ -343,7 +343,7 @@ namespace FundsManager
                                         account901.amount += _debitFactor * _maccount901.debit;
                                         account901.amount += _creditFactor * _maccount901.credit;
 
-                                        _maccount901.acc_amount = account901.amount;
+                                        _maccount901.acc_amount = Math.Round(account901.amount, 2);
 
                                         manager.My_db.Movements_Accounts.Add(_maccount901);
 

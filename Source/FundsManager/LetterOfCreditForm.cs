@@ -99,7 +99,7 @@ namespace FundsManager
                     _letter.Reference = txtReference.Text;
                     _letter.BankId = bankId;
                     _letter.FundId = manager.Selected;
-                    _letter.Amount = decimal.Parse(txtAmount.Text);
+                    _letter.Amount = Math.Round(decimal.Parse(txtAmount.Text), 2);
                     manager.My_db.letter_of_credits.Add(_letter);
                     manager.My_db.SaveChanges();
                 }
@@ -120,7 +120,7 @@ namespace FundsManager
                     if (_selected != null)
                     {
                         _selected.Reference = txtReference.Text;
-                        _selected.Amount = decimal.Parse(txtAmount.Text);
+                        _selected.Amount = Math.Round(decimal.Parse(txtAmount.Text), 2);
                         _selected.BankId = Convert.ToInt32(cbBank.SelectedValue);
 
                         manager.My_db.SaveChanges();
