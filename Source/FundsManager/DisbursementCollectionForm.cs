@@ -17,14 +17,14 @@ namespace FundsManager
 
         int IdIndex = 0;
         int NumberIndex = 1;
-        int AmountIndex = 2;
-        int ProfitShareIndex = 3;
-        int ToBeCollectedIndex = 4;
-        int CollectedIndex = 5;
-        int CollectTo125Index = 7;
-        int CollectTo128Index = 8;
-        int CollectTo130Index = 9;
-        int DateIndex = 10;
+        int CollectionDateIndex = 2;
+        int AmountIndex = 3;
+        int ProfitShareIndex = 4;
+        int ToBeCollectedIndex = 5;
+        int CollectedIndex = 6;
+        int CollectTo125Index = 8;
+        int CollectTo128Index = 9;
+        int CollectTo130Index = 10;
 
         public DisbursementCollectionForm()
         {
@@ -114,8 +114,7 @@ namespace FundsManager
                     string amountToBeCollected125Str = row.Cells[CollectTo125Index].Value != null ? row.Cells[CollectTo125Index].Value.ToString() : "0";
                     string amountToBeCollected128Str = row.Cells[CollectTo128Index].Value != null ? row.Cells[CollectTo128Index].Value.ToString() : "0";
                     string amountToBeCollected130Str = row.Cells[CollectTo130Index].Value != null ? row.Cells[CollectTo130Index].Value.ToString() : "0";
-                    string dateStr = row.Cells[DateIndex].Value != null ? row.Cells[DateIndex].Value.ToString() : "";
-
+                    
                     if (amountToBeCollected125Str != "0" || amountToBeCollected128Str != "0" || amountToBeCollected130Str != "0")
                     {
                         decimal amountToBeCollected125 = 0;
