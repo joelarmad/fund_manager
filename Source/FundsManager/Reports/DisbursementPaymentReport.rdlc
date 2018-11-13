@@ -274,7 +274,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=FormatNumber(Sum(Fields!amount.Value), 2)</Value>
+                                  <Value>=Sum(Fields!amount.Value)</Value>
                                   <Style>
                                     <FontSize>11pt</FontSize>
                                     <Format>#,0.00</Format>
@@ -315,7 +315,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=FormatNumber(Sum(Fields!exchange_rate.Value), 2)</Value>
+                                  <Value>=Sum(Fields!exchange_rate.Value)</Value>
                                   <Style>
                                     <FontSize>11pt</FontSize>
                                     <Format>#,0.0000000</Format>
@@ -345,7 +345,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -357,7 +356,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=FormatNumber(Sum(Fields!profit_share.Value), 2)</Value>
+                                  <Value>=Sum(Fields!profit_share.Value)</Value>
                                   <Style>
                                     <FontSize>11pt</FontSize>
                                     <Format>#,0.00</Format>

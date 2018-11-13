@@ -409,6 +409,12 @@
     <Compile Include="ReportForms\DibursementCreatedForm.Designer.cs">
       <DependentUpon>DibursementCreatedForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportForms\DisbursementCollectionReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForms\DisbursementCollectionReportForm.Designer.cs">
+      <DependentUpon>DisbursementCollectionReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportForms\DisbursementGeneratedInterestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -578,6 +584,9 @@
     <EmbeddedResource Include="ReportForms\DibursementCreatedForm.resx">
       <DependentUpon>DibursementCreatedForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\DisbursementCollectionReportForm.resx">
+      <DependentUpon>DisbursementCollectionReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\DisbursementGeneratedInterestForm.resx">
       <DependentUpon>DisbursementGeneratedInterestForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -590,6 +599,7 @@
     <EmbeddedResource Include="ReportForms\ReturnsState.resx">
       <DependentUpon>ReturnsState.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DisbursementCollections.rdlc" />
     <EmbeddedResource Include="Reports\DisbursementCreated.rdlc" />
     <EmbeddedResource Include="Reports\DisbursementGeneratedInterestReport.rdlc" />
     <EmbeddedResource Include="Reports\DisbursementPaymentReport.rdlc" />

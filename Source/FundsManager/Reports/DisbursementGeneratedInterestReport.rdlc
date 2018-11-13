@@ -282,7 +282,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=FormatNumber(Sum(Fields!amount.Value), 2)</Value>
+                                  <Value>=Sum(Fields!amount.Value)</Value>
                                   <Style>
                                     <Format>#,0.00</Format>
                                     <Color>#333333</Color>
@@ -310,14 +310,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="profit_share">
+                        <Textbox Name="generated_interest2">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=FormatNumber(Sum(Fields!profit_share.Value), 2)</Value>
+                                  <Value>=Sum(Fields!profit_share.Value)</Value>
                                   <Style>
                                     <Format>#,0.00</Format>
                                     <Color>#333333</Color>
@@ -329,7 +329,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>profit_share</rd:DefaultName>
+                          <rd:DefaultName>generated_interest</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -352,7 +352,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=FormatNumber(Sum(Fields!generated_interest.Value), 2)</Value>
+                                  <Value>=Sum(Fields!generated_interest.Value)</Value>
                                   <Style>
                                     <Format>#,0.00</Format>
                                     <Color>#333333</Color>
