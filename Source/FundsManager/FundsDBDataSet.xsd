@@ -3652,6 +3652,27 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DelayInterestToAccrueSourceTableAdapter" GeneratorDataComponentClassName="DelayInterestToAccrueSourceTableAdapter" Name="DelayInterestToAccrueSource" UserDataComponentName="DelayInterestToAccrueSourceTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.DelayInterestToAccrueSource" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Number, Investment, ProfitShare, TotalToBeCollected, CollectionDate, Remaining FROM DelayInterestToAccrueSource</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Number" DataSetColumn="Number" />
+              <Mapping SourceColumn="Investment" DataSetColumn="Investment" />
+              <Mapping SourceColumn="ProfitShare" DataSetColumn="ProfitShare" />
+              <Mapping SourceColumn="TotalToBeCollected" DataSetColumn="TotalToBeCollected" />
+              <Mapping SourceColumn="CollectionDate" DataSetColumn="CollectionDate" />
+              <Mapping SourceColumn="Remaining" DataSetColumn="Remaining" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -4941,6 +4962,24 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
               <xs:element name="credit125" msprop:Generator_ColumnVarNameInTable="columncredit125" msprop:Generator_ColumnPropNameInRow="credit125" msprop:Generator_ColumnPropNameInTable="credit125Column" msprop:Generator_UserColumnName="credit125" type="xs:decimal" />
               <xs:element name="credit128" msprop:Generator_ColumnVarNameInTable="columncredit128" msprop:Generator_ColumnPropNameInRow="credit128" msprop:Generator_ColumnPropNameInTable="credit128Column" msprop:Generator_UserColumnName="credit128" type="xs:decimal" />
               <xs:element name="credit130" msprop:Generator_ColumnVarNameInTable="columncredit130" msprop:Generator_ColumnPropNameInRow="credit130" msprop:Generator_ColumnPropNameInTable="credit130Column" msprop:Generator_UserColumnName="credit130" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DelayInterestToAccrueSource" msprop:Generator_TableClassName="DelayInterestToAccrueSourceDataTable" msprop:Generator_TableVarName="tableDelayInterestToAccrueSource" msprop:Generator_RowChangedName="DelayInterestToAccrueSourceRowChanged" msprop:Generator_TablePropName="DelayInterestToAccrueSource" msprop:Generator_RowDeletingName="DelayInterestToAccrueSourceRowDeleting" msprop:Generator_RowChangingName="DelayInterestToAccrueSourceRowChanging" msprop:Generator_RowEvHandlerName="DelayInterestToAccrueSourceRowChangeEventHandler" msprop:Generator_RowDeletedName="DelayInterestToAccrueSourceRowDeleted" msprop:Generator_RowClassName="DelayInterestToAccrueSourceRow" msprop:Generator_UserTableName="DelayInterestToAccrueSource" msprop:Generator_RowEvArgName="DelayInterestToAccrueSourceRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Number" msprop:Generator_ColumnVarNameInTable="columnNumber" msprop:Generator_ColumnPropNameInRow="Number" msprop:Generator_ColumnPropNameInTable="NumberColumn" msprop:Generator_UserColumnName="Number" type="xs:int" />
+              <xs:element name="Investment" msprop:Generator_ColumnVarNameInTable="columnInvestment" msprop:Generator_ColumnPropNameInRow="Investment" msprop:Generator_ColumnPropNameInTable="InvestmentColumn" msprop:Generator_UserColumnName="Investment" type="xs:decimal" />
+              <xs:element name="ProfitShare" msprop:Generator_ColumnVarNameInTable="columnProfitShare" msprop:Generator_ColumnPropNameInRow="ProfitShare" msprop:Generator_ColumnPropNameInTable="ProfitShareColumn" msprop:Generator_UserColumnName="ProfitShare" type="xs:decimal" />
+              <xs:element name="TotalToBeCollected" msprop:Generator_ColumnVarNameInTable="columnTotalToBeCollected" msprop:Generator_ColumnPropNameInRow="TotalToBeCollected" msprop:Generator_ColumnPropNameInTable="TotalToBeCollectedColumn" msprop:Generator_UserColumnName="TotalToBeCollected" type="xs:decimal" />
+              <xs:element name="CollectionDate" msprop:Generator_ColumnVarNameInTable="columnCollectionDate" msprop:Generator_ColumnPropNameInRow="CollectionDate" msprop:Generator_ColumnPropNameInTable="CollectionDateColumn" msprop:Generator_UserColumnName="CollectionDate">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="9" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Remaining" msprop:Generator_ColumnVarNameInTable="columnRemaining" msprop:Generator_ColumnPropNameInRow="Remaining" msprop:Generator_ColumnPropNameInTable="RemainingColumn" msprop:Generator_UserColumnName="Remaining" type="xs:decimal" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

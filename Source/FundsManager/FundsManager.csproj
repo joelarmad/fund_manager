@@ -128,6 +128,12 @@
     <Compile Include="ActivateBondsForm.Designer.cs">
       <DependentUpon>ActivateBondsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddendumsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddendumsForm.Designer.cs">
+      <DependentUpon>AddendumsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Bank.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -214,6 +220,12 @@
     </Compile>
     <Compile Include="Currency.cs">
       <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DelayInterestToAccrue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DelayInterestToAccrue.Designer.cs">
+      <DependentUpon>DelayInterestToAccrue.cs</DependentUpon>
     </Compile>
     <Compile Include="Disbursement.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -494,6 +506,9 @@
     <EmbeddedResource Include="ActivateBondsForm.resx">
       <DependentUpon>ActivateBondsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddendumsForm.resx">
+      <DependentUpon>AddendumsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BankingAccountsForm.resx">
       <DependentUpon>BankingAccountsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -520,6 +535,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CurrenciesForm.resx">
       <DependentUpon>CurrenciesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DelayInterestToAccrue.resx">
+      <DependentUpon>DelayInterestToAccrue.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DisbursementCollectionForm.resx">
       <DependentUpon>DisbursementCollectionForm.cs</DependentUpon>

@@ -69,6 +69,7 @@
             this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.delayInterestToAccrueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -298,7 +299,8 @@
             this.disbursemetToolStripMenuItem,
             this.collectionToolStripMenuItem,
             this.profitShareAccruedToolStripMenuItem,
-            this.delayInterestToolStripMenuItem});
+            this.delayInterestToolStripMenuItem,
+            this.delayInterestToAccrueToolStripMenuItem});
             this.investmentsToolStripMenuItem.Name = "investmentsToolStripMenuItem";
             this.investmentsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.investmentsToolStripMenuItem.Text = "Investments";
@@ -391,6 +393,13 @@
             this.returnsStateToolStripMenuItem.Text = "Profit && Loss Statement";
             this.returnsStateToolStripMenuItem.Click += new System.EventHandler(this.returnsStateToolStripMenuItem_Click);
             // 
+            // delayInterestToAccrueToolStripMenuItem
+            // 
+            this.delayInterestToAccrueToolStripMenuItem.Name = "delayInterestToAccrueToolStripMenuItem";
+            this.delayInterestToAccrueToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.delayInterestToAccrueToolStripMenuItem.Text = "Delay Interest to Accrue";
+            this.delayInterestToAccrueToolStripMenuItem.Click += new System.EventHandler(this.delayInterestToAccrueToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -457,6 +466,7 @@
         private System.Windows.Forms.ToolStripMenuItem letterOfCreditToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem shipmentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem investmentsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem delayInterestToAccrueToolStripMenuItem;
     }
 }
 
