@@ -295,7 +295,7 @@ namespace FundsManager
         private void delayInterestToAccrueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            DelayInterestToAccrue delayInterestToAccrue = new DelayInterestToAccrue();
+            AddendumsLauncher delayInterestToAccrue = new AddendumsLauncher();
             delayInterestToAccrue.MdiParent = this;
             delayInterestToAccrue.Show();
         }

@@ -221,11 +221,11 @@
     <Compile Include="Currency.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="DelayInterestToAccrue.cs">
+    <Compile Include="AddendumsLauncher.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DelayInterestToAccrue.Designer.cs">
-      <DependentUpon>DelayInterestToAccrue.cs</DependentUpon>
+    <Compile Include="AddendumsLauncher.Designer.cs">
+      <DependentUpon>AddendumsLauncher.cs</DependentUpon>
     </Compile>
     <Compile Include="Disbursement.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -536,8 +536,8 @@
     <EmbeddedResource Include="CurrenciesForm.resx">
       <DependentUpon>CurrenciesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DelayInterestToAccrue.resx">
-      <DependentUpon>DelayInterestToAccrue.cs</DependentUpon>
+    <EmbeddedResource Include="AddendumsLauncher.resx">
+      <DependentUpon>AddendumsLauncher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DisbursementCollectionForm.resx">
       <DependentUpon>DisbursementCollectionForm.cs</DependentUpon>

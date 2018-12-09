@@ -62,6 +62,7 @@
             this.collectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.profitShareAccruedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.delayInterestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.delayInterestToAccrueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.investmentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +70,6 @@
             this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.delayInterestToAccrueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -339,6 +339,13 @@
             this.delayInterestToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.delayInterestToolStripMenuItem.Text = "Delay Interest - Addendum";
             // 
+            // delayInterestToAccrueToolStripMenuItem
+            // 
+            this.delayInterestToAccrueToolStripMenuItem.Name = "delayInterestToAccrueToolStripMenuItem";
+            this.delayInterestToAccrueToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.delayInterestToAccrueToolStripMenuItem.Text = "Addendums";
+            this.delayInterestToAccrueToolStripMenuItem.Click += new System.EventHandler(this.delayInterestToAccrueToolStripMenuItem_Click);
+            // 
             // reportsToolStripMenuItem
             // 
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -392,13 +399,6 @@
             this.returnsStateToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.returnsStateToolStripMenuItem.Text = "Profit && Loss Statement";
             this.returnsStateToolStripMenuItem.Click += new System.EventHandler(this.returnsStateToolStripMenuItem_Click);
-            // 
-            // delayInterestToAccrueToolStripMenuItem
-            // 
-            this.delayInterestToAccrueToolStripMenuItem.Name = "delayInterestToAccrueToolStripMenuItem";
-            this.delayInterestToAccrueToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            this.delayInterestToAccrueToolStripMenuItem.Text = "Delay Interest to Accrue";
-            this.delayInterestToAccrueToolStripMenuItem.Click += new System.EventHandler(this.delayInterestToAccrueToolStripMenuItem_Click);
             // 
             // Form1
             // 

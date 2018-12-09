@@ -19,12 +19,12 @@ namespace FundsManager
         int NumberIndex = 1;
         int CollectionDateIndex = 2;
         int AmountIndex = 3;
-        int ProfitShareIndex = 4;
+        int CollectedIndex = 4;
         int ToBeCollectedIndex = 5;
-        int CollectedIndex = 6;
-        int CollectTo125Index = 8;
-        int CollectTo128Index = 9;
-        int CollectTo130Index = 10;
+        int DelayInterestIndex = 6;
+        int CollectTo125Index = 7;
+        int CollectTo128Index = 8;
+        int CollectTo130Index = 9;
 
         public DisbursementCollectionForm()
         {
@@ -108,7 +108,6 @@ namespace FundsManager
                     int id = int.Parse(row.Cells[IdIndex].Value.ToString());
                     string number = row.Cells[NumberIndex].Value.ToString();
                     decimal amount = decimal.Parse(row.Cells[AmountIndex].Value.ToString());
-                    decimal profitShare = decimal.Parse(row.Cells[ProfitShareIndex].Value.ToString());
                     decimal totalToBeCollected = decimal.Parse(row.Cells[ToBeCollectedIndex].Value.ToString());
                     decimal collected = decimal.Parse(row.Cells[CollectedIndex].Value.ToString());
                     string amountToBeCollected125Str = row.Cells[CollectTo125Index].Value != null ? row.Cells[CollectTo125Index].Value.ToString() : "0";

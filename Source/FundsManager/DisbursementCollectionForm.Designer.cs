@@ -32,7 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmdCollect = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -53,9 +52,8 @@
             this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.collection_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.profitshareDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toBeCollected = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.collectedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toBeCollected = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DelayInterest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Collect125 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Collect128 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -83,7 +81,7 @@
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Location = new System.Drawing.Point(8, 78);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1001, 248);
+            this.groupBox1.Size = new System.Drawing.Size(939, 248);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Disbursements";
@@ -99,9 +97,8 @@
             this.numberDataGridViewTextBoxColumn,
             this.collection_date,
             this.amountDataGridViewTextBoxColumn,
-            this.profitshareDataGridViewTextBoxColumn,
-            this.toBeCollected,
             this.collectedDataGridViewTextBoxColumn,
+            this.toBeCollected,
             this.DelayInterest,
             this.Collect125,
             this.Collect128,
@@ -109,7 +106,7 @@
             this.dataGridView1.DataSource = this.disbursementsToBeCollectedBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(14, 19);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(981, 212);
+            this.dataGridView1.Size = new System.Drawing.Size(909, 212);
             this.dataGridView1.TabIndex = 0;
             // 
             // disbursementsToBeCollectedBindingSource
@@ -237,16 +234,15 @@
             this.amountDataGridViewTextBoxColumn.ReadOnly = true;
             this.amountDataGridViewTextBoxColumn.Width = 70;
             // 
-            // profitshareDataGridViewTextBoxColumn
+            // collectedDataGridViewTextBoxColumn
             // 
-            this.profitshareDataGridViewTextBoxColumn.DataPropertyName = "profit_share";
+            this.collectedDataGridViewTextBoxColumn.DataPropertyName = "collected";
             dataGridViewCellStyle2.Format = "N2";
             dataGridViewCellStyle2.NullValue = null;
-            this.profitshareDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.profitshareDataGridViewTextBoxColumn.HeaderText = "Profit Share";
-            this.profitshareDataGridViewTextBoxColumn.Name = "profitshareDataGridViewTextBoxColumn";
-            this.profitshareDataGridViewTextBoxColumn.ReadOnly = true;
-            this.profitshareDataGridViewTextBoxColumn.Width = 80;
+            this.collectedDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.collectedDataGridViewTextBoxColumn.HeaderText = "Collected";
+            this.collectedDataGridViewTextBoxColumn.Name = "collectedDataGridViewTextBoxColumn";
+            this.collectedDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // toBeCollected
             // 
@@ -257,16 +253,6 @@
             this.toBeCollected.HeaderText = "To be Collected";
             this.toBeCollected.Name = "toBeCollected";
             this.toBeCollected.ReadOnly = true;
-            // 
-            // collectedDataGridViewTextBoxColumn
-            // 
-            this.collectedDataGridViewTextBoxColumn.DataPropertyName = "collected";
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.collectedDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
-            this.collectedDataGridViewTextBoxColumn.HeaderText = "Collected";
-            this.collectedDataGridViewTextBoxColumn.Name = "collectedDataGridViewTextBoxColumn";
-            this.collectedDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // DelayInterest
             // 
@@ -292,7 +278,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1021, 339);
+            this.ClientSize = new System.Drawing.Size(958, 339);
             this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdCollect);
@@ -303,7 +289,7 @@
             this.Controls.Add(this.label4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "DisbursementCollectionForm";
-            this.Text = "Disbursement Collection";
+            this.Text = "Collection";
             this.Load += new System.EventHandler(this.DisbursementCollectionForm_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -338,9 +324,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn collection_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn profitshareDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn toBeCollected;
         private System.Windows.Forms.DataGridViewTextBoxColumn collectedDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn toBeCollected;
         private System.Windows.Forms.DataGridViewTextBoxColumn DelayInterest;
         private System.Windows.Forms.DataGridViewTextBoxColumn Collect125;
         private System.Windows.Forms.DataGridViewTextBoxColumn Collect128;
