@@ -230,6 +230,12 @@
     <Compile Include="Disbursement.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DisbursementBook.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DisbursementBooking.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DisbursementCollection.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

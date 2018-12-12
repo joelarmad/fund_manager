@@ -173,6 +173,29 @@
           <Property Name="disbursement_id" Type="int" Nullable="false" />
           <Property Name="fund_id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="DisbursementBooking">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="book_id" Type="int" Nullable="false" />
+          <Property Name="disbursement_id" Type="int" Nullable="false" />
+          <Property Name="amount" Type="money" Nullable="false" />
+          <Property Name="currency_id" Type="int" Nullable="false" />
+          <Property Name="profit_share" Type="money" Nullable="false" />
+          <Property Name="delay_interest" Type="money" Nullable="false" />
+          <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="starting_date" Type="date" Nullable="false" />
+          <Property Name="collection_date" Type="date" Nullable="false" />
+          <Property Name="exchange_rate" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DisbursementBooks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+        </EntityType>
         <EntityType Name="DisbursementCollections">
           <Key>
             <PropertyRef Name="id" />
@@ -258,6 +281,7 @@
           <Property Name="pay_date" Type="date" />
           <Property Name="can_generate_interest" Type="bit" Nullable="false" />
           <Property Name="shipment_id" Type="int" />
+          <Property Name="collected" Type="bit" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -819,6 +843,42 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Principal>
             <Dependent Role="Disbursement_dates">
               <PropertyRef Name="fund_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementBooking_Book">
+          <End Role="DisbursementBooks" Type="Self.DisbursementBooks" Multiplicity="1" />
+          <End Role="DisbursementBooking" Type="Self.DisbursementBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DisbursementBooks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementBooking">
+              <PropertyRef Name="book_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementBooking_Currency">
+          <End Role="Currencies" Type="Self.Currencies" Multiplicity="1" />
+          <End Role="DisbursementBooking" Type="Self.DisbursementBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementBooking">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementBooking_Disbursement">
+          <End Role="Disbursements" Type="Self.Disbursements" Multiplicity="1" />
+          <End Role="DisbursementBooking" Type="Self.DisbursementBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disbursements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementBooking">
+              <PropertyRef Name="disbursement_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1391,6 +1451,8 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySet Name="Creditors" EntityType="Self.Creditors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currencies" EntityType="Self.Currencies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disbursement_dates" EntityType="Self.Disbursement_dates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DisbursementBooking" EntityType="Self.DisbursementBooking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DisbursementBooks" EntityType="Self.DisbursementBooks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DisbursementCollections" EntityType="Self.DisbursementCollections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DisbursementCollectionsDetails" EntityType="Self.DisbursementCollectionsDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DisbursementGeneratedInterestDetails" EntityType="Self.DisbursementGeneratedInterestDetails" Schema="dbo" store:Type="Tables" />
@@ -1556,6 +1618,18 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <AssociationSet Name="FK_Disbursement_dates_Funds" Association="Self.FK_Disbursement_dates_Funds">
             <End Role="Funds" EntitySet="Funds" />
             <End Role="Disbursement_dates" EntitySet="Disbursement_dates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementBooking_Book" Association="Self.FK_DisbursementBooking_Book">
+            <End Role="DisbursementBooks" EntitySet="DisbursementBooks" />
+            <End Role="DisbursementBooking" EntitySet="DisbursementBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementBooking_Currency" Association="Self.FK_DisbursementBooking_Currency">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="DisbursementBooking" EntitySet="DisbursementBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementBooking_Disbursement" Association="Self.FK_DisbursementBooking_Disbursement">
+            <End Role="Disbursements" EntitySet="Disbursements" />
+            <End Role="DisbursementBooking" EntitySet="DisbursementBooking" />
           </AssociationSet>
           <AssociationSet Name="FK_DisbursementCollections_AccoutingMovements" Association="Self.FK_DisbursementCollections_AccoutingMovements">
             <End Role="AccountingMovements" EntitySet="AccountingMovements" />
@@ -1763,11 +1837,9 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySet Name="Creditors" EntityType="FundsDBModel.Creditor" />
           <EntitySet Name="Currencies" EntityType="FundsDBModel.Currency" />
           <EntitySet Name="Disbursement_dates" EntityType="FundsDBModel.Disbursement_dates" />
-          <EntitySet Name="DisbursementGeneratedInterestDetails" EntityType="FundsDBModel.DisbursementGeneratedInterestDetail" />
           <EntitySet Name="DisbursementGeneratedInterests" EntityType="FundsDBModel.DisbursementGeneratedInterest" />
           <EntitySet Name="DisbursementItems" EntityType="FundsDBModel.DisbursementItem" />
           <EntitySet Name="DisbursementPayments" EntityType="FundsDBModel.DisbursementPayment" />
-          <EntitySet Name="Disbursements" EntityType="FundsDBModel.Disbursement" />
           <EntitySet Name="Employees" EntityType="FundsDBModel.Employee" />
           <EntitySet Name="FundBondInterests" EntityType="FundsDBModel.FundBondInterest" />
           <EntitySet Name="Funds" EntityType="FundsDBModel.Fund" />
@@ -1880,10 +1952,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="Fund" EntitySet="Funds" />
             <End Role="Bank" EntitySet="Banks" />
           </AssociationSet>
-          <AssociationSet Name="FK_Disbursements_Banks" Association="FundsDBModel.FK_Disbursements_Banks">
-            <End Role="Bank" EntitySet="Banks" />
-            <End Role="Disbursement" EntitySet="Disbursements" />
-          </AssociationSet>
           <AssociationSet Name="FK_letter_of_credits_Banks" Association="FundsDBModel.FK_letter_of_credits_Banks">
             <End Role="Bank" EntitySet="Banks" />
             <End Role="letter_of_credits" EntitySet="letter_of_credits" />
@@ -1916,10 +1984,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="Fund" EntitySet="Funds" />
             <End Role="Client" EntitySet="Clients" />
           </AssociationSet>
-          <AssociationSet Name="FK_Disbursements_Clients" Association="FundsDBModel.FK_Disbursements_Clients">
-            <End Role="Client" EntitySet="Clients" />
-            <End Role="Disbursement" EntitySet="Disbursements" />
-          </AssociationSet>
           <AssociationSet Name="FK_Countries_Funds" Association="FundsDBModel.FK_Countries_Funds">
             <End Role="Fund" EntitySet="Funds" />
             <End Role="Country" EntitySet="Countries" />
@@ -1936,21 +2000,9 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="Fund" EntitySet="Funds" />
             <End Role="Currency" EntitySet="Currencies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Disbursements_Currencies" Association="FundsDBModel.FK_Disbursements_Currencies">
-            <End Role="Currency" EntitySet="Currencies" />
-            <End Role="Disbursement" EntitySet="Disbursements" />
-          </AssociationSet>
           <AssociationSet Name="FK_Disbursement_dates_Funds" Association="FundsDBModel.FK_Disbursement_dates_Funds">
             <End Role="Fund" EntitySet="Funds" />
             <End Role="Disbursement_dates" EntitySet="Disbursement_dates" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests" Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests">
-            <End Role="DisbursementGeneratedInterest" EntitySet="DisbursementGeneratedInterests" />
-            <End Role="DisbursementGeneratedInterestDetail" EntitySet="DisbursementGeneratedInterestDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DisbursementGeneratedInterestDetails_Disbursements" Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_Disbursements">
-            <End Role="Disbursement" EntitySet="Disbursements" />
-            <End Role="DisbursementGeneratedInterestDetail" EntitySet="DisbursementGeneratedInterestDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_DisbursementItems_Item" Association="FundsDBModel.FK_DisbursementItems_Item">
             <End Role="Item" EntitySet="Items" />
@@ -1959,26 +2011,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <AssociationSet Name="FK_DisbursementPayments_Investments" Association="FundsDBModel.FK_DisbursementPayments_Investments">
             <End Role="Investment" EntitySet="Investments" />
             <End Role="DisbursementPayment" EntitySet="DisbursementPayments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Disbursements_Funds" Association="FundsDBModel.FK_Disbursements_Funds">
-            <End Role="Fund" EntitySet="Funds" />
-            <End Role="Disbursement" EntitySet="Disbursements" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Disbursements_Investments" Association="FundsDBModel.FK_Disbursements_Investments">
-            <End Role="Investment" EntitySet="Investments" />
-            <End Role="Disbursement" EntitySet="Disbursements" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Disbursements_Sector" Association="FundsDBModel.FK_Disbursements_Sector">
-            <End Role="Sector" EntitySet="Sectors" />
-            <End Role="Disbursement" EntitySet="Disbursements" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Disbursements_Shipments" Association="FundsDBModel.FK_Disbursements_Shipments">
-            <End Role="Shipment" EntitySet="Shipments" />
-            <End Role="Disbursement" EntitySet="Disbursements" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Disbursements_UnderlyingDebtors" Association="FundsDBModel.FK_Disbursements_UnderlyingDebtors">
-            <End Role="UnderlyingDebtor" EntitySet="UnderlyingDebtors" />
-            <End Role="Disbursement" EntitySet="Disbursements" />
           </AssociationSet>
           <AssociationSet Name="FK_Employees_Funds" Association="FundsDBModel.FK_Employees_Funds">
             <End Role="Fund" EntitySet="Funds" />
@@ -2044,19 +2076,11 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="Subaccount" EntitySet="Subaccounts" />
             <End Role="OtherDetail" EntitySet="OtherDetails" />
           </AssociationSet>
-          <AssociationSet Name="DisbursementPaymentDetails" Association="FundsDBModel.DisbursementPaymentDetails">
-            <End Role="Disbursement" EntitySet="Disbursements" />
-            <End Role="DisbursementPayment" EntitySet="DisbursementPayments" />
-          </AssociationSet>
           <EntitySet Name="ProfitShareToAccrues" EntityType="FundsDBModel.ProfitShareToAccrue" />
           <EntitySet Name="DisbursementCollections" EntityType="FundsDBModel.DisbursementCollection" />
           <AssociationSet Name="FK_DisbursementCollections_Investments" Association="FundsDBModel.FK_DisbursementCollections_Investments">
             <End Role="Investment" EntitySet="Investments" />
             <End Role="DisbursementCollection" EntitySet="DisbursementCollections" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DisbursementGeneratedInterestDetails_AccountingMovements" Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_AccountingMovements">
-            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
-            <End Role="DisbursementGeneratedInterestDetail" EntitySet="DisbursementGeneratedInterestDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_DisbursementPayments_AccountingMovements" Association="FundsDBModel.FK_DisbursementPayments_AccountingMovements">
             <End Role="AccountingMovement" EntitySet="AccountingMovements" />
@@ -2071,10 +2095,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="DisbursementCollection" EntitySet="DisbursementCollections" />
             <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_DisbursementCollectionsDetails_Disbursement" Association="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement">
-            <End Role="Disbursement" EntitySet="Disbursements" />
-            <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_DisbursementCollectionsDetails_Mov125" Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125">
             <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
             <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
@@ -2086,6 +2106,74 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <AssociationSet Name="FK_DisbursementCollectionsDetails_Mov130" Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130">
             <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
             <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
+          </AssociationSet>
+          <EntitySet Name="DisbursementGeneratedInterestDetails" EntityType="FundsDBModel.DisbursementGeneratedInterestDetail" />
+          <EntitySet Name="Disbursements" EntityType="FundsDBModel.Disbursement" />
+          <AssociationSet Name="FK_DisbursementGeneratedInterestDetails_AccountingMovements" Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_AccountingMovements">
+            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
+            <End Role="DisbursementGeneratedInterestDetail" EntitySet="DisbursementGeneratedInterestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Banks" Association="FundsDBModel.FK_Disbursements_Banks">
+            <End Role="Bank" EntitySet="Banks" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Clients" Association="FundsDBModel.FK_Disbursements_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Currencies" Association="FundsDBModel.FK_Disbursements_Currencies">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementCollectionsDetails_Disbursement" Association="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement">
+            <End Role="Disbursement" EntitySet="Disbursements" />
+            <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests" Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests">
+            <End Role="DisbursementGeneratedInterest" EntitySet="DisbursementGeneratedInterests" />
+            <End Role="DisbursementGeneratedInterestDetail" EntitySet="DisbursementGeneratedInterestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementGeneratedInterestDetails_Disbursements" Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_Disbursements">
+            <End Role="Disbursement" EntitySet="Disbursements" />
+            <End Role="DisbursementGeneratedInterestDetail" EntitySet="DisbursementGeneratedInterestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Funds" Association="FundsDBModel.FK_Disbursements_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Investments" Association="FundsDBModel.FK_Disbursements_Investments">
+            <End Role="Investment" EntitySet="Investments" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Sector" Association="FundsDBModel.FK_Disbursements_Sector">
+            <End Role="Sector" EntitySet="Sectors" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_Shipments" Association="FundsDBModel.FK_Disbursements_Shipments">
+            <End Role="Shipment" EntitySet="Shipments" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursements_UnderlyingDebtors" Association="FundsDBModel.FK_Disbursements_UnderlyingDebtors">
+            <End Role="UnderlyingDebtor" EntitySet="UnderlyingDebtors" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="DisbursementPaymentDetails" Association="FundsDBModel.DisbursementPaymentDetails">
+            <End Role="Disbursement" EntitySet="Disbursements" />
+            <End Role="DisbursementPayment" EntitySet="DisbursementPayments" />
+          </AssociationSet>
+          <EntitySet Name="DisbursementBookings" EntityType="FundsDBModel.DisbursementBooking" />
+          <AssociationSet Name="FK_DisbursementBooking_Currency" Association="FundsDBModel.FK_DisbursementBooking_Currency">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="DisbursementBooking" EntitySet="DisbursementBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementBooking_Disbursement" Association="FundsDBModel.FK_DisbursementBooking_Disbursement">
+            <End Role="Disbursement" EntitySet="Disbursements" />
+            <End Role="DisbursementBooking" EntitySet="DisbursementBookings" />
+          </AssociationSet>
+          <EntitySet Name="DisbursementBooks" EntityType="FundsDBModel.DisbursementBook" />
+          <AssociationSet Name="FK_DisbursementBooking_Book" Association="FundsDBModel.FK_DisbursementBooking_Book">
+            <End Role="DisbursementBook" EntitySet="DisbursementBooks" />
+            <End Role="DisbursementBooking" EntitySet="DisbursementBookings" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccountingMovement">
@@ -2103,9 +2191,9 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <NavigationProperty Name="Currency" Relationship="FundsDBModel.FK_AccountingMovements_Currencies" FromRole="AccountingMovement" ToRole="Currency" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_AccountingMovements_Funds" FromRole="AccountingMovement" ToRole="Fund" />
           <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_AccountingMovements" FromRole="AccountingMovement" ToRole="Movements_Accounts" />
-          <NavigationProperty Name="DisbursementGeneratedInterestDetails1" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_AccountingMovements" FromRole="AccountingMovement" ToRole="DisbursementGeneratedInterestDetail" />
           <NavigationProperty Name="DisbursementPayments" Relationship="FundsDBModel.FK_DisbursementPayments_AccountingMovements" FromRole="AccountingMovement" ToRole="DisbursementPayment" />
           <NavigationProperty Name="DisbursementCollections" Relationship="FundsDBModel.FK_DisbursementCollections_AccoutingMovements" FromRole="AccountingMovement" ToRole="DisbursementCollection" />
+          <NavigationProperty Name="DisbursementGeneratedInterestDetails" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_AccountingMovements" FromRole="AccountingMovement" ToRole="DisbursementGeneratedInterestDetail" />
         </EntityType>
         <EntityType Name="Account">
           <Key>
@@ -2216,8 +2304,8 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <NavigationProperty Name="UnderlyingDebtors" Relationship="FundsDBModel.debtor_bank_id" FromRole="Bank" ToRole="UnderlyingDebtor" />
           <NavigationProperty Name="Country" Relationship="FundsDBModel.FK_Banks_Countries" FromRole="Bank" ToRole="Country" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Banks_Funds" FromRole="Bank" ToRole="Fund" />
-          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Banks" FromRole="Bank" ToRole="Disbursement" />
           <NavigationProperty Name="letter_of_credits" Relationship="FundsDBModel.FK_letter_of_credits_Banks" FromRole="Bank" ToRole="letter_of_credits" />
+          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Banks" FromRole="Bank" ToRole="Disbursement" />
         </EntityType>
         <EntityType Name="Bond">
           <Key>
@@ -2300,6 +2388,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <NavigationProperty Name="BankingAccounts" Relationship="FundsDBModel.FK_BankingAccounts_Currencies" FromRole="Currency" ToRole="BankingAccount" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Currencies_Funds" FromRole="Currency" ToRole="Fund" />
           <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Currencies" FromRole="Currency" ToRole="Disbursement" />
+          <NavigationProperty Name="DisbursementBookings" Relationship="FundsDBModel.FK_DisbursementBooking_Currency" FromRole="Currency" ToRole="DisbursementBooking" />
         </EntityType>
         <EntityType Name="Disbursement_dates">
           <Key>
@@ -2311,20 +2400,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="disbursement_id" Type="Int32" Nullable="false" />
           <Property Name="fund_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Disbursement_dates_Funds" FromRole="Disbursement_dates" ToRole="Fund" />
-        </EntityType>
-        <EntityType Name="DisbursementGeneratedInterestDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="disbursement_generated_interest_id" Type="Int32" Nullable="false" />
-          <Property Name="disbursement_id" Type="Int32" Nullable="false" />
-          <Property Name="generated_interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="generated_interest_date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="DisbursementGeneratedInterest" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests" FromRole="DisbursementGeneratedInterestDetail" ToRole="DisbursementGeneratedInterest" />
-          <NavigationProperty Name="Disbursement" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_Disbursements" FromRole="DisbursementGeneratedInterestDetail" ToRole="Disbursement" />
-          <Property Name="accounting_movement_id" Type="Int32" />
-          <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_AccountingMovements" FromRole="DisbursementGeneratedInterestDetail" ToRole="AccountingMovement" />
         </EntityType>
         <EntityType Name="DisbursementGeneratedInterest">
           <Key>
@@ -2351,42 +2426,9 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="investment_id" Type="Int32" Nullable="false" />
           <Property Name="payment_date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Investment" Relationship="FundsDBModel.FK_DisbursementPayments_Investments" FromRole="DisbursementPayment" ToRole="Investment" />
-          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.DisbursementPaymentDetails" FromRole="DisbursementPayment" ToRole="Disbursement" />
           <Property Name="accounting_movement_id" Type="Int32" />
           <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_DisbursementPayments_AccountingMovements" FromRole="DisbursementPayment" ToRole="AccountingMovement" />
-        </EntityType>
-        <EntityType Name="Disbursement">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="investment_id" Type="Int32" Nullable="false" />
-          <Property Name="currency_id" Type="Int32" Nullable="false" />
-          <Property Name="exchange_rate" Type="Single" Nullable="false" />
-          <Property Name="client_id" Type="Int32" Nullable="false" />
-          <Property Name="underlying_debtor_id" Type="Int32" />
-          <Property Name="bank_risk_id" Type="Int32" />
-          <Property Name="profit_share" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="fund_id" Type="Int32" Nullable="false" />
-          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="sector_id" Type="Int32" Nullable="false" />
-          <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="collection_date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="pay_date" Type="DateTime" Precision="0" />
-          <Property Name="can_generate_interest" Type="Boolean" Nullable="false" />
-          <Property Name="shipment_id" Type="Int32" />
-          <NavigationProperty Name="Bank" Relationship="FundsDBModel.FK_Disbursements_Banks" FromRole="Disbursement" ToRole="Bank" />
-          <NavigationProperty Name="Client" Relationship="FundsDBModel.FK_Disbursements_Clients" FromRole="Disbursement" ToRole="Client" />
-          <NavigationProperty Name="Currency" Relationship="FundsDBModel.FK_Disbursements_Currencies" FromRole="Disbursement" ToRole="Currency" />
-          <NavigationProperty Name="DisbursementGeneratedInterestDetails" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_Disbursements" FromRole="Disbursement" ToRole="DisbursementGeneratedInterestDetail" />
-          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Disbursements_Funds" FromRole="Disbursement" ToRole="Fund" />
-          <NavigationProperty Name="Investment" Relationship="FundsDBModel.FK_Disbursements_Investments" FromRole="Disbursement" ToRole="Investment" />
-          <NavigationProperty Name="Sector" Relationship="FundsDBModel.FK_Disbursements_Sector" FromRole="Disbursement" ToRole="Sector" />
-          <NavigationProperty Name="Shipment" Relationship="FundsDBModel.FK_Disbursements_Shipments" FromRole="Disbursement" ToRole="Shipment" />
-          <NavigationProperty Name="UnderlyingDebtor" Relationship="FundsDBModel.FK_Disbursements_UnderlyingDebtors" FromRole="Disbursement" ToRole="UnderlyingDebtor" />
-          <NavigationProperty Name="DisbursementPayments" Relationship="FundsDBModel.DisbursementPaymentDetails" FromRole="Disbursement" ToRole="DisbursementPayment" />
-          <NavigationProperty Name="DisbursementCollectionsDetails" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement" FromRole="Disbursement" ToRole="DisbursementCollectionsDetail" />
+          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.DisbursementPaymentDetails" FromRole="DisbursementPayment" ToRole="Disbursement" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -2433,7 +2475,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <NavigationProperty Name="Creditors" Relationship="FundsDBModel.FK_Creditors_Funds" FromRole="Fund" ToRole="Creditor" />
           <NavigationProperty Name="Currencies" Relationship="FundsDBModel.FK_Currencies_Funds" FromRole="Fund" ToRole="Currency" />
           <NavigationProperty Name="Disbursement_dates" Relationship="FundsDBModel.FK_Disbursement_dates_Funds" FromRole="Fund" ToRole="Disbursement_dates" />
-          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Funds" FromRole="Fund" ToRole="Disbursement" />
           <NavigationProperty Name="Employees" Relationship="FundsDBModel.FK_Employees_Funds" FromRole="Fund" ToRole="Employee" />
           <NavigationProperty Name="Investments" Relationship="FundsDBModel.FK_Investments_Funds" FromRole="Fund" ToRole="Investment" />
           <NavigationProperty Name="Investors" Relationship="FundsDBModel.FK_Investors_Funds" FromRole="Fund" ToRole="Investor" />
@@ -2446,6 +2487,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <NavigationProperty Name="Shareholders" Relationship="FundsDBModel.FK_Shareholders_Funds" FromRole="Fund" ToRole="Shareholder" />
           <NavigationProperty Name="Subaccounts" Relationship="FundsDBModel.FK_Subaccounts_Funds" FromRole="Fund" ToRole="Subaccount" />
           <NavigationProperty Name="UnderlyingDebtors" Relationship="FundsDBModel.FK_UnderlyingDebtors_Funds" FromRole="Fund" ToRole="UnderlyingDebtor" />
+          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Funds" FromRole="Fund" ToRole="Disbursement" />
         </EntityType>
         <EntityType Name="Investment">
           <Key>
@@ -2459,9 +2501,9 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="fund_id" Type="Int32" Nullable="false" />
           <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DisbursementPayments" Relationship="FundsDBModel.FK_DisbursementPayments_Investments" FromRole="Investment" ToRole="DisbursementPayment" />
-          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Investments" FromRole="Investment" ToRole="Disbursement" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Investments_Funds" FromRole="Investment" ToRole="Fund" />
           <NavigationProperty Name="DisbursementCollections" Relationship="FundsDBModel.FK_DisbursementCollections_Investments" FromRole="Investment" ToRole="DisbursementCollection" />
+          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Investments" FromRole="Investment" ToRole="Disbursement" />
         </EntityType>
         <EntityType Name="InvestorBondInterest">
           <Key>
@@ -2566,8 +2608,8 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FK_Sectors_Funds" Type="Int32" Nullable="false" />
           <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Sector" FromRole="Sector" ToRole="Disbursement" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Sectors_Funds" FromRole="Sector" ToRole="Fund" />
+          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Sector" FromRole="Sector" ToRole="Disbursement" />
         </EntityType>
         <EntityType Name="Shareholder">
           <Key>
@@ -2587,8 +2629,8 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="LetterOfCreditId" Type="Int32" />
           <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Value" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Shipments" FromRole="Shipment" ToRole="Disbursement" />
           <NavigationProperty Name="letter_of_credits" Relationship="FundsDBModel.FK_Shipments_LetterOfCredits" FromRole="Shipment" ToRole="letter_of_credits" />
+          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Shipments" FromRole="Shipment" ToRole="Disbursement" />
         </EntityType>
         <EntityType Name="Subaccount">
           <Key>
@@ -2617,8 +2659,8 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Bank" Relationship="FundsDBModel.debtor_bank_id" FromRole="UnderlyingDebtor" ToRole="Bank" />
           <NavigationProperty Name="Country" Relationship="FundsDBModel.FK_UnderlyingDebtors_Countries" FromRole="UnderlyingDebtor" ToRole="Country" />
-          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_UnderlyingDebtors" FromRole="UnderlyingDebtor" ToRole="Disbursement" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_UnderlyingDebtors_Funds" FromRole="UnderlyingDebtor" ToRole="Fund" />
+          <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_UnderlyingDebtors" FromRole="UnderlyingDebtor" ToRole="Disbursement" />
         </EntityType>
         <Association Name="FK_AccountingMovements_Currencies">
           <End Type="FundsDBModel.Currency" Role="Currency" Multiplicity="1" />
@@ -2908,18 +2950,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Disbursements_Banks">
-          <End Type="FundsDBModel.Bank" Role="Bank" Multiplicity="0..1" />
-          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Bank">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Disbursement">
-              <PropertyRef Name="bank_risk_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_letter_of_credits_Banks">
           <End Type="FundsDBModel.Bank" Role="Bank" Multiplicity="1" />
           <End Type="FundsDBModel.letter_of_credits" Role="letter_of_credits" Multiplicity="*" />
@@ -3016,18 +3046,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Disbursements_Clients">
-          <End Type="FundsDBModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Disbursement">
-              <PropertyRef Name="client_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Countries_Funds">
           <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
           <End Type="FundsDBModel.Country" Role="Country" Multiplicity="*" />
@@ -3076,18 +3094,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Disbursements_Currencies">
-          <End Type="FundsDBModel.Currency" Role="Currency" Multiplicity="1" />
-          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Currency">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Disbursement">
-              <PropertyRef Name="currency_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Disbursement_dates_Funds">
           <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
           <End Type="FundsDBModel.Disbursement_dates" Role="Disbursement_dates" Multiplicity="*" />
@@ -3097,30 +3103,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Principal>
             <Dependent Role="Disbursement_dates">
               <PropertyRef Name="fund_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests">
-          <End Type="FundsDBModel.DisbursementGeneratedInterest" Role="DisbursementGeneratedInterest" Multiplicity="1" />
-          <End Type="FundsDBModel.DisbursementGeneratedInterestDetail" Role="DisbursementGeneratedInterestDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DisbursementGeneratedInterest">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DisbursementGeneratedInterestDetail">
-              <PropertyRef Name="disbursement_generated_interest_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DisbursementGeneratedInterestDetails_Disbursements">
-          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="1" />
-          <End Type="FundsDBModel.DisbursementGeneratedInterestDetail" Role="DisbursementGeneratedInterestDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Disbursement">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DisbursementGeneratedInterestDetail">
-              <PropertyRef Name="disbursement_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3145,66 +3127,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Principal>
             <Dependent Role="DisbursementPayment">
               <PropertyRef Name="investment_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Disbursements_Funds">
-          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
-          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Fund">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Disbursement">
-              <PropertyRef Name="fund_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Disbursements_Investments">
-          <End Type="FundsDBModel.Investment" Role="Investment" Multiplicity="1" />
-          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Investment">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Disbursement">
-              <PropertyRef Name="investment_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Disbursements_Sector">
-          <End Type="FundsDBModel.Sector" Role="Sector" Multiplicity="1" />
-          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sector">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Disbursement">
-              <PropertyRef Name="sector_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Disbursements_Shipments">
-          <End Type="FundsDBModel.Shipment" Role="Shipment" Multiplicity="0..1" />
-          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Shipment">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Disbursement">
-              <PropertyRef Name="shipment_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Disbursements_UnderlyingDebtors">
-          <End Type="FundsDBModel.UnderlyingDebtor" Role="UnderlyingDebtor" Multiplicity="0..1" />
-          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UnderlyingDebtor">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Disbursement">
-              <PropertyRef Name="underlying_debtor_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3400,10 +3322,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="DisbursementPaymentDetails">
-          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
-          <End Type="FundsDBModel.DisbursementPayment" Role="DisbursementPayment" Multiplicity="*" />
-        </Association>
         <EntityType Name="ProfitShareToAccrue">
           <Key>
             <PropertyRef Name="Id" />
@@ -3464,18 +3382,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DisbursementGeneratedInterestDetails_AccountingMovements">
-          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="0..1" />
-          <End Type="FundsDBModel.DisbursementGeneratedInterestDetail" Role="DisbursementGeneratedInterestDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccountingMovement">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DisbursementGeneratedInterestDetail">
-              <PropertyRef Name="accounting_movement_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DisbursementPayments_AccountingMovements">
           <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="0..1" />
           <End Type="FundsDBModel.DisbursementPayment" Role="DisbursementPayment" Multiplicity="*" />
@@ -3512,10 +3418,10 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="movement128_id" Type="Int32" />
           <Property Name="movement130_id" Type="Int32" />
           <NavigationProperty Name="DisbursementCollection" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_DisbursementCollection" FromRole="DisbursementCollectionsDetail" ToRole="DisbursementCollection" />
-          <NavigationProperty Name="Disbursement" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement" FromRole="DisbursementCollectionsDetail" ToRole="Disbursement" />
           <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
           <NavigationProperty Name="Movements_Accounts1" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov128" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
           <NavigationProperty Name="Movements_Accounts2" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
+          <NavigationProperty Name="Disbursement" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement" FromRole="DisbursementCollectionsDetail" ToRole="Disbursement" />
         </EntityType>
         <Association Name="FK_DisbursementCollectionsDetails_DisbursementCollection">
           <End Type="FundsDBModel.DisbursementCollection" Role="DisbursementCollection" Multiplicity="1" />
@@ -3526,18 +3432,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Principal>
             <Dependent Role="DisbursementCollectionsDetail">
               <PropertyRef Name="disbursement_collection_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DisbursementCollectionsDetails_Disbursement">
-          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="1" />
-          <End Type="FundsDBModel.DisbursementCollectionsDetail" Role="DisbursementCollectionsDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Disbursement">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DisbursementCollectionsDetail">
-              <PropertyRef Name="disbursement_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3574,6 +3468,266 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Principal>
             <Dependent Role="DisbursementCollectionsDetail">
               <PropertyRef Name="movement130_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DisbursementGeneratedInterestDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="disbursement_generated_interest_id" Type="Int32" Nullable="false" />
+          <Property Name="disbursement_id" Type="Int32" Nullable="false" />
+          <Property Name="generated_interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="generated_interest_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="accounting_movement_id" Type="Int32" />
+          <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_AccountingMovements" FromRole="DisbursementGeneratedInterestDetail" ToRole="AccountingMovement" />
+          <NavigationProperty Name="DisbursementGeneratedInterest" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests" FromRole="DisbursementGeneratedInterestDetail" ToRole="DisbursementGeneratedInterest" />
+          <NavigationProperty Name="Disbursement" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_Disbursements" FromRole="DisbursementGeneratedInterestDetail" ToRole="Disbursement" />
+        </EntityType>
+        <EntityType Name="Disbursement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="investment_id" Type="Int32" Nullable="false" />
+          <Property Name="currency_id" Type="Int32" Nullable="false" />
+          <Property Name="exchange_rate" Type="Single" Nullable="false" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="underlying_debtor_id" Type="Int32" />
+          <Property Name="bank_risk_id" Type="Int32" />
+          <Property Name="profit_share" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="fund_id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="sector_id" Type="Int32" Nullable="false" />
+          <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="collection_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pay_date" Type="DateTime" Precision="0" />
+          <Property Name="can_generate_interest" Type="Boolean" Nullable="false" />
+          <Property Name="shipment_id" Type="Int32" />
+          <Property Name="collected" Type="Boolean" />
+          <NavigationProperty Name="Bank" Relationship="FundsDBModel.FK_Disbursements_Banks" FromRole="Disbursement" ToRole="Bank" />
+          <NavigationProperty Name="Client" Relationship="FundsDBModel.FK_Disbursements_Clients" FromRole="Disbursement" ToRole="Client" />
+          <NavigationProperty Name="Currency" Relationship="FundsDBModel.FK_Disbursements_Currencies" FromRole="Disbursement" ToRole="Currency" />
+          <NavigationProperty Name="DisbursementCollectionsDetails" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement" FromRole="Disbursement" ToRole="DisbursementCollectionsDetail" />
+          <NavigationProperty Name="DisbursementGeneratedInterestDetails" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_Disbursements" FromRole="Disbursement" ToRole="DisbursementGeneratedInterestDetail" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Disbursements_Funds" FromRole="Disbursement" ToRole="Fund" />
+          <NavigationProperty Name="Investment" Relationship="FundsDBModel.FK_Disbursements_Investments" FromRole="Disbursement" ToRole="Investment" />
+          <NavigationProperty Name="Sector" Relationship="FundsDBModel.FK_Disbursements_Sector" FromRole="Disbursement" ToRole="Sector" />
+          <NavigationProperty Name="Shipment" Relationship="FundsDBModel.FK_Disbursements_Shipments" FromRole="Disbursement" ToRole="Shipment" />
+          <NavigationProperty Name="UnderlyingDebtor" Relationship="FundsDBModel.FK_Disbursements_UnderlyingDebtors" FromRole="Disbursement" ToRole="UnderlyingDebtor" />
+          <NavigationProperty Name="DisbursementPayments" Relationship="FundsDBModel.DisbursementPaymentDetails" FromRole="Disbursement" ToRole="DisbursementPayment" />
+          <NavigationProperty Name="DisbursementBookings" Relationship="FundsDBModel.FK_DisbursementBooking_Disbursement" FromRole="Disbursement" ToRole="DisbursementBooking" />
+        </EntityType>
+        <Association Name="FK_DisbursementGeneratedInterestDetails_AccountingMovements">
+          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="0..1" />
+          <End Type="FundsDBModel.DisbursementGeneratedInterestDetail" Role="DisbursementGeneratedInterestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingMovement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementGeneratedInterestDetail">
+              <PropertyRef Name="accounting_movement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Banks">
+          <End Type="FundsDBModel.Bank" Role="Bank" Multiplicity="0..1" />
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="bank_risk_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Clients">
+          <End Type="FundsDBModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Currencies">
+          <End Type="FundsDBModel.Currency" Role="Currency" Multiplicity="1" />
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementCollectionsDetails_Disbursement">
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="1" />
+          <End Type="FundsDBModel.DisbursementCollectionsDetail" Role="DisbursementCollectionsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disbursement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementCollectionsDetail">
+              <PropertyRef Name="disbursement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests">
+          <End Type="FundsDBModel.DisbursementGeneratedInterest" Role="DisbursementGeneratedInterest" Multiplicity="1" />
+          <End Type="FundsDBModel.DisbursementGeneratedInterestDetail" Role="DisbursementGeneratedInterestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DisbursementGeneratedInterest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementGeneratedInterestDetail">
+              <PropertyRef Name="disbursement_generated_interest_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementGeneratedInterestDetails_Disbursements">
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="1" />
+          <End Type="FundsDBModel.DisbursementGeneratedInterestDetail" Role="DisbursementGeneratedInterestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disbursement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementGeneratedInterestDetail">
+              <PropertyRef Name="disbursement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="fund_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Investments">
+          <End Type="FundsDBModel.Investment" Role="Investment" Multiplicity="1" />
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Investment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="investment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Sector">
+          <End Type="FundsDBModel.Sector" Role="Sector" Multiplicity="1" />
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="sector_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_Shipments">
+          <End Type="FundsDBModel.Shipment" Role="Shipment" Multiplicity="0..1" />
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="shipment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursements_UnderlyingDebtors">
+          <End Type="FundsDBModel.UnderlyingDebtor" Role="UnderlyingDebtor" Multiplicity="0..1" />
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnderlyingDebtor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="underlying_debtor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DisbursementPaymentDetails">
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <End Type="FundsDBModel.DisbursementPayment" Role="DisbursementPayment" Multiplicity="*" />
+        </Association>
+        <EntityType Name="DisbursementBooking">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="book_id" Type="Int32" Nullable="false" />
+          <Property Name="disbursement_id" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="currency_id" Type="Int32" Nullable="false" />
+          <Property Name="profit_share" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="delay_interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="starting_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="collection_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="exchange_rate" Type="Single" Nullable="false" />
+          <NavigationProperty Name="Currency" Relationship="FundsDBModel.FK_DisbursementBooking_Currency" FromRole="DisbursementBooking" ToRole="Currency" />
+          <NavigationProperty Name="Disbursement" Relationship="FundsDBModel.FK_DisbursementBooking_Disbursement" FromRole="DisbursementBooking" ToRole="Disbursement" />
+          <NavigationProperty Name="DisbursementBook" Relationship="FundsDBModel.FK_DisbursementBooking_Book" FromRole="DisbursementBooking" ToRole="DisbursementBook" />
+        </EntityType>
+        <Association Name="FK_DisbursementBooking_Currency">
+          <End Type="FundsDBModel.Currency" Role="Currency" Multiplicity="1" />
+          <End Type="FundsDBModel.DisbursementBooking" Role="DisbursementBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementBooking">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementBooking_Disbursement">
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="1" />
+          <End Type="FundsDBModel.DisbursementBooking" Role="DisbursementBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disbursement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementBooking">
+              <PropertyRef Name="disbursement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DisbursementBook">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="DisbursementBookings" Relationship="FundsDBModel.FK_DisbursementBooking_Book" FromRole="DisbursementBook" ToRole="DisbursementBooking" />
+        </EntityType>
+        <Association Name="FK_DisbursementBooking_Book">
+          <End Type="FundsDBModel.DisbursementBook" Role="DisbursementBook" Multiplicity="1" />
+          <End Type="FundsDBModel.DisbursementBooking" Role="DisbursementBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DisbursementBook">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementBooking">
+              <PropertyRef Name="book_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3767,18 +3921,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DisbursementGeneratedInterestDetails">
-            <EntityTypeMapping TypeName="FundsDBModel.DisbursementGeneratedInterestDetail">
-              <MappingFragment StoreEntitySet="DisbursementGeneratedInterestDetails">
-                <ScalarProperty Name="accounting_movement_id" ColumnName="accounting_movement_id" />
-                <ScalarProperty Name="generated_interest_date" ColumnName="generated_interest_date" />
-                <ScalarProperty Name="generated_interest" ColumnName="generated_interest" />
-                <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
-                <ScalarProperty Name="disbursement_generated_interest_id" ColumnName="disbursement_generated_interest_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DisbursementGeneratedInterests">
             <EntityTypeMapping TypeName="FundsDBModel.DisbursementGeneratedInterest">
               <MappingFragment StoreEntitySet="DisbursementGeneratedInterests">
@@ -3802,29 +3944,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
                 <ScalarProperty Name="payment_date" ColumnName="payment_date" />
                 <ScalarProperty Name="investment_id" ColumnName="investment_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Disbursements">
-            <EntityTypeMapping TypeName="FundsDBModel.Disbursement">
-              <MappingFragment StoreEntitySet="Disbursements">
-                <ScalarProperty Name="shipment_id" ColumnName="shipment_id" />
-                <ScalarProperty Name="can_generate_interest" ColumnName="can_generate_interest" />
-                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
-                <ScalarProperty Name="collection_date" ColumnName="collection_date" />
-                <ScalarProperty Name="number" ColumnName="number" />
-                <ScalarProperty Name="sector_id" ColumnName="sector_id" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="profit_share" ColumnName="profit_share" />
-                <ScalarProperty Name="bank_risk_id" ColumnName="bank_risk_id" />
-                <ScalarProperty Name="underlying_debtor_id" ColumnName="underlying_debtor_id" />
-                <ScalarProperty Name="client_id" ColumnName="client_id" />
-                <ScalarProperty Name="exchange_rate" ColumnName="exchange_rate" />
-                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
-                <ScalarProperty Name="investment_id" ColumnName="investment_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4009,14 +4128,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="DisbursementPaymentDetails" TypeName="FundsDBModel.DisbursementPaymentDetails" StoreEntitySet="DisbursementPaymentDetails">
-            <EndProperty Name="DisbursementPayment">
-              <ScalarProperty Name="id" ColumnName="disbursement_payment_id" />
-            </EndProperty>
-            <EndProperty Name="Disbursement">
-              <ScalarProperty Name="Id" ColumnName="disbursement_id" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="ProfitShareToAccrues">
             <EntityTypeMapping TypeName="FundsDBModel.ProfitShareToAccrue">
               <MappingFragment StoreEntitySet="ProfitShareToAccrue">
@@ -4060,6 +4171,75 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
                 <ScalarProperty Name="amount_collected" ColumnName="amount_collected" />
                 <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
                 <ScalarProperty Name="disbursement_collection_id" ColumnName="disbursement_collection_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DisbursementGeneratedInterestDetails">
+            <EntityTypeMapping TypeName="FundsDBModel.DisbursementGeneratedInterestDetail">
+              <MappingFragment StoreEntitySet="DisbursementGeneratedInterestDetails">
+                <ScalarProperty Name="accounting_movement_id" ColumnName="accounting_movement_id" />
+                <ScalarProperty Name="generated_interest_date" ColumnName="generated_interest_date" />
+                <ScalarProperty Name="generated_interest" ColumnName="generated_interest" />
+                <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
+                <ScalarProperty Name="disbursement_generated_interest_id" ColumnName="disbursement_generated_interest_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Disbursements">
+            <EntityTypeMapping TypeName="FundsDBModel.Disbursement">
+              <MappingFragment StoreEntitySet="Disbursements">
+                <ScalarProperty Name="collected" ColumnName="collected" />
+                <ScalarProperty Name="shipment_id" ColumnName="shipment_id" />
+                <ScalarProperty Name="can_generate_interest" ColumnName="can_generate_interest" />
+                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
+                <ScalarProperty Name="collection_date" ColumnName="collection_date" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="sector_id" ColumnName="sector_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="profit_share" ColumnName="profit_share" />
+                <ScalarProperty Name="bank_risk_id" ColumnName="bank_risk_id" />
+                <ScalarProperty Name="underlying_debtor_id" ColumnName="underlying_debtor_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="exchange_rate" ColumnName="exchange_rate" />
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+                <ScalarProperty Name="investment_id" ColumnName="investment_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="DisbursementPaymentDetails" TypeName="FundsDBModel.DisbursementPaymentDetails" StoreEntitySet="DisbursementPaymentDetails">
+            <EndProperty Name="DisbursementPayment">
+              <ScalarProperty Name="id" ColumnName="disbursement_payment_id" />
+            </EndProperty>
+            <EndProperty Name="Disbursement">
+              <ScalarProperty Name="Id" ColumnName="disbursement_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="DisbursementBookings">
+            <EntityTypeMapping TypeName="FundsDBModel.DisbursementBooking">
+              <MappingFragment StoreEntitySet="DisbursementBooking">
+                <ScalarProperty Name="exchange_rate" ColumnName="exchange_rate" />
+                <ScalarProperty Name="collection_date" ColumnName="collection_date" />
+                <ScalarProperty Name="starting_date" ColumnName="starting_date" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="delay_interest" ColumnName="delay_interest" />
+                <ScalarProperty Name="profit_share" ColumnName="profit_share" />
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
+                <ScalarProperty Name="book_id" ColumnName="book_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DisbursementBooks">
+            <EntityTypeMapping TypeName="FundsDBModel.DisbursementBook">
+              <MappingFragment StoreEntitySet="DisbursementBooks">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

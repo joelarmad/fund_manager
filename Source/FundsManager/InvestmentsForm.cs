@@ -19,8 +19,8 @@ namespace FundsManager
         public bool EditingExistingInvestment = false;
         public Investment InvestmenToEdit = null;
 
-        private Double disbursement;
-        private Double profit;
+        private decimal disbursement;
+        private decimal profit;
 
         //private List<DisbursementForInvestement> disbursements;
         private List<Disbursement> disbursements;
@@ -47,8 +47,6 @@ namespace FundsManager
 
                 manager = MyFundsManager.SingletonInstance;
                 InitializeComponent();
-
-                cbCurrency.SelectedValueChanged += getExchangeRate;
             }
             catch (Exception _ex)
             {
@@ -117,34 +115,6 @@ namespace FundsManager
             }
         }
 
-        private void textBox1_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                Double value;
-                if (Double.TryParse(txtAmount.Text, out value))
-                    disbursement = value;
-            }
-            catch (Exception _ex)
-            {
-                Console.WriteLine("Error in InvestmentsForm.textBox1_Leave: " + _ex.Message);
-            }
-        }
-
-        private void textBox3_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                Double value;
-                if (Double.TryParse(txtProfitShare.Text, out value))
-                    profit = value;
-            }
-            catch (Exception _ex)
-            {
-                Console.WriteLine("Error in InvestmentsForm.textBox3_Leave: " + _ex.Message);
-            }
-        }
-
         private void calculate_total_collection()
         {
             try
@@ -168,29 +138,6 @@ namespace FundsManager
             catch (Exception _ex)
             {
                 Console.WriteLine("Error in InvestmentsForm.calculate_total_collection: " + _ex.Message);
-            }
-        }
-
-        private void getExchangeRate(object sender, EventArgs e)
-        {
-            try
-            {
-                Double value = 0;
-
-                if (disbursement > 0 && profit > 0 && double.TryParse(txtExchangeRate.Text, out value))
-                {
-                    value = Math.Round((disbursement + profit) / value, 2);
-                    
-                    txtTotalToBeCollected.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", value);
-                }
-                else
-                {
-                    txtTotalToBeCollected.Text = "0.00";
-                }
-            }
-            catch (Exception _ex)
-            {
-                Console.WriteLine("Error in InvestmentsForm.getExchangeRate: " + _ex.Message);
             }
         }
 
@@ -832,6 +779,8 @@ namespace FundsManager
         {
             try
             {
+                    
+
                 decimal _result = 0;
                 if (!decimal.TryParse(txtAmount.Text, out _result) || _result <= 0)
                 {
@@ -839,6 +788,7 @@ namespace FundsManager
                 }
                 else
                 {
+                    disbursement = _result;
                     txtAmount.Text = String.Format("{0:0.00}", _result);
                 }
 
@@ -922,6 +872,7 @@ namespace FundsManager
                 }
                 else
                 {
+                    profit = _result;
                     txtProfitShare.Text = String.Format("{0:0.00}", _result);
                 }
 
@@ -1135,6 +1086,8 @@ namespace FundsManager
                     {
                         _disbursement.ItemsIds.Add(_itemId);
                     }
+
+                    _disbursement.collected = false;
 
                     return _disbursement;
                 }

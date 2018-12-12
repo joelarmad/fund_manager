@@ -28,22 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbShipment = new System.Windows.Forms.ComboBox();
+            this.components = new System.ComponentModel.Container();
             this.label15 = new System.Windows.Forms.Label();
-            this.cbLetterOfCredit = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.dtpCollectionDate = new System.Windows.Forms.DateTimePicker();
-            this.txtContract = new System.Windows.Forms.TextBox();
             this.lblContractPrefix = new System.Windows.Forms.Label();
             this.txtDelayInterest = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.cmdDeleteItem = new System.Windows.Forms.Button();
             this.cmdBook = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
-            this.dtpDisbursementDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpStartingDate = new System.Windows.Forms.DateTimePicker();
             this.cmdDeleteBooking = new System.Windows.Forms.Button();
-            this.lvDisbursements = new System.Windows.Forms.ListView();
+            this.lvBooking = new System.Windows.Forms.ListView();
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -54,62 +51,49 @@
             this.txtTotalToBeCollected = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.lbISelectedItems = new System.Windows.Forms.ListBox();
-            this.cmdAddItem = new System.Windows.Forms.Button();
-            this.cbItems = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cbSector = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtProfitShare = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.cbBank = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.cbUnderlyingDebtor = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.cbClient = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtExchangeRate = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cbCurrency = new System.Windows.Forms.ComboBox();
+            this.currenciesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.label2 = new System.Windows.Forms.Label();
             this.txtAmount = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNumber = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.lblContract = new System.Windows.Forms.Label();
+            this.lblClient = new System.Windows.Forms.Label();
+            this.lblUnderLayingDebtor = new System.Windows.Forms.Label();
+            this.lblUnderlayingBank = new System.Windows.Forms.Label();
+            this.lblLetterOfCredit = new System.Windows.Forms.Label();
+            this.lblShipment = new System.Windows.Forms.Label();
+            this.lblSector = new System.Windows.Forms.Label();
+            this.currenciesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CurrenciesTableAdapter();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cmdCancel = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             this.SuspendLayout();
-            // 
-            // cbShipment
-            // 
-            this.cbShipment.DisplayMember = "Number";
-            this.cbShipment.FormattingEnabled = true;
-            this.cbShipment.Location = new System.Drawing.Point(351, 192);
-            this.cbShipment.Name = "cbShipment";
-            this.cbShipment.Size = new System.Drawing.Size(121, 21);
-            this.cbShipment.TabIndex = 273;
-            this.cbShipment.ValueMember = "Id";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(289, 196);
+            this.label15.Location = new System.Drawing.Point(289, 192);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(54, 13);
             this.label15.TabIndex = 274;
             this.label15.Text = "Shipment:";
             // 
-            // cbLetterOfCredit
-            // 
-            this.cbLetterOfCredit.DisplayMember = "Reference";
-            this.cbLetterOfCredit.FormattingEnabled = true;
-            this.cbLetterOfCredit.Location = new System.Drawing.Point(351, 157);
-            this.cbLetterOfCredit.Name = "cbLetterOfCredit";
-            this.cbLetterOfCredit.Size = new System.Drawing.Size(121, 21);
-            this.cbLetterOfCredit.TabIndex = 271;
-            this.cbLetterOfCredit.ValueMember = "Id";
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(264, 161);
+            this.label14.Location = new System.Drawing.Point(264, 158);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(79, 13);
             this.label14.TabIndex = 272;
@@ -130,13 +114,6 @@
             this.dtpCollectionDate.Name = "dtpCollectionDate";
             this.dtpCollectionDate.Size = new System.Drawing.Size(200, 20);
             this.dtpCollectionDate.TabIndex = 257;
-            // 
-            // txtContract
-            // 
-            this.txtContract.Location = new System.Drawing.Point(351, 18);
-            this.txtContract.Name = "txtContract";
-            this.txtContract.Size = new System.Drawing.Size(121, 20);
-            this.txtContract.TabIndex = 245;
             // 
             // lblContractPrefix
             // 
@@ -165,16 +142,6 @@
             this.label12.TabIndex = 266;
             this.label12.Text = "Delay Interest:";
             // 
-            // cmdDeleteItem
-            // 
-            this.cmdDeleteItem.Enabled = false;
-            this.cmdDeleteItem.Location = new System.Drawing.Point(725, 57);
-            this.cmdDeleteItem.Name = "cmdDeleteItem";
-            this.cmdDeleteItem.Size = new System.Drawing.Size(75, 23);
-            this.cmdDeleteItem.TabIndex = 265;
-            this.cmdDeleteItem.Text = "Delete Item";
-            this.cmdDeleteItem.UseVisualStyleBackColor = true;
-            // 
             // cmdBook
             // 
             this.cmdBook.Enabled = false;
@@ -184,6 +151,7 @@
             this.cmdBook.TabIndex = 264;
             this.cmdBook.Text = "Book";
             this.cmdBook.UseVisualStyleBackColor = true;
+            this.cmdBook.Click += new System.EventHandler(this.cmdBook_Click);
             // 
             // label11
             // 
@@ -194,12 +162,12 @@
             this.label11.TabIndex = 263;
             this.label11.Text = "Starting Date:";
             // 
-            // dtpDisbursementDate
+            // dtpStartingDate
             // 
-            this.dtpDisbursementDate.Location = new System.Drawing.Point(589, 165);
-            this.dtpDisbursementDate.Name = "dtpDisbursementDate";
-            this.dtpDisbursementDate.Size = new System.Drawing.Size(200, 20);
-            this.dtpDisbursementDate.TabIndex = 255;
+            this.dtpStartingDate.Location = new System.Drawing.Point(589, 165);
+            this.dtpStartingDate.Name = "dtpStartingDate";
+            this.dtpStartingDate.Size = new System.Drawing.Size(200, 20);
+            this.dtpStartingDate.TabIndex = 255;
             // 
             // cmdDeleteBooking
             // 
@@ -210,23 +178,25 @@
             this.cmdDeleteBooking.TabIndex = 262;
             this.cmdDeleteBooking.Text = "Delete";
             this.cmdDeleteBooking.UseVisualStyleBackColor = true;
+            this.cmdDeleteBooking.Click += new System.EventHandler(this.cmdDeleteBooking_Click);
             // 
-            // lvDisbursements
+            // lvBooking
             // 
-            this.lvDisbursements.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvBooking.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader9,
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
-            this.lvDisbursements.Location = new System.Drawing.Point(15, 263);
-            this.lvDisbursements.MultiSelect = false;
-            this.lvDisbursements.Name = "lvDisbursements";
-            this.lvDisbursements.Size = new System.Drawing.Size(784, 270);
-            this.lvDisbursements.TabIndex = 270;
-            this.lvDisbursements.UseCompatibleStateImageBehavior = false;
-            this.lvDisbursements.View = System.Windows.Forms.View.Details;
+            this.lvBooking.Location = new System.Drawing.Point(15, 263);
+            this.lvBooking.MultiSelect = false;
+            this.lvBooking.Name = "lvBooking";
+            this.lvBooking.Size = new System.Drawing.Size(784, 270);
+            this.lvBooking.TabIndex = 270;
+            this.lvBooking.UseCompatibleStateImageBehavior = false;
+            this.lvBooking.View = System.Windows.Forms.View.Details;
+            this.lvBooking.SelectedIndexChanged += new System.EventHandler(this.lvBooking_SelectedIndexChanged);
             // 
             // columnHeader9
             // 
@@ -272,6 +242,7 @@
             this.cmdAddBooking.TabIndex = 258;
             this.cmdAddBooking.Text = "Add Booking";
             this.cmdAddBooking.UseVisualStyleBackColor = true;
+            this.cmdAddBooking.Click += new System.EventHandler(this.cmdAddBooking_Click);
             // 
             // txtTotalToBeCollected
             // 
@@ -294,48 +265,10 @@
             // lbISelectedItems
             // 
             this.lbISelectedItems.FormattingEnabled = true;
-            this.lbISelectedItems.Location = new System.Drawing.Point(589, 57);
+            this.lbISelectedItems.Location = new System.Drawing.Point(589, 44);
             this.lbISelectedItems.Name = "lbISelectedItems";
-            this.lbISelectedItems.Size = new System.Drawing.Size(120, 95);
+            this.lbISelectedItems.Size = new System.Drawing.Size(120, 108);
             this.lbISelectedItems.TabIndex = 269;
-            // 
-            // cmdAddItem
-            // 
-            this.cmdAddItem.Location = new System.Drawing.Point(725, 16);
-            this.cmdAddItem.Name = "cmdAddItem";
-            this.cmdAddItem.Size = new System.Drawing.Size(75, 23);
-            this.cmdAddItem.TabIndex = 254;
-            this.cmdAddItem.Text = "Add Item";
-            this.cmdAddItem.UseVisualStyleBackColor = true;
-            // 
-            // cbItems
-            // 
-            this.cbItems.DisplayMember = "name";
-            this.cbItems.FormattingEnabled = true;
-            this.cbItems.Location = new System.Drawing.Point(589, 18);
-            this.cbItems.Name = "cbItems";
-            this.cbItems.Size = new System.Drawing.Size(121, 21);
-            this.cbItems.TabIndex = 252;
-            this.cbItems.ValueMember = "Id";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(548, 22);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(35, 13);
-            this.label9.TabIndex = 259;
-            this.label9.Text = "Items:";
-            // 
-            // cbSector
-            // 
-            this.cbSector.DisplayMember = "name";
-            this.cbSector.FormattingEnabled = true;
-            this.cbSector.Location = new System.Drawing.Point(351, 227);
-            this.cbSector.Name = "cbSector";
-            this.cbSector.Size = new System.Drawing.Size(121, 21);
-            this.cbSector.TabIndex = 251;
-            this.cbSector.ValueMember = "Id";
             // 
             // label8
             // 
@@ -353,6 +286,10 @@
             this.txtProfitShare.Size = new System.Drawing.Size(121, 20);
             this.txtProfitShare.TabIndex = 242;
             this.txtProfitShare.Text = "0.00";
+            this.txtProfitShare.Click += new System.EventHandler(this.txtProfitShare_Click);
+            this.txtProfitShare.TextChanged += new System.EventHandler(this.txtProfitShare_TextChanged);
+            this.txtProfitShare.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtProfitShare_KeyUp);
+            this.txtProfitShare.Leave += new System.EventHandler(this.txtProfitShare_Leave);
             // 
             // label7
             // 
@@ -363,53 +300,23 @@
             this.label7.TabIndex = 253;
             this.label7.Text = "Profit Share:";
             // 
-            // cbBank
-            // 
-            this.cbBank.DisplayMember = "name";
-            this.cbBank.FormattingEnabled = true;
-            this.cbBank.Location = new System.Drawing.Point(351, 122);
-            this.cbBank.Name = "cbBank";
-            this.cbBank.Size = new System.Drawing.Size(121, 21);
-            this.cbBank.TabIndex = 249;
-            this.cbBank.ValueMember = "Id";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(256, 126);
+            this.label6.Location = new System.Drawing.Point(256, 124);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 13);
             this.label6.TabIndex = 250;
             this.label6.Text = "Underlying Bank:";
             // 
-            // cbUnderlyingDebtor
-            // 
-            this.cbUnderlyingDebtor.DisplayMember = "name";
-            this.cbUnderlyingDebtor.FormattingEnabled = true;
-            this.cbUnderlyingDebtor.Location = new System.Drawing.Point(351, 87);
-            this.cbUnderlyingDebtor.Name = "cbUnderlyingDebtor";
-            this.cbUnderlyingDebtor.Size = new System.Drawing.Size(121, 21);
-            this.cbUnderlyingDebtor.TabIndex = 247;
-            this.cbUnderlyingDebtor.ValueMember = "Id";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(249, 91);
+            this.label5.Location = new System.Drawing.Point(249, 90);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(95, 13);
             this.label5.TabIndex = 248;
             this.label5.Text = "Underlying Debtor:";
-            // 
-            // cbClient
-            // 
-            this.cbClient.DisplayMember = "name";
-            this.cbClient.FormattingEnabled = true;
-            this.cbClient.Location = new System.Drawing.Point(351, 52);
-            this.cbClient.Name = "cbClient";
-            this.cbClient.Size = new System.Drawing.Size(121, 21);
-            this.cbClient.TabIndex = 246;
-            this.cbClient.ValueMember = "Id";
             // 
             // label4
             // 
@@ -427,6 +334,9 @@
             this.txtExchangeRate.Size = new System.Drawing.Size(121, 20);
             this.txtExchangeRate.TabIndex = 240;
             this.txtExchangeRate.Text = "1.0000000";
+            this.txtExchangeRate.Click += new System.EventHandler(this.txtExchangeRate_Click);
+            this.txtExchangeRate.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtExchangeRate_KeyUp);
+            this.txtExchangeRate.Leave += new System.EventHandler(this.txtExchangeRate_Leave);
             // 
             // label3
             // 
@@ -439,6 +349,7 @@
             // 
             // cbCurrency
             // 
+            this.cbCurrency.DataSource = this.currenciesBindingSource;
             this.cbCurrency.DisplayMember = "name";
             this.cbCurrency.FormattingEnabled = true;
             this.cbCurrency.Location = new System.Drawing.Point(97, 53);
@@ -446,6 +357,18 @@
             this.cbCurrency.Size = new System.Drawing.Size(121, 21);
             this.cbCurrency.TabIndex = 239;
             this.cbCurrency.ValueMember = "Id";
+            this.cbCurrency.SelectedIndexChanged += new System.EventHandler(this.cbCurrency_SelectedIndexChanged);
+            this.cbCurrency.Leave += new System.EventHandler(this.cbCurrency_Leave);
+            // 
+            // currenciesBindingSource
+            // 
+            this.currenciesBindingSource.DataMember = "Currencies";
+            this.currenciesBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // fundsDBDataSet
+            // 
+            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
+            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label2
             // 
@@ -463,6 +386,10 @@
             this.txtAmount.Size = new System.Drawing.Size(121, 20);
             this.txtAmount.TabIndex = 237;
             this.txtAmount.Text = "0";
+            this.txtAmount.Click += new System.EventHandler(this.txtAmount_Click);
+            this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
+            this.txtAmount.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAmount_KeyUp);
+            this.txtAmount.Leave += new System.EventHandler(this.txtAmount_Leave);
             // 
             // label1
             // 
@@ -479,6 +406,8 @@
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Size = new System.Drawing.Size(121, 20);
             this.txtNumber.TabIndex = 276;
+            this.txtNumber.TextChanged += new System.EventHandler(this.txtNumber_TextChanged);
+            this.txtNumber.Leave += new System.EventHandler(this.txtNumber_Leave);
             // 
             // label16
             // 
@@ -489,45 +418,123 @@
             this.label16.TabIndex = 277;
             this.label16.Text = "Number:";
             // 
+            // lblContract
+            // 
+            this.lblContract.AutoSize = true;
+            this.lblContract.Location = new System.Drawing.Point(351, 22);
+            this.lblContract.Name = "lblContract";
+            this.lblContract.Size = new System.Drawing.Size(0, 13);
+            this.lblContract.TabIndex = 278;
+            // 
+            // lblClient
+            // 
+            this.lblClient.AutoSize = true;
+            this.lblClient.Location = new System.Drawing.Point(351, 56);
+            this.lblClient.Name = "lblClient";
+            this.lblClient.Size = new System.Drawing.Size(0, 13);
+            this.lblClient.TabIndex = 279;
+            // 
+            // lblUnderLayingDebtor
+            // 
+            this.lblUnderLayingDebtor.AutoSize = true;
+            this.lblUnderLayingDebtor.Location = new System.Drawing.Point(351, 90);
+            this.lblUnderLayingDebtor.Name = "lblUnderLayingDebtor";
+            this.lblUnderLayingDebtor.Size = new System.Drawing.Size(0, 13);
+            this.lblUnderLayingDebtor.TabIndex = 280;
+            // 
+            // lblUnderlayingBank
+            // 
+            this.lblUnderlayingBank.AutoSize = true;
+            this.lblUnderlayingBank.Location = new System.Drawing.Point(351, 124);
+            this.lblUnderlayingBank.Name = "lblUnderlayingBank";
+            this.lblUnderlayingBank.Size = new System.Drawing.Size(0, 13);
+            this.lblUnderlayingBank.TabIndex = 281;
+            // 
+            // lblLetterOfCredit
+            // 
+            this.lblLetterOfCredit.AutoSize = true;
+            this.lblLetterOfCredit.Location = new System.Drawing.Point(351, 158);
+            this.lblLetterOfCredit.Name = "lblLetterOfCredit";
+            this.lblLetterOfCredit.Size = new System.Drawing.Size(0, 13);
+            this.lblLetterOfCredit.TabIndex = 282;
+            // 
+            // lblShipment
+            // 
+            this.lblShipment.AutoSize = true;
+            this.lblShipment.Location = new System.Drawing.Point(349, 192);
+            this.lblShipment.Name = "lblShipment";
+            this.lblShipment.Size = new System.Drawing.Size(0, 13);
+            this.lblShipment.TabIndex = 283;
+            // 
+            // lblSector
+            // 
+            this.lblSector.AutoSize = true;
+            this.lblSector.Location = new System.Drawing.Point(351, 226);
+            this.lblSector.Name = "lblSector";
+            this.lblSector.Size = new System.Drawing.Size(0, 13);
+            this.lblSector.TabIndex = 284;
+            // 
+            // currenciesTableAdapter
+            // 
+            this.currenciesTableAdapter.ClearBeforeFill = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(587, 22);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(35, 13);
+            this.label9.TabIndex = 285;
+            this.label9.Text = "Items:";
+            // 
+            // cmdCancel
+            // 
+            this.cmdCancel.Location = new System.Drawing.Point(458, 226);
+            this.cmdCancel.Name = "cmdCancel";
+            this.cmdCancel.Size = new System.Drawing.Size(92, 23);
+            this.cmdCancel.TabIndex = 286;
+            this.cmdCancel.Text = "Cancel Edition";
+            this.cmdCancel.UseVisualStyleBackColor = true;
+            this.cmdCancel.Visible = false;
+            this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
+            // 
             // AddendumsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 579);
+            this.Controls.Add(this.cmdCancel);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.lblSector);
+            this.Controls.Add(this.lblShipment);
+            this.Controls.Add(this.lblLetterOfCredit);
+            this.Controls.Add(this.lblUnderlayingBank);
+            this.Controls.Add(this.lblUnderLayingDebtor);
+            this.Controls.Add(this.lblClient);
+            this.Controls.Add(this.lblContract);
             this.Controls.Add(this.txtNumber);
             this.Controls.Add(this.label16);
-            this.Controls.Add(this.cbShipment);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.cbLetterOfCredit);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.dtpCollectionDate);
-            this.Controls.Add(this.txtContract);
             this.Controls.Add(this.lblContractPrefix);
             this.Controls.Add(this.txtDelayInterest);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.cmdDeleteItem);
             this.Controls.Add(this.cmdBook);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.dtpDisbursementDate);
+            this.Controls.Add(this.dtpStartingDate);
             this.Controls.Add(this.cmdDeleteBooking);
-            this.Controls.Add(this.lvDisbursements);
+            this.Controls.Add(this.lvBooking);
             this.Controls.Add(this.cmdAddBooking);
             this.Controls.Add(this.txtTotalToBeCollected);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.lbISelectedItems);
-            this.Controls.Add(this.cmdAddItem);
-            this.Controls.Add(this.cbItems);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.cbSector);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtProfitShare);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.cbBank);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.cbUnderlyingDebtor);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.cbClient);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtExchangeRate);
             this.Controls.Add(this.label3);
@@ -540,28 +547,26 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Addendums";
             this.Load += new System.EventHandler(this.AddendumsForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox cbShipment;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ComboBox cbLetterOfCredit;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.DateTimePicker dtpCollectionDate;
-        private System.Windows.Forms.TextBox txtContract;
         private System.Windows.Forms.Label lblContractPrefix;
         private System.Windows.Forms.TextBox txtDelayInterest;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button cmdDeleteItem;
         private System.Windows.Forms.Button cmdBook;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.DateTimePicker dtpDisbursementDate;
+        private System.Windows.Forms.DateTimePicker dtpStartingDate;
         private System.Windows.Forms.Button cmdDeleteBooking;
-        private System.Windows.Forms.ListView lvDisbursements;
+        private System.Windows.Forms.ListView lvBooking;
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -572,18 +577,11 @@
         private System.Windows.Forms.TextBox txtTotalToBeCollected;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ListBox lbISelectedItems;
-        private System.Windows.Forms.Button cmdAddItem;
-        private System.Windows.Forms.ComboBox cbItems;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox cbSector;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtProfitShare;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cbBank;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox cbUnderlyingDebtor;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cbClient;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtExchangeRate;
         private System.Windows.Forms.Label label3;
@@ -593,5 +591,17 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNumber;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label lblContract;
+        private System.Windows.Forms.Label lblClient;
+        private System.Windows.Forms.Label lblUnderLayingDebtor;
+        private System.Windows.Forms.Label lblUnderlayingBank;
+        private System.Windows.Forms.Label lblLetterOfCredit;
+        private System.Windows.Forms.Label lblShipment;
+        private System.Windows.Forms.Label lblSector;
+        private FundsDBDataSet fundsDBDataSet;
+        private System.Windows.Forms.BindingSource currenciesBindingSource;
+        private FundsDBDataSetTableAdapters.CurrenciesTableAdapter currenciesTableAdapter;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button cmdCancel;
     }
 }

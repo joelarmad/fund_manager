@@ -142,6 +142,12 @@ namespace FundsManager {
         
         private DelayInterestToAccrueSourceDataTable tableDelayInterestToAccrueSource;
         
+        private DisbursementsForAddendumsDataTable tableDisbursementsForAddendums;
+        
+        private DisbursementBookingDataTable tableDisbursementBooking;
+        
+        private DisbursementBooksDataTable tableDisbursementBooks;
+        
         private global::System.Data.DataRelation relationcurrency_id;
         
         private global::System.Data.DataRelation relationFK_BankingAccounts_Funds;
@@ -323,6 +329,12 @@ namespace FundsManager {
         private global::System.Data.DataRelation relationFK_DisbursementCollectionsDetails_Mov128;
         
         private global::System.Data.DataRelation relationFK_DisbursementCollectionsDetails_Mov130;
+        
+        private global::System.Data.DataRelation relationFK_DisbursementBooking_Book;
+        
+        private global::System.Data.DataRelation relationFK_DisbursementBooking_Currency;
+        
+        private global::System.Data.DataRelation relationFK_DisbursementBooking_Disbursement;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -528,6 +540,15 @@ namespace FundsManager {
                 }
                 if ((ds.Tables["DelayInterestToAccrueSource"] != null)) {
                     base.Tables.Add(new DelayInterestToAccrueSourceDataTable(ds.Tables["DelayInterestToAccrueSource"]));
+                }
+                if ((ds.Tables["DisbursementsForAddendums"] != null)) {
+                    base.Tables.Add(new DisbursementsForAddendumsDataTable(ds.Tables["DisbursementsForAddendums"]));
+                }
+                if ((ds.Tables["DisbursementBooking"] != null)) {
+                    base.Tables.Add(new DisbursementBookingDataTable(ds.Tables["DisbursementBooking"]));
+                }
+                if ((ds.Tables["DisbursementBooks"] != null)) {
+                    base.Tables.Add(new DisbursementBooksDataTable(ds.Tables["DisbursementBooks"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -1139,6 +1160,36 @@ namespace FundsManager {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public DisbursementsForAddendumsDataTable DisbursementsForAddendums {
+            get {
+                return this.tableDisbursementsForAddendums;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public DisbursementBookingDataTable DisbursementBooking {
+            get {
+                return this.tableDisbursementBooking;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public DisbursementBooksDataTable DisbursementBooks {
+            get {
+                return this.tableDisbursementBooks;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -1380,6 +1431,15 @@ namespace FundsManager {
                 }
                 if ((ds.Tables["DelayInterestToAccrueSource"] != null)) {
                     base.Tables.Add(new DelayInterestToAccrueSourceDataTable(ds.Tables["DelayInterestToAccrueSource"]));
+                }
+                if ((ds.Tables["DisbursementsForAddendums"] != null)) {
+                    base.Tables.Add(new DisbursementsForAddendumsDataTable(ds.Tables["DisbursementsForAddendums"]));
+                }
+                if ((ds.Tables["DisbursementBooking"] != null)) {
+                    base.Tables.Add(new DisbursementBookingDataTable(ds.Tables["DisbursementBooking"]));
+                }
+                if ((ds.Tables["DisbursementBooks"] != null)) {
+                    base.Tables.Add(new DisbursementBooksDataTable(ds.Tables["DisbursementBooks"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -1768,6 +1828,24 @@ namespace FundsManager {
                     this.tableDelayInterestToAccrueSource.InitVars();
                 }
             }
+            this.tableDisbursementsForAddendums = ((DisbursementsForAddendumsDataTable)(base.Tables["DisbursementsForAddendums"]));
+            if ((initTable == true)) {
+                if ((this.tableDisbursementsForAddendums != null)) {
+                    this.tableDisbursementsForAddendums.InitVars();
+                }
+            }
+            this.tableDisbursementBooking = ((DisbursementBookingDataTable)(base.Tables["DisbursementBooking"]));
+            if ((initTable == true)) {
+                if ((this.tableDisbursementBooking != null)) {
+                    this.tableDisbursementBooking.InitVars();
+                }
+            }
+            this.tableDisbursementBooks = ((DisbursementBooksDataTable)(base.Tables["DisbursementBooks"]));
+            if ((initTable == true)) {
+                if ((this.tableDisbursementBooks != null)) {
+                    this.tableDisbursementBooks.InitVars();
+                }
+            }
             this.relationcurrency_id = this.Relations["currency_id"];
             this.relationFK_BankingAccounts_Funds = this.Relations["FK_BankingAccounts_Funds"];
             this.relationFK_Clients_Funds = this.Relations["FK_Clients_Funds"];
@@ -1859,6 +1937,9 @@ namespace FundsManager {
             this.relationFK_DisbursementCollectionsDetails_Mov125 = this.Relations["FK_DisbursementCollectionsDetails_Mov125"];
             this.relationFK_DisbursementCollectionsDetails_Mov128 = this.Relations["FK_DisbursementCollectionsDetails_Mov128"];
             this.relationFK_DisbursementCollectionsDetails_Mov130 = this.Relations["FK_DisbursementCollectionsDetails_Mov130"];
+            this.relationFK_DisbursementBooking_Book = this.Relations["FK_DisbursementBooking_Book"];
+            this.relationFK_DisbursementBooking_Currency = this.Relations["FK_DisbursementBooking_Currency"];
+            this.relationFK_DisbursementBooking_Disbursement = this.Relations["FK_DisbursementBooking_Disbursement"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1987,6 +2068,12 @@ namespace FundsManager {
             base.Tables.Add(this.tableDisbursementCollectionsView);
             this.tableDelayInterestToAccrueSource = new DelayInterestToAccrueSourceDataTable();
             base.Tables.Add(this.tableDelayInterestToAccrueSource);
+            this.tableDisbursementsForAddendums = new DisbursementsForAddendumsDataTable();
+            base.Tables.Add(this.tableDisbursementsForAddendums);
+            this.tableDisbursementBooking = new DisbursementBookingDataTable();
+            base.Tables.Add(this.tableDisbursementBooking);
+            this.tableDisbursementBooks = new DisbursementBooksDataTable();
+            base.Tables.Add(this.tableDisbursementBooks);
             this.relationcurrency_id = new global::System.Data.DataRelation("currency_id", new global::System.Data.DataColumn[] {
                         this.tableCurrencies.IdColumn}, new global::System.Data.DataColumn[] {
                         this.tableBankingAccounts.IdColumn}, false);
@@ -2351,6 +2438,18 @@ namespace FundsManager {
                         this.tableMovements_Accounts.IdColumn}, new global::System.Data.DataColumn[] {
                         this.tableDisbursementCollectionsDetails.movement130_idColumn}, false);
             this.Relations.Add(this.relationFK_DisbursementCollectionsDetails_Mov130);
+            this.relationFK_DisbursementBooking_Book = new global::System.Data.DataRelation("FK_DisbursementBooking_Book", new global::System.Data.DataColumn[] {
+                        this.tableDisbursementBooks.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDisbursementBooking.book_idColumn}, false);
+            this.Relations.Add(this.relationFK_DisbursementBooking_Book);
+            this.relationFK_DisbursementBooking_Currency = new global::System.Data.DataRelation("FK_DisbursementBooking_Currency", new global::System.Data.DataColumn[] {
+                        this.tableCurrencies.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDisbursementBooking.currency_idColumn}, false);
+            this.Relations.Add(this.relationFK_DisbursementBooking_Currency);
+            this.relationFK_DisbursementBooking_Disbursement = new global::System.Data.DataRelation("FK_DisbursementBooking_Disbursement", new global::System.Data.DataColumn[] {
+                        this.tableDisbursements.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDisbursementBooking.disbursement_idColumn}, false);
+            this.Relations.Add(this.relationFK_DisbursementBooking_Disbursement);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2709,6 +2808,24 @@ namespace FundsManager {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeDisbursementsForAddendums() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeDisbursementBooking() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeDisbursementBooks() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -2938,6 +3055,15 @@ namespace FundsManager {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void DelayInterestToAccrueSourceRowChangeEventHandler(object sender, DelayInterestToAccrueSourceRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void DisbursementsForAddendumsRowChangeEventHandler(object sender, DisbursementsForAddendumsRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void DisbursementBookingRowChangeEventHandler(object sender, DisbursementBookingRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void DisbursementBooksRowChangeEventHandler(object sender, DisbursementBooksRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -12720,6 +12846,8 @@ namespace FundsManager {
             
             private global::System.Data.DataColumn columnshipment_id;
             
+            private global::System.Data.DataColumn columncollected;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DisbursementsDataTable() {
@@ -12891,6 +13019,14 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn collectedColumn {
+                get {
+                    return this.columncollected;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -12942,7 +13078,8 @@ namespace FundsManager {
                         System.DateTime collection_date, 
                         System.DateTime pay_date, 
                         bool can_generate_interest, 
-                        ShipmentsRow parentShipmentsRowByFK_Disbursements_Shipments) {
+                        ShipmentsRow parentShipmentsRowByFK_Disbursements_Shipments, 
+                        bool collected) {
                 DisbursementsRow rowDisbursementsRow = ((DisbursementsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -12961,7 +13098,8 @@ namespace FundsManager {
                         collection_date,
                         pay_date,
                         can_generate_interest,
-                        null};
+                        null,
+                        collected};
                 if ((parentInvestmentsRowByFK_Disbursements_Investments != null)) {
                     columnValuesArray[1] = parentInvestmentsRowByFK_Disbursements_Investments[0];
                 }
@@ -13032,6 +13170,7 @@ namespace FundsManager {
                 this.columnpay_date = base.Columns["pay_date"];
                 this.columncan_generate_interest = base.Columns["can_generate_interest"];
                 this.columnshipment_id = base.Columns["shipment_id"];
+                this.columncollected = base.Columns["collected"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13071,6 +13210,8 @@ namespace FundsManager {
                 base.Columns.Add(this.columncan_generate_interest);
                 this.columnshipment_id = new global::System.Data.DataColumn("shipment_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnshipment_id);
+                this.columncollected = new global::System.Data.DataColumn("collected", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncollected);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
                 this.columnId.AutoIncrement = true;
@@ -19864,6 +20005,8 @@ namespace FundsManager {
             
             private global::System.Data.DataColumn columnsector;
             
+            private global::System.Data.DataColumn columncollected;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public InvestmentsViewDataTable() {
@@ -20075,6 +20218,14 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn collectedColumn {
+                get {
+                    return this.columncollected;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -20132,7 +20283,8 @@ namespace FundsManager {
                         int client_id, 
                         string client, 
                         int sector_id, 
-                        string sector) {
+                        string sector, 
+                        bool collected) {
                 InvestmentsViewRow rowInvestmentsViewRow = ((InvestmentsViewRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         fund_id,
@@ -20156,7 +20308,8 @@ namespace FundsManager {
                         client_id,
                         client,
                         sector_id,
-                        sector};
+                        sector,
+                        collected};
                 rowInvestmentsViewRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowInvestmentsViewRow);
                 return rowInvestmentsViewRow;
@@ -20201,6 +20354,7 @@ namespace FundsManager {
                 this.columnclient = base.Columns["client"];
                 this.columnsector_id = base.Columns["sector_id"];
                 this.columnsector = base.Columns["sector"];
+                this.columncollected = base.Columns["collected"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -20250,6 +20404,8 @@ namespace FundsManager {
                 base.Columns.Add(this.columnsector_id);
                 this.columnsector = new global::System.Data.DataColumn("sector", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsector);
+                this.columncollected = new global::System.Data.DataColumn("collected", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncollected);
                 this.columnfund_id.AllowDBNull = false;
                 this.columninvestment_id.AllowDBNull = false;
                 this.columncontract.AllowDBNull = false;
@@ -23715,6 +23871,1155 @@ namespace FundsManager {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class DisbursementsForAddendumsDataTable : global::System.Data.TypedTableBase<DisbursementsForAddendumsRow> {
+            
+            private global::System.Data.DataColumn columnfund_id;
+            
+            private global::System.Data.DataColumn columncontract;
+            
+            private global::System.Data.DataColumn columndisbursement_id;
+            
+            private global::System.Data.DataColumn columninvestment_id;
+            
+            private global::System.Data.DataColumn columnnumber;
+            
+            private global::System.Data.DataColumn columncollection_date;
+            
+            private global::System.Data.DataColumn columndate;
+            
+            private global::System.Data.DataColumn columnpay_date;
+            
+            private global::System.Data.DataColumn columncan_generate_interest;
+            
+            private global::System.Data.DataColumn columnamount;
+            
+            private global::System.Data.DataColumn columnprofit_share;
+            
+            private global::System.Data.DataColumn columntoBeCollected;
+            
+            private global::System.Data.DataColumn columncollected;
+            
+            private global::System.Data.DataColumn columnremaining;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementsForAddendumsDataTable() {
+                this.TableName = "DisbursementsForAddendums";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal DisbursementsForAddendumsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected DisbursementsForAddendumsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn fund_idColumn {
+                get {
+                    return this.columnfund_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn contractColumn {
+                get {
+                    return this.columncontract;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn disbursement_idColumn {
+                get {
+                    return this.columndisbursement_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn investment_idColumn {
+                get {
+                    return this.columninvestment_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn numberColumn {
+                get {
+                    return this.columnnumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn collection_dateColumn {
+                get {
+                    return this.columncollection_date;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dateColumn {
+                get {
+                    return this.columndate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn pay_dateColumn {
+                get {
+                    return this.columnpay_date;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn can_generate_interestColumn {
+                get {
+                    return this.columncan_generate_interest;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn amountColumn {
+                get {
+                    return this.columnamount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn profit_shareColumn {
+                get {
+                    return this.columnprofit_share;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn toBeCollectedColumn {
+                get {
+                    return this.columntoBeCollected;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn collectedColumn {
+                get {
+                    return this.columncollected;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn remainingColumn {
+                get {
+                    return this.columnremaining;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementsForAddendumsRow this[int index] {
+                get {
+                    return ((DisbursementsForAddendumsRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event DisbursementsForAddendumsRowChangeEventHandler DisbursementsForAddendumsRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event DisbursementsForAddendumsRowChangeEventHandler DisbursementsForAddendumsRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event DisbursementsForAddendumsRowChangeEventHandler DisbursementsForAddendumsRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event DisbursementsForAddendumsRowChangeEventHandler DisbursementsForAddendumsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddDisbursementsForAddendumsRow(DisbursementsForAddendumsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementsForAddendumsRow AddDisbursementsForAddendumsRow(int fund_id, string contract, int disbursement_id, int investment_id, string number, System.DateTime collection_date, System.DateTime date, System.DateTime pay_date, bool can_generate_interest, decimal amount, decimal profit_share, decimal toBeCollected, decimal collected, decimal remaining) {
+                DisbursementsForAddendumsRow rowDisbursementsForAddendumsRow = ((DisbursementsForAddendumsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        fund_id,
+                        contract,
+                        disbursement_id,
+                        investment_id,
+                        number,
+                        collection_date,
+                        date,
+                        pay_date,
+                        can_generate_interest,
+                        amount,
+                        profit_share,
+                        toBeCollected,
+                        collected,
+                        remaining};
+                rowDisbursementsForAddendumsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDisbursementsForAddendumsRow);
+                return rowDisbursementsForAddendumsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementsForAddendumsRow FindBydisbursement_id(int disbursement_id) {
+                return ((DisbursementsForAddendumsRow)(this.Rows.Find(new object[] {
+                            disbursement_id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                DisbursementsForAddendumsDataTable cln = ((DisbursementsForAddendumsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new DisbursementsForAddendumsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnfund_id = base.Columns["fund_id"];
+                this.columncontract = base.Columns["contract"];
+                this.columndisbursement_id = base.Columns["disbursement_id"];
+                this.columninvestment_id = base.Columns["investment_id"];
+                this.columnnumber = base.Columns["number"];
+                this.columncollection_date = base.Columns["collection_date"];
+                this.columndate = base.Columns["date"];
+                this.columnpay_date = base.Columns["pay_date"];
+                this.columncan_generate_interest = base.Columns["can_generate_interest"];
+                this.columnamount = base.Columns["amount"];
+                this.columnprofit_share = base.Columns["profit_share"];
+                this.columntoBeCollected = base.Columns["toBeCollected"];
+                this.columncollected = base.Columns["collected"];
+                this.columnremaining = base.Columns["remaining"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnfund_id = new global::System.Data.DataColumn("fund_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfund_id);
+                this.columncontract = new global::System.Data.DataColumn("contract", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncontract);
+                this.columndisbursement_id = new global::System.Data.DataColumn("disbursement_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndisbursement_id);
+                this.columninvestment_id = new global::System.Data.DataColumn("investment_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columninvestment_id);
+                this.columnnumber = new global::System.Data.DataColumn("number", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnumber);
+                this.columncollection_date = new global::System.Data.DataColumn("collection_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncollection_date);
+                this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndate);
+                this.columnpay_date = new global::System.Data.DataColumn("pay_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpay_date);
+                this.columncan_generate_interest = new global::System.Data.DataColumn("can_generate_interest", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncan_generate_interest);
+                this.columnamount = new global::System.Data.DataColumn("amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnamount);
+                this.columnprofit_share = new global::System.Data.DataColumn("profit_share", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprofit_share);
+                this.columntoBeCollected = new global::System.Data.DataColumn("toBeCollected", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntoBeCollected);
+                this.columncollected = new global::System.Data.DataColumn("collected", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncollected);
+                this.columnremaining = new global::System.Data.DataColumn("remaining", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnremaining);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columndisbursement_id}, true));
+                this.columnfund_id.AllowDBNull = false;
+                this.columncontract.AllowDBNull = false;
+                this.columncontract.MaxLength = 50;
+                this.columndisbursement_id.AllowDBNull = false;
+                this.columndisbursement_id.Unique = true;
+                this.columninvestment_id.AllowDBNull = false;
+                this.columnnumber.AllowDBNull = false;
+                this.columnnumber.MaxLength = 50;
+                this.columncollection_date.AllowDBNull = false;
+                this.columndate.AllowDBNull = false;
+                this.columncan_generate_interest.AllowDBNull = false;
+                this.columnamount.AllowDBNull = false;
+                this.columnprofit_share.AllowDBNull = false;
+                this.columntoBeCollected.ReadOnly = true;
+                this.columncollected.ReadOnly = true;
+                this.columnremaining.ReadOnly = true;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementsForAddendumsRow NewDisbursementsForAddendumsRow() {
+                return ((DisbursementsForAddendumsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new DisbursementsForAddendumsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(DisbursementsForAddendumsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.DisbursementsForAddendumsRowChanged != null)) {
+                    this.DisbursementsForAddendumsRowChanged(this, new DisbursementsForAddendumsRowChangeEvent(((DisbursementsForAddendumsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.DisbursementsForAddendumsRowChanging != null)) {
+                    this.DisbursementsForAddendumsRowChanging(this, new DisbursementsForAddendumsRowChangeEvent(((DisbursementsForAddendumsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.DisbursementsForAddendumsRowDeleted != null)) {
+                    this.DisbursementsForAddendumsRowDeleted(this, new DisbursementsForAddendumsRowChangeEvent(((DisbursementsForAddendumsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.DisbursementsForAddendumsRowDeleting != null)) {
+                    this.DisbursementsForAddendumsRowDeleting(this, new DisbursementsForAddendumsRowChangeEvent(((DisbursementsForAddendumsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveDisbursementsForAddendumsRow(DisbursementsForAddendumsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FundsDBDataSet ds = new FundsDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "DisbursementsForAddendumsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class DisbursementBookingDataTable : global::System.Data.TypedTableBase<DisbursementBookingRow> {
+            
+            private global::System.Data.DataColumn columnid;
+            
+            private global::System.Data.DataColumn columnbook_id;
+            
+            private global::System.Data.DataColumn columndisbursement_id;
+            
+            private global::System.Data.DataColumn columnamount;
+            
+            private global::System.Data.DataColumn columncurrency_id;
+            
+            private global::System.Data.DataColumn columnprofit_share;
+            
+            private global::System.Data.DataColumn columndelay_interest;
+            
+            private global::System.Data.DataColumn columnnumber;
+            
+            private global::System.Data.DataColumn columnstarting_date;
+            
+            private global::System.Data.DataColumn columncollection_date;
+            
+            private global::System.Data.DataColumn columnexchange_rate;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBookingDataTable() {
+                this.TableName = "DisbursementBooking";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal DisbursementBookingDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected DisbursementBookingDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn idColumn {
+                get {
+                    return this.columnid;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn book_idColumn {
+                get {
+                    return this.columnbook_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn disbursement_idColumn {
+                get {
+                    return this.columndisbursement_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn amountColumn {
+                get {
+                    return this.columnamount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn currency_idColumn {
+                get {
+                    return this.columncurrency_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn profit_shareColumn {
+                get {
+                    return this.columnprofit_share;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn delay_interestColumn {
+                get {
+                    return this.columndelay_interest;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn numberColumn {
+                get {
+                    return this.columnnumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn starting_dateColumn {
+                get {
+                    return this.columnstarting_date;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn collection_dateColumn {
+                get {
+                    return this.columncollection_date;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn exchange_rateColumn {
+                get {
+                    return this.columnexchange_rate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBookingRow this[int index] {
+                get {
+                    return ((DisbursementBookingRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event DisbursementBookingRowChangeEventHandler DisbursementBookingRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event DisbursementBookingRowChangeEventHandler DisbursementBookingRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event DisbursementBookingRowChangeEventHandler DisbursementBookingRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event DisbursementBookingRowChangeEventHandler DisbursementBookingRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddDisbursementBookingRow(DisbursementBookingRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBookingRow AddDisbursementBookingRow(DisbursementBooksRow parentDisbursementBooksRowByFK_DisbursementBooking_Book, DisbursementsRow parentDisbursementsRowByFK_DisbursementBooking_Disbursement, decimal amount, CurrenciesRow parentCurrenciesRowByFK_DisbursementBooking_Currency, decimal profit_share, decimal delay_interest, string number, System.DateTime starting_date, System.DateTime collection_date, float exchange_rate) {
+                DisbursementBookingRow rowDisbursementBookingRow = ((DisbursementBookingRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        null,
+                        amount,
+                        null,
+                        profit_share,
+                        delay_interest,
+                        number,
+                        starting_date,
+                        collection_date,
+                        exchange_rate};
+                if ((parentDisbursementBooksRowByFK_DisbursementBooking_Book != null)) {
+                    columnValuesArray[1] = parentDisbursementBooksRowByFK_DisbursementBooking_Book[0];
+                }
+                if ((parentDisbursementsRowByFK_DisbursementBooking_Disbursement != null)) {
+                    columnValuesArray[2] = parentDisbursementsRowByFK_DisbursementBooking_Disbursement[0];
+                }
+                if ((parentCurrenciesRowByFK_DisbursementBooking_Currency != null)) {
+                    columnValuesArray[4] = parentCurrenciesRowByFK_DisbursementBooking_Currency[0];
+                }
+                rowDisbursementBookingRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDisbursementBookingRow);
+                return rowDisbursementBookingRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBookingRow FindByid(int id) {
+                return ((DisbursementBookingRow)(this.Rows.Find(new object[] {
+                            id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                DisbursementBookingDataTable cln = ((DisbursementBookingDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new DisbursementBookingDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnid = base.Columns["id"];
+                this.columnbook_id = base.Columns["book_id"];
+                this.columndisbursement_id = base.Columns["disbursement_id"];
+                this.columnamount = base.Columns["amount"];
+                this.columncurrency_id = base.Columns["currency_id"];
+                this.columnprofit_share = base.Columns["profit_share"];
+                this.columndelay_interest = base.Columns["delay_interest"];
+                this.columnnumber = base.Columns["number"];
+                this.columnstarting_date = base.Columns["starting_date"];
+                this.columncollection_date = base.Columns["collection_date"];
+                this.columnexchange_rate = base.Columns["exchange_rate"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnid = new global::System.Data.DataColumn("id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnid);
+                this.columnbook_id = new global::System.Data.DataColumn("book_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbook_id);
+                this.columndisbursement_id = new global::System.Data.DataColumn("disbursement_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndisbursement_id);
+                this.columnamount = new global::System.Data.DataColumn("amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnamount);
+                this.columncurrency_id = new global::System.Data.DataColumn("currency_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncurrency_id);
+                this.columnprofit_share = new global::System.Data.DataColumn("profit_share", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprofit_share);
+                this.columndelay_interest = new global::System.Data.DataColumn("delay_interest", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndelay_interest);
+                this.columnnumber = new global::System.Data.DataColumn("number", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnumber);
+                this.columnstarting_date = new global::System.Data.DataColumn("starting_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstarting_date);
+                this.columncollection_date = new global::System.Data.DataColumn("collection_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncollection_date);
+                this.columnexchange_rate = new global::System.Data.DataColumn("exchange_rate", typeof(float), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnexchange_rate);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnid}, true));
+                this.columnid.AutoIncrement = true;
+                this.columnid.AutoIncrementSeed = -1;
+                this.columnid.AutoIncrementStep = -1;
+                this.columnid.AllowDBNull = false;
+                this.columnid.ReadOnly = true;
+                this.columnid.Unique = true;
+                this.columnbook_id.AllowDBNull = false;
+                this.columndisbursement_id.AllowDBNull = false;
+                this.columnamount.AllowDBNull = false;
+                this.columncurrency_id.AllowDBNull = false;
+                this.columnprofit_share.AllowDBNull = false;
+                this.columndelay_interest.AllowDBNull = false;
+                this.columnnumber.AllowDBNull = false;
+                this.columnnumber.MaxLength = 50;
+                this.columnstarting_date.AllowDBNull = false;
+                this.columncollection_date.AllowDBNull = false;
+                this.columnexchange_rate.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBookingRow NewDisbursementBookingRow() {
+                return ((DisbursementBookingRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new DisbursementBookingRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(DisbursementBookingRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.DisbursementBookingRowChanged != null)) {
+                    this.DisbursementBookingRowChanged(this, new DisbursementBookingRowChangeEvent(((DisbursementBookingRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.DisbursementBookingRowChanging != null)) {
+                    this.DisbursementBookingRowChanging(this, new DisbursementBookingRowChangeEvent(((DisbursementBookingRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.DisbursementBookingRowDeleted != null)) {
+                    this.DisbursementBookingRowDeleted(this, new DisbursementBookingRowChangeEvent(((DisbursementBookingRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.DisbursementBookingRowDeleting != null)) {
+                    this.DisbursementBookingRowDeleting(this, new DisbursementBookingRowChangeEvent(((DisbursementBookingRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveDisbursementBookingRow(DisbursementBookingRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FundsDBDataSet ds = new FundsDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "DisbursementBookingDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class DisbursementBooksDataTable : global::System.Data.TypedTableBase<DisbursementBooksRow> {
+            
+            private global::System.Data.DataColumn columnId;
+            
+            private global::System.Data.DataColumn columndate;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBooksDataTable() {
+                this.TableName = "DisbursementBooks";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal DisbursementBooksDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected DisbursementBooksDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IdColumn {
+                get {
+                    return this.columnId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dateColumn {
+                get {
+                    return this.columndate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBooksRow this[int index] {
+                get {
+                    return ((DisbursementBooksRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event DisbursementBooksRowChangeEventHandler DisbursementBooksRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event DisbursementBooksRowChangeEventHandler DisbursementBooksRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event DisbursementBooksRowChangeEventHandler DisbursementBooksRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event DisbursementBooksRowChangeEventHandler DisbursementBooksRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddDisbursementBooksRow(DisbursementBooksRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBooksRow AddDisbursementBooksRow(int Id, System.DateTime date) {
+                DisbursementBooksRow rowDisbursementBooksRow = ((DisbursementBooksRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        Id,
+                        date};
+                rowDisbursementBooksRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDisbursementBooksRow);
+                return rowDisbursementBooksRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBooksRow FindById(int Id) {
+                return ((DisbursementBooksRow)(this.Rows.Find(new object[] {
+                            Id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                DisbursementBooksDataTable cln = ((DisbursementBooksDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new DisbursementBooksDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnId = base.Columns["Id"];
+                this.columndate = base.Columns["date"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnId = new global::System.Data.DataColumn("Id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnId);
+                this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndate);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnId}, true));
+                this.columnId.AllowDBNull = false;
+                this.columnId.Unique = true;
+                this.columndate.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBooksRow NewDisbursementBooksRow() {
+                return ((DisbursementBooksRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new DisbursementBooksRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(DisbursementBooksRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.DisbursementBooksRowChanged != null)) {
+                    this.DisbursementBooksRowChanged(this, new DisbursementBooksRowChangeEvent(((DisbursementBooksRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.DisbursementBooksRowChanging != null)) {
+                    this.DisbursementBooksRowChanging(this, new DisbursementBooksRowChangeEvent(((DisbursementBooksRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.DisbursementBooksRowDeleted != null)) {
+                    this.DisbursementBooksRowDeleted(this, new DisbursementBooksRowChangeEvent(((DisbursementBooksRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.DisbursementBooksRowDeleting != null)) {
+                    this.DisbursementBooksRowDeleting(this, new DisbursementBooksRowChangeEvent(((DisbursementBooksRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveDisbursementBooksRow(DisbursementBooksRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FundsDBDataSet ds = new FundsDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "DisbursementBooksDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class BankingAccountsRow : global::System.Data.DataRow {
@@ -24570,6 +25875,17 @@ namespace FundsManager {
                 }
                 else {
                     return ((DisbursementsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Disbursements_Currencies"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBookingRow[] GetDisbursementBookingRows() {
+                if ((this.Table.ChildRelations["FK_DisbursementBooking_Currency"] == null)) {
+                    return new DisbursementBookingRow[0];
+                }
+                else {
+                    return ((DisbursementBookingRow[])(base.GetChildRows(this.Table.ChildRelations["FK_DisbursementBooking_Currency"])));
                 }
             }
         }
@@ -27783,6 +29099,22 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool collected {
+                get {
+                    try {
+                        return ((bool)(this[this.tableDisbursements.collectedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'collected\' de la tabla \'Disbursements\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDisbursements.collectedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public BanksRow BanksRow {
                 get {
                     return ((BanksRow)(this.GetParentRow(this.Table.ParentRelations["FK_Disbursements_Banks"])));
@@ -27919,6 +29251,18 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IscollectedNull() {
+                return this.IsNull(this.tableDisbursements.collectedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetcollectedNull() {
+                this[this.tableDisbursements.collectedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public Disbursement_datesRow[] GetDisbursement_datesRows() {
                 if ((this.Table.ChildRelations["FK_Disbursement_dates_Disbursement"] == null)) {
                     return new Disbursement_datesRow[0];
@@ -27969,6 +29313,17 @@ namespace FundsManager {
                 }
                 else {
                     return ((DisbursementCollectionsDetailsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_DisbursementCollectionsDetails_Disbursement"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBookingRow[] GetDisbursementBookingRows() {
+                if ((this.Table.ChildRelations["FK_DisbursementBooking_Disbursement"] == null)) {
+                    return new DisbursementBookingRow[0];
+                }
+                else {
+                    return ((DisbursementBookingRow[])(base.GetChildRows(this.Table.ChildRelations["FK_DisbursementBooking_Disbursement"])));
                 }
             }
         }
@@ -30476,6 +31831,22 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool collected {
+                get {
+                    try {
+                        return ((bool)(this[this.tableInvestmentsView.collectedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'collected\' de la tabla \'InvestmentsView\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableInvestmentsView.collectedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool Istotal_disbursementNull() {
                 return this.IsNull(this.tableInvestmentsView.total_disbursementColumn);
             }
@@ -30568,6 +31939,18 @@ namespace FundsManager {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetsectorNull() {
                 this[this.tableInvestmentsView.sectorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IscollectedNull() {
+                return this.IsNull(this.tableInvestmentsView.collectedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetcollectedNull() {
+                this[this.tableInvestmentsView.collectedColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -32245,6 +33628,464 @@ namespace FundsManager {
                 }
                 set {
                     this[this.tableDelayInterestToAccrueSource.RemainingColumn] = value;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class DisbursementsForAddendumsRow : global::System.Data.DataRow {
+            
+            private DisbursementsForAddendumsDataTable tableDisbursementsForAddendums;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal DisbursementsForAddendumsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableDisbursementsForAddendums = ((DisbursementsForAddendumsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int fund_id {
+                get {
+                    return ((int)(this[this.tableDisbursementsForAddendums.fund_idColumn]));
+                }
+                set {
+                    this[this.tableDisbursementsForAddendums.fund_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string contract {
+                get {
+                    return ((string)(this[this.tableDisbursementsForAddendums.contractColumn]));
+                }
+                set {
+                    this[this.tableDisbursementsForAddendums.contractColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int disbursement_id {
+                get {
+                    return ((int)(this[this.tableDisbursementsForAddendums.disbursement_idColumn]));
+                }
+                set {
+                    this[this.tableDisbursementsForAddendums.disbursement_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int investment_id {
+                get {
+                    return ((int)(this[this.tableDisbursementsForAddendums.investment_idColumn]));
+                }
+                set {
+                    this[this.tableDisbursementsForAddendums.investment_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string number {
+                get {
+                    return ((string)(this[this.tableDisbursementsForAddendums.numberColumn]));
+                }
+                set {
+                    this[this.tableDisbursementsForAddendums.numberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime collection_date {
+                get {
+                    return ((global::System.DateTime)(this[this.tableDisbursementsForAddendums.collection_dateColumn]));
+                }
+                set {
+                    this[this.tableDisbursementsForAddendums.collection_dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime date {
+                get {
+                    return ((global::System.DateTime)(this[this.tableDisbursementsForAddendums.dateColumn]));
+                }
+                set {
+                    this[this.tableDisbursementsForAddendums.dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime pay_date {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableDisbursementsForAddendums.pay_dateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'pay_date\' de la tabla \'DisbursementsForAddendums\' es DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tableDisbursementsForAddendums.pay_dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool can_generate_interest {
+                get {
+                    return ((bool)(this[this.tableDisbursementsForAddendums.can_generate_interestColumn]));
+                }
+                set {
+                    this[this.tableDisbursementsForAddendums.can_generate_interestColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal amount {
+                get {
+                    return ((decimal)(this[this.tableDisbursementsForAddendums.amountColumn]));
+                }
+                set {
+                    this[this.tableDisbursementsForAddendums.amountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal profit_share {
+                get {
+                    return ((decimal)(this[this.tableDisbursementsForAddendums.profit_shareColumn]));
+                }
+                set {
+                    this[this.tableDisbursementsForAddendums.profit_shareColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal toBeCollected {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableDisbursementsForAddendums.toBeCollectedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'toBeCollected\' de la tabla \'DisbursementsForAddendums\' es" +
+                                " DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDisbursementsForAddendums.toBeCollectedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal collected {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableDisbursementsForAddendums.collectedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'collected\' de la tabla \'DisbursementsForAddendums\' es DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDisbursementsForAddendums.collectedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal remaining {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableDisbursementsForAddendums.remainingColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'remaining\' de la tabla \'DisbursementsForAddendums\' es DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDisbursementsForAddendums.remainingColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Ispay_dateNull() {
+                return this.IsNull(this.tableDisbursementsForAddendums.pay_dateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setpay_dateNull() {
+                this[this.tableDisbursementsForAddendums.pay_dateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IstoBeCollectedNull() {
+                return this.IsNull(this.tableDisbursementsForAddendums.toBeCollectedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SettoBeCollectedNull() {
+                this[this.tableDisbursementsForAddendums.toBeCollectedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IscollectedNull() {
+                return this.IsNull(this.tableDisbursementsForAddendums.collectedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetcollectedNull() {
+                this[this.tableDisbursementsForAddendums.collectedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsremainingNull() {
+                return this.IsNull(this.tableDisbursementsForAddendums.remainingColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetremainingNull() {
+                this[this.tableDisbursementsForAddendums.remainingColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class DisbursementBookingRow : global::System.Data.DataRow {
+            
+            private DisbursementBookingDataTable tableDisbursementBooking;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal DisbursementBookingRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableDisbursementBooking = ((DisbursementBookingDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int id {
+                get {
+                    return ((int)(this[this.tableDisbursementBooking.idColumn]));
+                }
+                set {
+                    this[this.tableDisbursementBooking.idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int book_id {
+                get {
+                    return ((int)(this[this.tableDisbursementBooking.book_idColumn]));
+                }
+                set {
+                    this[this.tableDisbursementBooking.book_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int disbursement_id {
+                get {
+                    return ((int)(this[this.tableDisbursementBooking.disbursement_idColumn]));
+                }
+                set {
+                    this[this.tableDisbursementBooking.disbursement_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal amount {
+                get {
+                    return ((decimal)(this[this.tableDisbursementBooking.amountColumn]));
+                }
+                set {
+                    this[this.tableDisbursementBooking.amountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int currency_id {
+                get {
+                    return ((int)(this[this.tableDisbursementBooking.currency_idColumn]));
+                }
+                set {
+                    this[this.tableDisbursementBooking.currency_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal profit_share {
+                get {
+                    return ((decimal)(this[this.tableDisbursementBooking.profit_shareColumn]));
+                }
+                set {
+                    this[this.tableDisbursementBooking.profit_shareColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal delay_interest {
+                get {
+                    return ((decimal)(this[this.tableDisbursementBooking.delay_interestColumn]));
+                }
+                set {
+                    this[this.tableDisbursementBooking.delay_interestColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string number {
+                get {
+                    return ((string)(this[this.tableDisbursementBooking.numberColumn]));
+                }
+                set {
+                    this[this.tableDisbursementBooking.numberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime starting_date {
+                get {
+                    return ((global::System.DateTime)(this[this.tableDisbursementBooking.starting_dateColumn]));
+                }
+                set {
+                    this[this.tableDisbursementBooking.starting_dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime collection_date {
+                get {
+                    return ((global::System.DateTime)(this[this.tableDisbursementBooking.collection_dateColumn]));
+                }
+                set {
+                    this[this.tableDisbursementBooking.collection_dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public float exchange_rate {
+                get {
+                    return ((float)(this[this.tableDisbursementBooking.exchange_rateColumn]));
+                }
+                set {
+                    this[this.tableDisbursementBooking.exchange_rateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBooksRow DisbursementBooksRow {
+                get {
+                    return ((DisbursementBooksRow)(this.GetParentRow(this.Table.ParentRelations["FK_DisbursementBooking_Book"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_DisbursementBooking_Book"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public CurrenciesRow CurrenciesRow {
+                get {
+                    return ((CurrenciesRow)(this.GetParentRow(this.Table.ParentRelations["FK_DisbursementBooking_Currency"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_DisbursementBooking_Currency"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementsRow DisbursementsRow {
+                get {
+                    return ((DisbursementsRow)(this.GetParentRow(this.Table.ParentRelations["FK_DisbursementBooking_Disbursement"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_DisbursementBooking_Disbursement"]);
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class DisbursementBooksRow : global::System.Data.DataRow {
+            
+            private DisbursementBooksDataTable tableDisbursementBooks;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal DisbursementBooksRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableDisbursementBooks = ((DisbursementBooksDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Id {
+                get {
+                    return ((int)(this[this.tableDisbursementBooks.IdColumn]));
+                }
+                set {
+                    this[this.tableDisbursementBooks.IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime date {
+                get {
+                    return ((global::System.DateTime)(this[this.tableDisbursementBooks.dateColumn]));
+                }
+                set {
+                    this[this.tableDisbursementBooks.dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBookingRow[] GetDisbursementBookingRows() {
+                if ((this.Table.ChildRelations["FK_DisbursementBooking_Book"] == null)) {
+                    return new DisbursementBookingRow[0];
+                }
+                else {
+                    return ((DisbursementBookingRow[])(base.GetChildRows(this.Table.ChildRelations["FK_DisbursementBooking_Book"])));
                 }
             }
         }
@@ -34241,6 +36082,108 @@ namespace FundsManager {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DelayInterestToAccrueSourceRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class DisbursementsForAddendumsRowChangeEvent : global::System.EventArgs {
+            
+            private DisbursementsForAddendumsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementsForAddendumsRowChangeEvent(DisbursementsForAddendumsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementsForAddendumsRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class DisbursementBookingRowChangeEvent : global::System.EventArgs {
+            
+            private DisbursementBookingRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBookingRowChangeEvent(DisbursementBookingRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBookingRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class DisbursementBooksRowChangeEvent : global::System.EventArgs {
+            
+            private DisbursementBooksRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBooksRowChangeEvent(DisbursementBooksRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DisbursementBooksRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -44751,10 +46694,11 @@ SELECT DisbursementId, ItemId FROM DisbursementItems WHERE (DisbursementId = @Di
             tableMapping.ColumnMappings.Add("pay_date", "pay_date");
             tableMapping.ColumnMappings.Add("can_generate_interest", "can_generate_interest");
             tableMapping.ColumnMappings.Add("shipment_id", "shipment_id");
+            tableMapping.ColumnMappings.Add("collected", "collected");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Disbursements] WHERE (([Id] = @Original_Id) AND ([investment_id] = @Original_investment_id) AND ([currency_id] = @Original_currency_id) AND ([exchange_rate] = @Original_exchange_rate) AND ([client_id] = @Original_client_id) AND ((@IsNull_underlying_debtor_id = 1 AND [underlying_debtor_id] IS NULL) OR ([underlying_debtor_id] = @Original_underlying_debtor_id)) AND ((@IsNull_bank_risk_id = 1 AND [bank_risk_id] IS NULL) OR ([bank_risk_id] = @Original_bank_risk_id)) AND ([profit_share] = @Original_profit_share) AND ([amount] = @Original_amount) AND ([fund_id] = @Original_fund_id) AND ([date] = @Original_date) AND ([sector_id] = @Original_sector_id) AND ([number] = @Original_number) AND ([collection_date] = @Original_collection_date) AND ((@IsNull_pay_date = 1 AND [pay_date] IS NULL) OR ([pay_date] = @Original_pay_date)) AND ([can_generate_interest] = @Original_can_generate_interest) AND ((@IsNull_shipment_id = 1 AND [shipment_id] IS NULL) OR ([shipment_id] = @Original_shipment_id)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Disbursements] WHERE (([Id] = @Original_Id) AND ([investment_id] = @Original_investment_id) AND ([currency_id] = @Original_currency_id) AND ([exchange_rate] = @Original_exchange_rate) AND ([client_id] = @Original_client_id) AND ((@IsNull_underlying_debtor_id = 1 AND [underlying_debtor_id] IS NULL) OR ([underlying_debtor_id] = @Original_underlying_debtor_id)) AND ((@IsNull_bank_risk_id = 1 AND [bank_risk_id] IS NULL) OR ([bank_risk_id] = @Original_bank_risk_id)) AND ([profit_share] = @Original_profit_share) AND ([amount] = @Original_amount) AND ([fund_id] = @Original_fund_id) AND ([date] = @Original_date) AND ([sector_id] = @Original_sector_id) AND ([number] = @Original_number) AND ([collection_date] = @Original_collection_date) AND ((@IsNull_pay_date = 1 AND [pay_date] IS NULL) OR ([pay_date] = @Original_pay_date)) AND ([can_generate_interest] = @Original_can_generate_interest) AND ((@IsNull_shipment_id = 1 AND [shipment_id] IS NULL) OR ([shipment_id] = @Original_shipment_id)) AND ((@IsNull_collected = 1 AND [collected] IS NULL) OR ([collected] = @Original_collected)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_investment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -44777,10 +46721,12 @@ SELECT DisbursementId, ItemId FROM DisbursementItems WHERE (DisbursementId = @Di
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_can_generate_interest", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "can_generate_interest", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_shipment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shipment_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_shipment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shipment_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_collected", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collected", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_collected", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collected", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Disbursements] ([investment_id], [currency_id], [exchange_rate], [client_id], [underlying_debtor_id], [bank_risk_id], [profit_share], [amount], [fund_id], [date], [sector_id], [number], [collection_date], [pay_date], [can_generate_interest], [shipment_id]) VALUES (@investment_id, @currency_id, @exchange_rate, @client_id, @underlying_debtor_id, @bank_risk_id, @profit_share, @amount, @fund_id, @date, @sector_id, @number, @collection_date, @pay_date, @can_generate_interest, @shipment_id);
-SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, collection_date, pay_date, can_generate_interest, shipment_id FROM Disbursements WHERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Disbursements] ([investment_id], [currency_id], [exchange_rate], [client_id], [underlying_debtor_id], [bank_risk_id], [profit_share], [amount], [fund_id], [date], [sector_id], [number], [collection_date], [pay_date], [can_generate_interest], [shipment_id], [collected]) VALUES (@investment_id, @currency_id, @exchange_rate, @client_id, @underlying_debtor_id, @bank_risk_id, @profit_share, @amount, @fund_id, @date, @sector_id, @number, @collection_date, @pay_date, @can_generate_interest, @shipment_id, @collected);
+SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, collection_date, pay_date, can_generate_interest, shipment_id, collected FROM Disbursements WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@investment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@currency_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "currency_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -44798,6 +46744,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pay_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pay_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@can_generate_interest", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "can_generate_interest", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@shipment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shipment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@collected", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collected", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = "UPDATE [Disbursements] SET [investment_id] = @investment_id, [currency_id] = @cur" +
@@ -44806,22 +46753,24 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                 "are] = @profit_share, [amount] = @amount, [fund_id] = @fund_id, [date] = @date, " +
                 "[sector_id] = @sector_id, [number] = @number, [collection_date] = @collection_da" +
                 "te, [pay_date] = @pay_date, [can_generate_interest] = @can_generate_interest, [s" +
-                "hipment_id] = @shipment_id WHERE (([Id] = @Original_Id) AND ([investment_id] = @" +
-                "Original_investment_id) AND ([currency_id] = @Original_currency_id) AND ([exchan" +
-                "ge_rate] = @Original_exchange_rate) AND ([client_id] = @Original_client_id) AND " +
-                "((@IsNull_underlying_debtor_id = 1 AND [underlying_debtor_id] IS NULL) OR ([unde" +
-                "rlying_debtor_id] = @Original_underlying_debtor_id)) AND ((@IsNull_bank_risk_id " +
-                "= 1 AND [bank_risk_id] IS NULL) OR ([bank_risk_id] = @Original_bank_risk_id)) AN" +
-                "D ([profit_share] = @Original_profit_share) AND ([amount] = @Original_amount) AN" +
-                "D ([fund_id] = @Original_fund_id) AND ([date] = @Original_date) AND ([sector_id]" +
-                " = @Original_sector_id) AND ([number] = @Original_number) AND ([collection_date]" +
-                " = @Original_collection_date) AND ((@IsNull_pay_date = 1 AND [pay_date] IS NULL)" +
-                " OR ([pay_date] = @Original_pay_date)) AND ([can_generate_interest] = @Original_" +
-                "can_generate_interest) AND ((@IsNull_shipment_id = 1 AND [shipment_id] IS NULL) " +
-                "OR ([shipment_id] = @Original_shipment_id)));\r\nSELECT Id, investment_id, currenc" +
-                "y_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share" +
-                ", amount, fund_id, date, sector_id, number, collection_date, pay_date, can_gener" +
-                "ate_interest, shipment_id FROM Disbursements WHERE (Id = @Id)";
+                "hipment_id] = @shipment_id, [collected] = @collected WHERE (([Id] = @Original_Id" +
+                ") AND ([investment_id] = @Original_investment_id) AND ([currency_id] = @Original" +
+                "_currency_id) AND ([exchange_rate] = @Original_exchange_rate) AND ([client_id] =" +
+                " @Original_client_id) AND ((@IsNull_underlying_debtor_id = 1 AND [underlying_deb" +
+                "tor_id] IS NULL) OR ([underlying_debtor_id] = @Original_underlying_debtor_id)) A" +
+                "ND ((@IsNull_bank_risk_id = 1 AND [bank_risk_id] IS NULL) OR ([bank_risk_id] = @" +
+                "Original_bank_risk_id)) AND ([profit_share] = @Original_profit_share) AND ([amou" +
+                "nt] = @Original_amount) AND ([fund_id] = @Original_fund_id) AND ([date] = @Origi" +
+                "nal_date) AND ([sector_id] = @Original_sector_id) AND ([number] = @Original_numb" +
+                "er) AND ([collection_date] = @Original_collection_date) AND ((@IsNull_pay_date =" +
+                " 1 AND [pay_date] IS NULL) OR ([pay_date] = @Original_pay_date)) AND ([can_gener" +
+                "ate_interest] = @Original_can_generate_interest) AND ((@IsNull_shipment_id = 1 A" +
+                "ND [shipment_id] IS NULL) OR ([shipment_id] = @Original_shipment_id)) AND ((@IsN" +
+                "ull_collected = 1 AND [collected] IS NULL) OR ([collected] = @Original_collected" +
+                ")));\r\nSELECT Id, investment_id, currency_id, exchange_rate, client_id, underlyin" +
+                "g_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, numbe" +
+                "r, collection_date, pay_date, can_generate_interest, shipment_id, collected FROM" +
+                " Disbursements WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@investment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@currency_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "currency_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -44839,6 +46788,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pay_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pay_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@can_generate_interest", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "can_generate_interest", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@shipment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shipment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@collected", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collected", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_investment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_currency_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "currency_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -44860,6 +46810,8 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_can_generate_interest", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "can_generate_interest", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_shipment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shipment_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_shipment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shipment_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_collected", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collected", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_collected", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collected", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -44878,7 +46830,8 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debto" +
                 "r_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, coll" +
-                "ection_date, pay_date, can_generate_interest, shipment_id FROM Disbursements";
+                "ection_date, pay_date, can_generate_interest, shipment_id, collected FROM Disbur" +
+                "sements";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -44956,7 +46909,8 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                     System.DateTime Original_collection_date, 
                     global::System.Nullable<global::System.DateTime> Original_pay_date, 
                     bool Original_can_generate_interest, 
-                    global::System.Nullable<int> Original_shipment_id) {
+                    global::System.Nullable<int> Original_shipment_id, 
+                    global::System.Nullable<bool> Original_collected) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_investment_id));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_currency_id));
@@ -45007,6 +46961,14 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                 this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
+            if ((Original_collected.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[22].Value = ((bool)(Original_collected.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[22].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -45043,7 +47005,8 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                     System.DateTime collection_date, 
                     global::System.Nullable<global::System.DateTime> pay_date, 
                     bool can_generate_interest, 
-                    global::System.Nullable<int> shipment_id) {
+                    global::System.Nullable<int> shipment_id, 
+                    global::System.Nullable<bool> collected) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(investment_id));
             this.Adapter.InsertCommand.Parameters[1].Value = ((int)(currency_id));
             this.Adapter.InsertCommand.Parameters[2].Value = ((float)(exchange_rate));
@@ -45085,6 +47048,12 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             else {
                 this.Adapter.InsertCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
+            if ((collected.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[16].Value = ((bool)(collected.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -45122,6 +47091,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                     global::System.Nullable<global::System.DateTime> pay_date, 
                     bool can_generate_interest, 
                     global::System.Nullable<int> shipment_id, 
+                    global::System.Nullable<bool> collected, 
                     int Original_Id, 
                     int Original_investment_id, 
                     int Original_currency_id, 
@@ -45139,6 +47109,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                     global::System.Nullable<global::System.DateTime> Original_pay_date, 
                     bool Original_can_generate_interest, 
                     global::System.Nullable<int> Original_shipment_id, 
+                    global::System.Nullable<bool> Original_collected, 
                     int Id) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(investment_id));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(currency_id));
@@ -45181,57 +47152,71 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             else {
                 this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_Id));
-            this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_investment_id));
-            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_currency_id));
-            this.Adapter.UpdateCommand.Parameters[19].Value = ((float)(Original_exchange_rate));
-            this.Adapter.UpdateCommand.Parameters[20].Value = ((int)(Original_client_id));
-            if ((Original_underlying_debtor_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((int)(Original_underlying_debtor_id.Value));
+            if ((collected.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((bool)(collected.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_Id));
+            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_investment_id));
+            this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_currency_id));
+            this.Adapter.UpdateCommand.Parameters[20].Value = ((float)(Original_exchange_rate));
+            this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Original_client_id));
+            if ((Original_underlying_debtor_id.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((int)(Original_underlying_debtor_id.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
             }
             if ((Original_bank_risk_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((int)(Original_bank_risk_id.Value));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((int)(Original_bank_risk_id.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[25].Value = ((decimal)(Original_profit_share));
-            this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(Original_amount));
-            this.Adapter.UpdateCommand.Parameters[27].Value = ((int)(Original_fund_id));
-            this.Adapter.UpdateCommand.Parameters[28].Value = ((System.DateTime)(Original_date));
-            this.Adapter.UpdateCommand.Parameters[29].Value = ((int)(Original_sector_id));
+            this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(Original_profit_share));
+            this.Adapter.UpdateCommand.Parameters[27].Value = ((decimal)(Original_amount));
+            this.Adapter.UpdateCommand.Parameters[28].Value = ((int)(Original_fund_id));
+            this.Adapter.UpdateCommand.Parameters[29].Value = ((System.DateTime)(Original_date));
+            this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(Original_sector_id));
             if ((Original_number == null)) {
                 throw new global::System.ArgumentNullException("Original_number");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((string)(Original_number));
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((string)(Original_number));
             }
-            this.Adapter.UpdateCommand.Parameters[31].Value = ((System.DateTime)(Original_collection_date));
+            this.Adapter.UpdateCommand.Parameters[32].Value = ((System.DateTime)(Original_collection_date));
             if ((Original_pay_date.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((System.DateTime)(Original_pay_date.Value));
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((System.DateTime)(Original_pay_date.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[33].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[34].Value = ((bool)(Original_can_generate_interest));
+            this.Adapter.UpdateCommand.Parameters[35].Value = ((bool)(Original_can_generate_interest));
             if ((Original_shipment_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((int)(Original_shipment_id.Value));
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((int)(Original_shipment_id.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[36].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[37].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[37].Value = ((int)(Id));
+            if ((Original_collected.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((bool)(Original_collected.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[39].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[40].Value = ((int)(Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -45269,6 +47254,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                     global::System.Nullable<global::System.DateTime> pay_date, 
                     bool can_generate_interest, 
                     global::System.Nullable<int> shipment_id, 
+                    global::System.Nullable<bool> collected, 
                     int Original_Id, 
                     int Original_investment_id, 
                     int Original_currency_id, 
@@ -45285,8 +47271,9 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                     System.DateTime Original_collection_date, 
                     global::System.Nullable<global::System.DateTime> Original_pay_date, 
                     bool Original_can_generate_interest, 
-                    global::System.Nullable<int> Original_shipment_id) {
-            return this.Update(investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, collection_date, pay_date, can_generate_interest, shipment_id, Original_Id, Original_investment_id, Original_currency_id, Original_exchange_rate, Original_client_id, Original_underlying_debtor_id, Original_bank_risk_id, Original_profit_share, Original_amount, Original_fund_id, Original_date, Original_sector_id, Original_number, Original_collection_date, Original_pay_date, Original_can_generate_interest, Original_shipment_id, Original_Id);
+                    global::System.Nullable<int> Original_shipment_id, 
+                    global::System.Nullable<bool> Original_collected) {
+            return this.Update(investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, collection_date, pay_date, can_generate_interest, shipment_id, collected, Original_Id, Original_investment_id, Original_currency_id, Original_exchange_rate, Original_client_id, Original_underlying_debtor_id, Original_bank_risk_id, Original_profit_share, Original_amount, Original_fund_id, Original_date, Original_sector_id, Original_number, Original_collection_date, Original_pay_date, Original_can_generate_interest, Original_shipment_id, Original_collected, Original_Id);
         }
     }
     
@@ -50754,6 +52741,7 @@ WHERE        (a.FK_Accounts_Funds = @FundId)";
             tableMapping.ColumnMappings.Add("client", "client");
             tableMapping.ColumnMappings.Add("sector_id", "sector_id");
             tableMapping.ColumnMappings.Add("sector", "sector");
+            tableMapping.ColumnMappings.Add("collected", "collected");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -50770,34 +52758,28 @@ WHERE        (a.FK_Accounts_Funds = @FundId)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[5];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector FROM dbo.InvestmentsView";
+            this._commandCollection[0].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector, collected FROM InvestmentsView";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT        fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, 
-                         profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector
-FROM            InvestmentsView
-WHERE        (client_id = @ClientId) AND (bank_risk_id = @BankId) AND (fund_id = @fund_id) OR
-                         (client_id = @ClientId) AND (fund_id = @fund_id) AND (@BankId = 0) OR
-                         (bank_risk_id = @BankId) AND (fund_id = @fund_id) AND (@ClientId = 0) OR
-                         (fund_id = @fund_id) AND (@BankId = 0) AND (@ClientId = 0)";
+            this._commandCollection[1].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector, collected FROM InvestmentsView WHERE (client_id = @ClientId) AND (bank_risk_id = @BankId) AND (fund_id = @fund_id) OR (client_id = @ClientId) AND (fund_id = @fund_id) AND (@BankId = 0) OR (bank_risk_id = @BankId) AND (fund_id = @fund_id) AND (@ClientId = 0) OR (fund_id = @fund_id) AND (@BankId = 0) AND (@ClientId = 0)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ClientId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "client_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BankId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "bank_risk_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fund_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector FROM dbo.InvestmentsView  WHERE fund_id = @FundId";
+            this._commandCollection[2].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector, collected FROM InvestmentsView WHERE (fund_id = @FundId)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector FROM dbo.InvestmentsView WHERE investment_id = @InvestmentId";
+            this._commandCollection[3].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector, collected FROM InvestmentsView WHERE (investment_id = @InvestmentId)";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InvestmentId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[4].Connection = this.Connection;
-            this._commandCollection[4].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector FROM dbo.InvestmentsView WHERE payment_id = @PaymentId AND fund_id = @FundId";
+            this._commandCollection[4].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector, collected FROM InvestmentsView WHERE (payment_id = @PaymentId) AND (fund_id = @FundId)";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PaymentId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "payment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -53338,6 +55320,951 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class DisbursementsForAddendumsTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public DisbursementsForAddendumsTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "DisbursementsForAddendums";
+            tableMapping.ColumnMappings.Add("fund_id", "fund_id");
+            tableMapping.ColumnMappings.Add("contract", "contract");
+            tableMapping.ColumnMappings.Add("disbursement_id", "disbursement_id");
+            tableMapping.ColumnMappings.Add("investment_id", "investment_id");
+            tableMapping.ColumnMappings.Add("number", "number");
+            tableMapping.ColumnMappings.Add("collection_date", "collection_date");
+            tableMapping.ColumnMappings.Add("date", "date");
+            tableMapping.ColumnMappings.Add("pay_date", "pay_date");
+            tableMapping.ColumnMappings.Add("can_generate_interest", "can_generate_interest");
+            tableMapping.ColumnMappings.Add("amount", "amount");
+            tableMapping.ColumnMappings.Add("profit_share", "profit_share");
+            tableMapping.ColumnMappings.Add("toBeCollected", "toBeCollected");
+            tableMapping.ColumnMappings.Add("collected", "collected");
+            tableMapping.ColumnMappings.Add("remaining", "remaining");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::FundsManager.Properties.Settings.Default.FundsDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT fund_id, contract, disbursement_id, investment_id, number, collection_date" +
+                ", date, pay_date, can_generate_interest, amount, profit_share, toBeCollected, co" +
+                "llected, remaining FROM dbo.DisbursementsForAddendums";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = @"SELECT fund_id, contract, disbursement_id, investment_id, number, collection_date, date, pay_date, can_generate_interest, amount, profit_share, toBeCollected, collected, remaining FROM dbo.DisbursementsForAddendums WHERE investment_id = @InvestmentId AND fund_id = @FundId";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InvestmentId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FundsDBDataSet.DisbursementsForAddendumsDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FundsDBDataSet.DisbursementsForAddendumsDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FundsDBDataSet.DisbursementsForAddendumsDataTable dataTable = new FundsDBDataSet.DisbursementsForAddendumsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByInvestmentId(FundsDBDataSet.DisbursementsForAddendumsDataTable dataTable, int InvestmentId, int FundId) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(InvestmentId));
+            this.Adapter.SelectCommand.Parameters[1].Value = ((int)(FundId));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class DisbursementBookingTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public DisbursementBookingTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "DisbursementBooking";
+            tableMapping.ColumnMappings.Add("id", "id");
+            tableMapping.ColumnMappings.Add("book_id", "book_id");
+            tableMapping.ColumnMappings.Add("disbursement_id", "disbursement_id");
+            tableMapping.ColumnMappings.Add("amount", "amount");
+            tableMapping.ColumnMappings.Add("currency_id", "currency_id");
+            tableMapping.ColumnMappings.Add("profit_share", "profit_share");
+            tableMapping.ColumnMappings.Add("delay_interest", "delay_interest");
+            tableMapping.ColumnMappings.Add("number", "number");
+            tableMapping.ColumnMappings.Add("starting_date", "starting_date");
+            tableMapping.ColumnMappings.Add("collection_date", "collection_date");
+            tableMapping.ColumnMappings.Add("exchange_rate", "exchange_rate");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [DisbursementBooking] WHERE (([id] = @Original_id) AND ([book_id] = @Original_book_id) AND ([disbursement_id] = @Original_disbursement_id) AND ([amount] = @Original_amount) AND ([currency_id] = @Original_currency_id) AND ([profit_share] = @Original_profit_share) AND ([delay_interest] = @Original_delay_interest) AND ([number] = @Original_number) AND ([starting_date] = @Original_starting_date) AND ([collection_date] = @Original_collection_date) AND ([exchange_rate] = @Original_exchange_rate))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_book_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "book_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_disbursement_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "amount", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_currency_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "currency_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_profit_share", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "profit_share", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_delay_interest", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "delay_interest", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_number", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "number", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_starting_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "starting_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_collection_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collection_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_exchange_rate", global::System.Data.SqlDbType.Real, 0, global::System.Data.ParameterDirection.Input, 0, 0, "exchange_rate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [DisbursementBooking] ([book_id], [disbursement_id], [amount], [currency_id], [profit_share], [delay_interest], [number], [starting_date], [collection_date], [exchange_rate]) VALUES (@book_id, @disbursement_id, @amount, @currency_id, @profit_share, @delay_interest, @number, @starting_date, @collection_date, @exchange_rate);
+SELECT id, book_id, disbursement_id, amount, currency_id, profit_share, delay_interest, number, starting_date, collection_date, exchange_rate FROM DisbursementBooking WHERE (id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@book_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "book_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@disbursement_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@currency_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "currency_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@profit_share", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "profit_share", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@delay_interest", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "delay_interest", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@number", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@starting_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "starting_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@collection_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collection_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@exchange_rate", global::System.Data.SqlDbType.Real, 0, global::System.Data.ParameterDirection.Input, 0, 0, "exchange_rate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [DisbursementBooking] SET [book_id] = @book_id, [disbursement_id] = @disbursement_id, [amount] = @amount, [currency_id] = @currency_id, [profit_share] = @profit_share, [delay_interest] = @delay_interest, [number] = @number, [starting_date] = @starting_date, [collection_date] = @collection_date, [exchange_rate] = @exchange_rate WHERE (([id] = @Original_id) AND ([book_id] = @Original_book_id) AND ([disbursement_id] = @Original_disbursement_id) AND ([amount] = @Original_amount) AND ([currency_id] = @Original_currency_id) AND ([profit_share] = @Original_profit_share) AND ([delay_interest] = @Original_delay_interest) AND ([number] = @Original_number) AND ([starting_date] = @Original_starting_date) AND ([collection_date] = @Original_collection_date) AND ([exchange_rate] = @Original_exchange_rate));
+SELECT id, book_id, disbursement_id, amount, currency_id, profit_share, delay_interest, number, starting_date, collection_date, exchange_rate FROM DisbursementBooking WHERE (id = @id)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@book_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "book_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@disbursement_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "amount", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@currency_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "currency_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@profit_share", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "profit_share", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@delay_interest", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "delay_interest", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@number", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@starting_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "starting_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@collection_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collection_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@exchange_rate", global::System.Data.SqlDbType.Real, 0, global::System.Data.ParameterDirection.Input, 0, 0, "exchange_rate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_book_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "book_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_disbursement_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_amount", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "amount", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_currency_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "currency_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_profit_share", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "profit_share", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_delay_interest", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "delay_interest", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_number", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "number", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_starting_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "starting_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_collection_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collection_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_exchange_rate", global::System.Data.SqlDbType.Real, 0, global::System.Data.ParameterDirection.Input, 0, 0, "exchange_rate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::FundsManager.Properties.Settings.Default.FundsDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT id, book_id, disbursement_id, amount, currency_id, profit_share, delay_int" +
+                "erest, number, starting_date, collection_date, exchange_rate FROM DisbursementBo" +
+                "oking";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FundsDBDataSet.DisbursementBookingDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FundsDBDataSet.DisbursementBookingDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FundsDBDataSet.DisbursementBookingDataTable dataTable = new FundsDBDataSet.DisbursementBookingDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FundsDBDataSet.DisbursementBookingDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FundsDBDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "DisbursementBooking");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_id, int Original_book_id, int Original_disbursement_id, decimal Original_amount, int Original_currency_id, decimal Original_profit_share, decimal Original_delay_interest, string Original_number, System.DateTime Original_starting_date, System.DateTime Original_collection_date, float Original_exchange_rate) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_id));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_book_id));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_disbursement_id));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((decimal)(Original_amount));
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_currency_id));
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((decimal)(Original_profit_share));
+            this.Adapter.DeleteCommand.Parameters[6].Value = ((decimal)(Original_delay_interest));
+            if ((Original_number == null)) {
+                throw new global::System.ArgumentNullException("Original_number");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((string)(Original_number));
+            }
+            this.Adapter.DeleteCommand.Parameters[8].Value = ((System.DateTime)(Original_starting_date));
+            this.Adapter.DeleteCommand.Parameters[9].Value = ((System.DateTime)(Original_collection_date));
+            this.Adapter.DeleteCommand.Parameters[10].Value = ((float)(Original_exchange_rate));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(int book_id, int disbursement_id, decimal amount, int currency_id, decimal profit_share, decimal delay_interest, string number, System.DateTime starting_date, System.DateTime collection_date, float exchange_rate) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(book_id));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(disbursement_id));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(amount));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(currency_id));
+            this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(profit_share));
+            this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(delay_interest));
+            if ((number == null)) {
+                throw new global::System.ArgumentNullException("number");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(number));
+            }
+            this.Adapter.InsertCommand.Parameters[7].Value = ((System.DateTime)(starting_date));
+            this.Adapter.InsertCommand.Parameters[8].Value = ((System.DateTime)(collection_date));
+            this.Adapter.InsertCommand.Parameters[9].Value = ((float)(exchange_rate));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    int book_id, 
+                    int disbursement_id, 
+                    decimal amount, 
+                    int currency_id, 
+                    decimal profit_share, 
+                    decimal delay_interest, 
+                    string number, 
+                    System.DateTime starting_date, 
+                    System.DateTime collection_date, 
+                    float exchange_rate, 
+                    int Original_id, 
+                    int Original_book_id, 
+                    int Original_disbursement_id, 
+                    decimal Original_amount, 
+                    int Original_currency_id, 
+                    decimal Original_profit_share, 
+                    decimal Original_delay_interest, 
+                    string Original_number, 
+                    System.DateTime Original_starting_date, 
+                    System.DateTime Original_collection_date, 
+                    float Original_exchange_rate, 
+                    int id) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(book_id));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(disbursement_id));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(amount));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(currency_id));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(profit_share));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(delay_interest));
+            if ((number == null)) {
+                throw new global::System.ArgumentNullException("number");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(number));
+            }
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(starting_date));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(collection_date));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((float)(exchange_rate));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_id));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_book_id));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_disbursement_id));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_amount));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_currency_id));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((decimal)(Original_profit_share));
+            this.Adapter.UpdateCommand.Parameters[16].Value = ((decimal)(Original_delay_interest));
+            if ((Original_number == null)) {
+                throw new global::System.ArgumentNullException("Original_number");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_number));
+            }
+            this.Adapter.UpdateCommand.Parameters[18].Value = ((System.DateTime)(Original_starting_date));
+            this.Adapter.UpdateCommand.Parameters[19].Value = ((System.DateTime)(Original_collection_date));
+            this.Adapter.UpdateCommand.Parameters[20].Value = ((float)(Original_exchange_rate));
+            this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(id));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    int book_id, 
+                    int disbursement_id, 
+                    decimal amount, 
+                    int currency_id, 
+                    decimal profit_share, 
+                    decimal delay_interest, 
+                    string number, 
+                    System.DateTime starting_date, 
+                    System.DateTime collection_date, 
+                    float exchange_rate, 
+                    int Original_id, 
+                    int Original_book_id, 
+                    int Original_disbursement_id, 
+                    decimal Original_amount, 
+                    int Original_currency_id, 
+                    decimal Original_profit_share, 
+                    decimal Original_delay_interest, 
+                    string Original_number, 
+                    System.DateTime Original_starting_date, 
+                    System.DateTime Original_collection_date, 
+                    float Original_exchange_rate) {
+            return this.Update(book_id, disbursement_id, amount, currency_id, profit_share, delay_interest, number, starting_date, collection_date, exchange_rate, Original_id, Original_book_id, Original_disbursement_id, Original_amount, Original_currency_id, Original_profit_share, Original_delay_interest, Original_number, Original_starting_date, Original_collection_date, Original_exchange_rate, Original_id);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class DisbursementBooksTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public DisbursementBooksTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "DisbursementBooks";
+            tableMapping.ColumnMappings.Add("Id", "Id");
+            tableMapping.ColumnMappings.Add("date", "date");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[DisbursementBooks] WHERE (([Id] = @Original_Id) AND ([date] = " +
+                "@Original_date))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[DisbursementBooks] ([Id], [date]) VALUES (@Id, @date);\r\nSELECT" +
+                " Id, date FROM DisbursementBooks WHERE (Id = @Id)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[DisbursementBooks] SET [Id] = @Id, [date] = @date WHERE (([Id] = @O" +
+                "riginal_Id) AND ([date] = @Original_date));\r\nSELECT Id, date FROM DisbursementBo" +
+                "oks WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::FundsManager.Properties.Settings.Default.FundsDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT Id, date FROM dbo.DisbursementBooks";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FundsDBDataSet.DisbursementBooksDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FundsDBDataSet.DisbursementBooksDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FundsDBDataSet.DisbursementBooksDataTable dataTable = new FundsDBDataSet.DisbursementBooksDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FundsDBDataSet.DisbursementBooksDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FundsDBDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "DisbursementBooks");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_Id, System.DateTime Original_date) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((System.DateTime)(Original_date));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(int Id, System.DateTime date) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(Id));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(date));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int Id, System.DateTime date, int Original_Id, System.DateTime Original_date) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Id));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(date));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Original_Id));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((System.DateTime)(Original_date));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(System.DateTime date, int Original_Id, System.DateTime Original_date) {
+            return this.Update(Original_Id, date, Original_Id, Original_date);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -53428,6 +56355,10 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
         private DisbursementCollectionsTableAdapter _disbursementCollectionsTableAdapter;
         
         private DisbursementCollectionsDetailsTableAdapter _disbursementCollectionsDetailsTableAdapter;
+        
+        private DisbursementBookingTableAdapter _disbursementBookingTableAdapter;
+        
+        private DisbursementBooksTableAdapter _disbursementBooksTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -54006,6 +56937,34 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public DisbursementBookingTableAdapter DisbursementBookingTableAdapter {
+            get {
+                return this._disbursementBookingTableAdapter;
+            }
+            set {
+                this._disbursementBookingTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public DisbursementBooksTableAdapter DisbursementBooksTableAdapter {
+            get {
+                return this._disbursementBooksTableAdapter;
+            }
+            set {
+                this._disbursementBooksTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -54183,6 +57142,14 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                             && (this._disbursementCollectionsDetailsTableAdapter.Connection != null))) {
                     return this._disbursementCollectionsDetailsTableAdapter.Connection;
                 }
+                if (((this._disbursementBookingTableAdapter != null) 
+                            && (this._disbursementBookingTableAdapter.Connection != null))) {
+                    return this._disbursementBookingTableAdapter.Connection;
+                }
+                if (((this._disbursementBooksTableAdapter != null) 
+                            && (this._disbursementBooksTableAdapter.Connection != null))) {
+                    return this._disbursementBooksTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -54316,6 +57283,12 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                 if ((this._disbursementCollectionsDetailsTableAdapter != null)) {
                     count = (count + 1);
                 }
+                if ((this._disbursementBookingTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._disbursementBooksTableAdapter != null)) {
+                    count = (count + 1);
+                }
                 return count;
             }
         }
@@ -54372,21 +57345,39 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._clientsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Clients.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._clientsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._shipmentsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Shipments.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._shipmentsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._sectorsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Sectors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._sectorsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._underlyingDebtorsTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.UnderlyingDebtors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._underlyingDebtorsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._accountsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Accounts.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._accountsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -54408,57 +57399,12 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._sectorsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Sectors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._accountsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Accounts.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._sectorsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._shipmentsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Shipments.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._shipmentsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._clientsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Clients.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._clientsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._disbursementGeneratedInterestsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.DisbursementGeneratedInterests.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._disbursementGeneratedInterestsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._disbursementPaymentsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.DisbursementPayments.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._disbursementPaymentsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._disbursementCollectionsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.DisbursementCollections.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._disbursementCollectionsTableAdapter.Update(updatedRows));
+                    result = (result + this._accountsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -54471,24 +57417,6 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._bondsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Bonds.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._bondsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._investorsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Investors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._investorsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._bankingAccountsTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.BankingAccounts.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -54498,30 +57426,48 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._subaccountsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Subaccounts.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._disbursementGeneratedInterestsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.DisbursementGeneratedInterests.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._subaccountsTableAdapter.Update(updatedRows));
+                    result = (result + this._disbursementGeneratedInterestsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._employeesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Employees.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._disbursementCollectionsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.DisbursementCollections.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._employeesTableAdapter.Update(updatedRows));
+                    result = (result + this._disbursementCollectionsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._creditorsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Creditors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._disbursementPaymentsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.DisbursementPayments.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._creditorsTableAdapter.Update(updatedRows));
+                    result = (result + this._disbursementPaymentsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._bondsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Bonds.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._bondsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._disbursementBooksTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.DisbursementBooks.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._disbursementBooksTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -54543,6 +57489,42 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._creditorsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Creditors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._creditorsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._employeesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Employees.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._employeesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._investorsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Investors.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._investorsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._subaccountsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Subaccounts.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._subaccountsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._disbursementCollectionsDetailsTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.DisbursementCollectionsDetails.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -54558,24 +57540,6 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._bondsInvestorsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._disbursementGeneratedInterestDetailsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.DisbursementGeneratedInterestDetails.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._disbursementGeneratedInterestDetailsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._accountsBankingAccountsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.AccountsBankingAccounts.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._accountsBankingAccountsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -54606,21 +57570,21 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._accountsEmployeesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.AccountsEmployees.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._accountsEmployeesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._disbursementItemsTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.DisbursementItems.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._disbursementItemsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._accountsEmployeesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.AccountsEmployees.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._accountsEmployeesTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -54633,12 +57597,12 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._otherDetailsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.OtherDetails.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._disbursementBookingTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.DisbursementBooking.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._otherDetailsTableAdapter.Update(updatedRows));
+                    result = (result + this._disbursementBookingTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -54684,6 +57648,33 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._disbursementPaymentDetailsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._accountsBankingAccountsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.AccountsBankingAccounts.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._accountsBankingAccountsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._disbursementGeneratedInterestDetailsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.DisbursementGeneratedInterestDetails.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._disbursementGeneratedInterestDetailsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._otherDetailsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.OtherDetails.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._otherDetailsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -54737,19 +57728,35 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._clientsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Clients.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._clientsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._shipmentsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Shipments.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._shipmentsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._sectorsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Sectors.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._sectorsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._underlyingDebtorsTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.UnderlyingDebtors.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._underlyingDebtorsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._accountsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Accounts.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._accountsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -54769,51 +57776,11 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._sectorsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Sectors.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._accountsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Accounts.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._sectorsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._shipmentsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Shipments.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._shipmentsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._clientsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Clients.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._clientsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._disbursementGeneratedInterestsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.DisbursementGeneratedInterests.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._disbursementGeneratedInterestsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._disbursementPaymentsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.DisbursementPayments.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._disbursementPaymentsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._disbursementCollectionsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.DisbursementCollections.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._disbursementCollectionsTableAdapter.Update(addedRows));
+                    result = (result + this._accountsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -54825,22 +57792,6 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._bondsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Bonds.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._bondsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._investorsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Investors.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._investorsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._bankingAccountsTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.BankingAccounts.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -54849,27 +57800,43 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._subaccountsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Subaccounts.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._disbursementGeneratedInterestsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.DisbursementGeneratedInterests.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._subaccountsTableAdapter.Update(addedRows));
+                    result = (result + this._disbursementGeneratedInterestsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._employeesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Employees.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._disbursementCollectionsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.DisbursementCollections.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._employeesTableAdapter.Update(addedRows));
+                    result = (result + this._disbursementCollectionsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._creditorsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Creditors.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._disbursementPaymentsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.DisbursementPayments.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._creditorsTableAdapter.Update(addedRows));
+                    result = (result + this._disbursementPaymentsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._bondsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Bonds.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._bondsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._disbursementBooksTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.DisbursementBooks.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._disbursementBooksTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -54889,6 +57856,38 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._creditorsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Creditors.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._creditorsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._employeesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Employees.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._employeesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._investorsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Investors.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._investorsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._subaccountsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Subaccounts.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._subaccountsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._disbursementCollectionsDetailsTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.DisbursementCollectionsDetails.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -54902,22 +57901,6 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._bondsInvestorsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._disbursementGeneratedInterestDetailsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.DisbursementGeneratedInterestDetails.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._disbursementGeneratedInterestDetailsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._accountsBankingAccountsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.AccountsBankingAccounts.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._accountsBankingAccountsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -54945,19 +57928,19 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._accountsEmployeesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.AccountsEmployees.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._accountsEmployeesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._disbursementItemsTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.DisbursementItems.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._disbursementItemsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._accountsEmployeesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.AccountsEmployees.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._accountsEmployeesTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -54969,11 +57952,11 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._otherDetailsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.OtherDetails.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._disbursementBookingTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.DisbursementBooking.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._otherDetailsTableAdapter.Update(addedRows));
+                    result = (result + this._disbursementBookingTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -55017,6 +58000,30 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._accountsBankingAccountsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.AccountsBankingAccounts.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._accountsBankingAccountsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._disbursementGeneratedInterestDetailsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.DisbursementGeneratedInterestDetails.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._disbursementGeneratedInterestDetailsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._otherDetailsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.OtherDetails.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._otherDetailsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             return result;
         }
         
@@ -55027,6 +58034,30 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateDeletedRows(FundsDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
+            if ((this._otherDetailsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.OtherDetails.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._otherDetailsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._disbursementGeneratedInterestDetailsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.DisbursementGeneratedInterestDetails.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._disbursementGeneratedInterestDetailsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._accountsBankingAccountsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.AccountsBankingAccounts.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._accountsBankingAccountsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._disbursementPaymentDetailsTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.DisbursementPaymentDetails.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -55067,11 +58098,11 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._otherDetailsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.OtherDetails.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._disbursementBookingTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.DisbursementBooking.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._otherDetailsTableAdapter.Update(deletedRows));
+                    result = (result + this._disbursementBookingTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -55083,19 +58114,19 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._disbursementItemsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.DisbursementItems.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._disbursementItemsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._accountsEmployeesTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.AccountsEmployees.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._accountsEmployeesTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._disbursementItemsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.DisbursementItems.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._disbursementItemsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -55123,22 +58154,6 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._accountsBankingAccountsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.AccountsBankingAccounts.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._accountsBankingAccountsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._disbursementGeneratedInterestDetailsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.DisbursementGeneratedInterestDetails.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._disbursementGeneratedInterestDetailsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._bondsInvestorsTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.BondsInvestors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -55152,6 +58167,38 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._disbursementCollectionsDetailsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._subaccountsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Subaccounts.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._subaccountsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._investorsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Investors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._investorsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._employeesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Employees.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._employeesTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._creditorsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Creditors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._creditorsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -55171,43 +58218,11 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._creditorsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Creditors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._disbursementBooksTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.DisbursementBooks.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._creditorsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._employeesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Employees.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._employeesTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._subaccountsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Subaccounts.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._subaccountsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._bankingAccountsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.BankingAccounts.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._bankingAccountsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._investorsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Investors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._investorsTableAdapter.Update(deletedRows));
+                    result = (result + this._disbursementBooksTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -55219,11 +58234,11 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._disbursementsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Disbursements.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._disbursementPaymentsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.DisbursementPayments.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._disbursementsTableAdapter.Update(deletedRows));
+                    result = (result + this._disbursementPaymentsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -55235,14 +58250,6 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._disbursementPaymentsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.DisbursementPayments.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._disbursementPaymentsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._disbursementGeneratedInterestsTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.DisbursementGeneratedInterests.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -55251,27 +58258,27 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._clientsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Clients.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._bankingAccountsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.BankingAccounts.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._clientsTableAdapter.Update(deletedRows));
+                    result = (result + this._bankingAccountsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._shipmentsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Shipments.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._disbursementsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Disbursements.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._shipmentsTableAdapter.Update(deletedRows));
+                    result = (result + this._disbursementsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._sectorsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Sectors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._accountsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Accounts.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._sectorsTableAdapter.Update(deletedRows));
+                    result = (result + this._accountsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -55291,19 +58298,35 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._accountsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Accounts.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._accountsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._underlyingDebtorsTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.UnderlyingDebtors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._underlyingDebtorsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._sectorsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Sectors.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._sectorsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._shipmentsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Shipments.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._shipmentsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._clientsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Clients.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._clientsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -55583,6 +58606,16 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
             }
             if (((this._disbursementCollectionsDetailsTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._disbursementCollectionsDetailsTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
+                        "sma cadena de conexión.");
+            }
+            if (((this._disbursementBookingTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._disbursementBookingTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
+                        "sma cadena de conexión.");
+            }
+            if (((this._disbursementBooksTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._disbursementBooksTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("Todos los TableAdapters administrados por un TableAdapterManager deben usar la mi" +
                         "sma cadena de conexión.");
             }
@@ -55978,6 +59011,24 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                         adaptersWithAcceptChangesDuringUpdate.Add(this._disbursementCollectionsDetailsTableAdapter.Adapter);
                     }
                 }
+                if ((this._disbursementBookingTableAdapter != null)) {
+                    revertConnections.Add(this._disbursementBookingTableAdapter, this._disbursementBookingTableAdapter.Connection);
+                    this._disbursementBookingTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._disbursementBookingTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._disbursementBookingTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._disbursementBookingTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._disbursementBookingTableAdapter.Adapter);
+                    }
+                }
+                if ((this._disbursementBooksTableAdapter != null)) {
+                    revertConnections.Add(this._disbursementBooksTableAdapter, this._disbursementBooksTableAdapter.Connection);
+                    this._disbursementBooksTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._disbursementBooksTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._disbursementBooksTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._disbursementBooksTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._disbursementBooksTableAdapter.Adapter);
+                    }
+                }
                 // 
                 //---- Perform updates -----------
                 //
@@ -56195,6 +59246,14 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
                 if ((this._disbursementCollectionsDetailsTableAdapter != null)) {
                     this._disbursementCollectionsDetailsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._disbursementCollectionsDetailsTableAdapter]));
                     this._disbursementCollectionsDetailsTableAdapter.Transaction = null;
+                }
+                if ((this._disbursementBookingTableAdapter != null)) {
+                    this._disbursementBookingTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._disbursementBookingTableAdapter]));
+                    this._disbursementBookingTableAdapter.Transaction = null;
+                }
+                if ((this._disbursementBooksTableAdapter != null)) {
+                    this._disbursementBooksTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._disbursementBooksTableAdapter]));
+                    this._disbursementBooksTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

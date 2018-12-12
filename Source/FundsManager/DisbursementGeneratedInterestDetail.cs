@@ -21,8 +21,8 @@ namespace FundsManager
         public System.DateTime generated_interest_date { get; set; }
         public Nullable<int> accounting_movement_id { get; set; }
     
+        public virtual AccountingMovement AccountingMovement { get; set; }
         public virtual DisbursementGeneratedInterest DisbursementGeneratedInterest { get; set; }
         public virtual Disbursement Disbursement { get; set; }
-        public virtual AccountingMovement AccountingMovement { get; set; }
     }
 }

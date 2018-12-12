@@ -18,9 +18,9 @@ namespace FundsManager
         public AccountingMovement()
         {
             this.Movements_Accounts = new HashSet<Movements_Accounts>();
-            this.DisbursementGeneratedInterestDetails1 = new HashSet<DisbursementGeneratedInterestDetail>();
             this.DisbursementPayments = new HashSet<DisbursementPayment>();
             this.DisbursementCollections = new HashSet<DisbursementCollection>();
+            this.DisbursementGeneratedInterestDetails = new HashSet<DisbursementGeneratedInterestDetail>();
         }
     
         public int Id { get; set; }
@@ -37,10 +37,10 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movements_Accounts> Movements_Accounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DisbursementGeneratedInterestDetail> DisbursementGeneratedInterestDetails1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementPayment> DisbursementPayments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementCollection> DisbursementCollections { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementGeneratedInterestDetail> DisbursementGeneratedInterestDetails { get; set; }
     }
 }

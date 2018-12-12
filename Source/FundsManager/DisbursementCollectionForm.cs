@@ -232,6 +232,11 @@ namespace FundsManager
                                                 collectionDetail.disbursement_id = disbId;
                                                 collectionDetail.amount_collected = Math.Round(toBeCollected125 + toBeCollected128 + toBeCollected130, 2);
 
+                                                if (totalToBeCollected - collected - collectionDetail.amount_collected <= 0)
+                                                {
+                                                    disb.collected = true;
+                                                }
+
                                                 manager.My_db.DisbursementCollectionsDetails.Add(collectionDetail);
                                                 manager.My_db.SaveChanges();
 
