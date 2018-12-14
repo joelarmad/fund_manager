@@ -19,8 +19,8 @@ namespace FundsManager
         int NumberIndex = 1;
         int CollectionDateIndex = 2;
         int AmountIndex = 3;
-        int CollectedIndex = 4;
-        int ToBeCollectedIndex = 5;
+        int ProfitShareIndex = 4;
+        int CollectedIndex = 5;
         int DelayInterestIndex = 6;
         int CollectTo125Index = 7;
         int CollectTo128Index = 8;
@@ -95,7 +95,7 @@ namespace FundsManager
             {
                 List<int> ids = new List<int>();
                 List<decimal> amounts = new List<decimal>();
-                List<decimal> totalsToBeCollected = new List<decimal>();
+                List<decimal> profitShares = new List<decimal>();
                 List<decimal> collecteds = new List<decimal>();
                 List<decimal> collect125 = new List<decimal>();
                 List<decimal> collect128 = new List<decimal>();
@@ -108,7 +108,7 @@ namespace FundsManager
                     int id = int.Parse(row.Cells[IdIndex].Value.ToString());
                     string number = row.Cells[NumberIndex].Value.ToString();
                     decimal amount = decimal.Parse(row.Cells[AmountIndex].Value.ToString());
-                    decimal totalToBeCollected = decimal.Parse(row.Cells[ToBeCollectedIndex].Value.ToString());
+                    decimal profitShare = decimal.Parse(row.Cells[ProfitShareIndex].Value.ToString());
                     decimal collected = decimal.Parse(row.Cells[CollectedIndex].Value.ToString());
                     string amountToBeCollected125Str = row.Cells[CollectTo125Index].Value != null ? row.Cells[CollectTo125Index].Value.ToString() : "0";
                     string amountToBeCollected128Str = row.Cells[CollectTo128Index].Value != null ? row.Cells[CollectTo128Index].Value.ToString() : "0";
@@ -124,11 +124,11 @@ namespace FundsManager
                                 decimal.TryParse(amountToBeCollected128Str, out amountToBeCollected128) &&
                                 decimal.TryParse(amountToBeCollected130Str, out amountToBeCollected130))
                         {
-                            if (totalToBeCollected - collected - amountToBeCollected125 - amountToBeCollected128 - amountToBeCollected130 >= 0)
+                            if (profitShare - collected - amountToBeCollected125 - amountToBeCollected128 - amountToBeCollected130 >= 0)
                             {
                                 ids.Add(id);
                                 amounts.Add(amount);
-                                totalsToBeCollected.Add(totalToBeCollected);
+                                profitShares.Add(profitShare);
                                 collecteds.Add(collected);
                                 collect125.Add(amountToBeCollected125);
                                 collect128.Add(amountToBeCollected128);
@@ -193,7 +193,7 @@ namespace FundsManager
                                 {
                                     int disbId = ids[i];
                                     decimal amount = amounts[i];
-                                    decimal totalToBeCollected = totalsToBeCollected[i];
+                                    decimal profitShare = profitShares[i];
                                     decimal collected = collecteds[i];
                                     decimal toBeCollected125 = collect125[i];
                                     decimal toBeCollected128 = collect128[i];
@@ -232,7 +232,7 @@ namespace FundsManager
                                                 collectionDetail.disbursement_id = disbId;
                                                 collectionDetail.amount_collected = Math.Round(toBeCollected125 + toBeCollected128 + toBeCollected130, 2);
 
-                                                if (totalToBeCollected - collected - collectionDetail.amount_collected <= 0)
+                                                if (profitShare - collected - collectionDetail.amount_collected <= 0)
                                                 {
                                                     disb.collected = true;
                                                 }
