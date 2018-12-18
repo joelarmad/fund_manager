@@ -467,7 +467,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <PropertyRef Name="can_generate_interest" />
             <PropertyRef Name="contract" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="investment_id" Type="int" Nullable="false" />
           <Property Name="currency_id" Type="int" Nullable="false" />
           <Property Name="exchange_rate" Type="real" Nullable="false" />
@@ -484,6 +484,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="pay_date" Type="date" />
           <Property Name="can_generate_interest" Type="bit" Nullable="false" />
           <Property Name="shipment_id" Type="int" />
+          <Property Name="collected" Type="bit" />
           <Property Name="contract" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="debtor_bank_id">
@@ -1496,6 +1497,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
     [ProfitShareToAccrue].[pay_date] AS [pay_date], 
     [ProfitShareToAccrue].[can_generate_interest] AS [can_generate_interest], 
     [ProfitShareToAccrue].[shipment_id] AS [shipment_id], 
+    [ProfitShareToAccrue].[collected] AS [collected], 
     [ProfitShareToAccrue].[contract] AS [contract]
     FROM [dbo].[ProfitShareToAccrue] AS [ProfitShareToAccrue]</DefiningQuery>
           </EntitySet>
@@ -2076,7 +2078,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="Subaccount" EntitySet="Subaccounts" />
             <End Role="OtherDetail" EntitySet="OtherDetails" />
           </AssociationSet>
-          <EntitySet Name="ProfitShareToAccrues" EntityType="FundsDBModel.ProfitShareToAccrue" />
           <EntitySet Name="DisbursementCollections" EntityType="FundsDBModel.DisbursementCollection" />
           <AssociationSet Name="FK_DisbursementCollections_Investments" Association="FundsDBModel.FK_DisbursementCollections_Investments">
             <End Role="Investment" EntitySet="Investments" />
@@ -2175,6 +2176,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="DisbursementBook" EntitySet="DisbursementBooks" />
             <End Role="DisbursementBooking" EntitySet="DisbursementBookings" />
           </AssociationSet>
+          <EntitySet Name="ProfitShareToAccrues" EntityType="FundsDBModel.ProfitShareToAccrue" />
           </EntityContainer>
         <EntityType Name="AccountingMovement">
           <Key>
@@ -3322,42 +3324,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ProfitShareToAccrue">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="investment_id" />
-            <PropertyRef Name="currency_id" />
-            <PropertyRef Name="exchange_rate" />
-            <PropertyRef Name="client_id" />
-            <PropertyRef Name="profit_share" />
-            <PropertyRef Name="amount" />
-            <PropertyRef Name="fund_id" />
-            <PropertyRef Name="date" />
-            <PropertyRef Name="sector_id" />
-            <PropertyRef Name="number" />
-            <PropertyRef Name="collection_date" />
-            <PropertyRef Name="can_generate_interest" />
-            <PropertyRef Name="contract" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="investment_id" Type="Int32" Nullable="false" />
-          <Property Name="currency_id" Type="Int32" Nullable="false" />
-          <Property Name="exchange_rate" Type="Single" Nullable="false" />
-          <Property Name="client_id" Type="Int32" Nullable="false" />
-          <Property Name="underlying_debtor_id" Type="Int32" />
-          <Property Name="bank_risk_id" Type="Int32" />
-          <Property Name="profit_share" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="fund_id" Type="Int32" Nullable="false" />
-          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="sector_id" Type="Int32" Nullable="false" />
-          <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="collection_date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="pay_date" Type="DateTime" Precision="0" />
-          <Property Name="can_generate_interest" Type="Boolean" Nullable="false" />
-          <Property Name="shipment_id" Type="Int32" />
-          <Property Name="contract" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="DisbursementCollection">
           <Key>
             <PropertyRef Name="id" />
@@ -3731,6 +3697,43 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ProfitShareToAccrue">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="investment_id" />
+            <PropertyRef Name="currency_id" />
+            <PropertyRef Name="exchange_rate" />
+            <PropertyRef Name="client_id" />
+            <PropertyRef Name="profit_share" />
+            <PropertyRef Name="amount" />
+            <PropertyRef Name="fund_id" />
+            <PropertyRef Name="date" />
+            <PropertyRef Name="sector_id" />
+            <PropertyRef Name="number" />
+            <PropertyRef Name="collection_date" />
+            <PropertyRef Name="can_generate_interest" />
+            <PropertyRef Name="contract" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="investment_id" Type="Int32" Nullable="false" />
+          <Property Name="currency_id" Type="Int32" Nullable="false" />
+          <Property Name="exchange_rate" Type="Single" Nullable="false" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="underlying_debtor_id" Type="Int32" />
+          <Property Name="bank_risk_id" Type="Int32" />
+          <Property Name="profit_share" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="fund_id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="sector_id" Type="Int32" Nullable="false" />
+          <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="collection_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pay_date" Type="DateTime" Precision="0" />
+          <Property Name="can_generate_interest" Type="Boolean" Nullable="false" />
+          <Property Name="shipment_id" Type="Int32" />
+          <Property Name="collected" Type="Boolean" />
+          <Property Name="contract" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4128,30 +4131,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProfitShareToAccrues">
-            <EntityTypeMapping TypeName="FundsDBModel.ProfitShareToAccrue">
-              <MappingFragment StoreEntitySet="ProfitShareToAccrue">
-                <ScalarProperty Name="contract" ColumnName="contract" />
-                <ScalarProperty Name="shipment_id" ColumnName="shipment_id" />
-                <ScalarProperty Name="can_generate_interest" ColumnName="can_generate_interest" />
-                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
-                <ScalarProperty Name="collection_date" ColumnName="collection_date" />
-                <ScalarProperty Name="number" ColumnName="number" />
-                <ScalarProperty Name="sector_id" ColumnName="sector_id" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="profit_share" ColumnName="profit_share" />
-                <ScalarProperty Name="bank_risk_id" ColumnName="bank_risk_id" />
-                <ScalarProperty Name="underlying_debtor_id" ColumnName="underlying_debtor_id" />
-                <ScalarProperty Name="client_id" ColumnName="client_id" />
-                <ScalarProperty Name="exchange_rate" ColumnName="exchange_rate" />
-                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
-                <ScalarProperty Name="investment_id" ColumnName="investment_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DisbursementCollections">
             <EntityTypeMapping TypeName="FundsDBModel.DisbursementCollection">
               <MappingFragment StoreEntitySet="DisbursementCollections">
@@ -4239,6 +4218,31 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <EntityTypeMapping TypeName="FundsDBModel.DisbursementBook">
               <MappingFragment StoreEntitySet="DisbursementBooks">
                 <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfitShareToAccrues">
+            <EntityTypeMapping TypeName="FundsDBModel.ProfitShareToAccrue">
+              <MappingFragment StoreEntitySet="ProfitShareToAccrue">
+                <ScalarProperty Name="contract" ColumnName="contract" />
+                <ScalarProperty Name="collected" ColumnName="collected" />
+                <ScalarProperty Name="shipment_id" ColumnName="shipment_id" />
+                <ScalarProperty Name="can_generate_interest" ColumnName="can_generate_interest" />
+                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
+                <ScalarProperty Name="collection_date" ColumnName="collection_date" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="sector_id" ColumnName="sector_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="profit_share" ColumnName="profit_share" />
+                <ScalarProperty Name="bank_risk_id" ColumnName="bank_risk_id" />
+                <ScalarProperty Name="underlying_debtor_id" ColumnName="underlying_debtor_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="exchange_rate" ColumnName="exchange_rate" />
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+                <ScalarProperty Name="investment_id" ColumnName="investment_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

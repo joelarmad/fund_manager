@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cbClient = new System.Windows.Forms.ComboBox();
@@ -47,9 +47,9 @@
             this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.profitshareDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toBeCollectedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.profit_share_accrued = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.profit_share_to_accrue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.collectiondateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.remainingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.disbursementsForAddendumsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.clientsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientsTableAdapter();
             this.clientContractsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientContractsTableAdapter();
@@ -129,16 +129,16 @@
             this.numberDataGridViewTextBoxColumn,
             this.amountDataGridViewTextBoxColumn,
             this.profitshareDataGridViewTextBoxColumn,
-            this.toBeCollectedDataGridViewTextBoxColumn,
-            this.collectiondateDataGridViewTextBoxColumn,
-            this.remainingDataGridViewTextBoxColumn});
+            this.profit_share_accrued,
+            this.profit_share_to_accrue,
+            this.collectiondateDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.disbursementsForAddendumsBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(11, 67);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(662, 244);
+            this.dataGridView1.Size = new System.Drawing.Size(735, 244);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
@@ -153,8 +153,8 @@
             // numberDataGridViewTextBoxColumn
             // 
             this.numberDataGridViewTextBoxColumn.DataPropertyName = "number";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.numberDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.numberDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.numberDataGridViewTextBoxColumn.HeaderText = "Number";
             this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
             this.numberDataGridViewTextBoxColumn.ReadOnly = true;
@@ -162,10 +162,10 @@
             // amountDataGridViewTextBoxColumn
             // 
             this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N2";
-            dataGridViewCellStyle8.NullValue = null;
-            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.amountDataGridViewTextBoxColumn.HeaderText = "Investment";
             this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
             this.amountDataGridViewTextBoxColumn.ReadOnly = true;
@@ -173,41 +173,43 @@
             // profitshareDataGridViewTextBoxColumn
             // 
             this.profitshareDataGridViewTextBoxColumn.DataPropertyName = "profit_share";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N2";
-            this.profitshareDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.profitshareDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
             this.profitshareDataGridViewTextBoxColumn.HeaderText = "Profit Share";
             this.profitshareDataGridViewTextBoxColumn.Name = "profitshareDataGridViewTextBoxColumn";
             this.profitshareDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // toBeCollectedDataGridViewTextBoxColumn
+            // profit_share_accrued
             // 
-            this.toBeCollectedDataGridViewTextBoxColumn.DataPropertyName = "toBeCollected";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N2";
-            this.toBeCollectedDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle10;
-            this.toBeCollectedDataGridViewTextBoxColumn.HeaderText = "Total to be Collected";
-            this.toBeCollectedDataGridViewTextBoxColumn.Name = "toBeCollectedDataGridViewTextBoxColumn";
-            this.toBeCollectedDataGridViewTextBoxColumn.ReadOnly = true;
+            this.profit_share_accrued.DataPropertyName = "profit_share_accrued";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            this.profit_share_accrued.DefaultCellStyle = dataGridViewCellStyle4;
+            this.profit_share_accrued.HeaderText = "Profit Share Accrued";
+            this.profit_share_accrued.Name = "profit_share_accrued";
+            this.profit_share_accrued.ReadOnly = true;
+            this.profit_share_accrued.Width = 120;
+            // 
+            // profit_share_to_accrue
+            // 
+            this.profit_share_to_accrue.DataPropertyName = "profit_share_to_accrue";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            this.profit_share_to_accrue.DefaultCellStyle = dataGridViewCellStyle5;
+            this.profit_share_to_accrue.HeaderText = "Profit Share to Accrue";
+            this.profit_share_to_accrue.Name = "profit_share_to_accrue";
+            this.profit_share_to_accrue.ReadOnly = true;
+            this.profit_share_to_accrue.Width = 120;
             // 
             // collectiondateDataGridViewTextBoxColumn
             // 
             this.collectiondateDataGridViewTextBoxColumn.DataPropertyName = "collection_date";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.collectiondateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.collectiondateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
             this.collectiondateDataGridViewTextBoxColumn.HeaderText = "Collection Date";
             this.collectiondateDataGridViewTextBoxColumn.Name = "collectiondateDataGridViewTextBoxColumn";
             this.collectiondateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // remainingDataGridViewTextBoxColumn
-            // 
-            this.remainingDataGridViewTextBoxColumn.DataPropertyName = "remaining";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle12.Format = "N2";
-            this.remainingDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle12;
-            this.remainingDataGridViewTextBoxColumn.HeaderText = "Remaining";
-            this.remainingDataGridViewTextBoxColumn.Name = "remainingDataGridViewTextBoxColumn";
-            this.remainingDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // disbursementsForAddendumsBindingSource
             // 
@@ -230,7 +232,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(693, 331);
+            this.ClientSize = new System.Drawing.Size(758, 331);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.cbContract);
             this.Controls.Add(this.cbClient);
@@ -265,12 +267,14 @@
         private FundsDBDataSetTableAdapters.ClientContractsTableAdapter clientContractsTableAdapter;
         private System.Windows.Forms.BindingSource disbursementsForAddendumsBindingSource;
         private FundsDBDataSetTableAdapters.DisbursementsForAddendumsTableAdapter disbursementsForAddendumsTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn toBeCollectedDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn remainingDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn disbursementidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn profitshareDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn toBeCollectedDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn profit_share_accrued;
+        private System.Windows.Forms.DataGridViewTextBoxColumn profit_share_to_accrue;
         private System.Windows.Forms.DataGridViewTextBoxColumn collectiondateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn remainingDataGridViewTextBoxColumn;
     }
 }

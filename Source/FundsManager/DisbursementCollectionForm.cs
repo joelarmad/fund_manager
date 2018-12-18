@@ -232,7 +232,7 @@ namespace FundsManager
                                                 collectionDetail.disbursement_id = disbId;
                                                 collectionDetail.amount_collected = Math.Round(toBeCollected125 + toBeCollected128 + toBeCollected130, 2);
 
-                                                if (profitShare - collected - collectionDetail.amount_collected <= 0)
+                                                if (amount + profitShare - collected - collectionDetail.amount_collected <= 0)
                                                 {
                                                     disb.collected = true;
                                                 }

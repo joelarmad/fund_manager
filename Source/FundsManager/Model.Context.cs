@@ -60,12 +60,12 @@ namespace FundsManager
         public virtual DbSet<Shipment> Shipments { get; set; }
         public virtual DbSet<Subaccount> Subaccounts { get; set; }
         public virtual DbSet<UnderlyingDebtor> UnderlyingDebtors { get; set; }
-        public virtual DbSet<ProfitShareToAccrue> ProfitShareToAccrues { get; set; }
         public virtual DbSet<DisbursementCollection> DisbursementCollections { get; set; }
         public virtual DbSet<DisbursementCollectionsDetail> DisbursementCollectionsDetails { get; set; }
         public virtual DbSet<DisbursementGeneratedInterestDetail> DisbursementGeneratedInterestDetails { get; set; }
         public virtual DbSet<Disbursement> Disbursements { get; set; }
         public virtual DbSet<DisbursementBooking> DisbursementBookings { get; set; }
         public virtual DbSet<DisbursementBook> DisbursementBooks { get; set; }
+        public virtual DbSet<ProfitShareToAccrue> ProfitShareToAccrues { get; set; }
     }
 }
