@@ -267,6 +267,9 @@
     <Compile Include="DisbursementsForm.Designer.cs">
       <DependentUpon>DisbursementsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DisbursementsToBeCollected.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Disbursement_dates.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

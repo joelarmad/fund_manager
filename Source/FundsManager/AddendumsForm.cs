@@ -23,7 +23,8 @@ namespace FundsManager
         private Disbursement disbursement;
         private bool fEditMode;
 
-        private decimal fRemaining = 0;
+        private decimal fAmountRemaining = 0;
+        private decimal fProfitShareRemainig = 0;
 
         private List<DisbursementBooking> bookings;
         private List<DisbursementBooking> toDelete;
@@ -58,53 +59,61 @@ namespace FundsManager
 
                     if (disbursement != null)
                     {
-                        //TODO: determinar cual campo es el monto del amount
-                        fRemaining = disbursement.amount;
-                        txtAmount.Text = String.Format("{0:0.00}", disbursement.amount);
+                        DisbursementsToBeCollected toBeCollected = manager.My_db.DisbursementsToBeCollecteds.FirstOrDefault(x => x.disbursement_id == disbursement.Id);
 
-                        if (disbursement.currency_id > 0)
+                        if (toBeCollected != null)
                         {
-                            for (int i = 0; i < cbCurrency.Items.Count; i++)
+                            fProfitShareRemainig = toBeCollected.profit_share - toBeCollected.profit_share_accrued.Value;
+
+                            fAmountRemaining = toBeCollected.amount + toBeCollected.profit_share - toBeCollected.collected.Value - fProfitShareRemainig;
+
+                            txtAmount.Text = String.Format("{0:0.00}", fAmountRemaining);
+
+                            if (disbursement.currency_id > 0)
                             {
-                                cbCurrency.SelectedIndex = i;
+                                for (int i = 0; i < cbCurrency.Items.Count; i++)
+                                {
+                                    cbCurrency.SelectedIndex = i;
 
-                                if (cbCurrency.SelectedValue.ToString() == disbursement.currency_id.ToString())
-                                    break;
+                                    if (cbCurrency.SelectedValue.ToString() == disbursement.currency_id.ToString())
+                                        break;
+                                }
                             }
+
+                            txtExchangeRate.Text = String.Format("{0:0.0000000}", disbursement.exchange_rate);
+
+                            txtProfitShare.Text = String.Format("{0:0.00}", fProfitShareRemainig);
+
+                            txtDelayInterest.Text = "0.00";
+
+                            txtNumber.Text = disbursement.number.ToString();
+
+                            calculate_total_collection();
+
+                            lblContract.Text = disbursement.Investment.contract;
+
+                            lblClient.Text = disbursement.Client != null ? disbursement.Client.name : "";
+
+                            lblUnderLayingDebtor.Text = disbursement.UnderlyingDebtor != null ? disbursement.UnderlyingDebtor.name : "";
+
+                            lblUnderlayingBank.Text = disbursement.Bank != null ? disbursement.Bank.name : "";
+
+                            lblLetterOfCredit.Text = disbursement.Shipment != null ? disbursement.Shipment.letter_of_credits.Reference : "";
+
+                            lblShipment.Text = disbursement.Shipment != null ? disbursement.Shipment.Number : "";
+
+                            lblSector.Text = disbursement.Sector != null ? disbursement.Sector.name : "";
+
+                            List<DisbursementItem> items = manager.My_db.DisbursementItems.Where(x => x.DisbursementId == disbursement.Id).ToList();
+
+                            foreach (DisbursementItem disbItem in items)
+                            {
+                                lbISelectedItems.Items.Add(disbItem.Item.name);
+                            }
+
+                            dtpStartingDate.Value = disbursement.collection_date;
                         }
-
-                        txtExchangeRate.Text = String.Format("{0:0.0000000}", disbursement.exchange_rate);
-
-                        txtProfitShare.Text = String.Format("{0:0.00}", disbursement.profit_share);
-
-                        txtDelayInterest.Text = "0.00";
-
-                        txtNumber.Text = disbursement.number.ToString();
-
-                        calculate_total_collection();
-
-                        lblContract.Text = disbursement.Investment.contract;
-
-                        lblClient.Text = disbursement.Client != null ? disbursement.Client.name : "";
-
-                        lblUnderLayingDebtor.Text = disbursement.UnderlyingDebtor != null ? disbursement.UnderlyingDebtor.name : "";
-
-                        lblUnderlayingBank.Text = disbursement.Bank != null ? disbursement.Bank.name : "";
-
-                        lblLetterOfCredit.Text = disbursement.Shipment != null ? disbursement.Shipment.letter_of_credits.Reference : "";
-
-                        lblShipment.Text = disbursement.Shipment != null ? disbursement.Shipment.Number : "";
-
-                        lblSector.Text = disbursement.Sector != null ? disbursement.Sector.name : "";
-
-                        List<DisbursementItem> items = manager.My_db.DisbursementItems.Where(x => x.DisbursementId == disbursement.Id).ToList();
-
-                        foreach (DisbursementItem disbItem in items)
-                        {
-                            lbISelectedItems.Items.Add(disbItem.Item.name);
-                        }
-
-                        dtpStartingDate.Value = disbursement.collection_date;
+                        
                     }
                 }
                 else
@@ -326,7 +335,8 @@ namespace FundsManager
                     && decimal.TryParse(txtAmount.Text, out _amount)
                     && decimal.TryParse(txtProfitShare.Text, out _profitShare)
                     && txtNumber.Text.Trim() != ""
-                    && (_amount > 0 || _profitShare >= 0);
+                    && (_amount > 0 || _profitShare >= 0)
+                    && fAmountRemaining > 0;
             }
             catch (Exception _ex)
             {
@@ -423,14 +433,16 @@ namespace FundsManager
                     if (fEditMode && lvBooking.SelectedIndices.Count > 0)
                     {
                         _booking = bookings[lvBooking.SelectedIndices[0]];
-                        fRemaining += _booking.amount * (decimal)_booking.exchange_rate;
+                        fAmountRemaining += _booking.amount * (decimal)_booking.exchange_rate;
+                        fProfitShareRemainig += _booking.profit_share * (decimal)_booking.exchange_rate;
                     }
 
-                    decimal toDecrease = Convert.ToDecimal(txtAmount.Text);
+                    decimal amountToDecrease = Convert.ToDecimal(txtAmount.Text);
+                    decimal profitShareToDecrease = Convert.ToDecimal(txtProfitShare.Text);
 
                     _booking.disbursement_id = DisbursementId;
                     _booking.exchange_rate = exchangeRate;
-                    _booking.amount = Math.Round(toDecrease / (decimal)exchangeRate, 2);
+                    _booking.amount = Math.Round(amountToDecrease / (decimal)exchangeRate, 2);
                     _booking.profit_share = Math.Round(Convert.ToDecimal(txtProfitShare.Text) / (decimal)exchangeRate, 2);
                     _booking.currency_id = Convert.ToInt32(cbCurrency.SelectedValue);
                     _booking.starting_date = Convert.ToDateTime(dtpStartingDate.Text);
@@ -438,7 +450,8 @@ namespace FundsManager
                     _booking.number = txtNumber.Text;
                     _booking.delay_interest = Math.Round(Convert.ToDecimal(txtDelayInterest.Text), 2);
 
-                    fRemaining -= toDecrease;
+                    fAmountRemaining -= amountToDecrease;
+                    fProfitShareRemainig -= profitShareToDecrease;
 
                     return _booking;
                 }
@@ -522,10 +535,10 @@ namespace FundsManager
             lvBooking.SelectedIndices.Clear();
             lvBooking_SelectedIndexChanged(null, null);
             cmdAddBooking.Enabled = false;
-            txtAmount.Text = String.Format("{0:0.00}", fRemaining);
+            txtAmount.Text = String.Format("{0:0.00}", fAmountRemaining);
             cbCurrency.SelectedIndex = 0;
             txtExchangeRate.Text = "1.0000000";
-            txtProfitShare.Text = "0.00";
+            txtProfitShare.Text = String.Format("{0:0.00}", fProfitShareRemainig >= 0 ? fProfitShareRemainig : 0);
             txtNumber.Text = "";
             txtTotalToBeCollected.Text = "0.00";            
             dtpStartingDate.Value = DateTime.Now;
@@ -615,7 +628,7 @@ namespace FundsManager
 
         private void checkEnablingBookButton()
         {
-            cmdBook.Enabled = bookings.Count > 0 && fRemaining == 0;
+            cmdBook.Enabled = bookings.Count > 0 && fAmountRemaining == 0;
         }
 
         private void cmdDeleteBooking_Click(object sender, EventArgs e)
@@ -625,7 +638,8 @@ namespace FundsManager
                 if (lvBooking.SelectedIndices.Count > 0)
                 {
                     DisbursementBooking booking = bookings[lvBooking.SelectedIndices[0]];
-                    fRemaining += booking.amount * (decimal)booking.exchange_rate;
+                    fAmountRemaining += booking.amount * (decimal)booking.exchange_rate;
+                    fProfitShareRemainig += booking.profit_share * (decimal)booking.exchange_rate;
                     toDelete.Add(booking);
                     bookings.RemoveAt(lvBooking.SelectedIndices[0]);
                 }

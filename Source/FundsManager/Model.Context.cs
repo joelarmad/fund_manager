@@ -67,5 +67,6 @@ namespace FundsManager
         public virtual DbSet<DisbursementBooking> DisbursementBookings { get; set; }
         public virtual DbSet<DisbursementBook> DisbursementBooks { get; set; }
         public virtual DbSet<ProfitShareToAccrue> ProfitShareToAccrues { get; set; }
+        public virtual DbSet<DisbursementsToBeCollected> DisbursementsToBeCollecteds { get; set; }
     }
 }

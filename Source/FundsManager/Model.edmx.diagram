@@ -125,6 +125,7 @@
         <EntityTypeShape EntityType="FundsDBModel.DisbursementBook" Width="1.5" PointX="0.75" PointY="3.875" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Book" />
         <EntityTypeShape EntityType="FundsDBModel.ProfitShareToAccrue" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementsToBeCollected" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
