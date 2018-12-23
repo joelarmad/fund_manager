@@ -12813,6 +12813,8 @@ namespace FundsManager {
             
             private global::System.Data.DataColumn columncollected;
             
+            private global::System.Data.DataColumn columnhas_bookings;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DisbursementsDataTable() {
@@ -12992,6 +12994,14 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn has_bookingsColumn {
+                get {
+                    return this.columnhas_bookings;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -13044,7 +13054,8 @@ namespace FundsManager {
                         System.DateTime pay_date, 
                         bool can_generate_interest, 
                         ShipmentsRow parentShipmentsRowByFK_Disbursements_Shipments, 
-                        bool collected) {
+                        bool collected, 
+                        bool has_bookings) {
                 DisbursementsRow rowDisbursementsRow = ((DisbursementsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -13064,7 +13075,8 @@ namespace FundsManager {
                         pay_date,
                         can_generate_interest,
                         null,
-                        collected};
+                        collected,
+                        has_bookings};
                 if ((parentInvestmentsRowByFK_Disbursements_Investments != null)) {
                     columnValuesArray[1] = parentInvestmentsRowByFK_Disbursements_Investments[0];
                 }
@@ -13136,6 +13148,7 @@ namespace FundsManager {
                 this.columncan_generate_interest = base.Columns["can_generate_interest"];
                 this.columnshipment_id = base.Columns["shipment_id"];
                 this.columncollected = base.Columns["collected"];
+                this.columnhas_bookings = base.Columns["has_bookings"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13177,6 +13190,8 @@ namespace FundsManager {
                 base.Columns.Add(this.columnshipment_id);
                 this.columncollected = new global::System.Data.DataColumn("collected", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncollected);
+                this.columnhas_bookings = new global::System.Data.DataColumn("has_bookings", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhas_bookings);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
                 this.columnId.AutoIncrement = true;
@@ -20040,6 +20055,8 @@ namespace FundsManager {
             
             private global::System.Data.DataColumn columncollected_amount;
             
+            private global::System.Data.DataColumn columnhas_bookings;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public InvestmentsViewDataTable() {
@@ -20283,6 +20300,14 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn has_bookingsColumn {
+                get {
+                    return this.columnhas_bookings;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -20344,7 +20369,8 @@ namespace FundsManager {
                         bool collected, 
                         bool can_generate_interest, 
                         decimal generated_interest, 
-                        decimal collected_amount) {
+                        decimal collected_amount, 
+                        bool has_bookings) {
                 InvestmentsViewRow rowInvestmentsViewRow = ((InvestmentsViewRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         fund_id,
@@ -20372,7 +20398,8 @@ namespace FundsManager {
                         collected,
                         can_generate_interest,
                         generated_interest,
-                        collected_amount};
+                        collected_amount,
+                        has_bookings};
                 rowInvestmentsViewRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowInvestmentsViewRow);
                 return rowInvestmentsViewRow;
@@ -20421,6 +20448,7 @@ namespace FundsManager {
                 this.columncan_generate_interest = base.Columns["can_generate_interest"];
                 this.columngenerated_interest = base.Columns["generated_interest"];
                 this.columncollected_amount = base.Columns["collected_amount"];
+                this.columnhas_bookings = base.Columns["has_bookings"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -20478,6 +20506,8 @@ namespace FundsManager {
                 base.Columns.Add(this.columngenerated_interest);
                 this.columncollected_amount = new global::System.Data.DataColumn("collected_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncollected_amount);
+                this.columnhas_bookings = new global::System.Data.DataColumn("has_bookings", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhas_bookings);
                 this.columnfund_id.AllowDBNull = false;
                 this.columninvestment_id.AllowDBNull = false;
                 this.columncontract.AllowDBNull = false;
@@ -28675,6 +28705,22 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool has_bookings {
+                get {
+                    try {
+                        return ((bool)(this[this.tableDisbursements.has_bookingsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'has_bookings\' de la tabla \'Disbursements\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDisbursements.has_bookingsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public BanksRow BanksRow {
                 get {
                     return ((BanksRow)(this.GetParentRow(this.Table.ParentRelations["FK_Disbursements_Banks"])));
@@ -28819,6 +28865,18 @@ namespace FundsManager {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetcollectedNull() {
                 this[this.tableDisbursements.collectedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Ishas_bookingsNull() {
+                return this.IsNull(this.tableDisbursements.has_bookingsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Sethas_bookingsNull() {
+                this[this.tableDisbursements.has_bookingsColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -31520,6 +31578,22 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool has_bookings {
+                get {
+                    try {
+                        return ((bool)(this[this.tableInvestmentsView.has_bookingsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'has_bookings\' de la tabla \'InvestmentsView\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableInvestmentsView.has_bookingsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool Istotal_disbursementNull() {
                 return this.IsNull(this.tableInvestmentsView.total_disbursementColumn);
             }
@@ -31648,6 +31722,18 @@ namespace FundsManager {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Setcollected_amountNull() {
                 this[this.tableInvestmentsView.collected_amountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Ishas_bookingsNull() {
+                return this.IsNull(this.tableInvestmentsView.has_bookingsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Sethas_bookingsNull() {
+                this[this.tableInvestmentsView.has_bookingsColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -46055,10 +46141,11 @@ SELECT DisbursementId, ItemId FROM DisbursementItems WHERE (DisbursementId = @Di
             tableMapping.ColumnMappings.Add("can_generate_interest", "can_generate_interest");
             tableMapping.ColumnMappings.Add("shipment_id", "shipment_id");
             tableMapping.ColumnMappings.Add("collected", "collected");
+            tableMapping.ColumnMappings.Add("has_bookings", "has_bookings");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Disbursements] WHERE (([Id] = @Original_Id) AND ([investment_id] = @Original_investment_id) AND ([currency_id] = @Original_currency_id) AND ([exchange_rate] = @Original_exchange_rate) AND ([client_id] = @Original_client_id) AND ((@IsNull_underlying_debtor_id = 1 AND [underlying_debtor_id] IS NULL) OR ([underlying_debtor_id] = @Original_underlying_debtor_id)) AND ((@IsNull_bank_risk_id = 1 AND [bank_risk_id] IS NULL) OR ([bank_risk_id] = @Original_bank_risk_id)) AND ([profit_share] = @Original_profit_share) AND ([amount] = @Original_amount) AND ([fund_id] = @Original_fund_id) AND ([date] = @Original_date) AND ([sector_id] = @Original_sector_id) AND ([number] = @Original_number) AND ([collection_date] = @Original_collection_date) AND ((@IsNull_pay_date = 1 AND [pay_date] IS NULL) OR ([pay_date] = @Original_pay_date)) AND ([can_generate_interest] = @Original_can_generate_interest) AND ((@IsNull_shipment_id = 1 AND [shipment_id] IS NULL) OR ([shipment_id] = @Original_shipment_id)) AND ((@IsNull_collected = 1 AND [collected] IS NULL) OR ([collected] = @Original_collected)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Disbursements] WHERE (([Id] = @Original_Id) AND ([investment_id] = @Original_investment_id) AND ([currency_id] = @Original_currency_id) AND ([exchange_rate] = @Original_exchange_rate) AND ([client_id] = @Original_client_id) AND ((@IsNull_underlying_debtor_id = 1 AND [underlying_debtor_id] IS NULL) OR ([underlying_debtor_id] = @Original_underlying_debtor_id)) AND ((@IsNull_bank_risk_id = 1 AND [bank_risk_id] IS NULL) OR ([bank_risk_id] = @Original_bank_risk_id)) AND ([profit_share] = @Original_profit_share) AND ([amount] = @Original_amount) AND ([fund_id] = @Original_fund_id) AND ([date] = @Original_date) AND ([sector_id] = @Original_sector_id) AND ([number] = @Original_number) AND ([collection_date] = @Original_collection_date) AND ((@IsNull_pay_date = 1 AND [pay_date] IS NULL) OR ([pay_date] = @Original_pay_date)) AND ([can_generate_interest] = @Original_can_generate_interest) AND ((@IsNull_shipment_id = 1 AND [shipment_id] IS NULL) OR ([shipment_id] = @Original_shipment_id)) AND ((@IsNull_collected = 1 AND [collected] IS NULL) OR ([collected] = @Original_collected)) AND ((@IsNull_has_bookings = 1 AND [has_bookings] IS NULL) OR ([has_bookings] = @Original_has_bookings)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_investment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -46083,10 +46170,12 @@ SELECT DisbursementId, ItemId FROM DisbursementItems WHERE (DisbursementId = @Di
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_shipment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shipment_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_collected", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collected", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_collected", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collected", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_has_bookings", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "has_bookings", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_has_bookings", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "has_bookings", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Disbursements] ([investment_id], [currency_id], [exchange_rate], [client_id], [underlying_debtor_id], [bank_risk_id], [profit_share], [amount], [fund_id], [date], [sector_id], [number], [collection_date], [pay_date], [can_generate_interest], [shipment_id], [collected]) VALUES (@investment_id, @currency_id, @exchange_rate, @client_id, @underlying_debtor_id, @bank_risk_id, @profit_share, @amount, @fund_id, @date, @sector_id, @number, @collection_date, @pay_date, @can_generate_interest, @shipment_id, @collected);
-SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, collection_date, pay_date, can_generate_interest, shipment_id, collected FROM Disbursements WHERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Disbursements] ([investment_id], [currency_id], [exchange_rate], [client_id], [underlying_debtor_id], [bank_risk_id], [profit_share], [amount], [fund_id], [date], [sector_id], [number], [collection_date], [pay_date], [can_generate_interest], [shipment_id], [collected], [has_bookings]) VALUES (@investment_id, @currency_id, @exchange_rate, @client_id, @underlying_debtor_id, @bank_risk_id, @profit_share, @amount, @fund_id, @date, @sector_id, @number, @collection_date, @pay_date, @can_generate_interest, @shipment_id, @collected, @has_bookings);
+SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, collection_date, pay_date, can_generate_interest, shipment_id, collected, has_bookings FROM Disbursements WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@investment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@currency_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "currency_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -46105,6 +46194,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@can_generate_interest", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "can_generate_interest", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@shipment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shipment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@collected", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collected", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@has_bookings", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "has_bookings", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = "UPDATE [Disbursements] SET [investment_id] = @investment_id, [currency_id] = @cur" +
@@ -46113,24 +46203,26 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                 "are] = @profit_share, [amount] = @amount, [fund_id] = @fund_id, [date] = @date, " +
                 "[sector_id] = @sector_id, [number] = @number, [collection_date] = @collection_da" +
                 "te, [pay_date] = @pay_date, [can_generate_interest] = @can_generate_interest, [s" +
-                "hipment_id] = @shipment_id, [collected] = @collected WHERE (([Id] = @Original_Id" +
-                ") AND ([investment_id] = @Original_investment_id) AND ([currency_id] = @Original" +
-                "_currency_id) AND ([exchange_rate] = @Original_exchange_rate) AND ([client_id] =" +
-                " @Original_client_id) AND ((@IsNull_underlying_debtor_id = 1 AND [underlying_deb" +
-                "tor_id] IS NULL) OR ([underlying_debtor_id] = @Original_underlying_debtor_id)) A" +
-                "ND ((@IsNull_bank_risk_id = 1 AND [bank_risk_id] IS NULL) OR ([bank_risk_id] = @" +
-                "Original_bank_risk_id)) AND ([profit_share] = @Original_profit_share) AND ([amou" +
-                "nt] = @Original_amount) AND ([fund_id] = @Original_fund_id) AND ([date] = @Origi" +
-                "nal_date) AND ([sector_id] = @Original_sector_id) AND ([number] = @Original_numb" +
-                "er) AND ([collection_date] = @Original_collection_date) AND ((@IsNull_pay_date =" +
-                " 1 AND [pay_date] IS NULL) OR ([pay_date] = @Original_pay_date)) AND ([can_gener" +
-                "ate_interest] = @Original_can_generate_interest) AND ((@IsNull_shipment_id = 1 A" +
-                "ND [shipment_id] IS NULL) OR ([shipment_id] = @Original_shipment_id)) AND ((@IsN" +
-                "ull_collected = 1 AND [collected] IS NULL) OR ([collected] = @Original_collected" +
-                ")));\r\nSELECT Id, investment_id, currency_id, exchange_rate, client_id, underlyin" +
-                "g_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, numbe" +
-                "r, collection_date, pay_date, can_generate_interest, shipment_id, collected FROM" +
-                " Disbursements WHERE (Id = @Id)";
+                "hipment_id] = @shipment_id, [collected] = @collected, [has_bookings] = @has_book" +
+                "ings WHERE (([Id] = @Original_Id) AND ([investment_id] = @Original_investment_id" +
+                ") AND ([currency_id] = @Original_currency_id) AND ([exchange_rate] = @Original_e" +
+                "xchange_rate) AND ([client_id] = @Original_client_id) AND ((@IsNull_underlying_d" +
+                "ebtor_id = 1 AND [underlying_debtor_id] IS NULL) OR ([underlying_debtor_id] = @O" +
+                "riginal_underlying_debtor_id)) AND ((@IsNull_bank_risk_id = 1 AND [bank_risk_id]" +
+                " IS NULL) OR ([bank_risk_id] = @Original_bank_risk_id)) AND ([profit_share] = @O" +
+                "riginal_profit_share) AND ([amount] = @Original_amount) AND ([fund_id] = @Origin" +
+                "al_fund_id) AND ([date] = @Original_date) AND ([sector_id] = @Original_sector_id" +
+                ") AND ([number] = @Original_number) AND ([collection_date] = @Original_collectio" +
+                "n_date) AND ((@IsNull_pay_date = 1 AND [pay_date] IS NULL) OR ([pay_date] = @Ori" +
+                "ginal_pay_date)) AND ([can_generate_interest] = @Original_can_generate_interest)" +
+                " AND ((@IsNull_shipment_id = 1 AND [shipment_id] IS NULL) OR ([shipment_id] = @O" +
+                "riginal_shipment_id)) AND ((@IsNull_collected = 1 AND [collected] IS NULL) OR ([" +
+                "collected] = @Original_collected)) AND ((@IsNull_has_bookings = 1 AND [has_booki" +
+                "ngs] IS NULL) OR ([has_bookings] = @Original_has_bookings)));\r\nSELECT Id, invest" +
+                "ment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_" +
+                "id, profit_share, amount, fund_id, date, sector_id, number, collection_date, pay" +
+                "_date, can_generate_interest, shipment_id, collected, has_bookings FROM Disburse" +
+                "ments WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@investment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@currency_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "currency_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -46149,6 +46241,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@can_generate_interest", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "can_generate_interest", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@shipment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shipment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@collected", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collected", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@has_bookings", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "has_bookings", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_investment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_currency_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "currency_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -46172,6 +46265,8 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_shipment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shipment_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_collected", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collected", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_collected", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "collected", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_has_bookings", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "has_bookings", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_has_bookings", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "has_bookings", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -46188,10 +46283,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debto" +
-                "r_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, coll" +
-                "ection_date, pay_date, can_generate_interest, shipment_id, collected FROM Disbur" +
-                "sements";
+            this._commandCollection[0].CommandText = @"SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, collection_date, pay_date, can_generate_interest, shipment_id, collected, has_bookings FROM Disbursements";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -46270,7 +46362,8 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                     global::System.Nullable<global::System.DateTime> Original_pay_date, 
                     bool Original_can_generate_interest, 
                     global::System.Nullable<int> Original_shipment_id, 
-                    global::System.Nullable<bool> Original_collected) {
+                    global::System.Nullable<bool> Original_collected, 
+                    global::System.Nullable<bool> Original_has_bookings) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_investment_id));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_currency_id));
@@ -46329,6 +46422,14 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                 this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[22].Value = global::System.DBNull.Value;
             }
+            if ((Original_has_bookings.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[24].Value = ((bool)(Original_has_bookings.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[24].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -46366,7 +46467,8 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                     global::System.Nullable<global::System.DateTime> pay_date, 
                     bool can_generate_interest, 
                     global::System.Nullable<int> shipment_id, 
-                    global::System.Nullable<bool> collected) {
+                    global::System.Nullable<bool> collected, 
+                    global::System.Nullable<bool> has_bookings) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(investment_id));
             this.Adapter.InsertCommand.Parameters[1].Value = ((int)(currency_id));
             this.Adapter.InsertCommand.Parameters[2].Value = ((float)(exchange_rate));
@@ -46414,6 +46516,12 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             else {
                 this.Adapter.InsertCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
+            if ((has_bookings.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[17].Value = ((bool)(has_bookings.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[17].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -46452,6 +46560,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                     bool can_generate_interest, 
                     global::System.Nullable<int> shipment_id, 
                     global::System.Nullable<bool> collected, 
+                    global::System.Nullable<bool> has_bookings, 
                     int Original_Id, 
                     int Original_investment_id, 
                     int Original_currency_id, 
@@ -46470,6 +46579,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                     bool Original_can_generate_interest, 
                     global::System.Nullable<int> Original_shipment_id, 
                     global::System.Nullable<bool> Original_collected, 
+                    global::System.Nullable<bool> Original_has_bookings, 
                     int Id) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(investment_id));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(currency_id));
@@ -46518,65 +46628,79 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
             else {
                 this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_Id));
-            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_investment_id));
-            this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_currency_id));
-            this.Adapter.UpdateCommand.Parameters[20].Value = ((float)(Original_exchange_rate));
-            this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Original_client_id));
-            if ((Original_underlying_debtor_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((int)(Original_underlying_debtor_id.Value));
+            if ((has_bookings.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((bool)(has_bookings.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_Id));
+            this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_investment_id));
+            this.Adapter.UpdateCommand.Parameters[20].Value = ((int)(Original_currency_id));
+            this.Adapter.UpdateCommand.Parameters[21].Value = ((float)(Original_exchange_rate));
+            this.Adapter.UpdateCommand.Parameters[22].Value = ((int)(Original_client_id));
+            if ((Original_underlying_debtor_id.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((int)(Original_underlying_debtor_id.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
             }
             if ((Original_bank_risk_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((int)(Original_bank_risk_id.Value));
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((int)(Original_bank_risk_id.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(Original_profit_share));
-            this.Adapter.UpdateCommand.Parameters[27].Value = ((decimal)(Original_amount));
-            this.Adapter.UpdateCommand.Parameters[28].Value = ((int)(Original_fund_id));
-            this.Adapter.UpdateCommand.Parameters[29].Value = ((System.DateTime)(Original_date));
-            this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(Original_sector_id));
+            this.Adapter.UpdateCommand.Parameters[27].Value = ((decimal)(Original_profit_share));
+            this.Adapter.UpdateCommand.Parameters[28].Value = ((decimal)(Original_amount));
+            this.Adapter.UpdateCommand.Parameters[29].Value = ((int)(Original_fund_id));
+            this.Adapter.UpdateCommand.Parameters[30].Value = ((System.DateTime)(Original_date));
+            this.Adapter.UpdateCommand.Parameters[31].Value = ((int)(Original_sector_id));
             if ((Original_number == null)) {
                 throw new global::System.ArgumentNullException("Original_number");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((string)(Original_number));
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((string)(Original_number));
             }
-            this.Adapter.UpdateCommand.Parameters[32].Value = ((System.DateTime)(Original_collection_date));
+            this.Adapter.UpdateCommand.Parameters[33].Value = ((System.DateTime)(Original_collection_date));
             if ((Original_pay_date.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((System.DateTime)(Original_pay_date.Value));
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((System.DateTime)(Original_pay_date.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[35].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[35].Value = ((bool)(Original_can_generate_interest));
+            this.Adapter.UpdateCommand.Parameters[36].Value = ((bool)(Original_can_generate_interest));
             if ((Original_shipment_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[37].Value = ((int)(Original_shipment_id.Value));
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((int)(Original_shipment_id.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[37].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[38].Value = global::System.DBNull.Value;
             }
             if ((Original_collected.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[39].Value = ((bool)(Original_collected.Value));
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[40].Value = ((bool)(Original_collected.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[39].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[40].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[40].Value = ((int)(Id));
+            if ((Original_has_bookings.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[42].Value = ((bool)(Original_has_bookings.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[42].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[43].Value = ((int)(Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -46615,6 +46739,7 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                     bool can_generate_interest, 
                     global::System.Nullable<int> shipment_id, 
                     global::System.Nullable<bool> collected, 
+                    global::System.Nullable<bool> has_bookings, 
                     int Original_Id, 
                     int Original_investment_id, 
                     int Original_currency_id, 
@@ -46632,8 +46757,9 @@ SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debt
                     global::System.Nullable<global::System.DateTime> Original_pay_date, 
                     bool Original_can_generate_interest, 
                     global::System.Nullable<int> Original_shipment_id, 
-                    global::System.Nullable<bool> Original_collected) {
-            return this.Update(investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, collection_date, pay_date, can_generate_interest, shipment_id, collected, Original_Id, Original_investment_id, Original_currency_id, Original_exchange_rate, Original_client_id, Original_underlying_debtor_id, Original_bank_risk_id, Original_profit_share, Original_amount, Original_fund_id, Original_date, Original_sector_id, Original_number, Original_collection_date, Original_pay_date, Original_can_generate_interest, Original_shipment_id, Original_collected, Original_Id);
+                    global::System.Nullable<bool> Original_collected, 
+                    global::System.Nullable<bool> Original_has_bookings) {
+            return this.Update(investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, collection_date, pay_date, can_generate_interest, shipment_id, collected, has_bookings, Original_Id, Original_investment_id, Original_currency_id, Original_exchange_rate, Original_client_id, Original_underlying_debtor_id, Original_bank_risk_id, Original_profit_share, Original_amount, Original_fund_id, Original_date, Original_sector_id, Original_number, Original_collection_date, Original_pay_date, Original_can_generate_interest, Original_shipment_id, Original_collected, Original_has_bookings, Original_Id);
         }
     }
     
@@ -52106,6 +52232,7 @@ WHERE        (a.FK_Accounts_Funds = @FundId)";
             tableMapping.ColumnMappings.Add("can_generate_interest", "can_generate_interest");
             tableMapping.ColumnMappings.Add("generated_interest", "generated_interest");
             tableMapping.ColumnMappings.Add("collected_amount", "collected_amount");
+            tableMapping.ColumnMappings.Add("has_bookings", "has_bookings");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -52122,28 +52249,28 @@ WHERE        (a.FK_Accounts_Funds = @FundId)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[5];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector, collected, can_generate_interest, collected_amount, generated_interest FROM InvestmentsView";
+            this._commandCollection[0].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector, collected, can_generate_interest, collected_amount, generated_interest, has_bookings FROM InvestmentsView";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector, collected, can_generate_interest, collected_amount, generated_interest FROM InvestmentsView WHERE (client_id = @ClientId) AND (bank_risk_id = @BankId) AND (fund_id = @fund_id) OR (client_id = @ClientId) AND (fund_id = @fund_id) AND (@BankId = 0) OR (bank_risk_id = @BankId) AND (fund_id = @fund_id) AND (@ClientId = 0) OR (fund_id = @fund_id) AND (@BankId = 0) AND (@ClientId = 0)";
+            this._commandCollection[1].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector, collected, can_generate_interest, collected_amount, generated_interest, has_bookings FROM InvestmentsView WHERE (client_id = @ClientId) AND (bank_risk_id = @BankId) AND (fund_id = @fund_id) OR (client_id = @ClientId) AND (fund_id = @fund_id) AND (@BankId = 0) OR (bank_risk_id = @BankId) AND (fund_id = @fund_id) AND (@ClientId = 0) OR (fund_id = @fund_id) AND (@BankId = 0) AND (@ClientId = 0)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ClientId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "client_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BankId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "bank_risk_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fund_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector, collected, can_generate_interest, collected_amount, generated_interest FROM InvestmentsView WHERE (fund_id = @FundId)";
+            this._commandCollection[2].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector, collected, can_generate_interest, collected_amount, generated_interest, has_bookings FROM InvestmentsView WHERE (fund_id = @FundId)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector, collected, can_generate_interest, collected_amount, generated_interest FROM InvestmentsView WHERE (investment_id = @InvestmentId)";
+            this._commandCollection[3].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector, collected, can_generate_interest, collected_amount, generated_interest, has_bookings FROM InvestmentsView WHERE (investment_id = @InvestmentId)";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InvestmentId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "investment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[4].Connection = this.Connection;
-            this._commandCollection[4].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector, collected, can_generate_interest, collected_amount, generated_interest FROM InvestmentsView WHERE (payment_id = @PaymentId) AND (fund_id = @FundId)";
+            this._commandCollection[4].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, amount, exchange_rate, profit_share, disbursement_date, collection_date, bank_risk_id, bank_name, client_id, client, sector_id, sector, collected, can_generate_interest, collected_amount, generated_interest, has_bookings FROM InvestmentsView WHERE (payment_id = @PaymentId) AND (fund_id = @FundId)";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PaymentId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "payment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));

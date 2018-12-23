@@ -27,7 +27,7 @@ namespace FundsManager
         public float exchange_rate { get; set; }
     
         public virtual Currency Currency { get; set; }
-        public virtual Disbursement Disbursement { get; set; }
         public virtual DisbursementBook DisbursementBook { get; set; }
+        public virtual Disbursement Disbursement { get; set; }
     }
 }

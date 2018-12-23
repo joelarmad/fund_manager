@@ -699,6 +699,8 @@ namespace FundsManager
                     manager.My_db.SaveChanges();
                 }
 
+                disbursement.has_bookings = true;
+
                 manager.My_db.SaveChanges();
 
                 txtAmount.Text = "0";

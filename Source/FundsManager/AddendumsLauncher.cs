@@ -63,6 +63,8 @@ namespace FundsManager
                 AddendumsForm addendumsForm = new AddendumsForm();
                 addendumsForm.DisbursementId = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                 addendumsForm.ShowDialog();
+
+                updateDisbursements();
             }
         }
 
