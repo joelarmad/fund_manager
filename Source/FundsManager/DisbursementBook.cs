@@ -22,8 +22,14 @@ namespace FundsManager
     
         public int Id { get; set; }
         public System.DateTime date { get; set; }
+        public int accounting_movement_id { get; set; }
+        public int movement125_id { get; set; }
+        public int movement128_id { get; set; }
     
+        public virtual AccountingMovement AccountingMovement { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementBooking> DisbursementBookings { get; set; }
+        public virtual Movements_Accounts Movements_Accounts125 { get; set; }
+        public virtual Movements_Accounts Movements_Accounts128 { get; set; }
     }
 }

@@ -107,17 +107,12 @@
         <EntityTypeShape EntityType="FundsDBModel.DisbursementGeneratedInterestDetail" Width="1.5" PointX="17.25" PointY="49.25" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_AccountingMovements" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementBooking" Width="1.5" PointX="20.25" PointY="49.25" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Currency" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementBook" Width="1.5" PointX="0.75" PointY="3.875" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Book" />
         <EntityTypeShape EntityType="FundsDBModel.ProfitShareToAccrue" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="FundsDBModel.DisbursementsToBeCollected" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="FundsDBModel.Disbursement" Width="1.5" PointX="15" PointY="56.375" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Banks" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Clients" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Currencies" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Disbursement" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_Disbursements" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Funds" />
@@ -126,6 +121,16 @@
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Shipments" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_UnderlyingDebtors" />
         <AssociationConnector Association="FundsDBModel.DisbursementPaymentDetails" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementBooking" Width="1.5" PointX="20.25" PointY="46.625" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Currency" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Disbursement" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Movement125" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Movement128" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementBook" Width="1.5" PointX="16.875" PointY="42.5" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementBook_AccountingMovements" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Book" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementBook_Movement125" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementBook_Movement128" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

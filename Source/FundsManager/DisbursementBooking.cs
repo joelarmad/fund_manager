@@ -25,9 +25,13 @@ namespace FundsManager
         public System.DateTime starting_date { get; set; }
         public System.DateTime collection_date { get; set; }
         public float exchange_rate { get; set; }
+        public int movement125_id { get; set; }
+        public int movement128_id { get; set; }
     
         public virtual Currency Currency { get; set; }
-        public virtual DisbursementBook DisbursementBook { get; set; }
         public virtual Disbursement Disbursement { get; set; }
+        public virtual Movements_Accounts Movements_Accounts125 { get; set; }
+        public virtual Movements_Accounts Movements_Accounts128 { get; set; }
+        public virtual DisbursementBook DisbursementBook { get; set; }
     }
 }

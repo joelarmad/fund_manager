@@ -20,6 +20,10 @@ namespace FundsManager
             this.DisbursementCollectionsDetails = new HashSet<DisbursementCollectionsDetail>();
             this.DisbursementCollectionsDetails1 = new HashSet<DisbursementCollectionsDetail>();
             this.DisbursementCollectionsDetails2 = new HashSet<DisbursementCollectionsDetail>();
+            this.DisbursementBookings = new HashSet<DisbursementBooking>();
+            this.DisbursementBookings1 = new HashSet<DisbursementBooking>();
+            this.DisbursementBooks = new HashSet<DisbursementBook>();
+            this.DisbursementBooks1 = new HashSet<DisbursementBook>();
         }
     
         public int Id { get; set; }
@@ -44,5 +48,13 @@ namespace FundsManager
         public virtual ICollection<DisbursementCollectionsDetail> DisbursementCollectionsDetails1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementCollectionsDetail> DisbursementCollectionsDetails2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementBooking> DisbursementBookings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementBooking> DisbursementBookings1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementBook> DisbursementBooks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementBook> DisbursementBooks1 { get; set; }
     }
 }
