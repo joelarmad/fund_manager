@@ -70,6 +70,7 @@
             this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.booksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -351,6 +352,7 @@
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.movementsToolStripMenuItem,
             this.investmentsToolStripMenuItem1,
+            this.booksToolStripMenuItem,
             this.bondsToolStripMenuItem1});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
@@ -359,21 +361,21 @@
             // movementsToolStripMenuItem
             // 
             this.movementsToolStripMenuItem.Name = "movementsToolStripMenuItem";
-            this.movementsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.movementsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.movementsToolStripMenuItem.Text = "Movements";
             this.movementsToolStripMenuItem.Click += new System.EventHandler(this.movementsToolStripMenuItem_Click);
             // 
             // investmentsToolStripMenuItem1
             // 
             this.investmentsToolStripMenuItem1.Name = "investmentsToolStripMenuItem1";
-            this.investmentsToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
+            this.investmentsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.investmentsToolStripMenuItem1.Text = "Investments";
             this.investmentsToolStripMenuItem1.Click += new System.EventHandler(this.investmentsToolStripMenuItem1_Click);
             // 
             // bondsToolStripMenuItem1
             // 
             this.bondsToolStripMenuItem1.Name = "bondsToolStripMenuItem1";
-            this.bondsToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
+            this.bondsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.bondsToolStripMenuItem1.Text = "Bonds";
             this.bondsToolStripMenuItem1.Click += new System.EventHandler(this.bondsToolStripMenuItem1_Click);
             // 
@@ -399,6 +401,13 @@
             this.returnsStateToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.returnsStateToolStripMenuItem.Text = "Profit && Loss Statement";
             this.returnsStateToolStripMenuItem.Click += new System.EventHandler(this.returnsStateToolStripMenuItem_Click);
+            // 
+            // booksToolStripMenuItem
+            // 
+            this.booksToolStripMenuItem.Name = "booksToolStripMenuItem";
+            this.booksToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.booksToolStripMenuItem.Text = "Books";
+            this.booksToolStripMenuItem.Click += new System.EventHandler(this.booksToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -467,6 +476,7 @@
         private System.Windows.Forms.ToolStripMenuItem shipmentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem investmentsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem delayInterestToAccrueToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem booksToolStripMenuItem;
     }
 }
 

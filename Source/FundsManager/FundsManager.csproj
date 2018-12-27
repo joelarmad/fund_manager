@@ -176,6 +176,12 @@
     <Compile Include="BondsList.Designer.cs">
       <DependentUpon>BondsList.cs</DependentUpon>
     </Compile>
+    <Compile Include="BookReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BookReportForm.Designer.cs">
+      <DependentUpon>BookReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Classes\DataModel\Account.cs" />
     <Compile Include="Classes\DataModel\Bond.cs" />
     <Compile Include="Classes\DataModel\BondInvestor.cs" />
@@ -532,6 +538,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BondsList.resx">
       <DependentUpon>BondsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BookReportForm.resx">
+      <DependentUpon>BookReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ClientsForm.resx">
       <DependentUpon>ClientsForm.cs</DependentUpon>

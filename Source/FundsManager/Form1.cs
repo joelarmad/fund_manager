@@ -299,5 +299,13 @@ namespace FundsManager
             delayInterestToAccrue.MdiParent = this;
             delayInterestToAccrue.Show();
         }
+
+        private void booksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            BookReportForm booksReportForm = new BookReportForm();
+            booksReportForm.MdiParent = this;
+            booksReportForm.Show();
+        }
     }
 }

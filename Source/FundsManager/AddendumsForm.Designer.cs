@@ -231,7 +231,7 @@
             // 
             this.columnHeader5.Text = "New collection date";
             this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader5.Width = 120;
+            this.columnHeader5.Width = 200;
             // 
             // cmdAddBooking
             // 
