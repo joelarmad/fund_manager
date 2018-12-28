@@ -102,7 +102,7 @@ namespace FundsManager
 
                         foreach (DisbursementItem item in items)
                         {
-                            disb.ItemsIds.Add(item.ItemId);
+                            disb.AddItemId(item.ItemId);
                         }
                     }
 
@@ -191,12 +191,15 @@ namespace FundsManager
 
         private bool duplicatedDisbursementNumber()
         {
+            int i = 0;
             foreach (Disbursement disb in disbursements)
             {
-                if (disb.number == txtNumber.Text)
+                if (disb.number == txtNumber.Text && (!fEditMode || (fEditMode && lvDisbursements.SelectedIndices.Count > 0 && lvDisbursements.SelectedIndices[0] != i)))
                 {
                     return true;
                 }
+
+                i++;
             }
 
             return false;
@@ -295,8 +298,6 @@ namespace FundsManager
 
         private void cmdCreate_Click(object sender, EventArgs e)
         {
-            int created_investment_id = 0;
-
             try
             {
                 decimal _totalDisbursement = 0;
@@ -316,9 +317,6 @@ namespace FundsManager
                     _newInvestment.number = DateTime.Now.Ticks.ToString();
 
                     manager.My_db.Investments.Add(_newInvestment);
-                    manager.My_db.SaveChanges();
-
-                    created_investment_id = _newInvestment.Id;
                 }
 
                 foreach (Disbursement disbToDelete in toDelete)
@@ -326,13 +324,12 @@ namespace FundsManager
                     if (disbToDelete.Id > 0)
                     {
                         manager.My_db.Disbursements.Remove(disbToDelete);
-                        manager.My_db.SaveChanges();
                     }
                 }
 
                 foreach (Disbursement _disbursement in disbursements)
                 {
-                    _disbursement.investment_id = _newInvestment.Id;
+                    _disbursement.Investment = _newInvestment;
 
                     _totalDisbursement += _disbursement.Euro_collection;
                     _totalProfitShare += _disbursement.profit_share;
@@ -350,9 +347,15 @@ namespace FundsManager
                             manager.My_db.DisbursementItems.Remove(item);
                         }
                     }
+                }
 
-                    manager.My_db.SaveChanges();
+                _newInvestment.total_disbursement = Math.Round(_totalDisbursement, 2);
+                _newInvestment.profit_share = Math.Round(_totalProfitShare, 2);
 
+                manager.My_db.SaveChanges();
+
+                foreach (Disbursement _disbursement in disbursements)
+                {     
                     foreach (int _itemId in _disbursement.ItemsIds)
                     {
                         Item _item = manager.My_db.Items.FirstOrDefault(x => x.Id == _itemId);
@@ -364,13 +367,9 @@ namespace FundsManager
                             _disbursementItem.DisbursementId = _disbursement.Id;
 
                             manager.My_db.DisbursementItems.Add(_disbursementItem);
-                            manager.My_db.SaveChanges();
                         }
                     }
                 }
-
-                _newInvestment.total_disbursement = Math.Round(_totalDisbursement, 2);
-                _newInvestment.profit_share = Math.Round(_totalProfitShare, 2);
 
                 manager.My_db.SaveChanges();
 
@@ -405,45 +404,6 @@ namespace FundsManager
             catch (Exception _ex)
             {
                 ErrorMessage.showErrorMessage(_ex);
-
-                //rollback
-                //try
-                //{
-
-                //    Investment inv = manager.My_db.Investments.FirstOrDefault(x => x.Id == created_investment_id);
-
-
-                //    if (inv != null)
-                //    {
-                //        foreach (Disbursement disb in inv.Disbursements)
-                //        {
-
-                //            if (disb != null)
-                //            {
-                //                List<DisbursementItem> disbItms = manager.My_db.DisbursementItems.Where(x => x.DisbursementId == disb.Id).ToList();
-
-                //                foreach (DisbursementItem disbItem in disbItms)
-                //                {
-                //                    manager.My_db.DisbursementItems.Remove(disbItem);
-                //                }
-
-                //                manager.My_db.SaveChanges();
-
-                //                manager.My_db.Disbursements.Remove(disb);
-
-                //                manager.My_db.SaveChanges();
-                //            }
-                //        }
-
-                //        manager.My_db.Investments.Remove(inv);
-                //        manager.My_db.SaveChanges();
-                //    }
-
-                //}
-                //catch (Exception _ex2)
-                //{
-                //    ErrorMessage.showErrorMessage(_ex2);
-                //}
             }
         }
 
@@ -1024,6 +984,8 @@ namespace FundsManager
             {
                 Disbursement _disbursement = new Disbursement();
 
+                _disbursement.has_bookings = false;
+
                 float exchangeRate = 0;
 
                 if (float.TryParse(txtExchangeRate.Text, out exchangeRate) && exchangeRate > 0)
@@ -1084,7 +1046,7 @@ namespace FundsManager
 
                     foreach (int _itemId in fItemIds)
                     {
-                        _disbursement.ItemsIds.Add(_itemId);
+                        _disbursement.AddItemId(_itemId);
                     }
 
                     _disbursement.collected = false;

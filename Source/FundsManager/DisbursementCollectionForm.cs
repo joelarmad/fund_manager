@@ -87,10 +87,6 @@ namespace FundsManager
 
         private void cmdCollect_Click(object sender, EventArgs e)
         {
-            //For rolling back
-            int accounting_movement_id = 0;
-            int disbursement_collection_id = 0;
-
             try
             {
                 List<int> ids = new List<int>();
@@ -172,9 +168,6 @@ namespace FundsManager
                             if (account125 != null && account128 != null && account130 != null)
                             {
                                 manager.My_db.DisbursementCollections.Add(collection);
-                                manager.My_db.SaveChanges();
-
-                                disbursement_collection_id = collection.id;
 
                                 AccountingMovement accountingMovement = new AccountingMovement();
 
@@ -218,17 +211,12 @@ namespace FundsManager
 
                                                     manager.My_db.AccountingMovements.Add(accountingMovement);
 
-                                                    manager.My_db.SaveChanges();
-
-                                                    collection.accounting_movement_id = accountingMovement.Id;
-
-                                                    manager.My_db.SaveChanges();
-
-                                                    accounting_movement_id = accountingMovement.Id;
+                                                    collection.AccountingMovement = accountingMovement;
                                                 }
 
                                                 DisbursementCollectionsDetail collectionDetail = new DisbursementCollectionsDetail();
-                                                collectionDetail.disbursement_collection_id = collection.id;
+
+                                                collectionDetail.DisbursementCollection = collection;
                                                 collectionDetail.disbursement_id = disbId;
                                                 collectionDetail.amount_collected = Math.Round(toBeCollected125 + toBeCollected128 + toBeCollected130, 2);
 
@@ -238,11 +226,10 @@ namespace FundsManager
                                                 }
 
                                                 manager.My_db.DisbursementCollectionsDetails.Add(collectionDetail);
-                                                manager.My_db.SaveChanges();
 
                                                 Movements_Accounts _maccount125 = new Movements_Accounts();
 
-                                                _maccount125.FK_Movements_Accounts_AccountingMovements = accountingMovement.Id;
+                                                _maccount125.AccountingMovement = accountingMovement;
                                                 _maccount125.FK_Movements_Accounts_Funds = manager.Selected;
                                                 _maccount125.FK_Movements_Accounts_Accounts = account125.Id;
                                                 if (subacct125 != null)
@@ -271,13 +258,12 @@ namespace FundsManager
                                                 _maccount125.subacc_amount = Math.Round(subacct125.amount, 2);
 
                                                 manager.My_db.Movements_Accounts.Add(_maccount125);
-                                                manager.My_db.SaveChanges();
 
-                                                collectionDetail.movement125_id = _maccount125.Id;
+                                                collectionDetail.Movements_Accounts_125 = _maccount125;
 
                                                 Movements_Accounts _maccount128 = new Movements_Accounts();
 
-                                                _maccount128.FK_Movements_Accounts_AccountingMovements = accountingMovement.Id;
+                                                _maccount128.AccountingMovement = accountingMovement;
                                                 _maccount128.FK_Movements_Accounts_Funds = manager.Selected;
                                                 _maccount128.FK_Movements_Accounts_Accounts = account128.Id;
                                                 if (subacct128 != null)
@@ -306,13 +292,12 @@ namespace FundsManager
                                                 _maccount128.subacc_amount = Math.Round(subacct128.amount, 2);
 
                                                 manager.My_db.Movements_Accounts.Add(_maccount128);
-                                                manager.My_db.SaveChanges();
 
-                                                collectionDetail.movement128_id = _maccount128.Id;
+                                                collectionDetail.Movements_Accounts_128 = _maccount128;
 
                                                 Movements_Accounts _maccount130 = new Movements_Accounts();
 
-                                                _maccount130.FK_Movements_Accounts_AccountingMovements = accountingMovement.Id;
+                                                _maccount130.AccountingMovement = accountingMovement;
                                                 _maccount130.FK_Movements_Accounts_Funds = manager.Selected;
                                                 _maccount130.FK_Movements_Accounts_Accounts = account130.Id;
                                                 if (subacct130 != null)
@@ -341,11 +326,8 @@ namespace FundsManager
                                                 _maccount130.subacc_amount = Math.Round(subacct130.amount, 2);
 
                                                 manager.My_db.Movements_Accounts.Add(_maccount130);
-                                                manager.My_db.SaveChanges();
 
-                                                collectionDetail.movement130_id = _maccount130.Id;
-
-                                                manager.My_db.SaveChanges();
+                                                collectionDetail.Movements_Accounts_130 = _maccount130;
 
                                                 totalPaid += toBeCollected125 + toBeCollected128 + toBeCollected130;
 
@@ -384,7 +366,7 @@ namespace FundsManager
 
                                     if (!gledger.OperationCompleted)
                                     {
-                                        throw new Exception("Ledger operation has been failed. The disbursements collection will be rolled back.");
+                                        throw new Exception("Ledger operation has been failed. The disbursements collection has been rolled back.");
                                     }
 
                                     //TODO: mostrar reporte
@@ -411,49 +393,6 @@ namespace FundsManager
             catch (Exception _ex)
             {
                 ErrorMessage.showErrorMessage(_ex);
-
-                try
-                {
-                    AccountingMovement acctMov = manager.My_db.AccountingMovements.FirstOrDefault(x => x.Id == accounting_movement_id);
-
-                    if (acctMov != null)
-                    {
-                        List<Movements_Accounts> movements = manager.My_db.Movements_Accounts.Where(x => x.FK_Movements_Accounts_AccountingMovements == accounting_movement_id).ToList();
-
-                        foreach (Movements_Accounts movement in movements)
-                        {
-                            manager.My_db.Movements_Accounts.Remove(movement);
-                        }
-
-                        manager.My_db.SaveChanges();
-
-                        manager.My_db.AccountingMovements.Remove(acctMov);
-
-                        manager.My_db.SaveChanges();
-                    }
-
-                    DisbursementCollection disbCollection = manager.My_db.DisbursementCollections.FirstOrDefault(x => x.id == disbursement_collection_id);
-
-                    if (disbCollection != null)
-                    {
-                        List<DisbursementCollectionsDetail> details = manager.My_db.DisbursementCollectionsDetails.Where(x => x.disbursement_collection_id == disbursement_collection_id).ToList();
-
-                        foreach (DisbursementCollectionsDetail detail in details)
-                        {
-                            manager.My_db.DisbursementCollectionsDetails.Remove(detail);
-                        }
-
-                        manager.My_db.SaveChanges();
-
-                        manager.My_db.DisbursementCollections.Remove(disbCollection);
-
-                        manager.My_db.SaveChanges();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ErrorMessage.showErrorMessage(ex);
-                }
             }
         }
     }

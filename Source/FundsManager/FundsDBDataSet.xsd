@@ -2768,7 +2768,7 @@ SELECT Id, GeneratedDate FROM DisbursementGeneratedInterests WHERE (Id = @Id)</C
               <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.ProfitShareToAccrue" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, collection_date, pay_date, can_generate_interest, collected, contract, shipment_id FROM ProfitShareToAccrue</CommandText>
+                    <CommandText>SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, collection_date, pay_date, can_generate_interest, collected, contract, shipment_id, has_bookings FROM ProfitShareToAccrue</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -2794,6 +2794,7 @@ SELECT Id, GeneratedDate FROM DisbursementGeneratedInterests WHERE (Id = @Id)</C
               <Mapping SourceColumn="shipment_id" DataSetColumn="shipment_id" />
               <Mapping SourceColumn="collected" DataSetColumn="collected" />
               <Mapping SourceColumn="contract" DataSetColumn="contract" />
+              <Mapping SourceColumn="has_bookings" DataSetColumn="has_bookings" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -3408,7 +3409,7 @@ SELECT Id, LetterOfCreditId, Number, Value FROM Shipments WHERE (Id = @Id)</Comm
               <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.DisbursementGeneratedInterestView" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT fund_id, investment_id, contract, disbursement_id, amount, profit_share, collection_date, can_generate_interest, collected, date, number, pay_date, toBeCollected FROM DisbursementGeneratedInterestView</CommandText>
+                    <CommandText>SELECT fund_id, investment_id, contract, disbursement_id, amount, profit_share, collection_date, can_generate_interest, date, disbursement_number, disbursement_pay_date, generated_interest, disbursement_generated_interest_id, GeneratedDate FROM DisbursementGeneratedInterestView</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -3422,20 +3423,21 @@ SELECT Id, LetterOfCreditId, Number, Value FROM Shipments WHERE (Id = @Id)</Comm
               <Mapping SourceColumn="amount" DataSetColumn="amount" />
               <Mapping SourceColumn="profit_share" DataSetColumn="profit_share" />
               <Mapping SourceColumn="collection_date" DataSetColumn="collection_date" />
-              <Mapping SourceColumn="number" DataSetColumn="number" />
               <Mapping SourceColumn="date" DataSetColumn="date" />
-              <Mapping SourceColumn="pay_date" DataSetColumn="pay_date" />
               <Mapping SourceColumn="can_generate_interest" DataSetColumn="can_generate_interest" />
-              <Mapping SourceColumn="toBeCollected" DataSetColumn="toBeCollected" />
-              <Mapping SourceColumn="collected" DataSetColumn="collected" />
+              <Mapping SourceColumn="disbursement_number" DataSetColumn="disbursement_number" />
+              <Mapping SourceColumn="disbursement_pay_date" DataSetColumn="disbursement_pay_date" />
+              <Mapping SourceColumn="generated_interest" DataSetColumn="generated_interest" />
+              <Mapping SourceColumn="disbursement_generated_interest_id" DataSetColumn="disbursement_generated_interest_id" />
+              <Mapping SourceColumn="GeneratedDate" DataSetColumn="GeneratedDate" />
             </Mappings>
             <Sources>
               <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.DisbursementGeneratedInterestView" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByGeneratedInterestId" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByGeneratedInterestId" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByGeneratedInterestId">
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT fund_id, investment_id, contract, disbursement_id, amount, profit_share, collection_date, can_generate_interest, collected, date, number, pay_date, toBeCollected FROM DisbursementGeneratedInterestView WHERE (GeneratedId = @GeneratedId)</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT fund_id, investment_id, contract, disbursement_id, amount, profit_share, collection_date, can_generate_interest, date, disbursement_number, disbursement_pay_date, generated_interest, disbursement_generated_interest_id, GeneratedDate FROM DisbursementGeneratedInterestView WHERE (disbursement_generated_interest_id = @GeneratedId)</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="GeneratedId" ColumnName="GeneratedId" DataSourceName="[D:\TEMP\00_DATABASES\FUNDSDB.MDF].dbo.DisbursementGeneratedInterestView" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@GeneratedId" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="GeneratedId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="GeneratedId" ColumnName="disbursement_generated_interest_id" DataSourceName="[D:\TEMP\00_DATABASES\FUNDSDB.MDF].dbo.DisbursementGeneratedInterestView" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@GeneratedId" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="disbursement_generated_interest_id" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </SelectCommand>
@@ -4777,6 +4779,7 @@ SELECT Id, date, accounting_movement_id, movement125_id, movement128_id FROM Dis
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="has_bookings" msprop:Generator_ColumnVarNameInTable="columnhas_bookings" msprop:Generator_ColumnPropNameInRow="has_bookings" msprop:Generator_ColumnPropNameInTable="has_bookingsColumn" msprop:Generator_UserColumnName="has_bookings" type="xs:boolean" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -5076,18 +5079,19 @@ SELECT Id, date, accounting_movement_id, movement125_id, movement128_id FROM Dis
               <xs:element name="amount" msprop:Generator_ColumnVarNameInTable="columnamount" msprop:Generator_ColumnPropNameInRow="amount" msprop:Generator_ColumnPropNameInTable="amountColumn" msprop:Generator_UserColumnName="amount" type="xs:decimal" />
               <xs:element name="profit_share" msprop:Generator_ColumnVarNameInTable="columnprofit_share" msprop:Generator_ColumnPropNameInRow="profit_share" msprop:Generator_ColumnPropNameInTable="profit_shareColumn" msprop:Generator_UserColumnName="profit_share" type="xs:decimal" />
               <xs:element name="collection_date" msprop:Generator_ColumnVarNameInTable="columncollection_date" msprop:Generator_ColumnPropNameInRow="collection_date" msprop:Generator_ColumnPropNameInTable="collection_dateColumn" msprop:Generator_UserColumnName="collection_date" type="xs:dateTime" />
-              <xs:element name="number" msprop:Generator_ColumnVarNameInTable="columnnumber" msprop:Generator_ColumnPropNameInRow="number" msprop:Generator_ColumnPropNameInTable="numberColumn" msprop:Generator_UserColumnName="number">
+              <xs:element name="date" msprop:Generator_ColumnVarNameInTable="columndate" msprop:Generator_ColumnPropNameInRow="date" msprop:Generator_ColumnPropNameInTable="dateColumn" msprop:Generator_UserColumnName="date" type="xs:dateTime" />
+              <xs:element name="can_generate_interest" msprop:Generator_ColumnVarNameInTable="columncan_generate_interest" msprop:Generator_ColumnPropNameInRow="can_generate_interest" msprop:Generator_ColumnPropNameInTable="can_generate_interestColumn" msprop:Generator_UserColumnName="can_generate_interest" type="xs:boolean" />
+              <xs:element name="disbursement_number" msprop:Generator_ColumnVarNameInTable="columndisbursement_number" msprop:Generator_ColumnPropNameInRow="disbursement_number" msprop:Generator_ColumnPropNameInTable="disbursement_numberColumn" msprop:Generator_UserColumnName="disbursement_number">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="date" msprop:Generator_ColumnVarNameInTable="columndate" msprop:Generator_ColumnPropNameInRow="date" msprop:Generator_ColumnPropNameInTable="dateColumn" msprop:Generator_UserColumnName="date" type="xs:dateTime" />
-              <xs:element name="pay_date" msprop:Generator_ColumnVarNameInTable="columnpay_date" msprop:Generator_ColumnPropNameInRow="pay_date" msprop:Generator_ColumnPropNameInTable="pay_dateColumn" msprop:Generator_UserColumnName="pay_date" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="can_generate_interest" msprop:Generator_ColumnVarNameInTable="columncan_generate_interest" msprop:Generator_ColumnPropNameInRow="can_generate_interest" msprop:Generator_ColumnPropNameInTable="can_generate_interestColumn" msprop:Generator_UserColumnName="can_generate_interest" type="xs:boolean" />
-              <xs:element name="toBeCollected" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columntoBeCollected" msprop:Generator_ColumnPropNameInRow="toBeCollected" msprop:Generator_ColumnPropNameInTable="toBeCollectedColumn" msprop:Generator_UserColumnName="toBeCollected" type="xs:decimal" minOccurs="0" />
-              <xs:element name="collected" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columncollected" msprop:Generator_ColumnPropNameInRow="collected" msprop:Generator_ColumnPropNameInTable="collectedColumn" msprop:Generator_UserColumnName="collected" type="xs:decimal" minOccurs="0" />
+              <xs:element name="disbursement_pay_date" msprop:Generator_ColumnVarNameInTable="columndisbursement_pay_date" msprop:Generator_ColumnPropNameInRow="disbursement_pay_date" msprop:Generator_ColumnPropNameInTable="disbursement_pay_dateColumn" msprop:Generator_UserColumnName="disbursement_pay_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="generated_interest" msprop:Generator_ColumnVarNameInTable="columngenerated_interest" msprop:Generator_ColumnPropNameInRow="generated_interest" msprop:Generator_ColumnPropNameInTable="generated_interestColumn" msprop:Generator_UserColumnName="generated_interest" type="xs:decimal" />
+              <xs:element name="disbursement_generated_interest_id" msprop:Generator_ColumnVarNameInTable="columndisbursement_generated_interest_id" msprop:Generator_ColumnPropNameInRow="disbursement_generated_interest_id" msprop:Generator_ColumnPropNameInTable="disbursement_generated_interest_idColumn" msprop:Generator_UserColumnName="disbursement_generated_interest_id" type="xs:int" />
+              <xs:element name="GeneratedDate" msprop:Generator_ColumnVarNameInTable="columnGeneratedDate" msprop:Generator_ColumnPropNameInRow="GeneratedDate" msprop:Generator_ColumnPropNameInTable="GeneratedDateColumn" msprop:Generator_UserColumnName="GeneratedDate" type="xs:dateTime" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

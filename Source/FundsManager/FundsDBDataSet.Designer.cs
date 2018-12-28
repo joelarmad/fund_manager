@@ -16635,6 +16635,8 @@ namespace FundsManager {
             
             private global::System.Data.DataColumn columncontract;
             
+            private global::System.Data.DataColumn columnhas_bookings;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ProfitShareToAccrueDataTable() {
@@ -16822,6 +16824,14 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn has_bookingsColumn {
+                get {
+                    return this.columnhas_bookings;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -16875,7 +16885,8 @@ namespace FundsManager {
                         bool can_generate_interest, 
                         int shipment_id, 
                         bool collected, 
-                        string contract) {
+                        string contract, 
+                        bool has_bookings) {
                 ProfitShareToAccrueRow rowProfitShareToAccrueRow = ((ProfitShareToAccrueRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -16896,7 +16907,8 @@ namespace FundsManager {
                         can_generate_interest,
                         shipment_id,
                         collected,
-                        contract};
+                        contract,
+                        has_bookings};
                 rowProfitShareToAccrueRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowProfitShareToAccrueRow);
                 return rowProfitShareToAccrueRow;
@@ -16945,6 +16957,7 @@ namespace FundsManager {
                 this.columnshipment_id = base.Columns["shipment_id"];
                 this.columncollected = base.Columns["collected"];
                 this.columncontract = base.Columns["contract"];
+                this.columnhas_bookings = base.Columns["has_bookings"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -16988,6 +17001,8 @@ namespace FundsManager {
                 base.Columns.Add(this.columncollected);
                 this.columncontract = new global::System.Data.DataColumn("contract", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncontract);
+                this.columnhas_bookings = new global::System.Data.DataColumn("has_bookings", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhas_bookings);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
                 this.columnId.AutoIncrement = true;
@@ -21384,17 +21399,19 @@ namespace FundsManager {
             
             private global::System.Data.DataColumn columncollection_date;
             
-            private global::System.Data.DataColumn columnnumber;
-            
             private global::System.Data.DataColumn columndate;
-            
-            private global::System.Data.DataColumn columnpay_date;
             
             private global::System.Data.DataColumn columncan_generate_interest;
             
-            private global::System.Data.DataColumn columntoBeCollected;
+            private global::System.Data.DataColumn columndisbursement_number;
             
-            private global::System.Data.DataColumn columncollected;
+            private global::System.Data.DataColumn columndisbursement_pay_date;
+            
+            private global::System.Data.DataColumn columngenerated_interest;
+            
+            private global::System.Data.DataColumn columndisbursement_generated_interest_id;
+            
+            private global::System.Data.DataColumn columnGeneratedDate;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -21487,25 +21504,9 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn numberColumn {
-                get {
-                    return this.columnnumber;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn dateColumn {
                 get {
                     return this.columndate;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn pay_dateColumn {
-                get {
-                    return this.columnpay_date;
                 }
             }
             
@@ -21519,17 +21520,41 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn toBeCollectedColumn {
+            public global::System.Data.DataColumn disbursement_numberColumn {
                 get {
-                    return this.columntoBeCollected;
+                    return this.columndisbursement_number;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn collectedColumn {
+            public global::System.Data.DataColumn disbursement_pay_dateColumn {
                 get {
-                    return this.columncollected;
+                    return this.columndisbursement_pay_date;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn generated_interestColumn {
+                get {
+                    return this.columngenerated_interest;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn disbursement_generated_interest_idColumn {
+                get {
+                    return this.columndisbursement_generated_interest_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn GeneratedDateColumn {
+                get {
+                    return this.columnGeneratedDate;
                 }
             }
             
@@ -21570,7 +21595,7 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DisbursementGeneratedInterestViewRow AddDisbursementGeneratedInterestViewRow(int fund_id, int investment_id, string contract, int disbursement_id, decimal amount, decimal profit_share, System.DateTime collection_date, string number, System.DateTime date, System.DateTime pay_date, bool can_generate_interest, decimal toBeCollected, decimal collected) {
+            public DisbursementGeneratedInterestViewRow AddDisbursementGeneratedInterestViewRow(int fund_id, int investment_id, string contract, int disbursement_id, decimal amount, decimal profit_share, System.DateTime collection_date, System.DateTime date, bool can_generate_interest, string disbursement_number, System.DateTime disbursement_pay_date, decimal generated_interest, int disbursement_generated_interest_id, System.DateTime GeneratedDate) {
                 DisbursementGeneratedInterestViewRow rowDisbursementGeneratedInterestViewRow = ((DisbursementGeneratedInterestViewRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         fund_id,
@@ -21580,12 +21605,13 @@ namespace FundsManager {
                         amount,
                         profit_share,
                         collection_date,
-                        number,
                         date,
-                        pay_date,
                         can_generate_interest,
-                        toBeCollected,
-                        collected};
+                        disbursement_number,
+                        disbursement_pay_date,
+                        generated_interest,
+                        disbursement_generated_interest_id,
+                        GeneratedDate};
                 rowDisbursementGeneratedInterestViewRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDisbursementGeneratedInterestViewRow);
                 return rowDisbursementGeneratedInterestViewRow;
@@ -21622,12 +21648,13 @@ namespace FundsManager {
                 this.columnamount = base.Columns["amount"];
                 this.columnprofit_share = base.Columns["profit_share"];
                 this.columncollection_date = base.Columns["collection_date"];
-                this.columnnumber = base.Columns["number"];
                 this.columndate = base.Columns["date"];
-                this.columnpay_date = base.Columns["pay_date"];
                 this.columncan_generate_interest = base.Columns["can_generate_interest"];
-                this.columntoBeCollected = base.Columns["toBeCollected"];
-                this.columncollected = base.Columns["collected"];
+                this.columndisbursement_number = base.Columns["disbursement_number"];
+                this.columndisbursement_pay_date = base.Columns["disbursement_pay_date"];
+                this.columngenerated_interest = base.Columns["generated_interest"];
+                this.columndisbursement_generated_interest_id = base.Columns["disbursement_generated_interest_id"];
+                this.columnGeneratedDate = base.Columns["GeneratedDate"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -21647,18 +21674,20 @@ namespace FundsManager {
                 base.Columns.Add(this.columnprofit_share);
                 this.columncollection_date = new global::System.Data.DataColumn("collection_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncollection_date);
-                this.columnnumber = new global::System.Data.DataColumn("number", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnnumber);
                 this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndate);
-                this.columnpay_date = new global::System.Data.DataColumn("pay_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpay_date);
                 this.columncan_generate_interest = new global::System.Data.DataColumn("can_generate_interest", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncan_generate_interest);
-                this.columntoBeCollected = new global::System.Data.DataColumn("toBeCollected", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntoBeCollected);
-                this.columncollected = new global::System.Data.DataColumn("collected", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncollected);
+                this.columndisbursement_number = new global::System.Data.DataColumn("disbursement_number", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndisbursement_number);
+                this.columndisbursement_pay_date = new global::System.Data.DataColumn("disbursement_pay_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndisbursement_pay_date);
+                this.columngenerated_interest = new global::System.Data.DataColumn("generated_interest", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columngenerated_interest);
+                this.columndisbursement_generated_interest_id = new global::System.Data.DataColumn("disbursement_generated_interest_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndisbursement_generated_interest_id);
+                this.columnGeneratedDate = new global::System.Data.DataColumn("GeneratedDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGeneratedDate);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columndisbursement_id}, true));
                 this.columnfund_id.AllowDBNull = false;
@@ -21670,12 +21699,13 @@ namespace FundsManager {
                 this.columnamount.AllowDBNull = false;
                 this.columnprofit_share.AllowDBNull = false;
                 this.columncollection_date.AllowDBNull = false;
-                this.columnnumber.AllowDBNull = false;
-                this.columnnumber.MaxLength = 50;
                 this.columndate.AllowDBNull = false;
                 this.columncan_generate_interest.AllowDBNull = false;
-                this.columntoBeCollected.ReadOnly = true;
-                this.columncollected.ReadOnly = true;
+                this.columndisbursement_number.AllowDBNull = false;
+                this.columndisbursement_number.MaxLength = 50;
+                this.columngenerated_interest.AllowDBNull = false;
+                this.columndisbursement_generated_interest_id.AllowDBNull = false;
+                this.columnGeneratedDate.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -31243,6 +31273,23 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool has_bookings {
+                get {
+                    try {
+                        return ((bool)(this[this.tableProfitShareToAccrue.has_bookingsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'has_bookings\' de la tabla \'ProfitShareToAccrue\' es DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tableProfitShareToAccrue.has_bookingsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool Isunderlying_debtor_idNull() {
                 return this.IsNull(this.tableProfitShareToAccrue.underlying_debtor_idColumn);
             }
@@ -31299,6 +31346,18 @@ namespace FundsManager {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetcollectedNull() {
                 this[this.tableProfitShareToAccrue.collectedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Ishas_bookingsNull() {
+                return this.IsNull(this.tableProfitShareToAccrue.has_bookingsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Sethas_bookingsNull() {
+                this[this.tableProfitShareToAccrue.has_bookingsColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -33149,40 +33208,12 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string number {
-                get {
-                    return ((string)(this[this.tableDisbursementGeneratedInterestView.numberColumn]));
-                }
-                set {
-                    this[this.tableDisbursementGeneratedInterestView.numberColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public System.DateTime date {
                 get {
                     return ((global::System.DateTime)(this[this.tableDisbursementGeneratedInterestView.dateColumn]));
                 }
                 set {
                     this[this.tableDisbursementGeneratedInterestView.dateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime pay_date {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableDisbursementGeneratedInterestView.pay_dateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'pay_date\' de la tabla \'DisbursementGeneratedInterestView\'" +
-                                " es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDisbursementGeneratedInterestView.pay_dateColumn] = value;
                 }
             }
             
@@ -33199,72 +33230,75 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal toBeCollected {
+            public string disbursement_number {
+                get {
+                    return ((string)(this[this.tableDisbursementGeneratedInterestView.disbursement_numberColumn]));
+                }
+                set {
+                    this[this.tableDisbursementGeneratedInterestView.disbursement_numberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime disbursement_pay_date {
                 get {
                     try {
-                        return ((decimal)(this[this.tableDisbursementGeneratedInterestView.toBeCollectedColumn]));
+                        return ((global::System.DateTime)(this[this.tableDisbursementGeneratedInterestView.disbursement_pay_dateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'toBeCollected\' de la tabla \'DisbursementGeneratedInterest" +
-                                "View\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'disbursement_pay_date\' de la tabla \'DisbursementGenerated" +
+                                "InterestView\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDisbursementGeneratedInterestView.toBeCollectedColumn] = value;
+                    this[this.tableDisbursementGeneratedInterestView.disbursement_pay_dateColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal collected {
+            public decimal generated_interest {
                 get {
-                    try {
-                        return ((decimal)(this[this.tableDisbursementGeneratedInterestView.collectedColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'collected\' de la tabla \'DisbursementGeneratedInterestView" +
-                                "\' es DBNull.", e);
-                    }
+                    return ((decimal)(this[this.tableDisbursementGeneratedInterestView.generated_interestColumn]));
                 }
                 set {
-                    this[this.tableDisbursementGeneratedInterestView.collectedColumn] = value;
+                    this[this.tableDisbursementGeneratedInterestView.generated_interestColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Ispay_dateNull() {
-                return this.IsNull(this.tableDisbursementGeneratedInterestView.pay_dateColumn);
+            public int disbursement_generated_interest_id {
+                get {
+                    return ((int)(this[this.tableDisbursementGeneratedInterestView.disbursement_generated_interest_idColumn]));
+                }
+                set {
+                    this[this.tableDisbursementGeneratedInterestView.disbursement_generated_interest_idColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setpay_dateNull() {
-                this[this.tableDisbursementGeneratedInterestView.pay_dateColumn] = global::System.Convert.DBNull;
+            public System.DateTime GeneratedDate {
+                get {
+                    return ((global::System.DateTime)(this[this.tableDisbursementGeneratedInterestView.GeneratedDateColumn]));
+                }
+                set {
+                    this[this.tableDisbursementGeneratedInterestView.GeneratedDateColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IstoBeCollectedNull() {
-                return this.IsNull(this.tableDisbursementGeneratedInterestView.toBeCollectedColumn);
+            public bool Isdisbursement_pay_dateNull() {
+                return this.IsNull(this.tableDisbursementGeneratedInterestView.disbursement_pay_dateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SettoBeCollectedNull() {
-                this[this.tableDisbursementGeneratedInterestView.toBeCollectedColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IscollectedNull() {
-                return this.IsNull(this.tableDisbursementGeneratedInterestView.collectedColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetcollectedNull() {
-                this[this.tableDisbursementGeneratedInterestView.collectedColumn] = global::System.Convert.DBNull;
+            public void Setdisbursement_pay_dateNull() {
+                this[this.tableDisbursementGeneratedInterestView.disbursement_pay_dateColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -52181,6 +52215,7 @@ SELECT Id, disbursement_generated_interest_id, disbursement_id, generated_intere
             tableMapping.ColumnMappings.Add("shipment_id", "shipment_id");
             tableMapping.ColumnMappings.Add("collected", "collected");
             tableMapping.ColumnMappings.Add("contract", "contract");
+            tableMapping.ColumnMappings.Add("has_bookings", "has_bookings");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -52197,7 +52232,7 @@ SELECT Id, disbursement_generated_interest_id, disbursement_id, generated_intere
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, collection_date, pay_date, can_generate_interest, collected, contract, shipment_id FROM ProfitShareToAccrue";
+            this._commandCollection[0].CommandText = @"SELECT Id, investment_id, currency_id, exchange_rate, client_id, underlying_debtor_id, bank_risk_id, profit_share, amount, fund_id, date, sector_id, number, collection_date, pay_date, can_generate_interest, collected, contract, shipment_id, has_bookings FROM ProfitShareToAccrue";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -55280,12 +55315,13 @@ SELECT Id, LetterOfCreditId, Number, Value FROM Shipments WHERE (Id = @Id)";
             tableMapping.ColumnMappings.Add("amount", "amount");
             tableMapping.ColumnMappings.Add("profit_share", "profit_share");
             tableMapping.ColumnMappings.Add("collection_date", "collection_date");
-            tableMapping.ColumnMappings.Add("number", "number");
             tableMapping.ColumnMappings.Add("date", "date");
-            tableMapping.ColumnMappings.Add("pay_date", "pay_date");
             tableMapping.ColumnMappings.Add("can_generate_interest", "can_generate_interest");
-            tableMapping.ColumnMappings.Add("toBeCollected", "toBeCollected");
-            tableMapping.ColumnMappings.Add("collected", "collected");
+            tableMapping.ColumnMappings.Add("disbursement_number", "disbursement_number");
+            tableMapping.ColumnMappings.Add("disbursement_pay_date", "disbursement_pay_date");
+            tableMapping.ColumnMappings.Add("generated_interest", "generated_interest");
+            tableMapping.ColumnMappings.Add("disbursement_generated_interest_id", "disbursement_generated_interest_id");
+            tableMapping.ColumnMappings.Add("GeneratedDate", "GeneratedDate");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -55302,18 +55338,13 @@ SELECT Id, LetterOfCreditId, Number, Value FROM Shipments WHERE (Id = @Id)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT fund_id, investment_id, contract, disbursement_id, amount, profit_share, c" +
-                "ollection_date, can_generate_interest, collected, date, number, pay_date, toBeCo" +
-                "llected FROM DisbursementGeneratedInterestView";
+            this._commandCollection[0].CommandText = @"SELECT fund_id, investment_id, contract, disbursement_id, amount, profit_share, collection_date, can_generate_interest, date, disbursement_number, disbursement_pay_date, generated_interest, disbursement_generated_interest_id, GeneratedDate FROM DisbursementGeneratedInterestView";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT fund_id, investment_id, contract, disbursement_id, amount, profit_share, c" +
-                "ollection_date, can_generate_interest, collected, date, number, pay_date, toBeCo" +
-                "llected FROM DisbursementGeneratedInterestView WHERE (GeneratedId = @GeneratedId" +
-                ")";
+            this._commandCollection[1].CommandText = @"SELECT fund_id, investment_id, contract, disbursement_id, amount, profit_share, collection_date, can_generate_interest, date, disbursement_number, disbursement_pay_date, generated_interest, disbursement_generated_interest_id, GeneratedDate FROM DisbursementGeneratedInterestView WHERE (disbursement_generated_interest_id = @GeneratedId)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GeneratedId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "GeneratedId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GeneratedId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "disbursement_generated_interest_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

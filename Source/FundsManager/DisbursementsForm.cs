@@ -162,11 +162,6 @@ namespace FundsManager
             decimal totalPaid = 0;
 
             int investmentId = 0;
-            int disbursementPaymentId = 0;
-            int accountingMovementId = 0;
-            decimal? account125Amount = null;
-            List<int> subaccountsIds = new List<int>();
-            List<decimal> subaccountAmounts = new List<decimal>();
 
             Account account125 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "125" && x.FK_Accounts_Funds == manager.Selected);
 
@@ -176,8 +171,6 @@ namespace FundsManager
             {
                 if (account125 != null)
                 {
-                    account125Amount = account125.amount;
-
                     if (cbContract.SelectedValue != null
                         && int.TryParse(cbContract.SelectedValue.ToString(), out investmentId))
                     {
@@ -188,9 +181,6 @@ namespace FundsManager
                             dPayment.payment_date = Convert.ToDateTime(dtpPayDate.Text);
 
                             manager.My_db.DisbursementPayments.Add(dPayment);
-                            manager.My_db.SaveChanges();
-
-                            disbursementPaymentId = dPayment.id;
 
                             foreach (ListViewItem _item in lvDisbursements.SelectedItems)
                             {
@@ -207,8 +197,6 @@ namespace FundsManager
 
                                         dPayment.Disbursements.Add(toPay);
 
-                                        manager.My_db.SaveChanges();
-
                                         if (_accountingMovement.Id == 0)
                                         {
                                             _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
@@ -220,19 +208,16 @@ namespace FundsManager
                                             _accountingMovement.contract = cbContract.SelectedText;
 
                                             manager.My_db.AccountingMovements.Add(_accountingMovement);
-                                            manager.My_db.SaveChanges();
 
-                                            dPayment.accounting_movement_id = _accountingMovement.Id;
+                                            dPayment.AccountingMovement = _accountingMovement;
                                         }
-
-                                        accountingMovementId = _accountingMovement.Id;
 
                                         Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == toPay.currency_id && x.FK_Currencies_Funds == manager.Selected);
                                         Subaccount subacct125 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account125.Id && x.name == "INV " + currency.symbol);
 
                                         Movements_Accounts _maccount125 = new Movements_Accounts();
 
-                                        _maccount125.FK_Movements_Accounts_AccountingMovements = _accountingMovement.Id;
+                                        _maccount125.AccountingMovement = _accountingMovement;
                                         _maccount125.FK_Movements_Accounts_Funds = manager.Selected;
                                         _maccount125.FK_Movements_Accounts_Accounts = account125.Id;
                                         if (subacct125 != null)
@@ -260,51 +245,34 @@ namespace FundsManager
 
                                         if (subacct125 != null)
                                         {
-                                            if (!subaccountsIds.Contains(subacct125.Id))
-                                            {
-                                                subaccountsIds.Add(subacct125.Id);
-                                                subaccountAmounts.Add(subacct125.amount);
-                                            }
-
                                             subacct125.amount += _debitFactor * _maccount125.debit;
                                             subacct125.amount += _creditFactor * _maccount125.credit;
                                             _maccount125.subacc_amount = Math.Round(subacct125.amount, 2);
                                         }
 
                                         manager.My_db.Movements_Accounts.Add(_maccount125);
-
-                                        manager.My_db.SaveChanges();
                                     }
                                 }
                             }
 
-                            manager.My_db.SaveChanges();
-
                             lvDisbursements.SelectedIndices.Clear();
 
-                            if (_accountingMovement.Id > 0)
-                            {
-                                GeneralLedgerForm gledger = new GeneralLedgerForm();
-                                gledger.StartPosition = FormStartPosition.CenterScreen;
-                                gledger.FromDisbursementOperation = true;
-                                gledger.AcctMovFromDisbursement = _accountingMovement;
-                                gledger.CreditFromDisbursemet = totalPaid;
-                                gledger.ControlBox = false;
-                                gledger.ShowDialog();
+                            GeneralLedgerForm gledger = new GeneralLedgerForm();
+                            gledger.StartPosition = FormStartPosition.CenterScreen;
+                            gledger.FromDisbursementOperation = true;
+                            gledger.AcctMovFromDisbursement = _accountingMovement;
+                            gledger.CreditFromDisbursemet = totalPaid;
+                            gledger.ControlBox = false;
+                            gledger.ShowDialog();
 
-                                if (!gledger.OperationCompleted)
-                                {
-                                    throw new Exception("Ledger operation has been failed. The disbursements payment will be rolled back.");
-                                }
-
-                                DisbursementPaymentForm disbursement_payments = new DisbursementPaymentForm();
-                                disbursement_payments.paymentId = dPayment.id;
-                                disbursement_payments.Show();
-                            }
-                            else
+                            if (!gledger.OperationCompleted)
                             {
-                                throw new Exception("Relative accounting movement, to account 125, has not been created.");
+                                throw new Exception("Ledger operation has been failed. The disbursements payment has been rolled back.");
                             }
+
+                            DisbursementPaymentForm disbursement_payments = new DisbursementPaymentForm();
+                            disbursement_payments.paymentId = dPayment.id;
+                            disbursement_payments.Show();
                         }
                         else
                         {
@@ -325,58 +293,6 @@ namespace FundsManager
             {
                 Console.WriteLine("Error in DisbursementsForm.cmdPay_Click: " + _ex.Message);
                 ErrorMessage.showErrorMessage(_ex);
-
-                //rollback
-                try
-                {
-                    manager.Reset();
-
-                    for (int i = 0; i < subaccountsIds.Count; i++)
-                    {
-                        int subacctId = subaccountsIds[i];
-
-                        Subaccount subacct = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == subacctId);
-
-                        if (subacct != null)
-                        {
-                            subacct.amount = Math.Round(subaccountAmounts[i], 2);
-
-                            manager.My_db.SaveChanges();
-                        }
-                    }
-
-                    if (account125 != null && account125Amount.HasValue)
-                    {
-                        account125.amount = Math.Round(account125Amount.Value, 2);
-
-                        manager.My_db.SaveChanges();
-                    }
-
-                    DisbursementPayment disbPayment = manager.My_db.DisbursementPayments.FirstOrDefault(x => x.id == disbursementPaymentId);
-
-                    if (disbPayment != null)
-                    {
-                        foreach (Disbursement disb in disbPayment.Disbursements)
-                        {
-                            disb.pay_date = null;
-                            disb.can_generate_interest = false;
-
-                            manager.My_db.SaveChanges();
-                        }
-
-                        disbPayment.Disbursements.Clear();
-
-                        manager.My_db.SaveChanges();
-
-                        manager.My_db.DisbursementPayments.Remove(disbPayment);
-
-                        manager.My_db.SaveChanges();
-                    }
-                }
-                catch (Exception _ex2)
-                {
-                    ErrorMessage.showErrorMessage(new Exception("Error rolling back operation.", _ex2));
-                }
             }
 
             loadDisbursements();

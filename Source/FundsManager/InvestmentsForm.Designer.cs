@@ -411,6 +411,7 @@
             this.columnHeader8,
             this.columnHeader6,
             this.columnHeader7});
+            this.lvDisbursements.FullRowSelect = true;
             this.lvDisbursements.Location = new System.Drawing.Point(12, 260);
             this.lvDisbursements.MultiSelect = false;
             this.lvDisbursements.Name = "lvDisbursements";

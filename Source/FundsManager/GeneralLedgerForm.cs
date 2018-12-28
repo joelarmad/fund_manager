@@ -409,8 +409,6 @@ namespace FundsManager
         {
             if (listView1.Items.Count >= 0)
             {
-                int created_movement_id = 0;
-
                 try
                 {
                     if (!FormInEditAccountingMovement)
@@ -441,11 +439,7 @@ namespace FundsManager
                         {
                             manager.My_db.AccountingMovements.Add(newAccountingMovement);
                         }
-
-                        manager.My_db.SaveChanges();
-
-                        created_movement_id = newAccountingMovement.Id;
-
+                        
                         textBox3.Text = KeyDefinitions.NextAccountMovementReference;
                         textBox4.Clear();
                         textBox5.Clear();
@@ -458,8 +452,10 @@ namespace FundsManager
 
                         foreach (Movement newMovementAccount in movements)
                         {
-                            saveMovementInDB(newMovementAccount, newAccountingMovement.Id);
+                            addMovement(newMovementAccount, newAccountingMovement);
                         }
+
+                        manager.My_db.SaveChanges();
 
                         movements.Clear();
                         movementsToDelete.Clear();
@@ -489,8 +485,6 @@ namespace FundsManager
                             AccountingMovementToEdit.contract = txtContract.Text;
                         }
 
-                        manager.My_db.SaveChanges();
-
                         textBox3.Text = KeyDefinitions.NextAccountMovementReference;
                         textBox4.Clear();
                         textBox5.Clear();
@@ -503,7 +497,7 @@ namespace FundsManager
 
                         foreach (Movement movementToSave in movements)
                         {
-                            saveMovementInDB(movementToSave, AccountingMovementToEdit.Id);
+                            addMovement(movementToSave, AccountingMovementToEdit);
                         }
 
                         foreach (Movement toDelete in movementsToDelete)
@@ -513,6 +507,8 @@ namespace FundsManager
                                 manager.DeleteMovementAccount(toDelete.Id);
                             }
                         }
+
+                        manager.My_db.SaveChanges();
 
                         movements.Clear();
                         movementsToDelete.Clear();
@@ -526,20 +522,6 @@ namespace FundsManager
                 catch (Exception _ex)
                 {
                     ErrorMessage.showErrorMessage(_ex);
-
-                    //Try to rollback
-                    try
-                    {
-                        if (!FormInEditAccountingMovement)
-                        {
-
-                            //TODO: analizar rollback
-                        }
-                    }
-                    catch (Exception _ex2)
-                    {
-                        ErrorMessage.showErrorMessage(_ex2);
-                    }
 
                     OperationCompleted = false;
                 }
@@ -1094,7 +1076,7 @@ namespace FundsManager
             }
         }
 
-        private void saveMovementInDB(Movement toSave, int acctMovId)
+        private void addMovement(Movement toSave, AccountingMovement acctMov)
         {
             int? nullReference = null;
 
@@ -1109,7 +1091,7 @@ namespace FundsManager
                     throw new Exception("Attempt to edit non existing movement account.");
             }
 
-            movementAccountToSave.FK_Movements_Accounts_AccountingMovements = acctMovId;
+            movementAccountToSave.AccountingMovement = acctMov;
             movementAccountToSave.FK_Movements_Accounts_Funds = manager.Selected;
             movementAccountToSave.FK_Movements_Accounts_Accounts = toSave.Account;
 
@@ -1160,8 +1142,6 @@ namespace FundsManager
             {
                 manager.My_db.Movements_Accounts.Add(movementAccountToSave);
             }
-
-            manager.My_db.SaveChanges();
         }
 
         private void cmdDeleteMovement_Click(object sender, EventArgs e)

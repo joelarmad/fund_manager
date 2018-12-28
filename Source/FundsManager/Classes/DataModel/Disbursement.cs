@@ -15,6 +15,14 @@ namespace FundsManager
         public string TextUnderlyingDebtor;
 
         public List<int> ItemsIds = new List<int>();
+
+        public void AddItemId(int itemId)
+        {
+            if (ItemsIds.Contains(itemId))
+                return;
+
+            ItemsIds.Add(itemId);
+        }
     }
 
 

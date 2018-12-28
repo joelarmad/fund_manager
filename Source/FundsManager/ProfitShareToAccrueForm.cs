@@ -244,7 +244,6 @@ namespace FundsManager
                                         if (!interestCreated)
                                         {
                                             manager.My_db.DisbursementGeneratedInterests.Add(_generatedInterest);
-                                            manager.My_db.SaveChanges();
                                             interestCreated = true;
                                         }
 
@@ -255,21 +254,19 @@ namespace FundsManager
                                             if (disb != null)
                                             {
                                                 disb.can_generate_interest = false;
-                                                manager.My_db.SaveChanges();
                                             }
                                         }
 
                                         _totalInterest += _interest;
 
                                         DisbursementGeneratedInterestDetail _detail = new DisbursementGeneratedInterestDetail();
-                                        _detail.disbursement_generated_interest_id = _generatedInterest.Id;
+
+                                        _detail.DisbursementGeneratedInterest = _generatedInterest;
                                         _detail.disbursement_id = _profitShareToAccrue.Id;
                                         _detail.generated_interest = Math.Round(_interest, 2);
                                         _detail.generated_interest_date = toDate;
 
                                         manager.My_db.DisbursementGeneratedInterestDetails.Add(_detail);
-                                        manager.My_db.SaveChanges();
-
 
                                         AccountingMovement _accountingMovement = new AccountingMovement();
 
@@ -282,13 +279,12 @@ namespace FundsManager
                                         _accountingMovement.contract = investment.contract;
 
                                         manager.My_db.AccountingMovements.Add(_accountingMovement);
-                                        manager.My_db.SaveChanges();
 
-                                        _detail.accounting_movement_id = _accountingMovement.Id;
+                                        _detail.AccountingMovement = _accountingMovement;
 
                                         Movements_Accounts _maccount128 = new Movements_Accounts();
 
-                                        _maccount128.FK_Movements_Accounts_AccountingMovements = _accountingMovement.Id;
+                                        _maccount128.AccountingMovement = _accountingMovement;
                                         _maccount128.FK_Movements_Accounts_Funds = manager.Selected;
                                         _maccount128.FK_Movements_Accounts_Accounts = account128.Id;
                                         if (subacct128 != null)
@@ -318,11 +314,9 @@ namespace FundsManager
 
                                         manager.My_db.Movements_Accounts.Add(_maccount128);
 
-                                        manager.My_db.SaveChanges();
-
                                         Movements_Accounts _maccount901 = new Movements_Accounts();
 
-                                        _maccount901.FK_Movements_Accounts_AccountingMovements = _accountingMovement.Id;
+                                        _maccount901.AccountingMovement = _accountingMovement;
                                         _maccount901.FK_Movements_Accounts_Funds = manager.Selected;
                                         _maccount901.FK_Movements_Accounts_Accounts = account901.Id;
 
@@ -346,8 +340,6 @@ namespace FundsManager
                                         _maccount901.acc_amount = Math.Round(account901.amount, 2);
 
                                         manager.My_db.Movements_Accounts.Add(_maccount901);
-
-                                        manager.My_db.SaveChanges();
                                         
                                     }
                                 }
@@ -361,6 +353,8 @@ namespace FundsManager
                                 someDataMissed = true;
                             }
                         }
+
+                        manager.My_db.SaveChanges();
 
                         if (someDataMissed)
                         {

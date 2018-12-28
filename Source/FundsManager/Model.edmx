@@ -3542,9 +3542,9 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="movement128_id" Type="Int32" />
           <Property Name="movement130_id" Type="Int32" />
           <NavigationProperty Name="DisbursementCollection" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_DisbursementCollection" FromRole="DisbursementCollectionsDetail" ToRole="DisbursementCollection" />
-          <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
-          <NavigationProperty Name="Movements_Accounts1" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov128" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
-          <NavigationProperty Name="Movements_Accounts2" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
+          <NavigationProperty Name="Movements_Accounts_125" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
+          <NavigationProperty Name="Movements_Accounts_128" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov128" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
+          <NavigationProperty Name="Movements_Accounts_130" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
           <NavigationProperty Name="Disbursement" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement" FromRole="DisbursementCollectionsDetail" ToRole="Disbursement" />
         </EntityType>
         <Association Name="FK_DisbursementCollectionsDetails_DisbursementCollection">
