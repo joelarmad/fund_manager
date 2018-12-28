@@ -59,8 +59,8 @@
             this.investmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createInvestmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disbursemetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.collectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.profitShareAccruedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.collectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.delayInterestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.delayInterestToAccrueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -300,8 +300,8 @@
             this.disbursemetToolStripMenuItem,
             this.profitShareAccruedToolStripMenuItem,
             this.collectionToolStripMenuItem,
-            this.delayInterestToolStripMenuItem,
-            this.delayInterestToAccrueToolStripMenuItem});
+            this.delayInterestToAccrueToolStripMenuItem,
+            this.delayInterestToolStripMenuItem});
             this.investmentsToolStripMenuItem.Name = "investmentsToolStripMenuItem";
             this.investmentsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.investmentsToolStripMenuItem.Text = "Investments";
@@ -320,13 +320,6 @@
             this.disbursemetToolStripMenuItem.Text = "Disbursemet";
             this.disbursemetToolStripMenuItem.Click += new System.EventHandler(this.disbursemetToolStripMenuItem_Click);
             // 
-            // collectionToolStripMenuItem
-            // 
-            this.collectionToolStripMenuItem.Name = "collectionToolStripMenuItem";
-            this.collectionToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            this.collectionToolStripMenuItem.Text = "Collection";
-            this.collectionToolStripMenuItem.Click += new System.EventHandler(this.collectionToolStripMenuItem_Click);
-            // 
             // profitShareAccruedToolStripMenuItem
             // 
             this.profitShareAccruedToolStripMenuItem.Name = "profitShareAccruedToolStripMenuItem";
@@ -334,11 +327,19 @@
             this.profitShareAccruedToolStripMenuItem.Text = "Profit Share Accrued";
             this.profitShareAccruedToolStripMenuItem.Click += new System.EventHandler(this.profitShareAccruedToolStripMenuItem_Click);
             // 
+            // collectionToolStripMenuItem
+            // 
+            this.collectionToolStripMenuItem.Name = "collectionToolStripMenuItem";
+            this.collectionToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.collectionToolStripMenuItem.Text = "Collection";
+            this.collectionToolStripMenuItem.Click += new System.EventHandler(this.collectionToolStripMenuItem_Click);
+            // 
             // delayInterestToolStripMenuItem
             // 
             this.delayInterestToolStripMenuItem.Name = "delayInterestToolStripMenuItem";
             this.delayInterestToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.delayInterestToolStripMenuItem.Text = "Delay Interest - Addendum";
+            this.delayInterestToolStripMenuItem.Click += new System.EventHandler(this.delayInterestToolStripMenuItem_Click);
             // 
             // delayInterestToAccrueToolStripMenuItem
             // 

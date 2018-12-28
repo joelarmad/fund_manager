@@ -498,6 +498,9 @@ namespace FundsManager
                     fAmountRemaining -= amountToDecrease;
                     fProfitShareRemainig -= profitShareToDecrease;
 
+                    _booking.collected = false;
+                    _booking.can_generate_interest = true;
+
                     return _booking;
                 }
                 else
@@ -604,7 +607,7 @@ namespace FundsManager
                     else
                     {
                         DisbursementBooking selected = bookings[lvBooking.SelectedIndices[0]];
-
+                        //TODO: validar si tiene algun cobro
                         //if (selected.pay_date.HasValue)
                         //{
                         //    lvDisbursements.SelectedIndices.Clear();

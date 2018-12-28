@@ -125,6 +125,24 @@
           <Property Name="FK_BondsInvestors_Investors" Type="int" Nullable="false" />
           <Property Name="quantity" Type="float" Nullable="false" />
         </EntityType>
+        <EntityType Name="BookingGeneratedInterestDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="booking_generated_interest_id" Type="int" Nullable="false" />
+          <Property Name="booking_id" Type="int" Nullable="false" />
+          <Property Name="generated_interest" Type="money" Nullable="false" />
+          <Property Name="generated_interest_date" Type="date" Nullable="false" />
+          <Property Name="accounting_movement_id" Type="int" />
+        </EntityType>
+        <EntityType Name="BookingGeneratedInterests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GeneratedDate" Type="date" Nullable="false" />
+        </EntityType>
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="Id" />
@@ -190,6 +208,8 @@
           <Property Name="exchange_rate" Type="real" Nullable="false" />
           <Property Name="movement125_id" Type="int" Nullable="false" />
           <Property Name="movement128_id" Type="int" Nullable="false" />
+          <Property Name="collected" Type="bit" Nullable="false" />
+          <Property Name="can_generate_interest" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="DisbursementBooks">
           <Key>
@@ -455,6 +475,87 @@
           <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementsBookingView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="DisbursementsBookingView">
+          <Key>
+            <PropertyRef Name="fund_id" />
+            <PropertyRef Name="investment_id" />
+            <PropertyRef Name="contract" />
+            <PropertyRef Name="investment_date" />
+            <PropertyRef Name="investment_profit_share" />
+            <PropertyRef Name="disbursement_id" />
+            <PropertyRef Name="disbursement_number" />
+            <PropertyRef Name="currency_id" />
+            <PropertyRef Name="amount" />
+            <PropertyRef Name="exchange_rate" />
+            <PropertyRef Name="profit_share" />
+            <PropertyRef Name="disbursement_date" />
+            <PropertyRef Name="collection_date" />
+            <PropertyRef Name="can_generate_interest" />
+            <PropertyRef Name="client_id" />
+            <PropertyRef Name="client" />
+            <PropertyRef Name="sector_id" />
+            <PropertyRef Name="book_id" />
+            <PropertyRef Name="booking_number" />
+            <PropertyRef Name="book_date" />
+            <PropertyRef Name="accounting_movement_id" />
+            <PropertyRef Name="book_movement125_id" />
+            <PropertyRef Name="book_movement128_id" />
+            <PropertyRef Name="booking_id" />
+            <PropertyRef Name="booking_amount" />
+            <PropertyRef Name="booking_profit_share" />
+            <PropertyRef Name="delay_interest" />
+            <PropertyRef Name="starting_date" />
+            <PropertyRef Name="new_collection_date" />
+            <PropertyRef Name="movement125_id" />
+            <PropertyRef Name="movement128_id" />
+            <PropertyRef Name="is_booking_collected" />
+          </Key>
+          <Property Name="fund_id" Type="int" Nullable="false" />
+          <Property Name="investment_id" Type="int" Nullable="false" />
+          <Property Name="contract" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="investment_date" Type="datetime" Nullable="false" />
+          <Property Name="total_disbursement" Type="money" />
+          <Property Name="investment_profit_share" Type="money" Nullable="false" />
+          <Property Name="payment_id" Type="int" />
+          <Property Name="payment_date" Type="date" />
+          <Property Name="disbursement_id" Type="int" Nullable="false" />
+          <Property Name="disbursement_number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="disbursement_pay_date" Type="date" />
+          <Property Name="currency_id" Type="int" Nullable="false" />
+          <Property Name="amount" Type="money" Nullable="false" />
+          <Property Name="exchange_rate" Type="real" Nullable="false" />
+          <Property Name="profit_share" Type="money" Nullable="false" />
+          <Property Name="disbursement_date" Type="date" Nullable="false" />
+          <Property Name="collection_date" Type="date" Nullable="false" />
+          <Property Name="can_generate_interest" Type="bit" Nullable="false" />
+          <Property Name="collected" Type="bit" />
+          <Property Name="bank_risk_id" Type="int" />
+          <Property Name="bank_name" Type="varchar" MaxLength="50" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="client" Type="varchar(max)" Nullable="false" />
+          <Property Name="sector_id" Type="int" Nullable="false" />
+          <Property Name="sector" Type="varchar" MaxLength="50" />
+          <Property Name="generated_interest" Type="money" />
+          <Property Name="collected_amount" Type="money" />
+          <Property Name="has_bookings" Type="bit" />
+          <Property Name="book_id" Type="int" Nullable="false" />
+          <Property Name="booking_number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="book_date" Type="date" Nullable="false" />
+          <Property Name="accounting_movement_id" Type="int" Nullable="false" />
+          <Property Name="book_movement125_id" Type="int" Nullable="false" />
+          <Property Name="book_movement128_id" Type="int" Nullable="false" />
+          <Property Name="booking_id" Type="int" Nullable="false" />
+          <Property Name="booking_amount" Type="money" Nullable="false" />
+          <Property Name="booking_profit_share" Type="money" Nullable="false" />
+          <Property Name="delay_interest" Type="money" Nullable="false" />
+          <Property Name="starting_date" Type="date" Nullable="false" />
+          <Property Name="new_collection_date" Type="date" Nullable="false" />
+          <Property Name="movement125_id" Type="int" Nullable="false" />
+          <Property Name="movement128_id" Type="int" Nullable="false" />
+          <Property Name="is_booking_collected" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementsToBeCollected' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="DisbursementsToBeCollected">
           <Key>
@@ -520,6 +621,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="can_generate_interest" Type="bit" Nullable="false" />
           <Property Name="shipment_id" Type="int" />
           <Property Name="collected" Type="bit" />
+          <Property Name="has_bookings" Type="bit" />
           <Property Name="contract" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="debtor_bank_id">
@@ -807,6 +909,42 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Principal>
             <Dependent Role="BondsInvestors">
               <PropertyRef Name="FK_BondsInvestors_Investors" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingGeneratedInterestDetails_AccountingMovements">
+          <End Role="AccountingMovements" Type="Self.AccountingMovements" Multiplicity="0..1" />
+          <End Role="BookingGeneratedInterestDetails" Type="Self.BookingGeneratedInterestDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingMovements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingGeneratedInterestDetails">
+              <PropertyRef Name="accounting_movement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests">
+          <End Role="BookingGeneratedInterests" Type="Self.BookingGeneratedInterests" Multiplicity="1" />
+          <End Role="BookingGeneratedInterestDetails" Type="Self.BookingGeneratedInterestDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingGeneratedInterests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingGeneratedInterestDetails">
+              <PropertyRef Name="booking_generated_interest_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingGeneratedInterestDetails_Disbursements">
+          <End Role="DisbursementBooking" Type="Self.DisbursementBooking" Multiplicity="1" />
+          <End Role="BookingGeneratedInterestDetails" Type="Self.BookingGeneratedInterestDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DisbursementBooking">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BookingGeneratedInterestDetails">
+              <PropertyRef Name="booking_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1542,6 +1680,8 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySet Name="Banks" EntityType="Self.Banks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bonds" EntityType="Self.Bonds" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BondsInvestors" EntityType="Self.BondsInvestors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingGeneratedInterestDetails" EntityType="Self.BookingGeneratedInterestDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingGeneratedInterests" EntityType="Self.BookingGeneratedInterests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Creditors" EntityType="Self.Creditors" Schema="dbo" store:Type="Tables" />
@@ -1573,6 +1713,53 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySet Name="Shipments" EntityType="Self.Shipments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subaccounts" EntityType="Self.Subaccounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnderlyingDebtors" EntityType="Self.UnderlyingDebtors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DisbursementsBookingView" EntityType="Self.DisbursementsBookingView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DisbursementsBookingView].[fund_id] AS [fund_id], 
+    [DisbursementsBookingView].[investment_id] AS [investment_id], 
+    [DisbursementsBookingView].[contract] AS [contract], 
+    [DisbursementsBookingView].[investment_date] AS [investment_date], 
+    [DisbursementsBookingView].[total_disbursement] AS [total_disbursement], 
+    [DisbursementsBookingView].[investment_profit_share] AS [investment_profit_share], 
+    [DisbursementsBookingView].[payment_id] AS [payment_id], 
+    [DisbursementsBookingView].[payment_date] AS [payment_date], 
+    [DisbursementsBookingView].[disbursement_id] AS [disbursement_id], 
+    [DisbursementsBookingView].[disbursement_number] AS [disbursement_number], 
+    [DisbursementsBookingView].[disbursement_pay_date] AS [disbursement_pay_date], 
+    [DisbursementsBookingView].[currency_id] AS [currency_id], 
+    [DisbursementsBookingView].[amount] AS [amount], 
+    [DisbursementsBookingView].[exchange_rate] AS [exchange_rate], 
+    [DisbursementsBookingView].[profit_share] AS [profit_share], 
+    [DisbursementsBookingView].[disbursement_date] AS [disbursement_date], 
+    [DisbursementsBookingView].[collection_date] AS [collection_date], 
+    [DisbursementsBookingView].[can_generate_interest] AS [can_generate_interest], 
+    [DisbursementsBookingView].[collected] AS [collected], 
+    [DisbursementsBookingView].[bank_risk_id] AS [bank_risk_id], 
+    [DisbursementsBookingView].[bank_name] AS [bank_name], 
+    [DisbursementsBookingView].[client_id] AS [client_id], 
+    [DisbursementsBookingView].[client] AS [client], 
+    [DisbursementsBookingView].[sector_id] AS [sector_id], 
+    [DisbursementsBookingView].[sector] AS [sector], 
+    [DisbursementsBookingView].[generated_interest] AS [generated_interest], 
+    [DisbursementsBookingView].[collected_amount] AS [collected_amount], 
+    [DisbursementsBookingView].[has_bookings] AS [has_bookings], 
+    [DisbursementsBookingView].[book_id] AS [book_id], 
+    [DisbursementsBookingView].[booking_number] AS [booking_number], 
+    [DisbursementsBookingView].[book_date] AS [book_date], 
+    [DisbursementsBookingView].[accounting_movement_id] AS [accounting_movement_id], 
+    [DisbursementsBookingView].[book_movement125_id] AS [book_movement125_id], 
+    [DisbursementsBookingView].[book_movement128_id] AS [book_movement128_id], 
+    [DisbursementsBookingView].[booking_id] AS [booking_id], 
+    [DisbursementsBookingView].[booking_amount] AS [booking_amount], 
+    [DisbursementsBookingView].[booking_profit_share] AS [booking_profit_share], 
+    [DisbursementsBookingView].[delay_interest] AS [delay_interest], 
+    [DisbursementsBookingView].[starting_date] AS [starting_date], 
+    [DisbursementsBookingView].[new_collection_date] AS [new_collection_date], 
+    [DisbursementsBookingView].[movement125_id] AS [movement125_id], 
+    [DisbursementsBookingView].[movement128_id] AS [movement128_id], 
+    [DisbursementsBookingView].[is_booking_collected] AS [is_booking_collected]
+    FROM [dbo].[DisbursementsBookingView] AS [DisbursementsBookingView]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="DisbursementsToBeCollected" EntityType="Self.DisbursementsToBeCollected" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DisbursementsToBeCollected].[fund_id] AS [fund_id], 
@@ -1610,6 +1797,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
     [ProfitShareToAccrue].[can_generate_interest] AS [can_generate_interest], 
     [ProfitShareToAccrue].[shipment_id] AS [shipment_id], 
     [ProfitShareToAccrue].[collected] AS [collected], 
+    [ProfitShareToAccrue].[has_bookings] AS [has_bookings], 
     [ProfitShareToAccrue].[contract] AS [contract]
     FROM [dbo].[ProfitShareToAccrue] AS [ProfitShareToAccrue]</DefiningQuery>
           </EntitySet>
@@ -1708,6 +1896,18 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <AssociationSet Name="FK_BondsInvestors_Investors" Association="Self.FK_BondsInvestors_Investors">
             <End Role="Investors" EntitySet="Investors" />
             <End Role="BondsInvestors" EntitySet="BondsInvestors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingGeneratedInterestDetails_AccountingMovements" Association="Self.FK_BookingGeneratedInterestDetails_AccountingMovements">
+            <End Role="AccountingMovements" EntitySet="AccountingMovements" />
+            <End Role="BookingGeneratedInterestDetails" EntitySet="BookingGeneratedInterestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests" Association="Self.FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests">
+            <End Role="BookingGeneratedInterests" EntitySet="BookingGeneratedInterests" />
+            <End Role="BookingGeneratedInterestDetails" EntitySet="BookingGeneratedInterestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingGeneratedInterestDetails_Disbursements" Association="Self.FK_BookingGeneratedInterestDetails_Disbursements">
+            <End Role="DisbursementBooking" EntitySet="DisbursementBooking" />
+            <End Role="BookingGeneratedInterestDetails" EntitySet="BookingGeneratedInterestDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_Clients_Countries" Association="Self.FK_Clients_Countries">
             <End Role="Countries" EntitySet="Countries" />
@@ -2330,6 +2530,21 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
             <End Role="DisbursementBook" EntitySet="DisbursementBooks" />
           </AssociationSet>
+          <EntitySet Name="DisbursementsBookingViews" EntityType="FundsDBModel.DisbursementsBookingView" />
+          <EntitySet Name="BookingGeneratedInterestDetails" EntityType="FundsDBModel.BookingGeneratedInterestDetail" />
+          <EntitySet Name="BookingGeneratedInterests" EntityType="FundsDBModel.BookingGeneratedInterest" />
+          <AssociationSet Name="FK_BookingGeneratedInterestDetails_AccountingMovements" Association="FundsDBModel.FK_BookingGeneratedInterestDetails_AccountingMovements">
+            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
+            <End Role="BookingGeneratedInterestDetail" EntitySet="BookingGeneratedInterestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests" Association="FundsDBModel.FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests">
+            <End Role="BookingGeneratedInterest" EntitySet="BookingGeneratedInterests" />
+            <End Role="BookingGeneratedInterestDetail" EntitySet="BookingGeneratedInterestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingGeneratedInterestDetails_Disbursements" Association="FundsDBModel.FK_BookingGeneratedInterestDetails_Disbursements">
+            <End Role="DisbursementBooking" EntitySet="DisbursementBookings" />
+            <End Role="BookingGeneratedInterestDetail" EntitySet="BookingGeneratedInterestDetails" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccountingMovement">
           <Key>
@@ -2350,6 +2565,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <NavigationProperty Name="DisbursementCollections" Relationship="FundsDBModel.FK_DisbursementCollections_AccoutingMovements" FromRole="AccountingMovement" ToRole="DisbursementCollection" />
           <NavigationProperty Name="DisbursementGeneratedInterestDetails" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_AccountingMovements" FromRole="AccountingMovement" ToRole="DisbursementGeneratedInterestDetail" />
           <NavigationProperty Name="DisbursementBooks" Relationship="FundsDBModel.FK_DisbursementBook_AccountingMovements" FromRole="AccountingMovement" ToRole="DisbursementBook" />
+          <NavigationProperty Name="BookingGeneratedInterestDetails" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_AccountingMovements" FromRole="AccountingMovement" ToRole="BookingGeneratedInterestDetail" />
         </EntityType>
         <EntityType Name="Account">
           <Key>
@@ -3669,6 +3885,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="shipment_id" Type="Int32" />
           <Property Name="collected" Type="Boolean" />
           <Property Name="contract" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="has_bookings" Type="Boolean" />
         </EntityType>
         <EntityType Name="DisbursementsToBeCollected">
           <Key>
@@ -3879,6 +4096,9 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <NavigationProperty Name="Movements_Accounts125" Relationship="FundsDBModel.FK_DisbursementBooking_Movement125" FromRole="DisbursementBooking" ToRole="Movements_Accounts" />
           <NavigationProperty Name="Movements_Accounts128" Relationship="FundsDBModel.FK_DisbursementBooking_Movement128" FromRole="DisbursementBooking" ToRole="Movements_Accounts" />
           <NavigationProperty Name="DisbursementBook" Relationship="FundsDBModel.FK_DisbursementBooking_Book" FromRole="DisbursementBooking" ToRole="DisbursementBook" />
+          <Property Name="collected" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BookingGeneratedInterestDetails" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_Disbursements" FromRole="DisbursementBooking" ToRole="BookingGeneratedInterestDetail" />
+          <Property Name="can_generate_interest" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_DisbursementBooking_Currency">
           <End Type="FundsDBModel.Currency" Role="Currency" Multiplicity="1" />
@@ -3987,6 +4207,143 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Principal>
             <Dependent Role="DisbursementBook">
               <PropertyRef Name="movement128_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DisbursementsBookingView">
+          <Key>
+            <PropertyRef Name="fund_id" />
+            <PropertyRef Name="investment_id" />
+            <PropertyRef Name="contract" />
+            <PropertyRef Name="investment_date" />
+            <PropertyRef Name="investment_profit_share" />
+            <PropertyRef Name="disbursement_id" />
+            <PropertyRef Name="disbursement_number" />
+            <PropertyRef Name="amount" />
+            <PropertyRef Name="exchange_rate" />
+            <PropertyRef Name="profit_share" />
+            <PropertyRef Name="disbursement_date" />
+            <PropertyRef Name="collection_date" />
+            <PropertyRef Name="can_generate_interest" />
+            <PropertyRef Name="client_id" />
+            <PropertyRef Name="client" />
+            <PropertyRef Name="sector_id" />
+            <PropertyRef Name="book_id" />
+            <PropertyRef Name="book_date" />
+            <PropertyRef Name="accounting_movement_id" />
+            <PropertyRef Name="book_movement125_id" />
+            <PropertyRef Name="book_movement128_id" />
+            <PropertyRef Name="booking_id" />
+            <PropertyRef Name="booking_amount" />
+            <PropertyRef Name="booking_profit_share" />
+            <PropertyRef Name="delay_interest" />
+            <PropertyRef Name="starting_date" />
+            <PropertyRef Name="new_collection_date" />
+            <PropertyRef Name="movement125_id" />
+            <PropertyRef Name="movement128_id" />
+            <PropertyRef Name="is_booking_collected" />
+            <PropertyRef Name="booking_number" />
+            <PropertyRef Name="currency_id" />
+          </Key>
+          <Property Name="fund_id" Type="Int32" Nullable="false" />
+          <Property Name="investment_id" Type="Int32" Nullable="false" />
+          <Property Name="contract" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="investment_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="total_disbursement" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="investment_profit_share" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="payment_id" Type="Int32" />
+          <Property Name="payment_date" Type="DateTime" Precision="0" />
+          <Property Name="disbursement_id" Type="Int32" Nullable="false" />
+          <Property Name="disbursement_number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="disbursement_pay_date" Type="DateTime" Precision="0" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="exchange_rate" Type="Single" Nullable="false" />
+          <Property Name="profit_share" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="disbursement_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="collection_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="can_generate_interest" Type="Boolean" Nullable="false" />
+          <Property Name="collected" Type="Boolean" />
+          <Property Name="bank_risk_id" Type="Int32" />
+          <Property Name="bank_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="client" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sector_id" Type="Int32" Nullable="false" />
+          <Property Name="sector" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="generated_interest" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="collected_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="has_bookings" Type="Boolean" />
+          <Property Name="book_id" Type="Int32" Nullable="false" />
+          <Property Name="book_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="accounting_movement_id" Type="Int32" Nullable="false" />
+          <Property Name="book_movement125_id" Type="Int32" Nullable="false" />
+          <Property Name="book_movement128_id" Type="Int32" Nullable="false" />
+          <Property Name="booking_id" Type="Int32" Nullable="false" />
+          <Property Name="booking_amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="booking_profit_share" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="delay_interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="starting_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="new_collection_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="movement125_id" Type="Int32" Nullable="false" />
+          <Property Name="movement128_id" Type="Int32" Nullable="false" />
+          <Property Name="is_booking_collected" Type="Boolean" Nullable="false" />
+          <Property Name="booking_number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="currency_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookingGeneratedInterestDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="booking_generated_interest_id" Type="Int32" Nullable="false" />
+          <Property Name="booking_id" Type="Int32" Nullable="false" />
+          <Property Name="generated_interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="generated_interest_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="accounting_movement_id" Type="Int32" />
+          <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_AccountingMovements" FromRole="BookingGeneratedInterestDetail" ToRole="AccountingMovement" />
+          <NavigationProperty Name="BookingGeneratedInterest" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests" FromRole="BookingGeneratedInterestDetail" ToRole="BookingGeneratedInterest" />
+          <NavigationProperty Name="DisbursementBooking" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_Disbursements" FromRole="BookingGeneratedInterestDetail" ToRole="DisbursementBooking" />
+        </EntityType>
+        <EntityType Name="BookingGeneratedInterest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GeneratedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="BookingGeneratedInterestDetails" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests" FromRole="BookingGeneratedInterest" ToRole="BookingGeneratedInterestDetail" />
+        </EntityType>
+        <Association Name="FK_BookingGeneratedInterestDetails_AccountingMovements">
+          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="0..1" />
+          <End Type="FundsDBModel.BookingGeneratedInterestDetail" Role="BookingGeneratedInterestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingMovement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingGeneratedInterestDetail">
+              <PropertyRef Name="accounting_movement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests">
+          <End Type="FundsDBModel.BookingGeneratedInterest" Role="BookingGeneratedInterest" Multiplicity="1" />
+          <End Type="FundsDBModel.BookingGeneratedInterestDetail" Role="BookingGeneratedInterestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingGeneratedInterest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingGeneratedInterestDetail">
+              <PropertyRef Name="booking_generated_interest_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingGeneratedInterestDetails_Disbursements">
+          <End Type="FundsDBModel.DisbursementBooking" Role="DisbursementBooking" Multiplicity="1" />
+          <End Type="FundsDBModel.BookingGeneratedInterestDetail" Role="BookingGeneratedInterestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DisbursementBooking">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BookingGeneratedInterestDetail">
+              <PropertyRef Name="booking_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4424,6 +4781,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySetMapping Name="ProfitShareToAccrues">
             <EntityTypeMapping TypeName="FundsDBModel.ProfitShareToAccrue">
               <MappingFragment StoreEntitySet="ProfitShareToAccrue">
+                <ScalarProperty Name="has_bookings" ColumnName="has_bookings" />
                 <ScalarProperty Name="contract" ColumnName="contract" />
                 <ScalarProperty Name="collected" ColumnName="collected" />
                 <ScalarProperty Name="shipment_id" ColumnName="shipment_id" />
@@ -4501,6 +4859,8 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySetMapping Name="DisbursementBookings">
             <EntityTypeMapping TypeName="FundsDBModel.DisbursementBooking">
               <MappingFragment StoreEntitySet="DisbursementBooking">
+                <ScalarProperty Name="can_generate_interest" ColumnName="can_generate_interest" />
+                <ScalarProperty Name="collected" ColumnName="collected" />
                 <ScalarProperty Name="movement128_id" ColumnName="movement128_id" />
                 <ScalarProperty Name="movement125_id" ColumnName="movement125_id" />
                 <ScalarProperty Name="exchange_rate" ColumnName="exchange_rate" />
@@ -4524,6 +4884,75 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
                 <ScalarProperty Name="movement125_id" ColumnName="movement125_id" />
                 <ScalarProperty Name="accounting_movement_id" ColumnName="accounting_movement_id" />
                 <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DisbursementsBookingViews">
+            <EntityTypeMapping TypeName="FundsDBModel.DisbursementsBookingView">
+              <MappingFragment StoreEntitySet="DisbursementsBookingView">
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+                <ScalarProperty Name="booking_number" ColumnName="booking_number" />
+                <ScalarProperty Name="is_booking_collected" ColumnName="is_booking_collected" />
+                <ScalarProperty Name="movement128_id" ColumnName="movement128_id" />
+                <ScalarProperty Name="movement125_id" ColumnName="movement125_id" />
+                <ScalarProperty Name="new_collection_date" ColumnName="new_collection_date" />
+                <ScalarProperty Name="starting_date" ColumnName="starting_date" />
+                <ScalarProperty Name="delay_interest" ColumnName="delay_interest" />
+                <ScalarProperty Name="booking_profit_share" ColumnName="booking_profit_share" />
+                <ScalarProperty Name="booking_amount" ColumnName="booking_amount" />
+                <ScalarProperty Name="booking_id" ColumnName="booking_id" />
+                <ScalarProperty Name="book_movement128_id" ColumnName="book_movement128_id" />
+                <ScalarProperty Name="book_movement125_id" ColumnName="book_movement125_id" />
+                <ScalarProperty Name="accounting_movement_id" ColumnName="accounting_movement_id" />
+                <ScalarProperty Name="book_date" ColumnName="book_date" />
+                <ScalarProperty Name="book_id" ColumnName="book_id" />
+                <ScalarProperty Name="has_bookings" ColumnName="has_bookings" />
+                <ScalarProperty Name="collected_amount" ColumnName="collected_amount" />
+                <ScalarProperty Name="generated_interest" ColumnName="generated_interest" />
+                <ScalarProperty Name="sector" ColumnName="sector" />
+                <ScalarProperty Name="sector_id" ColumnName="sector_id" />
+                <ScalarProperty Name="client" ColumnName="client" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="bank_name" ColumnName="bank_name" />
+                <ScalarProperty Name="bank_risk_id" ColumnName="bank_risk_id" />
+                <ScalarProperty Name="collected" ColumnName="collected" />
+                <ScalarProperty Name="can_generate_interest" ColumnName="can_generate_interest" />
+                <ScalarProperty Name="collection_date" ColumnName="collection_date" />
+                <ScalarProperty Name="disbursement_date" ColumnName="disbursement_date" />
+                <ScalarProperty Name="profit_share" ColumnName="profit_share" />
+                <ScalarProperty Name="exchange_rate" ColumnName="exchange_rate" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="disbursement_pay_date" ColumnName="disbursement_pay_date" />
+                <ScalarProperty Name="disbursement_number" ColumnName="disbursement_number" />
+                <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
+                <ScalarProperty Name="payment_date" ColumnName="payment_date" />
+                <ScalarProperty Name="payment_id" ColumnName="payment_id" />
+                <ScalarProperty Name="investment_profit_share" ColumnName="investment_profit_share" />
+                <ScalarProperty Name="total_disbursement" ColumnName="total_disbursement" />
+                <ScalarProperty Name="investment_date" ColumnName="investment_date" />
+                <ScalarProperty Name="contract" ColumnName="contract" />
+                <ScalarProperty Name="investment_id" ColumnName="investment_id" />
+                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingGeneratedInterestDetails">
+            <EntityTypeMapping TypeName="FundsDBModel.BookingGeneratedInterestDetail">
+              <MappingFragment StoreEntitySet="BookingGeneratedInterestDetails">
+                <ScalarProperty Name="accounting_movement_id" ColumnName="accounting_movement_id" />
+                <ScalarProperty Name="generated_interest_date" ColumnName="generated_interest_date" />
+                <ScalarProperty Name="generated_interest" ColumnName="generated_interest" />
+                <ScalarProperty Name="booking_id" ColumnName="booking_id" />
+                <ScalarProperty Name="booking_generated_interest_id" ColumnName="booking_generated_interest_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingGeneratedInterests">
+            <EntityTypeMapping TypeName="FundsDBModel.BookingGeneratedInterest">
+              <MappingFragment StoreEntitySet="BookingGeneratedInterests">
+                <ScalarProperty Name="GeneratedDate" ColumnName="GeneratedDate" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

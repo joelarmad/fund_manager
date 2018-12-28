@@ -295,9 +295,9 @@ namespace FundsManager
         private void delayInterestToAccrueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            AddendumsLauncher delayInterestToAccrue = new AddendumsLauncher();
-            delayInterestToAccrue.MdiParent = this;
-            delayInterestToAccrue.Show();
+            AddendumsLauncher addendums = new AddendumsLauncher();
+            addendums.MdiParent = this;
+            addendums.Show();
         }
 
         private void booksToolStripMenuItem_Click(object sender, EventArgs e)
@@ -306,6 +306,14 @@ namespace FundsManager
             BookReportForm booksReportForm = new BookReportForm();
             booksReportForm.MdiParent = this;
             booksReportForm.Show();
+        }
+
+        private void delayInterestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            DelayInterestToAccrueForm delayInterest = new DelayInterestToAccrueForm();
+            delayInterest.MdiParent = this;
+            delayInterest.Show();
         }
     }
 }

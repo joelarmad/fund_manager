@@ -189,6 +189,7 @@
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
+            this.lvBooking.FullRowSelect = true;
             this.lvBooking.Location = new System.Drawing.Point(15, 263);
             this.lvBooking.MultiSelect = false;
             this.lvBooking.Name = "lvBooking";

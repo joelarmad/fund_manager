@@ -14,6 +14,12 @@ namespace FundsManager
     
     public partial class DisbursementBooking
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public DisbursementBooking()
+        {
+            this.BookingGeneratedInterestDetails = new HashSet<BookingGeneratedInterestDetail>();
+        }
+    
         public int id { get; set; }
         public int book_id { get; set; }
         public int disbursement_id { get; set; }
@@ -27,11 +33,15 @@ namespace FundsManager
         public float exchange_rate { get; set; }
         public int movement125_id { get; set; }
         public int movement128_id { get; set; }
+        public bool collected { get; set; }
+        public bool can_generate_interest { get; set; }
     
         public virtual Currency Currency { get; set; }
         public virtual Disbursement Disbursement { get; set; }
         public virtual Movements_Accounts Movements_Accounts125 { get; set; }
         public virtual Movements_Accounts Movements_Accounts128 { get; set; }
         public virtual DisbursementBook DisbursementBook { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BookingGeneratedInterestDetail> BookingGeneratedInterestDetails { get; set; }
     }
 }

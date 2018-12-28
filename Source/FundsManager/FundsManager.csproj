@@ -176,6 +176,12 @@
     <Compile Include="BondsList.Designer.cs">
       <DependentUpon>BondsList.cs</DependentUpon>
     </Compile>
+    <Compile Include="BookingGeneratedInterest.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BookingGeneratedInterestDetail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="BookReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -265,6 +271,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DisbursementPayment.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DisbursementsBookingView.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DisbursementsForm.cs">
@@ -422,6 +431,12 @@
     <Compile Include="ProfitShareToAccrue.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DelayInterestToAccrueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DelayInterestToAccrueForm.Designer.cs">
+      <DependentUpon>DelayInterestToAccrueForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProfitShareToAccrueForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -441,6 +456,12 @@
     </Compile>
     <Compile Include="ReportForms\DisbursementCollectionReportForm.Designer.cs">
       <DependentUpon>DisbursementCollectionReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForms\BookingGeneratedInterestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForms\BookingGeneratedInterestForm.Designer.cs">
+      <DependentUpon>BookingGeneratedInterestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportForms\DisbursementGeneratedInterestForm.cs">
       <SubType>Form</SubType>
@@ -605,6 +626,9 @@
     <EmbeddedResource Include="OtherDetailsForm.resx">
       <DependentUpon>OtherDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DelayInterestToAccrueForm.resx">
+      <DependentUpon>DelayInterestToAccrueForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProfitShareToAccrueForm.resx">
       <DependentUpon>ProfitShareToAccrueForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -623,6 +647,9 @@
     <EmbeddedResource Include="ReportForms\DisbursementCollectionReportForm.resx">
       <DependentUpon>DisbursementCollectionReportForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\BookingGeneratedInterestForm.resx">
+      <DependentUpon>BookingGeneratedInterestForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\DisbursementGeneratedInterestForm.resx">
       <DependentUpon>DisbursementGeneratedInterestForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -638,6 +665,7 @@
     <EmbeddedResource Include="Reports\DisbursementCollections.rdlc" />
     <EmbeddedResource Include="Reports\DisbursementCreated.rdlc" />
     <EmbeddedResource Include="Reports\DisbursementGeneratedInterestReport.rdlc" />
+    <EmbeddedResource Include="Reports\BookingGeneratedInterestReport.rdlc" />
     <EmbeddedResource Include="Reports\DisbursementPaymentReport.rdlc" />
     <EmbeddedResource Include="Reports\GeneralBalance.rdlc" />
     <EmbeddedResource Include="Reports\ProfitsState.rdlc" />

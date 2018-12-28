@@ -120,7 +120,7 @@ namespace FundsManager
                                 decimal.TryParse(amountToBeCollected128Str, out amountToBeCollected128) &&
                                 decimal.TryParse(amountToBeCollected130Str, out amountToBeCollected130))
                         {
-                            if (profitShare - collected - amountToBeCollected125 - amountToBeCollected128 - amountToBeCollected130 >= 0)
+                            if (amount + profitShare - collected - amountToBeCollected125 - amountToBeCollected128 - amountToBeCollected130 >= 0)
                             {
                                 ids.Add(id);
                                 amounts.Add(amount);

@@ -22,6 +22,7 @@ namespace FundsManager
             this.DisbursementCollections = new HashSet<DisbursementCollection>();
             this.DisbursementGeneratedInterestDetails = new HashSet<DisbursementGeneratedInterestDetail>();
             this.DisbursementBooks = new HashSet<DisbursementBook>();
+            this.BookingGeneratedInterestDetails = new HashSet<BookingGeneratedInterestDetail>();
         }
     
         public int Id { get; set; }
@@ -45,5 +46,7 @@ namespace FundsManager
         public virtual ICollection<DisbursementGeneratedInterestDetail> DisbursementGeneratedInterestDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementBook> DisbursementBooks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BookingGeneratedInterestDetail> BookingGeneratedInterestDetails { get; set; }
     }
 }
