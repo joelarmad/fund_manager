@@ -19072,6 +19072,12 @@ namespace FundsManager {
             
             private global::System.Data.DataColumn columnTotalLiability;
             
+            private global::System.Data.DataColumn columnacct_amount_last_period;
+            
+            private global::System.Data.DataColumn columnTotalAsset_last_period;
+            
+            private global::System.Data.DataColumn columnTotalLiability_last_period;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public AccountBalanceViewDataTable() {
@@ -19163,6 +19169,30 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn acct_amount_last_periodColumn {
+                get {
+                    return this.columnacct_amount_last_period;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TotalAsset_last_periodColumn {
+                get {
+                    return this.columnTotalAsset_last_period;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TotalLiability_last_periodColumn {
+                get {
+                    return this.columnTotalLiability_last_period;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -19198,7 +19228,7 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public AccountBalanceViewRow AddAccountBalanceViewRow(int FundId, string acct_number, string acct_type, string acct_name, decimal acct_amount, decimal TotalAsset, decimal TotalLiability) {
+            public AccountBalanceViewRow AddAccountBalanceViewRow(int FundId, string acct_number, string acct_type, string acct_name, decimal acct_amount, decimal TotalAsset, decimal TotalLiability, decimal acct_amount_last_period, decimal TotalAsset_last_period, decimal TotalLiability_last_period) {
                 AccountBalanceViewRow rowAccountBalanceViewRow = ((AccountBalanceViewRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         FundId,
@@ -19207,7 +19237,10 @@ namespace FundsManager {
                         acct_name,
                         acct_amount,
                         TotalAsset,
-                        TotalLiability};
+                        TotalLiability,
+                        acct_amount_last_period,
+                        TotalAsset_last_period,
+                        TotalLiability_last_period};
                 rowAccountBalanceViewRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowAccountBalanceViewRow);
                 return rowAccountBalanceViewRow;
@@ -19237,6 +19270,9 @@ namespace FundsManager {
                 this.columnacct_amount = base.Columns["acct_amount"];
                 this.columnTotalAsset = base.Columns["TotalAsset"];
                 this.columnTotalLiability = base.Columns["TotalLiability"];
+                this.columnacct_amount_last_period = base.Columns["acct_amount_last_period"];
+                this.columnTotalAsset_last_period = base.Columns["TotalAsset_last_period"];
+                this.columnTotalLiability_last_period = base.Columns["TotalLiability_last_period"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -19256,6 +19292,12 @@ namespace FundsManager {
                 base.Columns.Add(this.columnTotalAsset);
                 this.columnTotalLiability = new global::System.Data.DataColumn("TotalLiability", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTotalLiability);
+                this.columnacct_amount_last_period = new global::System.Data.DataColumn("acct_amount_last_period", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnacct_amount_last_period);
+                this.columnTotalAsset_last_period = new global::System.Data.DataColumn("TotalAsset_last_period", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalAsset_last_period);
+                this.columnTotalLiability_last_period = new global::System.Data.DataColumn("TotalLiability_last_period", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalLiability_last_period);
                 this.columnFundId.AllowDBNull = false;
                 this.columnacct_number.AllowDBNull = false;
                 this.columnacct_number.MaxLength = 50;
@@ -19265,6 +19307,9 @@ namespace FundsManager {
                 this.columnacct_name.MaxLength = 2147483647;
                 this.columnTotalAsset.ReadOnly = true;
                 this.columnTotalLiability.ReadOnly = true;
+                this.columnacct_amount_last_period.ReadOnly = true;
+                this.columnTotalAsset_last_period.ReadOnly = true;
+                this.columnTotalLiability_last_period.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -33420,6 +33465,57 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal acct_amount_last_period {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableAccountBalanceView.acct_amount_last_periodColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'acct_amount_last_period\' de la tabla \'AccountBalanceView\'" +
+                                " es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAccountBalanceView.acct_amount_last_periodColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal TotalAsset_last_period {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableAccountBalanceView.TotalAsset_last_periodColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'TotalAsset_last_period\' de la tabla \'AccountBalanceView\' " +
+                                "es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAccountBalanceView.TotalAsset_last_periodColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal TotalLiability_last_period {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableAccountBalanceView.TotalLiability_last_periodColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'TotalLiability_last_period\' de la tabla \'AccountBalanceVi" +
+                                "ew\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAccountBalanceView.TotalLiability_last_periodColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool Isacct_typeNull() {
                 return this.IsNull(this.tableAccountBalanceView.acct_typeColumn);
             }
@@ -33464,6 +33560,42 @@ namespace FundsManager {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetTotalLiabilityNull() {
                 this[this.tableAccountBalanceView.TotalLiabilityColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isacct_amount_last_periodNull() {
+                return this.IsNull(this.tableAccountBalanceView.acct_amount_last_periodColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setacct_amount_last_periodNull() {
+                this[this.tableAccountBalanceView.acct_amount_last_periodColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTotalAsset_last_periodNull() {
+                return this.IsNull(this.tableAccountBalanceView.TotalAsset_last_periodColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTotalAsset_last_periodNull() {
+                this[this.tableAccountBalanceView.TotalAsset_last_periodColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTotalLiability_last_periodNull() {
+                return this.IsNull(this.tableAccountBalanceView.TotalLiability_last_periodColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTotalLiability_last_periodNull() {
+                this[this.tableAccountBalanceView.TotalLiability_last_periodColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -54459,12 +54591,12 @@ WHERE        (TypeId IN (3, 4)) AND (FundId = @FundId) AND (Date >= @BeginDate) 
             this._commandCollection[1].CommandText = @"SELECT        FundId, Id, Reference, description, account_id, TypeId, AccountType, Account, SubAccount, Date, Debit, Credit, Shift_Amount, Acc_Amount, SubAcc_amount,
                              (SELECT        SUM(Shift_Amount) AS Expr1
                                FROM            MovementsView AS mv
-                               WHERE        (TypeId = 3) AND (Date >= @BeginDate) AND (Date < @EndDate) AND (FundId = @FundId)) AS TotalIncome,
+                               WHERE        (TypeId = 3) AND (Date >= @BeginDate) AND (Date <= @EndDate) AND (FundId = @FundId)) AS TotalIncome,
                              (SELECT        SUM(Shift_Amount) AS Expr1
                                FROM            MovementsView AS mv
-                               WHERE        (TypeId = 4) AND (Date >= @BeginDate) AND (Date < @EndDate) AND (FundId = @FundId)) AS TotalExpense
+                               WHERE        (TypeId = 4) AND (Date >= @BeginDate) AND (Date <= @EndDate) AND (FundId = @FundId)) AS TotalExpense
 FROM            MovementsView AS m
-WHERE        (TypeId IN (3, 4)) AND (FundId = @FundId) AND (Date >= @BeginDate) AND (Date < @EndDate)";
+WHERE        (TypeId IN (3, 4)) AND (FundId = @FundId) AND (Date >= @BeginDate) AND (Date <= @EndDate)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FundId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BeginDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -55170,6 +55302,9 @@ WHERE        (TypeId IN (3, 4)) AND (FundId = @FundId) AND (Date >= @BeginDate) 
             tableMapping.ColumnMappings.Add("acct_amount", "acct_amount");
             tableMapping.ColumnMappings.Add("TotalAsset", "TotalAsset");
             tableMapping.ColumnMappings.Add("TotalLiability", "TotalLiability");
+            tableMapping.ColumnMappings.Add("acct_amount_last_period", "acct_amount_last_period");
+            tableMapping.ColumnMappings.Add("TotalAsset_last_period", "TotalAsset_last_period");
+            tableMapping.ColumnMappings.Add("TotalLiability_last_period", "TotalLiability_last_period");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -55194,42 +55329,76 @@ WHERE        (TypeId IN (3, 4)) AND (FundId = @FundId) AND (Date >= @BeginDate) 
                 "SE \'\' END AS acct_type, a.name AS acct_name,\r\n                             (SELE" +
                 "CT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n                               " +
                 "FROM            MovementsView AS m\r\n                               WHERE        " +
-                "(account_id = a.Id) AND (Date >= @BeginDate) AND (Date < @EndDate)) AS acct_amou" +
-                "nt,\r\n                             (SELECT        ISNULL(SUM(Shift_Amount), 0) AS" +
-                " Expr1\r\n                               FROM            MovementsView AS m\r\n     " +
-                "                          WHERE        (Date >= @BeginDate) AND (Date < @EndDate" +
-                ") AND (TypeId IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalAsset,\r\n   " +
-                "                          (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n" +
-                "                               FROM            MovementsView AS m\r\n             " +
-                "                  WHERE        (Date >= @BeginDate) AND (Date < @EndDate) AND (T" +
-                "ypeId NOT IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalLiability\r\nFROM" +
-                "            Accounts AS a INNER JOIN\r\n                         AccountType AS at" +
-                " ON a.type = at.Id AND at.Id IN (0, 1, 5, 6, 7, 8, 9, 10, 11)\r\nWHERE        (a.F" +
-                "K_Accounts_Funds = @FundId)";
+                "(account_id = a.Id) AND (Date BETWEEN @StartDate AND @EndDate)) AS acct_amount,\r" +
+                "\n                             (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Exp" +
+                "r1\r\n                               FROM            MovementsView AS m\r\n         " +
+                "                      WHERE        (Date BETWEEN @StartDate AND @EndDate) AND (T" +
+                "ypeId IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalAsset,\r\n           " +
+                "                  (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n        " +
+                "                       FROM            MovementsView AS m\r\n                     " +
+                "          WHERE        (Date BETWEEN @StartDate AND @EndDate) AND (TypeId NOT IN" +
+                " (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalLiability,\r\n               " +
+                "              (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n            " +
+                "                   FROM            MovementsView AS m\r\n                         " +
+                "      WHERE        (account_id = a.Id) AND (Date BETWEEN @StartDateLastPeriod AN" +
+                "D @EndDateLastPeriod)) AS acct_amount_last_period,\r\n                            " +
+                " (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n                         " +
+                "      FROM            MovementsView AS m\r\n                               WHERE  " +
+                "      (Date BETWEEN @StartDateLastPeriod AND @EndDateLastPeriod) AND (TypeId IN " +
+                "(0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalAsset_last_period,\r\n        " +
+                "                     (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n     " +
+                "                          FROM            MovementsView AS m\r\n                  " +
+                "             WHERE        (Date BETWEEN @StartDateLastPeriod AND @EndDateLastPer" +
+                "iod) AND (TypeId NOT IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalLiab" +
+                "ility_last_period\r\nFROM            Accounts AS a INNER JOIN\r\n                   " +
+                "      AccountType AS at ON a.type = at.Id AND at.Id IN (0, 1, 5, 6, 7, 8, 9, 10," +
+                " 11)\r\nWHERE        (a.FK_Accounts_Funds = @FundId)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FundId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BeginDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StartDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EndDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StartDateLastPeriod", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EndDateLastPeriod", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT        a.FK_Accounts_Funds AS FundId, a.number AS acct_number, 
-                         CASE WHEN at.Id = 0 THEN 'Asset' WHEN at.Id = 1 THEN 'Liability' WHEN at.Id = 5 THEN 'Asset' WHEN at.Id = 6 THEN 'Liability' WHEN at.Id = 7 THEN 'Asset' WHEN at.Id = 8 THEN 'Asset' WHEN at.Id = 9 THEN 'Asset' WHEN at.Id
-                          = 10 THEN 'Liability' WHEN at.Id = 11 THEN 'Liability' ELSE '' END AS acct_type, a.name AS acct_name,
-                             (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1
-                               FROM            MovementsView AS m
-                               WHERE        (account_id = a.Id) AND (Date <= @EndDate)) AS acct_amount,
-                             (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1
-                               FROM            MovementsView AS m
-                               WHERE        (Date <= @EndDate) AND (TypeId IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalAsset,
-                             (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1
-                               FROM            MovementsView AS m
-                               WHERE        (Date <= @EndDate) AND (TypeId NOT IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalLiability
-FROM            Accounts AS a INNER JOIN
-                         AccountType AS at ON a.type = at.Id AND at.Id IN (0, 1, 5, 6, 7, 8, 9, 10, 11)
-WHERE        (a.FK_Accounts_Funds = @FundId)";
+            this._commandCollection[1].CommandText = "SELECT        a.FK_Accounts_Funds AS FundId, a.number AS acct_number, \r\n         " +
+                "                CASE WHEN at.Id = 0 THEN \'Asset\' WHEN at.Id = 1 THEN \'Liability\'" +
+                " WHEN at.Id = 5 THEN \'Asset\' WHEN at.Id = 6 THEN \'Liability\' WHEN at.Id = 7 THEN" +
+                " \'Asset\' WHEN at.Id = 8 THEN \'Asset\' WHEN at.Id = 9 THEN \'Asset\' WHEN at.Id\r\n   " +
+                "                       = 10 THEN \'Liability\' WHEN at.Id = 11 THEN \'Liability\' EL" +
+                "SE \'\' END AS acct_type, a.name AS acct_name,\r\n                             (SELE" +
+                "CT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n                               " +
+                "FROM            MovementsView AS m\r\n                               WHERE        " +
+                "(account_id = a.Id) AND (Date BETWEEN @StartDate AND @EndDate)) AS acct_amount,\r" +
+                "\n                             (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Exp" +
+                "r1\r\n                               FROM            MovementsView AS m\r\n         " +
+                "                      WHERE        (Date BETWEEN @StartDate AND @EndDate) AND (T" +
+                "ypeId IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalAsset,\r\n           " +
+                "                  (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n        " +
+                "                       FROM            MovementsView AS m\r\n                     " +
+                "          WHERE        (Date BETWEEN @StartDate AND @EndDate) AND (TypeId NOT IN" +
+                " (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalLiability,\r\n               " +
+                "              (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n            " +
+                "                   FROM            MovementsView AS m\r\n                         " +
+                "      WHERE        (account_id = a.Id) AND (Date BETWEEN @StartDateLastPeriod AN" +
+                "D @EndDateLastPeriod)) AS acct_amount_last_period,\r\n                            " +
+                " (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n                         " +
+                "      FROM            MovementsView AS m\r\n                               WHERE  " +
+                "      (Date BETWEEN @StartDateLastPeriod AND @EndDateLastPeriod) AND (TypeId IN " +
+                "(0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalAsset_last_period,\r\n        " +
+                "                     (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n     " +
+                "                          FROM            MovementsView AS m\r\n                  " +
+                "             WHERE        (Date BETWEEN @StartDateLastPeriod AND @EndDateLastPer" +
+                "iod) AND (TypeId NOT IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalLiab" +
+                "ility_last_period\r\nFROM            Accounts AS a INNER JOIN\r\n                   " +
+                "      AccountType AS at ON a.type = at.Id AND at.Id IN (0, 1, 5, 6, 7, 8, 9, 10," +
+                " 11)\r\nWHERE        (a.FK_Accounts_Funds = @FundId)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FundId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StartDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EndDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StartDateLastPeriod", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EndDateLastPeriod", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
             this._commandCollection[2].CommandText = "SELECT        a.FK_Accounts_Funds AS FundId, a.number AS acct_number, \r\n         " +
@@ -55240,33 +55409,49 @@ WHERE        (a.FK_Accounts_Funds = @FundId)";
                 "SE \'\' END AS acct_type, a.name AS acct_name,\r\n                             (SELE" +
                 "CT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n                               " +
                 "FROM            MovementsView AS m\r\n                               WHERE        " +
-                "(account_id = a.Id) AND (Date >= @BeginDate) AND (Date < @EndDate)) AS acct_amou" +
-                "nt,\r\n                             (SELECT        ISNULL(SUM(Shift_Amount), 0) AS" +
-                " Expr1\r\n                               FROM            MovementsView AS m\r\n     " +
-                "                          WHERE        (Date >= @BeginDate) AND (Date < @EndDate" +
-                ") AND (TypeId IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalAsset,\r\n   " +
-                "                          (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n" +
-                "                               FROM            MovementsView AS m\r\n             " +
-                "                  WHERE        (Date >= @BeginDate) AND (Date < @EndDate) AND (T" +
-                "ypeId NOT IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalLiability\r\nFROM" +
-                "            Accounts AS a INNER JOIN\r\n                         AccountType AS at" +
-                " ON a.type = at.Id AND at.Id IN (0, 1, 5, 6, 7, 8, 9, 10, 11)\r\nWHERE        (a.F" +
-                "K_Accounts_Funds = @FundId)";
+                "(account_id = a.Id) AND (Date BETWEEN @StartDate AND @EndDate)) AS acct_amount,\r" +
+                "\n                             (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Exp" +
+                "r1\r\n                               FROM            MovementsView AS m\r\n         " +
+                "                      WHERE        (Date BETWEEN @StartDate AND @EndDate) AND (T" +
+                "ypeId IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalAsset,\r\n           " +
+                "                  (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n        " +
+                "                       FROM            MovementsView AS m\r\n                     " +
+                "          WHERE        (Date BETWEEN @StartDate AND @EndDate) AND (TypeId NOT IN" +
+                " (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalLiability,\r\n               " +
+                "              (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n            " +
+                "                   FROM            MovementsView AS m\r\n                         " +
+                "      WHERE        (account_id = a.Id) AND (Date BETWEEN @StartDateLastPeriod AN" +
+                "D @EndDateLastPeriod)) AS acct_amount_last_period,\r\n                            " +
+                " (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n                         " +
+                "      FROM            MovementsView AS m\r\n                               WHERE  " +
+                "      (Date BETWEEN @StartDateLastPeriod AND @EndDateLastPeriod) AND (TypeId IN " +
+                "(0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalAsset_last_period,\r\n        " +
+                "                     (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1\r\n     " +
+                "                          FROM            MovementsView AS m\r\n                  " +
+                "             WHERE        (Date BETWEEN @StartDateLastPeriod AND @EndDateLastPer" +
+                "iod) AND (TypeId NOT IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalLiab" +
+                "ility_last_period\r\nFROM            Accounts AS a INNER JOIN\r\n                   " +
+                "      AccountType AS at ON a.type = at.Id AND at.Id IN (0, 1, 5, 6, 7, 8, 9, 10," +
+                " 11)\r\nWHERE        (a.FK_Accounts_Funds = @FundId)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FundId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BeginDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StartDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EndDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StartDateLastPeriod", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EndDateLastPeriod", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(FundsDBDataSet.AccountBalanceViewDataTable dataTable, int FundId, System.DateTime BeginDate, System.DateTime EndDate) {
+        public virtual int Fill(FundsDBDataSet.AccountBalanceViewDataTable dataTable, int FundId, System.DateTime StartDate, System.DateTime EndDate, System.DateTime StartDateLastPeriod, System.DateTime EndDateLastPeriod) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(FundId));
-            this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(BeginDate));
+            this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(StartDate));
             this.Adapter.SelectCommand.Parameters[2].Value = ((System.DateTime)(EndDate));
+            this.Adapter.SelectCommand.Parameters[3].Value = ((System.DateTime)(StartDateLastPeriod));
+            this.Adapter.SelectCommand.Parameters[4].Value = ((System.DateTime)(EndDateLastPeriod));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -55278,11 +55463,13 @@ WHERE        (a.FK_Accounts_Funds = @FundId)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual FundsDBDataSet.AccountBalanceViewDataTable GetData(int FundId, System.DateTime BeginDate, System.DateTime EndDate) {
+        public virtual FundsDBDataSet.AccountBalanceViewDataTable GetData(int FundId, System.DateTime StartDate, System.DateTime EndDate, System.DateTime StartDateLastPeriod, System.DateTime EndDateLastPeriod) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(FundId));
-            this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(BeginDate));
+            this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(StartDate));
             this.Adapter.SelectCommand.Parameters[2].Value = ((System.DateTime)(EndDate));
+            this.Adapter.SelectCommand.Parameters[3].Value = ((System.DateTime)(StartDateLastPeriod));
+            this.Adapter.SelectCommand.Parameters[4].Value = ((System.DateTime)(EndDateLastPeriod));
             FundsDBDataSet.AccountBalanceViewDataTable dataTable = new FundsDBDataSet.AccountBalanceViewDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -55292,10 +55479,13 @@ WHERE        (a.FK_Accounts_Funds = @FundId)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByDateInterval(FundsDBDataSet.AccountBalanceViewDataTable dataTable, int FundId, System.DateTime EndDate) {
+        public virtual int FillByDateInterval(FundsDBDataSet.AccountBalanceViewDataTable dataTable, int FundId, System.DateTime StartDate, System.DateTime EndDate, System.DateTime StartDateLastPeriod, System.DateTime EndDateLastPeriod) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(FundId));
-            this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(EndDate));
+            this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(StartDate));
+            this.Adapter.SelectCommand.Parameters[2].Value = ((System.DateTime)(EndDate));
+            this.Adapter.SelectCommand.Parameters[3].Value = ((System.DateTime)(StartDateLastPeriod));
+            this.Adapter.SelectCommand.Parameters[4].Value = ((System.DateTime)(EndDateLastPeriod));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -55307,11 +55497,13 @@ WHERE        (a.FK_Accounts_Funds = @FundId)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByFund(FundsDBDataSet.AccountBalanceViewDataTable dataTable, int FundId, System.DateTime BeginDate, System.DateTime EndDate) {
+        public virtual int FillByFund(FundsDBDataSet.AccountBalanceViewDataTable dataTable, int FundId, System.DateTime StartDate, System.DateTime EndDate, System.DateTime StartDateLastPeriod, System.DateTime EndDateLastPeriod) {
             this.Adapter.SelectCommand = this.CommandCollection[2];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(FundId));
-            this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(BeginDate));
+            this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(StartDate));
             this.Adapter.SelectCommand.Parameters[2].Value = ((System.DateTime)(EndDate));
+            this.Adapter.SelectCommand.Parameters[3].Value = ((System.DateTime)(StartDateLastPeriod));
+            this.Adapter.SelectCommand.Parameters[4].Value = ((System.DateTime)(EndDateLastPeriod));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }

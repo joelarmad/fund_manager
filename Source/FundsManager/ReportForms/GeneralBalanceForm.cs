@@ -38,9 +38,13 @@ namespace FundsManager.ReportForms
         {
             try
             {
+                DateTime from = new DateTime(DateTime.Now.Year, 1, 1);
                 DateTime to = Convert.ToDateTime(dtpTo.Text);
 
-                this.accountBalanceViewTableAdapter.FillByDateInterval(this.fundsDBDataSet.AccountBalanceView, manager.Selected, to);
+                DateTime fromLastPeriod = new DateTime(DateTime.Now.Year - 1, 1, 1);
+                DateTime toLastPeriod = new DateTime(fromLastPeriod.Year, to.Month, to.Day);
+
+                this.accountBalanceViewTableAdapter.FillByDateInterval(this.fundsDBDataSet.AccountBalanceView, manager.Selected, from, to, fromLastPeriod, toLastPeriod);
 
                 ReportParameter language = new ReportParameter("Language", Thread.CurrentThread.CurrentCulture.Name);
 
