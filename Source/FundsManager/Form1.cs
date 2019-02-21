@@ -315,5 +315,13 @@ namespace FundsManager
             delayInterest.MdiParent = this;
             delayInterest.Show();
         }
+
+        private void unknownRoutineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            UnknownRoutine form = new UnknownRoutine();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }

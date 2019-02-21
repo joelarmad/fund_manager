@@ -61,8 +61,8 @@
             this.disbursemetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.profitShareAccruedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.collectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.delayInterestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.delayInterestToAccrueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.delayInterestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.investmentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,6 +71,7 @@
             this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unknownRoutineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -251,7 +252,8 @@
             this.operationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.movementToolStripMenuItem,
             this.bondsToolStripMenuItem2,
-            this.investmentsToolStripMenuItem});
+            this.investmentsToolStripMenuItem,
+            this.unknownRoutineToolStripMenuItem});
             this.operationsToolStripMenuItem.Name = "operationsToolStripMenuItem";
             this.operationsToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
             this.operationsToolStripMenuItem.Text = "Operations";
@@ -259,7 +261,7 @@
             // movementToolStripMenuItem
             // 
             this.movementToolStripMenuItem.Name = "movementToolStripMenuItem";
-            this.movementToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.movementToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.movementToolStripMenuItem.Text = "General Ledger";
             this.movementToolStripMenuItem.Click += new System.EventHandler(this.movementToolStripMenuItem_Click);
             // 
@@ -270,7 +272,7 @@
             this.generateInterestsToolStripMenuItem,
             this.makePaymentsToolStripMenuItem});
             this.bondsToolStripMenuItem2.Name = "bondsToolStripMenuItem2";
-            this.bondsToolStripMenuItem2.Size = new System.Drawing.Size(153, 22);
+            this.bondsToolStripMenuItem2.Size = new System.Drawing.Size(169, 22);
             this.bondsToolStripMenuItem2.Text = "Bonds";
             // 
             // activateToolStripMenuItem
@@ -303,7 +305,7 @@
             this.delayInterestToAccrueToolStripMenuItem,
             this.delayInterestToolStripMenuItem});
             this.investmentsToolStripMenuItem.Name = "investmentsToolStripMenuItem";
-            this.investmentsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.investmentsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.investmentsToolStripMenuItem.Text = "Investments";
             // 
             // createInvestmentToolStripMenuItem
@@ -334,19 +336,19 @@
             this.collectionToolStripMenuItem.Text = "Collection";
             this.collectionToolStripMenuItem.Click += new System.EventHandler(this.collectionToolStripMenuItem_Click);
             // 
-            // delayInterestToolStripMenuItem
-            // 
-            this.delayInterestToolStripMenuItem.Name = "delayInterestToolStripMenuItem";
-            this.delayInterestToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            this.delayInterestToolStripMenuItem.Text = "Delay Interest - Addendum";
-            this.delayInterestToolStripMenuItem.Click += new System.EventHandler(this.delayInterestToolStripMenuItem_Click);
-            // 
             // delayInterestToAccrueToolStripMenuItem
             // 
             this.delayInterestToAccrueToolStripMenuItem.Name = "delayInterestToAccrueToolStripMenuItem";
             this.delayInterestToAccrueToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.delayInterestToAccrueToolStripMenuItem.Text = "Addendums";
             this.delayInterestToAccrueToolStripMenuItem.Click += new System.EventHandler(this.delayInterestToAccrueToolStripMenuItem_Click);
+            // 
+            // delayInterestToolStripMenuItem
+            // 
+            this.delayInterestToolStripMenuItem.Name = "delayInterestToolStripMenuItem";
+            this.delayInterestToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.delayInterestToolStripMenuItem.Text = "Delay Interest - Addendum";
+            this.delayInterestToolStripMenuItem.Click += new System.EventHandler(this.delayInterestToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -409,6 +411,13 @@
             this.returnsStateToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.returnsStateToolStripMenuItem.Text = "Profit && Loss Statement";
             this.returnsStateToolStripMenuItem.Click += new System.EventHandler(this.returnsStateToolStripMenuItem_Click);
+            // 
+            // unknownRoutineToolStripMenuItem
+            // 
+            this.unknownRoutineToolStripMenuItem.Name = "unknownRoutineToolStripMenuItem";
+            this.unknownRoutineToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.unknownRoutineToolStripMenuItem.Text = "Unknown Routine";
+            this.unknownRoutineToolStripMenuItem.Click += new System.EventHandler(this.unknownRoutineToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -478,6 +487,7 @@
         private System.Windows.Forms.ToolStripMenuItem investmentsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem delayInterestToAccrueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem booksToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem unknownRoutineToolStripMenuItem;
     }
 }
 

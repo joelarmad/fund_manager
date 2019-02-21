@@ -536,6 +536,12 @@
     <Compile Include="UnderlyingDebtorsForm.Designer.cs">
       <DependentUpon>UnderlyingDebtorsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UnknownRoutine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnknownRoutine.Designer.cs">
+      <DependentUpon>UnknownRoutine.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AccountsForm.resx">
       <DependentUpon>AccountsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -683,6 +689,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UnderlyingDebtorsForm.resx">
       <DependentUpon>UnderlyingDebtorsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnknownRoutine.resx">
+      <DependentUpon>UnknownRoutine.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
