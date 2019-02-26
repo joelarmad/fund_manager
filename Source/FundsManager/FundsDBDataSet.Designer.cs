@@ -27098,6 +27098,8 @@ namespace FundsManager {
             
             private global::System.Data.DataColumn columnhas_bookings;
             
+            private global::System.Data.DataColumn columntotal_to_be_collected;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public UnlinkedDisbursementsDataTable() {
@@ -27357,6 +27359,14 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn total_to_be_collectedColumn {
+                get {
+                    return this.columntotal_to_be_collected;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -27420,7 +27430,8 @@ namespace FundsManager {
                         string sector, 
                         decimal generated_interest, 
                         decimal collected_amount, 
-                        bool has_bookings) {
+                        bool has_bookings, 
+                        decimal total_to_be_collected) {
                 UnlinkedDisbursementsRow rowUnlinkedDisbursementsRow = ((UnlinkedDisbursementsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         fund_id,
@@ -27450,7 +27461,8 @@ namespace FundsManager {
                         sector,
                         generated_interest,
                         collected_amount,
-                        has_bookings};
+                        has_bookings,
+                        total_to_be_collected};
                 rowUnlinkedDisbursementsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUnlinkedDisbursementsRow);
                 return rowUnlinkedDisbursementsRow;
@@ -27501,6 +27513,7 @@ namespace FundsManager {
                 this.columngenerated_interest = base.Columns["generated_interest"];
                 this.columncollected_amount = base.Columns["collected_amount"];
                 this.columnhas_bookings = base.Columns["has_bookings"];
+                this.columntotal_to_be_collected = base.Columns["total_to_be_collected"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -27562,6 +27575,8 @@ namespace FundsManager {
                 base.Columns.Add(this.columncollected_amount);
                 this.columnhas_bookings = new global::System.Data.DataColumn("has_bookings", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnhas_bookings);
+                this.columntotal_to_be_collected = new global::System.Data.DataColumn("total_to_be_collected", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal_to_be_collected);
                 this.columnfund_id.AllowDBNull = false;
                 this.columninvestment_id.AllowDBNull = false;
                 this.columncontract.AllowDBNull = false;
@@ -27585,6 +27600,7 @@ namespace FundsManager {
                 this.columnsector.MaxLength = 50;
                 this.columngenerated_interest.ReadOnly = true;
                 this.columncollected_amount.ReadOnly = true;
+                this.columntotal_to_be_collected.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -38431,6 +38447,23 @@ namespace FundsManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal total_to_be_collected {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableUnlinkedDisbursements.total_to_be_collectedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'total_to_be_collected\' de la tabla \'UnlinkedDisbursements" +
+                                "\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUnlinkedDisbursements.total_to_be_collectedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool Istotal_disbursementNull() {
                 return this.IsNull(this.tableUnlinkedDisbursements.total_disbursementColumn);
             }
@@ -38571,6 +38604,18 @@ namespace FundsManager {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Sethas_bookingsNull() {
                 this[this.tableUnlinkedDisbursements.has_bookingsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Istotal_to_be_collectedNull() {
+                return this.IsNull(this.tableUnlinkedDisbursements.total_to_be_collectedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Settotal_to_be_collectedNull() {
+                this[this.tableUnlinkedDisbursements.total_to_be_collectedColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -62116,6 +62161,7 @@ SELECT Id, booking_generated_interest_id, booking_id, generated_interest, genera
             tableMapping.ColumnMappings.Add("generated_interest", "generated_interest");
             tableMapping.ColumnMappings.Add("collected_amount", "collected_amount");
             tableMapping.ColumnMappings.Add("has_bookings", "has_bookings");
+            tableMapping.ColumnMappings.Add("total_to_be_collected", "total_to_be_collected");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -62132,11 +62178,11 @@ SELECT Id, booking_generated_interest_id, booking_id, generated_interest, genera
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, currency_id, amount, exchange_rate, profit_share, disbursement_date, collection_date, can_generate_interest, collected, bank_risk_id, bank_name, client_id, client, sector_id, sector, generated_interest, collected_amount, has_bookings FROM dbo.UnlinkedDisbursements";
+            this._commandCollection[0].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, currency_id, amount, exchange_rate, profit_share, disbursement_date, collection_date, can_generate_interest, collected, bank_risk_id, bank_name, client_id, client, sector_id, sector, generated_interest, collected_amount, has_bookings, total_to_be_collected FROM UnlinkedDisbursements";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, currency_id, amount, exchange_rate, profit_share, disbursement_date, collection_date, can_generate_interest, collected, bank_risk_id, bank_name, client_id, client, sector_id, sector, generated_interest, collected_amount, has_bookings FROM dbo.UnlinkedDisbursements where fund_id = @FundId and collection_date <= @CollectionDate";
+            this._commandCollection[1].CommandText = @"SELECT fund_id, investment_id, contract, investment_date, total_disbursement, investment_profit_share, payment_id, payment_date, disbursement_id, disbursement_number, disbursement_pay_date, currency_id, amount, exchange_rate, profit_share, disbursement_date, collection_date, can_generate_interest, collected, bank_risk_id, bank_name, client_id, client, sector_id, sector, generated_interest, collected_amount, has_bookings, total_to_be_collected FROM UnlinkedDisbursements WHERE (fund_id = @FundId) AND (collection_date <= @CollectionDate)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FundId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "fund_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CollectionDate", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 0, 0, "collection_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
