@@ -279,7 +279,7 @@ namespace FundsManager
                     //TODO: Poner description correcta cuando la manden
                     _movement.description = "";
                     _movement.date = bond.issued;
-                    _movement.reference = KeyDefinitions.NextAccountMovementReference;
+                    _movement.reference = KeyDefinitions.NextAccountMovementReference(dtpIssuingDate.Value.Year);
                     _movement.FK_AccountingMovements_Currencies = manager.My_db.Currencies.FirstOrDefault().Id;
                     //TODO: Poner ORIG cuando la manden
                     _movement.original_reference = "";

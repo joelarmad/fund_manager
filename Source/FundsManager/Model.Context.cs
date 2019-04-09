@@ -71,5 +71,6 @@ namespace FundsManager
         public virtual DbSet<DisbursementsBookingView> DisbursementsBookingViews { get; set; }
         public virtual DbSet<BookingGeneratedInterestDetail> BookingGeneratedInterestDetails { get; set; }
         public virtual DbSet<BookingGeneratedInterest> BookingGeneratedInterests { get; set; }
+        public virtual DbSet<ServiceSupplier> ServiceSuppliers { get; set; }
     }
 }

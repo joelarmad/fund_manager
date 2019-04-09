@@ -202,7 +202,7 @@ namespace FundsManager
                                             _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
                                             _accountingMovement.description = "";
                                             _accountingMovement.date = dPayment.payment_date;
-                                            _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference;
+                                            _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpPayDate.Value.Year);
                                             _accountingMovement.FK_AccountingMovements_Currencies = toPay.currency_id;
                                             _accountingMovement.original_reference = cbContract.Text;
                                             _accountingMovement.contract = cbContract.SelectedText;

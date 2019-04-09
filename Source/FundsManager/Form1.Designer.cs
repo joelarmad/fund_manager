@@ -63,6 +63,7 @@
             this.collectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.delayInterestToAccrueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.delayInterestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unknownRoutineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.investmentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,7 +72,7 @@
             this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.unknownRoutineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serviceSuppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,7 +110,8 @@
             this.underlyingDebtorsToolStripMenuItem,
             this.shareholdersToolStripMenuItem,
             this.letterOfCreditToolStripMenuItem,
-            this.shipmentsToolStripMenuItem});
+            this.shipmentsToolStripMenuItem,
+            this.serviceSuppliersToolStripMenuItem});
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.addToolStripMenuItem.Text = "New";
@@ -350,6 +352,13 @@
             this.delayInterestToolStripMenuItem.Text = "Delay Interest - Addendum";
             this.delayInterestToolStripMenuItem.Click += new System.EventHandler(this.delayInterestToolStripMenuItem_Click);
             // 
+            // unknownRoutineToolStripMenuItem
+            // 
+            this.unknownRoutineToolStripMenuItem.Name = "unknownRoutineToolStripMenuItem";
+            this.unknownRoutineToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.unknownRoutineToolStripMenuItem.Text = "Unknown Routine";
+            this.unknownRoutineToolStripMenuItem.Click += new System.EventHandler(this.unknownRoutineToolStripMenuItem_Click);
+            // 
             // reportsToolStripMenuItem
             // 
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -412,12 +421,12 @@
             this.returnsStateToolStripMenuItem.Text = "Profit && Loss Statement";
             this.returnsStateToolStripMenuItem.Click += new System.EventHandler(this.returnsStateToolStripMenuItem_Click);
             // 
-            // unknownRoutineToolStripMenuItem
+            // serviceSuppliersToolStripMenuItem
             // 
-            this.unknownRoutineToolStripMenuItem.Name = "unknownRoutineToolStripMenuItem";
-            this.unknownRoutineToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.unknownRoutineToolStripMenuItem.Text = "Unknown Routine";
-            this.unknownRoutineToolStripMenuItem.Click += new System.EventHandler(this.unknownRoutineToolStripMenuItem_Click);
+            this.serviceSuppliersToolStripMenuItem.Name = "serviceSuppliersToolStripMenuItem";
+            this.serviceSuppliersToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.serviceSuppliersToolStripMenuItem.Text = "Service Suppliers";
+            this.serviceSuppliersToolStripMenuItem.Click += new System.EventHandler(this.serviceSuppliersToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -488,6 +497,7 @@
         private System.Windows.Forms.ToolStripMenuItem delayInterestToAccrueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem booksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unknownRoutineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem serviceSuppliersToolStripMenuItem;
     }
 }
 

@@ -137,6 +137,8 @@
         <AssociationConnector Association="FundsDBModel.FK_BookingGeneratedInterestDetails_AccountingMovements" />
         <AssociationConnector Association="FundsDBModel.FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests" />
         <AssociationConnector Association="FundsDBModel.FK_BookingGeneratedInterestDetails_Disbursements" />
+        <EntityTypeShape EntityType="FundsDBModel.ServiceSupplier" Width="1.5" PointX="3" PointY="44" />
+        <AssociationConnector Association="FundsDBModel.FK_ServiceSupplier_Funds" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

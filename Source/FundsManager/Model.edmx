@@ -434,6 +434,15 @@
           <Property Name="FK_Sectors_Funds" Type="int" Nullable="false" />
           <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="ServiceSuppliers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="FK_ServiceSupplier_Funds" Type="int" Nullable="false" />
+          <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Shareholders">
           <Key>
             <PropertyRef Name="Id" />
@@ -1596,6 +1605,18 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ServiceSupplier_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="ServiceSuppliers" Type="Self.ServiceSuppliers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceSuppliers">
+              <PropertyRef Name="FK_ServiceSupplier_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Shareholders_Funds">
           <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
           <End Role="Shareholders" Type="Self.Shareholders" Multiplicity="*" />
@@ -1709,6 +1730,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <EntitySet Name="OtherDetails" EntityType="Self.OtherDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resources" EntityType="Self.Resources" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sectors" EntityType="Self.Sectors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceSuppliers" EntityType="Self.ServiceSuppliers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shareholders" EntityType="Self.Shareholders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shipments" EntityType="Self.Shipments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subaccounts" EntityType="Self.Subaccounts" Schema="dbo" store:Type="Tables" />
@@ -2124,6 +2146,10 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <AssociationSet Name="FK_Sectors_Funds" Association="Self.FK_Sectors_Funds">
             <End Role="Funds" EntitySet="Funds" />
             <End Role="Sectors" EntitySet="Sectors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceSupplier_Funds" Association="Self.FK_ServiceSupplier_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="ServiceSuppliers" EntitySet="ServiceSuppliers" />
           </AssociationSet>
           <AssociationSet Name="FK_Shareholders_Funds" Association="Self.FK_Shareholders_Funds">
             <End Role="Funds" EntitySet="Funds" />
@@ -2545,6 +2571,11 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="DisbursementBooking" EntitySet="DisbursementBookings" />
             <End Role="BookingGeneratedInterestDetail" EntitySet="BookingGeneratedInterestDetails" />
           </AssociationSet>
+          <EntitySet Name="ServiceSuppliers" EntityType="FundsDBModel.ServiceSupplier" />
+          <AssociationSet Name="FK_ServiceSupplier_Funds" Association="FundsDBModel.FK_ServiceSupplier_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="ServiceSupplier" EntitySet="ServiceSuppliers" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccountingMovement">
           <Key>
@@ -2860,6 +2891,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <NavigationProperty Name="Subaccounts" Relationship="FundsDBModel.FK_Subaccounts_Funds" FromRole="Fund" ToRole="Subaccount" />
           <NavigationProperty Name="UnderlyingDebtors" Relationship="FundsDBModel.FK_UnderlyingDebtors_Funds" FromRole="Fund" ToRole="UnderlyingDebtor" />
           <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Funds" FromRole="Fund" ToRole="Disbursement" />
+          <NavigationProperty Name="ServiceSuppliers" Relationship="FundsDBModel.FK_ServiceSupplier_Funds" FromRole="Fund" ToRole="ServiceSupplier" />
         </EntityType>
         <EntityType Name="Investment">
           <Key>
@@ -4347,6 +4379,28 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ServiceSupplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_ServiceSupplier_Funds" Type="Int32" Nullable="false" />
+          <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_ServiceSupplier_Funds" FromRole="ServiceSupplier" ToRole="Fund" />
+        </EntityType>
+        <Association Name="FK_ServiceSupplier_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.ServiceSupplier" Role="ServiceSupplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceSupplier">
+              <PropertyRef Name="FK_ServiceSupplier_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4953,6 +5007,16 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <EntityTypeMapping TypeName="FundsDBModel.BookingGeneratedInterest">
               <MappingFragment StoreEntitySet="BookingGeneratedInterests">
                 <ScalarProperty Name="GeneratedDate" ColumnName="GeneratedDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceSuppliers">
+            <EntityTypeMapping TypeName="FundsDBModel.ServiceSupplier">
+              <MappingFragment StoreEntitySet="ServiceSuppliers">
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="FK_ServiceSupplier_Funds" ColumnName="FK_ServiceSupplier_Funds" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

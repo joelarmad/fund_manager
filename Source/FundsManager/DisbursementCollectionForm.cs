@@ -174,7 +174,7 @@ namespace FundsManager
                                 accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
                                 accountingMovement.description = "";
                                 accountingMovement.date = dtpDate.Value;
-                                accountingMovement.reference = KeyDefinitions.NextAccountMovementReference;
+                                accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpDate.Value.Year);
                                 accountingMovement.original_reference = cbContract.Text;
                                 accountingMovement.contract = cbContract.Text;
                                 accountingMovement.FK_AccountingMovements_Currencies = 0;

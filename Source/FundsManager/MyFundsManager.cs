@@ -99,6 +99,14 @@ namespace FundsManager
             My_db.SaveChanges();
         }
 
+        public void DeleteServiceSupplier(int _id)
+        {
+            ServiceSupplier _serviceSupplier = new ServiceSupplier();
+            _serviceSupplier = My_db.ServiceSuppliers.Find(_id);
+            My_db.ServiceSuppliers.Remove(_serviceSupplier);
+            My_db.SaveChanges();
+        }
+
         public void DeleteShareholder(int _id)
         {
             Shareholder _shareholder = new Shareholder();

@@ -70,7 +70,7 @@ namespace FundsManager
                 cbSubaccount.SelectedIndex = -1;
                 cbOtherDetail.SelectedItem = null;
                 cbOtherDetail.SelectedIndex = -1;
-                textBox3.Text = KeyDefinitions.NextAccountMovementReference;
+                textBox3.Text = KeyDefinitions.NextAccountMovementReference(dateTimePicker1.Value.Year);
 
                 fFloatingAccounts = manager.My_db.Accounts.Where(x => x.FK_Accounts_Funds == manager.Selected).ToList();
 
@@ -440,7 +440,7 @@ namespace FundsManager
                             manager.My_db.AccountingMovements.Add(newAccountingMovement);
                         }
                         
-                        textBox3.Text = KeyDefinitions.NextAccountMovementReference;
+                        textBox3.Text = KeyDefinitions.NextAccountMovementReference(dateTimePicker1.Value.Year);
                         textBox4.Clear();
                         textBox5.Clear();
                         txtContract.Clear();
@@ -485,7 +485,7 @@ namespace FundsManager
                             AccountingMovementToEdit.contract = txtContract.Text;
                         }
 
-                        textBox3.Text = KeyDefinitions.NextAccountMovementReference;
+                        textBox3.Text = KeyDefinitions.NextAccountMovementReference(dateTimePicker1.Value.Year);
                         textBox4.Clear();
                         textBox5.Clear();
                         txtContract.Clear();
@@ -1187,6 +1187,11 @@ namespace FundsManager
         {
             //TODO: implementar
             return true;
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            textBox3.Text = KeyDefinitions.NextAccountMovementReference(dateTimePicker1.Value.Year);
         }
     }
 }

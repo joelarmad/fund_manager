@@ -499,6 +499,15 @@
     <Compile Include="SectorsForm.Designer.cs">
       <DependentUpon>SectorsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ServiceSupplier.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceSupplierForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServiceSupplierForm.Designer.cs">
+      <DependentUpon>ServiceSupplierForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Shareholder.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -677,6 +686,9 @@
     <EmbeddedResource Include="Reports\ProfitsState.rdlc" />
     <EmbeddedResource Include="SectorsForm.resx">
       <DependentUpon>SectorsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ServiceSupplierForm.resx">
+      <DependentUpon>ServiceSupplierForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShareholdersForm.resx">
       <DependentUpon>ShareholdersForm.cs</DependentUpon>

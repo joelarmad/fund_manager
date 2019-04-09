@@ -745,7 +745,7 @@ namespace FundsManager
                     _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
                     _accountingMovement.description = "";
                     _accountingMovement.date = DateTime.Now.Date;
-                    _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference;
+                    _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpStartingDate.Value.Year);
                     _accountingMovement.FK_AccountingMovements_Currencies = disbursement.currency_id;
                     _accountingMovement.original_reference = disbursement.Investment.contract;
                     _accountingMovement.contract = disbursement.Investment.contract;

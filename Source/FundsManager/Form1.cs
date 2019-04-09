@@ -323,5 +323,13 @@ namespace FundsManager
             form.MdiParent = this;
             form.Show();
         }
+
+        private void serviceSuppliersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            ServiceSupplierForm form = new ServiceSupplierForm();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }
