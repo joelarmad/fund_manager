@@ -38,10 +38,10 @@ namespace FundsManager.ReportForms
         {
             try
             {
-                DateTime from = new DateTime(DateTime.Now.Year, 1, 1);
                 DateTime to = Convert.ToDateTime(dtpTo.Text);
+                DateTime from = new DateTime(to.Year, 1, 1);
 
-                DateTime fromLastPeriod = new DateTime(DateTime.Now.Year - 1, 1, 1);
+                DateTime fromLastPeriod = new DateTime(to.Year - 1, 1, 1);
                 DateTime toLastPeriod = new DateTime(fromLastPeriod.Year, to.Month, to.Day);
 
                 this.accountBalanceViewTableAdapter.FillByDateInterval(this.fundsDBDataSet.AccountBalanceView, manager.Selected, from, to, fromLastPeriod, toLastPeriod);

@@ -34,8 +34,8 @@ namespace FundsManager.ReportForms
         {
             try
             {
-                DateTime from = Convert.ToDateTime(dtpFrom.Text);
-                DateTime to = Convert.ToDateTime(dtpTo.Text);
+                DateTime from = dtpFrom.Value.Date;
+                DateTime to = dtpTo.Value;
 
                 this.profitResultsViewTableAdapter.FillByFund(this.fundsDBDataSet.ProfitResultsView, manager.Selected, from, to);
 
