@@ -587,6 +587,7 @@ namespace FundsManager
             cbCurrency.SelectedIndex = 0;
             txtExchangeRate.Text = "1.0000000";
             txtProfitShare.Text = String.Format("{0:0.00}", fProfitShareRemainig);
+            txtDelayInterest.Text = "0.00";
             txtNumber.Text = "";
             txtTotalToBeCollected.Text = "0.00";            
             dtpStartingDate.Value = DateTime.Now;
