@@ -25,6 +25,7 @@ namespace FundsManager
 
         private decimal fAmount = 0;
         private decimal fProfitShare = 0;
+        private decimal fDelayedInterest = 0;
         private decimal fAmountRemaining = 0;
         private decimal fProfitShareRemainig = 0;
 
@@ -347,6 +348,7 @@ namespace FundsManager
             {
                 decimal _selectedAmount = decimal.Parse(txtAmount.Text);
                 decimal _selectedProfitShare = decimal.Parse(txtProfitShare.Text);
+                decimal _selectedDelayedInterest = decimal.Parse(txtDelayInterest.Text);
 
                 if (!fEditMode)
                 {
@@ -354,6 +356,7 @@ namespace FundsManager
                     && txtNumber.Text.Trim() != ""
                     && _selectedAmount > 0 
                     && _selectedProfitShare >= 0
+                    && _selectedDelayedInterest >= 0
                     && fAmountRemaining > 0
                     && fProfitShareRemainig > 0;
                 }
@@ -363,20 +366,24 @@ namespace FundsManager
 
                     decimal _amount = 0;
                     decimal _profitShare = 0;
+                    decimal _delayedInterest = 0;
 
                     foreach (DisbursementBooking booking in bookings)
                     {
                         _amount += booking.amount;
                         _profitShare += booking.profit_share;
+                        _delayedInterest += booking.delay_interest;
                     }
 
                     _amount -= toModify.amount - _selectedAmount;
                     _profitShare -= toModify.profit_share - _selectedProfitShare;
+                    _delayedInterest -= toModify.delay_interest - _selectedDelayedInterest;
 
                     cmdAddBooking.Enabled = cbCurrency.SelectedIndex >= 0
                     && txtNumber.Text.Trim() != ""
                     && _selectedAmount > 0
                     && _selectedProfitShare >= 0
+                    && _delayedInterest >= 0
                     && fAmount - _amount >= 0
                     && fProfitShare - _profitShare >= 0;
                 }
@@ -410,7 +417,6 @@ namespace FundsManager
 
                         if (fEditMode)
                         {
-                            DisbursementBooking toDelete = bookings[lvBooking.SelectedIndices[0]];
                             bookings.RemoveAt(lvBooking.SelectedIndices[0]);
                         }
 
@@ -543,6 +549,8 @@ namespace FundsManager
         {
             try
             {
+                fDelayedInterest = 0;
+
                 lvBooking.Items.Clear();
 
                 Decimal total_investment = 0;
@@ -571,6 +579,8 @@ namespace FundsManager
                     ListViewItem listViewItemTotal = new ListViewItem(totales);
                     lvBooking.Items.Add(listViewItemTotal);
                 }
+
+                fDelayedInterest = total_delay_interest;
             }
             catch (Exception)
             {
@@ -736,12 +746,10 @@ namespace FundsManager
                     }
 
                     BookToEdit.Movements_Accounts125.credit = fAmount;
-                    BookToEdit.Movements_Accounts128.credit = fProfitShare;
+                    BookToEdit.Movements_Accounts128.credit = fDelayedInterest;
 
                 }
-                
-
-                if(!EditingExistingBook)
+                else
                 {
                     _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
                     _accountingMovement.description = "";
@@ -799,7 +807,7 @@ namespace FundsManager
                         _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
                     _maccount128.subaccount = disbursement.client_id;
                     _maccount128.subaccount_type = 1;
-                    _maccount128.credit = Math.Round(fProfitShare, 2);
+                    _maccount128.credit = Math.Round(fDelayedInterest, 2);
                     _maccount128.debit = 0;
 
                     _creditFactor = 1;
@@ -882,7 +890,7 @@ namespace FundsManager
                         _maccount128.subaccount = disbursement.client_id;
                         _maccount128.subaccount_type = 1;
                         _maccount128.credit = 0;
-                        _maccount128.debit = Math.Round(_booking.profit_share, 2);
+                        _maccount128.debit = Math.Round(_booking.delay_interest, 2);
 
                         _creditFactor = 1;
                         _debitFactor = -1;
@@ -943,6 +951,45 @@ namespace FundsManager
         private void txtNumber_TextChanged(object sender, EventArgs e)
         {
             checkEnablingAddBookingButton();
+        }
+
+        private void txtDelayInterest_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).SelectAll();
+        }
+
+        private void txtDelayInterest_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal _result = 0;
+                if (!decimal.TryParse(txtDelayInterest.Text, out _result) || _result < 0)
+                {
+                    txtDelayInterest.Text = "0.00";
+                }
+                else
+                {
+                    txtDelayInterest.Text = String.Format("{0:0.00}", _result);
+                }
+
+                checkEnablingAddBookingButton();
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error in AddendumsForm.txtDelayInterest_Leave: " + _ex.Message);
+            }
+        }
+
+        private void txtDelayInterest_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                checkEnablingAddBookingButton();
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error in AddendumsForm.txtProfitShare_TextChanged: " + _ex.Message);
+            }
         }
     }
 }

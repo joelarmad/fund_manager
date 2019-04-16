@@ -132,6 +132,9 @@
             this.txtDelayInterest.Size = new System.Drawing.Size(121, 20);
             this.txtDelayInterest.TabIndex = 243;
             this.txtDelayInterest.Text = "0";
+            this.txtDelayInterest.Click += new System.EventHandler(this.txtDelayInterest_Click);
+            this.txtDelayInterest.TextChanged += new System.EventHandler(this.txtDelayInterest_TextChanged);
+            this.txtDelayInterest.Leave += new System.EventHandler(this.txtDelayInterest_Leave);
             // 
             // label12
             // 
