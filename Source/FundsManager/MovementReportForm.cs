@@ -110,6 +110,9 @@ namespace FundsManager
                                 case 6:
                                     row[5] = manager.My_db.Shareholders.Find(my_account.subaccount) != null ? manager.My_db.Shareholders.Find(my_account.subaccount).name : "Shareholder not found";
                                     break;
+                                case 7:
+                                    row[5] = manager.My_db.ServiceSuppliers.Find(my_account.subaccount) != null ? manager.My_db.ServiceSuppliers.Find(my_account.subaccount).name : "Service Supplier not found";
+                                    break;
                             }
                         }
 

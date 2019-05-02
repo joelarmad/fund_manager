@@ -253,6 +253,12 @@ namespace FundsManager
                     comboSource.Add(custom_id, _shareholder.name);
                 }
 
+                foreach (ServiceSupplier _serviceSupplier in manager.My_db.ServiceSuppliers)
+                {
+                    int custom_id = int.Parse(7.ToString() + _serviceSupplier.Id.ToString());
+                    comboSource.Add(custom_id, _serviceSupplier.name);
+                }
+
                 cbOtherDetail.DataSource = new BindingSource(comboSource, null);
                 cbOtherDetail.DisplayMember = "Value";
                 cbOtherDetail.ValueMember = "Key";
@@ -983,6 +989,13 @@ namespace FundsManager
                         if (holder != null)
                         {
                             detailText = holder.name;
+                        }
+                        break;
+                    case 7:
+                        ServiceSupplier supplier = manager.My_db.ServiceSuppliers.FirstOrDefault(x => x.Id == _movement.Detail);
+                        if (supplier != null)
+                        {
+                            detailText = supplier.name;
                         }
                         break;
                 }
