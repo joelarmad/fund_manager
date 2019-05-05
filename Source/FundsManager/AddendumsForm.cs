@@ -560,7 +560,7 @@ namespace FundsManager
 
                 foreach (DisbursementBooking _booking in bookings)
                 {
-                    decimal _totalToBeCollected = _booking.amount + _booking.profit_share;
+                    decimal _totalToBeCollected = _booking.amount + _booking.profit_share + _booking.delay_interest;
 
                     
                     string[] row = { _booking.number,  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _booking.amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _booking.profit_share), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _booking.delay_interest), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _totalToBeCollected), _booking.collection_date.ToLongDateString() };
@@ -746,7 +746,8 @@ namespace FundsManager
                     }
 
                     BookToEdit.Movements_Accounts125.credit = fAmount;
-                    BookToEdit.Movements_Accounts128.credit = fDelayedInterest;
+                    //BookToEdit.Movements_Accounts128.credit = fDelayedInterest;
+                    BookToEdit.Movements_Accounts128.credit = fProfitShare;
 
                 }
                 else
@@ -807,7 +808,8 @@ namespace FundsManager
                         _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
                     _maccount128.subaccount = disbursement.client_id;
                     _maccount128.subaccount_type = 1;
-                    _maccount128.credit = Math.Round(fDelayedInterest, 2);
+                    //_maccount128.credit = Math.Round(fDelayedInterest, 2);
+                    _maccount128.credit = Math.Round(fProfitShare, 2);
                     _maccount128.debit = 0;
 
                     _creditFactor = 1;
@@ -890,7 +892,8 @@ namespace FundsManager
                         _maccount128.subaccount = disbursement.client_id;
                         _maccount128.subaccount_type = 1;
                         _maccount128.credit = 0;
-                        _maccount128.debit = Math.Round(_booking.delay_interest, 2);
+                        //_maccount128.debit = Math.Round(_booking.delay_interest, 2);
+                        _maccount128.debit = Math.Round(_booking.profit_share, 2);
 
                         _creditFactor = 1;
                         _debitFactor = -1;

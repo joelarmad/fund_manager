@@ -58,7 +58,8 @@ namespace FundsManager
                             _delayedProfitShareToAccrue.booking_id.ToString(),
                             _delayedProfitShareToAccrue.contract,
                             _delayedProfitShareToAccrue.booking_number,
-                            String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _delayedProfitShareToAccrue.profit_share),
+                            //String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _delayedProfitShareToAccrue.profit_share),
+                            String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _delayedProfitShareToAccrue.delay_interest),
                             _delayedProfitShareToAccrue.new_collection_date.ToLongDateString(),
                             starting_date,
                             financingDays.ToString()
@@ -232,8 +233,11 @@ namespace FundsManager
 
                                     if (totalFinancingDays > 0 && financingDays > 0)
                                     {
-                                        decimal profitSharePerDay = _delayedProfitShareToAccrue.profit_share / totalFinancingDays;
-                                        _interest = Math.Round(financingDays * profitSharePerDay, 2);
+                                        //decimal profitSharePerDay = _delayedProfitShareToAccrue.profit_share / totalFinancingDays;
+                                        //_interest = Math.Round(financingDays * profitSharePerDay, 2);
+
+                                        decimal delayInterestPerDay = _delayedProfitShareToAccrue.delay_interest / totalFinancingDays;
+                                        _interest = Math.Round(financingDays * delayInterestPerDay, 2);
                                     }
 
                                     canContinueGeneratingInterest = toDate < _delayedProfitShareToAccrue.new_collection_date;

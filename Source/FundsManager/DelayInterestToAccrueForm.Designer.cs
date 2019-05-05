@@ -36,7 +36,7 @@
             this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Contract = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Number = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ProfitShare = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DelayedInterest = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CollectionDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StartingDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Days = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -90,7 +90,7 @@
             this.Id,
             this.Contract,
             this.Number,
-            this.ProfitShare,
+            this.DelayedInterest,
             this.CollectionDate,
             this.StartingDate,
             this.Days});
@@ -117,10 +117,10 @@
             // 
             this.Number.Text = "Number";
             // 
-            // ProfitShare
+            // DelayedInterest
             // 
-            this.ProfitShare.Text = "Profit Share";
-            this.ProfitShare.Width = 100;
+            this.DelayedInterest.Text = "Delayed Interest";
+            this.DelayedInterest.Width = 100;
             // 
             // CollectionDate
             // 
@@ -198,7 +198,7 @@
         private System.Windows.Forms.ListView lvBookings;
         private System.Windows.Forms.ColumnHeader Id;
         private System.Windows.Forms.ColumnHeader Number;
-        private System.Windows.Forms.ColumnHeader ProfitShare;
+        private System.Windows.Forms.ColumnHeader DelayedInterest;
         private System.Windows.Forms.ColumnHeader CollectionDate;
         private System.Windows.Forms.ColumnHeader Days;
         private System.Windows.Forms.ColumnHeader StartingDate;
