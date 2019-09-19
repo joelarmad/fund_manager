@@ -21,8 +21,8 @@ namespace FundsManager
                 manager = MyFundsManager.SingletonInstance;
                 InitializeComponent();
 
-                dateTimePicker1.Value = DateTime.Now.AddMonths(-1);
-                dateTimePicker2.Value = DateTime.Now;
+                dateTimePicker1.Value = DateTime.Now.AddMonths(-1).Date;
+                dateTimePicker2.Value = DateTime.Now.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
 
                 listView1.FullRowSelect = true;
 
@@ -50,6 +50,7 @@ namespace FundsManager
         {
             try
             {
+
                 listView1.Items.Clear();
 
                 int accountId = 0;
@@ -61,7 +62,7 @@ namespace FundsManager
 
                 String[] row = new String[9];
 
-                foreach (AccountingMovement _amove in manager.My_db.AccountingMovements.Where(x => (x.reference == textBox1.Text.Trim() || textBox1.Text.Trim() == "") && x.date >= dateTimePicker1.Value.Date && x.date <= dateTimePicker2.Value).ToList())
+                foreach (AccountingMovement _amove in manager.My_db.AccountingMovements.Where(x => (x.reference == textBox1.Text.Trim() || textBox1.Text.Trim() == "") && x.date >= dateTimePicker1.Value && x.date <= dateTimePicker2.Value).ToList())
                 {
 
                     List<Movements_Accounts> movementsAccount = manager.My_db.Movements_Accounts.Where(x => x.FK_Movements_Accounts_AccountingMovements == _amove.Id && (x.FK_Movements_Accounts_Accounts == accountId || accountId == 0)).ToList();

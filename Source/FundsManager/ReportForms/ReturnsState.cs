@@ -25,7 +25,7 @@ namespace FundsManager.ReportForms
         private void ReturnsState_Load(object sender, EventArgs e)
         {
             dtpFrom.Value = new DateTime(DateTime.Now.Year, 1, 1);
-            dtpTo.Value = DateTime.Now;
+            dtpTo.Value = DateTime.Now.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
 
             refreshData();
         }
