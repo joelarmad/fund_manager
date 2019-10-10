@@ -52,7 +52,10 @@ namespace FundsManager
 
             try
             {
-               
+                txtExchangeRate.Text = String.Format("{0:0.0000000}", 1);
+                txtProfitShare.Text = String.Format("{0:0.00}", 0);
+                txtTotalToBeCollected.Text = String.Format("{0:0.00}", 0);
+
                 // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Currencies' Puede moverla o quitarla según sea necesario.
                 this.currenciesTableAdapter.Fill(this.fundsDBDataSet.Currencies);
 
@@ -78,9 +81,9 @@ namespace FundsManager
 
                             txtProfitShare.Text = String.Format("{0:0.00}", fProfitShareRemainig);
 
-                            txtDelayInterest.Text = "0.00";
+                            txtDelayInterest.Text = String.Format("{0:0.00}", 0);
 
-                            
+
                         }
                     }
                     else
@@ -172,7 +175,7 @@ namespace FundsManager
                 }
                 else
                 {
-                    txtTotalToBeCollected.Text = "0.00";
+                    txtTotalToBeCollected.Text = String.Format("{0:0.00}", 0);
                 }
             }
             catch (Exception _ex)
@@ -268,7 +271,7 @@ namespace FundsManager
                 decimal _result = 0;
                 if (!decimal.TryParse(txtExchangeRate.Text, out _result) || _result <= 0)
                 {
-                    txtExchangeRate.Text = "1.0000000";
+                    txtExchangeRate.Text = String.Format("{0:0.0000000}", 1);
                 }
                 else
                 {
@@ -300,7 +303,7 @@ namespace FundsManager
                 decimal _result = 0;
                 if (!decimal.TryParse(txtProfitShare.Text, out _result) || _result < 0)
                 {
-                    txtProfitShare.Text = "0.00";
+                    txtProfitShare.Text = String.Format("{0:0.00}", 0);
                 }
                 else
                 {
@@ -595,11 +598,11 @@ namespace FundsManager
             cmdAddBooking.Enabled = false;
             txtAmount.Text = String.Format("{0:0.00}", fAmountRemaining);
             cbCurrency.SelectedIndex = 0;
-            txtExchangeRate.Text = "1.0000000";
+            txtExchangeRate.Text = String.Format("{0:0.0000000}", 1);
             txtProfitShare.Text = String.Format("{0:0.00}", fProfitShareRemainig);
-            txtDelayInterest.Text = "0.00";
+            txtDelayInterest.Text = String.Format("{0:0.00}", 0);
             txtNumber.Text = "";
-            txtTotalToBeCollected.Text = "0.00";            
+            txtTotalToBeCollected.Text = String.Format("{0:0.00}", 0);
             dtpStartingDate.Value = DateTime.Now;
             dtpCollectionDate.Value = DateTime.Now;
             cmdDeleteBooking.Enabled = false;
@@ -933,9 +936,9 @@ namespace FundsManager
 
                 txtAmount.Text = "0";
                 txtNumber.Text = "";
-                txtProfitShare.Text = "0.00";
-                txtExchangeRate.Text = "1.0000000";
-                txtTotalToBeCollected.Text = "0.00";
+                txtProfitShare.Text = String.Format("{0:0.00}", 0);
+                txtExchangeRate.Text = String.Format("{0:0.0000000}", 1);
+                txtTotalToBeCollected.Text = String.Format("{0:0.00}", 0);
                 lbISelectedItems.Items.Clear();
                 lvBooking.Items.Clear();
 
@@ -968,7 +971,7 @@ namespace FundsManager
                 decimal _result = 0;
                 if (!decimal.TryParse(txtDelayInterest.Text, out _result) || _result < 0)
                 {
-                    txtDelayInterest.Text = "0.00";
+                    txtDelayInterest.Text = String.Format("{0:0.00}", 0);
                 }
                 else
                 {

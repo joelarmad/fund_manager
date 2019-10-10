@@ -59,6 +59,10 @@ namespace FundsManager
             try
             {
 
+                txtExchangeRate.Text = String.Format("{0:0.00000000}", 1);
+                txtProfitShare.Text = String.Format("{0:0.00}", 0);
+                txtTotalToBeCollected.Text = String.Format("{0:0.00}", 0);
+
                 // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Clients' Puede moverla o quitarla según sea necesario.
                 this.clientsTableAdapter.FillByFund(this.fundsDBDataSet.Clients, manager.Selected);
                 // TODO: This line of code loads data into the 'fundsDBDataSet.Items' table. You can move, or remove it, as needed.
@@ -132,7 +136,7 @@ namespace FundsManager
                 }
                 else
                 {
-                    txtTotalToBeCollected.Text = "0.00";
+                    txtTotalToBeCollected.Text = String.Format("{0:0.00}", 0);
                 }
             }
             catch (Exception _ex)
@@ -378,9 +382,9 @@ namespace FundsManager
                 txtAmount.Text = "0";
                 txtNumber.Text = "";
                 txtContract.Text = "xxx/" + DateTime.Now.Year.ToString().Substring(2, 2);
-                txtProfitShare.Text = "0.00";
-                txtExchangeRate.Text = "1.0000000";
-                txtTotalToBeCollected.Text = "0.00";
+                txtProfitShare.Text = String.Format("{0:0.00}", 0);
+                txtExchangeRate.Text = String.Format("{0:0.0000000}", 1);
+                txtTotalToBeCollected.Text = String.Format("{0:0.00}", 0);
                 lbISelectedItems.Items.Clear();
                 lvDisbursements.Items.Clear();
 
@@ -796,7 +800,7 @@ namespace FundsManager
                 decimal _result = 0;
                 if (!decimal.TryParse(txtExchangeRate.Text, out _result) || _result <= 0)
                 {
-                    txtExchangeRate.Text = "1.0000000";
+                    txtExchangeRate.Text = String.Format("{0:0.0000000}", 1);
                 }
                 else
                 {
@@ -828,7 +832,7 @@ namespace FundsManager
                 decimal _result = 0;
                 if (!decimal.TryParse(txtProfitShare.Text, out _result) || _result < 0)
                 {
-                    txtProfitShare.Text = "0.00";
+                    txtProfitShare.Text = String.Format("{0:0.00}", 0);
                 }
                 else
                 {
@@ -960,10 +964,10 @@ namespace FundsManager
             cmdAddDisbursement.Enabled = false;
             txtAmount.Text = "0";
             cbCurrency.SelectedIndex = 0;
-            txtExchangeRate.Text = "1.0000000";
-            txtProfitShare.Text = "0.00";
+            txtExchangeRate.Text = String.Format("{0:0.00000000}", 1);
+            txtProfitShare.Text = String.Format("{0:0.00}", 0);
             txtNumber.Text = "";
-            txtTotalToBeCollected.Text = "0.00";
+            txtTotalToBeCollected.Text = String.Format("{0:0.00}", 0);
             cbClient.SelectedIndex = 0;
             cbUnderlyingDebtor.SelectedIndex = 0;
             cbBank.SelectedIndex = 0;
@@ -1087,6 +1091,11 @@ namespace FundsManager
                     disbursements.Add(toAdd);
                 }
             }
+        }
+
+        private void txtNumber_KeyUp(object sender, KeyEventArgs e)
+        {
+            checkEnablingAddDisbursementButton();
         }
     }
 }

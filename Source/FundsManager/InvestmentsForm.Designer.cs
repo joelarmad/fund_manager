@@ -523,6 +523,7 @@
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Size = new System.Drawing.Size(121, 20);
             this.txtNumber.TabIndex = 5;
+            this.txtNumber.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNumber_KeyUp);
             this.txtNumber.Leave += new System.EventHandler(this.txtNumber_Leave);
             // 
             // label12

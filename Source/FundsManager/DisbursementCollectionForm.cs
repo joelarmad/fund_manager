@@ -19,9 +19,9 @@ namespace FundsManager
         int NumberIndex = 1;
         int CollectionDateIndex = 2;
         int AmountIndex = 3;
-        int ProfitShareIndex = 4;
-        int CollectedIndex = 5;
-        int DelayInterestIndex = 6;
+        int DelayInterestIndex = 4;
+        int ProfitShareIndex = 5;
+        int CollectedIndex = 6;
         int CollectTo125Index = 7;
         int CollectTo128Index = 8;
         int CollectTo130Index = 9;
