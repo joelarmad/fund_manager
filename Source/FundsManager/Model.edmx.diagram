@@ -132,13 +132,14 @@
         <AssociationConnector Association="FundsDBModel.FK_DisbursementBook_Movement125" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementBook_Movement128" />
         <EntityTypeShape EntityType="FundsDBModel.DisbursementsBookingView" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="FundsDBModel.BookingGeneratedInterestDetail" Width="1.5" PointX="22.5" PointY="46.875" />
         <EntityTypeShape EntityType="FundsDBModel.BookingGeneratedInterest" Width="1.5" PointX="20.25" PointY="43.5" />
-        <AssociationConnector Association="FundsDBModel.FK_BookingGeneratedInterestDetails_AccountingMovements" />
-        <AssociationConnector Association="FundsDBModel.FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests" />
-        <AssociationConnector Association="FundsDBModel.FK_BookingGeneratedInterestDetails_Disbursements" />
         <EntityTypeShape EntityType="FundsDBModel.ServiceSupplier" Width="1.5" PointX="3" PointY="44" />
         <AssociationConnector Association="FundsDBModel.FK_ServiceSupplier_Funds" />
+        <EntityTypeShape EntityType="FundsDBModel.BookingGeneratedInterestDetail" Width="1.5" PointX="22.5" PointY="52" />
+        <AssociationConnector Association="FundsDBModel.FK_BookingGeneratedInterestDetails_AccountingMovements" />
+        <AssociationConnector Association="FundsDBModel.FK_BookingGeneratedInterestDetails_Booking" />
+        <AssociationConnector Association="FundsDBModel.FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests" />
+        <AssociationConnector Association="FundsDBModel.FK_BookingGeneratedInterestDetails_Disbusement" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

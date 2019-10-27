@@ -33,8 +33,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cbClient = new System.Windows.Forms.ComboBox();
@@ -43,17 +41,15 @@
             this.cbContract = new System.Windows.Forms.ComboBox();
             this.clientContractsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.disbursementidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.profitshareDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.profit_share_accrued = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.profit_share_to_accrue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.collectiondateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.disbursementsForAddendumsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.clientsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientsTableAdapter();
             this.clientContractsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientContractsTableAdapter();
             this.disbursementsForAddendumsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.DisbursementsForAddendumsTableAdapter();
+            this.disbursementidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.profitshareDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.collectiondateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientContractsBindingSource)).BeginInit();
@@ -129,8 +125,6 @@
             this.numberDataGridViewTextBoxColumn,
             this.amountDataGridViewTextBoxColumn,
             this.profitshareDataGridViewTextBoxColumn,
-            this.profit_share_accrued,
-            this.profit_share_to_accrue,
             this.collectiondateDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.disbursementsForAddendumsBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(11, 67);
@@ -141,6 +135,23 @@
             this.dataGridView1.Size = new System.Drawing.Size(735, 244);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            // 
+            // disbursementsForAddendumsBindingSource
+            // 
+            this.disbursementsForAddendumsBindingSource.DataMember = "DisbursementsForAddendums";
+            this.disbursementsForAddendumsBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // clientsTableAdapter
+            // 
+            this.clientsTableAdapter.ClearBeforeFill = true;
+            // 
+            // clientContractsTableAdapter
+            // 
+            this.clientContractsTableAdapter.ClearBeforeFill = true;
+            // 
+            // disbursementsForAddendumsTableAdapter
+            // 
+            this.disbursementsForAddendumsTableAdapter.ClearBeforeFill = true;
             // 
             // disbursementidDataGridViewTextBoxColumn
             // 
@@ -180,53 +191,14 @@
             this.profitshareDataGridViewTextBoxColumn.Name = "profitshareDataGridViewTextBoxColumn";
             this.profitshareDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // profit_share_accrued
-            // 
-            this.profit_share_accrued.DataPropertyName = "profit_share_accrued";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            this.profit_share_accrued.DefaultCellStyle = dataGridViewCellStyle4;
-            this.profit_share_accrued.HeaderText = "Profit Share Accrued";
-            this.profit_share_accrued.Name = "profit_share_accrued";
-            this.profit_share_accrued.ReadOnly = true;
-            this.profit_share_accrued.Width = 120;
-            // 
-            // profit_share_to_accrue
-            // 
-            this.profit_share_to_accrue.DataPropertyName = "profit_share_to_accrue";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            this.profit_share_to_accrue.DefaultCellStyle = dataGridViewCellStyle5;
-            this.profit_share_to_accrue.HeaderText = "Profit Share to Accrue";
-            this.profit_share_to_accrue.Name = "profit_share_to_accrue";
-            this.profit_share_to_accrue.ReadOnly = true;
-            this.profit_share_to_accrue.Width = 120;
-            // 
             // collectiondateDataGridViewTextBoxColumn
             // 
             this.collectiondateDataGridViewTextBoxColumn.DataPropertyName = "collection_date";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.collectiondateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.collectiondateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
             this.collectiondateDataGridViewTextBoxColumn.HeaderText = "Collection Date";
             this.collectiondateDataGridViewTextBoxColumn.Name = "collectiondateDataGridViewTextBoxColumn";
             this.collectiondateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // disbursementsForAddendumsBindingSource
-            // 
-            this.disbursementsForAddendumsBindingSource.DataMember = "DisbursementsForAddendums";
-            this.disbursementsForAddendumsBindingSource.DataSource = this.fundsDBDataSet;
-            // 
-            // clientsTableAdapter
-            // 
-            this.clientsTableAdapter.ClearBeforeFill = true;
-            // 
-            // clientContractsTableAdapter
-            // 
-            this.clientContractsTableAdapter.ClearBeforeFill = true;
-            // 
-            // disbursementsForAddendumsTableAdapter
-            // 
-            this.disbursementsForAddendumsTableAdapter.ClearBeforeFill = true;
             // 
             // AddendumsLauncher
             // 
@@ -273,8 +245,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn profitshareDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn profit_share_accrued;
-        private System.Windows.Forms.DataGridViewTextBoxColumn profit_share_to_accrue;
         private System.Windows.Forms.DataGridViewTextBoxColumn collectiondateDataGridViewTextBoxColumn;
     }
 }

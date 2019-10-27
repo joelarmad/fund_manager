@@ -135,6 +135,7 @@
           <Property Name="generated_interest" Type="money" Nullable="false" />
           <Property Name="generated_interest_date" Type="date" Nullable="false" />
           <Property Name="accounting_movement_id" Type="int" />
+          <Property Name="disbursement_id" Type="int" />
         </EntityType>
         <EntityType Name="BookingGeneratedInterests">
           <Key>
@@ -483,8 +484,8 @@
           <Property Name="CountryId" Type="int" Nullable="false" />
           <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementsBookingView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'E:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementsBookingView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DisbursementsBookingView">
           <Key>
             <PropertyRef Name="fund_id" />
@@ -564,8 +565,8 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Disburs
           <Property Name="movement128_id" Type="int" Nullable="false" />
           <Property Name="is_booking_collected" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementsToBeCollected' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'E:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementsToBeCollected' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DisbursementsToBeCollected">
           <Key>
             <PropertyRef Name="fund_id" />
@@ -593,8 +594,8 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Disburs
           <Property Name="collected" Type="money" />
           <Property Name="profit_share_accrued" Type="money" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitShareToAccrue' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'E:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitShareToAccrue' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ProfitShareToAccrue">
           <Key>
             <PropertyRef Name="Id" />
@@ -933,6 +934,18 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_BookingGeneratedInterestDetails_Booking">
+          <End Role="DisbursementBooking" Type="Self.DisbursementBooking" Multiplicity="1" />
+          <End Role="BookingGeneratedInterestDetails" Type="Self.BookingGeneratedInterestDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DisbursementBooking">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BookingGeneratedInterestDetails">
+              <PropertyRef Name="booking_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests">
           <End Role="BookingGeneratedInterests" Type="Self.BookingGeneratedInterests" Multiplicity="1" />
           <End Role="BookingGeneratedInterestDetails" Type="Self.BookingGeneratedInterestDetails" Multiplicity="*" />
@@ -945,15 +958,15 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BookingGeneratedInterestDetails_Disbursements">
-          <End Role="DisbursementBooking" Type="Self.DisbursementBooking" Multiplicity="1" />
+        <Association Name="FK_BookingGeneratedInterestDetails_Disbusement">
+          <End Role="Disbursements" Type="Self.Disbursements" Multiplicity="0..1" />
           <End Role="BookingGeneratedInterestDetails" Type="Self.BookingGeneratedInterestDetails" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DisbursementBooking">
-              <PropertyRef Name="id" />
+            <Principal Role="Disbursements">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="BookingGeneratedInterestDetails">
-              <PropertyRef Name="booking_id" />
+              <PropertyRef Name="disbursement_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1923,12 +1936,16 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="AccountingMovements" EntitySet="AccountingMovements" />
             <End Role="BookingGeneratedInterestDetails" EntitySet="BookingGeneratedInterestDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_BookingGeneratedInterestDetails_Booking" Association="Self.FK_BookingGeneratedInterestDetails_Booking">
+            <End Role="DisbursementBooking" EntitySet="DisbursementBooking" />
+            <End Role="BookingGeneratedInterestDetails" EntitySet="BookingGeneratedInterestDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests" Association="Self.FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests">
             <End Role="BookingGeneratedInterests" EntitySet="BookingGeneratedInterests" />
             <End Role="BookingGeneratedInterestDetails" EntitySet="BookingGeneratedInterestDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_BookingGeneratedInterestDetails_Disbursements" Association="Self.FK_BookingGeneratedInterestDetails_Disbursements">
-            <End Role="DisbursementBooking" EntitySet="DisbursementBooking" />
+          <AssociationSet Name="FK_BookingGeneratedInterestDetails_Disbusement" Association="Self.FK_BookingGeneratedInterestDetails_Disbusement">
+            <End Role="Disbursements" EntitySet="Disbursements" />
             <End Role="BookingGeneratedInterestDetails" EntitySet="BookingGeneratedInterestDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_Clients_Countries" Association="Self.FK_Clients_Countries">
@@ -2557,24 +2574,28 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             <End Role="DisbursementBook" EntitySet="DisbursementBooks" />
           </AssociationSet>
           <EntitySet Name="DisbursementsBookingViews" EntityType="FundsDBModel.DisbursementsBookingView" />
-          <EntitySet Name="BookingGeneratedInterestDetails" EntityType="FundsDBModel.BookingGeneratedInterestDetail" />
           <EntitySet Name="BookingGeneratedInterests" EntityType="FundsDBModel.BookingGeneratedInterest" />
+          <EntitySet Name="ServiceSuppliers" EntityType="FundsDBModel.ServiceSupplier" />
+          <AssociationSet Name="FK_ServiceSupplier_Funds" Association="FundsDBModel.FK_ServiceSupplier_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="ServiceSupplier" EntitySet="ServiceSuppliers" />
+          </AssociationSet>
+          <EntitySet Name="BookingGeneratedInterestDetails" EntityType="FundsDBModel.BookingGeneratedInterestDetail" />
           <AssociationSet Name="FK_BookingGeneratedInterestDetails_AccountingMovements" Association="FundsDBModel.FK_BookingGeneratedInterestDetails_AccountingMovements">
             <End Role="AccountingMovement" EntitySet="AccountingMovements" />
+            <End Role="BookingGeneratedInterestDetail" EntitySet="BookingGeneratedInterestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingGeneratedInterestDetails_Booking" Association="FundsDBModel.FK_BookingGeneratedInterestDetails_Booking">
+            <End Role="DisbursementBooking" EntitySet="DisbursementBookings" />
             <End Role="BookingGeneratedInterestDetail" EntitySet="BookingGeneratedInterestDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests" Association="FundsDBModel.FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests">
             <End Role="BookingGeneratedInterest" EntitySet="BookingGeneratedInterests" />
             <End Role="BookingGeneratedInterestDetail" EntitySet="BookingGeneratedInterestDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_BookingGeneratedInterestDetails_Disbursements" Association="FundsDBModel.FK_BookingGeneratedInterestDetails_Disbursements">
-            <End Role="DisbursementBooking" EntitySet="DisbursementBookings" />
+          <AssociationSet Name="FK_BookingGeneratedInterestDetails_Disbusement" Association="FundsDBModel.FK_BookingGeneratedInterestDetails_Disbusement">
+            <End Role="Disbursement" EntitySet="Disbursements" />
             <End Role="BookingGeneratedInterestDetail" EntitySet="BookingGeneratedInterestDetails" />
-          </AssociationSet>
-          <EntitySet Name="ServiceSuppliers" EntityType="FundsDBModel.ServiceSupplier" />
-          <AssociationSet Name="FK_ServiceSupplier_Funds" Association="FundsDBModel.FK_ServiceSupplier_Funds">
-            <End Role="Fund" EntitySet="Funds" />
-            <End Role="ServiceSupplier" EntitySet="ServiceSuppliers" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccountingMovement">
@@ -3981,6 +4002,7 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <NavigationProperty Name="UnderlyingDebtor" Relationship="FundsDBModel.FK_Disbursements_UnderlyingDebtors" FromRole="Disbursement" ToRole="UnderlyingDebtor" />
           <NavigationProperty Name="DisbursementPayments" Relationship="FundsDBModel.DisbursementPaymentDetails" FromRole="Disbursement" ToRole="DisbursementPayment" />
           <NavigationProperty Name="DisbursementBookings" Relationship="FundsDBModel.FK_DisbursementBooking_Disbursement" FromRole="Disbursement" ToRole="DisbursementBooking" />
+          <NavigationProperty Name="BookingGeneratedInterestDetails" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_Disbusement" FromRole="Disbursement" ToRole="BookingGeneratedInterestDetail" />
         </EntityType>
         <Association Name="FK_Disbursements_Banks">
           <End Type="FundsDBModel.Bank" Role="Bank" Multiplicity="0..1" />
@@ -4129,8 +4151,8 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <NavigationProperty Name="Movements_Accounts128" Relationship="FundsDBModel.FK_DisbursementBooking_Movement128" FromRole="DisbursementBooking" ToRole="Movements_Accounts" />
           <NavigationProperty Name="DisbursementBook" Relationship="FundsDBModel.FK_DisbursementBooking_Book" FromRole="DisbursementBooking" ToRole="DisbursementBook" />
           <Property Name="collected" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="BookingGeneratedInterestDetails" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_Disbursements" FromRole="DisbursementBooking" ToRole="BookingGeneratedInterestDetail" />
           <Property Name="can_generate_interest" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BookingGeneratedInterestDetails" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_Booking" FromRole="DisbursementBooking" ToRole="BookingGeneratedInterestDetail" />
         </EntityType>
         <Association Name="FK_DisbursementBooking_Currency">
           <End Type="FundsDBModel.Currency" Role="Currency" Multiplicity="1" />
@@ -4321,20 +4343,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="booking_number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="currency_id" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="BookingGeneratedInterestDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="booking_generated_interest_id" Type="Int32" Nullable="false" />
-          <Property Name="booking_id" Type="Int32" Nullable="false" />
-          <Property Name="generated_interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="generated_interest_date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="accounting_movement_id" Type="Int32" />
-          <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_AccountingMovements" FromRole="BookingGeneratedInterestDetail" ToRole="AccountingMovement" />
-          <NavigationProperty Name="BookingGeneratedInterest" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests" FromRole="BookingGeneratedInterestDetail" ToRole="BookingGeneratedInterest" />
-          <NavigationProperty Name="DisbursementBooking" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_Disbursements" FromRole="BookingGeneratedInterestDetail" ToRole="DisbursementBooking" />
-        </EntityType>
         <EntityType Name="BookingGeneratedInterest">
           <Key>
             <PropertyRef Name="Id" />
@@ -4343,42 +4351,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
           <Property Name="GeneratedDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="BookingGeneratedInterestDetails" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests" FromRole="BookingGeneratedInterest" ToRole="BookingGeneratedInterestDetail" />
         </EntityType>
-        <Association Name="FK_BookingGeneratedInterestDetails_AccountingMovements">
-          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="0..1" />
-          <End Type="FundsDBModel.BookingGeneratedInterestDetail" Role="BookingGeneratedInterestDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccountingMovement">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BookingGeneratedInterestDetail">
-              <PropertyRef Name="accounting_movement_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests">
-          <End Type="FundsDBModel.BookingGeneratedInterest" Role="BookingGeneratedInterest" Multiplicity="1" />
-          <End Type="FundsDBModel.BookingGeneratedInterestDetail" Role="BookingGeneratedInterestDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BookingGeneratedInterest">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BookingGeneratedInterestDetail">
-              <PropertyRef Name="booking_generated_interest_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BookingGeneratedInterestDetails_Disbursements">
-          <End Type="FundsDBModel.DisbursementBooking" Role="DisbursementBooking" Multiplicity="1" />
-          <End Type="FundsDBModel.BookingGeneratedInterestDetail" Role="BookingGeneratedInterestDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DisbursementBooking">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="BookingGeneratedInterestDetail">
-              <PropertyRef Name="booking_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ServiceSupplier">
           <Key>
             <PropertyRef Name="Id" />
@@ -4398,6 +4370,70 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
             </Principal>
             <Dependent Role="ServiceSupplier">
               <PropertyRef Name="FK_ServiceSupplier_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BookingGeneratedInterestDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="booking_generated_interest_id" Type="Int32" Nullable="false" />
+          <Property Name="booking_id" Type="Int32" Nullable="false" />
+          <Property Name="generated_interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="generated_interest_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="accounting_movement_id" Type="Int32" />
+          <Property Name="disbursement_id" Type="Int32" />
+          <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_AccountingMovements" FromRole="BookingGeneratedInterestDetail" ToRole="AccountingMovement" />
+          <NavigationProperty Name="DisbursementBooking" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_Booking" FromRole="BookingGeneratedInterestDetail" ToRole="DisbursementBooking" />
+          <NavigationProperty Name="BookingGeneratedInterest" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests" FromRole="BookingGeneratedInterestDetail" ToRole="BookingGeneratedInterest" />
+          <NavigationProperty Name="Disbursement" Relationship="FundsDBModel.FK_BookingGeneratedInterestDetails_Disbusement" FromRole="BookingGeneratedInterestDetail" ToRole="Disbursement" />
+        </EntityType>
+        <Association Name="FK_BookingGeneratedInterestDetails_AccountingMovements">
+          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="0..1" />
+          <End Type="FundsDBModel.BookingGeneratedInterestDetail" Role="BookingGeneratedInterestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingMovement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingGeneratedInterestDetail">
+              <PropertyRef Name="accounting_movement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingGeneratedInterestDetails_Booking">
+          <End Type="FundsDBModel.DisbursementBooking" Role="DisbursementBooking" Multiplicity="1" />
+          <End Type="FundsDBModel.BookingGeneratedInterestDetail" Role="BookingGeneratedInterestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DisbursementBooking">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BookingGeneratedInterestDetail">
+              <PropertyRef Name="booking_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests">
+          <End Type="FundsDBModel.BookingGeneratedInterest" Role="BookingGeneratedInterest" Multiplicity="1" />
+          <End Type="FundsDBModel.BookingGeneratedInterestDetail" Role="BookingGeneratedInterestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingGeneratedInterest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingGeneratedInterestDetail">
+              <PropertyRef Name="booking_generated_interest_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingGeneratedInterestDetails_Disbusement">
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="0..1" />
+          <End Type="FundsDBModel.BookingGeneratedInterestDetail" Role="BookingGeneratedInterestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disbursement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingGeneratedInterestDetail">
+              <PropertyRef Name="disbursement_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4991,18 +5027,6 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BookingGeneratedInterestDetails">
-            <EntityTypeMapping TypeName="FundsDBModel.BookingGeneratedInterestDetail">
-              <MappingFragment StoreEntitySet="BookingGeneratedInterestDetails">
-                <ScalarProperty Name="accounting_movement_id" ColumnName="accounting_movement_id" />
-                <ScalarProperty Name="generated_interest_date" ColumnName="generated_interest_date" />
-                <ScalarProperty Name="generated_interest" ColumnName="generated_interest" />
-                <ScalarProperty Name="booking_id" ColumnName="booking_id" />
-                <ScalarProperty Name="booking_generated_interest_id" ColumnName="booking_generated_interest_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="BookingGeneratedInterests">
             <EntityTypeMapping TypeName="FundsDBModel.BookingGeneratedInterest">
               <MappingFragment StoreEntitySet="BookingGeneratedInterests">
@@ -5017,6 +5041,19 @@ advertencia 6002: La tabla o vista 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitS
                 <ScalarProperty Name="number" ColumnName="number" />
                 <ScalarProperty Name="FK_ServiceSupplier_Funds" ColumnName="FK_ServiceSupplier_Funds" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingGeneratedInterestDetails">
+            <EntityTypeMapping TypeName="FundsDBModel.BookingGeneratedInterestDetail">
+              <MappingFragment StoreEntitySet="BookingGeneratedInterestDetails">
+                <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
+                <ScalarProperty Name="accounting_movement_id" ColumnName="accounting_movement_id" />
+                <ScalarProperty Name="generated_interest_date" ColumnName="generated_interest_date" />
+                <ScalarProperty Name="generated_interest" ColumnName="generated_interest" />
+                <ScalarProperty Name="booking_id" ColumnName="booking_id" />
+                <ScalarProperty Name="booking_generated_interest_id" ColumnName="booking_generated_interest_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -19,12 +19,11 @@ namespace FundsManager
         int NumberIndex = 1;
         int CollectionDateIndex = 2;
         int AmountIndex = 3;
-        int DelayInterestIndex = 4;
-        int ProfitShareIndex = 5;
-        int CollectedIndex = 6;
-        int CollectTo125Index = 7;
-        int CollectTo128Index = 8;
-        int CollectTo130Index = 9;
+        int ProfitShareIndex = 4;
+        int DelayInterestIndex = 5;
+        int CollectTo125Index = 6;
+        int CollectTo128Index = 7;
+        int CollectTo130Index = 8;
 
         public DisbursementCollectionForm()
         {
@@ -92,7 +91,7 @@ namespace FundsManager
                 List<int> ids = new List<int>();
                 List<decimal> amounts = new List<decimal>();
                 List<decimal> profitShares = new List<decimal>();
-                List<decimal> collecteds = new List<decimal>();
+                List<decimal> delayInterests = new List<decimal>();
                 List<decimal> collect125 = new List<decimal>();
                 List<decimal> collect128 = new List<decimal>();
                 List<decimal> collect130 = new List<decimal>();
@@ -105,7 +104,7 @@ namespace FundsManager
                     string number = row.Cells[NumberIndex].Value.ToString();
                     decimal amount = decimal.Parse(row.Cells[AmountIndex].Value.ToString());
                     decimal profitShare = decimal.Parse(row.Cells[ProfitShareIndex].Value.ToString());
-                    decimal collected = decimal.Parse(row.Cells[CollectedIndex].Value.ToString());
+                    decimal delayInterest = decimal.Parse(row.Cells[DelayInterestIndex].Value.ToString());
                     string amountToBeCollected125Str = row.Cells[CollectTo125Index].Value != null ? row.Cells[CollectTo125Index].Value.ToString() : "0";
                     string amountToBeCollected128Str = row.Cells[CollectTo128Index].Value != null ? row.Cells[CollectTo128Index].Value.ToString() : "0";
                     string amountToBeCollected130Str = row.Cells[CollectTo130Index].Value != null ? row.Cells[CollectTo130Index].Value.ToString() : "0";
@@ -120,12 +119,12 @@ namespace FundsManager
                                 decimal.TryParse(amountToBeCollected128Str, out amountToBeCollected128) &&
                                 decimal.TryParse(amountToBeCollected130Str, out amountToBeCollected130))
                         {
-                            if (amount + profitShare - collected - amountToBeCollected125 - amountToBeCollected128 - amountToBeCollected130 >= 0)
+                            if (amount - amountToBeCollected125 >= 0 && profitShare - amountToBeCollected128 >= 0 && delayInterest - amountToBeCollected130 >= 0)
                             {
                                 ids.Add(id);
                                 amounts.Add(amount);
                                 profitShares.Add(profitShare);
-                                collecteds.Add(collected);
+                                delayInterests.Add(delayInterest);
                                 collect125.Add(amountToBeCollected125);
                                 collect128.Add(amountToBeCollected128);
                                 collect130.Add(amountToBeCollected130);
@@ -187,7 +186,7 @@ namespace FundsManager
                                     int disbId = ids[i];
                                     decimal amount = amounts[i];
                                     decimal profitShare = profitShares[i];
-                                    decimal collected = collecteds[i];
+                                    decimal delayInterest = delayInterests[i];
                                     decimal toBeCollected125 = collect125[i];
                                     decimal toBeCollected128 = collect128[i];
                                     decimal toBeCollected130 = collect130[i];
@@ -220,7 +219,7 @@ namespace FundsManager
                                                 collectionDetail.disbursement_id = disbId;
                                                 collectionDetail.amount_collected = Math.Round(toBeCollected125 + toBeCollected128 + toBeCollected130, 2);
 
-                                                if (amount + profitShare - collected - collectionDetail.amount_collected <= 0)
+                                                if (amount - toBeCollected125 <= 0 && profitShare - toBeCollected128 <= 0 && delayInterest - toBeCollected130 <= 0)
                                                 {
                                                     disb.collected = true;
                                                 }

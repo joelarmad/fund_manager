@@ -211,9 +211,9 @@ namespace FundsManager
                             if (currency != null && subacct128 != null)
                             {
                                 BookingGeneratedInterestDetail interestDetail = manager.My_db.BookingGeneratedInterestDetails.FirstOrDefault(x => x.booking_id == _delayedProfitShareToAccrue.booking_id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
-
+                                
                                 if (interestDetail == null)
-                                {     
+                                {
                                     DateTime? fromDate = getLastGeneratedInterestDateFor(_delayedProfitShareToAccrue.booking_id);
 
                                     if (fromDate == null)
@@ -268,6 +268,7 @@ namespace FundsManager
                                         _detail.booking_id = _delayedProfitShareToAccrue.booking_id;
                                         _detail.generated_interest = Math.Round(_interest, 2);
                                         _detail.generated_interest_date = toDate;
+                                        _detail.disbursement_id = _delayedProfitShareToAccrue.disbursement_id;
 
                                         manager.My_db.BookingGeneratedInterestDetails.Add(_detail);
 
