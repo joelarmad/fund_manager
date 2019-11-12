@@ -50,6 +50,7 @@
             this.disbursementidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.collection_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toBeCollected = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DelayInterest = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,6 +95,7 @@
             this.disbursementidDataGridViewTextBoxColumn,
             this.numberDataGridViewTextBoxColumn,
             this.collection_date,
+            this.amount,
             this.amountDataGridViewTextBoxColumn,
             this.toBeCollected,
             this.DelayInterest,
@@ -220,6 +222,12 @@
             this.collection_date.ReadOnly = true;
             this.collection_date.Width = 120;
             // 
+            // amount
+            // 
+            this.amount.DataPropertyName = "amount";
+            this.amount.HeaderText = "Disbursement";
+            this.amount.Name = "amount";
+            // 
             // amountDataGridViewTextBoxColumn
             // 
             this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount_remainig";
@@ -313,6 +321,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn disbursementidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn collection_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn toBeCollected;
         private System.Windows.Forms.DataGridViewTextBoxColumn DelayInterest;

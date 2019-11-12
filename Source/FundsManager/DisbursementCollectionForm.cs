@@ -18,12 +18,13 @@ namespace FundsManager
         int IdIndex = 0;
         int NumberIndex = 1;
         int CollectionDateIndex = 2;
-        int AmountIndex = 3;
-        int ProfitShareIndex = 4;
-        int DelayInterestIndex = 5;
-        int CollectTo125Index = 6;
-        int CollectTo128Index = 7;
-        int CollectTo130Index = 8;
+        int DisbursementIndex = 3;
+        int AmountIndex = 4;
+        int ProfitShareIndex = 5;
+        int DelayInterestIndex = 6;
+        int CollectTo125Index = 7;
+        int CollectTo128Index = 8;
+        int CollectTo130Index = 9;
 
         public DisbursementCollectionForm()
         {
