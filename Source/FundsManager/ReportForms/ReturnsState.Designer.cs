@@ -31,24 +31,36 @@
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            this.profitResultsViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.cmdFilter = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
-            this.profitResultsViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.profitResultsViewTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ProfitResultsViewTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.profitResultsViewBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             this.SuspendLayout();
+            // 
+            // profitResultsViewBindingSource
+            // 
+            this.profitResultsViewBindingSource.DataMember = "ProfitResultsView";
+            this.profitResultsViewBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // fundsDBDataSet
+            // 
+            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
+            this.fundsDBDataSet.EnforceConstraints = false;
+            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // reportViewer1
             // 
             reportDataSource1.Name = "DataSet1";
             reportDataSource1.Value = this.profitResultsViewBindingSource;
             reportDataSource2.Name = "DataSet2";
+            reportDataSource2.Value = null;
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource2);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "FundsManager.Reports.ProfitsState.rdlc";
@@ -101,16 +113,6 @@
             this.dtpFrom.Name = "dtpFrom";
             this.dtpFrom.Size = new System.Drawing.Size(200, 20);
             this.dtpFrom.TabIndex = 6;
-            // 
-            // profitResultsViewBindingSource
-            // 
-            this.profitResultsViewBindingSource.DataMember = "ProfitResultsView";
-            this.profitResultsViewBindingSource.DataSource = this.fundsDBDataSet;
-            // 
-            // fundsDBDataSet
-            // 
-            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
-            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // profitResultsViewTableAdapter
             // 

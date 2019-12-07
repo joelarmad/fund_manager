@@ -37,11 +37,18 @@ namespace FundsManager.ReportForms
                 DateTime from = dtpFrom.Value.Date;
                 DateTime to = dtpTo.Value;
 
-                this.profitResultsViewTableAdapter.FillByFund(this.fundsDBDataSet.ProfitResultsView, manager.Selected, from, to);
+                DateTime lastFrom = from.AddYears(-1);
+                DateTime lastTo = to.AddYears(-1);
+
+                this.profitResultsViewTableAdapter.Fill(this.fundsDBDataSet.ProfitResultsView, manager.Selected, from, to, lastFrom, lastTo);
 
                 ReportParameter language = new ReportParameter("Language", Thread.CurrentThread.CurrentCulture.Name);
+                ReportParameter current = new ReportParameter("Current", from.Year.ToString());
+                ReportParameter last = new ReportParameter("Last", lastFrom.Year.ToString());
 
                 reportViewer1.LocalReport.SetParameters(language);
+                reportViewer1.LocalReport.SetParameters(current);
+                reportViewer1.LocalReport.SetParameters(last);
 
                 reportViewer1.RefreshReport();
             }
