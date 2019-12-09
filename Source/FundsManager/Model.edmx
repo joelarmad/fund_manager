@@ -432,6 +432,8 @@
           <Property Name="fund_id" Type="int" Nullable="false" />
           <Property Name="currency_id" Type="int" Nullable="false" />
           <Property Name="accounting_movement_id" Type="int" Nullable="false" />
+          <Property Name="renegotiated" Type="bit" />
+          <Property Name="loan_origin_id" Type="int" />
         </EntityType>
         <EntityType Name="Movements_Accounts">
           <Key>
@@ -919,6 +921,8 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Loans_View' d
           <Property Name="generated_interest" Type="money" />
           <Property Name="currency_id" Type="int" Nullable="false" />
           <Property Name="currency_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="renegotiated" Type="bit" />
+          <Property Name="loan_origin_id" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.MovementsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2638,7 +2642,9 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
     [Loans_View].[end_date] AS [end_date], 
     [Loans_View].[generated_interest] AS [generated_interest], 
     [Loans_View].[currency_id] AS [currency_id], 
-    [Loans_View].[currency_name] AS [currency_name]
+    [Loans_View].[currency_name] AS [currency_name], 
+    [Loans_View].[renegotiated] AS [renegotiated], 
+    [Loans_View].[loan_origin_id] AS [loan_origin_id]
     FROM [dbo].[Loans_View] AS [Loans_View]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="MovementsView" EntityType="Self.MovementsView" store:Type="Views" store:Schema="dbo">
@@ -3240,7 +3246,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySet Name="letter_of_credits" EntityType="FundsDBModel.letter_of_credits" />
           <EntitySet Name="LoanGeneratedInterestDetails" EntityType="FundsDBModel.LoanGeneratedInterestDetail" />
           <EntitySet Name="LoanGeneratedInterests" EntityType="FundsDBModel.LoanGeneratedInterest" />
-          <EntitySet Name="Loans" EntityType="FundsDBModel.Loan" />
           <EntitySet Name="Movements_Accounts" EntityType="FundsDBModel.Movements_Accounts" />
           <EntitySet Name="OtherDetails" EntityType="FundsDBModel.OtherDetail" />
           <EntitySet Name="Resources" EntityType="FundsDBModel.Resource" />
@@ -3281,10 +3286,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <AssociationSet Name="FK_LoanGeneratedInterestDetails_AccountingMovements" Association="FundsDBModel.FK_LoanGeneratedInterestDetails_AccountingMovements">
             <End Role="AccountingMovement" EntitySet="AccountingMovements" />
             <End Role="LoanGeneratedInterestDetail" EntitySet="LoanGeneratedInterestDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Loans_Accounting_Movement" Association="FundsDBModel.FK_Loans_Accounting_Movement">
-            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
-            <End Role="Loan" EntitySet="Loans" />
           </AssociationSet>
           <AssociationSet Name="FK_Movements_Accounts_AccountingMovements" Association="FundsDBModel.FK_Movements_Accounts_AccountingMovements">
             <End Role="AccountingMovement" EntitySet="AccountingMovements" />
@@ -3438,10 +3439,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="Fund" EntitySet="Funds" />
             <End Role="Creditor" EntitySet="Creditors" />
           </AssociationSet>
-          <AssociationSet Name="FK_Loans_Creditors" Association="FundsDBModel.FK_Loans_Creditors">
-            <End Role="Creditor" EntitySet="Creditors" />
-            <End Role="Loan" EntitySet="Loans" />
-          </AssociationSet>
           <AssociationSet Name="FK_Currencies_Funds" Association="FundsDBModel.FK_Currencies_Funds">
             <End Role="Fund" EntitySet="Funds" />
             <End Role="Currency" EntitySet="Currencies" />
@@ -3453,10 +3450,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <AssociationSet Name="FK_Disbursements_Currencies" Association="FundsDBModel.FK_Disbursements_Currencies">
             <End Role="Currency" EntitySet="Currencies" />
             <End Role="Disbursement" EntitySet="Disbursements" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Loans_Currencies" Association="FundsDBModel.FK_Loans_Currencies">
-            <End Role="Currency" EntitySet="Currencies" />
-            <End Role="Loan" EntitySet="Loans" />
           </AssociationSet>
           <AssociationSet Name="FK_Disbursement_dates_Funds" Association="FundsDBModel.FK_Disbursement_dates_Funds">
             <End Role="Fund" EntitySet="Funds" />
@@ -3566,10 +3559,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="Fund" EntitySet="Funds" />
             <End Role="letter_of_credits" EntitySet="letter_of_credits" />
           </AssociationSet>
-          <AssociationSet Name="FK_Loans_Funds" Association="FundsDBModel.FK_Loans_Funds">
-            <End Role="Fund" EntitySet="Funds" />
-            <End Role="Loan" EntitySet="Loans" />
-          </AssociationSet>
           <AssociationSet Name="FK_Movements_Accounts_Funds" Association="FundsDBModel.FK_Movements_Accounts_Funds">
             <End Role="Fund" EntitySet="Funds" />
             <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
@@ -3610,10 +3599,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="letter_of_credits" EntitySet="letter_of_credits" />
             <End Role="Shipment" EntitySet="Shipments" />
           </AssociationSet>
-          <AssociationSet Name="FK_LoanGeneratedInterestDetails_Loan" Association="FundsDBModel.FK_LoanGeneratedInterestDetails_Loan">
-            <End Role="Loan" EntitySet="Loans" />
-            <End Role="LoanGeneratedInterestDetail" EntitySet="LoanGeneratedInterestDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_LoanGeneratedInterestDetails_LoanGeneratedInterests" Association="FundsDBModel.FK_LoanGeneratedInterestDetails_LoanGeneratedInterests">
             <End Role="LoanGeneratedInterest" EntitySet="LoanGeneratedInterests" />
             <End Role="LoanGeneratedInterestDetail" EntitySet="LoanGeneratedInterestDetails" />
@@ -3641,7 +3626,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySet Name="DisbursementsForAddendums" EntityType="FundsDBModel.DisbursementsForAddendum" />
           <EntitySet Name="DisbursementsToBeCollecteds" EntityType="FundsDBModel.DisbursementsToBeCollected" />
           <EntitySet Name="InvestmentsViews" EntityType="FundsDBModel.InvestmentsView" />
-          <EntitySet Name="Loans_View" EntityType="FundsDBModel.Loans_View" />
           <EntitySet Name="MovementsViews" EntityType="FundsDBModel.MovementsView" />
           <EntitySet Name="ProfitResultsViews" EntityType="FundsDBModel.ProfitResultsView" />
           <EntitySet Name="ProfitShareToAccrues" EntityType="FundsDBModel.ProfitShareToAccrue" />
@@ -3659,9 +3643,31 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="AccountingMovement" EntitySet="AccountingMovements" />
             <End Role="Loan_Repayments" EntitySet="Loan_Repayments" />
           </AssociationSet>
+          <EntitySet Name="Loans" EntityType="FundsDBModel.Loan" />
+          <EntitySet Name="Loans_View" EntityType="FundsDBModel.Loans_View" />
+          <AssociationSet Name="FK_Loans_Accounting_Movement" Association="FundsDBModel.FK_Loans_Accounting_Movement">
+            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
+            <End Role="Loan" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Loans_Creditors" Association="FundsDBModel.FK_Loans_Creditors">
+            <End Role="Creditor" EntitySet="Creditors" />
+            <End Role="Loan" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Loans_Currencies" Association="FundsDBModel.FK_Loans_Currencies">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="Loan" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Loans_Funds" Association="FundsDBModel.FK_Loans_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Loan" EntitySet="Loans" />
+          </AssociationSet>
           <AssociationSet Name="FK_Loan_Repayments_Loan" Association="FundsDBModel.FK_Loan_Repayments_Loan">
             <End Role="Loan" EntitySet="Loans" />
             <End Role="Loan_Repayments" EntitySet="Loan_Repayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoanGeneratedInterestDetails_Loan" Association="FundsDBModel.FK_LoanGeneratedInterestDetails_Loan">
+            <End Role="Loan" EntitySet="Loans" />
+            <End Role="LoanGeneratedInterestDetail" EntitySet="LoanGeneratedInterestDetails" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccountingMovement">
@@ -3684,9 +3690,9 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="DisbursementGeneratedInterestDetails" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_AccountingMovements" FromRole="AccountingMovement" ToRole="DisbursementGeneratedInterestDetail" />
           <NavigationProperty Name="DisbursementPayments" Relationship="FundsDBModel.FK_DisbursementPayments_AccountingMovements" FromRole="AccountingMovement" ToRole="DisbursementPayment" />
           <NavigationProperty Name="LoanGeneratedInterestDetails" Relationship="FundsDBModel.FK_LoanGeneratedInterestDetails_AccountingMovements" FromRole="AccountingMovement" ToRole="LoanGeneratedInterestDetail" />
-          <NavigationProperty Name="Loans" Relationship="FundsDBModel.FK_Loans_Accounting_Movement" FromRole="AccountingMovement" ToRole="Loan" />
           <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_AccountingMovements" FromRole="AccountingMovement" ToRole="Movements_Accounts" />
           <NavigationProperty Name="Loan_Repayments" Relationship="FundsDBModel.FK_Loan_Repayments_AccountingMovements" FromRole="AccountingMovement" ToRole="Loan_Repayments" />
+          <NavigationProperty Name="Loans" Relationship="FundsDBModel.FK_Loans_Accounting_Movement" FromRole="AccountingMovement" ToRole="Loan" />
         </EntityType>
         <EntityType Name="Account">
           <Key>
@@ -4120,7 +4126,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="Investors" Relationship="FundsDBModel.FK_Investors_Funds" FromRole="Fund" ToRole="Investor" />
           <NavigationProperty Name="Items" Relationship="FundsDBModel.FK_Items_Funds" FromRole="Fund" ToRole="Item" />
           <NavigationProperty Name="letter_of_credits" Relationship="FundsDBModel.FK_letter_of_credits_Funds" FromRole="Fund" ToRole="letter_of_credits" />
-          <NavigationProperty Name="Loans" Relationship="FundsDBModel.FK_Loans_Funds" FromRole="Fund" ToRole="Loan" />
           <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_Funds" FromRole="Fund" ToRole="Movements_Accounts" />
           <NavigationProperty Name="OtherDetails" Relationship="FundsDBModel.FK_OtherDetails_Funds" FromRole="Fund" ToRole="OtherDetail" />
           <NavigationProperty Name="Resources" Relationship="FundsDBModel.FK_Resources_Fund" FromRole="Fund" ToRole="Resource" />
@@ -4129,6 +4134,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="Shareholders" Relationship="FundsDBModel.FK_Shareholders_Funds" FromRole="Fund" ToRole="Shareholder" />
           <NavigationProperty Name="Subaccounts" Relationship="FundsDBModel.FK_Subaccounts_Funds" FromRole="Fund" ToRole="Subaccount" />
           <NavigationProperty Name="UnderlyingDebtors" Relationship="FundsDBModel.FK_UnderlyingDebtors_Funds" FromRole="Fund" ToRole="UnderlyingDebtor" />
+          <NavigationProperty Name="Loans" Relationship="FundsDBModel.FK_Loans_Funds" FromRole="Fund" ToRole="Loan" />
         </EntityType>
         <EntityType Name="Investment">
           <Key>
@@ -4207,8 +4213,8 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="generated_interest_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="accounting_movement_id" Type="Int32" />
           <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_LoanGeneratedInterestDetails_AccountingMovements" FromRole="LoanGeneratedInterestDetail" ToRole="AccountingMovement" />
-          <NavigationProperty Name="Loan" Relationship="FundsDBModel.FK_LoanGeneratedInterestDetails_Loan" FromRole="LoanGeneratedInterestDetail" ToRole="Loan" />
           <NavigationProperty Name="LoanGeneratedInterest" Relationship="FundsDBModel.FK_LoanGeneratedInterestDetails_LoanGeneratedInterests" FromRole="LoanGeneratedInterestDetail" ToRole="LoanGeneratedInterest" />
+          <NavigationProperty Name="Loan" Relationship="FundsDBModel.FK_LoanGeneratedInterestDetails_Loan" FromRole="LoanGeneratedInterestDetail" ToRole="Loan" />
         </EntityType>
         <EntityType Name="LoanGeneratedInterest">
           <Key>
@@ -4217,27 +4223,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GeneratedDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="LoanGeneratedInterestDetails" Relationship="FundsDBModel.FK_LoanGeneratedInterestDetails_LoanGeneratedInterests" FromRole="LoanGeneratedInterest" ToRole="LoanGeneratedInterestDetail" />
-        </EntityType>
-        <EntityType Name="Loan">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="lender_id" Type="Int32" Nullable="false" />
-          <Property Name="interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="reference" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="start" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="end" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="fund_id" Type="Int32" Nullable="false" />
-          <Property Name="currency_id" Type="Int32" Nullable="false" />
-          <Property Name="accounting_movement_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_Loans_Accounting_Movement" FromRole="Loan" ToRole="AccountingMovement" />
-          <NavigationProperty Name="Creditor" Relationship="FundsDBModel.FK_Loans_Creditors" FromRole="Loan" ToRole="Creditor" />
-          <NavigationProperty Name="Currency" Relationship="FundsDBModel.FK_Loans_Currencies" FromRole="Loan" ToRole="Currency" />
-          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Loans_Funds" FromRole="Loan" ToRole="Fund" />
-          <NavigationProperty Name="LoanGeneratedInterestDetails" Relationship="FundsDBModel.FK_LoanGeneratedInterestDetails_Loan" FromRole="Loan" ToRole="LoanGeneratedInterestDetail" />
-          <NavigationProperty Name="Loan_Repayments" Relationship="FundsDBModel.FK_Loan_Repayments_Loan" FromRole="Loan" ToRole="Loan_Repayments" />
         </EntityType>
         <EntityType Name="Movements_Accounts">
           <Key>
@@ -4452,18 +4437,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="LoanGeneratedInterestDetail">
-              <PropertyRef Name="accounting_movement_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Loans_Accounting_Movement">
-          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="1" />
-          <End Type="FundsDBModel.Loan" Role="Loan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccountingMovement">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Loan">
               <PropertyRef Name="accounting_movement_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -4924,18 +4897,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Loans_Creditors">
-          <End Type="FundsDBModel.Creditor" Role="Creditor" Multiplicity="1" />
-          <End Type="FundsDBModel.Loan" Role="Loan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Creditor">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Loan">
-              <PropertyRef Name="lender_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Currencies_Funds">
           <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
           <End Type="FundsDBModel.Currency" Role="Currency" Multiplicity="*" />
@@ -4968,18 +4929,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Disbursement">
-              <PropertyRef Name="currency_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Loans_Currencies">
-          <End Type="FundsDBModel.Currency" Role="Currency" Multiplicity="1" />
-          <End Type="FundsDBModel.Loan" Role="Loan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Currency">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Loan">
               <PropertyRef Name="currency_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -5308,18 +5257,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Loans_Funds">
-          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
-          <End Type="FundsDBModel.Loan" Role="Loan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Fund">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Loan">
-              <PropertyRef Name="fund_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Movements_Accounts_Funds">
           <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
           <End Type="FundsDBModel.Movements_Accounts" Role="Movements_Accounts" Multiplicity="*" />
@@ -5437,18 +5374,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Principal>
             <Dependent Role="Shipment">
               <PropertyRef Name="LetterOfCreditId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LoanGeneratedInterestDetails_Loan">
-          <End Type="FundsDBModel.Loan" Role="Loan" Multiplicity="1" />
-          <End Type="FundsDBModel.LoanGeneratedInterestDetail" Role="LoanGeneratedInterestDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Loan">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LoanGeneratedInterestDetail">
-              <PropertyRef Name="loan_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5835,33 +5760,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="collected_amount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="has_bookings" Type="Boolean" />
         </EntityType>
-        <EntityType Name="Loans_View">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="fund_id" />
-            <PropertyRef Name="lender_id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="interest" />
-            <PropertyRef Name="amount" />
-            <PropertyRef Name="reference" />
-            <PropertyRef Name="start_date" />
-            <PropertyRef Name="end_date" />
-            <PropertyRef Name="currency_id" />
-            <PropertyRef Name="currency_name" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="fund_id" Type="Int32" Nullable="false" />
-          <Property Name="lender_id" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="reference" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="generated_interest" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="currency_id" Type="Int32" Nullable="false" />
-          <Property Name="currency_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="MovementsView">
           <Key>
             <PropertyRef Name="FundId" />
@@ -6125,6 +6023,106 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Loan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lender_id" Type="Int32" Nullable="false" />
+          <Property Name="interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="reference" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fund_id" Type="Int32" Nullable="false" />
+          <Property Name="currency_id" Type="Int32" Nullable="false" />
+          <Property Name="accounting_movement_id" Type="Int32" Nullable="false" />
+          <Property Name="renegotiated" Type="Boolean" />
+          <Property Name="loan_origin_id" Type="Int32" />
+          <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_Loans_Accounting_Movement" FromRole="Loan" ToRole="AccountingMovement" />
+          <NavigationProperty Name="Creditor" Relationship="FundsDBModel.FK_Loans_Creditors" FromRole="Loan" ToRole="Creditor" />
+          <NavigationProperty Name="Currency" Relationship="FundsDBModel.FK_Loans_Currencies" FromRole="Loan" ToRole="Currency" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Loans_Funds" FromRole="Loan" ToRole="Fund" />
+          <NavigationProperty Name="Loan_Repayments" Relationship="FundsDBModel.FK_Loan_Repayments_Loan" FromRole="Loan" ToRole="Loan_Repayments" />
+          <NavigationProperty Name="LoanGeneratedInterestDetails" Relationship="FundsDBModel.FK_LoanGeneratedInterestDetails_Loan" FromRole="Loan" ToRole="LoanGeneratedInterestDetail" />
+        </EntityType>
+        <EntityType Name="Loans_View">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="fund_id" />
+            <PropertyRef Name="lender_id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="interest" />
+            <PropertyRef Name="amount" />
+            <PropertyRef Name="reference" />
+            <PropertyRef Name="start_date" />
+            <PropertyRef Name="end_date" />
+            <PropertyRef Name="currency_id" />
+            <PropertyRef Name="currency_name" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="fund_id" Type="Int32" Nullable="false" />
+          <Property Name="lender_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="reference" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="generated_interest" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="currency_id" Type="Int32" Nullable="false" />
+          <Property Name="currency_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="renegotiated" Type="Boolean" />
+          <Property Name="loan_origin_id" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Loans_Accounting_Movement">
+          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="1" />
+          <End Type="FundsDBModel.Loan" Role="Loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingMovement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loan">
+              <PropertyRef Name="accounting_movement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Loans_Creditors">
+          <End Type="FundsDBModel.Creditor" Role="Creditor" Multiplicity="1" />
+          <End Type="FundsDBModel.Loan" Role="Loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Creditor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loan">
+              <PropertyRef Name="lender_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Loans_Currencies">
+          <End Type="FundsDBModel.Currency" Role="Currency" Multiplicity="1" />
+          <End Type="FundsDBModel.Loan" Role="Loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loan">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Loans_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Loan" Role="Loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loan">
+              <PropertyRef Name="fund_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Loan_Repayments_Loan">
           <End Type="FundsDBModel.Loan" Role="Loan" Multiplicity="1" />
           <End Type="FundsDBModel.Loan_Repayments" Role="Loan_Repayments" Multiplicity="*" />
@@ -6133,6 +6131,18 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Loan_Repayments">
+              <PropertyRef Name="loan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoanGeneratedInterestDetails_Loan">
+          <End Type="FundsDBModel.Loan" Role="Loan" Multiplicity="1" />
+          <End Type="FundsDBModel.LoanGeneratedInterestDetail" Role="LoanGeneratedInterestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoanGeneratedInterestDetail">
               <PropertyRef Name="loan_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -6574,22 +6584,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Loans">
-            <EntityTypeMapping TypeName="FundsDBModel.Loan">
-              <MappingFragment StoreEntitySet="Loans">
-                <ScalarProperty Name="accounting_movement_id" ColumnName="accounting_movement_id" />
-                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
-                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
-                <ScalarProperty Name="end" ColumnName="end" />
-                <ScalarProperty Name="start" ColumnName="start" />
-                <ScalarProperty Name="reference" ColumnName="reference" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="interest" ColumnName="interest" />
-                <ScalarProperty Name="lender_id" ColumnName="lender_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Movements_Accounts">
             <EntityTypeMapping TypeName="FundsDBModel.Movements_Accounts">
               <MappingFragment StoreEntitySet="Movements_Accounts">
@@ -6937,24 +6931,6 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Loans_View">
-            <EntityTypeMapping TypeName="FundsDBModel.Loans_View">
-              <MappingFragment StoreEntitySet="Loans_View">
-                <ScalarProperty Name="currency_name" ColumnName="currency_name" />
-                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
-                <ScalarProperty Name="generated_interest" ColumnName="generated_interest" />
-                <ScalarProperty Name="end_date" ColumnName="end_date" />
-                <ScalarProperty Name="start_date" ColumnName="start_date" />
-                <ScalarProperty Name="reference" ColumnName="reference" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="interest" ColumnName="interest" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="lender_id" ColumnName="lender_id" />
-                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="MovementsViews">
             <EntityTypeMapping TypeName="FundsDBModel.MovementsView">
               <MappingFragment StoreEntitySet="MovementsView">
@@ -7149,6 +7125,44 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
                 <ScalarProperty Name="accounting_movement_id" ColumnName="accounting_movement_id" />
                 <ScalarProperty Name="repayment_date" ColumnName="repayment_date" />
                 <ScalarProperty Name="loan_id" ColumnName="loan_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loans">
+            <EntityTypeMapping TypeName="FundsDBModel.Loan">
+              <MappingFragment StoreEntitySet="Loans">
+                <ScalarProperty Name="loan_origin_id" ColumnName="loan_origin_id" />
+                <ScalarProperty Name="renegotiated" ColumnName="renegotiated" />
+                <ScalarProperty Name="accounting_movement_id" ColumnName="accounting_movement_id" />
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
+                <ScalarProperty Name="end" ColumnName="end" />
+                <ScalarProperty Name="start" ColumnName="start" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="interest" ColumnName="interest" />
+                <ScalarProperty Name="lender_id" ColumnName="lender_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loans_View">
+            <EntityTypeMapping TypeName="FundsDBModel.Loans_View">
+              <MappingFragment StoreEntitySet="Loans_View">
+                <ScalarProperty Name="loan_origin_id" ColumnName="loan_origin_id" />
+                <ScalarProperty Name="renegotiated" ColumnName="renegotiated" />
+                <ScalarProperty Name="currency_name" ColumnName="currency_name" />
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+                <ScalarProperty Name="generated_interest" ColumnName="generated_interest" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="interest" ColumnName="interest" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="lender_id" ColumnName="lender_id" />
+                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
