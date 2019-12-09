@@ -73,7 +73,8 @@ namespace FundsManager
 
                             fProfitShare = fProfitShareRemainig;
 
-                            fAmountRemaining = toBeCollected.amount + toBeCollected.profit_share - toBeCollected.collected.Value - fProfitShareRemainig;
+                            fAmountRemaining = toBeCollected.amount + toBeCollected.profit_share + 
+                                - (toBeCollected.amount_collected.Value + toBeCollected.profit_share_collected.Value) - fProfitShareRemainig;
 
                             fAmount = fAmountRemaining;
 
@@ -748,9 +749,9 @@ namespace FundsManager
                         return;
                     }
 
-                    BookToEdit.Movements_Accounts125.credit = fAmount;
+                    BookToEdit.Movements_Accounts.credit = fAmount;
                     //BookToEdit.Movements_Accounts128.credit = fDelayedInterest;
-                    BookToEdit.Movements_Accounts128.credit = fProfitShare;
+                    BookToEdit.Movements_Accounts1.credit = fProfitShare;
 
                 }
                 else
@@ -835,14 +836,14 @@ namespace FundsManager
 
                     manager.My_db.Movements_Accounts.Add(_maccount128);
 
-                    _book.Movements_Accounts125 = _maccount125;
-                    _book.Movements_Accounts128 = _maccount128;
+                    _book.Movements_Accounts = _maccount125;
+                    _book.Movements_Accounts1 = _maccount128;
                 }
 
                 foreach (DisbursementBooking bookingToDelete in toDelete)
                 {
-                    manager.My_db.Movements_Accounts.Remove(bookingToDelete.Movements_Accounts125);
-                    manager.My_db.Movements_Accounts.Remove(bookingToDelete.Movements_Accounts128);
+                    manager.My_db.Movements_Accounts.Remove(bookingToDelete.Movements_Accounts);
+                    manager.My_db.Movements_Accounts.Remove(bookingToDelete.Movements_Accounts1);
 
                     manager.My_db.DisbursementBookings.Remove(bookingToDelete);
                 }
@@ -918,15 +919,15 @@ namespace FundsManager
 
                         manager.My_db.Movements_Accounts.Add(_maccount128);
 
-                        _booking.Movements_Accounts125 = _maccount125;
-                        _booking.Movements_Accounts128 = _maccount128;
+                        _booking.Movements_Accounts = _maccount125;
+                        _booking.Movements_Accounts1 = _maccount128;
 
                         manager.My_db.DisbursementBookings.Add(_booking);
                     }
                     else
                     {
-                        _booking.Movements_Accounts125.debit = _booking.amount;
-                        _booking.Movements_Accounts128.debit = _booking.profit_share;
+                        _booking.Movements_Accounts.debit = _booking.amount;
+                        _booking.Movements_Accounts1.debit = _booking.profit_share;
                     }
                 }
 

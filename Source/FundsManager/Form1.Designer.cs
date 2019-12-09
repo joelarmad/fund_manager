@@ -50,6 +50,7 @@
             this.shareholdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.letterOfCreditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shipmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serviceSuppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bondsToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,7 +73,11 @@
             this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.serviceSuppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loanInterestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.repaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loanRenegotiationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -249,13 +254,21 @@
             this.shipmentsToolStripMenuItem.Text = "Shipments";
             this.shipmentsToolStripMenuItem.Click += new System.EventHandler(this.shipmentsToolStripMenuItem_Click);
             // 
+            // serviceSuppliersToolStripMenuItem
+            // 
+            this.serviceSuppliersToolStripMenuItem.Name = "serviceSuppliersToolStripMenuItem";
+            this.serviceSuppliersToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.serviceSuppliersToolStripMenuItem.Text = "Service Suppliers";
+            this.serviceSuppliersToolStripMenuItem.Click += new System.EventHandler(this.serviceSuppliersToolStripMenuItem_Click);
+            // 
             // operationsToolStripMenuItem
             // 
             this.operationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.movementToolStripMenuItem,
             this.bondsToolStripMenuItem2,
             this.investmentsToolStripMenuItem,
-            this.unknownRoutineToolStripMenuItem});
+            this.unknownRoutineToolStripMenuItem,
+            this.loanToolStripMenuItem});
             this.operationsToolStripMenuItem.Name = "operationsToolStripMenuItem";
             this.operationsToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
             this.operationsToolStripMenuItem.Text = "Operations";
@@ -421,12 +434,44 @@
             this.returnsStateToolStripMenuItem.Text = "Profit && Loss Statement";
             this.returnsStateToolStripMenuItem.Click += new System.EventHandler(this.returnsStateToolStripMenuItem_Click);
             // 
-            // serviceSuppliersToolStripMenuItem
+            // loanToolStripMenuItem
             // 
-            this.serviceSuppliersToolStripMenuItem.Name = "serviceSuppliersToolStripMenuItem";
-            this.serviceSuppliersToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.serviceSuppliersToolStripMenuItem.Text = "Service Suppliers";
-            this.serviceSuppliersToolStripMenuItem.Click += new System.EventHandler(this.serviceSuppliersToolStripMenuItem_Click);
+            this.loanToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createToolStripMenuItem,
+            this.loanInterestToolStripMenuItem,
+            this.repaymentToolStripMenuItem,
+            this.loanRenegotiationToolStripMenuItem});
+            this.loanToolStripMenuItem.Name = "loanToolStripMenuItem";
+            this.loanToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.loanToolStripMenuItem.Text = "Loan";
+            // 
+            // createToolStripMenuItem
+            // 
+            this.createToolStripMenuItem.Name = "createToolStripMenuItem";
+            this.createToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.createToolStripMenuItem.Text = "Create";
+            this.createToolStripMenuItem.Click += new System.EventHandler(this.createToolStripMenuItem_Click);
+            // 
+            // loanInterestToolStripMenuItem
+            // 
+            this.loanInterestToolStripMenuItem.Name = "loanInterestToolStripMenuItem";
+            this.loanInterestToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.loanInterestToolStripMenuItem.Text = "Loan Interest";
+            this.loanInterestToolStripMenuItem.Click += new System.EventHandler(this.loanInterestToolStripMenuItem_Click);
+            // 
+            // repaymentToolStripMenuItem
+            // 
+            this.repaymentToolStripMenuItem.Name = "repaymentToolStripMenuItem";
+            this.repaymentToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.repaymentToolStripMenuItem.Text = "Repayment";
+            this.repaymentToolStripMenuItem.Click += new System.EventHandler(this.repaymentToolStripMenuItem_Click);
+            // 
+            // loanRenegotiationToolStripMenuItem
+            // 
+            this.loanRenegotiationToolStripMenuItem.Name = "loanRenegotiationToolStripMenuItem";
+            this.loanRenegotiationToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.loanRenegotiationToolStripMenuItem.Text = "Loan Renegotiation";
+            this.loanRenegotiationToolStripMenuItem.Click += new System.EventHandler(this.loanRenegotiationToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -498,6 +543,11 @@
         private System.Windows.Forms.ToolStripMenuItem booksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unknownRoutineToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem serviceSuppliersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loanInterestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem repaymentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loanRenegotiationToolStripMenuItem;
     }
 }
 

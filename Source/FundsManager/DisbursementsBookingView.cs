@@ -25,6 +25,7 @@ namespace FundsManager
         public int disbursement_id { get; set; }
         public string disbursement_number { get; set; }
         public Nullable<System.DateTime> disbursement_pay_date { get; set; }
+        public int currency_id { get; set; }
         public decimal amount { get; set; }
         public float exchange_rate { get; set; }
         public decimal profit_share { get; set; }
@@ -42,6 +43,7 @@ namespace FundsManager
         public Nullable<decimal> collected_amount { get; set; }
         public Nullable<bool> has_bookings { get; set; }
         public int book_id { get; set; }
+        public string booking_number { get; set; }
         public System.DateTime book_date { get; set; }
         public int accounting_movement_id { get; set; }
         public int book_movement125_id { get; set; }
@@ -55,7 +57,5 @@ namespace FundsManager
         public int movement125_id { get; set; }
         public int movement128_id { get; set; }
         public bool is_booking_collected { get; set; }
-        public string booking_number { get; set; }
-        public int currency_id { get; set; }
     }
 }

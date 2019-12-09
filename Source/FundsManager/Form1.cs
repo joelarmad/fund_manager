@@ -331,5 +331,37 @@ namespace FundsManager
             form.MdiParent = this;
             form.Show();
         }
+
+        private void createToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            LoanCreate form = new LoanCreate();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void loanInterestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            LoanInterest form = new LoanInterest();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void repaymentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            LoanRepayment form = new LoanRepayment();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void loanRenegotiationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            LoanRenegotiation form = new LoanRenegotiation();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }

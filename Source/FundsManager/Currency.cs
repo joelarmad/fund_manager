@@ -19,8 +19,9 @@ namespace FundsManager
         {
             this.AccountingMovements = new HashSet<AccountingMovement>();
             this.BankingAccounts = new HashSet<BankingAccount>();
-            this.Disbursements = new HashSet<Disbursement>();
             this.DisbursementBookings = new HashSet<DisbursementBooking>();
+            this.Disbursements = new HashSet<Disbursement>();
+            this.Loans = new HashSet<Loan>();
         }
     
         public int Id { get; set; }
@@ -35,8 +36,10 @@ namespace FundsManager
         public virtual ICollection<BankingAccount> BankingAccounts { get; set; }
         public virtual Fund Fund { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementBooking> DisbursementBookings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disbursement> Disbursements { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DisbursementBooking> DisbursementBookings { get; set; }
+        public virtual ICollection<Loan> Loans { get; set; }
     }
 }

@@ -259,7 +259,7 @@ namespace FundsManager
 
                                                 manager.My_db.Movements_Accounts.Add(_maccount125);
 
-                                                collectionDetail.Movements_Accounts_125 = _maccount125;
+                                                collectionDetail.Movements_Accounts = _maccount125;
 
                                                 Movements_Accounts _maccount128 = new Movements_Accounts();
 
@@ -293,7 +293,7 @@ namespace FundsManager
 
                                                 manager.My_db.Movements_Accounts.Add(_maccount128);
 
-                                                collectionDetail.Movements_Accounts_128 = _maccount128;
+                                                collectionDetail.Movements_Accounts1 = _maccount128;
 
                                                 Movements_Accounts _maccount130 = new Movements_Accounts();
 
@@ -327,7 +327,7 @@ namespace FundsManager
 
                                                 manager.My_db.Movements_Accounts.Add(_maccount130);
 
-                                                collectionDetail.Movements_Accounts_130 = _maccount130;
+                                                collectionDetail.Movements_Accounts2 = _maccount130;
 
                                                 totalPaid += toBeCollected125 + toBeCollected128 + toBeCollected130;
 

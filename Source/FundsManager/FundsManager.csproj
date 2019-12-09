@@ -97,6 +97,9 @@
     <Compile Include="Account.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="AccountBalanceView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="AccountingMovement.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -134,6 +137,9 @@
     <Compile Include="AddendumsForm.Designer.cs">
       <DependentUpon>AddendumsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="BalanceResumeView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Bank.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -153,6 +159,9 @@
       <DependentUpon>BanksForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Bond.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BondDetail.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="BondPayments.cs">
@@ -182,6 +191,9 @@
     <Compile Include="BookingGeneratedInterestDetail.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="BookingGeneratedInterestView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="BookReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +210,9 @@
     <Compile Include="Classes\Utilities\ErrorMessage.cs" />
     <Compile Include="Classes\Utilities\KeyDefinitions.cs" />
     <Compile Include="Client.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientContract.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ClientsForm.cs">
@@ -260,11 +275,17 @@
     <Compile Include="DisbursementCollectionsDetail.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DisbursementCollectionView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DisbursementForInvestement.cs" />
     <Compile Include="DisbursementGeneratedInterest.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DisbursementGeneratedInterestDetail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DisbursementGeneratedInterestView.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DisbursementItem.cs">
@@ -274,6 +295,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DisbursementsBookingView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DisbursementsForAddendum.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DisbursementsForm.cs">
@@ -362,6 +386,9 @@
     <Compile Include="InvestmentsForm.Designer.cs">
       <DependentUpon>InvestmentsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InvestmentsView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Investor.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -393,6 +420,45 @@
     <Compile Include="letter_of_credits.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Loan.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoanCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoanCreate.Designer.cs">
+      <DependentUpon>LoanCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoanGeneratedInterest.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoanGeneratedInterestDetail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoanInterest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoanInterest.Designer.cs">
+      <DependentUpon>LoanInterest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoanRenegotiation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoanRenegotiation.Designer.cs">
+      <DependentUpon>LoanRenegotiation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoanRepayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoanRepayment.Designer.cs">
+      <DependentUpon>LoanRepayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Loans_View.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Loan_Repayments.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -415,6 +481,9 @@
     <Compile Include="MovementReportForm.Designer.cs">
       <DependentUpon>MovementReportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MovementsView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Movements_Accounts.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -428,20 +497,26 @@
     <Compile Include="OtherDetailsForm.Designer.cs">
       <DependentUpon>OtherDetailsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProfitShareToAccrue.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="DelayInterestToAccrueForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DelayInterestToAccrueForm.Designer.cs">
       <DependentUpon>DelayInterestToAccrueForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProfitResultsView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfitShareToAccrue.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProfitShareToAccrueForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ProfitShareToAccrueForm.Designer.cs">
       <DependentUpon>ProfitShareToAccrueForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProfitsResumeView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -530,11 +605,32 @@
     <Compile Include="Subaccount.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="SubAccountBalance.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="SubaccountsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SubaccountsForm.Designer.cs">
       <DependentUpon>SubaccountsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Template_Balance_Sheet.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Template_Profit_Loss.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TotalAsset.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TotalExpense.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TotalIncome.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TotalLiability.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="UnderlyingDebtor.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -550,6 +646,9 @@
     </Compile>
     <Compile Include="UnknownRoutine.Designer.cs">
       <DependentUpon>UnknownRoutine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnlinkedDisbursement.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AccountsForm.resx">
       <DependentUpon>AccountsForm.cs</DependentUpon>
@@ -634,6 +733,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LetterOfCreditForm.resx">
       <DependentUpon>LetterOfCreditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoanCreate.resx">
+      <DependentUpon>LoanCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoanInterest.resx">
+      <DependentUpon>LoanInterest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoanRenegotiation.resx">
+      <DependentUpon>LoanRenegotiation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoanRepayment.resx">
+      <DependentUpon>LoanRepayment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MovementReportForm.resx">
       <DependentUpon>MovementReportForm.cs</DependentUpon>

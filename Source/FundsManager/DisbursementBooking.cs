@@ -36,12 +36,12 @@ namespace FundsManager
         public bool collected { get; set; }
         public bool can_generate_interest { get; set; }
     
-        public virtual Currency Currency { get; set; }
-        public virtual Disbursement Disbursement { get; set; }
-        public virtual Movements_Accounts Movements_Accounts125 { get; set; }
-        public virtual Movements_Accounts Movements_Accounts128 { get; set; }
-        public virtual DisbursementBook DisbursementBook { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookingGeneratedInterestDetail> BookingGeneratedInterestDetails { get; set; }
+        public virtual Currency Currency { get; set; }
+        public virtual DisbursementBook DisbursementBook { get; set; }
+        public virtual Disbursement Disbursement { get; set; }
+        public virtual Movements_Accounts Movements_Accounts { get; set; }
+        public virtual Movements_Accounts Movements_Accounts1 { get; set; }
     }
 }

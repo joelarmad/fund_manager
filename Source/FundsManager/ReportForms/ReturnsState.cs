@@ -24,7 +24,6 @@ namespace FundsManager.ReportForms
 
         private void ReturnsState_Load(object sender, EventArgs e)
         {
-            dtpFrom.Value = new DateTime(DateTime.Now.Year, 1, 1);
             dtpTo.Value = DateTime.Now.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
 
             refreshData();
@@ -34,8 +33,9 @@ namespace FundsManager.ReportForms
         {
             try
             {
-                DateTime from = dtpFrom.Value.Date;
+
                 DateTime to = dtpTo.Value;
+                DateTime from = new DateTime(to.Year, 1, 1, 0, 0, 0);
 
                 DateTime lastFrom = from.AddYears(-1);
                 DateTime lastTo = to.AddYears(-1);

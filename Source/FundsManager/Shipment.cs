@@ -25,8 +25,8 @@ namespace FundsManager
         public string Number { get; set; }
         public Nullable<decimal> Value { get; set; }
     
-        public virtual letter_of_credits letter_of_credits { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disbursement> Disbursements { get; set; }
+        public virtual letter_of_credits letter_of_credits { get; set; }
     }
 }

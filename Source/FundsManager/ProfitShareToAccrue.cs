@@ -32,7 +32,7 @@ namespace FundsManager
         public bool can_generate_interest { get; set; }
         public Nullable<int> shipment_id { get; set; }
         public Nullable<bool> collected { get; set; }
-        public string contract { get; set; }
         public Nullable<bool> has_bookings { get; set; }
+        public string contract { get; set; }
     }
 }

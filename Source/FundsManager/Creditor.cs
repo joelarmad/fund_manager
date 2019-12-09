@@ -18,6 +18,7 @@ namespace FundsManager
         public Creditor()
         {
             this.AccountsCreditors = new HashSet<AccountsCreditor>();
+            this.Loans = new HashSet<Loan>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,7 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountsCreditor> AccountsCreditors { get; set; }
         public virtual Fund Fund { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Loan> Loans { get; set; }
     }
 }

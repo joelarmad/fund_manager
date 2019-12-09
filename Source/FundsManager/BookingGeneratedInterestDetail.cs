@@ -23,8 +23,8 @@ namespace FundsManager
         public Nullable<int> disbursement_id { get; set; }
     
         public virtual AccountingMovement AccountingMovement { get; set; }
-        public virtual DisbursementBooking DisbursementBooking { get; set; }
         public virtual BookingGeneratedInterest BookingGeneratedInterest { get; set; }
+        public virtual DisbursementBooking DisbursementBooking { get; set; }
         public virtual Disbursement Disbursement { get; set; }
     }
 }

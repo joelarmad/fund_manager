@@ -123,6 +123,14 @@ namespace FundsManager
             My_db.SaveChanges();
         }
 
+        public void DeleteLoan(int _id)
+        {
+            Loan _loan = new Loan();
+            _loan = My_db.Loans.Find(_id);
+            My_db.Loans.Remove(_loan);
+            My_db.SaveChanges();
+        }
+
         public void DeleteShipment(int _id)
         {
             Shipment _shipment = new Shipment();
