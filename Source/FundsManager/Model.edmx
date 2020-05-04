@@ -434,6 +434,7 @@
           <Property Name="accounting_movement_id" Type="int" Nullable="false" />
           <Property Name="renegotiated" Type="bit" />
           <Property Name="loan_origin_id" Type="int" />
+          <Property Name="interest_base" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Movements_Accounts">
           <Key>
@@ -529,7 +530,7 @@
           <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.AccountBalanceView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.AccountBalanceView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AccountBalanceView">
           <Key>
             <PropertyRef Name="FundId" />
@@ -545,7 +546,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.AccountBalanc
           <Property Name="acct_amount" Type="money" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.BalanceResumeView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.BalanceResumeView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="BalanceResumeView">
           <Key>
             <PropertyRef Name="FundId" />
@@ -555,7 +556,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.BalanceResume
           <Property Name="Liability" Type="money" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.BondDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.BondDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="BondDetails">
           <Key>
             <PropertyRef Name="BondId" />
@@ -582,7 +583,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.BondDetails' 
           <Property Name="InvestorPieces" Type="float" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.BookingGeneratedInterestView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.BookingGeneratedInterestView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="BookingGeneratedInterestView">
           <Key>
             <PropertyRef Name="fund_id" />
@@ -615,7 +616,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.BookingGenera
           <Property Name="GeneratedDate" Type="date" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ClientContracts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ClientContracts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ClientContracts">
           <Key>
             <PropertyRef Name="fund_id" />
@@ -631,7 +632,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ClientContrac
           <Property Name="name" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementCollectionView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementCollectionView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DisbursementCollectionView">
           <Key>
             <PropertyRef Name="fund_id" />
@@ -665,7 +666,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementC
           <Property Name="can_generate_interest" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementGeneratedInterestView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementGeneratedInterestView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DisbursementGeneratedInterestView">
           <Key>
             <PropertyRef Name="fund_id" />
@@ -698,7 +699,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementG
           <Property Name="GeneratedDate" Type="date" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementsBookingView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementsBookingView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DisbursementsBookingView">
           <Key>
             <PropertyRef Name="fund_id" />
@@ -779,7 +780,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Disbursements
           <Property Name="is_booking_collected" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementsForAddendums' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementsForAddendums' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DisbursementsForAddendums">
           <Key>
             <PropertyRef Name="fund_id" />
@@ -807,7 +808,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Disbursements
           <Property Name="profit_share" Type="money" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementsToBeCollected' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementsToBeCollected' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DisbursementsToBeCollected">
           <Key>
             <PropertyRef Name="fund_id" />
@@ -844,7 +845,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Disbursements
           <Property Name="can_generate_interest" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.InvestmentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.InvestmentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InvestmentsView">
           <Key>
             <PropertyRef Name="fund_id" />
@@ -894,7 +895,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.InvestmentsVi
           <Property Name="has_bookings" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Loans_View' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Loans_View' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Loans_View">
           <Key>
             <PropertyRef Name="Id" />
@@ -908,6 +909,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Loans_View' d
             <PropertyRef Name="end_date" />
             <PropertyRef Name="currency_id" />
             <PropertyRef Name="currency_name" />
+            <PropertyRef Name="interest_base" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="fund_id" Type="int" Nullable="false" />
@@ -923,9 +925,10 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Loans_View' d
           <Property Name="currency_name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="renegotiated" Type="bit" />
           <Property Name="loan_origin_id" Type="int" />
+          <Property Name="interest_base" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.MovementsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.MovementsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="MovementsView">
           <Key>
             <PropertyRef Name="FundId" />
@@ -960,7 +963,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.MovementsView
           <Property Name="SubAcc_amount" Type="money" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitResultsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitResultsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ProfitResultsView">
           <Key>
             <PropertyRef Name="FundId" />
@@ -995,7 +998,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitResults
           <Property Name="SubAcc_amount" Type="money" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitShareToAccrue' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitShareToAccrue' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ProfitShareToAccrue">
           <Key>
             <PropertyRef Name="Id" />
@@ -1035,7 +1038,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitShareTo
           <Property Name="contract" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitsResumeView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitsResumeView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ProfitsResumeView">
           <Key>
             <PropertyRef Name="FundId" />
@@ -1045,7 +1048,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitsResume
           <Property Name="Expense" Type="money" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.SubAccountBalance' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.SubAccountBalance' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SubAccountBalance">
           <Key>
             <PropertyRef Name="acct_number" />
@@ -1063,7 +1066,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.SubAccountBal
           <Property Name="subacct_amount" Type="money" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Template_Balance_Sheet' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Template_Balance_Sheet' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Template_Balance_Sheet">
           <Key>
             <PropertyRef Name="FundId" />
@@ -1085,7 +1088,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Template_Bala
           <Property Name="TotalEquity_last_period" Type="money" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Template_Profit_Loss' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Template_Profit_Loss' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Template_Profit_Loss">
           <Key>
             <PropertyRef Name="AccountType" />
@@ -1103,7 +1106,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Template_Prof
           <Property Name="ProfitLossLastPeriod" Type="money" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.TotalAsset' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.TotalAsset' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TotalAsset">
           <Key>
             <PropertyRef Name="FundId" />
@@ -1112,7 +1115,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.TotalAsset' d
           <Property Name="TotalAsset" Type="money" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.TotalExpense' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.TotalExpense' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TotalExpense">
           <Key>
             <PropertyRef Name="FundId" />
@@ -1121,7 +1124,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.TotalExpense'
           <Property Name="ExpenseShiftAmount" Type="money" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.TotalIncome' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.TotalIncome' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TotalIncome">
           <Key>
             <PropertyRef Name="FundId" />
@@ -1130,7 +1133,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.TotalIncome' 
           <Property Name="IncomeShiftAmount" Type="money" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.TotalLiability' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.TotalLiability' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TotalLiability">
           <Key>
             <PropertyRef Name="FundId" />
@@ -1139,7 +1142,7 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.TotalLiabilit
           <Property Name="TotalLiability" Type="money" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbursements' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbursements' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UnlinkedDisbursements">
           <Key>
             <PropertyRef Name="fund_id" />
@@ -2644,7 +2647,8 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
     [Loans_View].[currency_id] AS [currency_id], 
     [Loans_View].[currency_name] AS [currency_name], 
     [Loans_View].[renegotiated] AS [renegotiated], 
-    [Loans_View].[loan_origin_id] AS [loan_origin_id]
+    [Loans_View].[loan_origin_id] AS [loan_origin_id], 
+    [Loans_View].[interest_base] AS [interest_base]
     FROM [dbo].[Loans_View] AS [Loans_View]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="MovementsView" EntityType="Self.MovementsView" store:Type="Views" store:Schema="dbo">
@@ -3643,8 +3647,8 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="AccountingMovement" EntitySet="AccountingMovements" />
             <End Role="Loan_Repayments" EntitySet="Loan_Repayments" />
           </AssociationSet>
-          <EntitySet Name="Loans" EntityType="FundsDBModel.Loan" />
           <EntitySet Name="Loans_View" EntityType="FundsDBModel.Loans_View" />
+          <EntitySet Name="Loans" EntityType="FundsDBModel.Loan" />
           <AssociationSet Name="FK_Loans_Accounting_Movement" Association="FundsDBModel.FK_Loans_Accounting_Movement">
             <End Role="AccountingMovement" EntitySet="AccountingMovements" />
             <End Role="Loan" EntitySet="Loans" />
@@ -6023,6 +6027,37 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Loans_View">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="fund_id" />
+            <PropertyRef Name="lender_id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="interest" />
+            <PropertyRef Name="amount" />
+            <PropertyRef Name="reference" />
+            <PropertyRef Name="start_date" />
+            <PropertyRef Name="end_date" />
+            <PropertyRef Name="currency_id" />
+            <PropertyRef Name="currency_name" />
+            <PropertyRef Name="interest_base" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="fund_id" Type="Int32" Nullable="false" />
+          <Property Name="lender_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="reference" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="generated_interest" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="currency_id" Type="Int32" Nullable="false" />
+          <Property Name="currency_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="renegotiated" Type="Boolean" />
+          <Property Name="loan_origin_id" Type="Int32" />
+          <Property Name="interest_base" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Loan">
           <Key>
             <PropertyRef Name="Id" />
@@ -6039,41 +6074,13 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="accounting_movement_id" Type="Int32" Nullable="false" />
           <Property Name="renegotiated" Type="Boolean" />
           <Property Name="loan_origin_id" Type="Int32" />
+          <Property Name="interest_base" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_Loans_Accounting_Movement" FromRole="Loan" ToRole="AccountingMovement" />
           <NavigationProperty Name="Creditor" Relationship="FundsDBModel.FK_Loans_Creditors" FromRole="Loan" ToRole="Creditor" />
           <NavigationProperty Name="Currency" Relationship="FundsDBModel.FK_Loans_Currencies" FromRole="Loan" ToRole="Currency" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Loans_Funds" FromRole="Loan" ToRole="Fund" />
           <NavigationProperty Name="Loan_Repayments" Relationship="FundsDBModel.FK_Loan_Repayments_Loan" FromRole="Loan" ToRole="Loan_Repayments" />
           <NavigationProperty Name="LoanGeneratedInterestDetails" Relationship="FundsDBModel.FK_LoanGeneratedInterestDetails_Loan" FromRole="Loan" ToRole="LoanGeneratedInterestDetail" />
-        </EntityType>
-        <EntityType Name="Loans_View">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="fund_id" />
-            <PropertyRef Name="lender_id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="interest" />
-            <PropertyRef Name="amount" />
-            <PropertyRef Name="reference" />
-            <PropertyRef Name="start_date" />
-            <PropertyRef Name="end_date" />
-            <PropertyRef Name="currency_id" />
-            <PropertyRef Name="currency_name" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="fund_id" Type="Int32" Nullable="false" />
-          <Property Name="lender_id" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="reference" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="generated_interest" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="currency_id" Type="Int32" Nullable="false" />
-          <Property Name="currency_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="renegotiated" Type="Boolean" />
-          <Property Name="loan_origin_id" Type="Int32" />
         </EntityType>
         <Association Name="FK_Loans_Accounting_Movement">
           <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="1" />
@@ -7129,27 +7136,10 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Loans">
-            <EntityTypeMapping TypeName="FundsDBModel.Loan">
-              <MappingFragment StoreEntitySet="Loans">
-                <ScalarProperty Name="loan_origin_id" ColumnName="loan_origin_id" />
-                <ScalarProperty Name="renegotiated" ColumnName="renegotiated" />
-                <ScalarProperty Name="accounting_movement_id" ColumnName="accounting_movement_id" />
-                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
-                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
-                <ScalarProperty Name="end" ColumnName="end" />
-                <ScalarProperty Name="start" ColumnName="start" />
-                <ScalarProperty Name="reference" ColumnName="reference" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="interest" ColumnName="interest" />
-                <ScalarProperty Name="lender_id" ColumnName="lender_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Loans_View">
             <EntityTypeMapping TypeName="FundsDBModel.Loans_View">
               <MappingFragment StoreEntitySet="Loans_View">
+                <ScalarProperty Name="interest_base" ColumnName="interest_base" />
                 <ScalarProperty Name="loan_origin_id" ColumnName="loan_origin_id" />
                 <ScalarProperty Name="renegotiated" ColumnName="renegotiated" />
                 <ScalarProperty Name="currency_name" ColumnName="currency_name" />
@@ -7163,6 +7153,25 @@ warning 6002: The table/view 'C:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="lender_id" ColumnName="lender_id" />
                 <ScalarProperty Name="fund_id" ColumnName="fund_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loans">
+            <EntityTypeMapping TypeName="FundsDBModel.Loan">
+              <MappingFragment StoreEntitySet="Loans">
+                <ScalarProperty Name="interest_base" ColumnName="interest_base" />
+                <ScalarProperty Name="loan_origin_id" ColumnName="loan_origin_id" />
+                <ScalarProperty Name="renegotiated" ColumnName="renegotiated" />
+                <ScalarProperty Name="accounting_movement_id" ColumnName="accounting_movement_id" />
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
+                <ScalarProperty Name="end" ColumnName="end" />
+                <ScalarProperty Name="start" ColumnName="start" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="interest" ColumnName="interest" />
+                <ScalarProperty Name="lender_id" ColumnName="lender_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

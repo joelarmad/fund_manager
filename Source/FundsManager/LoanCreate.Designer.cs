@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.cbLender = new System.Windows.Forms.ComboBox();
             this.creditorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -49,13 +49,6 @@
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.interestDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.referenceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.startdateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.enddateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.loansViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cmdCancel = new System.Windows.Forms.Button();
             this.cmdDelete = new System.Windows.Forms.Button();
@@ -64,9 +57,20 @@
             this.creditorsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CreditorsTableAdapter();
             this.loans_ViewTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.Loans_ViewTableAdapter();
             this.cbCurrency = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.currenciesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label7 = new System.Windows.Forms.Label();
             this.currenciesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CurrenciesTableAdapter();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.referenceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.interest_base = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.interestDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startdateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.enddateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label8 = new System.Windows.Forms.Label();
+            this.rb360 = new System.Windows.Forms.RadioButton();
+            this.rb365 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.creditorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -192,9 +196,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dataGridView1);
-            this.groupBox1.Location = new System.Drawing.Point(24, 148);
+            this.groupBox1.Location = new System.Drawing.Point(24, 178);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(703, 248);
+            this.groupBox1.Size = new System.Drawing.Size(785, 248);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Loans";
@@ -207,10 +211,11 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
+            this.referenceDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
+            this.interest_base,
             this.interestDataGridViewTextBoxColumn,
             this.amountDataGridViewTextBoxColumn,
-            this.referenceDataGridViewTextBoxColumn,
             this.startdateDataGridViewTextBoxColumn,
             this.enddateDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.loansViewBindingSource;
@@ -218,69 +223,9 @@
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(675, 211);
+            this.dataGridView1.Size = new System.Drawing.Size(754, 211);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // interestDataGridViewTextBoxColumn
-            // 
-            this.interestDataGridViewTextBoxColumn.DataPropertyName = "interest";
-            dataGridViewCellStyle9.Format = "N2";
-            dataGridViewCellStyle9.NullValue = null;
-            this.interestDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle9;
-            this.interestDataGridViewTextBoxColumn.HeaderText = "interest";
-            this.interestDataGridViewTextBoxColumn.Name = "interestDataGridViewTextBoxColumn";
-            this.interestDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // amountDataGridViewTextBoxColumn
-            // 
-            this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount";
-            dataGridViewCellStyle10.Format = "N2";
-            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle10;
-            this.amountDataGridViewTextBoxColumn.HeaderText = "amount";
-            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
-            this.amountDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // referenceDataGridViewTextBoxColumn
-            // 
-            this.referenceDataGridViewTextBoxColumn.DataPropertyName = "reference";
-            this.referenceDataGridViewTextBoxColumn.HeaderText = "reference";
-            this.referenceDataGridViewTextBoxColumn.Name = "referenceDataGridViewTextBoxColumn";
-            this.referenceDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // startdateDataGridViewTextBoxColumn
-            // 
-            this.startdateDataGridViewTextBoxColumn.DataPropertyName = "start_date";
-            dataGridViewCellStyle11.Format = "d";
-            dataGridViewCellStyle11.NullValue = null;
-            this.startdateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle11;
-            this.startdateDataGridViewTextBoxColumn.HeaderText = "start_date";
-            this.startdateDataGridViewTextBoxColumn.Name = "startdateDataGridViewTextBoxColumn";
-            this.startdateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // enddateDataGridViewTextBoxColumn
-            // 
-            this.enddateDataGridViewTextBoxColumn.DataPropertyName = "end_date";
-            dataGridViewCellStyle12.Format = "d";
-            this.enddateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle12;
-            this.enddateDataGridViewTextBoxColumn.HeaderText = "end_date";
-            this.enddateDataGridViewTextBoxColumn.Name = "enddateDataGridViewTextBoxColumn";
-            this.enddateDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // loansViewBindingSource
             // 
@@ -343,6 +288,11 @@
             this.cbCurrency.TabIndex = 239;
             this.cbCurrency.ValueMember = "Id";
             // 
+            // currenciesBindingSource
+            // 
+            this.currenciesBindingSource.DataMember = "Currencies";
+            this.currenciesBindingSource.DataSource = this.fundsDBDataSet;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -352,20 +302,117 @@
             this.label7.TabIndex = 240;
             this.label7.Text = "Currency:";
             // 
-            // currenciesBindingSource
-            // 
-            this.currenciesBindingSource.DataMember = "Currencies";
-            this.currenciesBindingSource.DataSource = this.fundsDBDataSet;
-            // 
             // currenciesTableAdapter
             // 
             this.currenciesTableAdapter.ClearBeforeFill = true;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // referenceDataGridViewTextBoxColumn
+            // 
+            this.referenceDataGridViewTextBoxColumn.DataPropertyName = "reference";
+            this.referenceDataGridViewTextBoxColumn.HeaderText = "reference";
+            this.referenceDataGridViewTextBoxColumn.Name = "referenceDataGridViewTextBoxColumn";
+            this.referenceDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // interest_base
+            // 
+            this.interest_base.DataPropertyName = "interest_base";
+            this.interest_base.HeaderText = "base";
+            this.interest_base.Name = "interest_base";
+            this.interest_base.ReadOnly = true;
+            // 
+            // interestDataGridViewTextBoxColumn
+            // 
+            this.interestDataGridViewTextBoxColumn.DataPropertyName = "interest";
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.interestDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            this.interestDataGridViewTextBoxColumn.HeaderText = "interest";
+            this.interestDataGridViewTextBoxColumn.Name = "interestDataGridViewTextBoxColumn";
+            this.interestDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // amountDataGridViewTextBoxColumn
+            // 
+            this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount";
+            dataGridViewCellStyle6.Format = "N2";
+            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            this.amountDataGridViewTextBoxColumn.HeaderText = "amount";
+            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
+            this.amountDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // startdateDataGridViewTextBoxColumn
+            // 
+            this.startdateDataGridViewTextBoxColumn.DataPropertyName = "start_date";
+            dataGridViewCellStyle7.Format = "d";
+            dataGridViewCellStyle7.NullValue = null;
+            this.startdateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle7;
+            this.startdateDataGridViewTextBoxColumn.HeaderText = "start_date";
+            this.startdateDataGridViewTextBoxColumn.Name = "startdateDataGridViewTextBoxColumn";
+            this.startdateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // enddateDataGridViewTextBoxColumn
+            // 
+            this.enddateDataGridViewTextBoxColumn.DataPropertyName = "end_date";
+            dataGridViewCellStyle8.Format = "d";
+            this.enddateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
+            this.enddateDataGridViewTextBoxColumn.HeaderText = "end_date";
+            this.enddateDataGridViewTextBoxColumn.Name = "enddateDataGridViewTextBoxColumn";
+            this.enddateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(32, 138);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(34, 13);
+            this.label8.TabIndex = 241;
+            this.label8.Text = "Base:";
+            // 
+            // rb360
+            // 
+            this.rb360.AutoSize = true;
+            this.rb360.Checked = true;
+            this.rb360.Location = new System.Drawing.Point(95, 138);
+            this.rb360.Name = "rb360";
+            this.rb360.Size = new System.Drawing.Size(43, 17);
+            this.rb360.TabIndex = 242;
+            this.rb360.TabStop = true;
+            this.rb360.Text = "360";
+            this.rb360.UseVisualStyleBackColor = true;
+            // 
+            // rb365
+            // 
+            this.rb365.AutoSize = true;
+            this.rb365.Location = new System.Drawing.Point(144, 138);
+            this.rb365.Name = "rb365";
+            this.rb365.Size = new System.Drawing.Size(43, 17);
+            this.rb365.TabIndex = 243;
+            this.rb365.TabStop = true;
+            this.rb365.Text = "365";
+            this.rb365.UseVisualStyleBackColor = true;
             // 
             // LoanCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(743, 413);
+            this.ClientSize = new System.Drawing.Size(821, 442);
+            this.Controls.Add(this.rb365);
+            this.Controls.Add(this.rb360);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.cbCurrency);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cmdCancel);
@@ -427,16 +474,20 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource loansViewBindingSource;
         private FundsDBDataSetTableAdapters.Loans_ViewTableAdapter loans_ViewTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn interestDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn referenceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn startdateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn enddateDataGridViewTextBoxColumn;
         private System.Windows.Forms.ComboBox cbCurrency;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.BindingSource currenciesBindingSource;
         private FundsDBDataSetTableAdapters.CurrenciesTableAdapter currenciesTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn referenceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn interest_base;
+        private System.Windows.Forms.DataGridViewTextBoxColumn interestDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn startdateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn enddateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.RadioButton rb360;
+        private System.Windows.Forms.RadioButton rb365;
     }
 }

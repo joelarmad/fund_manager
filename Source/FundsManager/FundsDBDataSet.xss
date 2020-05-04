@@ -74,7 +74,7 @@
     <Shape ID="DesignTable:ServiceSuppliers" ZOrder="25" X="19416" Y="0" Height="153" Width="239" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
     <Shape ID="DesignTable:Template_Balance_Sheet" ZOrder="23" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
     <Shape ID="DesignTable:Template_Profit_Loss" ZOrder="22" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
-    <Shape ID="DesignTable:Loans" ZOrder="1" X="19725" Y="0" Height="324" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:Loans" ZOrder="1" X="19725" Y="0" Height="324" Width="297" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
     <Shape ID="DesignTable:Loans_View" ZOrder="18" X="19973" Y="0" Height="324" Width="211" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
     <Shape ID="DesignTable:LoanGeneratedInterestDetails" ZOrder="17" X="20254" Y="0" Height="191" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
     <Shape ID="DesignTable:LoanGeneratedInterests" ZOrder="16" X="20624" Y="0" Height="115" Width="283" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
@@ -1904,7 +1904,7 @@
           <Y>152</Y>
         </Point>
         <Point>
-          <X>20025</X>
+          <X>20022</X>
           <Y>152</Y>
         </Point>
       </RoutePoints>

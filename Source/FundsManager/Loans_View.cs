@@ -28,5 +28,6 @@ namespace FundsManager
         public string currency_name { get; set; }
         public Nullable<bool> renegotiated { get; set; }
         public Nullable<int> loan_origin_id { get; set; }
+        public int interest_base { get; set; }
     }
 }

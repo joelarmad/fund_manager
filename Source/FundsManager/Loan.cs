@@ -33,6 +33,7 @@ namespace FundsManager
         public int accounting_movement_id { get; set; }
         public Nullable<bool> renegotiated { get; set; }
         public Nullable<int> loan_origin_id { get; set; }
+        public int interest_base { get; set; }
     
         public virtual AccountingMovement AccountingMovement { get; set; }
         public virtual Creditor Creditor { get; set; }

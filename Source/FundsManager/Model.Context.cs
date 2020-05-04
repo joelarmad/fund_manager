@@ -95,7 +95,7 @@ namespace FundsManager
         public virtual DbSet<TotalLiability> TotalLiabilities { get; set; }
         public virtual DbSet<UnlinkedDisbursement> UnlinkedDisbursements { get; set; }
         public virtual DbSet<Loan_Repayments> Loan_Repayments { get; set; }
-        public virtual DbSet<Loan> Loans { get; set; }
         public virtual DbSet<Loans_View> Loans_View { get; set; }
+        public virtual DbSet<Loan> Loans { get; set; }
     }
 }

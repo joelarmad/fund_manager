@@ -145,6 +145,7 @@ namespace FundsManager
                     }
 
                     dtpStartingDate.Value = disbursement.collection_date;
+                    dtpBookingDate.Value = disbursement.collection_date;
                 }
                 else
                 {
@@ -605,6 +606,7 @@ namespace FundsManager
             txtNumber.Text = "";
             txtTotalToBeCollected.Text = String.Format("{0:0.00}", 0);
             dtpStartingDate.Value = DateTime.Now;
+            dtpBookingDate.Value = DateTime.Now;
             dtpCollectionDate.Value = DateTime.Now;
             cmdDeleteBooking.Enabled = false;
         }
@@ -758,7 +760,7 @@ namespace FundsManager
                 {
                     _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
                     _accountingMovement.description = "";
-                    _accountingMovement.date = DateTime.Now.Date;
+                    _accountingMovement.date = dtpBookingDate.Value.Date;
                     _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpStartingDate.Value.Year);
                     _accountingMovement.FK_AccountingMovements_Currencies = disbursement.currency_id;
                     _accountingMovement.original_reference = disbursement.Investment.contract;

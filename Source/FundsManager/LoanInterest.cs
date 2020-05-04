@@ -218,16 +218,13 @@ namespace FundsManager
 
                                     decimal _interest = 0;
 
-                                    int totalFinancingDays = (_loanToAccrue.end_date.Date - _loanToAccrue.start_date.Date).Days;
-
                                     DateTime toDate = dtpDate.Value <= _loanToAccrue.end_date ? dtpDate.Value : _loanToAccrue.end_date;
 
-                                    int financingDays = (toDate.Date - fromDate.Value.Date).Days;
+                                    int days = (toDate.Date - fromDate.Value.Date).Days;
 
-                                    if (totalFinancingDays > 0 && financingDays > 0)
+                                    if (days > 0)
                                     {
-                                        decimal delayInterestPerDay = _loanToAccrue.interest / totalFinancingDays;
-                                        _interest = Math.Round(financingDays * delayInterestPerDay, 2);
+                                        _interest = Math.Round(_loanToAccrue.amount * _loanToAccrue.interest * days / _loanToAccrue.interest_base, 2);
                                     }
 
                                     canContinueGeneratingInterest = toDate < _loanToAccrue.end_date;

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model '\\10.30.10.122\d\00_Proyectos\fund_manager\Source\FundsManager\Model.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\00_Proyectos\fund_manager\Source\FundsManager\Model.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

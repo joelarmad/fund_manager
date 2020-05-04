@@ -166,8 +166,8 @@
         <EntityTypeShape EntityType="FundsDBModel.UnlinkedDisbursement" Width="1.5" PointX="14.75" PointY="9.75" />
         <EntityTypeShape EntityType="FundsDBModel.Loan_Repayments" Width="1.5" PointX="17.75" PointY="62" />
         <AssociationConnector Association="FundsDBModel.FK_Loan_Repayments_AccountingMovements" />
-        <EntityTypeShape EntityType="FundsDBModel.Loan" Width="1.5" PointX="10.5" PointY="61.875" />
         <EntityTypeShape EntityType="FundsDBModel.Loans_View" Width="1.5" PointX="3.375" PointY="15.75" />
+        <EntityTypeShape EntityType="FundsDBModel.Loan" Width="1.5" PointX="10.5" PointY="61.75" />
         <AssociationConnector Association="FundsDBModel.FK_Loans_Accounting_Movement" />
         <AssociationConnector Association="FundsDBModel.FK_Loans_Creditors" />
         <AssociationConnector Association="FundsDBModel.FK_Loans_Currencies" />

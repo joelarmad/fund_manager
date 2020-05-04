@@ -180,7 +180,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "DelayInterestToAccrueForm";
-            this.Text = "Delayed Profit Share To Accrue";
+            this.Text = "Delay Interest To Accrue";
             this.Load += new System.EventHandler(this.ProfitShareToAccrueForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

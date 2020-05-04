@@ -77,6 +77,8 @@
             this.currenciesTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.CurrenciesTableAdapter();
             this.label9 = new System.Windows.Forms.Label();
             this.cmdCancel = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.dtpBookingDate = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             this.SuspendLayout();
@@ -113,7 +115,7 @@
             this.dtpCollectionDate.Location = new System.Drawing.Point(589, 193);
             this.dtpCollectionDate.Name = "dtpCollectionDate";
             this.dtpCollectionDate.Size = new System.Drawing.Size(200, 20);
-            this.dtpCollectionDate.TabIndex = 257;
+            this.dtpCollectionDate.TabIndex = 248;
             // 
             // lblContractPrefix
             // 
@@ -151,7 +153,7 @@
             this.cmdBook.Location = new System.Drawing.Point(672, 544);
             this.cmdBook.Name = "cmdBook";
             this.cmdBook.Size = new System.Drawing.Size(128, 23);
-            this.cmdBook.TabIndex = 264;
+            this.cmdBook.TabIndex = 252;
             this.cmdBook.Text = "Book";
             this.cmdBook.UseVisualStyleBackColor = true;
             this.cmdBook.Click += new System.EventHandler(this.cmdBook_Click);
@@ -170,7 +172,7 @@
             this.dtpStartingDate.Location = new System.Drawing.Point(589, 165);
             this.dtpStartingDate.Name = "dtpStartingDate";
             this.dtpStartingDate.Size = new System.Drawing.Size(200, 20);
-            this.dtpStartingDate.TabIndex = 255;
+            this.dtpStartingDate.TabIndex = 247;
             // 
             // cmdDeleteBooking
             // 
@@ -178,7 +180,7 @@
             this.cmdDeleteBooking.Location = new System.Drawing.Point(678, 226);
             this.cmdDeleteBooking.Name = "cmdDeleteBooking";
             this.cmdDeleteBooking.Size = new System.Drawing.Size(121, 23);
-            this.cmdDeleteBooking.TabIndex = 262;
+            this.cmdDeleteBooking.TabIndex = 251;
             this.cmdDeleteBooking.Text = "Delete";
             this.cmdDeleteBooking.UseVisualStyleBackColor = true;
             this.cmdDeleteBooking.Click += new System.EventHandler(this.cmdDeleteBooking_Click);
@@ -243,7 +245,7 @@
             this.cmdAddBooking.Location = new System.Drawing.Point(557, 226);
             this.cmdAddBooking.Name = "cmdAddBooking";
             this.cmdAddBooking.Size = new System.Drawing.Size(115, 23);
-            this.cmdAddBooking.TabIndex = 258;
+            this.cmdAddBooking.TabIndex = 249;
             this.cmdAddBooking.Text = "Add Booking";
             this.cmdAddBooking.UseVisualStyleBackColor = true;
             this.cmdAddBooking.Click += new System.EventHandler(this.cmdAddBooking_Click);
@@ -271,8 +273,8 @@
             this.lbISelectedItems.FormattingEnabled = true;
             this.lbISelectedItems.Location = new System.Drawing.Point(589, 44);
             this.lbISelectedItems.Name = "lbISelectedItems";
-            this.lbISelectedItems.Size = new System.Drawing.Size(120, 108);
-            this.lbISelectedItems.TabIndex = 269;
+            this.lbISelectedItems.Size = new System.Drawing.Size(120, 82);
+            this.lbISelectedItems.TabIndex = 245;
             // 
             // label8
             // 
@@ -409,7 +411,7 @@
             this.txtNumber.Location = new System.Drawing.Point(97, 190);
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Size = new System.Drawing.Size(121, 20);
-            this.txtNumber.TabIndex = 276;
+            this.txtNumber.TabIndex = 244;
             this.txtNumber.TextChanged += new System.EventHandler(this.txtNumber_TextChanged);
             this.txtNumber.Leave += new System.EventHandler(this.txtNumber_Leave);
             // 
@@ -496,17 +498,35 @@
             this.cmdCancel.Location = new System.Drawing.Point(458, 226);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(92, 23);
-            this.cmdCancel.TabIndex = 286;
+            this.cmdCancel.TabIndex = 250;
             this.cmdCancel.Text = "Cancel Edition";
             this.cmdCancel.UseVisualStyleBackColor = true;
             this.cmdCancel.Visible = false;
             this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(507, 140);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(75, 13);
+            this.label17.TabIndex = 288;
+            this.label17.Text = "Booking Date:";
+            // 
+            // dtpBookingDate
+            // 
+            this.dtpBookingDate.Location = new System.Drawing.Point(589, 137);
+            this.dtpBookingDate.Name = "dtpBookingDate";
+            this.dtpBookingDate.Size = new System.Drawing.Size(200, 20);
+            this.dtpBookingDate.TabIndex = 246;
             // 
             // AddendumsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 579);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.dtpBookingDate);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.lblSector);
@@ -607,5 +627,7 @@
         private FundsDBDataSetTableAdapters.CurrenciesTableAdapter currenciesTableAdapter;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button cmdCancel;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.DateTimePicker dtpBookingDate;
     }
 }

@@ -32,9 +32,37 @@ namespace FundsManager
             loadLoansData();
         }
 
+        private bool validate()
+        {
+            bool result = false;
+
+            double amount = 0;
+            double interest = 0;
+
+            if (cbLender.SelectedIndex >= 0 && 
+                cbCurrency.SelectedIndex >= 0 && 
+                txtReference.Text.Trim() != "" && 
+                double.TryParse(txtAmount.Text, out amount) &&
+                amount > 0 && 
+                double.TryParse(txtInterest.Text, out interest) && 
+                interest > 0)
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
         private void cmdAdd_Click(object sender, EventArgs e)
         {
-            addLoan();
+            if (validate())
+            {
+                addLoan();
+            }
+            else
+            {
+                MessageBox.Show("Please, verify data.");
+            }
         }
 
         private void cmdCancel_Click(object sender, EventArgs e)
@@ -114,6 +142,7 @@ namespace FundsManager
                     _loan.end = dtpTo.Value;
                     _loan.currency_id = currencyId;
                     _loan.renegotiated = false;
+                    _loan.interest_base = rb360.Checked ? 360 : 365;
 
                     AccountingMovement acctMov = generateAccountingMovement(_loan);
 
@@ -150,6 +179,7 @@ namespace FundsManager
                         _selected.start = dtpFrom.Value;
                         _selected.end = dtpTo.Value;
                         _selected.currency_id = currencyId;
+                        _selected.interest_base = rb360.Checked ? 360 : 365;
 
                         manager.My_db.SaveChanges();
                     }

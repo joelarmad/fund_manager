@@ -1,2 +1,0 @@
-UPDATE dbo.Disbursements SET has_bookings = 1 WHERE id IN (SELECT disbursement_id FROM dbo.DisbursementBooking)
-UPDATE dbo.Disbursements SET has_bookings = 0 WHERE id NOT IN (SELECT disbursement_id FROM dbo.DisbursementBooking)
