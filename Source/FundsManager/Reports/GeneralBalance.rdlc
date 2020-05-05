@@ -1247,7 +1247,7 @@
                       </Group>
                       <SortExpressions>
                         <SortExpression>
-                          <Value>=Fields!acct_name.Value</Value>
+                          <Value>=Fields!acct_number.Value</Value>
                         </SortExpression>
                       </SortExpressions>
                       <TablixHeader>
@@ -1284,6 +1284,7 @@
                               <PaddingBottom>2pt</PaddingBottom>
                             </Style>
                           </Textbox>
+                          <rd:Selected>true</rd:Selected>
                         </CellContents>
                       </TablixHeader>
                       <TablixMembers>

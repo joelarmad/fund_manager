@@ -71,7 +71,7 @@
                   <Width>1.0285in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.91667in</Width>
+                  <Width>1.03125in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -162,7 +162,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!ProfitLoss.Value)</Value>
+                                  <Value>=Fields!Shift_Amount.Value</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
                                     <Format>'€'0.00</Format>
@@ -199,7 +199,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!ProfitLossLastPeriod.Value)</Value>
+                                  <Value>=Fields!Shift_Amount_Last_Period.Value</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
                                     <Format>'€'0.00</Format>
@@ -467,7 +467,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>1.96875in</Size>
+                            <Size>1.85417in</Size>
                             <CellContents>
                               <Textbox Name="Textbox44">
                                 <CanGrow>true</CanGrow>
@@ -610,7 +610,7 @@
                             </SortExpression>
                           </SortExpressions>
                           <TablixHeader>
-                            <Size>1.96875in</Size>
+                            <Size>1.85417in</Size>
                             <CellContents>
                               <Textbox Name="SubAccount">
                                 <CanGrow>true</CanGrow>
@@ -687,7 +687,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>1.96875in</Size>
+                            <Size>1.85417in</Size>
                             <CellContents>
                               <Textbox Name="Textbox27">
                                 <CanGrow>true</CanGrow>
@@ -726,7 +726,7 @@
                     </TablixMember>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>3.92364in</Size>
+                        <Size>3.80906in</Size>
                         <CellContents>
                           <Textbox Name="Textbox22">
                             <CanGrow>true</CanGrow>
@@ -766,7 +766,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Height>0.88542in</Height>
+            <Height>0.88541in</Height>
             <Width>6.73066in</Width>
             <Style>
               <Border>
@@ -816,7 +816,7 @@
                     <Value>=Fields!ProfitLoss.Value</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
-                      <Format>'€'0.00</Format>
+                      <Format>'€'#,0.00</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -824,10 +824,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox35</rd:DefaultName>
-            <Top>0.89458in</Top>
-            <Left>4.93899in</Left>
+            <Top>0.88541in</Top>
+            <Left>4.67091in</Left>
             <Height>0.25in</Height>
-            <Width>0.875in</Width>
+            <Width>1.0285in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -857,7 +857,7 @@
                     <Value>=Fields!ProfitLossLastPeriod.Value</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
-                      <Format>'€'0.00</Format>
+                      <Format>'€'#,0.00</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -866,9 +866,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox36</rd:DefaultName>
             <Top>0.89458in</Top>
-            <Left>5.85566in</Left>
+            <Left>5.72718in</Left>
             <Height>0.25in</Height>
-            <Width>0.875in</Width>
+            <Width>1.00348in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
