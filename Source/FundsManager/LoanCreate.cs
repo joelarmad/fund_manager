@@ -281,7 +281,7 @@ namespace FundsManager
                     
 
                     _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
-                    _accountingMovement.description = "";
+                    _accountingMovement.description = ((FundsDBDataSet.CreditorsRow)((DataRowView)cbLender.SelectedItem).Row).name;
                     _accountingMovement.date = loan.start;
                     _accountingMovement.reference = _accountingMovement.contract = KeyDefinitions.NextAccountMovementReference(loan.start.Year);
                     _accountingMovement.FK_AccountingMovements_Currencies = loan.currency_id;
@@ -324,6 +324,8 @@ namespace FundsManager
                     _maccount470.AccountingMovement = _accountingMovement;
                     _maccount470.FK_Movements_Accounts_Funds = manager.Selected;
                     _maccount470.FK_Movements_Accounts_Accounts = account470.Id;
+                    if (subacct470 != null)
+                        _maccount470.FK_Movements_Accounts_Subaccounts = subacct470.Id;
                     _maccount470.debit = 0;
                     _maccount470.credit = Math.Round(loan.amount, 2);
 
