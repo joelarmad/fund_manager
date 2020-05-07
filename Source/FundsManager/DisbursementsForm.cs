@@ -259,9 +259,9 @@ namespace FundsManager
 
                             GeneralLedgerForm gledger = new GeneralLedgerForm();
                             gledger.StartPosition = FormStartPosition.CenterScreen;
-                            gledger.FromDisbursementOperation = true;
-                            gledger.AcctMovFromDisbursement = _accountingMovement;
-                            gledger.CreditFromDisbursemet = totalPaid;
+                            gledger.FromExternalOperation = true;
+                            gledger.ExternalAccountMovemet = _accountingMovement;
+                            gledger.ExternalCredit = totalPaid;
                             gledger.ControlBox = false;
                             gledger.ShowDialog();
 

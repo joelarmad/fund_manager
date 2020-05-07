@@ -15,10 +15,10 @@ namespace FundsManager
     public partial class GeneralLedgerForm : Form
     {
 
-        public bool FromDisbursementOperation = false;
-        public AccountingMovement AcctMovFromDisbursement = null;
-        public decimal CreditFromDisbursemet = 0;
-        public decimal DebitFromDisbursemet = 0;
+        public bool FromExternalOperation = false;
+        public AccountingMovement ExternalAccountMovemet = null;
+        public decimal ExternalCredit = 0;
+        public decimal ExternalDebit = 0;
         public bool OperationCompleted = false;
 
         private bool AvoidAccountBalanceValidation = false;
@@ -131,23 +131,23 @@ namespace FundsManager
                     }
                 }
 
-                if (FromDisbursementOperation && AcctMovFromDisbursement != null)
+                if (FromExternalOperation && ExternalAccountMovemet != null)
                 {
                     AvoidAccountBalanceValidation = true;
 
-                    textBox3.Text = AcctMovFromDisbursement.reference;
+                    textBox3.Text = ExternalAccountMovemet.reference;
 
-                    textBox5.Text = AcctMovFromDisbursement.original_reference;
+                    textBox5.Text = ExternalAccountMovemet.original_reference;
 
-                    dateTimePicker1.Value = AcctMovFromDisbursement.date;
+                    dateTimePicker1.Value = ExternalAccountMovemet.date;
 
-                    textBox4.Text = AcctMovFromDisbursement.description;
+                    textBox4.Text = ExternalAccountMovemet.description;
 
                     for (int i = 0; i < comboBox4.Items.Count; i++)
                     {
                         int currency_id = ((FundsManager.FundsDBDataSet.CurrenciesRow)((System.Data.DataRowView)comboBox4.Items[i]).Row).Id;
 
-                        if (currency_id == AcctMovFromDisbursement.FK_AccountingMovements_Currencies)
+                        if (currency_id == ExternalAccountMovemet.FK_AccountingMovements_Currencies)
                         {
                             comboBox4.SelectedIndex = i;
                             break;
@@ -157,8 +157,8 @@ namespace FundsManager
                     textBox3.Enabled = false;
                     textBox5.Enabled = false;
 
-                    textBox1.Text = String.Format("{0:0.00}", DebitFromDisbursemet);
-                    textBox2.Text = String.Format("{0:0.00}", CreditFromDisbursemet);
+                    textBox1.Text = String.Format("{0:0.00}", ExternalDebit);
+                    textBox2.Text = String.Format("{0:0.00}", ExternalCredit);
                 }
             }
             catch (Exception _ex)
@@ -421,7 +421,7 @@ namespace FundsManager
                     {
                         AccountingMovement newAccountingMovement = new AccountingMovement();
 
-                        if (!FromDisbursementOperation)
+                        if (!FromExternalOperation)
                         {
                             newAccountingMovement.FK_AccountingMovements_Funds = manager.Selected;
                             newAccountingMovement.reference = textBox3.Text;
@@ -429,7 +429,7 @@ namespace FundsManager
                         }
                         else
                         {
-                            newAccountingMovement = AcctMovFromDisbursement;
+                            newAccountingMovement = ExternalAccountMovemet;
                         }
 
                         newAccountingMovement.description = textBox4.Text;
@@ -441,7 +441,7 @@ namespace FundsManager
                             newAccountingMovement.contract = txtContract.Text;
                         }
 
-                        if (!FromDisbursementOperation)
+                        if (!FromExternalOperation)
                         {
                             manager.My_db.AccountingMovements.Add(newAccountingMovement);
                         }
@@ -470,7 +470,7 @@ namespace FundsManager
 
                         button2.Enabled = false;
 
-                        if (FromDisbursementOperation)
+                        if (FromExternalOperation)
                         {
                             OperationCompleted = true;
                             this.Close();

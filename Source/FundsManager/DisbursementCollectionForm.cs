@@ -358,9 +358,9 @@ namespace FundsManager
                                 {
                                     GeneralLedgerForm gledger = new GeneralLedgerForm();
                                     gledger.StartPosition = FormStartPosition.CenterScreen;
-                                    gledger.FromDisbursementOperation = true;
-                                    gledger.AcctMovFromDisbursement = accountingMovement;
-                                    gledger.DebitFromDisbursemet = totalPaid;
+                                    gledger.FromExternalOperation = true;
+                                    gledger.ExternalAccountMovemet = accountingMovement;
+                                    gledger.ExternalDebit = totalPaid;
                                     gledger.ControlBox = false;
                                     gledger.ShowDialog();
 
