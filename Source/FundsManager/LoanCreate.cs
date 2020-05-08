@@ -151,39 +151,52 @@ namespace FundsManager
                         _loan.AccountingMovement = acctMov;
 
                         manager.My_db.Loans.Add(_loan);
-                        manager.My_db.SaveChanges();
+
+                        GeneralLedgerForm gledger = new GeneralLedgerForm();
+                        gledger.StartPosition = FormStartPosition.CenterScreen;
+                        gledger.FromExternalOperation = true;
+                        gledger.ExternalAccountMovemet = acctMov;
+                        gledger.ExternalDebit = _loan.amount;
+                        gledger.ControlBox = false;
+                        gledger.ShowDialog();
+
+                        if (!gledger.OperationCompleted)
+                        {
+                            throw new Exception("Ledger operation has been failed.");
+                        }
+
                     }
                 }
-                else
-                {
-                    //TODO: no esta claro como proceder en la modificacion pues hay mov de cuentas involucrados
-                    int _id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+                //else
+                //{
+                //    //TODO: no esta claro como proceder en la modificacion pues hay mov de cuentas involucrados
+                //    int _id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
 
-                    Loan _validation = manager.My_db.Loans.FirstOrDefault(x => x.Id != _id && x.reference == txtReference.Text && x.fund_id == manager.Selected);
+                //    Loan _validation = manager.My_db.Loans.FirstOrDefault(x => x.Id != _id && x.reference == txtReference.Text && x.fund_id == manager.Selected);
 
-                    if (_validation != null)
-                    {
-                        MessageBox.Show("Duplicated reference.");
-                        return;
-                    }
+                //    if (_validation != null)
+                //    {
+                //        MessageBox.Show("Duplicated reference.");
+                //        return;
+                //    }
 
-                    Loan _selected = manager.My_db.Loans.FirstOrDefault(x => x.Id == _id);
+                //    Loan _selected = manager.My_db.Loans.FirstOrDefault(x => x.Id == _id);
 
-                    if (_selected != null)
-                    {
-                        _selected.fund_id = manager.Selected;
-                        _selected.lender_id = lenderId;
-                        _selected.reference = txtReference.Text;
-                        _selected.interest = Math.Round(decimal.Parse(txtInterest.Text), 2);
-                        _selected.amount = Math.Round(decimal.Parse(txtAmount.Text), 2);
-                        _selected.start = dtpFrom.Value;
-                        _selected.end = dtpTo.Value;
-                        _selected.currency_id = currencyId;
-                        _selected.interest_base = rb360.Checked ? 360 : 365;
+                //    if (_selected != null)
+                //    {
+                //        _selected.fund_id = manager.Selected;
+                //        _selected.lender_id = lenderId;
+                //        _selected.reference = txtReference.Text;
+                //        _selected.interest = Math.Round(decimal.Parse(txtInterest.Text), 2);
+                //        _selected.amount = Math.Round(decimal.Parse(txtAmount.Text), 2);
+                //        _selected.start = dtpFrom.Value;
+                //        _selected.end = dtpTo.Value;
+                //        _selected.currency_id = currencyId;
+                //        _selected.interest_base = rb360.Checked ? 360 : 365;
 
-                        manager.My_db.SaveChanges();
-                    }
-                }
+                //        manager.My_db.SaveChanges();
+                //    }
+                //}
 
                 loadLoansData();
 
@@ -289,36 +302,6 @@ namespace FundsManager
 
                     manager.My_db.AccountingMovements.Add(_accountingMovement);
 
-                    Movements_Accounts _maccount110 = new Movements_Accounts();
-
-                    _maccount110.AccountingMovement = _accountingMovement;
-                    _maccount110.FK_Movements_Accounts_Funds = manager.Selected;
-                    _maccount110.FK_Movements_Accounts_Accounts = account110.Id;
-                    if (subacct110 != null)
-                        _maccount110.FK_Movements_Accounts_Subaccounts = subacct110.Id;
-                    _maccount110.debit = Math.Round(loan.amount, 2);
-                    _maccount110.credit = 0;
-
-                    int _creditFactor = 1;
-                    int _debitFactor = -1;
-
-                    if (Account.leftAccountingIncrement(account110.type))
-                    {
-                        _creditFactor = -1;
-                        _debitFactor = 1;
-                    }
-
-                    account110.amount += _debitFactor * _maccount110.debit;
-                    account110.amount += _creditFactor * _maccount110.credit;
-
-                    _maccount110.acc_amount = Math.Round(account110.amount, 2);
-
-                    subacct110.amount += _debitFactor * _maccount110.debit;
-                    subacct110.amount += _creditFactor * _maccount110.credit;
-                    _maccount110.subacc_amount = Math.Round(subacct110.amount, 2);
-
-                    manager.My_db.Movements_Accounts.Add(_maccount110);
-
                     Movements_Accounts _maccount470 = new Movements_Accounts();
 
                     _maccount470.AccountingMovement = _accountingMovement;
@@ -329,8 +312,8 @@ namespace FundsManager
                     _maccount470.debit = 0;
                     _maccount470.credit = Math.Round(loan.amount, 2);
 
-                    _creditFactor = 1;
-                    _debitFactor = -1;
+                    int _creditFactor = 1;
+                    int _debitFactor = -1;
 
                     if (Account.leftAccountingIncrement(account470.type))
                     {
