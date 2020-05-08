@@ -514,7 +514,7 @@
                                   <Value>=Fields!acct_amount_last_period.Value</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
-                                    <Format>'€'0.00</Format>
+                                    <Format>'€'#,0.00</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -635,7 +635,7 @@
                                   <Value>=Sum(Fields!acct_amount_last_period.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>'€'0.00</Format>
+                                    <Format>'€'#,0.00</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -665,6 +665,7 @@
                             <rd:FormatSymbolCulture>es-ES</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -1284,7 +1285,6 @@
                               <PaddingBottom>2pt</PaddingBottom>
                             </Style>
                           </Textbox>
-                          <rd:Selected>true</rd:Selected>
                         </CellContents>
                       </TablixHeader>
                       <TablixMembers>
