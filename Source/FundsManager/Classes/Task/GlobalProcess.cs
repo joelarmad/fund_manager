@@ -20,13 +20,13 @@ namespace FundsManager.Classes.Task
                 
                 DateTime _now = DateTime.Now.Date;
 
-                List<Bond> _bonds = _manager.My_db.Bonds.Where(x => x.issued <= _now && x.active == 1).ToList();
+                List<BondsTFF> _bonds = _manager.My_db.BondsTFFs.Where(x => x.issued <= _now && x.active == 1).ToList();
 
-                foreach (Bond _bond in _bonds)
+                foreach (BondsTFF _bond in _bonds)
                 {
-                    List<BondsInvestor> _bondInvestors = _manager.My_db.BondsInvestors.Where(x => x.FK_BondsInvestors_Bonds == _bond.Id).ToList();
+                    List<BondsTFFInvestor> _bondInvestors = _manager.My_db.BondsTFFInvestors.Where(x => x.FK_BondsInvestors_Bonds == _bond.Id).ToList();
 
-                    foreach (BondsInvestor _bondInvestor in _bondInvestors)
+                    foreach (BondsTFFInvestor _bondInvestor in _bondInvestors)
                     {
                         DateTime _interestDate = _bond.issued.AddMonths(1);
 
@@ -78,7 +78,7 @@ namespace FundsManager.Classes.Task
             }
         }
 
-        private static void generateRegistryForBondInterest(Bond aBond, BondsInvestor aInvestor, DateTime aInterestDate, decimal aInvestorAmount, decimal aFundAmount)
+        private static void generateRegistryForBondInterest(BondsTFF aBond, BondsTFFInvestor aInvestor, DateTime aInterestDate, decimal aInvestorAmount, decimal aFundAmount)
         {
             try
             {

@@ -20,7 +20,5 @@ namespace FundsManager
         public System.DateTime InterestDate { get; set; }
         public bool Extracted { get; set; }
         public Nullable<System.DateTime> ExtractionDate { get; set; }
-    
-        public virtual Bond Bond { get; set; }
     }
 }

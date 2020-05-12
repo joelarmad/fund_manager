@@ -19,7 +19,7 @@ namespace FundsManager
             InitializeComponent();
             listView1.FullRowSelect = true;
 
-            foreach (Bond _bond in manager.My_db.Bonds)
+            foreach (BondsTFF _bond in manager.My_db.BondsTFFs)
             {
                 Decimal amount = (decimal)_bond.pieces * _bond.price;
                 string[] row = { _bond.number, Convert.ToString(_bond.pieces), string.Format("€{0:N2}", amount), Convert.ToString(_bond.issued) };

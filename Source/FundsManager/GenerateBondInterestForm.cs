@@ -21,7 +21,7 @@ namespace FundsManager
             InitializeComponent();
             total_bond_interest = 0;
             total_tff_interest = 0;
-            foreach (Bond _bond in manager.My_db.Bonds)
+            foreach (BondsTFF _bond in manager.My_db.BondsTFFs)
             {
                 DateTime now = DateTime.Now;
                 var startDate = new DateTime(now.Year, now.Month, 1);
@@ -39,7 +39,7 @@ namespace FundsManager
                 ListViewItem my_item = new ListViewItem(row);
                 my_item.Font = new Font(listView1.Font, FontStyle.Bold);
                 listView1.Items.Add(my_item);
-                foreach (BondsInvestor _investor in _bond.BondsInvestors)
+                foreach (BondsTFFInvestor _investor in _bond.BondsTFFInvestors)
                 {
 
                     String name = manager.My_db.Investors.Find(_investor.FK_BondsInvestors_Investors).name;

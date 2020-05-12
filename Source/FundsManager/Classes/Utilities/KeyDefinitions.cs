@@ -8,11 +8,18 @@ namespace FundsManager.Classes.Utilities
 {
     public static class KeyDefinitions
     {
-        public static string BOND_CONSECUTIVE_KEY
+        public static string BONDTFF_CONSECUTIVE_KEY
         {
             get
             {
-                return "BOND_CONSECUTIVE";
+                return "BONDTFF_CONSECUTIVE";
+            }
+        }
+        public static string BONDTFAM_CONSECUTIVE_KEY
+        {
+            get
+            {
+                return "BONDTFAM_CONSECUTIVE";
             }
         }
 

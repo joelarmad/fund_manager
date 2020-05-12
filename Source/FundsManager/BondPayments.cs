@@ -44,9 +44,9 @@ namespace FundsManager
 
             int _investorId = fInvestorId = Convert.ToInt32(cbInvestor.SelectedValue);
 
-            foreach (BondsInvestor _bondInvestor in manager.My_db.BondsInvestors.Where(x => x.FK_BondsInvestors_Investors == _investorId))
+            foreach (BondsTFFInvestor _bondInvestor in manager.My_db.BondsTFFInvestors.Where(x => x.FK_BondsInvestors_Investors == _investorId))
             {
-                foreach (Bond _bond in manager.My_db.Bonds.Where(x => x.Id == _bondInvestor.FK_BondsInvestors_Bonds && x.FK_Bonds_Funds == manager.Selected))
+                foreach (BondsTFF _bond in manager.My_db.BondsTFFs.Where(x => x.Id == _bondInvestor.FK_BondsInvestors_Bonds && x.FK_Bonds_Funds == manager.Selected))
                 {
                     comboSource.Add(_bond.Id, _bond.number);
                 }
@@ -81,8 +81,8 @@ namespace FundsManager
             int _investorId = fInvestorId = Convert.ToInt32(cbInvestor.SelectedValue);
             int _bondId = fBondId = Convert.ToInt32(cbBond.SelectedValue);
 
-            Bond _bond = manager.My_db.Bonds.FirstOrDefault(x => x.Id == _bondId);
-            BondsInvestor _bondInvestor = manager.My_db.BondsInvestors.FirstOrDefault(x => x.FK_BondsInvestors_Bonds == _bondId && x.FK_BondsInvestors_Investors == _investorId);
+            BondsTFF _bond = manager.My_db.BondsTFFs.FirstOrDefault(x => x.Id == _bondId);
+            BondsTFFInvestor _bondInvestor = manager.My_db.BondsTFFInvestors.FirstOrDefault(x => x.FK_BondsInvestors_Bonds == _bondId && x.FK_BondsInvestors_Investors == _investorId);
             
             if (_bond != null && _bondInvestor != null)
             {

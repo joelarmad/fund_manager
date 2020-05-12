@@ -46,6 +46,7 @@
             this.fundsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.investorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bondsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bondsTFAMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.underlyingDebtorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shareholdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.letterOfCreditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,6 +66,11 @@
             this.delayInterestToAccrueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.delayInterestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unknownRoutineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loanInterestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.repaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loanRenegotiationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.investmentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,11 +79,8 @@
             this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loanInterestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.repaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loanRenegotiationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bondsTFAMToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.activateToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -112,6 +115,7 @@
             this.fundsToolStripMenuItem,
             this.investorsToolStripMenuItem,
             this.bondsToolStripMenuItem,
+            this.bondsTFAMToolStripMenuItem,
             this.underlyingDebtorsToolStripMenuItem,
             this.shareholdersToolStripMenuItem,
             this.letterOfCreditToolStripMenuItem,
@@ -223,8 +227,15 @@
             // 
             this.bondsToolStripMenuItem.Name = "bondsToolStripMenuItem";
             this.bondsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.bondsToolStripMenuItem.Text = "Bonds";
+            this.bondsToolStripMenuItem.Text = "Bonds TFF";
             this.bondsToolStripMenuItem.Click += new System.EventHandler(this.bondsToolStripMenuItem_Click);
+            // 
+            // bondsTFAMToolStripMenuItem
+            // 
+            this.bondsTFAMToolStripMenuItem.Name = "bondsTFAMToolStripMenuItem";
+            this.bondsTFAMToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.bondsTFAMToolStripMenuItem.Text = "Bonds TFAM";
+            this.bondsTFAMToolStripMenuItem.Click += new System.EventHandler(this.bondsTFAMToolStripMenuItem_Click);
             // 
             // underlyingDebtorsToolStripMenuItem
             // 
@@ -266,6 +277,7 @@
             this.operationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.movementToolStripMenuItem,
             this.bondsToolStripMenuItem2,
+            this.bondsTFAMToolStripMenuItem1,
             this.investmentsToolStripMenuItem,
             this.unknownRoutineToolStripMenuItem,
             this.loanToolStripMenuItem});
@@ -288,7 +300,7 @@
             this.makePaymentsToolStripMenuItem});
             this.bondsToolStripMenuItem2.Name = "bondsToolStripMenuItem2";
             this.bondsToolStripMenuItem2.Size = new System.Drawing.Size(169, 22);
-            this.bondsToolStripMenuItem2.Text = "Bonds";
+            this.bondsToolStripMenuItem2.Text = "Bonds TFF";
             // 
             // activateToolStripMenuItem
             // 
@@ -372,6 +384,45 @@
             this.unknownRoutineToolStripMenuItem.Text = "Unknown Routine";
             this.unknownRoutineToolStripMenuItem.Click += new System.EventHandler(this.unknownRoutineToolStripMenuItem_Click);
             // 
+            // loanToolStripMenuItem
+            // 
+            this.loanToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createToolStripMenuItem,
+            this.loanInterestToolStripMenuItem,
+            this.repaymentToolStripMenuItem,
+            this.loanRenegotiationToolStripMenuItem});
+            this.loanToolStripMenuItem.Name = "loanToolStripMenuItem";
+            this.loanToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.loanToolStripMenuItem.Text = "Loan";
+            // 
+            // createToolStripMenuItem
+            // 
+            this.createToolStripMenuItem.Name = "createToolStripMenuItem";
+            this.createToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.createToolStripMenuItem.Text = "Create";
+            this.createToolStripMenuItem.Click += new System.EventHandler(this.createToolStripMenuItem_Click);
+            // 
+            // loanInterestToolStripMenuItem
+            // 
+            this.loanInterestToolStripMenuItem.Name = "loanInterestToolStripMenuItem";
+            this.loanInterestToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.loanInterestToolStripMenuItem.Text = "Loan Interest";
+            this.loanInterestToolStripMenuItem.Click += new System.EventHandler(this.loanInterestToolStripMenuItem_Click);
+            // 
+            // repaymentToolStripMenuItem
+            // 
+            this.repaymentToolStripMenuItem.Name = "repaymentToolStripMenuItem";
+            this.repaymentToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.repaymentToolStripMenuItem.Text = "Repayment";
+            this.repaymentToolStripMenuItem.Click += new System.EventHandler(this.repaymentToolStripMenuItem_Click);
+            // 
+            // loanRenegotiationToolStripMenuItem
+            // 
+            this.loanRenegotiationToolStripMenuItem.Name = "loanRenegotiationToolStripMenuItem";
+            this.loanRenegotiationToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.loanRenegotiationToolStripMenuItem.Text = "Loan Renegotiation";
+            this.loanRenegotiationToolStripMenuItem.Click += new System.EventHandler(this.loanRenegotiationToolStripMenuItem_Click);
+            // 
             // reportsToolStripMenuItem
             // 
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -434,44 +485,20 @@
             this.returnsStateToolStripMenuItem.Text = "Profit && Loss Statement";
             this.returnsStateToolStripMenuItem.Click += new System.EventHandler(this.returnsStateToolStripMenuItem_Click);
             // 
-            // loanToolStripMenuItem
+            // bondsTFAMToolStripMenuItem1
             // 
-            this.loanToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createToolStripMenuItem,
-            this.loanInterestToolStripMenuItem,
-            this.repaymentToolStripMenuItem,
-            this.loanRenegotiationToolStripMenuItem});
-            this.loanToolStripMenuItem.Name = "loanToolStripMenuItem";
-            this.loanToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.loanToolStripMenuItem.Text = "Loan";
+            this.bondsTFAMToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.activateToolStripMenuItem1});
+            this.bondsTFAMToolStripMenuItem1.Name = "bondsTFAMToolStripMenuItem1";
+            this.bondsTFAMToolStripMenuItem1.Size = new System.Drawing.Size(169, 22);
+            this.bondsTFAMToolStripMenuItem1.Text = "Bonds TFAM";
             // 
-            // createToolStripMenuItem
+            // activateToolStripMenuItem1
             // 
-            this.createToolStripMenuItem.Name = "createToolStripMenuItem";
-            this.createToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.createToolStripMenuItem.Text = "Create";
-            this.createToolStripMenuItem.Click += new System.EventHandler(this.createToolStripMenuItem_Click);
-            // 
-            // loanInterestToolStripMenuItem
-            // 
-            this.loanInterestToolStripMenuItem.Name = "loanInterestToolStripMenuItem";
-            this.loanInterestToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.loanInterestToolStripMenuItem.Text = "Loan Interest";
-            this.loanInterestToolStripMenuItem.Click += new System.EventHandler(this.loanInterestToolStripMenuItem_Click);
-            // 
-            // repaymentToolStripMenuItem
-            // 
-            this.repaymentToolStripMenuItem.Name = "repaymentToolStripMenuItem";
-            this.repaymentToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.repaymentToolStripMenuItem.Text = "Repayment";
-            this.repaymentToolStripMenuItem.Click += new System.EventHandler(this.repaymentToolStripMenuItem_Click);
-            // 
-            // loanRenegotiationToolStripMenuItem
-            // 
-            this.loanRenegotiationToolStripMenuItem.Name = "loanRenegotiationToolStripMenuItem";
-            this.loanRenegotiationToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.loanRenegotiationToolStripMenuItem.Text = "Loan Renegotiation";
-            this.loanRenegotiationToolStripMenuItem.Click += new System.EventHandler(this.loanRenegotiationToolStripMenuItem_Click);
+            this.activateToolStripMenuItem1.Name = "activateToolStripMenuItem1";
+            this.activateToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.activateToolStripMenuItem1.Text = "Activate";
+            this.activateToolStripMenuItem1.Click += new System.EventHandler(this.activateToolStripMenuItem1_Click);
             // 
             // Form1
             // 
@@ -548,6 +575,9 @@
         private System.Windows.Forms.ToolStripMenuItem loanInterestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem repaymentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loanRenegotiationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bondsTFAMToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bondsTFAMToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem activateToolStripMenuItem1;
     }
 }
 

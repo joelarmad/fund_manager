@@ -25,7 +25,6 @@ namespace FundsManager
             this.AccountsEmployees = new HashSet<AccountsEmployee>();
             this.BankingAccounts = new HashSet<BankingAccount>();
             this.Banks = new HashSet<Bank>();
-            this.Bonds = new HashSet<Bond>();
             this.Clients = new HashSet<Client>();
             this.Countries = new HashSet<Country>();
             this.Creditors = new HashSet<Creditor>();
@@ -46,6 +45,8 @@ namespace FundsManager
             this.Subaccounts = new HashSet<Subaccount>();
             this.UnderlyingDebtors = new HashSet<UnderlyingDebtor>();
             this.Loans = new HashSet<Loan>();
+            this.BondsTFAMs = new HashSet<BondsTFAM>();
+            this.BondsTFFs = new HashSet<BondsTFF>();
         }
     
         public int Id { get; set; }
@@ -69,8 +70,6 @@ namespace FundsManager
         public virtual ICollection<BankingAccount> BankingAccounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bank> Banks { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bond> Bonds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Client> Clients { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -111,5 +110,9 @@ namespace FundsManager
         public virtual ICollection<UnderlyingDebtor> UnderlyingDebtors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Loan> Loans { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BondsTFAM> BondsTFAMs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BondsTFF> BondsTFFs { get; set; }
     }
 }

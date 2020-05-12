@@ -29,5 +29,7 @@ namespace FundsManager
         public Nullable<decimal> Shift_Amount { get; set; }
         public decimal Acc_Amount { get; set; }
         public decimal SubAcc_amount { get; set; }
+        public string Detail { get; set; }
+        public string Currency { get; set; }
     }
 }

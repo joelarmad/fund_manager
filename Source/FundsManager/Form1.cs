@@ -164,7 +164,7 @@ namespace FundsManager
         private void bondsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            BondsForm bond_form = new BondsForm();
+            BondsTFFForm bond_form = new BondsTFFForm();
             bond_form.MdiParent = this;
             bond_form.Show();
         }
@@ -362,6 +362,22 @@ namespace FundsManager
             LoanRenegotiation form = new LoanRenegotiation();
             form.MdiParent = this;
             form.Show();
+        }
+
+        private void bondsTFAMToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            BondsTFAMForm bond_form = new BondsTFAMForm();
+            bond_form.MdiParent = this;
+            bond_form.Show();
+        }
+
+        private void activateToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            BondsTFAMActivation bond_form = new BondsTFAMActivation();
+            bond_form.MdiParent = this;
+            bond_form.Show();
         }
     }
 }
