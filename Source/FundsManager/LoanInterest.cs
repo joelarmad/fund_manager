@@ -57,7 +57,7 @@ namespace FundsManager
                             _loanToAccrue.Id.ToString(),
                             _loanToAccrue.reference,
                             String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _loanToAccrue.amount),
-                            String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _loanToAccrue.interest),
+                            String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:N2}", _loanToAccrue.interest) + "%",
                             _loanToAccrue.start_date.ToLongDateString(),
                             _loanToAccrue.end_date.ToLongDateString(),
                             financingDays.ToString()

@@ -20,5 +20,15 @@ namespace FundsManager
             label4.Text = string.Format("€{0:N2}", _total_tff_interest);
             label8.Text = string.Format("€{0:N2}", _total_tff_interest);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
