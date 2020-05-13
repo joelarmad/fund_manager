@@ -271,25 +271,7 @@ namespace FundsManager
                                             _maccount840.FK_Movements_Accounts_Subaccounts = subacct840.Id;
                                         _maccount840.debit = Math.Round(_interest, 2);
                                         _maccount840.credit = 0;
-
-                                        int _creditFactor = 1;
-                                        int _debitFactor = -1;
-
-                                        if (Account.leftAccountingIncrement(account840.type))
-                                        {
-                                            _creditFactor = -1;
-                                            _debitFactor = 1;
-                                        }
-
-                                        account840.amount += _debitFactor * _maccount840.debit;
-                                        account840.amount += _creditFactor * _maccount840.credit;
-
-                                        _maccount840.acc_amount = Math.Round(account840.amount, 2);
-
-                                        subacct840.amount += _debitFactor * _maccount840.debit;
-                                        subacct840.amount += _creditFactor * _maccount840.credit;
-                                        _maccount840.subacc_amount = Math.Round(subacct840.amount, 2);
-
+                                        
                                         manager.My_db.Movements_Accounts.Add(_maccount840);
 
                                         Movements_Accounts _maccount470 = new Movements_Accounts();
@@ -299,21 +281,7 @@ namespace FundsManager
                                         _maccount470.FK_Movements_Accounts_Accounts = account470.Id;
                                         _maccount470.debit = 0;
                                         _maccount470.credit = Math.Round(_interest, 2);
-
-                                        _creditFactor = 1;
-                                        _debitFactor = -1;
-
-                                        if (Account.leftAccountingIncrement(account470.type))
-                                        {
-                                            _creditFactor = -1;
-                                            _debitFactor = 1;
-                                        }
-
-                                        account470.amount += _debitFactor * _maccount470.debit;
-                                        account470.amount += _creditFactor * _maccount470.credit;
-
-                                        _maccount470.acc_amount = Math.Round(account470.amount, 2);
-
+                                        
                                         manager.My_db.Movements_Accounts.Add(_maccount470);
 
                                     }

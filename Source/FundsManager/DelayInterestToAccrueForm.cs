@@ -293,25 +293,7 @@ namespace FundsManager
                                         _maccount128.subaccount_type = 1;
                                         _maccount128.debit = Math.Round(_interest, 2);
                                         _maccount128.credit = 0;
-
-                                        int _creditFactor = 1;
-                                        int _debitFactor = -1;
-
-                                        if (Account.leftAccountingIncrement(account128.type))
-                                        {
-                                            _creditFactor = -1;
-                                            _debitFactor = 1;
-                                        }
-
-                                        account128.amount += _debitFactor * _maccount128.debit;
-                                        account128.amount += _creditFactor * _maccount128.credit;
-
-                                        _maccount128.acc_amount = Math.Round(account128.amount, 2);
-
-                                        subacct128.amount += _debitFactor * _maccount128.debit;
-                                        subacct128.amount += _creditFactor * _maccount128.credit;
-                                        _maccount128.subacc_amount = Math.Round(subacct128.amount, 2);
-
+                                        
                                         manager.My_db.Movements_Accounts.Add(_maccount128);
 
                                         Movements_Accounts _maccount901 = new Movements_Accounts();
@@ -324,21 +306,7 @@ namespace FundsManager
                                         _maccount901.subaccount_type = 1;
                                         _maccount901.debit = 0;
                                         _maccount901.credit = Math.Round(_interest, 2);
-
-                                        _creditFactor = 1;
-                                        _debitFactor = -1;
-
-                                        if (Account.leftAccountingIncrement(account901.type))
-                                        {
-                                            _creditFactor = -1;
-                                            _debitFactor = 1;
-                                        }
-
-                                        account901.amount += _debitFactor * _maccount901.debit;
-                                        account901.amount += _creditFactor * _maccount901.credit;
-
-                                        _maccount901.acc_amount = Math.Round(account901.amount, 2);
-
+                                        
                                         manager.My_db.Movements_Accounts.Add(_maccount901);
                                         
                                     }

@@ -26,7 +26,6 @@ namespace FundsManager
         }
     
         public virtual DbSet<AccountingMovement> AccountingMovements { get; set; }
-        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<AccountsBankingAccount> AccountsBankingAccounts { get; set; }
         public virtual DbSet<AccountsClient> AccountsClients { get; set; }
         public virtual DbSet<AccountsCreditor> AccountsCreditors { get; set; }
@@ -60,17 +59,13 @@ namespace FundsManager
         public virtual DbSet<letter_of_credits> letter_of_credits { get; set; }
         public virtual DbSet<LoanGeneratedInterestDetail> LoanGeneratedInterestDetails { get; set; }
         public virtual DbSet<LoanGeneratedInterest> LoanGeneratedInterests { get; set; }
-        public virtual DbSet<Movements_Accounts> Movements_Accounts { get; set; }
         public virtual DbSet<OtherDetail> OtherDetails { get; set; }
         public virtual DbSet<Resource> Resources { get; set; }
         public virtual DbSet<Sector> Sectors { get; set; }
         public virtual DbSet<ServiceSupplier> ServiceSuppliers { get; set; }
         public virtual DbSet<Shareholder> Shareholders { get; set; }
         public virtual DbSet<Shipment> Shipments { get; set; }
-        public virtual DbSet<Subaccount> Subaccounts { get; set; }
         public virtual DbSet<UnderlyingDebtor> UnderlyingDebtors { get; set; }
-        public virtual DbSet<AccountBalanceView> AccountBalanceViews { get; set; }
-        public virtual DbSet<BalanceResumeView> BalanceResumeViews { get; set; }
         public virtual DbSet<BondDetail> BondDetails { get; set; }
         public virtual DbSet<BookingGeneratedInterestView> BookingGeneratedInterestViews { get; set; }
         public virtual DbSet<ClientContract> ClientContracts { get; set; }
@@ -80,17 +75,12 @@ namespace FundsManager
         public virtual DbSet<DisbursementsForAddendum> DisbursementsForAddendums { get; set; }
         public virtual DbSet<DisbursementsToBeCollected> DisbursementsToBeCollecteds { get; set; }
         public virtual DbSet<InvestmentsView> InvestmentsViews { get; set; }
-        public virtual DbSet<MovementsView> MovementsViews { get; set; }
-        public virtual DbSet<ProfitResultsView> ProfitResultsViews { get; set; }
         public virtual DbSet<ProfitShareToAccrue> ProfitShareToAccrues { get; set; }
         public virtual DbSet<ProfitsResumeView> ProfitsResumeViews { get; set; }
-        public virtual DbSet<SubAccountBalance> SubAccountBalances { get; set; }
         public virtual DbSet<Template_Balance_Sheet> Template_Balance_Sheet { get; set; }
         public virtual DbSet<Template_Profit_Loss> Template_Profit_Loss { get; set; }
-        public virtual DbSet<TotalAsset> TotalAssets { get; set; }
         public virtual DbSet<TotalExpense> TotalExpenses { get; set; }
         public virtual DbSet<TotalIncome> TotalIncomes { get; set; }
-        public virtual DbSet<TotalLiability> TotalLiabilities { get; set; }
         public virtual DbSet<UnlinkedDisbursement> UnlinkedDisbursements { get; set; }
         public virtual DbSet<Loan_Repayments> Loan_Repayments { get; set; }
         public virtual DbSet<Loans_View> Loans_View { get; set; }
@@ -99,5 +89,11 @@ namespace FundsManager
         public virtual DbSet<BondsTFFInvestor> BondsTFFInvestors { get; set; }
         public virtual DbSet<BondsTFAM> BondsTFAMs { get; set; }
         public virtual DbSet<BondsTFAMGeneratedInterest> BondsTFAMGeneratedInterests { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Subaccount> Subaccounts { get; set; }
+        public virtual DbSet<AccountBalanceView> AccountBalanceViews { get; set; }
+        public virtual DbSet<SubAccountBalance> SubAccountBalances { get; set; }
+        public virtual DbSet<Movements_Accounts> Movements_Accounts { get; set; }
+        public virtual DbSet<MovementsView> MovementsViews { get; set; }
     }
 }

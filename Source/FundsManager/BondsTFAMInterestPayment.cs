@@ -80,28 +80,7 @@ namespace FundsManager
                                     _maccount540.credit = 0;
 
                                     totalPaid += _maccount540.debit;
-
-                                    int _creditFactor = 1;
-                                    int _debitFactor = -1;
-
-                                    if (Account.leftAccountingIncrement(account540.type))
-                                    {
-                                        _creditFactor = -1;
-                                        _debitFactor = 1;
-                                    }
-
-                                    account540.amount += _debitFactor * _maccount540.debit;
-                                    account540.amount += _creditFactor * _maccount540.credit;
-
-                                    _maccount540.acc_amount = Math.Round(account540.amount, 2);
-
-                                    if (subacct40 != null)
-                                    {
-                                        subacct40.amount += _debitFactor * _maccount540.debit;
-                                        subacct40.amount += _creditFactor * _maccount540.credit;
-                                        _maccount540.subacc_amount = Math.Round(subacct40.amount, 2);
-                                    }
-
+                                    
                                     manager.My_db.Movements_Accounts.Add(_maccount540);
                                 }
                             }

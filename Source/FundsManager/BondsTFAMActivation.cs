@@ -71,28 +71,7 @@ namespace FundsManager
                             //_maccount125.subaccount_type = 1;
                             _maccount.debit = 0;
                             _maccount.credit = Math.Round(bond.amount, 2);
-
-                            int _creditFactor = 1;
-                            int _debitFactor = -1;
-
-                            if (Account.leftAccountingIncrement(account540.type))
-                            {
-                                _creditFactor = -1;
-                                _debitFactor = 1;
-                            }
-
-                            account540.amount += _debitFactor * _maccount.debit;
-                            account540.amount += _creditFactor * _maccount.credit;
-
-                            _maccount.acc_amount = Math.Round(account540.amount, 2);
-
-                            if (subacct != null)
-                            {
-                                subacct.amount += _debitFactor * _maccount.debit;
-                                subacct.amount += _creditFactor * _maccount.credit;
-                                _maccount.subacc_amount = Math.Round(subacct.amount, 2);
-                            }
-
+                            
                             manager.My_db.Movements_Accounts.Add(_maccount);
 
                             GeneralLedgerForm gledger = new GeneralLedgerForm();

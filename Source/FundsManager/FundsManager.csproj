@@ -137,9 +137,6 @@
     <Compile Include="AddendumsForm.Designer.cs">
       <DependentUpon>AddendumsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BalanceResumeView.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Bank.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -539,9 +536,6 @@
     <Compile Include="DelayInterestToAccrueForm.Designer.cs">
       <DependentUpon>DelayInterestToAccrueForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProfitResultsView.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="ProfitShareToAccrue.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -656,16 +650,10 @@
     <Compile Include="Template_Profit_Loss.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="TotalAsset.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="TotalExpense.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="TotalIncome.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TotalLiability.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="UnderlyingDebtor.cs">

@@ -228,28 +228,7 @@ namespace FundsManager
                                         _maccount125.credit = 0;
 
                                         totalPaid += toPay.amount;
-
-                                        int _creditFactor = 1;
-                                        int _debitFactor = -1;
-
-                                        if (Account.leftAccountingIncrement(account125.type))
-                                        {
-                                            _creditFactor = -1;
-                                            _debitFactor = 1;
-                                        }
-
-                                        account125.amount += _debitFactor * _maccount125.debit;
-                                        account125.amount += _creditFactor * _maccount125.credit;
-
-                                        _maccount125.acc_amount = Math.Round(account125.amount, 2);
-
-                                        if (subacct125 != null)
-                                        {
-                                            subacct125.amount += _debitFactor * _maccount125.debit;
-                                            subacct125.amount += _creditFactor * _maccount125.credit;
-                                            _maccount125.subacc_amount = Math.Round(subacct125.amount, 2);
-                                        }
-
+                                        
                                         manager.My_db.Movements_Accounts.Add(_maccount125);
                                     }
                                 }

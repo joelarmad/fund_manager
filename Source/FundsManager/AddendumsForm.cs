@@ -784,25 +784,7 @@ namespace FundsManager
                     _maccount125.subaccount_type = 1;
                     _maccount125.credit = Math.Round(fAmount, 2);
                     _maccount125.debit = 0;
-
-                    int _creditFactor = 1;
-                    int _debitFactor = -1;
-
-                    if (Account.leftAccountingIncrement(account125.type))
-                    {
-                        _creditFactor = -1;
-                        _debitFactor = 1;
-                    }
-
-                    account125.amount += _debitFactor * _maccount125.debit;
-                    account125.amount += _creditFactor * _maccount125.credit;
-
-                    _maccount125.acc_amount = Math.Round(account125.amount, 2);
-
-                    subacct125.amount += _debitFactor * _maccount125.debit;
-                    subacct125.amount += _creditFactor * _maccount125.credit;
-                    _maccount125.subacc_amount = Math.Round(subacct125.amount, 2);
-
+                    
                     manager.My_db.Movements_Accounts.Add(_maccount125);
 
                     Movements_Accounts _maccount128 = new Movements_Accounts();
@@ -817,25 +799,7 @@ namespace FundsManager
                     //_maccount128.credit = Math.Round(fDelayedInterest, 2);
                     _maccount128.credit = Math.Round(fProfitShare, 2);
                     _maccount128.debit = 0;
-
-                    _creditFactor = 1;
-                    _debitFactor = -1;
-
-                    if (Account.leftAccountingIncrement(account128.type))
-                    {
-                        _creditFactor = -1;
-                        _debitFactor = 1;
-                    }
-
-                    account128.amount += _debitFactor * _maccount128.debit;
-                    account128.amount += _creditFactor * _maccount128.credit;
-
-                    _maccount128.acc_amount = Math.Round(account128.amount, 2);
-
-                    subacct128.amount += _debitFactor * _maccount128.debit;
-                    subacct128.amount += _creditFactor * _maccount128.credit;
-                    _maccount128.subacc_amount = Math.Round(subacct128.amount, 2);
-
+                    
                     manager.My_db.Movements_Accounts.Add(_maccount128);
 
                     _book.Movements_Accounts = _maccount125;
@@ -876,16 +840,7 @@ namespace FundsManager
                             _creditFactor = -1;
                             _debitFactor = 1;
                         }
-
-                        account125.amount += _debitFactor * _maccount125.debit;
-                        account125.amount += _creditFactor * _maccount125.credit;
-
-                        _maccount125.acc_amount = Math.Round(account125.amount, 2);
-
-                        subacct125.amount += _debitFactor * _maccount125.debit;
-                        subacct125.amount += _creditFactor * _maccount125.credit;
-                        _maccount125.subacc_amount = Math.Round(subacct125.amount, 2);
-
+                        
                         manager.My_db.Movements_Accounts.Add(_maccount125);
 
                         Movements_Accounts _maccount128 = new Movements_Accounts();
@@ -909,16 +864,7 @@ namespace FundsManager
                             _creditFactor = -1;
                             _debitFactor = 1;
                         }
-
-                        account128.amount += _debitFactor * _maccount128.debit;
-                        account128.amount += _creditFactor * _maccount128.credit;
-
-                        _maccount128.acc_amount = Math.Round(account128.amount, 2);
-
-                        subacct128.amount += _debitFactor * _maccount128.debit;
-                        subacct128.amount += _creditFactor * _maccount128.credit;
-                        _maccount128.subacc_amount = Math.Round(subacct128.amount, 2);
-
+                        
                         manager.My_db.Movements_Accounts.Add(_maccount128);
 
                         _booking.Movements_Accounts = _maccount125;

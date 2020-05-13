@@ -18,6 +18,5 @@ namespace FundsManager
         public string acct_number { get; set; }
         public string acct_type { get; set; }
         public string acct_name { get; set; }
-        public decimal acct_amount { get; set; }
     }
 }

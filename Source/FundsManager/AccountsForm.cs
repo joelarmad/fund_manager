@@ -121,7 +121,6 @@ namespace FundsManager
 
                         Account _account = new Account();
                         _account.name = txtName.Text;
-                        _account.amount = 0;
                         _account.number = txtAccountNumber.Text;
                         _account.FK_Accounts_Funds = manager.Selected;
                         _account.type = typeId;

@@ -317,9 +317,6 @@ namespace FundsManager
 
                     manager.My_db.Movements_Accounts.Add(_movAcctBond);
 
-                    _CashAtBank.amount += (decimal)bond.pieces * bond.price;
-                    _Bonds.amount -= (decimal)bond.pieces * bond.price;
-
                     manager.My_db.SaveChanges();
 
                     investors.Clear();

@@ -311,21 +311,7 @@ namespace FundsManager
                         _maccount470.FK_Movements_Accounts_Subaccounts = subacct470.Id;
                     _maccount470.debit = 0;
                     _maccount470.credit = Math.Round(loan.amount, 2);
-
-                    int _creditFactor = 1;
-                    int _debitFactor = -1;
-
-                    if (Account.leftAccountingIncrement(account470.type))
-                    {
-                        _creditFactor = -1;
-                        _debitFactor = 1;
-                    }
-
-                    account470.amount += _debitFactor * _maccount470.debit;
-                    account470.amount += _creditFactor * _maccount470.credit;
-
-                    _maccount470.acc_amount = Math.Round(account470.amount, 2);
-
+                    
                     manager.My_db.Movements_Accounts.Add(_maccount470);
                 }
 

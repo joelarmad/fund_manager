@@ -20,8 +20,8 @@ namespace FundsManager
         public int employee_id { get; set; }
         public decimal amount { get; set; }
     
-        public virtual Account Account { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual Fund Fund { get; set; }
+        public virtual Account Account { get; set; }
     }
 }

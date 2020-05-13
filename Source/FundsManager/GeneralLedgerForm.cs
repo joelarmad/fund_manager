@@ -545,22 +545,13 @@ namespace FundsManager
             try
             {
                 decimal _latestAmount = 0;
-                bool _found = false;
 
                 foreach (Movement _movement in movements)
                 {
                     if (_movement.Account == aAccountId)
                     {
                         _latestAmount = _movement.AccountBalance;
-                        _found = true;
                     }
-                }
-
-                if (!_found)
-                {
-                    Account _account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == aAccountId);
-
-                    _latestAmount = _account.amount;
                 }
 
                 return _latestAmount + amountShift;
@@ -577,22 +568,13 @@ namespace FundsManager
             try
             {
                 decimal _latestAmount = 0;
-                bool _found = false;
 
                 foreach (Movement _movement in movements)
                 {
                     if (_movement.Subaccount == aSubAccountId)
                     {
                         _latestAmount = _movement.SubAccountBalance;
-                        _found = true;
                     }
-                }
-
-                if (!_found)
-                {
-                    Subaccount _subAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == aSubAccountId);
-
-                    _latestAmount = _subAccount.amount;
                 }
 
                 return _latestAmount + amountShift;
@@ -1126,31 +1108,7 @@ namespace FundsManager
 
             Account _account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == toSave.Account);
             Subaccount _subAccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == toSave.Subaccount);
-
-            int _creditFactor = 1;
-            int _debitFactor = -1;
-
-            if (Account.leftAccountingIncrement(_account.type))
-            {
-                _creditFactor = -1;
-                _debitFactor = 1;
-            }
-
-            _account.amount += _debitFactor * toSave.Debit;
-            _account.amount += _creditFactor * toSave.Credit;
-            movementAccountToSave.acc_amount = Math.Round(_account.amount, 2);
-
-            if (_subAccount != null)
-            {
-                _subAccount.amount += _debitFactor * toSave.Debit;
-                _subAccount.amount += _creditFactor * toSave.Credit;
-                movementAccountToSave.subacc_amount = Math.Round(_subAccount.amount, 2);
-            }
-            else
-            {
-                movementAccountToSave.subacc_amount = 0;
-            }
-
+            
             if (toSave.Id == 0)
             {
                 manager.My_db.Movements_Accounts.Add(movementAccountToSave);
