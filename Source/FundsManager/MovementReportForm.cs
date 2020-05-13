@@ -47,7 +47,7 @@ namespace FundsManager
         {
             try
             {
-                this.movementsViewTableAdapter.FillByFilters(this.fundsDBDataSet.MovementsView, manager.Selected, txtReference.Text.Trim(), cbAccount.SelectedValue != null ? int.Parse(cbAccount.SelectedValue.ToString()) : 0, dtpFrom.Value, dtpTo.Value);
+                this.movementsViewTableAdapter.FillByFilters(this.fundsDBDataSet.MovementsView, manager.Selected, txtReference.Text.Trim(), cbAccount.SelectedValue != null ? int.Parse(cbAccount.SelectedValue.ToString()) : 0, dtpFrom.Value.Date, dtpTo.Value.Date.AddHours(23).AddMinutes(59).AddSeconds(59));
                 
             }
             catch (Exception _ex)

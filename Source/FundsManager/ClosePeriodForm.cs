@@ -114,7 +114,7 @@ namespace FundsManager
                     {
                         _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
                         _accountingMovement.description = "Period Closure";
-                        _accountingMovement.date = new DateTime(selectedYear, 12, 31, 23, 59, 59, 999);
+                        _accountingMovement.date = new DateTime(selectedYear, 12, 31, 23, 59, 59);
                         _accountingMovement.reference = _accountingMovement.contract = KeyDefinitions.NextAccountMovementReference(selectedYear);
                         _accountingMovement.FK_AccountingMovements_Currencies = 1;
                         _accountingMovement.original_reference = "";
