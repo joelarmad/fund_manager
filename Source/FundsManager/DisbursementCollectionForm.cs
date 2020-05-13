@@ -368,8 +368,7 @@ namespace FundsManager
                                     {
                                         throw new Exception("Ledger operation has been failed. The disbursements collection has been rolled back.");
                                     }
-
-                                    //TODO: mostrar reporte
+                                    
                                 }
                             }
                             else

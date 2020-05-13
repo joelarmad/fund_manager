@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.cmdPay = new System.Windows.Forms.Button();
@@ -89,7 +89,7 @@
             this.groupBox1.Size = new System.Drawing.Size(686, 248);
             this.groupBox1.TabIndex = 32;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Disbursements";
+            this.groupBox1.Text = "Bonds";
             // 
             // dataGridView1
             // 
@@ -130,9 +130,9 @@
             // amountDataGridViewTextBoxColumn
             // 
             this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount";
-            dataGridViewCellStyle11.Format = "C2";
-            dataGridViewCellStyle11.NullValue = null;
-            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.amountDataGridViewTextBoxColumn.HeaderText = "Amount";
             this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
             this.amountDataGridViewTextBoxColumn.ReadOnly = true;
@@ -140,9 +140,9 @@
             // interestonbondDataGridViewTextBoxColumn
             // 
             this.interestonbondDataGridViewTextBoxColumn.DataPropertyName = "interest_on_bond";
-            dataGridViewCellStyle12.Format = "N2";
-            dataGridViewCellStyle12.NullValue = null;
-            this.interestonbondDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.interestonbondDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.interestonbondDataGridViewTextBoxColumn.HeaderText = "Interest on Bond";
             this.interestonbondDataGridViewTextBoxColumn.Name = "interestonbondDataGridViewTextBoxColumn";
             this.interestonbondDataGridViewTextBoxColumn.ReadOnly = true;
@@ -150,9 +150,9 @@
             // interesttffcontributionDataGridViewTextBoxColumn
             // 
             this.interesttffcontributionDataGridViewTextBoxColumn.DataPropertyName = "interest_tff_contribution";
-            dataGridViewCellStyle13.Format = "N2";
-            dataGridViewCellStyle13.NullValue = null;
-            this.interesttffcontributionDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.interesttffcontributionDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
             this.interesttffcontributionDataGridViewTextBoxColumn.HeaderText = "Interest TFF";
             this.interesttffcontributionDataGridViewTextBoxColumn.Name = "interesttffcontributionDataGridViewTextBoxColumn";
             this.interesttffcontributionDataGridViewTextBoxColumn.ReadOnly = true;
@@ -160,8 +160,8 @@
             // issuedDataGridViewTextBoxColumn
             // 
             this.issuedDataGridViewTextBoxColumn.DataPropertyName = "issued";
-            dataGridViewCellStyle14.Format = "d";
-            this.issuedDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle4.Format = "d";
+            this.issuedDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
             this.issuedDataGridViewTextBoxColumn.HeaderText = "Issued";
             this.issuedDataGridViewTextBoxColumn.Name = "issuedDataGridViewTextBoxColumn";
             this.issuedDataGridViewTextBoxColumn.ReadOnly = true;
@@ -169,9 +169,9 @@
             // expiredDataGridViewTextBoxColumn
             // 
             this.expiredDataGridViewTextBoxColumn.DataPropertyName = "expired";
-            dataGridViewCellStyle15.Format = "d";
-            dataGridViewCellStyle15.NullValue = null;
-            this.expiredDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle5.Format = "d";
+            dataGridViewCellStyle5.NullValue = null;
+            this.expiredDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
             this.expiredDataGridViewTextBoxColumn.HeaderText = "Expire";
             this.expiredDataGridViewTextBoxColumn.Name = "expiredDataGridViewTextBoxColumn";
             this.expiredDataGridViewTextBoxColumn.ReadOnly = true;

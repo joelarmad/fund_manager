@@ -61,6 +61,7 @@
             this.bondsTFAMToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.activateToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generateInterestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainPaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.investmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createInvestmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disbursemetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,7 +83,7 @@
             this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mainPaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.interestPaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -329,7 +330,8 @@
             this.bondsTFAMToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.activateToolStripMenuItem1,
             this.generateInterestToolStripMenuItem,
-            this.mainPaymentToolStripMenuItem});
+            this.mainPaymentToolStripMenuItem,
+            this.interestPaymentToolStripMenuItem});
             this.bondsTFAMToolStripMenuItem1.Name = "bondsTFAMToolStripMenuItem1";
             this.bondsTFAMToolStripMenuItem1.Size = new System.Drawing.Size(169, 22);
             this.bondsTFAMToolStripMenuItem1.Text = "Bonds TFAM";
@@ -347,6 +349,13 @@
             this.generateInterestToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.generateInterestToolStripMenuItem.Text = "Generate Interest";
             this.generateInterestToolStripMenuItem.Click += new System.EventHandler(this.generateInterestToolStripMenuItem_Click);
+            // 
+            // mainPaymentToolStripMenuItem
+            // 
+            this.mainPaymentToolStripMenuItem.Name = "mainPaymentToolStripMenuItem";
+            this.mainPaymentToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.mainPaymentToolStripMenuItem.Text = "Main Payment";
+            this.mainPaymentToolStripMenuItem.Click += new System.EventHandler(this.mainPaymentToolStripMenuItem_Click);
             // 
             // investmentsToolStripMenuItem
             // 
@@ -511,12 +520,12 @@
             this.returnsStateToolStripMenuItem.Text = "Profit && Loss Statement";
             this.returnsStateToolStripMenuItem.Click += new System.EventHandler(this.returnsStateToolStripMenuItem_Click);
             // 
-            // mainPaymentToolStripMenuItem
+            // interestPaymentToolStripMenuItem
             // 
-            this.mainPaymentToolStripMenuItem.Name = "mainPaymentToolStripMenuItem";
-            this.mainPaymentToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.mainPaymentToolStripMenuItem.Text = "Main Payment";
-            this.mainPaymentToolStripMenuItem.Click += new System.EventHandler(this.mainPaymentToolStripMenuItem_Click);
+            this.interestPaymentToolStripMenuItem.Name = "interestPaymentToolStripMenuItem";
+            this.interestPaymentToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.interestPaymentToolStripMenuItem.Text = "Interest Payment";
+            this.interestPaymentToolStripMenuItem.Click += new System.EventHandler(this.interestPaymentToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -598,6 +607,7 @@
         private System.Windows.Forms.ToolStripMenuItem activateToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem generateInterestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mainPaymentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem interestPaymentToolStripMenuItem;
     }
 }
 

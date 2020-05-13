@@ -191,6 +191,12 @@
     <Compile Include="BondsTFAMInterest.Designer.cs">
       <DependentUpon>BondsTFAMInterest.cs</DependentUpon>
     </Compile>
+    <Compile Include="BondsTFAMInterestPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BondsTFAMInterestPayment.Designer.cs">
+      <DependentUpon>BondsTFAMInterestPayment.cs</DependentUpon>
+    </Compile>
     <Compile Include="BondsTFAMMainPayment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -706,6 +712,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BondsTFAMInterest.resx">
       <DependentUpon>BondsTFAMInterest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BondsTFAMInterestPayment.resx">
+      <DependentUpon>BondsTFAMInterestPayment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BondsTFAMMainPayment.resx">
       <DependentUpon>BondsTFAMMainPayment.cs</DependentUpon>
