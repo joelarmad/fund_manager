@@ -177,6 +177,7 @@
         <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130" />
         <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_Subaccounts" />
+        <EntityTypeShape EntityType="FundsDBModel.ClosedPeriod" Width="1.5" PointX="11.375" PointY="16.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

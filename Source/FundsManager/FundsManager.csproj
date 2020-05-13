@@ -254,6 +254,15 @@
     <Compile Include="ClientsForm.Designer.cs">
       <DependentUpon>ClientsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClosedPeriod.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClosePeriodForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClosePeriodForm.Designer.cs">
+      <DependentUpon>ClosePeriodForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CountriesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -718,6 +727,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ClientsForm.resx">
       <DependentUpon>ClientsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClosePeriodForm.resx">
+      <DependentUpon>ClosePeriodForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CountriesForm.resx">
       <DependentUpon>CountriesForm.cs</DependentUpon>

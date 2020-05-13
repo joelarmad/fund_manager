@@ -95,5 +95,6 @@ namespace FundsManager
         public virtual DbSet<SubAccountBalance> SubAccountBalances { get; set; }
         public virtual DbSet<Movements_Accounts> Movements_Accounts { get; set; }
         public virtual DbSet<MovementsView> MovementsViews { get; set; }
+        public virtual DbSet<ClosedPeriod> ClosedPeriods { get; set; }
     }
 }

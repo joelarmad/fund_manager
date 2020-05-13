@@ -403,5 +403,13 @@ namespace FundsManager
             bond_form.MdiParent = this;
             bond_form.Show();
         }
+
+        private void closePeriodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            ClosePeriodForm bond_form = new ClosePeriodForm();
+            bond_form.MdiParent = this;
+            bond_form.Show();
+        }
     }
 }

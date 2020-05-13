@@ -62,6 +62,7 @@
             this.activateToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generateInterestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainPaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.interestPaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.investmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createInvestmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disbursemetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,7 +84,7 @@
             this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.interestPaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closePeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,7 +94,8 @@
             this.addToolStripMenuItem,
             this.operationsToolStripMenuItem,
             this.reportsToolStripMenuItem,
-            this.reportsToolStripMenuItem1});
+            this.reportsToolStripMenuItem1,
+            this.closePeriodToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(818, 24);
@@ -357,6 +359,13 @@
             this.mainPaymentToolStripMenuItem.Text = "Main Payment";
             this.mainPaymentToolStripMenuItem.Click += new System.EventHandler(this.mainPaymentToolStripMenuItem_Click);
             // 
+            // interestPaymentToolStripMenuItem
+            // 
+            this.interestPaymentToolStripMenuItem.Name = "interestPaymentToolStripMenuItem";
+            this.interestPaymentToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.interestPaymentToolStripMenuItem.Text = "Interest Payment";
+            this.interestPaymentToolStripMenuItem.Click += new System.EventHandler(this.interestPaymentToolStripMenuItem_Click);
+            // 
             // investmentsToolStripMenuItem
             // 
             this.investmentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -520,12 +529,12 @@
             this.returnsStateToolStripMenuItem.Text = "Profit && Loss Statement";
             this.returnsStateToolStripMenuItem.Click += new System.EventHandler(this.returnsStateToolStripMenuItem_Click);
             // 
-            // interestPaymentToolStripMenuItem
+            // closePeriodToolStripMenuItem
             // 
-            this.interestPaymentToolStripMenuItem.Name = "interestPaymentToolStripMenuItem";
-            this.interestPaymentToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.interestPaymentToolStripMenuItem.Text = "Interest Payment";
-            this.interestPaymentToolStripMenuItem.Click += new System.EventHandler(this.interestPaymentToolStripMenuItem_Click);
+            this.closePeriodToolStripMenuItem.Name = "closePeriodToolStripMenuItem";
+            this.closePeriodToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
+            this.closePeriodToolStripMenuItem.Text = "Close Period";
+            this.closePeriodToolStripMenuItem.Click += new System.EventHandler(this.closePeriodToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -608,6 +617,7 @@
         private System.Windows.Forms.ToolStripMenuItem generateInterestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mainPaymentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem interestPaymentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem closePeriodToolStripMenuItem;
     }
 }
 
