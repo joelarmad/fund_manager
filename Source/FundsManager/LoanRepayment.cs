@@ -97,21 +97,29 @@ namespace FundsManager
         {
             try
             {
-                int lenderId = Convert.ToInt32(cbLender.SelectedValue);
+                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == DateTime.Now.Year) == null)
+                {
+                    int lenderId = Convert.ToInt32(cbLender.SelectedValue);
 
-                int loan_id = int.Parse(cbLoan.SelectedValue.ToString());
+                    int loan_id = int.Parse(cbLoan.SelectedValue.ToString());
 
-                Loan loan = manager.My_db.Loans.FirstOrDefault(x => x.Id == loan_id);
+                    Loan loan = manager.My_db.Loans.FirstOrDefault(x => x.Id == loan_id);
 
-                Loan_Repayments repayment = new Loan_Repayments();
-                repayment.Loan = loan;
-                repayment.repayment_date = DateTime.Now;
-                repayment.AccountingMovement = generateAccountingMovement(repayment);
+                    Loan_Repayments repayment = new Loan_Repayments();
+                    repayment.Loan = loan;
+                    repayment.repayment_date = DateTime.Now;
+                    repayment.AccountingMovement = generateAccountingMovement(repayment);
 
-                manager.My_db.Loan_Repayments.Add(repayment);
-                manager.My_db.SaveChanges();
+                    manager.My_db.Loan_Repayments.Add(repayment);
+                    manager.My_db.SaveChanges();
 
-                loadRepayments();
+                    loadRepayments();
+                }
+                else
+                {
+                    ErrorMessage.showErrorMessage(new Exception("No movement allowed in closed period."));
+                }
+                
             }
             catch (Exception _ex)
             {

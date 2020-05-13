@@ -119,88 +119,96 @@ namespace FundsManager
         {
             try
             {
-                int lenderId = Convert.ToInt32(cbLender.SelectedValue);
-                int currencyId = Convert.ToInt32(cbCurrency.SelectedValue);
-
-                if (!fEditMode)
+                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpFrom.Value.Year) == null)
                 {
-                    Loan _validation = manager.My_db.Loans.FirstOrDefault(x => x.reference == txtReference.Text && x.fund_id == manager.Selected);
+                    int lenderId = Convert.ToInt32(cbLender.SelectedValue);
+                    int currencyId = Convert.ToInt32(cbCurrency.SelectedValue);
 
-                    if (_validation != null)
+                    if (!fEditMode)
                     {
-                        MessageBox.Show("Duplicated reference.");
-                        return;
-                    }
+                        Loan _validation = manager.My_db.Loans.FirstOrDefault(x => x.reference == txtReference.Text && x.fund_id == manager.Selected);
 
-                    Loan _loan = new Loan();
-                    _loan.fund_id = manager.Selected;
-                    _loan.lender_id = lenderId;
-                    _loan.reference = txtReference.Text;
-                    _loan.interest = Math.Round(decimal.Parse(txtInterest.Text), 2);
-                    _loan.amount = Math.Round(decimal.Parse(txtAmount.Text), 2);
-                    _loan.start = dtpFrom.Value;
-                    _loan.end = dtpTo.Value;
-                    _loan.currency_id = currencyId;
-                    _loan.renegotiated = false;
-                    _loan.interest_base = rb360.Checked ? 360 : 365;
-
-                    AccountingMovement acctMov = generateAccountingMovement(_loan);
-
-                    if (acctMov != null)
-                    {
-                        _loan.AccountingMovement = acctMov;
-
-                        manager.My_db.Loans.Add(_loan);
-
-                        GeneralLedgerForm gledger = new GeneralLedgerForm();
-                        gledger.StartPosition = FormStartPosition.CenterScreen;
-                        gledger.FromExternalOperation = true;
-                        gledger.ExternalAccountMovemet = acctMov;
-                        gledger.ExternalDebit = _loan.amount;
-                        gledger.ControlBox = false;
-                        gledger.ShowDialog();
-
-                        if (!gledger.OperationCompleted)
+                        if (_validation != null)
                         {
-                            throw new Exception("Ledger operation has been failed.");
+                            MessageBox.Show("Duplicated reference.");
+                            return;
                         }
 
+                        Loan _loan = new Loan();
+                        _loan.fund_id = manager.Selected;
+                        _loan.lender_id = lenderId;
+                        _loan.reference = txtReference.Text;
+                        _loan.interest = Math.Round(decimal.Parse(txtInterest.Text), 2);
+                        _loan.amount = Math.Round(decimal.Parse(txtAmount.Text), 2);
+                        _loan.start = dtpFrom.Value;
+                        _loan.end = dtpTo.Value;
+                        _loan.currency_id = currencyId;
+                        _loan.renegotiated = false;
+                        _loan.interest_base = rb360.Checked ? 360 : 365;
+
+                        AccountingMovement acctMov = generateAccountingMovement(_loan);
+
+                        if (acctMov != null)
+                        {
+                            _loan.AccountingMovement = acctMov;
+
+                            manager.My_db.Loans.Add(_loan);
+
+                            GeneralLedgerForm gledger = new GeneralLedgerForm();
+                            gledger.StartPosition = FormStartPosition.CenterScreen;
+                            gledger.FromExternalOperation = true;
+                            gledger.ExternalAccountMovemet = acctMov;
+                            gledger.ExternalDebit = _loan.amount;
+                            gledger.ControlBox = false;
+                            gledger.ShowDialog();
+
+                            if (!gledger.OperationCompleted)
+                            {
+                                throw new Exception("Ledger operation has been failed.");
+                            }
+
+                        }
                     }
+                    //else
+                    //{
+                    //    //TODO: no esta claro como proceder en la modificacion pues hay mov de cuentas involucrados
+                    //    int _id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+
+                    //    Loan _validation = manager.My_db.Loans.FirstOrDefault(x => x.Id != _id && x.reference == txtReference.Text && x.fund_id == manager.Selected);
+
+                    //    if (_validation != null)
+                    //    {
+                    //        MessageBox.Show("Duplicated reference.");
+                    //        return;
+                    //    }
+
+                    //    Loan _selected = manager.My_db.Loans.FirstOrDefault(x => x.Id == _id);
+
+                    //    if (_selected != null)
+                    //    {
+                    //        _selected.fund_id = manager.Selected;
+                    //        _selected.lender_id = lenderId;
+                    //        _selected.reference = txtReference.Text;
+                    //        _selected.interest = Math.Round(decimal.Parse(txtInterest.Text), 2);
+                    //        _selected.amount = Math.Round(decimal.Parse(txtAmount.Text), 2);
+                    //        _selected.start = dtpFrom.Value;
+                    //        _selected.end = dtpTo.Value;
+                    //        _selected.currency_id = currencyId;
+                    //        _selected.interest_base = rb360.Checked ? 360 : 365;
+
+                    //        manager.My_db.SaveChanges();
+                    //    }
+                    //}
+
+                    loadLoansData();
+
+                    cmdCancel_Click(null, null);
                 }
-                //else
-                //{
-                //    //TODO: no esta claro como proceder en la modificacion pues hay mov de cuentas involucrados
-                //    int _id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
-
-                //    Loan _validation = manager.My_db.Loans.FirstOrDefault(x => x.Id != _id && x.reference == txtReference.Text && x.fund_id == manager.Selected);
-
-                //    if (_validation != null)
-                //    {
-                //        MessageBox.Show("Duplicated reference.");
-                //        return;
-                //    }
-
-                //    Loan _selected = manager.My_db.Loans.FirstOrDefault(x => x.Id == _id);
-
-                //    if (_selected != null)
-                //    {
-                //        _selected.fund_id = manager.Selected;
-                //        _selected.lender_id = lenderId;
-                //        _selected.reference = txtReference.Text;
-                //        _selected.interest = Math.Round(decimal.Parse(txtInterest.Text), 2);
-                //        _selected.amount = Math.Round(decimal.Parse(txtAmount.Text), 2);
-                //        _selected.start = dtpFrom.Value;
-                //        _selected.end = dtpTo.Value;
-                //        _selected.currency_id = currencyId;
-                //        _selected.interest_base = rb360.Checked ? 360 : 365;
-
-                //        manager.My_db.SaveChanges();
-                //    }
-                //}
-
-                loadLoansData();
-
-                cmdCancel_Click(null, null);
+                else
+                {
+                    ErrorMessage.showErrorMessage(new Exception("No movement allowed in closed period."));
+                }
+                
             }
             catch (Exception _ex)
             {

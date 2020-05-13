@@ -36,78 +36,86 @@ namespace FundsManager
 
             try
             {
-                if (account540 != null)
+                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpDate.Value.Year) == null)
                 {
-                    if (dataGridView1.SelectedRows.Count > 0)
+                    if (account540 != null)
                     {
-                        foreach (DataGridViewRow _item in dataGridView1.SelectedRows)
+                        if (dataGridView1.SelectedRows.Count > 0)
                         {
-                            int interestId = 0;
-
-                            if (int.TryParse(_item.Cells[0].Value.ToString(), out interestId))
+                            foreach (DataGridViewRow _item in dataGridView1.SelectedRows)
                             {
-                                BondsTFAMGeneratedInterest toPay = manager.My_db.BondsTFAMGeneratedInterests.FirstOrDefault(x => x.Id == interestId);
+                                int interestId = 0;
 
-                                if (toPay != null)
+                                if (int.TryParse(_item.Cells[0].Value.ToString(), out interestId))
                                 {
-                                    toPay.payment_interest_date = dtpDate.Value;
+                                    BondsTFAMGeneratedInterest toPay = manager.My_db.BondsTFAMGeneratedInterests.FirstOrDefault(x => x.Id == interestId);
 
-                                    _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
-                                    _accountingMovement.description = toPay.BondsTFAM.number + " Interest Payment";
-                                    _accountingMovement.date = toPay.payment_interest_date.Value;
-                                    _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(toPay.payment_interest_date.Value.Year);
-                                    _accountingMovement.FK_AccountingMovements_Currencies = toPay.BondsTFAM.currency_id;
-                                    _accountingMovement.original_reference = "";
-                                    _accountingMovement.contract = "";
+                                    if (toPay != null)
+                                    {
+                                        toPay.payment_interest_date = dtpDate.Value;
 
-                                    manager.My_db.AccountingMovements.Add(_accountingMovement);
+                                        _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
+                                        _accountingMovement.description = toPay.BondsTFAM.number + " Interest Payment";
+                                        _accountingMovement.date = toPay.payment_interest_date.Value;
+                                        _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(toPay.payment_interest_date.Value.Year);
+                                        _accountingMovement.FK_AccountingMovements_Currencies = toPay.BondsTFAM.currency_id;
+                                        _accountingMovement.original_reference = "";
+                                        _accountingMovement.contract = "";
 
-                                    toPay.AccountingMovement1 = _accountingMovement;
+                                        manager.My_db.AccountingMovements.Add(_accountingMovement);
 
-                                    Subaccount subacct40 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account540.Id && x.name == "Interest Bond");
+                                        toPay.AccountingMovement1 = _accountingMovement;
 
-                                    Movements_Accounts _maccount540 = new Movements_Accounts();
+                                        Subaccount subacct40 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account540.Id && x.name == "Interest Bond");
 
-                                    _maccount540.AccountingMovement = _accountingMovement;
-                                    _maccount540.FK_Movements_Accounts_Funds = manager.Selected;
-                                    _maccount540.FK_Movements_Accounts_Accounts = account540.Id;
-                                    if (subacct40 != null)
-                                        _maccount540.FK_Movements_Accounts_Subaccounts = subacct40.Id;
-                                    //TODO: other details
-                                    //_maccount540.subaccount = toPay.client_id;
-                                    //_maccount540.subaccount_type = 1;
-                                    _maccount540.debit = Math.Round(toPay.generated_bond_interest + toPay.generated_tff_interest, 2);
-                                    _maccount540.credit = 0;
+                                        Movements_Accounts _maccount540 = new Movements_Accounts();
 
-                                    totalPaid += _maccount540.debit;
-                                    
-                                    manager.My_db.Movements_Accounts.Add(_maccount540);
+                                        _maccount540.AccountingMovement = _accountingMovement;
+                                        _maccount540.FK_Movements_Accounts_Funds = manager.Selected;
+                                        _maccount540.FK_Movements_Accounts_Accounts = account540.Id;
+                                        if (subacct40 != null)
+                                            _maccount540.FK_Movements_Accounts_Subaccounts = subacct40.Id;
+                                        //TODO: other details
+                                        //_maccount540.subaccount = toPay.client_id;
+                                        //_maccount540.subaccount_type = 1;
+                                        _maccount540.debit = Math.Round(toPay.generated_bond_interest + toPay.generated_tff_interest, 2);
+                                        _maccount540.credit = 0;
+
+                                        totalPaid += _maccount540.debit;
+
+                                        manager.My_db.Movements_Accounts.Add(_maccount540);
+                                    }
                                 }
                             }
+
+                            GeneralLedgerForm gledger = new GeneralLedgerForm();
+                            gledger.StartPosition = FormStartPosition.CenterScreen;
+                            gledger.FromExternalOperation = true;
+                            gledger.ExternalAccountMovemet = _accountingMovement;
+                            gledger.ExternalCredit = totalPaid;
+                            gledger.ControlBox = false;
+                            gledger.ShowDialog();
+
+                            if (!gledger.OperationCompleted)
+                            {
+                                throw new Exception("Ledger operation has been failed. The bonds interest payment has been rolled back.");
+                            }
                         }
-
-                        GeneralLedgerForm gledger = new GeneralLedgerForm();
-                        gledger.StartPosition = FormStartPosition.CenterScreen;
-                        gledger.FromExternalOperation = true;
-                        gledger.ExternalAccountMovemet = _accountingMovement;
-                        gledger.ExternalCredit = totalPaid;
-                        gledger.ControlBox = false;
-                        gledger.ShowDialog();
-
-                        if (!gledger.OperationCompleted)
+                        else
                         {
-                            throw new Exception("Ledger operation has been failed. The bonds interest payment has been rolled back.");
+                            ErrorMessage.showErrorMessage(new Exception("Please, select the interest."));
                         }
                     }
                     else
                     {
-                        ErrorMessage.showErrorMessage(new Exception("Please, select the interest."));
+                        ErrorMessage.showErrorMessage(new Exception("Account 540 not found."));
                     }
                 }
                 else
                 {
-                    ErrorMessage.showErrorMessage(new Exception("Account 540 not found."));
+                    ErrorMessage.showErrorMessage(new Exception("No movement allowed in closed period."));
                 }
+                
             }
             catch (Exception _ex)
             {

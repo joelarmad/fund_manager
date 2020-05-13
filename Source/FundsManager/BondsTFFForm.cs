@@ -220,117 +220,125 @@ namespace FundsManager
         {
             try
             {
-                BondsTFF bond = new BondsTFF();
-                bond.number = txtNumber.Text;
-                bond.issued = Convert.ToDateTime(dtpIssuingDate.Text);
-                bond.expired = Convert.ToDateTime(dtpExpirationDate.Text);
-                bond.FK_Bonds_Funds = manager.Selected;
-                bond.price = Math.Round(Convert.ToDecimal(txtPrice.Text), 2);
-                bond.pieces = (float)Convert.ToDecimal(txtBondPieces.Text);
-                bond.interest_on_bond = Convert.ToInt32(txtBondInterest.Text);
-                bond.interest_tff_contribution = Convert.ToInt32(txtTFFInterest.Text);
-
-                bond.active = 1;
-
-                manager.My_db.BondsTFFs.Add(bond);
-                manager.My_db.SaveChanges();
-
-                foreach (InvestorForBond _investor in investors)
+                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpIssuingDate.Value.Year) == null)
                 {
+                    BondsTFF bond = new BondsTFF();
+                    bond.number = txtNumber.Text;
+                    bond.issued = Convert.ToDateTime(dtpIssuingDate.Text);
+                    bond.expired = Convert.ToDateTime(dtpExpirationDate.Text);
+                    bond.FK_Bonds_Funds = manager.Selected;
+                    bond.price = Math.Round(Convert.ToDecimal(txtPrice.Text), 2);
+                    bond.pieces = (float)Convert.ToDecimal(txtBondPieces.Text);
+                    bond.interest_on_bond = Convert.ToInt32(txtBondInterest.Text);
+                    bond.interest_tff_contribution = Convert.ToInt32(txtTFFInterest.Text);
 
-                    BondsTFFInvestor bond_investor = new BondsTFFInvestor();
-                    bond_investor.FK_BondsInvestors_Bonds = bond.Id;
-                    bond_investor.FK_BondsInvestors_Investors = _investor.Id;
-                    bond_investor.quantity = _investor.Pieces;
-                    manager.My_db.BondsTFFInvestors.Add(bond_investor);
+                    bond.active = 1;
+
+                    manager.My_db.BondsTFFs.Add(bond);
                     manager.My_db.SaveChanges();
 
+                    foreach (InvestorForBond _investor in investors)
+                    {
+
+                        BondsTFFInvestor bond_investor = new BondsTFFInvestor();
+                        bond_investor.FK_BondsInvestors_Bonds = bond.Id;
+                        bond_investor.FK_BondsInvestors_Investors = _investor.Id;
+                        bond_investor.quantity = _investor.Pieces;
+                        manager.My_db.BondsTFFInvestors.Add(bond_investor);
+                        manager.My_db.SaveChanges();
+
+                    }
+
+                    Resource _resource = manager.My_db.Resources.FirstOrDefault(x => x.Name == KeyDefinitions.BONDTFF_CONSECUTIVE_KEY);
+
+                    fBondConsecutive++;
+
+                    _resource.Value = fBondConsecutive.ToString();
+
+                    manager.My_db.SaveChanges();
+
+
+
+                    //TODO: Crear un movimiento contable con un debito a 100 y un credito a 510 por el monto del bono
+
+                    //Obtener nuevo numero de referencia
+                    //Crear AccountingMovement
+                    //Crear Movements_Accounts con un debito a 100
+                    //Crear Movements_Accounts con un credito a 510
+
+                    Account _CashAtBank = manager.My_db.Accounts.FirstOrDefault(x => x.number == "100" && x.FK_Accounts_Funds == manager.Selected);
+                    Account _Bonds = manager.My_db.Accounts.FirstOrDefault(x => x.number == "510" && x.FK_Accounts_Funds == manager.Selected);
+                    Subaccount _CashAtBankEUR = manager.My_db.Subaccounts.FirstOrDefault(x => x.name == "Cash at Bank EUR");
+                    Subaccount _BondI = manager.My_db.Subaccounts.FirstOrDefault(x => x.name == "Bond I");
+
+                    if (_CashAtBank != null
+                        && _Bonds != null
+                        && _CashAtBankEUR != null
+                        && _BondI != null)
+                    {
+                        AccountingMovement _movement = new AccountingMovement();
+                        _movement.FK_AccountingMovements_Funds = manager.Selected;
+                        //TODO: Poner description correcta cuando la manden
+                        _movement.description = "";
+                        _movement.date = bond.issued;
+                        _movement.reference = KeyDefinitions.NextAccountMovementReference(dtpIssuingDate.Value.Year);
+                        _movement.FK_AccountingMovements_Currencies = manager.My_db.Currencies.FirstOrDefault().Id;
+                        //TODO: Poner ORIG cuando la manden
+                        _movement.original_reference = "";
+                        manager.My_db.AccountingMovements.Add(_movement);
+                        manager.My_db.SaveChanges();
+
+                        Movements_Accounts _movAcctCashAtBank = new Movements_Accounts();
+                        Movements_Accounts _movAcctBond = new Movements_Accounts();
+
+                        _movAcctCashAtBank.FK_Movements_Accounts_AccountingMovements = _movement.Id;
+                        _movAcctCashAtBank.FK_Movements_Accounts_Funds = manager.Selected;
+                        _movAcctCashAtBank.FK_Movements_Accounts_Accounts = _CashAtBank.Id;
+                        _movAcctCashAtBank.FK_Movements_Accounts_Subaccounts = _CashAtBankEUR.Id;
+                        //TODO: Poner subaccount type correcto cuando lo manden
+                        //_movAcctCashAtBank.subaccount_type = my_movement.Detail_type;
+                        //TODO: Poner subaccount type correcto cuando lo manden
+                        //_movAcctCashAtBank.subaccount = my_movement.Detail;
+
+                        _movAcctCashAtBank.debit = Math.Round((decimal)bond.pieces * bond.price, 2);
+                        _movAcctCashAtBank.credit = 0;
+
+                        manager.My_db.Movements_Accounts.Add(_movAcctCashAtBank);
+
+                        _movAcctBond.FK_Movements_Accounts_AccountingMovements = _movement.Id;
+                        _movAcctBond.FK_Movements_Accounts_Funds = manager.Selected;
+                        _movAcctBond.FK_Movements_Accounts_Accounts = _Bonds.Id;
+                        _movAcctBond.FK_Movements_Accounts_Subaccounts = _BondI.Id;
+                        //TODO: Poner subaccount type correcto cuando lo manden
+                        //_movAcctBond.subaccount_type = my_movement.Detail_type;
+                        //TODO: Poner subaccount type correcto cuando lo manden
+                        //_movAcctBond.subaccount = my_movement.Detail;
+
+                        _movAcctBond.debit = 0;
+                        _movAcctBond.credit = Math.Round((decimal)bond.pieces * bond.price, 2);
+
+                        manager.My_db.Movements_Accounts.Add(_movAcctBond);
+
+                        manager.My_db.SaveChanges();
+
+                        investors.Clear();
+                        check_pieces = 0;
+                        txtNumber.Text = "Bond " + Conversions.toRomanNumeral(fBondConsecutive);
+                        txtPrice.Text = "0";
+                        txtBondInterest.Text = "10";
+                        txtTFFInterest.Text = "1";
+                        txtInvestorPieces.Text = "0";
+                        txtBondPieces.Text = "0";
+                        listView1.Items.Clear();
+                        txtPrice.ReadOnly = false;
+                        txtBondPieces.ReadOnly = false;
+                    }
                 }
-
-                Resource _resource = manager.My_db.Resources.FirstOrDefault(x => x.Name == KeyDefinitions.BONDTFF_CONSECUTIVE_KEY);
-
-                fBondConsecutive++;
-
-                _resource.Value = fBondConsecutive.ToString();
-
-                manager.My_db.SaveChanges();
-
+                else
+                {
+                    ErrorMessage.showErrorMessage(new Exception("No movement allowed in closed period."));
+                }
                 
-
-                //TODO: Crear un movimiento contable con un debito a 100 y un credito a 510 por el monto del bono
-
-                //Obtener nuevo numero de referencia
-                //Crear AccountingMovement
-                //Crear Movements_Accounts con un debito a 100
-                //Crear Movements_Accounts con un credito a 510
-
-                Account _CashAtBank = manager.My_db.Accounts.FirstOrDefault(x => x.number == "100" && x.FK_Accounts_Funds == manager.Selected);
-                Account _Bonds = manager.My_db.Accounts.FirstOrDefault(x => x.number == "510" && x.FK_Accounts_Funds == manager.Selected);
-                Subaccount _CashAtBankEUR = manager.My_db.Subaccounts.FirstOrDefault(x => x.name == "Cash at Bank EUR");
-                Subaccount _BondI = manager.My_db.Subaccounts.FirstOrDefault(x => x.name == "Bond I");
-
-                if (_CashAtBank != null 
-                    && _Bonds != null
-                    && _CashAtBankEUR != null
-                    && _BondI != null)
-                {
-                    AccountingMovement _movement = new AccountingMovement();
-                    _movement.FK_AccountingMovements_Funds = manager.Selected;
-                    //TODO: Poner description correcta cuando la manden
-                    _movement.description = "";
-                    _movement.date = bond.issued;
-                    _movement.reference = KeyDefinitions.NextAccountMovementReference(dtpIssuingDate.Value.Year);
-                    _movement.FK_AccountingMovements_Currencies = manager.My_db.Currencies.FirstOrDefault().Id;
-                    //TODO: Poner ORIG cuando la manden
-                    _movement.original_reference = "";
-                    manager.My_db.AccountingMovements.Add(_movement);
-                    manager.My_db.SaveChanges();
-
-                    Movements_Accounts _movAcctCashAtBank = new Movements_Accounts();
-                    Movements_Accounts _movAcctBond = new Movements_Accounts();
-
-                    _movAcctCashAtBank.FK_Movements_Accounts_AccountingMovements = _movement.Id;
-                    _movAcctCashAtBank.FK_Movements_Accounts_Funds = manager.Selected;
-                    _movAcctCashAtBank.FK_Movements_Accounts_Accounts = _CashAtBank.Id;
-                    _movAcctCashAtBank.FK_Movements_Accounts_Subaccounts = _CashAtBankEUR.Id;
-                    //TODO: Poner subaccount type correcto cuando lo manden
-                    //_movAcctCashAtBank.subaccount_type = my_movement.Detail_type;
-                    //TODO: Poner subaccount type correcto cuando lo manden
-                    //_movAcctCashAtBank.subaccount = my_movement.Detail;
-
-                    _movAcctCashAtBank.debit = Math.Round((decimal)bond.pieces * bond.price, 2);
-                    _movAcctCashAtBank.credit = 0;
-                    
-                    manager.My_db.Movements_Accounts.Add(_movAcctCashAtBank);
-
-                    _movAcctBond.FK_Movements_Accounts_AccountingMovements = _movement.Id;
-                    _movAcctBond.FK_Movements_Accounts_Funds = manager.Selected;
-                    _movAcctBond.FK_Movements_Accounts_Accounts = _Bonds.Id;
-                    _movAcctBond.FK_Movements_Accounts_Subaccounts = _BondI.Id;
-                    //TODO: Poner subaccount type correcto cuando lo manden
-                    //_movAcctBond.subaccount_type = my_movement.Detail_type;
-                    //TODO: Poner subaccount type correcto cuando lo manden
-                    //_movAcctBond.subaccount = my_movement.Detail;
-
-                    _movAcctBond.debit = 0;
-                    _movAcctBond.credit = Math.Round((decimal)bond.pieces * bond.price, 2);
-
-                    manager.My_db.Movements_Accounts.Add(_movAcctBond);
-
-                    manager.My_db.SaveChanges();
-
-                    investors.Clear();
-                    check_pieces = 0;
-                    txtNumber.Text = "Bond " + Conversions.toRomanNumeral(fBondConsecutive);
-                    txtPrice.Text = "0";
-                    txtBondInterest.Text = "10";
-                    txtTFFInterest.Text = "1";
-                    txtInvestorPieces.Text = "0";
-                    txtBondPieces.Text = "0";
-                    listView1.Items.Clear();
-                    txtPrice.ReadOnly = false;
-                    txtBondPieces.ReadOnly = false;
-                }
                 
             }
             catch (Exception _ex)

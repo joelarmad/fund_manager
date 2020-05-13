@@ -417,113 +417,122 @@ namespace FundsManager
             {
                 try
                 {
-                    if (!FormInEditAccountingMovement)
+                    DateTime date = Convert.ToDateTime(dateTimePicker1.Text);
+                    if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == date.Year) == null)
                     {
-                        AccountingMovement newAccountingMovement = new AccountingMovement();
-
-                        if (!FromExternalOperation)
+                        if (!FormInEditAccountingMovement)
                         {
-                            newAccountingMovement.FK_AccountingMovements_Funds = manager.Selected;
-                            newAccountingMovement.reference = textBox3.Text;
-                            newAccountingMovement.original_reference = textBox5.Text;
+                            AccountingMovement newAccountingMovement = new AccountingMovement();
+
+                            if (!FromExternalOperation)
+                            {
+                                newAccountingMovement.FK_AccountingMovements_Funds = manager.Selected;
+                                newAccountingMovement.reference = textBox3.Text;
+                                newAccountingMovement.original_reference = textBox5.Text;
+                            }
+                            else
+                            {
+                                newAccountingMovement = ExternalAccountMovemet;
+                            }
+
+                            newAccountingMovement.description = textBox4.Text;
+                            newAccountingMovement.date = Convert.ToDateTime(dateTimePicker1.Text);
+                            newAccountingMovement.FK_AccountingMovements_Currencies = Convert.ToInt32(comboBox4.SelectedValue);
+
+                            if (txtContract.Visible)
+                            {
+                                newAccountingMovement.contract = txtContract.Text;
+                            }
+
+                            if (!FromExternalOperation)
+                            {
+                                manager.My_db.AccountingMovements.Add(newAccountingMovement);
+                            }
+
+                            textBox3.Text = KeyDefinitions.NextAccountMovementReference(dateTimePicker1.Value.Year);
+                            textBox4.Clear();
+                            textBox5.Clear();
+                            txtContract.Clear();
+                            listView1.Items.Clear();
+                            textBox1.Text = 0.ToString();
+                            textBox2.Text = 0.ToString();
+                            total_credit = 0;
+                            total_debit = 0;
+
+                            foreach (Movement newMovementAccount in movements)
+                            {
+                                addMovement(newMovementAccount, newAccountingMovement);
+                            }
+
+                            manager.My_db.SaveChanges();
+
+                            movements.Clear();
+                            movementsToDelete.Clear();
+
+                            checkForContractVisibility();
+
+                            button2.Enabled = false;
+
+                            if (FromExternalOperation)
+                            {
+                                OperationCompleted = true;
+                                this.Close();
+                            }
                         }
                         else
                         {
-                            newAccountingMovement = ExternalAccountMovemet;
-                        }
 
-                        newAccountingMovement.description = textBox4.Text;
-                        newAccountingMovement.date = Convert.ToDateTime(dateTimePicker1.Text);
-                        newAccountingMovement.FK_AccountingMovements_Currencies = Convert.ToInt32(comboBox4.SelectedValue);
+                            AccountingMovementToEdit.FK_AccountingMovements_Funds = manager.Selected;
+                            AccountingMovementToEdit.description = textBox4.Text;
+                            AccountingMovementToEdit.date = Convert.ToDateTime(dateTimePicker1.Text);
+                            AccountingMovementToEdit.reference = textBox3.Text;
+                            AccountingMovementToEdit.FK_AccountingMovements_Currencies = Convert.ToInt32(comboBox4.SelectedValue);
+                            AccountingMovementToEdit.original_reference = textBox5.Text;
 
-                        if (txtContract.Visible)
-                        {
-                            newAccountingMovement.contract = txtContract.Text;
-                        }
+                            if (txtContract.Visible)
+                            {
+                                AccountingMovementToEdit.contract = txtContract.Text;
+                            }
 
-                        if (!FromExternalOperation)
-                        {
-                            manager.My_db.AccountingMovements.Add(newAccountingMovement);
-                        }
-                        
-                        textBox3.Text = KeyDefinitions.NextAccountMovementReference(dateTimePicker1.Value.Year);
-                        textBox4.Clear();
-                        textBox5.Clear();
-                        txtContract.Clear();
-                        listView1.Items.Clear();
-                        textBox1.Text = 0.ToString();
-                        textBox2.Text = 0.ToString();
-                        total_credit = 0;
-                        total_debit = 0;
+                            textBox3.Text = KeyDefinitions.NextAccountMovementReference(dateTimePicker1.Value.Year);
+                            textBox4.Clear();
+                            textBox5.Clear();
+                            txtContract.Clear();
+                            listView1.Items.Clear();
+                            textBox1.Text = 0.ToString();
+                            textBox2.Text = 0.ToString();
+                            total_credit = 0;
+                            total_debit = 0;
 
-                        foreach (Movement newMovementAccount in movements)
-                        {
-                            addMovement(newMovementAccount, newAccountingMovement);
-                        }
+                            foreach (Movement movementToSave in movements)
+                            {
+                                addMovement(movementToSave, AccountingMovementToEdit);
+                            }
 
-                        manager.My_db.SaveChanges();
+                            foreach (Movement toDelete in movementsToDelete)
+                            {
+                                if (toDelete.Id > 0)
+                                {
+                                    manager.DeleteMovementAccount(toDelete.Id);
+                                }
+                            }
 
-                        movements.Clear();
-                        movementsToDelete.Clear();
+                            manager.My_db.SaveChanges();
 
-                        checkForContractVisibility();
+                            movements.Clear();
+                            movementsToDelete.Clear();
 
-                        button2.Enabled = false;
-
-                        if (FromExternalOperation)
-                        {
                             OperationCompleted = true;
                             this.Close();
                         }
+
+                        OperationCompleted = true;
                     }
                     else
                     {
-
-                        AccountingMovementToEdit.FK_AccountingMovements_Funds = manager.Selected;
-                        AccountingMovementToEdit.description = textBox4.Text;
-                        AccountingMovementToEdit.date = Convert.ToDateTime(dateTimePicker1.Text);
-                        AccountingMovementToEdit.reference = textBox3.Text;
-                        AccountingMovementToEdit.FK_AccountingMovements_Currencies = Convert.ToInt32(comboBox4.SelectedValue);
-                        AccountingMovementToEdit.original_reference = textBox5.Text;
-
-                        if (txtContract.Visible)
-                        {
-                            AccountingMovementToEdit.contract = txtContract.Text;
-                        }
-
-                        textBox3.Text = KeyDefinitions.NextAccountMovementReference(dateTimePicker1.Value.Year);
-                        textBox4.Clear();
-                        textBox5.Clear();
-                        txtContract.Clear();
-                        listView1.Items.Clear();
-                        textBox1.Text = 0.ToString();
-                        textBox2.Text = 0.ToString();
-                        total_credit = 0;
-                        total_debit = 0;
-
-                        foreach (Movement movementToSave in movements)
-                        {
-                            addMovement(movementToSave, AccountingMovementToEdit);
-                        }
-
-                        foreach (Movement toDelete in movementsToDelete)
-                        {
-                            if (toDelete.Id > 0)
-                            {
-                                manager.DeleteMovementAccount(toDelete.Id);
-                            }
-                        }
-
-                        manager.My_db.SaveChanges();
-
-                        movements.Clear();
-                        movementsToDelete.Clear();
-
-                        OperationCompleted = true;
-                        this.Close();
+                        ErrorMessage.showErrorMessage(new Exception("No movement allowed in closed period."));
                     }
-
-                    OperationCompleted = true;
+                    
                 }
                 catch (Exception _ex)
                 {

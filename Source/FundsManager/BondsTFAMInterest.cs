@@ -115,173 +115,181 @@ namespace FundsManager
                 {
                     try
                     {
-                        DateTime _date = Convert.ToDateTime(dtpDate.Text);
-
-                        List<BondsTFAM> _bondsToGenerateInterest = new List<BondsTFAM>();
-
-                        if (!forAll)
+                        if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpDate.Value.Year) == null)
                         {
-                            foreach (ListViewItem _item in lvData.SelectedItems)
+                            DateTime _date = Convert.ToDateTime(dtpDate.Text);
+
+                            List<BondsTFAM> _bondsToGenerateInterest = new List<BondsTFAM>();
+
+                            if (!forAll)
                             {
-                                int bondId = 0;
-
-                                if (int.TryParse(_item.Text, out bondId))
+                                foreach (ListViewItem _item in lvData.SelectedItems)
                                 {
-                                    BondsTFAM toGenerate = manager.My_db.BondsTFAMs.FirstOrDefault(x => x.Id == bondId);
+                                    int bondId = 0;
 
-                                    if (toGenerate != null)
+                                    if (int.TryParse(_item.Text, out bondId))
                                     {
-                                        _bondsToGenerateInterest.Add(toGenerate);
-                                    }
+                                        BondsTFAM toGenerate = manager.My_db.BondsTFAMs.FirstOrDefault(x => x.Id == bondId);
 
-                                    if (toGenerate.expired <= toGenerate.issued)
-                                    {
-                                        errorsDetected = true;
-                                        errorMessages += "\rBond " + toGenerate.number + ": expire <= issued date.";
-                                    }
+                                        if (toGenerate != null)
+                                        {
+                                            _bondsToGenerateInterest.Add(toGenerate);
+                                        }
 
-                                    if (toGenerate.amount == 0)
-                                    {
-                                        errorsDetected = true;
-                                        errorMessages += "\rBond " + toGenerate.number + ": amount = 0.";
+                                        if (toGenerate.expired <= toGenerate.issued)
+                                        {
+                                            errorsDetected = true;
+                                            errorMessages += "\rBond " + toGenerate.number + ": expire <= issued date.";
+                                        }
+
+                                        if (toGenerate.amount == 0)
+                                        {
+                                            errorsDetected = true;
+                                            errorMessages += "\rBond " + toGenerate.number + ": amount = 0.";
+                                        }
                                     }
                                 }
+                            }
+                            else
+                            {
+                                foreach (ListViewItem _item in lvData.Items)
+                                {
+                                    int bondId = 0;
+
+                                    if (int.TryParse(_item.Text, out bondId))
+                                    {
+                                        BondsTFAM toGenerate = manager.My_db.BondsTFAMs.FirstOrDefault(x => x.Id == bondId);
+
+                                        if (toGenerate != null)
+                                        {
+                                            _bondsToGenerateInterest.Add(toGenerate);
+                                        }
+
+                                        if (toGenerate.expired <= toGenerate.issued)
+                                        {
+                                            errorsDetected = true;
+                                            errorMessages += "\rBond " + toGenerate.number + ": expire <= issued date.";
+                                        }
+
+                                        if (toGenerate.amount == 0)
+                                        {
+                                            errorsDetected = true;
+                                            errorMessages += "\rBond " + toGenerate.number + ": amount = 0.";
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (errorsDetected)
+                            {
+                                if (MessageBox.Show("Do you want continue?\r\rThese bonds will be ignored in interest generation." + errorMessages, "Warning", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                                {
+                                    cmdGenerateInterest.Enabled = true;
+                                    cmdGenerateAllInterest.Enabled = true;
+                                    return;
+                                }
+                            }
+
+                            if (_bondsToGenerateInterest.Count > 0)
+                            {
+
+                                foreach (BondsTFAM _bondToGenerate in _bondsToGenerateInterest)
+                                {
+                                    BondsTFAMGeneratedInterest existingInterest = manager.My_db.BondsTFAMGeneratedInterests.FirstOrDefault(x => x.bond_id == _bondToGenerate.Id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
+
+                                    if (existingInterest == null)
+                                    {
+                                        DateTime? fromDate = getLastGeneratedInterestDateFor(_bondToGenerate.Id);
+
+                                        if (fromDate == null)
+                                        {
+                                            fromDate = _bondToGenerate.issued;
+                                        }
+
+                                        bool canContinueGeneratingInterest = true;
+
+                                        decimal _interestOnBond = 0;
+                                        decimal _interestOnTFF = 0;
+
+                                        DateTime toDate = dtpDate.Value <= _bondToGenerate.expired ? dtpDate.Value : _bondToGenerate.expired;
+
+                                        int days = (toDate.Date - fromDate.Value.Date).Days;
+
+                                        if (days > 0)
+                                        {
+                                            _interestOnBond = Math.Round(_bondToGenerate.amount * (decimal)_bondToGenerate.interest_on_bond * days / 360, 2);
+                                            _interestOnTFF = Math.Round(_bondToGenerate.amount * (decimal)_bondToGenerate.interest_tff_contribution * days / 360, 2);
+                                        }
+
+                                        canContinueGeneratingInterest = toDate < _bondToGenerate.expired;
+
+                                        if (_interestOnBond > 0 && _interestOnTFF > 0)
+                                        {
+                                            BondsTFAMGeneratedInterest _interest = new BondsTFAMGeneratedInterest();
+
+                                            _interest.bond_id = _bondToGenerate.Id;
+                                            _interest.generated_bond_interest = Math.Round(_interestOnBond, 2);
+                                            _interest.generated_tff_interest = Math.Round(_interestOnTFF, 2);
+                                            _interest.generated_interest_date = toDate;
+
+                                            manager.My_db.BondsTFAMGeneratedInterests.Add(_interest);
+
+                                            AccountingMovement _accountingMovement = new AccountingMovement();
+
+                                            _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
+                                            _accountingMovement.description = _bondToGenerate.number + " Interest";
+                                            _accountingMovement.date = dtpDate.Value;
+                                            _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpDate.Value.Year);
+                                            _accountingMovement.FK_AccountingMovements_Currencies = _bondToGenerate.currency_id;
+                                            _accountingMovement.original_reference = "";
+                                            _accountingMovement.contract = "";
+
+                                            manager.My_db.AccountingMovements.Add(_accountingMovement);
+
+                                            _interest.AccountingMovement = _accountingMovement;
+
+                                            Movements_Accounts _maccount840 = new Movements_Accounts();
+
+                                            _maccount840.AccountingMovement = _accountingMovement;
+                                            _maccount840.FK_Movements_Accounts_Funds = manager.Selected;
+                                            _maccount840.FK_Movements_Accounts_Accounts = account840.Id;
+                                            if (subacct840 != null)
+                                                _maccount840.FK_Movements_Accounts_Subaccounts = subacct840.Id;
+                                            _maccount840.debit = Math.Round(_interestOnBond + _interestOnTFF, 2);
+                                            _maccount840.credit = 0;
+
+                                            manager.My_db.Movements_Accounts.Add(_maccount840);
+
+                                            Movements_Accounts _maccount540 = new Movements_Accounts();
+
+                                            _maccount540.AccountingMovement = _accountingMovement;
+                                            _maccount540.FK_Movements_Accounts_Funds = manager.Selected;
+                                            _maccount540.FK_Movements_Accounts_Accounts = account540.Id;
+                                            _maccount540.debit = 0;
+                                            _maccount540.credit = Math.Round(_interestOnBond + _interestOnTFF, 2);
+
+                                            manager.My_db.Movements_Accounts.Add(_maccount540);
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Attempt to duplicate bond interest generation.");
+                                    }
+                                }
+
+                                manager.My_db.SaveChanges();
+                            }
+                            else
+                            {
+                                MessageBox.Show("No bonds found for interest generation.");
                             }
                         }
                         else
                         {
-                            foreach (ListViewItem _item in lvData.Items)
-                            {
-                                int bondId = 0;
-
-                                if (int.TryParse(_item.Text, out bondId))
-                                {
-                                    BondsTFAM toGenerate = manager.My_db.BondsTFAMs.FirstOrDefault(x => x.Id == bondId);
-
-                                    if (toGenerate != null)
-                                    {
-                                        _bondsToGenerateInterest.Add(toGenerate);
-                                    }
-
-                                    if (toGenerate.expired <= toGenerate.issued)
-                                    {
-                                        errorsDetected = true;
-                                        errorMessages += "\rBond " + toGenerate.number + ": expire <= issued date.";
-                                    }
-
-                                    if (toGenerate.amount == 0)
-                                    {
-                                        errorsDetected = true;
-                                        errorMessages += "\rBond " + toGenerate.number + ": amount = 0.";
-                                    }
-                                }
-                            }
+                            ErrorMessage.showErrorMessage(new Exception("No movement allowed in closed period."));
                         }
-
-                        if (errorsDetected)
-                        {
-                            if (MessageBox.Show("Do you want continue?\r\rThese bonds will be ignored in interest generation." + errorMessages, "Warning", MessageBoxButtons.OKCancel) != DialogResult.OK)
-                            {
-                                cmdGenerateInterest.Enabled = true;
-                                cmdGenerateAllInterest.Enabled = true;
-                                return;
-                            }
-                        }
-
-                        if (_bondsToGenerateInterest.Count > 0)
-                        {
-
-                            foreach (BondsTFAM _bondToGenerate in _bondsToGenerateInterest)
-                            {
-                                BondsTFAMGeneratedInterest existingInterest = manager.My_db.BondsTFAMGeneratedInterests.FirstOrDefault(x => x.bond_id == _bondToGenerate.Id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
-
-                                if (existingInterest == null)
-                                {
-                                    DateTime? fromDate = getLastGeneratedInterestDateFor(_bondToGenerate.Id);
-
-                                    if (fromDate == null)
-                                    {
-                                        fromDate = _bondToGenerate.issued;
-                                    }
-
-                                    bool canContinueGeneratingInterest = true;
-
-                                    decimal _interestOnBond = 0;
-                                    decimal _interestOnTFF = 0;
-
-                                    DateTime toDate = dtpDate.Value <= _bondToGenerate.expired ? dtpDate.Value : _bondToGenerate.expired;
-
-                                    int days = (toDate.Date - fromDate.Value.Date).Days;
-
-                                    if (days > 0)
-                                    {
-                                        _interestOnBond = Math.Round(_bondToGenerate.amount * (decimal)_bondToGenerate.interest_on_bond * days / 360, 2);
-                                        _interestOnTFF = Math.Round(_bondToGenerate.amount * (decimal)_bondToGenerate.interest_tff_contribution * days / 360, 2);
-                                    }
-
-                                    canContinueGeneratingInterest = toDate < _bondToGenerate.expired;
-
-                                    if (_interestOnBond > 0 && _interestOnTFF > 0)
-                                    {
-                                        BondsTFAMGeneratedInterest _interest = new BondsTFAMGeneratedInterest();
-                                        
-                                        _interest.bond_id = _bondToGenerate.Id;
-                                        _interest.generated_bond_interest = Math.Round(_interestOnBond, 2);
-                                        _interest.generated_tff_interest = Math.Round(_interestOnTFF, 2);
-                                        _interest.generated_interest_date = toDate;
-
-                                        manager.My_db.BondsTFAMGeneratedInterests.Add(_interest);
-
-                                        AccountingMovement _accountingMovement = new AccountingMovement();
-
-                                        _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
-                                        _accountingMovement.description = _bondToGenerate.number + " Interest";
-                                        _accountingMovement.date = dtpDate.Value;
-                                        _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpDate.Value.Year);
-                                        _accountingMovement.FK_AccountingMovements_Currencies = _bondToGenerate.currency_id;
-                                        _accountingMovement.original_reference = "";
-                                        _accountingMovement.contract = "";
-
-                                        manager.My_db.AccountingMovements.Add(_accountingMovement);
-
-                                        _interest.AccountingMovement = _accountingMovement;
-
-                                        Movements_Accounts _maccount840 = new Movements_Accounts();
-
-                                        _maccount840.AccountingMovement = _accountingMovement;
-                                        _maccount840.FK_Movements_Accounts_Funds = manager.Selected;
-                                        _maccount840.FK_Movements_Accounts_Accounts = account840.Id;
-                                        if (subacct840 != null)
-                                            _maccount840.FK_Movements_Accounts_Subaccounts = subacct840.Id;
-                                        _maccount840.debit = Math.Round(_interestOnBond + _interestOnTFF, 2);
-                                        _maccount840.credit = 0;
-                                        
-                                        manager.My_db.Movements_Accounts.Add(_maccount840);
-
-                                        Movements_Accounts _maccount540 = new Movements_Accounts();
-
-                                        _maccount540.AccountingMovement = _accountingMovement;
-                                        _maccount540.FK_Movements_Accounts_Funds = manager.Selected;
-                                        _maccount540.FK_Movements_Accounts_Accounts = account540.Id;
-                                        _maccount540.debit = 0;
-                                        _maccount540.credit = Math.Round(_interestOnBond + _interestOnTFF, 2);
-                                        
-                                        manager.My_db.Movements_Accounts.Add(_maccount540);
-
-                                    }
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Attempt to duplicate bond interest generation.");
-                                }
-                            }
-
-                            manager.My_db.SaveChanges();
-                        }
-                        else
-                        {
-                            MessageBox.Show("No bonds found for interest generation.");
-                        }
+                        
 
                     }
                     catch (Exception _ex)

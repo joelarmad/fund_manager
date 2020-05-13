@@ -89,251 +89,259 @@ namespace FundsManager
         {
             try
             {
-                List<int> ids = new List<int>();
-                List<decimal> amounts = new List<decimal>();
-                List<decimal> profitShares = new List<decimal>();
-                List<decimal> delayInterests = new List<decimal>();
-                List<decimal> collect125 = new List<decimal>();
-                List<decimal> collect128 = new List<decimal>();
-                List<decimal> collect130 = new List<decimal>();
-
-                String errors = "";
-
-                foreach (DataGridViewRow row in dataGridView1.Rows)
+                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpDate.Value.Year) == null)
                 {
-                    int id = int.Parse(row.Cells[IdIndex].Value.ToString());
-                    string number = row.Cells[NumberIndex].Value.ToString();
-                    decimal amount = decimal.Parse(row.Cells[AmountIndex].Value.ToString());
-                    decimal profitShare = decimal.Parse(row.Cells[ProfitShareIndex].Value.ToString());
-                    decimal delayInterest = decimal.Parse(row.Cells[DelayInterestIndex].Value.ToString());
-                    string amountToBeCollected125Str = row.Cells[CollectTo125Index].Value != null ? row.Cells[CollectTo125Index].Value.ToString() : "0";
-                    string amountToBeCollected128Str = row.Cells[CollectTo128Index].Value != null ? row.Cells[CollectTo128Index].Value.ToString() : "0";
-                    string amountToBeCollected130Str = row.Cells[CollectTo130Index].Value != null ? row.Cells[CollectTo130Index].Value.ToString() : "0";
-                    
-                    if (amountToBeCollected125Str != "0" || amountToBeCollected128Str != "0" || amountToBeCollected130Str != "0")
-                    {
-                        decimal amountToBeCollected125 = 0;
-                        decimal amountToBeCollected128 = 0;
-                        decimal amountToBeCollected130 = 0;
+                    List<int> ids = new List<int>();
+                    List<decimal> amounts = new List<decimal>();
+                    List<decimal> profitShares = new List<decimal>();
+                    List<decimal> delayInterests = new List<decimal>();
+                    List<decimal> collect125 = new List<decimal>();
+                    List<decimal> collect128 = new List<decimal>();
+                    List<decimal> collect130 = new List<decimal>();
 
-                        if (decimal.TryParse(amountToBeCollected125Str, out amountToBeCollected125) &&
-                                decimal.TryParse(amountToBeCollected128Str, out amountToBeCollected128) &&
-                                decimal.TryParse(amountToBeCollected130Str, out amountToBeCollected130))
+                    String errors = "";
+
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    {
+                        int id = int.Parse(row.Cells[IdIndex].Value.ToString());
+                        string number = row.Cells[NumberIndex].Value.ToString();
+                        decimal amount = decimal.Parse(row.Cells[AmountIndex].Value.ToString());
+                        decimal profitShare = decimal.Parse(row.Cells[ProfitShareIndex].Value.ToString());
+                        decimal delayInterest = decimal.Parse(row.Cells[DelayInterestIndex].Value.ToString());
+                        string amountToBeCollected125Str = row.Cells[CollectTo125Index].Value != null ? row.Cells[CollectTo125Index].Value.ToString() : "0";
+                        string amountToBeCollected128Str = row.Cells[CollectTo128Index].Value != null ? row.Cells[CollectTo128Index].Value.ToString() : "0";
+                        string amountToBeCollected130Str = row.Cells[CollectTo130Index].Value != null ? row.Cells[CollectTo130Index].Value.ToString() : "0";
+
+                        if (amountToBeCollected125Str != "0" || amountToBeCollected128Str != "0" || amountToBeCollected130Str != "0")
                         {
-                            if (amount - amountToBeCollected125 >= 0 && profitShare - amountToBeCollected128 >= 0 && delayInterest - amountToBeCollected130 >= 0)
+                            decimal amountToBeCollected125 = 0;
+                            decimal amountToBeCollected128 = 0;
+                            decimal amountToBeCollected130 = 0;
+
+                            if (decimal.TryParse(amountToBeCollected125Str, out amountToBeCollected125) &&
+                                    decimal.TryParse(amountToBeCollected128Str, out amountToBeCollected128) &&
+                                    decimal.TryParse(amountToBeCollected130Str, out amountToBeCollected130))
                             {
-                                ids.Add(id);
-                                amounts.Add(amount);
-                                profitShares.Add(profitShare);
-                                delayInterests.Add(delayInterest);
-                                collect125.Add(amountToBeCollected125);
-                                collect128.Add(amountToBeCollected128);
-                                collect130.Add(amountToBeCollected130);
+                                if (amount - amountToBeCollected125 >= 0 && profitShare - amountToBeCollected128 >= 0 && delayInterest - amountToBeCollected130 >= 0)
+                                {
+                                    ids.Add(id);
+                                    amounts.Add(amount);
+                                    profitShares.Add(profitShare);
+                                    delayInterests.Add(delayInterest);
+                                    collect125.Add(amountToBeCollected125);
+                                    collect128.Add(amountToBeCollected128);
+                                    collect130.Add(amountToBeCollected130);
+                                }
+                                else
+                                {
+                                    errors += "\r\tDisbursement " + number + " has too much collection value.";
+                                }
                             }
                             else
                             {
-                                errors += "\r\tDisbursement " + number + " has too much collection value.";
+                                errors += "\r  Disbursement " + number + " has wrong collection value.";
                             }
                         }
-                        else
-                        {
-                            errors += "\r  Disbursement " + number + " has wrong collection value.";
-                        }
                     }
-                }
 
-                if (errors != "")
-                {
-                    string msg = "Please, fix these errors:" + errors;
-
-                    ErrorMessage.showErrorMessage(new Exception(msg));
-                    return;
-                }
-                else
-                {
-                    string msg = "";
-
-                    if (ids.Count > 0)
+                    if (errors != "")
                     {
-                        DisbursementCollection collection = new DisbursementCollection();
-                        collection.collection_date = dtpDate.Value;
-                        collection.investment_id = cbContract.SelectedValue != null ? int.Parse(cbContract.SelectedValue.ToString()) : 0;
+                        string msg = "Please, fix these errors:" + errors;
 
-                        Account account125 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "125" && x.FK_Accounts_Funds == manager.Selected);
-                        Account account128 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "128" && x.FK_Accounts_Funds == manager.Selected);
-                        Account account130 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "130" && x.FK_Accounts_Funds == manager.Selected);
+                        ErrorMessage.showErrorMessage(new Exception(msg));
+                        return;
+                    }
+                    else
+                    {
+                        string msg = "";
 
-                        if (collection.investment_id > 0)
+                        if (ids.Count > 0)
                         {
-                            if (account125 != null && account128 != null && account130 != null)
+                            DisbursementCollection collection = new DisbursementCollection();
+                            collection.collection_date = dtpDate.Value;
+                            collection.investment_id = cbContract.SelectedValue != null ? int.Parse(cbContract.SelectedValue.ToString()) : 0;
+
+                            Account account125 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "125" && x.FK_Accounts_Funds == manager.Selected);
+                            Account account128 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "128" && x.FK_Accounts_Funds == manager.Selected);
+                            Account account130 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "130" && x.FK_Accounts_Funds == manager.Selected);
+
+                            if (collection.investment_id > 0)
                             {
-                                manager.My_db.DisbursementCollections.Add(collection);
-
-                                AccountingMovement accountingMovement = new AccountingMovement();
-
-                                accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
-                                accountingMovement.description = "";
-                                accountingMovement.date = dtpDate.Value;
-                                accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpDate.Value.Year);
-                                accountingMovement.original_reference = cbContract.Text;
-                                accountingMovement.contract = cbContract.Text;
-                                accountingMovement.FK_AccountingMovements_Currencies = 0;
-
-                                bool showGL = false;
-                                decimal totalPaid = 0;
-
-                                for (int i = 0; i < ids.Count; i++)
+                                if (account125 != null && account128 != null && account130 != null)
                                 {
-                                    int disbId = ids[i];
-                                    decimal amount = amounts[i];
-                                    decimal profitShare = profitShares[i];
-                                    decimal delayInterest = delayInterests[i];
-                                    decimal toBeCollected125 = collect125[i];
-                                    decimal toBeCollected128 = collect128[i];
-                                    decimal toBeCollected130 = collect130[i];
+                                    manager.My_db.DisbursementCollections.Add(collection);
 
-                                    Disbursement disb = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == disbId);
+                                    AccountingMovement accountingMovement = new AccountingMovement();
 
-                                    if (disb != null)
+                                    accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
+                                    accountingMovement.description = "";
+                                    accountingMovement.date = dtpDate.Value;
+                                    accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpDate.Value.Year);
+                                    accountingMovement.original_reference = cbContract.Text;
+                                    accountingMovement.contract = cbContract.Text;
+                                    accountingMovement.FK_AccountingMovements_Currencies = 0;
+
+                                    bool showGL = false;
+                                    decimal totalPaid = 0;
+
+                                    for (int i = 0; i < ids.Count; i++)
                                     {
-                                        Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == disb.currency_id && x.FK_Currencies_Funds == manager.Selected);
-                                        Subaccount subacct125 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account125.Id && x.name == "INV " + currency.symbol);
-                                        Subaccount subacct128 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account128.Id && x.name == "INV " + currency.symbol);
-                                        Subaccount subacct130 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account130.Id && x.name == "INV " + currency.symbol);
+                                        int disbId = ids[i];
+                                        decimal amount = amounts[i];
+                                        decimal profitShare = profitShares[i];
+                                        decimal delayInterest = delayInterests[i];
+                                        decimal toBeCollected125 = collect125[i];
+                                        decimal toBeCollected128 = collect128[i];
+                                        decimal toBeCollected130 = collect130[i];
 
-                                        if (currency != null)
-                                        {   
-                                            if (subacct125 != null && subacct128 != null && subacct130 != null)
+                                        Disbursement disb = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == disbId);
+
+                                        if (disb != null)
+                                        {
+                                            Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == disb.currency_id && x.FK_Currencies_Funds == manager.Selected);
+                                            Subaccount subacct125 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account125.Id && x.name == "INV " + currency.symbol);
+                                            Subaccount subacct128 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account128.Id && x.name == "INV " + currency.symbol);
+                                            Subaccount subacct130 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account130.Id && x.name == "INV " + currency.symbol);
+
+                                            if (currency != null)
                                             {
-                                                if (accountingMovement.FK_AccountingMovements_Currencies == 0)
+                                                if (subacct125 != null && subacct128 != null && subacct130 != null)
                                                 {
-                                                    accountingMovement.FK_AccountingMovements_Currencies = currency.Id;
+                                                    if (accountingMovement.FK_AccountingMovements_Currencies == 0)
+                                                    {
+                                                        accountingMovement.FK_AccountingMovements_Currencies = currency.Id;
 
-                                                    manager.My_db.AccountingMovements.Add(accountingMovement);
+                                                        manager.My_db.AccountingMovements.Add(accountingMovement);
 
-                                                    collection.AccountingMovement = accountingMovement;
+                                                        collection.AccountingMovement = accountingMovement;
+                                                    }
+
+                                                    DisbursementCollectionsDetail collectionDetail = new DisbursementCollectionsDetail();
+
+                                                    collectionDetail.DisbursementCollection = collection;
+                                                    collectionDetail.disbursement_id = disbId;
+                                                    collectionDetail.amount_collected = Math.Round(toBeCollected125 + toBeCollected128 + toBeCollected130, 2);
+
+                                                    if (amount - toBeCollected125 <= 0 && profitShare - toBeCollected128 <= 0 && delayInterest - toBeCollected130 <= 0)
+                                                    {
+                                                        disb.collected = true;
+                                                    }
+
+                                                    manager.My_db.DisbursementCollectionsDetails.Add(collectionDetail);
+
+                                                    Movements_Accounts _maccount125 = new Movements_Accounts();
+
+                                                    _maccount125.AccountingMovement = accountingMovement;
+                                                    _maccount125.FK_Movements_Accounts_Funds = manager.Selected;
+                                                    _maccount125.FK_Movements_Accounts_Accounts = account125.Id;
+                                                    if (subacct125 != null)
+                                                        _maccount125.FK_Movements_Accounts_Subaccounts = subacct125.Id;
+                                                    _maccount125.subaccount = disb.client_id;
+                                                    _maccount125.subaccount_type = 1;
+                                                    _maccount125.debit = 0;
+                                                    _maccount125.credit = Math.Round(toBeCollected125, 2);
+
+                                                    manager.My_db.Movements_Accounts.Add(_maccount125);
+
+                                                    collectionDetail.Movements_Accounts = _maccount125;
+
+                                                    Movements_Accounts _maccount128 = new Movements_Accounts();
+
+                                                    _maccount128.AccountingMovement = accountingMovement;
+                                                    _maccount128.FK_Movements_Accounts_Funds = manager.Selected;
+                                                    _maccount128.FK_Movements_Accounts_Accounts = account128.Id;
+                                                    if (subacct128 != null)
+                                                        _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
+                                                    _maccount128.subaccount = disb.client_id;
+                                                    _maccount128.subaccount_type = 1;
+                                                    _maccount128.debit = 0;
+                                                    _maccount128.credit = Math.Round(toBeCollected128, 2);
+
+                                                    manager.My_db.Movements_Accounts.Add(_maccount128);
+
+                                                    collectionDetail.Movements_Accounts1 = _maccount128;
+
+                                                    Movements_Accounts _maccount130 = new Movements_Accounts();
+
+                                                    _maccount130.AccountingMovement = accountingMovement;
+                                                    _maccount130.FK_Movements_Accounts_Funds = manager.Selected;
+                                                    _maccount130.FK_Movements_Accounts_Accounts = account130.Id;
+                                                    if (subacct130 != null)
+                                                        _maccount130.FK_Movements_Accounts_Subaccounts = subacct130.Id;
+                                                    _maccount130.subaccount = disb.client_id;
+                                                    _maccount130.subaccount_type = 1;
+                                                    _maccount130.debit = 0;
+                                                    _maccount130.credit = Math.Round(toBeCollected130, 2);
+
+                                                    manager.My_db.Movements_Accounts.Add(_maccount130);
+
+                                                    collectionDetail.Movements_Accounts2 = _maccount130;
+
+                                                    totalPaid += toBeCollected125 + toBeCollected128 + toBeCollected130;
+
+                                                    showGL = true;
                                                 }
-
-                                                DisbursementCollectionsDetail collectionDetail = new DisbursementCollectionsDetail();
-
-                                                collectionDetail.DisbursementCollection = collection;
-                                                collectionDetail.disbursement_id = disbId;
-                                                collectionDetail.amount_collected = Math.Round(toBeCollected125 + toBeCollected128 + toBeCollected130, 2);
-
-                                                if (amount - toBeCollected125 <= 0 && profitShare - toBeCollected128 <= 0 && delayInterest - toBeCollected130 <= 0)
+                                                else
                                                 {
-                                                    disb.collected = true;
+                                                    msg += "\rSome sub account is missing. No collection has been generated for disbursement with Id=\"" + disbId + "\".";
                                                 }
-
-                                                manager.My_db.DisbursementCollectionsDetails.Add(collectionDetail);
-
-                                                Movements_Accounts _maccount125 = new Movements_Accounts();
-
-                                                _maccount125.AccountingMovement = accountingMovement;
-                                                _maccount125.FK_Movements_Accounts_Funds = manager.Selected;
-                                                _maccount125.FK_Movements_Accounts_Accounts = account125.Id;
-                                                if (subacct125 != null)
-                                                    _maccount125.FK_Movements_Accounts_Subaccounts = subacct125.Id;
-                                                _maccount125.subaccount = disb.client_id;
-                                                _maccount125.subaccount_type = 1;
-                                                _maccount125.debit = 0;
-                                                _maccount125.credit = Math.Round(toBeCollected125, 2);
-                                                
-                                                manager.My_db.Movements_Accounts.Add(_maccount125);
-
-                                                collectionDetail.Movements_Accounts = _maccount125;
-
-                                                Movements_Accounts _maccount128 = new Movements_Accounts();
-
-                                                _maccount128.AccountingMovement = accountingMovement;
-                                                _maccount128.FK_Movements_Accounts_Funds = manager.Selected;
-                                                _maccount128.FK_Movements_Accounts_Accounts = account128.Id;
-                                                if (subacct128 != null)
-                                                    _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
-                                                _maccount128.subaccount = disb.client_id;
-                                                _maccount128.subaccount_type = 1;
-                                                _maccount128.debit = 0;
-                                                _maccount128.credit = Math.Round(toBeCollected128, 2);
-                                                
-                                                manager.My_db.Movements_Accounts.Add(_maccount128);
-
-                                                collectionDetail.Movements_Accounts1 = _maccount128;
-
-                                                Movements_Accounts _maccount130 = new Movements_Accounts();
-
-                                                _maccount130.AccountingMovement = accountingMovement;
-                                                _maccount130.FK_Movements_Accounts_Funds = manager.Selected;
-                                                _maccount130.FK_Movements_Accounts_Accounts = account130.Id;
-                                                if (subacct130 != null)
-                                                    _maccount130.FK_Movements_Accounts_Subaccounts = subacct130.Id;
-                                                _maccount130.subaccount = disb.client_id;
-                                                _maccount130.subaccount_type = 1;
-                                                _maccount130.debit = 0;
-                                                _maccount130.credit = Math.Round(toBeCollected130, 2);
-                                                
-                                                manager.My_db.Movements_Accounts.Add(_maccount130);
-
-                                                collectionDetail.Movements_Accounts2 = _maccount130;
-
-                                                totalPaid += toBeCollected125 + toBeCollected128 + toBeCollected130;
-
-                                                showGL = true;
                                             }
                                             else
                                             {
-                                                msg += "\rSome sub account is missing. No collection has been generated for disbursement with Id=\"" + disbId + "\".";
+                                                msg += "\rCurrency is missing. No collection has been generated for disbursement with Id=\"" + disbId + "\".";
                                             }
                                         }
                                         else
                                         {
-                                            msg += "\rCurrency is missing. No collection has been generated for disbursement with Id=\"" + disbId + "\".";
+                                            msg += "\rDisbursement with Id=\"" + disbId.ToString() + "\" not found.";
                                         }
                                     }
-                                    else
+
+                                    if (msg != "")
                                     {
-                                        msg += "\rDisbursement with Id=\"" + disbId.ToString() + "\" not found.";
+                                        MessageBox.Show("Warning:\r\r" + msg);
+                                    }
+
+                                    if (showGL)
+                                    {
+                                        GeneralLedgerForm gledger = new GeneralLedgerForm();
+                                        gledger.StartPosition = FormStartPosition.CenterScreen;
+                                        gledger.FromExternalOperation = true;
+                                        gledger.ExternalAccountMovemet = accountingMovement;
+                                        gledger.ExternalDebit = totalPaid;
+                                        gledger.ControlBox = false;
+                                        gledger.ShowDialog();
+
+                                        if (!gledger.OperationCompleted)
+                                        {
+                                            throw new Exception("Ledger operation has been failed. The disbursements collection has been rolled back.");
+                                        }
+
                                     }
                                 }
-
-                                if (msg != "")
+                                else
                                 {
-                                    MessageBox.Show("Warning:\r\r" + msg);
-                                }
-
-                                if (showGL)
-                                {
-                                    GeneralLedgerForm gledger = new GeneralLedgerForm();
-                                    gledger.StartPosition = FormStartPosition.CenterScreen;
-                                    gledger.FromExternalOperation = true;
-                                    gledger.ExternalAccountMovemet = accountingMovement;
-                                    gledger.ExternalDebit = totalPaid;
-                                    gledger.ControlBox = false;
-                                    gledger.ShowDialog();
-
-                                    if (!gledger.OperationCompleted)
-                                    {
-                                        throw new Exception("Ledger operation has been failed. The disbursements collection has been rolled back.");
-                                    }
-                                    
+                                    ErrorMessage.showErrorMessage(new Exception("Account 125, 128 or 130 is missing."));
                                 }
                             }
                             else
                             {
-                                ErrorMessage.showErrorMessage(new Exception("Account 125, 128 or 130 is missing."));
+                                ErrorMessage.showErrorMessage(new Exception("No investment found for this contract."));
                             }
                         }
                         else
                         {
-                            ErrorMessage.showErrorMessage(new Exception("No investment found for this contract."));
+                            ErrorMessage.showErrorMessage(new Exception("No disbursement found."));
                         }
                     }
-                    else
-                    {
-                        ErrorMessage.showErrorMessage(new Exception("No disbursement found."));
-                    }
-                }
 
-                updateDisbursementList();
+                    updateDisbursementList();
+                }
+                else
+                {
+                    ErrorMessage.showErrorMessage(new Exception("No movement allowed in closed period."));
+                }
+                
             }
             catch (Exception _ex)
             {

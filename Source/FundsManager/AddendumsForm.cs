@@ -718,108 +718,63 @@ namespace FundsManager
         {
             try
             {
-                AccountingMovement _accountingMovement = new AccountingMovement();
-                DisbursementBook _book = new DisbursementBook();
-
-
-                Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == disbursement.currency_id && x.FK_Currencies_Funds == manager.Selected);
-                Account account125 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "125" && x.FK_Accounts_Funds == manager.Selected);
-                Subaccount subacct125 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account125.Id && x.name == "INV " + currency.symbol);
-                Account account128 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "128" && x.FK_Accounts_Funds == manager.Selected);
-                Subaccount subacct128 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account128.Id && x.name == "INV " + currency.symbol);
-
-                if (account125 == null || account128 == null || subacct125 == null || subacct128 == null)
+                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpBookingDate.Value.Year) == null)
                 {
-                    //TODO: Error
-                    return;
-                }
+                    AccountingMovement _accountingMovement = new AccountingMovement();
+                    DisbursementBook _book = new DisbursementBook();
 
-                if (EditingExistingBook)
-                {
-                    if (BookToEdit == null)
+
+                    Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == disbursement.currency_id && x.FK_Currencies_Funds == manager.Selected);
+                    Account account125 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "125" && x.FK_Accounts_Funds == manager.Selected);
+                    Subaccount subacct125 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account125.Id && x.name == "INV " + currency.symbol);
+                    Account account128 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "128" && x.FK_Accounts_Funds == manager.Selected);
+                    Subaccount subacct128 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account128.Id && x.name == "INV " + currency.symbol);
+
+                    if (account125 == null || account128 == null || subacct125 == null || subacct128 == null)
                     {
                         //TODO: Error
                         return;
                     }
 
-                    _book = BookToEdit;
-                    _accountingMovement = manager.My_db.AccountingMovements.FirstOrDefault(x => x.Id == _book.accounting_movement_id);
-
-                    if (_accountingMovement == null)
+                    if (EditingExistingBook)
                     {
-                        //TODO: error
-                        return;
+                        if (BookToEdit == null)
+                        {
+                            //TODO: Error
+                            return;
+                        }
+
+                        _book = BookToEdit;
+                        _accountingMovement = manager.My_db.AccountingMovements.FirstOrDefault(x => x.Id == _book.accounting_movement_id);
+
+                        if (_accountingMovement == null)
+                        {
+                            //TODO: error
+                            return;
+                        }
+
+                        BookToEdit.Movements_Accounts.credit = fAmount;
+                        //BookToEdit.Movements_Accounts128.credit = fDelayedInterest;
+                        BookToEdit.Movements_Accounts1.credit = fProfitShare;
+
                     }
-
-                    BookToEdit.Movements_Accounts.credit = fAmount;
-                    //BookToEdit.Movements_Accounts128.credit = fDelayedInterest;
-                    BookToEdit.Movements_Accounts1.credit = fProfitShare;
-
-                }
-                else
-                {
-                    _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
-                    _accountingMovement.description = "";
-                    _accountingMovement.date = dtpBookingDate.Value.Date;
-                    _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpStartingDate.Value.Year);
-                    _accountingMovement.FK_AccountingMovements_Currencies = disbursement.currency_id;
-                    _accountingMovement.original_reference = disbursement.Investment.contract;
-                    _accountingMovement.contract = disbursement.Investment.contract;
-
-                    manager.My_db.AccountingMovements.Add(_accountingMovement);
-
-                    _book.date = DateTime.Now.Date;
-
-                    _book.AccountingMovement = _accountingMovement;
-                    manager.My_db.DisbursementBooks.Add(_book);
-
-                    Movements_Accounts _maccount125 = new Movements_Accounts();
-
-                    _maccount125.AccountingMovement = _accountingMovement;
-                    _maccount125.FK_Movements_Accounts_Funds = manager.Selected;
-                    _maccount125.FK_Movements_Accounts_Accounts = account125.Id;
-                    if (subacct125 != null)
-                        _maccount125.FK_Movements_Accounts_Subaccounts = subacct125.Id;
-                    _maccount125.subaccount = disbursement.client_id;
-                    _maccount125.subaccount_type = 1;
-                    _maccount125.credit = Math.Round(fAmount, 2);
-                    _maccount125.debit = 0;
-                    
-                    manager.My_db.Movements_Accounts.Add(_maccount125);
-
-                    Movements_Accounts _maccount128 = new Movements_Accounts();
-
-                    _maccount128.AccountingMovement = _accountingMovement;
-                    _maccount128.FK_Movements_Accounts_Funds = manager.Selected;
-                    _maccount128.FK_Movements_Accounts_Accounts = account128.Id;
-                    if (subacct128 != null)
-                        _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
-                    _maccount128.subaccount = disbursement.client_id;
-                    _maccount128.subaccount_type = 1;
-                    //_maccount128.credit = Math.Round(fDelayedInterest, 2);
-                    _maccount128.credit = Math.Round(fProfitShare, 2);
-                    _maccount128.debit = 0;
-                    
-                    manager.My_db.Movements_Accounts.Add(_maccount128);
-
-                    _book.Movements_Accounts = _maccount125;
-                    _book.Movements_Accounts1 = _maccount128;
-                }
-
-                foreach (DisbursementBooking bookingToDelete in toDelete)
-                {
-                    manager.My_db.Movements_Accounts.Remove(bookingToDelete.Movements_Accounts);
-                    manager.My_db.Movements_Accounts.Remove(bookingToDelete.Movements_Accounts1);
-
-                    manager.My_db.DisbursementBookings.Remove(bookingToDelete);
-                }
-
-                foreach (DisbursementBooking _booking in bookings)
-                {
-                    _booking.book_id = _book.Id;
-
-                    if (_booking.id == 0)
+                    else
                     {
+                        _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
+                        _accountingMovement.description = "";
+                        _accountingMovement.date = dtpBookingDate.Value.Date;
+                        _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpStartingDate.Value.Year);
+                        _accountingMovement.FK_AccountingMovements_Currencies = disbursement.currency_id;
+                        _accountingMovement.original_reference = disbursement.Investment.contract;
+                        _accountingMovement.contract = disbursement.Investment.contract;
+
+                        manager.My_db.AccountingMovements.Add(_accountingMovement);
+
+                        _book.date = DateTime.Now.Date;
+
+                        _book.AccountingMovement = _accountingMovement;
+                        manager.My_db.DisbursementBooks.Add(_book);
+
                         Movements_Accounts _maccount125 = new Movements_Accounts();
 
                         _maccount125.AccountingMovement = _accountingMovement;
@@ -829,18 +784,9 @@ namespace FundsManager
                             _maccount125.FK_Movements_Accounts_Subaccounts = subacct125.Id;
                         _maccount125.subaccount = disbursement.client_id;
                         _maccount125.subaccount_type = 1;
-                        _maccount125.credit = 0;
-                        _maccount125.debit = Math.Round(_booking.amount, 2);
+                        _maccount125.credit = Math.Round(fAmount, 2);
+                        _maccount125.debit = 0;
 
-                        int _creditFactor = 1;
-                        int _debitFactor = -1;
-
-                        if (Account.leftAccountingIncrement(account125.type))
-                        {
-                            _creditFactor = -1;
-                            _debitFactor = 1;
-                        }
-                        
                         manager.My_db.Movements_Accounts.Add(_maccount125);
 
                         Movements_Accounts _maccount128 = new Movements_Accounts();
@@ -852,50 +798,111 @@ namespace FundsManager
                             _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
                         _maccount128.subaccount = disbursement.client_id;
                         _maccount128.subaccount_type = 1;
-                        _maccount128.credit = 0;
-                        //_maccount128.debit = Math.Round(_booking.delay_interest, 2);
-                        _maccount128.debit = Math.Round(_booking.profit_share, 2);
+                        //_maccount128.credit = Math.Round(fDelayedInterest, 2);
+                        _maccount128.credit = Math.Round(fProfitShare, 2);
+                        _maccount128.debit = 0;
 
-                        _creditFactor = 1;
-                        _debitFactor = -1;
-
-                        if (Account.leftAccountingIncrement(account128.type))
-                        {
-                            _creditFactor = -1;
-                            _debitFactor = 1;
-                        }
-                        
                         manager.My_db.Movements_Accounts.Add(_maccount128);
 
-                        _booking.Movements_Accounts = _maccount125;
-                        _booking.Movements_Accounts1 = _maccount128;
-
-                        manager.My_db.DisbursementBookings.Add(_booking);
+                        _book.Movements_Accounts = _maccount125;
+                        _book.Movements_Accounts1 = _maccount128;
                     }
-                    else
+
+                    foreach (DisbursementBooking bookingToDelete in toDelete)
                     {
-                        _booking.Movements_Accounts.debit = _booking.amount;
-                        _booking.Movements_Accounts1.debit = _booking.profit_share;
+                        manager.My_db.Movements_Accounts.Remove(bookingToDelete.Movements_Accounts);
+                        manager.My_db.Movements_Accounts.Remove(bookingToDelete.Movements_Accounts1);
+
+                        manager.My_db.DisbursementBookings.Remove(bookingToDelete);
                     }
+
+                    foreach (DisbursementBooking _booking in bookings)
+                    {
+                        _booking.book_id = _book.Id;
+
+                        if (_booking.id == 0)
+                        {
+                            Movements_Accounts _maccount125 = new Movements_Accounts();
+
+                            _maccount125.AccountingMovement = _accountingMovement;
+                            _maccount125.FK_Movements_Accounts_Funds = manager.Selected;
+                            _maccount125.FK_Movements_Accounts_Accounts = account125.Id;
+                            if (subacct125 != null)
+                                _maccount125.FK_Movements_Accounts_Subaccounts = subacct125.Id;
+                            _maccount125.subaccount = disbursement.client_id;
+                            _maccount125.subaccount_type = 1;
+                            _maccount125.credit = 0;
+                            _maccount125.debit = Math.Round(_booking.amount, 2);
+
+                            int _creditFactor = 1;
+                            int _debitFactor = -1;
+
+                            if (Account.leftAccountingIncrement(account125.type))
+                            {
+                                _creditFactor = -1;
+                                _debitFactor = 1;
+                            }
+
+                            manager.My_db.Movements_Accounts.Add(_maccount125);
+
+                            Movements_Accounts _maccount128 = new Movements_Accounts();
+
+                            _maccount128.AccountingMovement = _accountingMovement;
+                            _maccount128.FK_Movements_Accounts_Funds = manager.Selected;
+                            _maccount128.FK_Movements_Accounts_Accounts = account128.Id;
+                            if (subacct128 != null)
+                                _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
+                            _maccount128.subaccount = disbursement.client_id;
+                            _maccount128.subaccount_type = 1;
+                            _maccount128.credit = 0;
+                            //_maccount128.debit = Math.Round(_booking.delay_interest, 2);
+                            _maccount128.debit = Math.Round(_booking.profit_share, 2);
+
+                            _creditFactor = 1;
+                            _debitFactor = -1;
+
+                            if (Account.leftAccountingIncrement(account128.type))
+                            {
+                                _creditFactor = -1;
+                                _debitFactor = 1;
+                            }
+
+                            manager.My_db.Movements_Accounts.Add(_maccount128);
+
+                            _booking.Movements_Accounts = _maccount125;
+                            _booking.Movements_Accounts1 = _maccount128;
+
+                            manager.My_db.DisbursementBookings.Add(_booking);
+                        }
+                        else
+                        {
+                            _booking.Movements_Accounts.debit = _booking.amount;
+                            _booking.Movements_Accounts1.debit = _booking.profit_share;
+                        }
+                    }
+
+                    disbursement.has_bookings = true;
+
+                    manager.My_db.SaveChanges();
+
+                    txtAmount.Text = "0";
+                    txtNumber.Text = "";
+                    txtProfitShare.Text = String.Format("{0:0.00}", 0);
+                    txtExchangeRate.Text = String.Format("{0:0.0000000}", 1);
+                    txtTotalToBeCollected.Text = String.Format("{0:0.00}", 0);
+                    lbISelectedItems.Items.Clear();
+                    lvBooking.Items.Clear();
+
+                    bookings.Clear();
+
+                    cmdCancel_Click(null, null);
+
+                    this.Close();
                 }
-
-                disbursement.has_bookings = true;
-                
-                manager.My_db.SaveChanges();
-
-                txtAmount.Text = "0";
-                txtNumber.Text = "";
-                txtProfitShare.Text = String.Format("{0:0.00}", 0);
-                txtExchangeRate.Text = String.Format("{0:0.0000000}", 1);
-                txtTotalToBeCollected.Text = String.Format("{0:0.00}", 0);
-                lbISelectedItems.Items.Clear();
-                lvBooking.Items.Clear();
-
-                bookings.Clear();
-
-                cmdCancel_Click(null, null);
-
-                this.Close();
+                else
+                {
+                    ErrorMessage.showErrorMessage(new Exception("No movement allowed in closed period."));
+                }
             }
             catch (Exception _ex)
             {

@@ -112,214 +112,222 @@ namespace FundsManager
             {
                 try
                 {
-                    DateTime _date = Convert.ToDateTime(dtpDate.Text);
-                    
-                    List<Loans_View> _loansToAccrue = new List<Loans_View>();
-
-                    if (!forAll)
+                    if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpDate.Value.Year) == null)
                     {
-                        foreach (ListViewItem _item in lvData.SelectedItems)
+                        DateTime _date = Convert.ToDateTime(dtpDate.Text);
+
+                        List<Loans_View> _loansToAccrue = new List<Loans_View>();
+
+                        if (!forAll)
                         {
-                            int loanID = 0;
-
-                            if (int.TryParse(_item.Text, out loanID))
+                            foreach (ListViewItem _item in lvData.SelectedItems)
                             {
-                                Loans_View toAcrue = manager.My_db.Loans_View.FirstOrDefault(x => x.Id == loanID);
+                                int loanID = 0;
 
-                                if (toAcrue != null)
+                                if (int.TryParse(_item.Text, out loanID))
                                 {
-                                    _loansToAccrue.Add(toAcrue);
-                                }
+                                    Loans_View toAcrue = manager.My_db.Loans_View.FirstOrDefault(x => x.Id == loanID);
 
-                                if (toAcrue.end_date <= toAcrue.start_date)
-                                {
-                                    errorsDetected = true;
-                                    errorMessages += "\rReference " + toAcrue.reference + ": end <= start date.";
-                                }
+                                    if (toAcrue != null)
+                                    {
+                                        _loansToAccrue.Add(toAcrue);
+                                    }
 
-                                if (toAcrue.interest == 0)
-                                {
-                                    errorsDetected = true;
-                                    errorMessages += "\rReference " + toAcrue.reference + ": interest = 0.";
+                                    if (toAcrue.end_date <= toAcrue.start_date)
+                                    {
+                                        errorsDetected = true;
+                                        errorMessages += "\rReference " + toAcrue.reference + ": end <= start date.";
+                                    }
+
+                                    if (toAcrue.interest == 0)
+                                    {
+                                        errorsDetected = true;
+                                        errorMessages += "\rReference " + toAcrue.reference + ": interest = 0.";
+                                    }
                                 }
                             }
                         }
-                    }     
-                    else
-                    {
-                        foreach (ListViewItem _item in lvData.Items)
+                        else
                         {
-                            int loanId = 0;
-
-                            if (int.TryParse(_item.Text, out loanId))
+                            foreach (ListViewItem _item in lvData.Items)
                             {
-                                Loans_View toAcrue = manager.My_db.Loans_View.FirstOrDefault(x => x.Id == loanId);
+                                int loanId = 0;
 
-                                if (toAcrue != null)
+                                if (int.TryParse(_item.Text, out loanId))
                                 {
-                                    _loansToAccrue.Add(toAcrue);
-                                }
+                                    Loans_View toAcrue = manager.My_db.Loans_View.FirstOrDefault(x => x.Id == loanId);
 
-                                if (toAcrue.end_date <= toAcrue.start_date)
-                                {
-                                    errorsDetected = true;
-                                    errorMessages += "\rReference " + toAcrue.reference + ": end <= start date.";
-                                }
+                                    if (toAcrue != null)
+                                    {
+                                        _loansToAccrue.Add(toAcrue);
+                                    }
 
-                                if (toAcrue.interest == 0)
-                                {
-                                    errorsDetected = true;
-                                    errorMessages += "\rReference " + toAcrue.reference + ": interest = 0.";
+                                    if (toAcrue.end_date <= toAcrue.start_date)
+                                    {
+                                        errorsDetected = true;
+                                        errorMessages += "\rReference " + toAcrue.reference + ": end <= start date.";
+                                    }
+
+                                    if (toAcrue.interest == 0)
+                                    {
+                                        errorsDetected = true;
+                                        errorMessages += "\rReference " + toAcrue.reference + ": interest = 0.";
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    if (errorsDetected)
-                    {
-                        if (MessageBox.Show("Do you want continue?\r\rThese loans will be ignored in interest generation." + errorMessages, "Warning", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                        if (errorsDetected)
                         {
-                            cmdGenerateInterest.Enabled = true;
-                            cmdGenerateAllInterest.Enabled = true;
-                            return;
-                        }
-                    }
-
-                    if (_loansToAccrue.Count > 0)
-                    {
-                        LoanGeneratedInterest _generatedInterest = new LoanGeneratedInterest();
-                        _generatedInterest.GeneratedDate = Convert.ToDateTime(dtpDate.Text);
-
-                        bool interestCreated = false;
-
-                        decimal _totalInterest = 0;
-
-                        bool someDataMissed = false;
-
-                        foreach (Loans_View _loanToAccrue in _loansToAccrue)
-                        {
-                            Subaccount subacct840 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account840.Id && x.name == "Interest on loan");
-                            Subaccount subacct470 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account470.Id && x.name == "Interest Loan");
-
-                            if (subacct840 != null && subacct470 != null)
+                            if (MessageBox.Show("Do you want continue?\r\rThese loans will be ignored in interest generation." + errorMessages, "Warning", MessageBoxButtons.OKCancel) != DialogResult.OK)
                             {
-                                LoanGeneratedInterestDetail interestDetail = manager.My_db.LoanGeneratedInterestDetails.FirstOrDefault(x => x.loan_id == _loanToAccrue.Id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
+                                cmdGenerateInterest.Enabled = true;
+                                cmdGenerateAllInterest.Enabled = true;
+                                return;
+                            }
+                        }
 
-                                if (interestDetail == null)
+                        if (_loansToAccrue.Count > 0)
+                        {
+                            LoanGeneratedInterest _generatedInterest = new LoanGeneratedInterest();
+                            _generatedInterest.GeneratedDate = Convert.ToDateTime(dtpDate.Text);
+
+                            bool interestCreated = false;
+
+                            decimal _totalInterest = 0;
+
+                            bool someDataMissed = false;
+
+                            foreach (Loans_View _loanToAccrue in _loansToAccrue)
+                            {
+                                Subaccount subacct840 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account840.Id && x.name == "Interest on loan");
+                                Subaccount subacct470 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account470.Id && x.name == "Interest Loan");
+
+                                if (subacct840 != null && subacct470 != null)
                                 {
-                                    DateTime? fromDate = getLastGeneratedInterestDateFor(_loanToAccrue.Id);
+                                    LoanGeneratedInterestDetail interestDetail = manager.My_db.LoanGeneratedInterestDetails.FirstOrDefault(x => x.loan_id == _loanToAccrue.Id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
 
-                                    if (fromDate == null)
+                                    if (interestDetail == null)
                                     {
-                                        fromDate = _loanToAccrue.start_date;
-                                    }
+                                        DateTime? fromDate = getLastGeneratedInterestDateFor(_loanToAccrue.Id);
 
-                                    bool canContinueGeneratingInterest = true;
-
-                                    decimal _interest = 0;
-
-                                    DateTime toDate = dtpDate.Value <= _loanToAccrue.end_date ? dtpDate.Value : _loanToAccrue.end_date;
-
-                                    int days = (toDate.Date - fromDate.Value.Date).Days;
-
-                                    if (days > 0)
-                                    {
-                                        _interest = Math.Round(_loanToAccrue.amount * _loanToAccrue.interest * days / _loanToAccrue.interest_base, 2);
-                                    }
-
-                                    canContinueGeneratingInterest = toDate < _loanToAccrue.end_date;
-
-                                    if (_interest > 0)
-                                    {
-                                        if (!interestCreated)
+                                        if (fromDate == null)
                                         {
-                                            manager.My_db.LoanGeneratedInterests.Add(_generatedInterest);
-                                            interestCreated = true;
+                                            fromDate = _loanToAccrue.start_date;
                                         }
 
-                                        _totalInterest += _interest;
+                                        bool canContinueGeneratingInterest = true;
 
-                                        LoanGeneratedInterestDetail _detail = new LoanGeneratedInterestDetail();
+                                        decimal _interest = 0;
 
-                                        _detail.LoanGeneratedInterest = _generatedInterest;
-                                        _detail.loan_id = _loanToAccrue.Id;
-                                        _detail.generated_interest = Math.Round(_interest, 2);
-                                        _detail.generated_interest_date = toDate;
+                                        DateTime toDate = dtpDate.Value <= _loanToAccrue.end_date ? dtpDate.Value : _loanToAccrue.end_date;
 
-                                        manager.My_db.LoanGeneratedInterestDetails.Add(_detail);
+                                        int days = (toDate.Date - fromDate.Value.Date).Days;
 
-                                        AccountingMovement _accountingMovement = new AccountingMovement();
+                                        if (days > 0)
+                                        {
+                                            _interest = Math.Round(_loanToAccrue.amount * _loanToAccrue.interest * days / _loanToAccrue.interest_base, 2);
+                                        }
 
-                                        _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
-                                        _accountingMovement.description = "";
-                                        _accountingMovement.date = dtpDate.Value;
-                                        _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpDate.Value.Year);
-                                        _accountingMovement.FK_AccountingMovements_Currencies = _loanToAccrue.currency_id;
-                                        _accountingMovement.original_reference = _loanToAccrue.reference;
-                                        _accountingMovement.contract = _loanToAccrue.reference;
+                                        canContinueGeneratingInterest = toDate < _loanToAccrue.end_date;
 
-                                        manager.My_db.AccountingMovements.Add(_accountingMovement);
+                                        if (_interest > 0)
+                                        {
+                                            if (!interestCreated)
+                                            {
+                                                manager.My_db.LoanGeneratedInterests.Add(_generatedInterest);
+                                                interestCreated = true;
+                                            }
 
-                                        _detail.AccountingMovement = _accountingMovement;
+                                            _totalInterest += _interest;
 
-                                        Movements_Accounts _maccount840 = new Movements_Accounts();
+                                            LoanGeneratedInterestDetail _detail = new LoanGeneratedInterestDetail();
 
-                                        _maccount840.AccountingMovement = _accountingMovement;
-                                        _maccount840.FK_Movements_Accounts_Funds = manager.Selected;
-                                        _maccount840.FK_Movements_Accounts_Accounts = account840.Id;
-                                        if (subacct840 != null)
-                                            _maccount840.FK_Movements_Accounts_Subaccounts = subacct840.Id;
-                                        _maccount840.debit = Math.Round(_interest, 2);
-                                        _maccount840.credit = 0;
-                                        
-                                        manager.My_db.Movements_Accounts.Add(_maccount840);
+                                            _detail.LoanGeneratedInterest = _generatedInterest;
+                                            _detail.loan_id = _loanToAccrue.Id;
+                                            _detail.generated_interest = Math.Round(_interest, 2);
+                                            _detail.generated_interest_date = toDate;
 
-                                        Movements_Accounts _maccount470 = new Movements_Accounts();
+                                            manager.My_db.LoanGeneratedInterestDetails.Add(_detail);
 
-                                        _maccount470.AccountingMovement = _accountingMovement;
-                                        _maccount470.FK_Movements_Accounts_Funds = manager.Selected;
-                                        _maccount470.FK_Movements_Accounts_Accounts = account470.Id;
-                                        _maccount470.debit = 0;
-                                        _maccount470.credit = Math.Round(_interest, 2);
-                                        
-                                        manager.My_db.Movements_Accounts.Add(_maccount470);
+                                            AccountingMovement _accountingMovement = new AccountingMovement();
 
+                                            _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
+                                            _accountingMovement.description = "";
+                                            _accountingMovement.date = dtpDate.Value;
+                                            _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpDate.Value.Year);
+                                            _accountingMovement.FK_AccountingMovements_Currencies = _loanToAccrue.currency_id;
+                                            _accountingMovement.original_reference = _loanToAccrue.reference;
+                                            _accountingMovement.contract = _loanToAccrue.reference;
+
+                                            manager.My_db.AccountingMovements.Add(_accountingMovement);
+
+                                            _detail.AccountingMovement = _accountingMovement;
+
+                                            Movements_Accounts _maccount840 = new Movements_Accounts();
+
+                                            _maccount840.AccountingMovement = _accountingMovement;
+                                            _maccount840.FK_Movements_Accounts_Funds = manager.Selected;
+                                            _maccount840.FK_Movements_Accounts_Accounts = account840.Id;
+                                            if (subacct840 != null)
+                                                _maccount840.FK_Movements_Accounts_Subaccounts = subacct840.Id;
+                                            _maccount840.debit = Math.Round(_interest, 2);
+                                            _maccount840.credit = 0;
+
+                                            manager.My_db.Movements_Accounts.Add(_maccount840);
+
+                                            Movements_Accounts _maccount470 = new Movements_Accounts();
+
+                                            _maccount470.AccountingMovement = _accountingMovement;
+                                            _maccount470.FK_Movements_Accounts_Funds = manager.Selected;
+                                            _maccount470.FK_Movements_Accounts_Accounts = account470.Id;
+                                            _maccount470.debit = 0;
+                                            _maccount470.credit = Math.Round(_interest, 2);
+
+                                            manager.My_db.Movements_Accounts.Add(_maccount470);
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Attempt to duplicate loan interest generation.");
                                     }
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Attempt to duplicate loan interest generation.");
+                                    someDataMissed = true;
                                 }
                             }
-                            else
+
+                            manager.My_db.SaveChanges();
+
+                            if (someDataMissed)
                             {
-                                someDataMissed = true;
+                                ErrorMessage.showErrorMessage(new Exception("Some interests has not been generated dued missing related data. \rPlease, contact with your system administrator in order to find and fix missed data."));
                             }
+
+                            //if (interestCreated)
+                            //{
+                            //    BookingGeneratedInterestForm disbursement_generated_interest_form = new BookingGeneratedInterestForm();
+                            //    disbursement_generated_interest_form.generated_interest_id = _generatedInterest.Id;
+                            //    disbursement_generated_interest_form.Show();
+                            //}
+                            //else
+                            //{
+                            //    MessageBox.Show("No actions performed.");
+                            //}
+
                         }
-
-                        manager.My_db.SaveChanges();
-
-                        if (someDataMissed)
+                        else
                         {
-                            ErrorMessage.showErrorMessage(new Exception("Some interests has not been generated dued missing related data. \rPlease, contact with your system administrator in order to find and fix missed data."));
+                            MessageBox.Show("No disbursement found for interest generation.");
                         }
-
-                        //if (interestCreated)
-                        //{
-                        //    BookingGeneratedInterestForm disbursement_generated_interest_form = new BookingGeneratedInterestForm();
-                        //    disbursement_generated_interest_form.generated_interest_id = _generatedInterest.Id;
-                        //    disbursement_generated_interest_form.Show();
-                        //}
-                        //else
-                        //{
-                        //    MessageBox.Show("No actions performed.");
-                        //}
-
                     }
                     else
                     {
-                        MessageBox.Show("No disbursement found for interest generation.");
+                        ErrorMessage.showErrorMessage(new Exception("No movement allowed in closed period."));
                     }
+                    
 
                 }
                 catch (Exception _ex)
