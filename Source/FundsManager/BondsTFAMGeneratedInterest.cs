@@ -19,9 +19,12 @@ namespace FundsManager
         public decimal generated_bond_interest { get; set; }
         public decimal generated_tff_interest { get; set; }
         public System.DateTime generated_interest_date { get; set; }
-        public Nullable<int> accounting_movement_id { get; set; }
+        public Nullable<System.DateTime> payment_interest_date { get; set; }
+        public Nullable<int> interest_accounting_movement_id { get; set; }
+        public Nullable<int> payment_accounting_movement_id { get; set; }
     
         public virtual AccountingMovement AccountingMovement { get; set; }
+        public virtual AccountingMovement AccountingMovement1 { get; set; }
         public virtual BondsTFAM BondsTFAM { get; set; }
     }
 }

@@ -70,9 +70,9 @@ namespace FundsManager
 
                 }
             }
-            catch (Exception)
+            catch (Exception _ex)
             {
-
+                ErrorMessage.showErrorMessage(_ex);
             }
         }
 
@@ -235,7 +235,7 @@ namespace FundsManager
                                         AccountingMovement _accountingMovement = new AccountingMovement();
 
                                         _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
-                                        _accountingMovement.description = "";
+                                        _accountingMovement.description = _bondToGenerate.number + " Interest";
                                         _accountingMovement.date = dtpDate.Value;
                                         _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpDate.Value.Year);
                                         _accountingMovement.FK_AccountingMovements_Currencies = _bondToGenerate.currency_id;

@@ -95,9 +95,9 @@ namespace FundsManager
         public virtual DbSet<Loan_Repayments> Loan_Repayments { get; set; }
         public virtual DbSet<Loans_View> Loans_View { get; set; }
         public virtual DbSet<Loan> Loans { get; set; }
-        public virtual DbSet<BondsTFAM> BondsTFAMs { get; set; }
         public virtual DbSet<BondsTFF> BondsTFFs { get; set; }
         public virtual DbSet<BondsTFFInvestor> BondsTFFInvestors { get; set; }
+        public virtual DbSet<BondsTFAM> BondsTFAMs { get; set; }
         public virtual DbSet<BondsTFAMGeneratedInterest> BondsTFAMGeneratedInterests { get; set; }
     }
 }

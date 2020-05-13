@@ -44,13 +44,13 @@ namespace FundsManager
                             AccountingMovement _accountingMovement = new AccountingMovement();
 
                             _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
-                            _accountingMovement.description = bond.number;
+                            _accountingMovement.description = bond.number + " Activation";
                             _accountingMovement.date = dtpActivationDate.Value;
                             _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpActivationDate.Value.Year);
                             _accountingMovement.FK_AccountingMovements_Currencies = bond.currency_id;
                             _accountingMovement.original_reference = "";
                             _accountingMovement.contract = "";
-
+                            
                             manager.My_db.AccountingMovements.Add(_accountingMovement);
 
                             bond.AccountingMovement = _accountingMovement;

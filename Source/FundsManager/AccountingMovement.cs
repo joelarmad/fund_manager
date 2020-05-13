@@ -27,7 +27,9 @@ namespace FundsManager
             this.Loan_Repayments = new HashSet<Loan_Repayments>();
             this.Loans = new HashSet<Loan>();
             this.BondsTFAMs = new HashSet<BondsTFAM>();
+            this.BondsTFAMs1 = new HashSet<BondsTFAM>();
             this.BondsTFAMGeneratedInterests = new HashSet<BondsTFAMGeneratedInterest>();
+            this.BondsTFAMGeneratedInterests1 = new HashSet<BondsTFAMGeneratedInterest>();
         }
     
         public int Id { get; set; }
@@ -62,6 +64,10 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BondsTFAM> BondsTFAMs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BondsTFAM> BondsTFAMs1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BondsTFAMGeneratedInterest> BondsTFAMGeneratedInterests { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BondsTFAMGeneratedInterest> BondsTFAMGeneratedInterests1 { get; set; }
     }
 }
