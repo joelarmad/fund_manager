@@ -78,7 +78,7 @@
     <Shape ID="DesignTable:LoanGeneratedInterests" ZOrder="29" X="20624" Y="0" Height="115" Width="283" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
     <Shape ID="DesignTable:Loan_Repayments" ZOrder="22" X="0" Y="0" Height="172" Width="249" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
     <Shape ID="DesignTable:BondsTFAM" ZOrder="12" X="0" Y="0" Height="305" Width="215" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="235" />
-    <Shape ID="DesignTable:BondsTFAMGeneratedInterest" ZOrder="11" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
+    <Shape ID="DesignTable:BondsTFAMGeneratedInterest" ZOrder="11" X="0" Y="0" Height="191" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
     <Shape ID="DesignTable:BondsTFF" ZOrder="10" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
     <Shape ID="DesignTable:BondsTFFInvestors" ZOrder="4" X="20977" Y="0" Height="153" Width="253" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
   </Shapes>
@@ -2034,7 +2034,7 @@
           <Y>60</Y>
         </Point>
         <Point>
-          <X>158</X>
+          <X>300</X>
           <Y>60</Y>
         </Point>
       </RoutePoints>
@@ -2054,7 +2054,7 @@
           <Y>60</Y>
         </Point>
         <Point>
-          <X>158</X>
+          <X>300</X>
           <Y>60</Y>
         </Point>
       </RoutePoints>

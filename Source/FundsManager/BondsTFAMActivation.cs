@@ -55,6 +55,7 @@ namespace FundsManager
 
                             bond.AccountingMovement = _accountingMovement;
                             bond.active = 1;
+                            bond.can_generate_interest = 1;
                             
                             Subaccount subacct = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account540.Id && x.name == "Principal Bonds");
 

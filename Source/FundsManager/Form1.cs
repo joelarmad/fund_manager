@@ -379,5 +379,13 @@ namespace FundsManager
             bond_form.MdiParent = this;
             bond_form.Show();
         }
+
+        private void generateInterestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            BondsTFAMInterest bond_form = new BondsTFAMInterest();
+            bond_form.MdiParent = this;
+            bond_form.Show();
+        }
     }
 }

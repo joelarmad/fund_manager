@@ -28,14 +28,15 @@ namespace FundsManager
         public double interest_on_bond { get; set; }
         public double interest_tff_contribution { get; set; }
         public int active { get; set; }
-        public Nullable<System.DateTime> expired { get; set; }
+        public System.DateTime expired { get; set; }
         public Nullable<int> accounting_movement_id { get; set; }
         public int currency_id { get; set; }
+        public int can_generate_interest { get; set; }
     
         public virtual AccountingMovement AccountingMovement { get; set; }
         public virtual Fund Fund { get; set; }
+        public virtual Currency Currency { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BondsTFAMGeneratedInterest> BondsTFAMGeneratedInterests { get; set; }
-        public virtual Currency Currency { get; set; }
     }
 }

@@ -16,7 +16,8 @@ namespace FundsManager
     {
         public int Id { get; set; }
         public int bond_id { get; set; }
-        public decimal generated_interest { get; set; }
+        public decimal generated_bond_interest { get; set; }
+        public decimal generated_tff_interest { get; set; }
         public System.DateTime generated_interest_date { get; set; }
         public Nullable<int> accounting_movement_id { get; set; }
     
