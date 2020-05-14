@@ -63,7 +63,6 @@ namespace FundsManager
 
         private void LetterOfCreditForm_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Banks' Puede moverla o quitarla según sea necesario.
             this.banksTableAdapter.FillExcludingOwnWithNoEmpty(this.fundsDBDataSet.Banks, manager.Selected);
 
             loadLettersData();

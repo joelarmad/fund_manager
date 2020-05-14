@@ -27,7 +27,6 @@ namespace FundsManager
 
         private void SubaccountsForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'fundsDBDataSet.Accounts' table. You can move, or remove it, as needed.
             this.accountsTableAdapter.FillByFund(this.fundsDBDataSet.Accounts, manager.Selected);
 
             loadSubAccountData();

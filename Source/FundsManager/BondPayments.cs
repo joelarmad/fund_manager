@@ -28,7 +28,6 @@ namespace FundsManager
         
         private void BondPayments_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Investors' Puede moverla o quitarla según sea necesario.
             this.investorsTableAdapter.FillByFund(this.fundsDBDataSet.Investors, manager.Selected);
 
             if (cbInvestor.Items.Count > 0)

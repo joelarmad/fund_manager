@@ -19,7 +19,6 @@ namespace FundsManager
 
         private void FundSelectionForm_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Funds' Puede moverla o quitarla según sea necesario.
             this.fundsTableAdapter.Fill(this.fundsDBDataSet.Funds);
 
         }

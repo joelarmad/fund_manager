@@ -35,7 +35,6 @@ namespace FundsManager
         private void DisbursementsForm_Load(object sender, EventArgs e)
         {
             
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Clients' Puede moverla o quitarla según sea necesario.
             this.clientsTableAdapter.FillByFund(this.fundsDBDataSet.Clients, manager.Selected);
            
             updateContractCombo();
@@ -53,7 +52,6 @@ namespace FundsManager
                 //    cbOtherDetails.Enabled = true;
                 //}
 
-                //// TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Subaccounts' Puede moverla o quitarla según sea necesario.
                 //this.subaccountsTableAdapter.FillByAccount(this.fundsDBDataSet.Subaccounts, cashAtBank.Id, manager.Selected);
 
                 //updateOtherDetailsCombobox();
@@ -70,7 +68,6 @@ namespace FundsManager
 
         //    if (cbSubAccount.SelectedValue != null && int.TryParse(cbSubAccount.SelectedValue.ToString(), out subAccountId))
         //    {
-        //        // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.OtherDetails' Puede moverla o quitarla según sea necesario.
         //        this.otherDetailsTableAdapter.FillBySubaccount(this.fundsDBDataSet.OtherDetails, subAccountId, manager.Selected);
         //    }
         //}

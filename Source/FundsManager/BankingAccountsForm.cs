@@ -31,15 +31,10 @@ namespace FundsManager
 
         private void BankingAccountsForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'fundsDBDataSet1.BAccountsWithBanksCurrencies' table. You can move, or remove it, as needed.
             this.bAccountsWithBanksCurrenciesTableAdapter.FillByFund(this.fundsDBDataSet1.BAccountsWithBanksCurrencies, manager.Selected);
-            // TODO: This line of code loads data into the 'fundsDBDataSet.BAccountsWithBanksCurrencies' table. You can move, or remove it, as needed.
             this.bAccountsWithBanksCurrenciesTableAdapter.FillByFund(this.fundsDBDataSet.BAccountsWithBanksCurrencies, manager.Selected);
-            // TODO: This line of code loads data into the 'fundsDBDataSet.Currencies' table. You can move, or remove it, as needed.
             this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
-            // TODO: This line of code loads data into the 'fundsDBDataSet.Banks' table. You can move, or remove it, as needed.
             this.banksTableAdapter.FillByFund(this.fundsDBDataSet.Banks, manager.Selected);
-            // TODO: This line of code loads data into the 'fundsDBDataSet.BankingAccounts' table. You can move, or remove it, as needed.
             this.bankingAccountsTableAdapter.FillByFund(this.fundsDBDataSet.BankingAccounts, manager.Selected);
 
         }

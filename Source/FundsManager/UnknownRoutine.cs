@@ -34,7 +34,6 @@ namespace FundsManager
 
         private void loadData()
         {
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.UnlinkedDisbursements' Puede moverla o quitarla según sea necesario.
             this.unlinkedDisbursementsTableAdapter.FillByDate(this.fundsDBDataSet.UnlinkedDisbursements, manager.Selected, dateTimePicker1.Value.ToString("yyyy-MM-dd"));
         }
     }

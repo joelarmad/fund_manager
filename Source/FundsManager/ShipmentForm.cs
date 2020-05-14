@@ -24,7 +24,6 @@ namespace FundsManager
 
         private void ShipmentForm_Load(object sender, EventArgs e)
         {            
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.letter_of_credits' Puede moverla o quitarla según sea necesario.
             this.letter_of_creditsTableAdapter.FillByFundWithNoEmpty(this.fundsDBDataSet.letter_of_credits, manager.Selected);
 
             loadShipmentData();
@@ -122,7 +121,6 @@ namespace FundsManager
         {
             if (fundsDBDataSet != null && cbLetter.SelectedValue != null)
             {
-                // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Shipments' Puede moverla o quitarla según sea necesario.
                 this.shipmentsTableAdapter.FillByLetterWithNoEmpty(this.fundsDBDataSet.Shipments, int.Parse(cbLetter.SelectedValue.ToString()));
             }
 

@@ -29,7 +29,6 @@ namespace FundsManager
 
         private void OtherDetailsForm_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Accounts' Puede moverla o quitarla según sea necesario.
             this.accountsTableAdapter.FillByExistingAccount(this.fundsDBDataSet.Accounts, manager.Selected);
 
             loadSubAccounts();
@@ -211,7 +210,6 @@ namespace FundsManager
 
             if (cbAccount.SelectedValue != null && int.TryParse(cbAccount.SelectedValue.ToString(), out accountId))
             {
-                // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Subaccounts' Puede moverla o quitarla según sea necesario.
                 this.subaccountsTableAdapter.FillByAccount(this.fundsDBDataSet.Subaccounts, accountId, manager.Selected);
 
                 loadDetails();
@@ -226,7 +224,6 @@ namespace FundsManager
 
                 if (cbSubAccount.SelectedValue != null && int.TryParse(cbSubAccount.SelectedValue.ToString(), out subacctId))
                 {
-                    // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.OtherDetails' Puede moverla o quitarla según sea necesario.
                     this.otherDetailsTableAdapter.FillBySubaccount(this.fundsDBDataSet.OtherDetails, subacctId, manager.Selected);
                 }
             }

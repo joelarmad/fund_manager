@@ -227,7 +227,7 @@ namespace FundsManager
 
                                         if (days > 0)
                                         {
-                                            _interest = Math.Round(_loanToAccrue.amount * _loanToAccrue.interest * days / _loanToAccrue.interest_base, 2);
+                                            _interest = Math.Round(_loanToAccrue.amount * _loanToAccrue.interest * days / _loanToAccrue.interest_base / 100, 2);
                                         }
 
                                         canContinueGeneratingInterest = toDate < _loanToAccrue.end_date;

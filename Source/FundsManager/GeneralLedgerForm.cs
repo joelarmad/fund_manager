@@ -61,9 +61,7 @@ namespace FundsManager
             try
             {
 
-                // TODO: This line of code loads data into the 'fundsDBDataSet.Currencies' table. You can move, or remove it, as needed.
                 this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
-                // TODO: This line of code loads data into the 'fundsDBDataSet.Accounts' table. You can move, or remove it, as needed.
                 this.accountsTableAdapter.FillByFund(this.fundsDBDataSet.Accounts, manager.Selected);
                 cbAccount.SelectedItem = null;
                 cbAccount.SelectedText = "Select account";
@@ -994,6 +992,13 @@ namespace FundsManager
                         if (lender != null)
                         {
                             detailText = lender.name;
+                        }
+                        break;
+                    case 9:
+                        BondsTFAM bond = manager.My_db.BondsTFAMs.FirstOrDefault(x => x.Id == _movement.Detail);
+                        if (bond != null)
+                        {
+                            detailText = bond.number;
                         }
                         break;
                 }

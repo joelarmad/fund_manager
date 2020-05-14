@@ -75,9 +75,8 @@ namespace FundsManager
                                         _maccount540.FK_Movements_Accounts_Accounts = account540.Id;
                                         if (subacct40 != null)
                                             _maccount540.FK_Movements_Accounts_Subaccounts = subacct40.Id;
-                                        //TODO: other details
-                                        //_maccount540.subaccount = toPay.client_id;
-                                        //_maccount540.subaccount_type = 1;
+                                        _maccount540.subaccount = toPay.Id;
+                                        _maccount540.subaccount_type = 9;
                                         _maccount540.debit = Math.Round(toPay.generated_bond_interest + toPay.generated_tff_interest, 2);
                                         _maccount540.credit = 0;
 

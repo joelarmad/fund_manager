@@ -23,7 +23,6 @@ namespace FundsManager
 
         private void LoanRepayment_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'fundsDBDataSet.Creditors' table. You can move, or remove it, as needed.
             this.creditorsTableAdapter.FillByFund(this.fundsDBDataSet.Creditors, manager.Selected);
             loadLoans();
         }
@@ -79,7 +78,6 @@ namespace FundsManager
             {
                 id = int.Parse(cbLoan.SelectedValue.ToString());
             }
-            // TODO: This line of code loads data into the 'fundsDBDataSet.Loan_Repayments' table. You can move, or remove it, as needed.
             this.loan_RepaymentsTableAdapter.FillByLoan(this.fundsDBDataSet.Loan_Repayments, id);
         }
 

@@ -25,7 +25,6 @@ namespace FundsManager
 
         private void InvestorsForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'fundsDBDataSet.Investors' table. You can move, or remove it, as needed.
             this.investorsTableAdapter.FillByFund(this.fundsDBDataSet.Investors, manager.Selected);
         }
 

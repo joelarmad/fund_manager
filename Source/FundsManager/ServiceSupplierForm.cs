@@ -25,7 +25,6 @@ namespace FundsManager
 
         private void ServiceSupplierForm_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.ServiceSuppliers' Puede moverla o quitarla según sea necesario.
             this.serviceSuppliersTableAdapter.Fill(this.fundsDBDataSet.ServiceSuppliers, manager.Selected);
 
         }

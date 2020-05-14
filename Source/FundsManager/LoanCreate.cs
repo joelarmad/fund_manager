@@ -24,9 +24,7 @@ namespace FundsManager
 
         private void LoanCreate_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'fundsDBDataSet.Currencies' table. You can move, or remove it, as needed.
             this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
-            // TODO: This line of code loads data into the 'fundsDBDataSet.Loans' table. You can move, or remove it, as needed.
             this.creditorsTableAdapter.FillByFund(this.fundsDBDataSet.Creditors, manager.Selected);
 
             loadLoansData();
@@ -108,7 +106,6 @@ namespace FundsManager
         {
             if (fundsDBDataSet != null && cbLender.SelectedValue != null)
             {
-                // TODO: This line of code loads data into the 'fundsDBDataSet.Loans_View' table. You can move, or remove it, as needed.
                 this.loans_ViewTableAdapter.FillByFund(this.fundsDBDataSet.Loans_View, manager.Selected, int.Parse(cbLender.SelectedValue.ToString()));
             }
 

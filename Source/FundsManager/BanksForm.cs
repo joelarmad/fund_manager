@@ -25,9 +25,7 @@ namespace FundsManager
 
         private void BanksForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'fundsDBDataSet.Banks' table. You can move, or remove it, as needed.
             this.banksTableAdapter.FillByFund(this.fundsDBDataSet.Banks, manager.Selected);
-            // TODO: This line of code loads data into the 'fundsDBDataSet.Countries' table. You can move, or remove it, as needed.
             this.countriesTableAdapter.FillByFund(this.fundsDBDataSet.Countries, manager.Selected);
 
             listBox1.SelectedIndex = -1;

@@ -22,13 +22,9 @@ namespace FundsManager
 
         private void InvesmentReportForm_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Banks' Puede moverla o quitarla según sea necesario.
             this.banksTableAdapter.FillExcludingOwnBanks(this.fundsDBDataSet.Banks, manager.Selected);
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.UnderlyingDebtors' Puede moverla o quitarla según sea necesario.
             this.underlyingDebtorsTableAdapter.FillAddingEmptyRow(this.fundsDBDataSet.UnderlyingDebtors, manager.Selected);
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Clients' Puede moverla o quitarla según sea necesario.
             this.clientsTableAdapter.FillWithEmpty(this.fundsDBDataSet.Clients, manager.Selected);
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Currencies' Puede moverla o quitarla según sea necesario.
             this.currenciesTableAdapter.FillWithEmpty(this.fundsDBDataSet.Currencies, manager.Selected);
 
             loadInvestments();

@@ -46,7 +46,6 @@ namespace FundsManager
             {
                 fBondConsecutive = 0;
 
-                // TODO: This line of code loads data into the 'fundsDBDataSet.Investors' table. You can move, or remove it, as needed.
                 this.investorsTableAdapter.FillByFund(this.fundsDBDataSet.Investors, manager.Selected);
                 cbInvestors.SelectedItem = null;
                 cbInvestors.SelectedText = "Select investor";

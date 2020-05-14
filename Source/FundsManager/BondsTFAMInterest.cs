@@ -217,8 +217,8 @@ namespace FundsManager
 
                                         if (days > 0)
                                         {
-                                            _interestOnBond = Math.Round(_bondToGenerate.amount * (decimal)_bondToGenerate.interest_on_bond * days / 360, 2);
-                                            _interestOnTFF = Math.Round(_bondToGenerate.amount * (decimal)_bondToGenerate.interest_tff_contribution * days / 360, 2);
+                                            _interestOnBond = Math.Round(_bondToGenerate.amount * (decimal)_bondToGenerate.interest_on_bond * days / 360 / 100, 2);
+                                            _interestOnTFF = Math.Round(_bondToGenerate.amount * (decimal)_bondToGenerate.interest_tff_contribution * days / 360 / 100, 2);
                                         }
 
                                         canContinueGeneratingInterest = toDate < _bondToGenerate.expired;

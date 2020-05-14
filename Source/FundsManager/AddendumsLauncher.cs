@@ -29,7 +29,6 @@ namespace FundsManager
 
         private void AddendumsLauncher_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Clients' Puede moverla o quitarla según sea necesario.
             this.clientsTableAdapter.FillByFund(this.fundsDBDataSet.Clients, manager.Selected);
 
             updateContractCombo();
@@ -51,7 +50,6 @@ namespace FundsManager
 
             if (cbContract.SelectedValue != null && int.TryParse(cbContract.SelectedValue.ToString(), out investmentId))
             {
-                // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.DisbursementsForAddendums' Puede moverla o quitarla según sea necesario.
                 this.disbursementsForAddendumsTableAdapter.FillByInvestmentId(this.fundsDBDataSet.DisbursementsForAddendums, investmentId, manager.Selected);
             }
         }

@@ -63,21 +63,13 @@ namespace FundsManager
                 txtProfitShare.Text = String.Format("{0:0.00}", 0);
                 txtTotalToBeCollected.Text = String.Format("{0:0.00}", 0);
 
-                // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Clients' Puede moverla o quitarla según sea necesario.
                 this.clientsTableAdapter.FillByFund(this.fundsDBDataSet.Clients, manager.Selected);
-                // TODO: This line of code loads data into the 'fundsDBDataSet.Items' table. You can move, or remove it, as needed.
                 this.itemsTableAdapter.FillByFund(this.fundsDBDataSet.Items, manager.Selected);
-                // TODO: This line of code loads data into the 'fundsDBDataSet.Sectors' table. You can move, or remove it, as needed.
                 this.sectorsTableAdapter.FillByFund(this.fundsDBDataSet.Sectors, manager.Selected);
-                // TODO: This line of code loads data into the 'fundsDBDataSet.Currencies' table. You can move, or remove it, as needed.
                 this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
-                // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.UnderlyingDebtors' Puede moverla o quitarla según sea necesario.
                 this.underlyingDebtorsTableAdapter.FillAddingEmptyRow(this.fundsDBDataSet.UnderlyingDebtors, manager.Selected);
-                // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Banks' Puede moverla o quitarla según sea necesario.
                 this.banksTableAdapter.FillExcludingOwnBanks(this.fundsDBDataSet.Banks, manager.Selected);
-                // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.letter_of_credits' Puede moverla o quitarla según sea necesario.
                 this.letter_of_creditsTableAdapter.FillByBank(this.fundsDBDataSet.letter_of_credits, manager.Selected, int.Parse(cbBank.SelectedValue.ToString()));
-                // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Shipments' Puede moverla o quitarla según sea necesario.
                 this.shipmentsTableAdapter.FillByLetterWithEmpty(this.fundsDBDataSet.Shipments, int.Parse(cbLetterOfCredit.SelectedValue.ToString()));
 
                 Fund fund = manager.My_db.Funds.FirstOrDefault(x => x.Id == manager.Selected);
@@ -151,13 +143,11 @@ namespace FundsManager
             {
                 if (cbBank.SelectedValue != null)
                 {
-                    // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.letter_of_credits' Puede moverla o quitarla según sea necesario.
                     this.letter_of_creditsTableAdapter.FillByBank(this.fundsDBDataSet.letter_of_credits, manager.Selected, int.Parse(cbBank.SelectedValue.ToString()));
                 }
 
                 if (cbLetterOfCredit.SelectedValue != null)
                 {
-                    // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Shipments' Puede moverla o quitarla según sea necesario.
                     this.shipmentsTableAdapter.FillByLetterWithEmpty(this.fundsDBDataSet.Shipments, int.Parse(cbLetterOfCredit.SelectedValue.ToString()));
                 }
 
@@ -946,7 +936,6 @@ namespace FundsManager
         {
             if (cbLetterOfCredit.SelectedValue != null)
             {
-                // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Shipments' Puede moverla o quitarla según sea necesario.
                 this.shipmentsTableAdapter.FillByLetterWithEmpty(this.fundsDBDataSet.Shipments, int.Parse(cbLetterOfCredit.SelectedValue.ToString()));
             }
             checkEnablingAddDisbursementButton();

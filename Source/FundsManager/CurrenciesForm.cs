@@ -26,7 +26,6 @@ namespace FundsManager
 
         private void CurrenciesForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'fundsDBDataSet.Currencies' table. You can move, or remove it, as needed.
             this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
 
         }

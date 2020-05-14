@@ -56,7 +56,6 @@ namespace FundsManager
                 txtProfitShare.Text = String.Format("{0:0.00}", 0);
                 txtTotalToBeCollected.Text = String.Format("{0:0.00}", 0);
 
-                // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Currencies' Puede moverla o quitarla según sea necesario.
                 this.currenciesTableAdapter.Fill(this.fundsDBDataSet.Currencies);
 
                 disbursement = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == DisbursementId);

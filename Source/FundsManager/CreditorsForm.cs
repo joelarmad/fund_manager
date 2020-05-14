@@ -25,7 +25,6 @@ namespace FundsManager
 
         private void CreditorsForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'fundsDBDataSet.Creditors' table. You can move, or remove it, as needed.
             this.creditorsTableAdapter.FillByFund(this.fundsDBDataSet.Creditors, manager.Selected);
 
         }

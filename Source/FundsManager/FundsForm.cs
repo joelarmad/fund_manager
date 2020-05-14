@@ -92,7 +92,6 @@ namespace FundsManager
 
         private void FundsForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'fundsDBDataSet.Funds' table. You can move, or remove it, as needed.
             this.fundsTableAdapter.Fill(this.fundsDBDataSet.Funds);
 
             listBox1.SelectedIndex = -1;

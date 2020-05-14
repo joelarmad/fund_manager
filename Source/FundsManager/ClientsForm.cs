@@ -25,7 +25,6 @@ namespace FundsManager
 
         private void ClientsForm_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Countries' Puede moverla o quitarla según sea necesario.
             this.countriesTableAdapter.FillByFund(this.fundsDBDataSet.Countries, manager.Selected);
 
             loadClientsData();

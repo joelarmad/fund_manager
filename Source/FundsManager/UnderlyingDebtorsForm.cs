@@ -25,7 +25,6 @@ namespace FundsManager
 
         private void UnderlyingDebtorsForm_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet1.Countries' Puede moverla o quitarla según sea necesario.
             this.countriesTableAdapter.FillByFund(this.fundsDBDataSet1.Countries, manager.Selected);
             loadUnderlyingDebtorsData();
         }

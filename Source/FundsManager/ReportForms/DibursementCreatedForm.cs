@@ -23,7 +23,6 @@ namespace FundsManager.ReportForms
 
         private void DibursementCreatedForm_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.InvestmentsView' Puede moverla o quitarla según sea necesario.
             this.investmentsViewTableAdapter.FillByInvestment(this.fundsDBDataSet.InvestmentsView, investmentId);
 
             ReportParameter language = new ReportParameter("Language", Thread.CurrentThread.CurrentCulture.Name);

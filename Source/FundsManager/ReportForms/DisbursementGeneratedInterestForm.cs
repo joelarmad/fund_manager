@@ -23,7 +23,6 @@ namespace FundsManager.ReportForms
 
         private void DisbursementGeneratedInterestForm_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.DisbursementGeneratedInterestView' Puede moverla o quitarla según sea necesario.
             this.disbursementGeneratedInterestViewTableAdapter.FillByGeneratedInterestId(this.fundsDBDataSet.DisbursementGeneratedInterestView, generated_interest_id);
 
             ReportParameter language = new ReportParameter("Language", Thread.CurrentThread.CurrentCulture.Name);

@@ -26,7 +26,6 @@ namespace FundsManager
 
         private void ShareholdersForm_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.Shareholders' Puede moverla o quitarla según sea necesario.
             this.shareholdersTableAdapter.FillByFund(this.fundsDBDataSet.Shareholders, manager.Selected);
 
         }

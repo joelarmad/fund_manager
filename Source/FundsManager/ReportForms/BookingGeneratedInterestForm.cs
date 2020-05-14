@@ -23,7 +23,6 @@ namespace FundsManager.ReportForms
 
         private void BookingGeneratedInterestForm_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'fundsDBDataSet.BookingGeneratedInterestView' Puede moverla o quitarla según sea necesario.
             this.bookingGeneratedInterestViewTableAdapter.FillByGeneratedId(this.fundsDBDataSet.BookingGeneratedInterestView, generated_interest_id);
 
             var rds = new ReportDataSource("dsGeneratedInterest", (DataTable)this.fundsDBDataSet.BookingGeneratedInterestView);
