@@ -288,21 +288,19 @@ namespace FundsManager
         {
             AccountingMovement _accountingMovement = new AccountingMovement();
 
-            Account account110 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "110" && x.FK_Accounts_Funds == manager.Selected);
             Account account470 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "470" && x.FK_Accounts_Funds == manager.Selected);
 
-            if (account110 != null && account470 != null)
+            if (account470 != null)
             {
                 Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == loan.currency_id && x.FK_Currencies_Funds == manager.Selected);
-                Subaccount subacct110 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account110.Id && x.name == "Bank " + currency.symbol);
                 Subaccount subacct470 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account470.Id && x.name == "Principal Loan");
 
-                if (currency != null && subacct110 != null && subacct470 != null)
+                if (currency != null && subacct470 != null)
                 {
                     
 
                     _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
-                    _accountingMovement.description = ((FundsDBDataSet.CreditorsRow)((DataRowView)cbLender.SelectedItem).Row).name;
+                    _accountingMovement.description = "Loan";
                     _accountingMovement.date = loan.start;
                     _accountingMovement.reference = _accountingMovement.contract = KeyDefinitions.NextAccountMovementReference(loan.start.Year);
                     _accountingMovement.FK_AccountingMovements_Currencies = loan.currency_id;
@@ -315,8 +313,9 @@ namespace FundsManager
                     _maccount470.AccountingMovement = _accountingMovement;
                     _maccount470.FK_Movements_Accounts_Funds = manager.Selected;
                     _maccount470.FK_Movements_Accounts_Accounts = account470.Id;
-                    if (subacct470 != null)
-                        _maccount470.FK_Movements_Accounts_Subaccounts = subacct470.Id;
+                    _maccount470.FK_Movements_Accounts_Subaccounts = subacct470.Id;
+                    _maccount470.subaccount = loan.lender_id;
+                    _maccount470.subaccount_type = 8;
                     _maccount470.debit = 0;
                     _maccount470.credit = Math.Round(loan.amount, 2);
                     

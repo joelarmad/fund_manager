@@ -989,6 +989,13 @@ namespace FundsManager
                             detailText = supplier.name;
                         }
                         break;
+                    case 8:
+                        Creditor lender = manager.My_db.Creditors.FirstOrDefault(x => x.Id == _movement.Detail);
+                        if (lender != null)
+                        {
+                            detailText = lender.name;
+                        }
+                        break;
                 }
 
                 int _creditFactor = 1;

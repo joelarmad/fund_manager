@@ -1,4 +1,5 @@
 ﻿using FundsManager.Classes.Utilities;
+using FundsManager.ReportForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -306,16 +307,16 @@ namespace FundsManager
                                 ErrorMessage.showErrorMessage(new Exception("Some interests has not been generated dued missing related data. \rPlease, contact with your system administrator in order to find and fix missed data."));
                             }
 
-                            //if (interestCreated)
-                            //{
-                            //    BookingGeneratedInterestForm disbursement_generated_interest_form = new BookingGeneratedInterestForm();
-                            //    disbursement_generated_interest_form.generated_interest_id = _generatedInterest.Id;
-                            //    disbursement_generated_interest_form.Show();
-                            //}
-                            //else
-                            //{
-                            //    MessageBox.Show("No actions performed.");
-                            //}
+                            if (interestCreated)
+                            {
+                                LoanGeneratedInterestForm generated_interest_form = new LoanGeneratedInterestForm();
+                                generated_interest_form.generated_interest_id = _generatedInterest.Id;
+                                generated_interest_form.Show();
+                            }
+                            else
+                            {
+                                MessageBox.Show("No actions performed.");
+                            }
 
                         }
                         else
