@@ -164,8 +164,10 @@
         <AssociationConnector Association="FundsDBModel.FK_Subaccounts_Accounts" />
         <AssociationConnector Association="FundsDBModel.FK_Subaccounts_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_OtherDetails_SubAcct" />
-        <EntityTypeShape EntityType="FundsDBModel.Movements_Accounts" Width="1.5" PointX="17.5" PointY="65.375" />
         <EntityTypeShape EntityType="FundsDBModel.MovementsView" Width="1.5" PointX="5.375" PointY="15.75" />
+        <EntityTypeShape EntityType="FundsDBModel.ClosedPeriod" Width="1.5" PointX="11.375" PointY="16.75" />
+        <EntityTypeShape EntityType="FundsDBModel.AccountBalance" Width="1.5" PointX="17.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FundsDBModel.Movements_Accounts" Width="1.5" PointX="17.5" PointY="65.25" />
         <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_AccountingMovements" />
         <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_Accounts" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Movement125" />
@@ -177,7 +179,6 @@
         <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130" />
         <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_Subaccounts" />
-        <EntityTypeShape EntityType="FundsDBModel.ClosedPeriod" Width="1.5" PointX="11.375" PointY="16.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

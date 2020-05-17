@@ -29,5 +29,6 @@ namespace FundsManager
         public Nullable<decimal> Shift_Amount { get; set; }
         public string Detail { get; set; }
         public string Currency { get; set; }
+        public int MovementId { get; set; }
     }
 }

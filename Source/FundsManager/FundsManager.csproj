@@ -97,6 +97,9 @@
     <Compile Include="Account.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="AccountBalance.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="AccountBalanceView.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -559,6 +562,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportForms\AccountReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForms\AccountReport.Designer.cs">
+      <DependentUpon>AccountReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportForms\DibursementCreatedForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -824,6 +833,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ReportForms\AccountReport.resx">
+      <DependentUpon>AccountReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\DibursementCreatedForm.resx">
       <DependentUpon>DibursementCreatedForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -855,6 +867,7 @@
     <EmbeddedResource Include="Reports\BookingGeneratedInterestReport.rdlc" />
     <EmbeddedResource Include="Reports\DisbursementPaymentReport.rdlc" />
     <EmbeddedResource Include="Reports\GeneralBalance.rdlc" />
+    <EmbeddedResource Include="Reports\AccountReport.rdlc" />
     <EmbeddedResource Include="Reports\ProfitsState.rdlc" />
     <EmbeddedResource Include="SectorsForm.resx">
       <DependentUpon>SectorsForm.cs</DependentUpon>

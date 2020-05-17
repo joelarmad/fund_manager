@@ -85,6 +85,7 @@
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closePeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.accountReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -510,7 +511,8 @@
             // 
             this.reportsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.generalBalanceToolStripMenuItem,
-            this.returnsStateToolStripMenuItem});
+            this.returnsStateToolStripMenuItem,
+            this.accountReportToolStripMenuItem});
             this.reportsToolStripMenuItem1.Name = "reportsToolStripMenuItem1";
             this.reportsToolStripMenuItem1.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem1.Text = "Reports";
@@ -535,6 +537,13 @@
             this.closePeriodToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
             this.closePeriodToolStripMenuItem.Text = "Close Period";
             this.closePeriodToolStripMenuItem.Click += new System.EventHandler(this.closePeriodToolStripMenuItem_Click);
+            // 
+            // accountReportToolStripMenuItem
+            // 
+            this.accountReportToolStripMenuItem.Name = "accountReportToolStripMenuItem";
+            this.accountReportToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.accountReportToolStripMenuItem.Text = "Account Report";
+            this.accountReportToolStripMenuItem.Click += new System.EventHandler(this.accountReportToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -618,6 +627,7 @@
         private System.Windows.Forms.ToolStripMenuItem mainPaymentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem interestPaymentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closePeriodToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem accountReportToolStripMenuItem;
     }
 }
 

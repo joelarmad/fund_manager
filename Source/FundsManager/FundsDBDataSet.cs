@@ -7,9 +7,12 @@
     }
 }
 
-namespace FundsManager.FundsDBDataSetTableAdapters {
-    
-    
+namespace FundsManager.FundsDBDataSetTableAdapters
+{
+    partial class Procedure1TableAdapter
+    {
+    }
+
     public partial class letter_of_creditsTableAdapter {
     }
 }

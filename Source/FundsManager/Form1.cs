@@ -36,217 +36,217 @@ namespace FundsManager
         private void fundsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            FundsForm funds_form = new FundsForm();
-            funds_form.MdiParent = this;
-            funds_form.Show();
+            FundsForm form = new FundsForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void countriesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            CountriesForm countries_form = new CountriesForm();
-            countries_form.MdiParent = this;
-            countries_form.Show();
+            CountriesForm form = new CountriesForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void itemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            ItemsForm items_form = new ItemsForm();
-            items_form.MdiParent = this;
-            items_form.Show();
+            ItemsForm form = new ItemsForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void sectorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            SectorsForm sectors_form = new SectorsForm();
-            sectors_form.MdiParent = this;
-            sectors_form.Show();
+            SectorsForm form = new SectorsForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void creditorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            CreditorsForm creditors_form = new CreditorsForm();
-            creditors_form.MdiParent = this;
-            creditors_form.Show();
+            CreditorsForm form = new CreditorsForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void clientsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            ClientsForm clients_form = new ClientsForm();
-            clients_form.MdiParent = this;
-            clients_form.Show();
+            ClientsForm form = new ClientsForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void accountsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            AccountsForm accounts_form = new AccountsForm();
-            accounts_form.MdiParent = this;
-            accounts_form.Show();
+            AccountsForm form = new AccountsForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void banksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            BanksForm banks_form = new BanksForm();
-            banks_form.MdiParent = this;
-            banks_form.Show();
+            BanksForm form = new BanksForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void bankingAccountsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            BankingAccountsForm banking_form = new BankingAccountsForm();
-            banking_form.MdiParent = this;
-            banking_form.Show();
+            BankingAccountsForm form = new BankingAccountsForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void currenciesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            CurrenciesForm currency_form = new CurrenciesForm();
-            currency_form.MdiParent = this;
-            currency_form.Show();
+            CurrenciesForm form = new CurrenciesForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void movementToolStripMenuItem_Click(object sender, EventArgs e)
         { 
             this.IsMdiContainer = true;
-            GeneralLedgerForm general_ledger_form = new GeneralLedgerForm();
-            general_ledger_form.MdiParent = this;
-            general_ledger_form.Show();
+            GeneralLedgerForm form = new GeneralLedgerForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void employeesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            EmployeesForm employee_form = new EmployeesForm();
-            employee_form.MdiParent = this;
-            employee_form.Show();
+            EmployeesForm form = new EmployeesForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void movementsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            MovementReportForm mreport_form = new MovementReportForm();
-            mreport_form.MdiParent = this;
-            mreport_form.Show();
+            MovementReportForm form = new MovementReportForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void subaccountsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            SubaccountsForm subaccount_form = new SubaccountsForm();
-            subaccount_form.MdiParent = this;
-            subaccount_form.Show();
+            SubaccountsForm form = new SubaccountsForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void otherDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            OtherDetailsForm otherdetail_form = new OtherDetailsForm();
-            otherdetail_form.MdiParent = this;
-            otherdetail_form.Show();
+            OtherDetailsForm form = new OtherDetailsForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void investorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            InvestorsForm investor_form = new InvestorsForm();
-            investor_form.MdiParent = this;
-            investor_form.Show();
+            InvestorsForm form = new InvestorsForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void bondsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            BondsTFFForm bond_form = new BondsTFFForm();
-            bond_form.MdiParent = this;
-            bond_form.Show();
+            BondsTFFForm form = new BondsTFFForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void bondsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            BondsList bondlist_form = new BondsList();
-            bondlist_form.MdiParent = this;
-            bondlist_form.Show();
+            BondsList form = new BondsList();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void generateInterestsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            GenerateBondInterestForm interest_form = new GenerateBondInterestForm();
-            interest_form.MdiParent = this;
-            interest_form.Show();
+            GenerateBondInterestForm form = new GenerateBondInterestForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void underlyingDebtorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            UnderlyingDebtorsForm underlyingdebtor_form = new UnderlyingDebtorsForm();
-            underlyingdebtor_form.MdiParent = this;
-            underlyingdebtor_form.Show();
+            UnderlyingDebtorsForm form = new UnderlyingDebtorsForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void generalBalanceToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            ReportForms.GeneralBalanceForm _generalBalance = new ReportForms.GeneralBalanceForm();
-            _generalBalance.MdiParent = this;
-            _generalBalance.Show();
+            ReportForms.GeneralBalanceForm form = new ReportForms.GeneralBalanceForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void returnsStateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            ReportForms.ReturnsState _returnsState = new ReportForms.ReturnsState();
-            _returnsState.MdiParent = this;
-            _returnsState.Show();
+            ReportForms.ReturnsState form = new ReportForms.ReturnsState();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void makePaymentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            BondPayments _bondPayments = new BondPayments();
-            _bondPayments.MdiParent = this;
-            _bondPayments.Show();
+            BondPayments form = new BondPayments();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void shareholdersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            ShareholdersForm _shareholdersForm = new ShareholdersForm();
-            _shareholdersForm.MdiParent = this;
-            _shareholdersForm.Show();
+            ShareholdersForm form = new ShareholdersForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void disbursemetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            DisbursementsForm disbursements_form = new DisbursementsForm();
-            disbursements_form.MdiParent = this;
-            disbursements_form.Show();
+            DisbursementsForm form = new DisbursementsForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void profitShareAccruedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            ProfitShareToAccrueForm profit_share_to_accrue_form = new ProfitShareToAccrueForm();
-            profit_share_to_accrue_form.MdiParent = this;
-            profit_share_to_accrue_form.Show();
+            ProfitShareToAccrueForm form = new ProfitShareToAccrueForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void createInvestmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            InvestmentsForm investments_form = new InvestmentsForm();
-            investments_form.MdiParent = this;
-            investments_form.Show();
+            InvestmentsForm form = new InvestmentsForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void Form1_Shown(object sender, EventArgs e)
@@ -258,33 +258,33 @@ namespace FundsManager
         private void letterOfCreditToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            LetterOfCreditForm letter_form = new LetterOfCreditForm();
-            letter_form.MdiParent = this;
-            letter_form.Show();
+            LetterOfCreditForm form = new LetterOfCreditForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void shipmentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            ShipmentForm Shipment_form = new ShipmentForm();
-            Shipment_form.MdiParent = this;
-            Shipment_form.Show();
+            ShipmentForm form = new ShipmentForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void collectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            DisbursementCollectionForm disbCollection = new DisbursementCollectionForm();
-            disbCollection.MdiParent = this;
-            disbCollection.Show();
+            DisbursementCollectionForm form = new DisbursementCollectionForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void investmentsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            InvesmentReportForm inv = new InvesmentReportForm();
-            inv.MdiParent = this;
-            inv.Show();
+            InvesmentReportForm form = new InvesmentReportForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -295,25 +295,25 @@ namespace FundsManager
         private void delayInterestToAccrueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            AddendumsLauncher addendums = new AddendumsLauncher();
-            addendums.MdiParent = this;
-            addendums.Show();
+            AddendumsLauncher form = new AddendumsLauncher();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void booksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            BookReportForm booksReportForm = new BookReportForm();
-            booksReportForm.MdiParent = this;
-            booksReportForm.Show();
+            BookReportForm form = new BookReportForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void delayInterestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            DelayInterestToAccrueForm delayInterest = new DelayInterestToAccrueForm();
-            delayInterest.MdiParent = this;
-            delayInterest.Show();
+            DelayInterestToAccrueForm form = new DelayInterestToAccrueForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void unknownRoutineToolStripMenuItem_Click(object sender, EventArgs e)
@@ -367,49 +367,57 @@ namespace FundsManager
         private void bondsTFAMToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            BondsTFAMForm bond_form = new BondsTFAMForm();
-            bond_form.MdiParent = this;
-            bond_form.Show();
+            BondsTFAMForm form = new BondsTFAMForm();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void activateToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            BondsTFAMActivation bond_form = new BondsTFAMActivation();
-            bond_form.MdiParent = this;
-            bond_form.Show();
+            BondsTFAMActivation form = new BondsTFAMActivation();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void generateInterestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            BondsTFAMInterest bond_form = new BondsTFAMInterest();
-            bond_form.MdiParent = this;
-            bond_form.Show();
+            BondsTFAMInterest form = new BondsTFAMInterest();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void mainPaymentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            BondsTFAMMainPayment bond_form = new BondsTFAMMainPayment();
-            bond_form.MdiParent = this;
-            bond_form.Show();
+            BondsTFAMMainPayment form = new BondsTFAMMainPayment();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void interestPaymentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            BondsTFAMInterestPayment bond_form = new BondsTFAMInterestPayment();
-            bond_form.MdiParent = this;
-            bond_form.Show();
+            BondsTFAMInterestPayment form = new BondsTFAMInterestPayment();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void closePeriodToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            ClosePeriodForm bond_form = new ClosePeriodForm();
-            bond_form.MdiParent = this;
-            bond_form.Show();
+            ClosePeriodForm form = new ClosePeriodForm();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void accountReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            AccountReport form = new AccountReport();
+            form.MdiParent = this;
+            form.Show();
         }
     }
 }
