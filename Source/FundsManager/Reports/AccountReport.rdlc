@@ -6,19 +6,19 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.2125in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.2125in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.2125in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.2125in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.2125in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -64,7 +64,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>description</Value>
+                              <Value>Description</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -154,7 +154,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>balance</Value>
+                              <Value>Balance</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -360,10 +360,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>dsAccountReport</DataSetName>
-        <Top>1.45708in</Top>
-        <Left>0.57167in</Left>
+        <Top>0.54041in</Top>
+        <Left>0.22792in</Left>
         <Height>0.5in</Height>
-        <Width>5in</Width>
+        <Width>6.0625in</Width>
         <Style>
           <Border>
             <Style>None</Style>

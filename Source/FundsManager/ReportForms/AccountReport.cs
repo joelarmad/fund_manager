@@ -14,6 +14,8 @@ namespace FundsManager.ReportForms
 {
     public partial class AccountReport : Form
     {
+        private MyFundsManager manager = MyFundsManager.SingletonInstance;
+
         public AccountReport()
         {
             InitializeComponent();
@@ -21,7 +23,20 @@ namespace FundsManager.ReportForms
 
         private void AccountReport_Load(object sender, EventArgs e)
         {
-            this.accountReportTableAdapter.Fill(this.fundsDBDataSet.AccountReport, 0, 0, "", new DateTime(2017, 1, 1), new DateTime(2018, 1, 1), 1);
+            this.accountsTableAdapter.FillByFund(this.fundsDBDataSet.Accounts, manager.Selected);
+
+            cbAccount_SelectedIndexChanged(null, null);
+
+            cmdFind_Click(null, null);
+
+        }
+
+        private void cmdFind_Click(object sender, EventArgs e)
+        {
+            int accountId = cbAccount.SelectedValue != null ? int.Parse(cbAccount.SelectedValue.ToString()) : 0;
+            int subAccountId = cbSubAccount.SelectedValue != null ? int.Parse(cbSubAccount.SelectedValue.ToString()) : 0;
+
+            this.accountReportTableAdapter.Fill(this.fundsDBDataSet.AccountReport, accountId, subAccountId, txtDetail.Text.Trim(), dtpFrom.Value.Date, dtpTo.Value.Date.AddDays(1).AddSeconds(-1), manager.Selected);
 
             var rds = new ReportDataSource("dsAccountReport", (DataTable)this.fundsDBDataSet.AccountReport);
 
@@ -30,7 +45,17 @@ namespace FundsManager.ReportForms
 
 
             reportViewer1.RefreshReport();
+        }
 
+        private void cbAccount_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int accountId = 0;
+            if (cbAccount.SelectedIndex >= 0)
+            {
+                accountId = int.Parse(cbAccount.SelectedValue.ToString());
+            }
+
+            this.subaccountsTableAdapter.FillByAccount(this.fundsDBDataSet.Subaccounts,accountId, manager.Selected);
         }
     }
 }
