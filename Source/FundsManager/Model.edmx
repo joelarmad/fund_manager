@@ -5,13 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="FundsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="AccountBalance">
-          <Key>
-            <PropertyRef Name="account_id" />
-          </Key>
-          <Property Name="account_id" Type="int" Nullable="false" />
-          <Property Name="balance" Type="money" Nullable="false" />
-        </EntityType>
         <EntityType Name="AccountingMovements">
           <Key>
             <PropertyRef Name="Id" />
@@ -127,7 +120,7 @@
           <Property Name="activation_accounting_movement_id" Type="int" />
           <Property Name="payment_accounting_movement_id" Type="int" />
         </EntityType>
-        <EntityType Name="BondsTFAMGeneratedInterest">
+        <EntityType Name="BondsTFAMGeneratedInterestDetails">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -139,6 +132,14 @@
           <Property Name="payment_interest_date" Type="date" />
           <Property Name="interest_accounting_movement_id" Type="int" />
           <Property Name="payment_accounting_movement_id" Type="int" />
+          <Property Name="interest_id" Type="int" />
+        </EntityType>
+        <EntityType Name="BondsTFAMGeneratedInterests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GeneratedDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="BondsTFF">
           <Key>
@@ -995,6 +996,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.MovementsView
           <Property Name="Shift_Amount" Type="money" />
           <Property Name="Detail" Type="text" Nullable="false" />
           <Property Name="Currency" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SubAccountId" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitShareToAccrue' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1468,39 +1470,51 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BondsTFAMGeneratedInterest_AccountingMovements_interest">
+        <Association Name="FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_interest">
           <End Role="AccountingMovements" Type="Self.AccountingMovements" Multiplicity="0..1" />
-          <End Role="BondsTFAMGeneratedInterest" Type="Self.BondsTFAMGeneratedInterest" Multiplicity="*" />
+          <End Role="BondsTFAMGeneratedInterestDetails" Type="Self.BondsTFAMGeneratedInterestDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AccountingMovements">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="BondsTFAMGeneratedInterest">
+            <Dependent Role="BondsTFAMGeneratedInterestDetails">
               <PropertyRef Name="interest_accounting_movement_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BondsTFAMGeneratedInterest_AccountingMovements_payment">
+        <Association Name="FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_payment">
           <End Role="AccountingMovements" Type="Self.AccountingMovements" Multiplicity="0..1" />
-          <End Role="BondsTFAMGeneratedInterest" Type="Self.BondsTFAMGeneratedInterest" Multiplicity="*" />
+          <End Role="BondsTFAMGeneratedInterestDetails" Type="Self.BondsTFAMGeneratedInterestDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AccountingMovements">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="BondsTFAMGeneratedInterest">
+            <Dependent Role="BondsTFAMGeneratedInterestDetails">
               <PropertyRef Name="payment_accounting_movement_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BondsTFAMGeneratedInterest_BondsTFAM">
+        <Association Name="FK_BondsTFAMGeneratedInterestDetails_BondsTFAM">
           <End Role="BondsTFAM" Type="Self.BondsTFAM" Multiplicity="1" />
-          <End Role="BondsTFAMGeneratedInterest" Type="Self.BondsTFAMGeneratedInterest" Multiplicity="*" />
+          <End Role="BondsTFAMGeneratedInterestDetails" Type="Self.BondsTFAMGeneratedInterestDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BondsTFAM">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="BondsTFAMGeneratedInterest">
+            <Dependent Role="BondsTFAMGeneratedInterestDetails">
               <PropertyRef Name="bond_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BondsTFAMGeneratedInterestDetails_GeneratedInterest">
+          <End Role="BondsTFAMGeneratedInterests" Type="Self.BondsTFAMGeneratedInterests" Multiplicity="0..1" />
+          <End Role="BondsTFAMGeneratedInterestDetails" Type="Self.BondsTFAMGeneratedInterestDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BondsTFAMGeneratedInterests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BondsTFAMGeneratedInterestDetails">
+              <PropertyRef Name="interest_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2405,7 +2419,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FundsDBModelStoreContainer">
-          <EntitySet Name="AccountBalance" EntityType="Self.AccountBalance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountingMovements" EntityType="Self.AccountingMovements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountsBankingAccounts" EntityType="Self.AccountsBankingAccounts" Schema="dbo" store:Type="Tables" />
@@ -2416,7 +2429,8 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySet Name="BankingAccounts" EntityType="Self.BankingAccounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Banks" EntityType="Self.Banks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BondsTFAM" EntityType="Self.BondsTFAM" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BondsTFAMGeneratedInterest" EntityType="Self.BondsTFAMGeneratedInterest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BondsTFAMGeneratedInterestDetails" EntityType="Self.BondsTFAMGeneratedInterestDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BondsTFAMGeneratedInterests" EntityType="Self.BondsTFAMGeneratedInterests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BondsTFF" EntityType="Self.BondsTFF" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BondsTFFInvestors" EntityType="Self.BondsTFFInvestors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BookingGeneratedInterestDetails" EntityType="Self.BookingGeneratedInterestDetails" Schema="dbo" store:Type="Tables" />
@@ -2701,7 +2715,8 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
     [MovementsView].[Credit] AS [Credit], 
     [MovementsView].[Shift_Amount] AS [Shift_Amount], 
     [MovementsView].[Detail] AS [Detail], 
-    [MovementsView].[Currency] AS [Currency]
+    [MovementsView].[Currency] AS [Currency], 
+    [MovementsView].[SubAccountId] AS [SubAccountId]
     FROM [dbo].[MovementsView] AS [MovementsView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ProfitShareToAccrue" EntityType="Self.ProfitShareToAccrue" store:Type="Views" store:Schema="dbo">
@@ -2916,17 +2931,21 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="Funds" EntitySet="Funds" />
             <End Role="BondsTFAM" EntitySet="BondsTFAM" />
           </AssociationSet>
-          <AssociationSet Name="FK_BondsTFAMGeneratedInterest_AccountingMovements_interest" Association="Self.FK_BondsTFAMGeneratedInterest_AccountingMovements_interest">
+          <AssociationSet Name="FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_interest" Association="Self.FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_interest">
             <End Role="AccountingMovements" EntitySet="AccountingMovements" />
-            <End Role="BondsTFAMGeneratedInterest" EntitySet="BondsTFAMGeneratedInterest" />
+            <End Role="BondsTFAMGeneratedInterestDetails" EntitySet="BondsTFAMGeneratedInterestDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_BondsTFAMGeneratedInterest_AccountingMovements_payment" Association="Self.FK_BondsTFAMGeneratedInterest_AccountingMovements_payment">
+          <AssociationSet Name="FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_payment" Association="Self.FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_payment">
             <End Role="AccountingMovements" EntitySet="AccountingMovements" />
-            <End Role="BondsTFAMGeneratedInterest" EntitySet="BondsTFAMGeneratedInterest" />
+            <End Role="BondsTFAMGeneratedInterestDetails" EntitySet="BondsTFAMGeneratedInterestDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_BondsTFAMGeneratedInterest_BondsTFAM" Association="Self.FK_BondsTFAMGeneratedInterest_BondsTFAM">
+          <AssociationSet Name="FK_BondsTFAMGeneratedInterestDetails_BondsTFAM" Association="Self.FK_BondsTFAMGeneratedInterestDetails_BondsTFAM">
             <End Role="BondsTFAM" EntitySet="BondsTFAM" />
-            <End Role="BondsTFAMGeneratedInterest" EntitySet="BondsTFAMGeneratedInterest" />
+            <End Role="BondsTFAMGeneratedInterestDetails" EntitySet="BondsTFAMGeneratedInterestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BondsTFAMGeneratedInterestDetails_GeneratedInterest" Association="Self.FK_BondsTFAMGeneratedInterestDetails_GeneratedInterest">
+            <End Role="BondsTFAMGeneratedInterests" EntitySet="BondsTFAMGeneratedInterests" />
+            <End Role="BondsTFAMGeneratedInterestDetails" EntitySet="BondsTFAMGeneratedInterestDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_BondsTFF_Funds" Association="Self.FK_BondsTFF_Funds">
             <End Role="Funds" EntitySet="Funds" />
@@ -3617,19 +3636,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="Fund" EntitySet="Funds" />
             <End Role="BondsTFAM" EntitySet="BondsTFAMs" />
           </AssociationSet>
-          <EntitySet Name="BondsTFAMGeneratedInterests" EntityType="FundsDBModel.BondsTFAMGeneratedInterest" />
-          <AssociationSet Name="FK_BondsTFAMGeneratedInterest_AccountingMovements_interest" Association="FundsDBModel.FK_BondsTFAMGeneratedInterest_AccountingMovements_interest">
-            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
-            <End Role="BondsTFAMGeneratedInterest" EntitySet="BondsTFAMGeneratedInterests" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BondsTFAMGeneratedInterest_AccountingMovements_payment" Association="FundsDBModel.FK_BondsTFAMGeneratedInterest_AccountingMovements_payment">
-            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
-            <End Role="BondsTFAMGeneratedInterest" EntitySet="BondsTFAMGeneratedInterests" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BondsTFAMGeneratedInterest_BondsTFAM" Association="FundsDBModel.FK_BondsTFAMGeneratedInterest_BondsTFAM">
-            <End Role="BondsTFAM" EntitySet="BondsTFAMs" />
-            <End Role="BondsTFAMGeneratedInterest" EntitySet="BondsTFAMGeneratedInterests" />
-          </AssociationSet>
           <EntitySet Name="Accounts" EntityType="FundsDBModel.Account" />
           <EntitySet Name="Subaccounts" EntityType="FundsDBModel.Subaccount" />
           <EntitySet Name="AccountBalanceViews" EntityType="FundsDBModel.AccountBalanceView" />
@@ -3668,7 +3674,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           </AssociationSet>
           <EntitySet Name="MovementsViews" EntityType="FundsDBModel.MovementsView" />
           <EntitySet Name="ClosedPeriods" EntityType="FundsDBModel.ClosedPeriod" />
-          <EntitySet Name="AccountBalances" EntityType="FundsDBModel.AccountBalance" />
           <EntitySet Name="Movements_Accounts" EntityType="FundsDBModel.Movements_Accounts" />
           <AssociationSet Name="FK_Movements_Accounts_AccountingMovements" Association="FundsDBModel.FK_Movements_Accounts_AccountingMovements">
             <End Role="AccountingMovement" EntitySet="AccountingMovements" />
@@ -3714,6 +3719,24 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="Subaccount" EntitySet="Subaccounts" />
             <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
           </AssociationSet>
+          <EntitySet Name="BondsTFAMGeneratedInterests" EntityType="FundsDBModel.BondsTFAMGeneratedInterest" />
+          <EntitySet Name="BondsTFAMGeneratedInterestDetails" EntityType="FundsDBModel.BondsTFAMGeneratedInterestDetail" />
+          <AssociationSet Name="FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_interest" Association="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_interest">
+            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
+            <End Role="BondsTFAMGeneratedInterestDetail" EntitySet="BondsTFAMGeneratedInterestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_payment" Association="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_payment">
+            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
+            <End Role="BondsTFAMGeneratedInterestDetail" EntitySet="BondsTFAMGeneratedInterestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BondsTFAMGeneratedInterestDetails_BondsTFAM" Association="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_BondsTFAM">
+            <End Role="BondsTFAM" EntitySet="BondsTFAMs" />
+            <End Role="BondsTFAMGeneratedInterestDetail" EntitySet="BondsTFAMGeneratedInterestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BondsTFAMGeneratedInterestDetails_GeneratedInterest" Association="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_GeneratedInterest">
+            <End Role="BondsTFAMGeneratedInterest" EntitySet="BondsTFAMGeneratedInterests" />
+            <End Role="BondsTFAMGeneratedInterestDetail" EntitySet="BondsTFAMGeneratedInterestDetails" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccountingMovement">
           <Key>
@@ -3739,10 +3762,10 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="Loans" Relationship="FundsDBModel.FK_Loans_Accounting_Movement" FromRole="AccountingMovement" ToRole="Loan" />
           <NavigationProperty Name="BondsTFAMs" Relationship="FundsDBModel.FK_BondsTFAM_AccountingMovements_Activation" FromRole="AccountingMovement" ToRole="BondsTFAM" />
           <NavigationProperty Name="BondsTFAMs1" Relationship="FundsDBModel.FK_BondsTFAM_AccountingMovements_Payment" FromRole="AccountingMovement" ToRole="BondsTFAM" />
-          <NavigationProperty Name="BondsTFAMGeneratedInterests" Relationship="FundsDBModel.FK_BondsTFAMGeneratedInterest_AccountingMovements_interest" FromRole="AccountingMovement" ToRole="BondsTFAMGeneratedInterest" />
-          <NavigationProperty Name="BondsTFAMGeneratedInterests1" Relationship="FundsDBModel.FK_BondsTFAMGeneratedInterest_AccountingMovements_payment" FromRole="AccountingMovement" ToRole="BondsTFAMGeneratedInterest" />
           <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_AccountingMovements" FromRole="AccountingMovement" ToRole="Movements_Accounts" />
-        </EntityType>
+          <NavigationProperty Name="BondsTFAMGeneratedInterestDetails" Relationship="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_interest" FromRole="AccountingMovement" ToRole="BondsTFAMGeneratedInterestDetail" />
+          <NavigationProperty Name="BondsTFAMGeneratedInterestDetails1" Relationship="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_payment" FromRole="AccountingMovement" ToRole="BondsTFAMGeneratedInterestDetail" />
+          </EntityType>
         <EntityType Name="AccountsBankingAccount">
           <Key>
             <PropertyRef Name="Id" />
@@ -5790,7 +5813,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="AccountingMovement1" Relationship="FundsDBModel.FK_BondsTFAM_AccountingMovements_Payment" FromRole="BondsTFAM" ToRole="AccountingMovement" />
           <NavigationProperty Name="Currency" Relationship="FundsDBModel.FK_BondsTFAM_Currencies" FromRole="BondsTFAM" ToRole="Currency" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_BondsTFAM_Funds" FromRole="BondsTFAM" ToRole="Fund" />
-          <NavigationProperty Name="BondsTFAMGeneratedInterests" Relationship="FundsDBModel.FK_BondsTFAMGeneratedInterest_BondsTFAM" FromRole="BondsTFAM" ToRole="BondsTFAMGeneratedInterest" />
+          <NavigationProperty Name="BondsTFAMGeneratedInterestDetails" Relationship="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_BondsTFAM" FromRole="BondsTFAM" ToRole="BondsTFAMGeneratedInterestDetail" />
         </EntityType>
         <Association Name="FK_BondsTFAM_AccountingMovements_Activation">
           <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="0..1" />
@@ -5837,58 +5860,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Principal>
             <Dependent Role="BondsTFAM">
               <PropertyRef Name="FK_Bonds_Funds" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="BondsTFAMGeneratedInterest">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="bond_id" Type="Int32" Nullable="false" />
-          <Property Name="generated_bond_interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="generated_tff_interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="generated_interest_date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="payment_interest_date" Type="DateTime" Precision="0" />
-          <Property Name="interest_accounting_movement_id" Type="Int32" />
-          <Property Name="payment_accounting_movement_id" Type="Int32" />
-          <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_BondsTFAMGeneratedInterest_AccountingMovements_interest" FromRole="BondsTFAMGeneratedInterest" ToRole="AccountingMovement" />
-          <NavigationProperty Name="AccountingMovement1" Relationship="FundsDBModel.FK_BondsTFAMGeneratedInterest_AccountingMovements_payment" FromRole="BondsTFAMGeneratedInterest" ToRole="AccountingMovement" />
-          <NavigationProperty Name="BondsTFAM" Relationship="FundsDBModel.FK_BondsTFAMGeneratedInterest_BondsTFAM" FromRole="BondsTFAMGeneratedInterest" ToRole="BondsTFAM" />
-        </EntityType>
-        <Association Name="FK_BondsTFAMGeneratedInterest_AccountingMovements_interest">
-          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="0..1" />
-          <End Type="FundsDBModel.BondsTFAMGeneratedInterest" Role="BondsTFAMGeneratedInterest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccountingMovement">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BondsTFAMGeneratedInterest">
-              <PropertyRef Name="interest_accounting_movement_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BondsTFAMGeneratedInterest_AccountingMovements_payment">
-          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="0..1" />
-          <End Type="FundsDBModel.BondsTFAMGeneratedInterest" Role="BondsTFAMGeneratedInterest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccountingMovement">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BondsTFAMGeneratedInterest">
-              <PropertyRef Name="payment_accounting_movement_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BondsTFAMGeneratedInterest_BondsTFAM">
-          <End Type="FundsDBModel.BondsTFAM" Role="BondsTFAM" Multiplicity="1" />
-          <End Type="FundsDBModel.BondsTFAMGeneratedInterest" Role="BondsTFAMGeneratedInterest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BondsTFAM">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BondsTFAMGeneratedInterest">
-              <PropertyRef Name="bond_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6077,6 +6048,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="Detail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Currency" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MovementId" Type="Int32" Nullable="false" />
+          <Property Name="SubAccountId" Type="Int32" />
         </EntityType>
         <EntityType Name="ClosedPeriod">
           <Key>
@@ -6084,13 +6056,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           </Key>
           <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="closing_date" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="AccountBalance">
-          <Key>
-            <PropertyRef Name="account_id" />
-          </Key>
-          <Property Name="account_id" Type="Int32" Nullable="false" />
-          <Property Name="balance" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="Movements_Accounts">
           <Key>
@@ -6247,6 +6212,80 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Principal>
             <Dependent Role="Movements_Accounts">
               <PropertyRef Name="FK_Movements_Accounts_Subaccounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BondsTFAMGeneratedInterest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GeneratedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="BondsTFAMGeneratedInterestDetails" Relationship="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_GeneratedInterest" FromRole="BondsTFAMGeneratedInterest" ToRole="BondsTFAMGeneratedInterestDetail" />
+        </EntityType>
+        <EntityType Name="BondsTFAMGeneratedInterestDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bond_id" Type="Int32" Nullable="false" />
+          <Property Name="generated_bond_interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="generated_tff_interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="generated_interest_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="payment_interest_date" Type="DateTime" Precision="0" />
+          <Property Name="interest_accounting_movement_id" Type="Int32" />
+          <Property Name="payment_accounting_movement_id" Type="Int32" />
+          <Property Name="interest_id" Type="Int32" />
+          <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_interest" FromRole="BondsTFAMGeneratedInterestDetail" ToRole="AccountingMovement" />
+          <NavigationProperty Name="AccountingMovement1" Relationship="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_payment" FromRole="BondsTFAMGeneratedInterestDetail" ToRole="AccountingMovement" />
+          <NavigationProperty Name="BondsTFAM" Relationship="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_BondsTFAM" FromRole="BondsTFAMGeneratedInterestDetail" ToRole="BondsTFAM" />
+          <NavigationProperty Name="BondsTFAMGeneratedInterest" Relationship="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_GeneratedInterest" FromRole="BondsTFAMGeneratedInterestDetail" ToRole="BondsTFAMGeneratedInterest" />
+        </EntityType>
+        <Association Name="FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_interest">
+          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="0..1" />
+          <End Type="FundsDBModel.BondsTFAMGeneratedInterestDetail" Role="BondsTFAMGeneratedInterestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingMovement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BondsTFAMGeneratedInterestDetail">
+              <PropertyRef Name="interest_accounting_movement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_payment">
+          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="0..1" />
+          <End Type="FundsDBModel.BondsTFAMGeneratedInterestDetail" Role="BondsTFAMGeneratedInterestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingMovement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BondsTFAMGeneratedInterestDetail">
+              <PropertyRef Name="payment_accounting_movement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BondsTFAMGeneratedInterestDetails_BondsTFAM">
+          <End Type="FundsDBModel.BondsTFAM" Role="BondsTFAM" Multiplicity="1" />
+          <End Type="FundsDBModel.BondsTFAMGeneratedInterestDetail" Role="BondsTFAMGeneratedInterestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BondsTFAM">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BondsTFAMGeneratedInterestDetail">
+              <PropertyRef Name="bond_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BondsTFAMGeneratedInterestDetails_GeneratedInterest">
+          <End Type="FundsDBModel.BondsTFAMGeneratedInterest" Role="BondsTFAMGeneratedInterest" Multiplicity="0..1" />
+          <End Type="FundsDBModel.BondsTFAMGeneratedInterestDetail" Role="BondsTFAMGeneratedInterestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BondsTFAMGeneratedInterest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BondsTFAMGeneratedInterestDetail">
+              <PropertyRef Name="interest_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7162,20 +7201,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BondsTFAMGeneratedInterests">
-            <EntityTypeMapping TypeName="FundsDBModel.BondsTFAMGeneratedInterest">
-              <MappingFragment StoreEntitySet="BondsTFAMGeneratedInterest">
-                <ScalarProperty Name="payment_accounting_movement_id" ColumnName="payment_accounting_movement_id" />
-                <ScalarProperty Name="interest_accounting_movement_id" ColumnName="interest_accounting_movement_id" />
-                <ScalarProperty Name="payment_interest_date" ColumnName="payment_interest_date" />
-                <ScalarProperty Name="generated_interest_date" ColumnName="generated_interest_date" />
-                <ScalarProperty Name="generated_tff_interest" ColumnName="generated_tff_interest" />
-                <ScalarProperty Name="generated_bond_interest" ColumnName="generated_bond_interest" />
-                <ScalarProperty Name="bond_id" ColumnName="bond_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="FundsDBModel.Account">
               <MappingFragment StoreEntitySet="Accounts">
@@ -7221,6 +7246,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySetMapping Name="MovementsViews">
             <EntityTypeMapping TypeName="FundsDBModel.MovementsView">
               <MappingFragment StoreEntitySet="MovementsView">
+                <ScalarProperty Name="SubAccountId" ColumnName="SubAccountId" />
                 <ScalarProperty Name="MovementId" ColumnName="MovementId" />
                 <ScalarProperty Name="Currency" ColumnName="Currency" />
                 <ScalarProperty Name="Detail" ColumnName="Detail" />
@@ -7248,14 +7274,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AccountBalances">
-            <EntityTypeMapping TypeName="FundsDBModel.AccountBalance">
-              <MappingFragment StoreEntitySet="AccountBalance">
-                <ScalarProperty Name="balance" ColumnName="balance" />
-                <ScalarProperty Name="account_id" ColumnName="account_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Movements_Accounts">
             <EntityTypeMapping TypeName="FundsDBModel.Movements_Accounts">
               <MappingFragment StoreEntitySet="Movements_Accounts">
@@ -7268,6 +7286,29 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
                 <ScalarProperty Name="credit" ColumnName="credit" />
                 <ScalarProperty Name="FK_Movements_Accounts_AccountingMovements" ColumnName="FK_Movements_Accounts_AccountingMovements" />
                 <ScalarProperty Name="FK_Movements_Accounts_Subaccounts" ColumnName="FK_Movements_Accounts_Subaccounts" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BondsTFAMGeneratedInterests">
+            <EntityTypeMapping TypeName="FundsDBModel.BondsTFAMGeneratedInterest">
+              <MappingFragment StoreEntitySet="BondsTFAMGeneratedInterests">
+                <ScalarProperty Name="GeneratedDate" ColumnName="GeneratedDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BondsTFAMGeneratedInterestDetails">
+            <EntityTypeMapping TypeName="FundsDBModel.BondsTFAMGeneratedInterestDetail">
+              <MappingFragment StoreEntitySet="BondsTFAMGeneratedInterestDetails">
+                <ScalarProperty Name="interest_id" ColumnName="interest_id" />
+                <ScalarProperty Name="payment_accounting_movement_id" ColumnName="payment_accounting_movement_id" />
+                <ScalarProperty Name="interest_accounting_movement_id" ColumnName="interest_accounting_movement_id" />
+                <ScalarProperty Name="payment_interest_date" ColumnName="payment_interest_date" />
+                <ScalarProperty Name="generated_interest_date" ColumnName="generated_interest_date" />
+                <ScalarProperty Name="generated_tff_interest" ColumnName="generated_tff_interest" />
+                <ScalarProperty Name="generated_bond_interest" ColumnName="generated_bond_interest" />
+                <ScalarProperty Name="bond_id" ColumnName="bond_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

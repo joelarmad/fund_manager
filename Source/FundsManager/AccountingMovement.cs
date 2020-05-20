@@ -27,9 +27,9 @@ namespace FundsManager
             this.Loans = new HashSet<Loan>();
             this.BondsTFAMs = new HashSet<BondsTFAM>();
             this.BondsTFAMs1 = new HashSet<BondsTFAM>();
-            this.BondsTFAMGeneratedInterests = new HashSet<BondsTFAMGeneratedInterest>();
-            this.BondsTFAMGeneratedInterests1 = new HashSet<BondsTFAMGeneratedInterest>();
             this.Movements_Accounts = new HashSet<Movements_Accounts>();
+            this.BondsTFAMGeneratedInterestDetails = new HashSet<BondsTFAMGeneratedInterestDetail>();
+            this.BondsTFAMGeneratedInterestDetails1 = new HashSet<BondsTFAMGeneratedInterestDetail>();
         }
     
         public int Id { get; set; }
@@ -64,10 +64,10 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BondsTFAM> BondsTFAMs1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BondsTFAMGeneratedInterest> BondsTFAMGeneratedInterests { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BondsTFAMGeneratedInterest> BondsTFAMGeneratedInterests1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movements_Accounts> Movements_Accounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BondsTFAMGeneratedInterestDetail> BondsTFAMGeneratedInterestDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BondsTFAMGeneratedInterestDetail> BondsTFAMGeneratedInterestDetails1 { get; set; }
     }
 }

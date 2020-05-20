@@ -17,7 +17,7 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BondsTFAM()
         {
-            this.BondsTFAMGeneratedInterests = new HashSet<BondsTFAMGeneratedInterest>();
+            this.BondsTFAMGeneratedInterestDetails = new HashSet<BondsTFAMGeneratedInterestDetail>();
         }
     
         public int Id { get; set; }
@@ -41,6 +41,6 @@ namespace FundsManager
         public virtual Currency Currency { get; set; }
         public virtual Fund Fund { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BondsTFAMGeneratedInterest> BondsTFAMGeneratedInterests { get; set; }
+        public virtual ICollection<BondsTFAMGeneratedInterestDetail> BondsTFAMGeneratedInterestDetails { get; set; }
     }
 }

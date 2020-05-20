@@ -81,11 +81,12 @@
             this.investmentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.booksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bondsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.bondsTFAMToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closePeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closePeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -474,7 +475,8 @@
             this.movementsToolStripMenuItem,
             this.investmentsToolStripMenuItem1,
             this.booksToolStripMenuItem,
-            this.bondsToolStripMenuItem1});
+            this.bondsToolStripMenuItem1,
+            this.bondsTFAMToolStripMenuItem2});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.reportsToolStripMenuItem.Text = "Edit";
@@ -482,30 +484,37 @@
             // movementsToolStripMenuItem
             // 
             this.movementsToolStripMenuItem.Name = "movementsToolStripMenuItem";
-            this.movementsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.movementsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.movementsToolStripMenuItem.Text = "Movements";
             this.movementsToolStripMenuItem.Click += new System.EventHandler(this.movementsToolStripMenuItem_Click);
             // 
             // investmentsToolStripMenuItem1
             // 
             this.investmentsToolStripMenuItem1.Name = "investmentsToolStripMenuItem1";
-            this.investmentsToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
+            this.investmentsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.investmentsToolStripMenuItem1.Text = "Investments";
             this.investmentsToolStripMenuItem1.Click += new System.EventHandler(this.investmentsToolStripMenuItem1_Click);
             // 
             // booksToolStripMenuItem
             // 
             this.booksToolStripMenuItem.Name = "booksToolStripMenuItem";
-            this.booksToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.booksToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.booksToolStripMenuItem.Text = "Books";
             this.booksToolStripMenuItem.Click += new System.EventHandler(this.booksToolStripMenuItem_Click);
             // 
             // bondsToolStripMenuItem1
             // 
             this.bondsToolStripMenuItem1.Name = "bondsToolStripMenuItem1";
-            this.bondsToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
-            this.bondsToolStripMenuItem1.Text = "Bonds";
-            this.bondsToolStripMenuItem1.Click += new System.EventHandler(this.bondsToolStripMenuItem1_Click);
+            this.bondsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.bondsToolStripMenuItem1.Text = "Bonds TFF";
+            this.bondsToolStripMenuItem1.Click += new System.EventHandler(this.bondsToolStripMenuItem1_Click_1);
+            // 
+            // bondsTFAMToolStripMenuItem2
+            // 
+            this.bondsTFAMToolStripMenuItem2.Name = "bondsTFAMToolStripMenuItem2";
+            this.bondsTFAMToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.bondsTFAMToolStripMenuItem2.Text = "Bonds TFAM";
+            this.bondsTFAMToolStripMenuItem2.Click += new System.EventHandler(this.bondsTFAMToolStripMenuItem2_Click);
             // 
             // reportsToolStripMenuItem1
             // 
@@ -531,19 +540,19 @@
             this.returnsStateToolStripMenuItem.Text = "Profit && Loss Statement";
             this.returnsStateToolStripMenuItem.Click += new System.EventHandler(this.returnsStateToolStripMenuItem_Click);
             // 
-            // closePeriodToolStripMenuItem
-            // 
-            this.closePeriodToolStripMenuItem.Name = "closePeriodToolStripMenuItem";
-            this.closePeriodToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
-            this.closePeriodToolStripMenuItem.Text = "Close Period";
-            this.closePeriodToolStripMenuItem.Click += new System.EventHandler(this.closePeriodToolStripMenuItem_Click);
-            // 
             // accountReportToolStripMenuItem
             // 
             this.accountReportToolStripMenuItem.Name = "accountReportToolStripMenuItem";
             this.accountReportToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.accountReportToolStripMenuItem.Text = "Account Report";
             this.accountReportToolStripMenuItem.Click += new System.EventHandler(this.accountReportToolStripMenuItem_Click);
+            // 
+            // closePeriodToolStripMenuItem
+            // 
+            this.closePeriodToolStripMenuItem.Name = "closePeriodToolStripMenuItem";
+            this.closePeriodToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
+            this.closePeriodToolStripMenuItem.Text = "Close Period";
+            this.closePeriodToolStripMenuItem.Click += new System.EventHandler(this.closePeriodToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -628,6 +637,7 @@
         private System.Windows.Forms.ToolStripMenuItem interestPaymentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closePeriodToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem accountReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bondsTFAMToolStripMenuItem2;
     }
 }
 

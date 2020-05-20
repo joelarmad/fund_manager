@@ -14,17 +14,16 @@ namespace FundsManager
     
     public partial class BondsTFAMGeneratedInterest
     {
-        public int Id { get; set; }
-        public int bond_id { get; set; }
-        public decimal generated_bond_interest { get; set; }
-        public decimal generated_tff_interest { get; set; }
-        public System.DateTime generated_interest_date { get; set; }
-        public Nullable<System.DateTime> payment_interest_date { get; set; }
-        public Nullable<int> interest_accounting_movement_id { get; set; }
-        public Nullable<int> payment_accounting_movement_id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BondsTFAMGeneratedInterest()
+        {
+            this.BondsTFAMGeneratedInterestDetails = new HashSet<BondsTFAMGeneratedInterestDetail>();
+        }
     
-        public virtual AccountingMovement AccountingMovement { get; set; }
-        public virtual AccountingMovement AccountingMovement1 { get; set; }
-        public virtual BondsTFAM BondsTFAM { get; set; }
+        public int Id { get; set; }
+        public System.DateTime GeneratedDate { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BondsTFAMGeneratedInterestDetail> BondsTFAMGeneratedInterestDetails { get; set; }
     }
 }

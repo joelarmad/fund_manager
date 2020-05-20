@@ -48,7 +48,7 @@ namespace FundsManager
 
                                 if (int.TryParse(_item.Cells[0].Value.ToString(), out interestId))
                                 {
-                                    BondsTFAMGeneratedInterest toPay = manager.My_db.BondsTFAMGeneratedInterests.FirstOrDefault(x => x.Id == interestId);
+                                    BondsTFAMGeneratedInterestDetail toPay = manager.My_db.BondsTFAMGeneratedInterestDetails.FirstOrDefault(x => x.Id == interestId);
 
                                     if (toPay != null)
                                     {

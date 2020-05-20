@@ -88,14 +88,14 @@ namespace FundsManager
         public virtual DbSet<BondsTFF> BondsTFFs { get; set; }
         public virtual DbSet<BondsTFFInvestor> BondsTFFInvestors { get; set; }
         public virtual DbSet<BondsTFAM> BondsTFAMs { get; set; }
-        public virtual DbSet<BondsTFAMGeneratedInterest> BondsTFAMGeneratedInterests { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Subaccount> Subaccounts { get; set; }
         public virtual DbSet<AccountBalanceView> AccountBalanceViews { get; set; }
         public virtual DbSet<SubAccountBalance> SubAccountBalances { get; set; }
         public virtual DbSet<MovementsView> MovementsViews { get; set; }
         public virtual DbSet<ClosedPeriod> ClosedPeriods { get; set; }
-        public virtual DbSet<AccountBalance> AccountBalances { get; set; }
         public virtual DbSet<Movements_Accounts> Movements_Accounts { get; set; }
+        public virtual DbSet<BondsTFAMGeneratedInterest> BondsTFAMGeneratedInterests { get; set; }
+        public virtual DbSet<BondsTFAMGeneratedInterestDetail> BondsTFAMGeneratedInterestDetails { get; set; }
     }
 }

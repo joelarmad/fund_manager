@@ -169,14 +169,6 @@ namespace FundsManager
             form.Show();
         }
 
-        private void bondsToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            this.IsMdiContainer = true;
-            BondsList form = new BondsList();
-            form.MdiParent = this;
-            form.Show();
-        }
-
         private void generateInterestsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
@@ -416,6 +408,22 @@ namespace FundsManager
         {
             this.IsMdiContainer = true;
             AccountReport form = new AccountReport();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void bondsToolStripMenuItem1_Click_1(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            BondsList form = new BondsList();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void bondsTFAMToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            BondsTFAMListForm form = new BondsTFAMListForm();
             form.MdiParent = this;
             form.Show();
         }

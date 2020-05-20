@@ -97,9 +97,6 @@
     <Compile Include="Account.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="AccountBalance.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="AccountBalanceView.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -167,6 +164,12 @@
     <Compile Include="BondPayments.Designer.cs">
       <DependentUpon>BondPayments.cs</DependentUpon>
     </Compile>
+    <Compile Include="BondsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BondsList.Designer.cs">
+      <DependentUpon>BondsList.cs</DependentUpon>
+    </Compile>
     <Compile Include="BondsTFAM.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -185,6 +188,9 @@
     <Compile Include="BondsTFAMGeneratedInterest.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="BondsTFAMGeneratedInterestDetail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="BondsTFAMInterest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +202,12 @@
     </Compile>
     <Compile Include="BondsTFAMInterestPayment.Designer.cs">
       <DependentUpon>BondsTFAMInterestPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BondsTFAMListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BondsTFAMListForm.Designer.cs">
+      <DependentUpon>BondsTFAMListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="BondsTFAMMainPayment.cs">
       <SubType>Form</SubType>
@@ -212,11 +224,11 @@
     <Compile Include="BondsTFFForm.Designer.cs">
       <DependentUpon>BondsTFFForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BondsList.cs">
+    <Compile Include="BondsTFAMList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BondsList.Designer.cs">
-      <DependentUpon>BondsList.cs</DependentUpon>
+    <Compile Include="BondsTFAMList.Designer.cs">
+      <DependentUpon>BondsTFAMList.cs</DependentUpon>
     </Compile>
     <Compile Include="BondsTFFInvestor.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -568,6 +580,12 @@
     <Compile Include="ReportForms\AccountReport.Designer.cs">
       <DependentUpon>AccountReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportForms\BondGeneratedInterestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForms\BondGeneratedInterestForm.Designer.cs">
+      <DependentUpon>BondGeneratedInterestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportForms\DibursementCreatedForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -716,6 +734,9 @@
     <EmbeddedResource Include="BondPayments.resx">
       <DependentUpon>BondPayments.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BondsList.resx">
+      <DependentUpon>BondsList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BondsTFAMActivation.resx">
       <DependentUpon>BondsTFAMActivation.cs</DependentUpon>
     </EmbeddedResource>
@@ -728,14 +749,17 @@
     <EmbeddedResource Include="BondsTFAMInterestPayment.resx">
       <DependentUpon>BondsTFAMInterestPayment.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BondsTFAMListForm.resx">
+      <DependentUpon>BondsTFAMListForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BondsTFAMMainPayment.resx">
       <DependentUpon>BondsTFAMMainPayment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BondsTFFForm.resx">
       <DependentUpon>BondsTFFForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BondsList.resx">
-      <DependentUpon>BondsList.cs</DependentUpon>
+    <EmbeddedResource Include="BondsTFAMList.resx">
+      <DependentUpon>BondsTFAMList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BookReportForm.resx">
       <DependentUpon>BookReportForm.cs</DependentUpon>
@@ -836,6 +860,9 @@
     <EmbeddedResource Include="ReportForms\AccountReport.resx">
       <DependentUpon>AccountReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\BondGeneratedInterestForm.resx">
+      <DependentUpon>BondGeneratedInterestForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\DibursementCreatedForm.resx">
       <DependentUpon>DibursementCreatedForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -860,6 +887,7 @@
     <EmbeddedResource Include="ReportForms\ReturnsState.resx">
       <DependentUpon>ReturnsState.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\BondGeneratedInterestReport.rdlc" />
     <EmbeddedResource Include="Reports\LoanGeneratedInterestReport.rdlc" />
     <EmbeddedResource Include="Reports\DisbursementCollections.rdlc" />
     <EmbeddedResource Include="Reports\DisbursementCreated.rdlc" />

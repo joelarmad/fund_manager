@@ -1,4 +1,5 @@
 ﻿using FundsManager.Classes.Utilities;
+using FundsManager.ReportForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,7 +36,7 @@ namespace FundsManager
                 foreach (BondsTFAM _bond in _bondsList)
                 {
 
-                    BondsTFAMGeneratedInterest interestDetail = manager.My_db.BondsTFAMGeneratedInterests.FirstOrDefault(x => x.bond_id == _bond.Id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
+                    BondsTFAMGeneratedInterestDetail interestDetail = manager.My_db.BondsTFAMGeneratedInterestDetails.FirstOrDefault(x => x.bond_id == _bond.Id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
 
                     if (interestDetail == null)
                     {
@@ -80,7 +81,7 @@ namespace FundsManager
         {
             try
             {
-                BondsTFAMGeneratedInterest interest = manager.My_db.BondsTFAMGeneratedInterests.OrderByDescending(x => x.generated_interest_date).FirstOrDefault(x => x.bond_id == bondId);
+                BondsTFAMGeneratedInterestDetail interest = manager.My_db.BondsTFAMGeneratedInterestDetails.OrderByDescending(x => x.generated_interest_date).FirstOrDefault(x => x.bond_id == bondId);
 
                 if (interest != null)
                 {
@@ -192,10 +193,14 @@ namespace FundsManager
 
                             if (_bondsToGenerateInterest.Count > 0)
                             {
+                                BondsTFAMGeneratedInterest _interest = new BondsTFAMGeneratedInterest();
+                                _interest.GeneratedDate = DateTime.Now;
+
+                                bool interestCreated = false;
 
                                 foreach (BondsTFAM _bondToGenerate in _bondsToGenerateInterest)
                                 {
-                                    BondsTFAMGeneratedInterest existingInterest = manager.My_db.BondsTFAMGeneratedInterests.FirstOrDefault(x => x.bond_id == _bondToGenerate.Id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
+                                    BondsTFAMGeneratedInterestDetail existingInterest = manager.My_db.BondsTFAMGeneratedInterestDetails.FirstOrDefault(x => x.bond_id == _bondToGenerate.Id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
 
                                     if (existingInterest == null)
                                     {
@@ -225,14 +230,21 @@ namespace FundsManager
 
                                         if (_interestOnBond > 0 && _interestOnTFF > 0)
                                         {
-                                            BondsTFAMGeneratedInterest _interest = new BondsTFAMGeneratedInterest();
+                                            if (!interestCreated)
+                                            {
+                                                manager.My_db.BondsTFAMGeneratedInterests.Add(_interest);
+                                                interestCreated = true;
+                                            }
 
-                                            _interest.bond_id = _bondToGenerate.Id;
-                                            _interest.generated_bond_interest = Math.Round(_interestOnBond, 2);
-                                            _interest.generated_tff_interest = Math.Round(_interestOnTFF, 2);
-                                            _interest.generated_interest_date = toDate;
+                                            BondsTFAMGeneratedInterestDetail _interestDetail = new BondsTFAMGeneratedInterestDetail();
+                                            _interestDetail.BondsTFAMGeneratedInterest = _interest;
 
-                                            manager.My_db.BondsTFAMGeneratedInterests.Add(_interest);
+                                            _interestDetail.bond_id = _bondToGenerate.Id;
+                                            _interestDetail.generated_bond_interest = Math.Round(_interestOnBond, 2);
+                                            _interestDetail.generated_tff_interest = Math.Round(_interestOnTFF, 2);
+                                            _interestDetail.generated_interest_date = toDate;
+
+                                            manager.My_db.BondsTFAMGeneratedInterestDetails.Add(_interestDetail);
 
                                             AccountingMovement _accountingMovement = new AccountingMovement();
 
@@ -246,7 +258,7 @@ namespace FundsManager
 
                                             manager.My_db.AccountingMovements.Add(_accountingMovement);
 
-                                            _interest.AccountingMovement = _accountingMovement;
+                                            _interestDetail.AccountingMovement = _accountingMovement;
 
                                             Movements_Accounts _maccount840 = new Movements_Accounts();
 
@@ -255,6 +267,8 @@ namespace FundsManager
                                             _maccount840.FK_Movements_Accounts_Accounts = account840.Id;
                                             if (subacct840 != null)
                                                 _maccount840.FK_Movements_Accounts_Subaccounts = subacct840.Id;
+                                            _maccount840.subaccount_type = 9;
+                                            _maccount840.subaccount = _bondToGenerate.Id;
                                             _maccount840.debit = Math.Round(_interestOnBond + _interestOnTFF, 2);
                                             _maccount840.credit = 0;
 
@@ -265,6 +279,8 @@ namespace FundsManager
                                             _maccount540.AccountingMovement = _accountingMovement;
                                             _maccount540.FK_Movements_Accounts_Funds = manager.Selected;
                                             _maccount540.FK_Movements_Accounts_Accounts = account540.Id;
+                                            _maccount840.subaccount_type = 9;
+                                            _maccount840.subaccount = _bondToGenerate.Id;
                                             _maccount540.debit = 0;
                                             _maccount540.credit = Math.Round(_interestOnBond + _interestOnTFF, 2);
 
@@ -279,6 +295,10 @@ namespace FundsManager
                                 }
 
                                 manager.My_db.SaveChanges();
+
+                                BondGeneratedInterestForm generated_interest_form = new BondGeneratedInterestForm();
+                                generated_interest_form.generated_interest_id = _interest.Id;
+                                generated_interest_form.Show();
                             }
                             else
                             {
