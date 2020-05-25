@@ -279,8 +279,10 @@ namespace FundsManager
                                             _maccount540.AccountingMovement = _accountingMovement;
                                             _maccount540.FK_Movements_Accounts_Funds = manager.Selected;
                                             _maccount540.FK_Movements_Accounts_Accounts = account540.Id;
-                                            _maccount840.subaccount_type = 9;
-                                            _maccount840.subaccount = _bondToGenerate.Id;
+                                            if (subacct540 != null)
+                                                _maccount540.FK_Movements_Accounts_Subaccounts = subacct540.Id;
+                                            _maccount540.subaccount_type = 9;
+                                            _maccount540.subaccount = _bondToGenerate.Id;
                                             _maccount540.debit = 0;
                                             _maccount540.credit = Math.Round(_interestOnBond + _interestOnTFF, 2);
 

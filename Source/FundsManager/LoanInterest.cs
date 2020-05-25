@@ -254,7 +254,7 @@ namespace FundsManager
                                             AccountingMovement _accountingMovement = new AccountingMovement();
 
                                             _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
-                                            _accountingMovement.description = "";
+                                            _accountingMovement.description = "Loan Interest";
                                             _accountingMovement.date = dtpDate.Value;
                                             _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpDate.Value.Year);
                                             _accountingMovement.FK_AccountingMovements_Currencies = _loanToAccrue.currency_id;
@@ -272,6 +272,8 @@ namespace FundsManager
                                             _maccount840.FK_Movements_Accounts_Accounts = account840.Id;
                                             if (subacct840 != null)
                                                 _maccount840.FK_Movements_Accounts_Subaccounts = subacct840.Id;
+                                            _maccount840.subaccount_type = 8;
+                                            _maccount840.subaccount = _loanToAccrue.lender_id;
                                             _maccount840.debit = Math.Round(_interest, 2);
                                             _maccount840.credit = 0;
 
@@ -282,6 +284,10 @@ namespace FundsManager
                                             _maccount470.AccountingMovement = _accountingMovement;
                                             _maccount470.FK_Movements_Accounts_Funds = manager.Selected;
                                             _maccount470.FK_Movements_Accounts_Accounts = account470.Id;
+                                            if (subacct470 != null)
+                                                _maccount470.FK_Movements_Accounts_Subaccounts = subacct470.Id;
+                                            _maccount470.subaccount_type = 8;
+                                            _maccount470.subaccount = _loanToAccrue.lender_id;
                                             _maccount470.debit = 0;
                                             _maccount470.credit = Math.Round(_interest, 2);
 

@@ -274,7 +274,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!amount.Value)</Value>
+                                  <Value>=Fields!amount.Value</Value>
                                   <Style>
                                     <Format>#,0.00</Format>
                                     <Color>#333333</Color>
@@ -309,7 +309,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!generated_bond_interest.Value)</Value>
+                                  <Value>=Fields!generated_bond_interest.Value</Value>
                                   <Style>
                                     <Format>#,0.00</Format>
                                     <Color>#333333</Color>
@@ -344,7 +344,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!generated_tff_interest.Value, "dsGeneratedInterest")</Value>
+                                  <Value>=Fields!generated_tff_interest.Value</Value>
                                   <Style>
                                     <Format>#,0.00</Format>
                                     <Color>#333333</Color>
