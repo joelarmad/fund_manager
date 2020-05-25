@@ -32,7 +32,6 @@
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.accountReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.accountReportTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountReportTableAdapter();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,7 +39,6 @@
             this.accountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cbSubAccount = new System.Windows.Forms.ComboBox();
             this.subaccountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.txtDetail = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
@@ -48,6 +46,8 @@
             this.cmdFind = new System.Windows.Forms.Button();
             this.accountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountsTableAdapter();
             this.subaccountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.SubaccountsTableAdapter();
+            this.cbOtherDetails = new System.Windows.Forms.ComboBox();
+            this.accountReportTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountReportTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountReportBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
@@ -72,10 +72,6 @@
             // 
             this.accountReportBindingSource.DataMember = "AccountReport";
             this.accountReportBindingSource.DataSource = this.fundsDBDataSet;
-            // 
-            // accountReportTableAdapter
-            // 
-            this.accountReportTableAdapter.ClearBeforeFill = true;
             // 
             // label1
             // 
@@ -131,18 +127,12 @@
             this.cbSubAccount.Size = new System.Drawing.Size(169, 21);
             this.cbSubAccount.TabIndex = 6;
             this.cbSubAccount.ValueMember = "Id";
+            this.cbSubAccount.SelectedIndexChanged += new System.EventHandler(this.cbSubAccount_SelectedIndexChanged);
             // 
             // subaccountsBindingSource
             // 
             this.subaccountsBindingSource.DataMember = "Subaccounts";
             this.subaccountsBindingSource.DataSource = this.fundsDBDataSet;
-            // 
-            // txtDetail
-            // 
-            this.txtDetail.Location = new System.Drawing.Point(82, 70);
-            this.txtDetail.Name = "txtDetail";
-            this.txtDetail.Size = new System.Drawing.Size(169, 20);
-            this.txtDetail.TabIndex = 7;
             // 
             // label4
             // 
@@ -194,17 +184,30 @@
             // 
             this.subaccountsTableAdapter.ClearBeforeFill = true;
             // 
+            // cbOtherDetails
+            // 
+            this.cbOtherDetails.FormattingEnabled = true;
+            this.cbOtherDetails.Location = new System.Drawing.Point(82, 68);
+            this.cbOtherDetails.Name = "cbOtherDetails";
+            this.cbOtherDetails.Size = new System.Drawing.Size(169, 21);
+            this.cbOtherDetails.TabIndex = 13;
+            this.cbOtherDetails.SelectedIndexChanged += new System.EventHandler(this.cbOtherDetails_SelectedIndexChanged);
+            // 
+            // accountReportTableAdapter
+            // 
+            this.accountReportTableAdapter.ClearBeforeFill = true;
+            // 
             // AccountReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(871, 557);
+            this.ClientSize = new System.Drawing.Size(1025, 564);
+            this.Controls.Add(this.cbOtherDetails);
             this.Controls.Add(this.cmdFind);
             this.Controls.Add(this.dtpTo);
             this.Controls.Add(this.dtpFrom);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtDetail);
             this.Controls.Add(this.cbSubAccount);
             this.Controls.Add(this.cbAccount);
             this.Controls.Add(this.label3);
@@ -231,13 +234,11 @@
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private FundsDBDataSet fundsDBDataSet;
         private System.Windows.Forms.BindingSource accountReportBindingSource;
-        private FundsDBDataSetTableAdapters.AccountReportTableAdapter accountReportTableAdapter;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbAccount;
         private System.Windows.Forms.ComboBox cbSubAccount;
-        private System.Windows.Forms.TextBox txtDetail;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtpFrom;
@@ -247,5 +248,7 @@
         private FundsDBDataSetTableAdapters.AccountsTableAdapter accountsTableAdapter;
         private System.Windows.Forms.BindingSource subaccountsBindingSource;
         private FundsDBDataSetTableAdapters.SubaccountsTableAdapter subaccountsTableAdapter;
+        private System.Windows.Forms.ComboBox cbOtherDetails;
+        private FundsDBDataSetTableAdapters.AccountReportTableAdapter accountReportTableAdapter;
     }
 }

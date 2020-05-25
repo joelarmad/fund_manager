@@ -79,12 +79,12 @@
     <Shape ID="DesignTable:BondsTFFInvestors" ZOrder="19" X="20977" Y="0" Height="153" Width="253" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
     <Shape ID="DesignTable:BondsTFAMInterestToPay" ZOrder="13" X="21300" Y="0" Height="229" Width="295" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />
     <Shape ID="DesignTable:ClosedPeriods" ZOrder="12" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
-    <Shape ID="DesignTable:LoanGeneratedInterestView" ZOrder="1" X="0" Y="0" Height="324" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
-    <Shape ID="DesignTable:AccountReport" ZOrder="10" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
-    <Shape ID="DesignTable:BondsTFAMGeneratedInterestDetails" ZOrder="9" X="21665" Y="0" Height="248" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="197" />
-    <Shape ID="DesignTable:BondsTFAMGeneratedInterests" ZOrder="8" X="22035" Y="0" Height="115" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
-    <Shape ID="DesignTable:BondGeneratedInterestView" ZOrder="7" X="22405" Y="0" Height="324" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
-    <Shape ID="DesignTable:DisbursementCollectionView" ZOrder="6" X="22775" Y="0" Height="305" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:LoanGeneratedInterestView" ZOrder="2" X="0" Y="0" Height="324" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:BondsTFAMGeneratedInterestDetails" ZOrder="10" X="21665" Y="0" Height="248" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="197" />
+    <Shape ID="DesignTable:BondsTFAMGeneratedInterests" ZOrder="9" X="22035" Y="0" Height="115" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
+    <Shape ID="DesignTable:BondGeneratedInterestView" ZOrder="8" X="22405" Y="0" Height="324" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:DisbursementCollectionView" ZOrder="7" X="22775" Y="0" Height="305" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:AccountReport" ZOrder="1" X="23145" Y="0" Height="305" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
   </Shapes>
   <Connectors>
     <Connector ID="DesignRelation:currency_id" ZOrder="198" LineWidth="11">
@@ -2119,7 +2119,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_interest" ZOrder="5" LineWidth="11">
+    <Connector ID="DesignRelation:FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_interest" ZOrder="6" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>923</X>
@@ -2131,7 +2131,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_payment" ZOrder="4" LineWidth="11">
+    <Connector ID="DesignRelation:FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_payment" ZOrder="5" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>923</X>
@@ -2143,7 +2143,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_BondsTFAMGeneratedInterestDetails_BondsTFAM" ZOrder="3" LineWidth="11">
+    <Connector ID="DesignRelation:FK_BondsTFAMGeneratedInterestDetails_BondsTFAM" ZOrder="4" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>240</X>
@@ -2163,7 +2163,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_BondsTFAMGeneratedInterestDetails_GeneratedInterest" ZOrder="2" LineWidth="11">
+    <Connector ID="DesignRelation:FK_BondsTFAMGeneratedInterestDetails_GeneratedInterest" ZOrder="3" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>22043</X>

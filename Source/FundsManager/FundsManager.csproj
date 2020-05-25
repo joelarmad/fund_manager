@@ -255,6 +255,7 @@
     <Compile Include="Classes\DataModel\FundsDBEntities.cs" />
     <Compile Include="Classes\Task\GlobalProcess.cs" />
     <Compile Include="Classes\Utilities\Conversions.cs" />
+    <Compile Include="Classes\Utilities\DataUtils.cs" />
     <Compile Include="Classes\Utilities\ErrorMessage.cs" />
     <Compile Include="Classes\Utilities\KeyDefinitions.cs" />
     <Compile Include="Client.cs">

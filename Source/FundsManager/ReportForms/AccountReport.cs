@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using FundsManager.Classes.Utilities;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,8 @@ namespace FundsManager.ReportForms
 
             cbAccount_SelectedIndexChanged(null, null);
 
+            loadOtherDetails();
+
             cmdFind_Click(null, null);
 
         }
@@ -35,13 +38,41 @@ namespace FundsManager.ReportForms
         {
             int accountId = cbAccount.SelectedValue != null ? int.Parse(cbAccount.SelectedValue.ToString()) : 0;
             int subAccountId = cbSubAccount.SelectedValue != null ? int.Parse(cbSubAccount.SelectedValue.ToString()) : 0;
+            int detailType = 0;
+            int detailId = 0;
+            String detail = "";
 
-            this.accountReportTableAdapter.Fill(this.fundsDBDataSet.AccountReport, accountId, subAccountId, txtDetail.Text.Trim(), dtpFrom.Value.Date, dtpTo.Value.Date.AddDays(1).AddSeconds(-1), manager.Selected);
+            if (cbOtherDetails.SelectedIndex > 0)
+            {
+                string temp_id = Convert.ToString(cbOtherDetails.SelectedValue);
+                detailType = Convert.ToInt32(temp_id.Substring(0, 1));
+                detailId = Convert.ToInt32(temp_id.Substring(1, temp_id.Length - 1));
+                detail = ((KeyValuePair<int, string>)cbOtherDetails.SelectedItem).Value;
+            }
+
+            Account account = manager.My_db.Accounts.FirstOrDefault(x => x.Id == accountId);
+            Subaccount subaccount = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == subAccountId);
+
+            this.accountReportTableAdapter.Fill(this.fundsDBDataSet.AccountReport, accountId, subAccountId, detailType, detailId, dtpFrom.Value.Date, dtpTo.Value.Date.AddDays(1).AddSeconds(-1), manager.Selected);
 
             var rds = new ReportDataSource("dsAccountReport", (DataTable)this.fundsDBDataSet.AccountReport);
 
             reportViewer1.LocalReport.DataSources.Clear();
             reportViewer1.LocalReport.DataSources.Add(rds);
+
+            ReportParameter pAccount = new ReportParameter("Account", "Account: " + (account != null ? account.name + " (" + account.number + ")" : ""));
+            ReportParameter pSubbaccount = new ReportParameter("SubAccount", "SubAccount: " + (subaccount != null ? subaccount.name : ""));
+            ReportParameter pDetails = new ReportParameter("Detail", "Other details: " + detail);
+            ReportParameter pFrom = new ReportParameter("From", "From " + dtpFrom.Value.ToShortDateString());
+            ReportParameter pTo = new ReportParameter("To", "To " + dtpTo.Value.ToShortDateString());
+
+
+
+            reportViewer1.LocalReport.SetParameters(pAccount);
+            reportViewer1.LocalReport.SetParameters(pSubbaccount);
+            reportViewer1.LocalReport.SetParameters(pDetails);
+            reportViewer1.LocalReport.SetParameters(pFrom);
+            reportViewer1.LocalReport.SetParameters(pTo);
 
 
             reportViewer1.RefreshReport();
@@ -56,6 +87,39 @@ namespace FundsManager.ReportForms
             }
 
             this.subaccountsTableAdapter.FillByAccount(this.fundsDBDataSet.Subaccounts,accountId, manager.Selected);
+        }
+
+        private void cbOtherDetails_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbSubAccount_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadOtherDetails();
+        }
+
+        private void loadOtherDetails()
+        {
+            try
+            {
+                cbOtherDetails.DataSource = null;
+                cbOtherDetails.Items.Clear();
+                cbOtherDetails.Text = "";
+                cbOtherDetails.SelectedItem = null;
+                cbOtherDetails.SelectedText = "Select detail";
+
+                Dictionary<int, string> comboSource = DataUtils.getOtherDetailsSource(cbSubAccount.SelectedValue != null ? Convert.ToInt32(cbSubAccount.SelectedValue) : 0);
+
+
+                cbOtherDetails.DataSource = new BindingSource(comboSource, null);
+                cbOtherDetails.DisplayMember = "Value";
+                cbOtherDetails.ValueMember = "Key";
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error in AcctountReport.loadOtherDetails: " + _ex.Message);
+            }
         }
     }
 }

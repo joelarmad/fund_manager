@@ -312,7 +312,7 @@ namespace FundsManager
                     _maccount470.FK_Movements_Accounts_Accounts = account470.Id;
                     _maccount470.FK_Movements_Accounts_Subaccounts = subacct470.Id;
                     _maccount470.subaccount = loan.lender_id;
-                    _maccount470.subaccount_type = 8;
+                    _maccount470.subaccount_type = 4;
                     _maccount470.debit = 0;
                     _maccount470.credit = Math.Round(loan.amount, 2);
                     

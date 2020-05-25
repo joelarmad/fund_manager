@@ -2647,7 +2647,7 @@ SELECT Id, GeneratedDate FROM DisbursementGeneratedInterests WHERE (Id = @Id)</C
               <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.MovementsView" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT FundId, Id, Reference, description, TypeId, AccountType, Account, SubAccount, Date, Debit, Credit, Shift_Amount, Currency, Detail, account_id, MovementId, SubAccountId FROM MovementsView</CommandText>
+                    <CommandText>SELECT FundId, Id, Reference, description, TypeId, AccountType, Account, SubAccount, Date, Debit, Credit, Shift_Amount, Currency, Detail, account_id, MovementId, SubAccountId, detail_id, detail_type FROM MovementsView</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -2671,12 +2671,14 @@ SELECT Id, GeneratedDate FROM DisbursementGeneratedInterests WHERE (Id = @Id)</C
               <Mapping SourceColumn="Currency" DataSetColumn="Currency" />
               <Mapping SourceColumn="MovementId" DataSetColumn="MovementId" />
               <Mapping SourceColumn="SubAccountId" DataSetColumn="SubAccountId" />
+              <Mapping SourceColumn="detail_type" DataSetColumn="detail_type" />
+              <Mapping SourceColumn="detail_id" DataSetColumn="detail_id" />
             </Mappings>
             <Sources>
               <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.MovementsView" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByFilters" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByFilters" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByFilters">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT FundId, Id, account_id, Reference, description, TypeId, AccountType, Account, SubAccount, Date, Debit, Credit, Shift_Amount, Detail, Currency, MovementId, SubAccountId FROM MovementsView WHERE (FundId = @FundId) AND (Reference LIKE '%' + @Reference + '%') AND (account_id = @AccountId) AND (Date &gt;= @StartDate) AND (Date &lt;= @EndDate) OR (FundId = @FundId) AND (Reference LIKE '%' + @Reference + '%') AND (Date &gt;= @StartDate) AND (Date &lt;= @EndDate) AND (@AccountId = 0) OR (FundId = @FundId) AND (Reference LIKE '%' + @Reference + '%') AND (account_id = @AccountId) AND (Date &lt;= @EndDate) AND (@StartDate = '') OR (FundId = @FundId) AND (Reference LIKE '%' + @Reference + '%') AND (Date &lt;= @EndDate) AND (@AccountId = 0) AND (@StartDate = '') OR (FundId = @FundId) AND (Reference LIKE '%' + @Reference + '%') AND (account_id = @AccountId) AND (Date &gt;= @StartDate) AND (@EndDate = '') OR (FundId = @FundId) AND (Reference LIKE '%' + @Reference + '%') AND (Date &gt;= @StartDate) AND (@AccountId = 0) AND (@EndDate = '') OR (FundId = @FundId) AND (Reference LIKE '%' + @Reference + '%') AND (account_id = @AccountId) AND (@StartDate = '') AND (@EndDate = '') OR (FundId = @FundId) AND (Reference LIKE '%' + @Reference + '%') AND (@AccountId = 0) AND (@StartDate = '') AND (@EndDate = '')</CommandText>
+                    <CommandText>SELECT FundId, Id, account_id, Reference, description, TypeId, AccountType, Account, SubAccount, Date, Debit, Credit, Shift_Amount, Detail, Currency, MovementId, SubAccountId, detail_id, detail_type FROM MovementsView WHERE (FundId = @FundId) AND (Reference LIKE '%' + @Reference + '%') AND (account_id = @AccountId) AND (Date &gt;= @StartDate) AND (Date &lt;= @EndDate) OR (FundId = @FundId) AND (Reference LIKE '%' + @Reference + '%') AND (Date &gt;= @StartDate) AND (Date &lt;= @EndDate) AND (@AccountId = 0) OR (FundId = @FundId) AND (Reference LIKE '%' + @Reference + '%') AND (account_id = @AccountId) AND (Date &lt;= @EndDate) AND (@StartDate = '') OR (FundId = @FundId) AND (Reference LIKE '%' + @Reference + '%') AND (Date &lt;= @EndDate) AND (@AccountId = 0) AND (@StartDate = '') OR (FundId = @FundId) AND (Reference LIKE '%' + @Reference + '%') AND (account_id = @AccountId) AND (Date &gt;= @StartDate) AND (@EndDate = '') OR (FundId = @FundId) AND (Reference LIKE '%' + @Reference + '%') AND (Date &gt;= @StartDate) AND (@AccountId = 0) AND (@EndDate = '') OR (FundId = @FundId) AND (Reference LIKE '%' + @Reference + '%') AND (account_id = @AccountId) AND (@StartDate = '') AND (@EndDate = '') OR (FundId = @FundId) AND (Reference LIKE '%' + @Reference + '%') AND (@AccountId = 0) AND (@StartDate = '') AND (@EndDate = '')</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="FundId" ColumnName="FundId" DataSourceName="[D:\TEMP\00_DATABASES\FUNDSDB.MDF].dbo.MovementsView" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@FundId" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="FundId" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="Reference" ColumnName="Reference" DataSourceName="[D:\TEMP\00_DATABASES\FUNDSDB.MDF].dbo.MovementsView" DataTypeServer="varchar(50)" DbType="AnsiString" Direction="Input" ParameterName="@Reference" Precision="0" ProviderType="VarChar" Scale="0" Size="50" SourceColumn="Reference" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -4755,46 +4757,6 @@ WHERE        (loan_generated_interest_id = @GeneratedId)</CommandText>
               </DbSource>
             </Sources>
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccountReportTableAdapter" GeneratorDataComponentClassName="AccountReportTableAdapter" Name="AccountReport" UserDataComponentName="AccountReportTableAdapter">
-            <MainSource>
-              <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.AccountReport" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
-                <SelectCommand>
-                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
-                    <CommandText>dbo.AccountReport</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@accountId" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@subaccountId" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="varchar" DbType="AnsiString" Direction="Input" ParameterName="@otherDetails" Precision="0" ProviderType="VarChar" Scale="0" Size="50" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@from" Precision="10" ProviderType="Date" Scale="0" Size="3" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@to" Precision="10" ProviderType="Date" Scale="0" Size="3" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@fundId" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-            </MainSource>
-            <Mappings>
-              <Mapping SourceColumn="FundId" DataSetColumn="FundId" />
-              <Mapping SourceColumn="Id" DataSetColumn="Id" />
-              <Mapping SourceColumn="MovementId" DataSetColumn="MovementId" />
-              <Mapping SourceColumn="Reference" DataSetColumn="Reference" />
-              <Mapping SourceColumn="description" DataSetColumn="description" />
-              <Mapping SourceColumn="account_id" DataSetColumn="account_id" />
-              <Mapping SourceColumn="TypeId" DataSetColumn="TypeId" />
-              <Mapping SourceColumn="AccountType" DataSetColumn="AccountType" />
-              <Mapping SourceColumn="Account" DataSetColumn="Account" />
-              <Mapping SourceColumn="SubAccount" DataSetColumn="SubAccount" />
-              <Mapping SourceColumn="Date" DataSetColumn="Date" />
-              <Mapping SourceColumn="Debit" DataSetColumn="Debit" />
-              <Mapping SourceColumn="Credit" DataSetColumn="Credit" />
-              <Mapping SourceColumn="Shift_Amount" DataSetColumn="Shift_Amount" />
-              <Mapping SourceColumn="Detail" DataSetColumn="Detail" />
-              <Mapping SourceColumn="Currency" DataSetColumn="Currency" />
-              <Mapping SourceColumn="balance" DataSetColumn="balance" />
-            </Mappings>
-            <Sources />
-          </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="BondsTFAMGeneratedInterestDetailsTableAdapter" GeneratorDataComponentClassName="BondsTFAMGeneratedInterestDetailsTableAdapter" Name="BondsTFAMGeneratedInterestDetails" UserDataComponentName="BondsTFAMGeneratedInterestDetailsTableAdapter">
             <MainSource>
               <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.BondsTFAMGeneratedInterestDetails" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
@@ -5011,6 +4973,49 @@ SELECT Id, GeneratedDate FROM BondsTFAMGeneratedInterests WHERE (Id = @Id)</Comm
               <Mapping SourceColumn="profit_share_collected" DataSetColumn="profit_share_collected" />
               <Mapping SourceColumn="delay_interest_collected" DataSetColumn="delay_interest_collected" />
               <Mapping SourceColumn="can_generate_interest" DataSetColumn="can_generate_interest" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccountReportTableAdapter" GeneratorDataComponentClassName="AccountReportTableAdapter" Name="AccountReport" UserDataComponentName="AccountReportTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.AccountReport" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                    <CommandText>dbo.AccountReport</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@accountId" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@subaccountId" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@detailType" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@detailId" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@from" Precision="10" ProviderType="Date" Scale="0" Size="3" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@to" Precision="10" ProviderType="Date" Scale="0" Size="3" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@fundId" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="FundId" DataSetColumn="FundId" />
+              <Mapping SourceColumn="Id" DataSetColumn="Id" />
+              <Mapping SourceColumn="MovementId" DataSetColumn="MovementId" />
+              <Mapping SourceColumn="Reference" DataSetColumn="Reference" />
+              <Mapping SourceColumn="description" DataSetColumn="description" />
+              <Mapping SourceColumn="account_id" DataSetColumn="account_id" />
+              <Mapping SourceColumn="TypeId" DataSetColumn="TypeId" />
+              <Mapping SourceColumn="AccountType" DataSetColumn="AccountType" />
+              <Mapping SourceColumn="Account" DataSetColumn="Account" />
+              <Mapping SourceColumn="SubAccount" DataSetColumn="SubAccount" />
+              <Mapping SourceColumn="Date" DataSetColumn="Date" />
+              <Mapping SourceColumn="Debit" DataSetColumn="Debit" />
+              <Mapping SourceColumn="Credit" DataSetColumn="Credit" />
+              <Mapping SourceColumn="Shift_Amount" DataSetColumn="Shift_Amount" />
+              <Mapping SourceColumn="Detail" DataSetColumn="Detail" />
+              <Mapping SourceColumn="Currency" DataSetColumn="Currency" />
+              <Mapping SourceColumn="SubAccountId" DataSetColumn="SubAccountId" />
+              <Mapping SourceColumn="balance" DataSetColumn="balance" />
+              <Mapping SourceColumn="row_index" DataSetColumn="row_index" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -5894,6 +5899,8 @@ SELECT Id, GeneratedDate FROM BondsTFAMGeneratedInterests WHERE (Id = @Id)</Comm
               </xs:element>
               <xs:element name="MovementId" msprop:Generator_ColumnVarNameInTable="columnMovementId" msprop:Generator_ColumnPropNameInRow="MovementId" msprop:Generator_ColumnPropNameInTable="MovementIdColumn" msprop:Generator_UserColumnName="MovementId" type="xs:int" />
               <xs:element name="SubAccountId" msprop:Generator_ColumnVarNameInTable="columnSubAccountId" msprop:Generator_ColumnPropNameInRow="SubAccountId" msprop:Generator_ColumnPropNameInTable="SubAccountIdColumn" msprop:Generator_UserColumnName="SubAccountId" type="xs:int" minOccurs="0" />
+              <xs:element name="detail_type" msprop:Generator_ColumnVarNameInTable="columndetail_type" msprop:Generator_ColumnPropNameInRow="detail_type" msprop:Generator_ColumnPropNameInTable="detail_typeColumn" msprop:Generator_UserColumnName="detail_type" type="xs:int" minOccurs="0" />
+              <xs:element name="detail_id" msprop:Generator_ColumnVarNameInTable="columndetail_id" msprop:Generator_ColumnPropNameInRow="detail_id" msprop:Generator_ColumnPropNameInTable="detail_idColumn" msprop:Generator_UserColumnName="detail_id" type="xs:int" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -6747,71 +6754,6 @@ SELECT Id, GeneratedDate FROM BondsTFAMGeneratedInterests WHERE (Id = @Id)</Comm
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="AccountReport" msprop:Generator_TableClassName="AccountReportDataTable" msprop:Generator_TableVarName="tableAccountReport" msprop:Generator_TablePropName="AccountReport" msprop:Generator_RowDeletingName="AccountReportRowDeleting" msprop:Generator_RowChangingName="AccountReportRowChanging" msprop:Generator_RowEvHandlerName="AccountReportRowChangeEventHandler" msprop:Generator_RowDeletedName="AccountReportRowDeleted" msprop:Generator_UserTableName="AccountReport" msprop:Generator_RowChangedName="AccountReportRowChanged" msprop:Generator_RowEvArgName="AccountReportRowChangeEvent" msprop:Generator_RowClassName="AccountReportRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="FundId" msprop:Generator_ColumnVarNameInTable="columnFundId" msprop:Generator_ColumnPropNameInRow="FundId" msprop:Generator_ColumnPropNameInTable="FundIdColumn" msprop:Generator_UserColumnName="FundId" type="xs:int" />
-              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
-              <xs:element name="MovementId" msprop:Generator_ColumnVarNameInTable="columnMovementId" msprop:Generator_ColumnPropNameInRow="MovementId" msprop:Generator_ColumnPropNameInTable="MovementIdColumn" msprop:Generator_UserColumnName="MovementId" type="xs:int" />
-              <xs:element name="Reference" msprop:Generator_ColumnVarNameInTable="columnReference" msprop:Generator_ColumnPropNameInRow="Reference" msprop:Generator_ColumnPropNameInTable="ReferenceColumn" msprop:Generator_UserColumnName="Reference">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="description" msprop:Generator_ColumnVarNameInTable="columndescription" msprop:Generator_ColumnPropNameInRow="description" msprop:Generator_ColumnPropNameInTable="descriptionColumn" msprop:Generator_UserColumnName="description">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="2147483647" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="account_id" msprop:Generator_ColumnVarNameInTable="columnaccount_id" msprop:Generator_ColumnPropNameInRow="account_id" msprop:Generator_ColumnPropNameInTable="account_idColumn" msprop:Generator_UserColumnName="account_id" type="xs:int" />
-              <xs:element name="TypeId" msprop:Generator_ColumnVarNameInTable="columnTypeId" msprop:Generator_ColumnPropNameInRow="TypeId" msprop:Generator_ColumnPropNameInTable="TypeIdColumn" msprop:Generator_UserColumnName="TypeId" type="xs:int" />
-              <xs:element name="AccountType" msprop:Generator_ColumnVarNameInTable="columnAccountType" msprop:Generator_ColumnPropNameInRow="AccountType" msprop:Generator_ColumnPropNameInTable="AccountTypeColumn" msprop:Generator_UserColumnName="AccountType">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Account" msprop:Generator_ColumnVarNameInTable="columnAccount" msprop:Generator_ColumnPropNameInRow="Account" msprop:Generator_ColumnPropNameInTable="AccountColumn" msprop:Generator_UserColumnName="Account">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="2147483647" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="SubAccount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSubAccount" msprop:Generator_ColumnPropNameInRow="SubAccount" msprop:Generator_ColumnPropNameInTable="SubAccountColumn" msprop:Generator_UserColumnName="SubAccount" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="2147483647" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_UserColumnName="Date" type="xs:dateTime" />
-              <xs:element name="Debit" msprop:Generator_ColumnVarNameInTable="columnDebit" msprop:Generator_ColumnPropNameInRow="Debit" msprop:Generator_ColumnPropNameInTable="DebitColumn" msprop:Generator_UserColumnName="Debit" type="xs:decimal" />
-              <xs:element name="Credit" msprop:Generator_ColumnVarNameInTable="columnCredit" msprop:Generator_ColumnPropNameInRow="Credit" msprop:Generator_ColumnPropNameInTable="CreditColumn" msprop:Generator_UserColumnName="Credit" type="xs:decimal" />
-              <xs:element name="Shift_Amount" msprop:Generator_ColumnVarNameInTable="columnShift_Amount" msprop:Generator_ColumnPropNameInRow="Shift_Amount" msprop:Generator_ColumnPropNameInTable="Shift_AmountColumn" msprop:Generator_UserColumnName="Shift_Amount" type="xs:decimal" minOccurs="0" />
-              <xs:element name="Detail" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnDetail" msprop:Generator_ColumnPropNameInRow="Detail" msprop:Generator_ColumnPropNameInTable="DetailColumn" msprop:Generator_UserColumnName="Detail" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="2147483647" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Currency" msprop:Generator_ColumnVarNameInTable="columnCurrency" msprop:Generator_ColumnPropNameInRow="Currency" msprop:Generator_ColumnPropNameInTable="CurrencyColumn" msprop:Generator_UserColumnName="Currency">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="balance" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnbalance" msprop:Generator_ColumnPropNameInRow="balance" msprop:Generator_ColumnPropNameInTable="balanceColumn" msprop:Generator_UserColumnName="balance" type="xs:decimal" minOccurs="0" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
         <xs:element name="BondsTFAMGeneratedInterestDetails" msprop:Generator_TableClassName="BondsTFAMGeneratedInterestDetailsDataTable" msprop:Generator_TableVarName="tableBondsTFAMGeneratedInterestDetails" msprop:Generator_RowChangedName="BondsTFAMGeneratedInterestDetailsRowChanged" msprop:Generator_TablePropName="BondsTFAMGeneratedInterestDetails" msprop:Generator_RowDeletingName="BondsTFAMGeneratedInterestDetailsRowDeleting" msprop:Generator_RowChangingName="BondsTFAMGeneratedInterestDetailsRowChanging" msprop:Generator_RowEvHandlerName="BondsTFAMGeneratedInterestDetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="BondsTFAMGeneratedInterestDetailsRowDeleted" msprop:Generator_RowClassName="BondsTFAMGeneratedInterestDetailsRow" msprop:Generator_UserTableName="BondsTFAMGeneratedInterestDetails" msprop:Generator_RowEvArgName="BondsTFAMGeneratedInterestDetailsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
@@ -6903,6 +6845,73 @@ SELECT Id, GeneratedDate FROM BondsTFAMGeneratedInterests WHERE (Id = @Id)</Comm
               <xs:element name="profit_share_collected" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnprofit_share_collected" msprop:Generator_ColumnPropNameInRow="profit_share_collected" msprop:Generator_ColumnPropNameInTable="profit_share_collectedColumn" msprop:Generator_UserColumnName="profit_share_collected" type="xs:decimal" minOccurs="0" />
               <xs:element name="delay_interest_collected" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columndelay_interest_collected" msprop:Generator_ColumnPropNameInRow="delay_interest_collected" msprop:Generator_ColumnPropNameInTable="delay_interest_collectedColumn" msprop:Generator_UserColumnName="delay_interest_collected" type="xs:decimal" minOccurs="0" />
               <xs:element name="can_generate_interest" msprop:Generator_ColumnVarNameInTable="columncan_generate_interest" msprop:Generator_ColumnPropNameInRow="can_generate_interest" msprop:Generator_ColumnPropNameInTable="can_generate_interestColumn" msprop:Generator_UserColumnName="can_generate_interest" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccountReport" msprop:Generator_TableClassName="AccountReportDataTable" msprop:Generator_TableVarName="tableAccountReport" msprop:Generator_RowChangedName="AccountReportRowChanged" msprop:Generator_TablePropName="AccountReport" msprop:Generator_RowDeletingName="AccountReportRowDeleting" msprop:Generator_RowChangingName="AccountReportRowChanging" msprop:Generator_RowEvHandlerName="AccountReportRowChangeEventHandler" msprop:Generator_RowDeletedName="AccountReportRowDeleted" msprop:Generator_RowClassName="AccountReportRow" msprop:Generator_UserTableName="AccountReport" msprop:Generator_RowEvArgName="AccountReportRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FundId" msprop:Generator_ColumnVarNameInTable="columnFundId" msprop:Generator_ColumnPropNameInRow="FundId" msprop:Generator_ColumnPropNameInTable="FundIdColumn" msprop:Generator_UserColumnName="FundId" type="xs:int" />
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
+              <xs:element name="MovementId" msprop:Generator_ColumnVarNameInTable="columnMovementId" msprop:Generator_ColumnPropNameInRow="MovementId" msprop:Generator_ColumnPropNameInTable="MovementIdColumn" msprop:Generator_UserColumnName="MovementId" type="xs:int" />
+              <xs:element name="Reference" msprop:Generator_ColumnVarNameInTable="columnReference" msprop:Generator_ColumnPropNameInRow="Reference" msprop:Generator_ColumnPropNameInTable="ReferenceColumn" msprop:Generator_UserColumnName="Reference">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="description" msprop:Generator_ColumnVarNameInTable="columndescription" msprop:Generator_ColumnPropNameInRow="description" msprop:Generator_ColumnPropNameInTable="descriptionColumn" msprop:Generator_UserColumnName="description">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="account_id" msprop:Generator_ColumnVarNameInTable="columnaccount_id" msprop:Generator_ColumnPropNameInRow="account_id" msprop:Generator_ColumnPropNameInTable="account_idColumn" msprop:Generator_UserColumnName="account_id" type="xs:int" />
+              <xs:element name="TypeId" msprop:Generator_ColumnVarNameInTable="columnTypeId" msprop:Generator_ColumnPropNameInRow="TypeId" msprop:Generator_ColumnPropNameInTable="TypeIdColumn" msprop:Generator_UserColumnName="TypeId" type="xs:int" />
+              <xs:element name="AccountType" msprop:Generator_ColumnVarNameInTable="columnAccountType" msprop:Generator_ColumnPropNameInRow="AccountType" msprop:Generator_ColumnPropNameInTable="AccountTypeColumn" msprop:Generator_UserColumnName="AccountType">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Account" msprop:Generator_ColumnVarNameInTable="columnAccount" msprop:Generator_ColumnPropNameInRow="Account" msprop:Generator_ColumnPropNameInTable="AccountColumn" msprop:Generator_UserColumnName="Account">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SubAccount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSubAccount" msprop:Generator_ColumnPropNameInRow="SubAccount" msprop:Generator_ColumnPropNameInTable="SubAccountColumn" msprop:Generator_UserColumnName="SubAccount" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_UserColumnName="Date" type="xs:dateTime" />
+              <xs:element name="Debit" msprop:Generator_ColumnVarNameInTable="columnDebit" msprop:Generator_ColumnPropNameInRow="Debit" msprop:Generator_ColumnPropNameInTable="DebitColumn" msprop:Generator_UserColumnName="Debit" type="xs:decimal" />
+              <xs:element name="Credit" msprop:Generator_ColumnVarNameInTable="columnCredit" msprop:Generator_ColumnPropNameInRow="Credit" msprop:Generator_ColumnPropNameInTable="CreditColumn" msprop:Generator_UserColumnName="Credit" type="xs:decimal" />
+              <xs:element name="Shift_Amount" msprop:Generator_ColumnVarNameInTable="columnShift_Amount" msprop:Generator_ColumnPropNameInRow="Shift_Amount" msprop:Generator_ColumnPropNameInTable="Shift_AmountColumn" msprop:Generator_UserColumnName="Shift_Amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Detail" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnDetail" msprop:Generator_ColumnPropNameInRow="Detail" msprop:Generator_ColumnPropNameInTable="DetailColumn" msprop:Generator_UserColumnName="Detail" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Currency" msprop:Generator_ColumnVarNameInTable="columnCurrency" msprop:Generator_ColumnPropNameInRow="Currency" msprop:Generator_ColumnPropNameInTable="CurrencyColumn" msprop:Generator_UserColumnName="Currency">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SubAccountId" msprop:Generator_ColumnVarNameInTable="columnSubAccountId" msprop:Generator_ColumnPropNameInRow="SubAccountId" msprop:Generator_ColumnPropNameInTable="SubAccountIdColumn" msprop:Generator_UserColumnName="SubAccountId" type="xs:int" minOccurs="0" />
+              <xs:element name="balance" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnbalance" msprop:Generator_ColumnPropNameInRow="balance" msprop:Generator_ColumnPropNameInTable="balanceColumn" msprop:Generator_UserColumnName="balance" type="xs:decimal" minOccurs="0" />
+              <xs:element name="row_index" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnrow_index" msprop:Generator_ColumnPropNameInRow="row_index" msprop:Generator_ColumnPropNameInTable="row_indexColumn" msprop:Generator_UserColumnName="row_index" type="xs:int" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
