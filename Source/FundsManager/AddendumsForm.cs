@@ -361,8 +361,7 @@ namespace FundsManager
                     && _selectedAmount > 0 
                     && _selectedProfitShare >= 0
                     && _selectedDelayedInterest >= 0
-                    && fAmountRemaining > 0
-                    && fProfitShareRemainig > 0;
+                    && fAmountRemaining > 0;
                 }
                 else
                 {

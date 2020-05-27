@@ -12,19 +12,19 @@ namespace FundsManager
     using System;
     using System.Collections.Generic;
     
-    public partial class BookingGeneratedInterestDetail
+    public partial class BookingCollectionsDetail
     {
-        public int Id { get; set; }
-        public int booking_generated_interest_id { get; set; }
+        public int disbursement_collection_id { get; set; }
         public int booking_id { get; set; }
-        public decimal generated_interest { get; set; }
-        public System.DateTime generated_interest_date { get; set; }
-        public Nullable<int> accounting_movement_id { get; set; }
-        public Nullable<int> disbursement_id { get; set; }
+        public decimal amount_collected { get; set; }
+        public Nullable<int> movement125_id { get; set; }
+        public Nullable<int> movement128_id { get; set; }
+        public Nullable<int> movement130_id { get; set; }
     
-        public virtual AccountingMovement AccountingMovement { get; set; }
-        public virtual BookingGeneratedInterest BookingGeneratedInterest { get; set; }
-        public virtual Disbursement Disbursement { get; set; }
+        public virtual DisbursementCollection DisbursementCollection { get; set; }
+        public virtual Movements_Accounts Movements_Accounts { get; set; }
+        public virtual Movements_Accounts Movements_Accounts1 { get; set; }
+        public virtual Movements_Accounts Movements_Accounts2 { get; set; }
         public virtual DisbursementBooking DisbursementBooking { get; set; }
     }
 }

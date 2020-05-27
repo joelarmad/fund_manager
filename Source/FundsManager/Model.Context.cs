@@ -40,7 +40,6 @@ namespace FundsManager
         public virtual DbSet<Creditor> Creditors { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
         public virtual DbSet<Disbursement_dates> Disbursement_dates { get; set; }
-        public virtual DbSet<DisbursementBooking> DisbursementBookings { get; set; }
         public virtual DbSet<DisbursementBook> DisbursementBooks { get; set; }
         public virtual DbSet<DisbursementCollection> DisbursementCollections { get; set; }
         public virtual DbSet<DisbursementCollectionsDetail> DisbursementCollectionsDetails { get; set; }
@@ -69,11 +68,8 @@ namespace FundsManager
         public virtual DbSet<BondDetail> BondDetails { get; set; }
         public virtual DbSet<BookingGeneratedInterestView> BookingGeneratedInterestViews { get; set; }
         public virtual DbSet<ClientContract> ClientContracts { get; set; }
-        public virtual DbSet<DisbursementCollectionView> DisbursementCollectionViews { get; set; }
         public virtual DbSet<DisbursementGeneratedInterestView> DisbursementGeneratedInterestViews { get; set; }
-        public virtual DbSet<DisbursementsBookingView> DisbursementsBookingViews { get; set; }
         public virtual DbSet<DisbursementsForAddendum> DisbursementsForAddendums { get; set; }
-        public virtual DbSet<DisbursementsToBeCollected> DisbursementsToBeCollecteds { get; set; }
         public virtual DbSet<InvestmentsView> InvestmentsViews { get; set; }
         public virtual DbSet<ProfitShareToAccrue> ProfitShareToAccrues { get; set; }
         public virtual DbSet<ProfitsResumeView> ProfitsResumeViews { get; set; }
@@ -97,5 +93,9 @@ namespace FundsManager
         public virtual DbSet<Movements_Accounts> Movements_Accounts { get; set; }
         public virtual DbSet<BondsTFAMGeneratedInterest> BondsTFAMGeneratedInterests { get; set; }
         public virtual DbSet<BondsTFAMGeneratedInterestDetail> BondsTFAMGeneratedInterestDetails { get; set; }
+        public virtual DbSet<BookingCollectionsDetail> BookingCollectionsDetails { get; set; }
+        public virtual DbSet<DisbursementsToBeCollected> DisbursementsToBeCollecteds { get; set; }
+        public virtual DbSet<DisbursementBooking> DisbursementBookings { get; set; }
+        public virtual DbSet<DisbursementsBookingView> DisbursementsBookingViews { get; set; }
     }
 }

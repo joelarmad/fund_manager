@@ -57,6 +57,7 @@
             this.Collect125 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Collect128 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Collect130 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.is_booking = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.disbursementsToBeCollectedBindingSource)).BeginInit();
@@ -101,7 +102,8 @@
             this.DelayInterest,
             this.Collect125,
             this.Collect128,
-            this.Collect130});
+            this.Collect130,
+            this.is_booking});
             this.dataGridView1.DataSource = this.disbursementsToBeCollectedBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(14, 19);
             this.dataGridView1.Name = "dataGridView1";
@@ -200,8 +202,8 @@
             // 
             // disbursementidDataGridViewTextBoxColumn
             // 
-            this.disbursementidDataGridViewTextBoxColumn.DataPropertyName = "disbursement_id";
-            this.disbursementidDataGridViewTextBoxColumn.HeaderText = "disbursement_id";
+            this.disbursementidDataGridViewTextBoxColumn.DataPropertyName = "row_key";
+            this.disbursementidDataGridViewTextBoxColumn.HeaderText = "row key";
             this.disbursementidDataGridViewTextBoxColumn.Name = "disbursementidDataGridViewTextBoxColumn";
             this.disbursementidDataGridViewTextBoxColumn.ReadOnly = true;
             this.disbursementidDataGridViewTextBoxColumn.Visible = false;
@@ -271,6 +273,15 @@
             this.Collect130.HeaderText = "Collect to 130";
             this.Collect130.Name = "Collect130";
             // 
+            // is_booking
+            // 
+            this.is_booking.DataPropertyName = "is_booking";
+            this.is_booking.FalseValue = "0";
+            this.is_booking.HeaderText = "is_booking";
+            this.is_booking.Name = "is_booking";
+            this.is_booking.TrueValue = "1";
+            this.is_booking.Visible = false;
+            // 
             // DisbursementCollectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -328,5 +339,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Collect125;
         private System.Windows.Forms.DataGridViewTextBoxColumn Collect128;
         private System.Windows.Forms.DataGridViewTextBoxColumn Collect130;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn is_booking;
     }
 }

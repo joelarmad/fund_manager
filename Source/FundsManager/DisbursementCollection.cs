@@ -18,6 +18,7 @@ namespace FundsManager
         public DisbursementCollection()
         {
             this.DisbursementCollectionsDetails = new HashSet<DisbursementCollectionsDetail>();
+            this.BookingCollectionsDetails = new HashSet<BookingCollectionsDetail>();
         }
     
         public int id { get; set; }
@@ -29,5 +30,7 @@ namespace FundsManager
         public virtual Investment Investment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementCollectionsDetail> DisbursementCollectionsDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BookingCollectionsDetail> BookingCollectionsDetails { get; set; }
     }
 }

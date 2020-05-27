@@ -233,6 +233,9 @@
     <Compile Include="BondsTFFInvestor.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="BookingCollectionsDetail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="BookingGeneratedInterest.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -331,9 +334,6 @@
       <DependentUpon>DisbursementCollectionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DisbursementCollectionsDetail.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DisbursementCollectionView.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DisbursementForInvestement.cs" />

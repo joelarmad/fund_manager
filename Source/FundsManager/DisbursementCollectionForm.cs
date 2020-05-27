@@ -25,6 +25,7 @@ namespace FundsManager
         int CollectTo125Index = 7;
         int CollectTo128Index = 8;
         int CollectTo130Index = 9;
+        int IsBookingIndex = 10;
 
         public DisbursementCollectionForm()
         {
@@ -88,19 +89,20 @@ namespace FundsManager
             {
                 if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpDate.Value.Year) == null)
                 {
-                    List<int> ids = new List<int>();
+                    List<string> rowIds = new List<string>();
                     List<decimal> amounts = new List<decimal>();
                     List<decimal> profitShares = new List<decimal>();
                     List<decimal> delayInterests = new List<decimal>();
                     List<decimal> collect125 = new List<decimal>();
                     List<decimal> collect128 = new List<decimal>();
                     List<decimal> collect130 = new List<decimal>();
+                    List<bool> isBookings = new List<bool>();
 
                     String errors = "";
 
                     foreach (DataGridViewRow row in dataGridView1.Rows)
                     {
-                        int id = int.Parse(row.Cells[IdIndex].Value.ToString());
+                        string rowId = row.Cells[IdIndex].Value.ToString();
                         string number = row.Cells[NumberIndex].Value.ToString();
                         decimal amount = decimal.Parse(row.Cells[AmountIndex].Value.ToString());
                         decimal profitShare = decimal.Parse(row.Cells[ProfitShareIndex].Value.ToString());
@@ -108,6 +110,7 @@ namespace FundsManager
                         string amountToBeCollected125Str = row.Cells[CollectTo125Index].Value != null ? row.Cells[CollectTo125Index].Value.ToString() : "0";
                         string amountToBeCollected128Str = row.Cells[CollectTo128Index].Value != null ? row.Cells[CollectTo128Index].Value.ToString() : "0";
                         string amountToBeCollected130Str = row.Cells[CollectTo130Index].Value != null ? row.Cells[CollectTo130Index].Value.ToString() : "0";
+                        bool isBooking = row.Cells[IsBookingIndex].Value != null ? bool.Parse(row.Cells[IsBookingIndex].Value.ToString()) : false;
 
                         if (amountToBeCollected125Str != "0" || amountToBeCollected128Str != "0" || amountToBeCollected130Str != "0")
                         {
@@ -121,13 +124,14 @@ namespace FundsManager
                             {
                                 if (amount - amountToBeCollected125 >= 0 && profitShare - amountToBeCollected128 >= 0 && delayInterest - amountToBeCollected130 >= 0)
                                 {
-                                    ids.Add(id);
+                                    rowIds.Add(rowId);
                                     amounts.Add(amount);
                                     profitShares.Add(profitShare);
                                     delayInterests.Add(delayInterest);
                                     collect125.Add(amountToBeCollected125);
                                     collect128.Add(amountToBeCollected128);
                                     collect130.Add(amountToBeCollected130);
+                                    isBookings.Add(isBooking);
                                 }
                                 else
                                 {
@@ -152,7 +156,7 @@ namespace FundsManager
                     {
                         string msg = "";
 
-                        if (ids.Count > 0)
+                        if (rowIds.Count > 0)
                         {
                             DisbursementCollection collection = new DisbursementCollection();
                             collection.collection_date = dtpDate.Value;
@@ -171,7 +175,7 @@ namespace FundsManager
                                     AccountingMovement accountingMovement = new AccountingMovement();
 
                                     accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
-                                    accountingMovement.description = "";
+                                    accountingMovement.description = "Disbursement Collection";
                                     accountingMovement.date = dtpDate.Value;
                                     accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpDate.Value.Year);
                                     accountingMovement.original_reference = cbContract.Text;
@@ -181,21 +185,28 @@ namespace FundsManager
                                     bool showGL = false;
                                     decimal totalPaid = 0;
 
-                                    for (int i = 0; i < ids.Count; i++)
+                                    for (int i = 0; i < rowIds.Count; i++)
                                     {
-                                        int disbId = ids[i];
+                                        string rowId = rowIds[i];
                                         decimal amount = amounts[i];
                                         decimal profitShare = profitShares[i];
                                         decimal delayInterest = delayInterests[i];
                                         decimal toBeCollected125 = collect125[i];
                                         decimal toBeCollected128 = collect128[i];
                                         decimal toBeCollected130 = collect130[i];
+                                        bool isBooking = isBookings[i];
 
-                                        Disbursement disb = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == disbId);
+                                        int disbursementId = int.Parse(rowId.Split('_')[0]);
+                                        int bookingId = int.Parse(rowId.Split('_')[1]);
 
-                                        if (disb != null)
+                                        Disbursement disbursement = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == disbursementId);
+                                        DisbursementBooking booking = manager.My_db.DisbursementBookings.FirstOrDefault(x => x.id == bookingId);
+
+                                        if (disbursement != null && (booking != null || !isBooking))
                                         {
-                                            Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == disb.currency_id && x.FK_Currencies_Funds == manager.Selected);
+                                            int currencyId = booking != null ? booking.currency_id : disbursement.currency_id;
+
+                                            Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == currencyId && x.FK_Currencies_Funds == manager.Selected);
                                             Subaccount subacct125 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account125.Id && x.name == "INV " + currency.symbol);
                                             Subaccount subacct128 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account128.Id && x.name == "INV " + currency.symbol);
                                             Subaccount subacct130 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account130.Id && x.name == "INV " + currency.symbol);
@@ -213,66 +224,113 @@ namespace FundsManager
                                                         collection.AccountingMovement = accountingMovement;
                                                     }
 
-                                                    DisbursementCollectionsDetail collectionDetail = new DisbursementCollectionsDetail();
+                                                    DisbursementCollectionsDetail disbursementCollectionDetail = new DisbursementCollectionsDetail();
+                                                    BookingCollectionsDetail bookingCollectionDetail = new BookingCollectionsDetail();
 
-                                                    collectionDetail.DisbursementCollection = collection;
-                                                    collectionDetail.disbursement_id = disbId;
-                                                    collectionDetail.amount_collected = Math.Round(toBeCollected125 + toBeCollected128 + toBeCollected130, 2);
-
-                                                    if (amount - toBeCollected125 <= 0 && profitShare - toBeCollected128 <= 0 && delayInterest - toBeCollected130 <= 0)
+                                                    if (!isBooking)
                                                     {
-                                                        disb.collected = true;
+                                                        disbursementCollectionDetail.DisbursementCollection = collection;
+                                                        disbursementCollectionDetail.disbursement_id = disbursementId;
+                                                        disbursementCollectionDetail.amount_collected = Math.Round(toBeCollected125 + toBeCollected128 + toBeCollected130, 2);
+
+                                                        if (amount - toBeCollected125 <= 0 && profitShare - toBeCollected128 <= 0 && delayInterest - toBeCollected130 <= 0)
+                                                        {
+                                                            disbursement.collected = true;
+                                                        }
+
+                                                        manager.My_db.DisbursementCollectionsDetails.Add(disbursementCollectionDetail);
+                                                    }
+                                                    else
+                                                    {
+                                                        bookingCollectionDetail.DisbursementCollection = collection;
+                                                        bookingCollectionDetail.booking_id = bookingId;
+                                                        bookingCollectionDetail.amount_collected = Math.Round(toBeCollected125 + toBeCollected128 + toBeCollected130, 2);
+
+                                                        if (amount - toBeCollected125 <= 0 && profitShare - toBeCollected128 <= 0 && delayInterest - toBeCollected130 <= 0)
+                                                        {
+                                                            booking.collected = true;
+                                                        }
+
+                                                        manager.My_db.BookingCollectionsDetails.Add(bookingCollectionDetail);
                                                     }
 
-                                                    manager.My_db.DisbursementCollectionsDetails.Add(collectionDetail);
+                                                    if (toBeCollected125 > 0)
+                                                    {
+                                                        Movements_Accounts _maccount125 = new Movements_Accounts();
 
-                                                    Movements_Accounts _maccount125 = new Movements_Accounts();
+                                                        _maccount125.AccountingMovement = accountingMovement;
+                                                        _maccount125.FK_Movements_Accounts_Funds = manager.Selected;
+                                                        _maccount125.FK_Movements_Accounts_Accounts = account125.Id;
+                                                        if (subacct125 != null)
+                                                            _maccount125.FK_Movements_Accounts_Subaccounts = subacct125.Id;
+                                                        _maccount125.subaccount = disbursement.client_id;
+                                                        _maccount125.subaccount_type = 1;
+                                                        _maccount125.debit = 0;
+                                                        _maccount125.credit = Math.Round(toBeCollected125, 2);
 
-                                                    _maccount125.AccountingMovement = accountingMovement;
-                                                    _maccount125.FK_Movements_Accounts_Funds = manager.Selected;
-                                                    _maccount125.FK_Movements_Accounts_Accounts = account125.Id;
-                                                    if (subacct125 != null)
-                                                        _maccount125.FK_Movements_Accounts_Subaccounts = subacct125.Id;
-                                                    _maccount125.subaccount = disb.client_id;
-                                                    _maccount125.subaccount_type = 1;
-                                                    _maccount125.debit = 0;
-                                                    _maccount125.credit = Math.Round(toBeCollected125, 2);
+                                                        manager.My_db.Movements_Accounts.Add(_maccount125);
 
-                                                    manager.My_db.Movements_Accounts.Add(_maccount125);
+                                                        if (!isBooking)
+                                                        {
+                                                            disbursementCollectionDetail.Movements_Accounts = _maccount125;
+                                                        }
+                                                        else
+                                                        {
+                                                            bookingCollectionDetail.Movements_Accounts = _maccount125;
+                                                        }
+                                                    }
 
-                                                    collectionDetail.Movements_Accounts = _maccount125;
+                                                    if (toBeCollected128 > 0)
+                                                    {
+                                                        Movements_Accounts _maccount128 = new Movements_Accounts();
 
-                                                    Movements_Accounts _maccount128 = new Movements_Accounts();
+                                                        _maccount128.AccountingMovement = accountingMovement;
+                                                        _maccount128.FK_Movements_Accounts_Funds = manager.Selected;
+                                                        _maccount128.FK_Movements_Accounts_Accounts = account128.Id;
+                                                        if (subacct128 != null)
+                                                            _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
+                                                        _maccount128.subaccount = disbursement.client_id;
+                                                        _maccount128.subaccount_type = 1;
+                                                        _maccount128.debit = 0;
+                                                        _maccount128.credit = Math.Round(toBeCollected128, 2);
 
-                                                    _maccount128.AccountingMovement = accountingMovement;
-                                                    _maccount128.FK_Movements_Accounts_Funds = manager.Selected;
-                                                    _maccount128.FK_Movements_Accounts_Accounts = account128.Id;
-                                                    if (subacct128 != null)
-                                                        _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
-                                                    _maccount128.subaccount = disb.client_id;
-                                                    _maccount128.subaccount_type = 1;
-                                                    _maccount128.debit = 0;
-                                                    _maccount128.credit = Math.Round(toBeCollected128, 2);
+                                                        manager.My_db.Movements_Accounts.Add(_maccount128);
+                                                        
+                                                        if (!isBooking)
+                                                        {
+                                                            disbursementCollectionDetail.Movements_Accounts1 = _maccount128;
+                                                        }
+                                                        else
+                                                        {
+                                                            bookingCollectionDetail.Movements_Accounts1 = _maccount128;
+                                                        }
+                                                    }
 
-                                                    manager.My_db.Movements_Accounts.Add(_maccount128);
+                                                    if (toBeCollected130 > 0)
+                                                    {
+                                                        Movements_Accounts _maccount130 = new Movements_Accounts();
 
-                                                    collectionDetail.Movements_Accounts1 = _maccount128;
+                                                        _maccount130.AccountingMovement = accountingMovement;
+                                                        _maccount130.FK_Movements_Accounts_Funds = manager.Selected;
+                                                        _maccount130.FK_Movements_Accounts_Accounts = account130.Id;
+                                                        if (subacct130 != null)
+                                                            _maccount130.FK_Movements_Accounts_Subaccounts = subacct130.Id;
+                                                        _maccount130.subaccount = disbursement.client_id;
+                                                        _maccount130.subaccount_type = 1;
+                                                        _maccount130.debit = 0;
+                                                        _maccount130.credit = Math.Round(toBeCollected130, 2);
 
-                                                    Movements_Accounts _maccount130 = new Movements_Accounts();
+                                                        manager.My_db.Movements_Accounts.Add(_maccount130);
 
-                                                    _maccount130.AccountingMovement = accountingMovement;
-                                                    _maccount130.FK_Movements_Accounts_Funds = manager.Selected;
-                                                    _maccount130.FK_Movements_Accounts_Accounts = account130.Id;
-                                                    if (subacct130 != null)
-                                                        _maccount130.FK_Movements_Accounts_Subaccounts = subacct130.Id;
-                                                    _maccount130.subaccount = disb.client_id;
-                                                    _maccount130.subaccount_type = 1;
-                                                    _maccount130.debit = 0;
-                                                    _maccount130.credit = Math.Round(toBeCollected130, 2);
-
-                                                    manager.My_db.Movements_Accounts.Add(_maccount130);
-
-                                                    collectionDetail.Movements_Accounts2 = _maccount130;
+                                                        if (!isBooking)
+                                                        {
+                                                            disbursementCollectionDetail.Movements_Accounts2 = _maccount130;
+                                                        }
+                                                        else
+                                                        {
+                                                            bookingCollectionDetail.Movements_Accounts2 = _maccount130;
+                                                        }
+                                                    }
 
                                                     totalPaid += toBeCollected125 + toBeCollected128 + toBeCollected130;
 
@@ -280,17 +338,17 @@ namespace FundsManager
                                                 }
                                                 else
                                                 {
-                                                    msg += "\rSome sub account is missing. No collection has been generated for disbursement with Id=\"" + disbId + "\".";
+                                                    msg += "\rSome sub account is missing. No collection has been generated for disbursement with Id=\"" + disbursementId + "\".";
                                                 }
                                             }
                                             else
                                             {
-                                                msg += "\rCurrency is missing. No collection has been generated for disbursement with Id=\"" + disbId + "\".";
+                                                msg += "\rCurrency is missing. No collection has been generated for disbursement with Id=\"" + disbursementId + "\".";
                                             }
                                         }
                                         else
                                         {
-                                            msg += "\rDisbursement with Id=\"" + disbId.ToString() + "\" not found.";
+                                            msg += "\rDisbursement with Id=\"" + disbursementId.ToString() + "\" not found.";
                                         }
                                     }
 

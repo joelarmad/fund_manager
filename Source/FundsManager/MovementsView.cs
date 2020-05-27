@@ -31,5 +31,7 @@ namespace FundsManager
         public string Currency { get; set; }
         public int MovementId { get; set; }
         public Nullable<int> SubAccountId { get; set; }
+        public Nullable<int> detail_type { get; set; }
+        public Nullable<int> detail_id { get; set; }
     }
 }
