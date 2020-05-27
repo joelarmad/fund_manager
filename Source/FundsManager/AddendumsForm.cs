@@ -796,8 +796,8 @@ namespace FundsManager
                             _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
                         _maccount128.subaccount = disbursement.client_id;
                         _maccount128.subaccount_type = 1;
-                        //_maccount128.credit = Math.Round(fDelayedInterest, 2);
-                        _maccount128.credit = Math.Round(fProfitShare, 2);
+                        _maccount128.credit = Math.Round(fDelayedInterest, 2);
+                        //_maccount128.credit = Math.Round(fProfitShare, 2);
                         _maccount128.debit = 0;
 
                         manager.My_db.Movements_Accounts.Add(_maccount128);
@@ -832,15 +832,6 @@ namespace FundsManager
                             _maccount125.credit = 0;
                             _maccount125.debit = Math.Round(_booking.amount, 2);
 
-                            int _creditFactor = 1;
-                            int _debitFactor = -1;
-
-                            if (Account.leftAccountingIncrement(account125.type))
-                            {
-                                _creditFactor = -1;
-                                _debitFactor = 1;
-                            }
-
                             manager.My_db.Movements_Accounts.Add(_maccount125);
 
                             Movements_Accounts _maccount128 = new Movements_Accounts();
@@ -853,17 +844,8 @@ namespace FundsManager
                             _maccount128.subaccount = disbursement.client_id;
                             _maccount128.subaccount_type = 1;
                             _maccount128.credit = 0;
-                            //_maccount128.debit = Math.Round(_booking.delay_interest, 2);
-                            _maccount128.debit = Math.Round(_booking.profit_share, 2);
-
-                            _creditFactor = 1;
-                            _debitFactor = -1;
-
-                            if (Account.leftAccountingIncrement(account128.type))
-                            {
-                                _creditFactor = -1;
-                                _debitFactor = 1;
-                            }
+                            _maccount128.debit = Math.Round(_booking.delay_interest, 2);
+                            //_maccount128.debit = Math.Round(_booking.profit_share, 2);
 
                             manager.My_db.Movements_Accounts.Add(_maccount128);
 
