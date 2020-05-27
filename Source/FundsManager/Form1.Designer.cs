@@ -358,7 +358,7 @@
             // 
             this.mainPaymentToolStripMenuItem.Name = "mainPaymentToolStripMenuItem";
             this.mainPaymentToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.mainPaymentToolStripMenuItem.Text = "Main Payment";
+            this.mainPaymentToolStripMenuItem.Text = "Principal Repayment";
             this.mainPaymentToolStripMenuItem.Click += new System.EventHandler(this.mainPaymentToolStripMenuItem_Click);
             // 
             // interestPaymentToolStripMenuItem

@@ -203,7 +203,7 @@
             this.Name = "BondsTFAMMainPayment";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "Bonds TFAM Main Payment";
+            this.Text = "Bonds TFAM Principal Repayment";
             this.Load += new System.EventHandler(this.BondsTFAMMainPayment_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
