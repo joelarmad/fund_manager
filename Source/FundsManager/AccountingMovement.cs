@@ -30,6 +30,8 @@ namespace FundsManager
             this.Movements_Accounts = new HashSet<Movements_Accounts>();
             this.BondsTFAMGeneratedInterestDetails = new HashSet<BondsTFAMGeneratedInterestDetail>();
             this.BondsTFAMGeneratedInterestDetails1 = new HashSet<BondsTFAMGeneratedInterestDetail>();
+            this.DisbursementOverdueDetails = new HashSet<DisbursementOverdueDetail>();
+            this.DisbursementOverdueDetails1 = new HashSet<DisbursementOverdueDetail>();
         }
     
         public int Id { get; set; }
@@ -69,5 +71,9 @@ namespace FundsManager
         public virtual ICollection<BondsTFAMGeneratedInterestDetail> BondsTFAMGeneratedInterestDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BondsTFAMGeneratedInterestDetail> BondsTFAMGeneratedInterestDetails1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementOverdueDetail> DisbursementOverdueDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementOverdueDetail> DisbursementOverdueDetails1 { get; set; }
     }
 }

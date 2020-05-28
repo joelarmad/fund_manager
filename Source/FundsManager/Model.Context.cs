@@ -42,7 +42,6 @@ namespace FundsManager
         public virtual DbSet<Disbursement_dates> Disbursement_dates { get; set; }
         public virtual DbSet<DisbursementBook> DisbursementBooks { get; set; }
         public virtual DbSet<DisbursementCollection> DisbursementCollections { get; set; }
-        public virtual DbSet<DisbursementCollectionsDetail> DisbursementCollectionsDetails { get; set; }
         public virtual DbSet<DisbursementGeneratedInterestDetail> DisbursementGeneratedInterestDetails { get; set; }
         public virtual DbSet<DisbursementGeneratedInterest> DisbursementGeneratedInterests { get; set; }
         public virtual DbSet<DisbursementItem> DisbursementItems { get; set; }
@@ -69,7 +68,6 @@ namespace FundsManager
         public virtual DbSet<BookingGeneratedInterestView> BookingGeneratedInterestViews { get; set; }
         public virtual DbSet<ClientContract> ClientContracts { get; set; }
         public virtual DbSet<DisbursementGeneratedInterestView> DisbursementGeneratedInterestViews { get; set; }
-        public virtual DbSet<DisbursementsForAddendum> DisbursementsForAddendums { get; set; }
         public virtual DbSet<InvestmentsView> InvestmentsViews { get; set; }
         public virtual DbSet<ProfitShareToAccrue> ProfitShareToAccrues { get; set; }
         public virtual DbSet<ProfitsResumeView> ProfitsResumeViews { get; set; }
@@ -97,5 +95,9 @@ namespace FundsManager
         public virtual DbSet<DisbursementsToBeCollected> DisbursementsToBeCollecteds { get; set; }
         public virtual DbSet<DisbursementBooking> DisbursementBookings { get; set; }
         public virtual DbSet<DisbursementsBookingView> DisbursementsBookingViews { get; set; }
+        public virtual DbSet<DisbursementOverdue> DisbursementOverdues { get; set; }
+        public virtual DbSet<DisbursementCollectionsDetail> DisbursementCollectionsDetails { get; set; }
+        public virtual DbSet<DisbursementOverdueDetail> DisbursementOverdueDetails { get; set; }
+        public virtual DbSet<DisbursementsForAddendum> DisbursementsForAddendums { get; set; }
     }
 }

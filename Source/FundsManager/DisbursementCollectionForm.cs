@@ -235,7 +235,9 @@ namespace FundsManager
 
                                                         if (amount - toBeCollected125 <= 0 && profitShare - toBeCollected128 <= 0 && delayInterest - toBeCollected130 <= 0)
                                                         {
-                                                            disbursement.collected = true;
+                                                            //TODO: analizar cuando se da por cobrado un disbursement, tener en cuenta si es un booking
+                                                            //TODO: analizar la posibilidad de generar el overdue correspondiente, automaticamente, en caso de estar vencido.
+                                                            //disbursement.collected = true;
                                                         }
 
                                                         manager.My_db.DisbursementCollectionsDetails.Add(disbursementCollectionDetail);

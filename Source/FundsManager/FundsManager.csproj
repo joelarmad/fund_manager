@@ -349,6 +349,12 @@
     <Compile Include="DisbursementItem.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DisbursementOverdue.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DisbursementOverdueDetail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DisbursementPayment.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

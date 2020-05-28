@@ -14,6 +14,7 @@ namespace FundsManager
     
     public partial class DisbursementsForAddendum
     {
+        public string row_key { get; set; }
         public int fund_id { get; set; }
         public string contract { get; set; }
         public int disbursement_id { get; set; }
@@ -21,7 +22,7 @@ namespace FundsManager
         public string number { get; set; }
         public System.DateTime collection_date { get; set; }
         public System.DateTime date { get; set; }
-        public System.DateTime pay_date { get; set; }
+        public Nullable<System.DateTime> pay_date { get; set; }
         public bool can_generate_interest { get; set; }
         public decimal amount { get; set; }
         public decimal profit_share { get; set; }

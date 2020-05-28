@@ -17,8 +17,8 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DisbursementCollection()
         {
-            this.DisbursementCollectionsDetails = new HashSet<DisbursementCollectionsDetail>();
             this.BookingCollectionsDetails = new HashSet<BookingCollectionsDetail>();
+            this.DisbursementCollectionsDetails = new HashSet<DisbursementCollectionsDetail>();
         }
     
         public int id { get; set; }
@@ -29,8 +29,8 @@ namespace FundsManager
         public virtual AccountingMovement AccountingMovement { get; set; }
         public virtual Investment Investment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DisbursementCollectionsDetail> DisbursementCollectionsDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookingCollectionsDetail> BookingCollectionsDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementCollectionsDetail> DisbursementCollectionsDetails { get; set; }
     }
 }
