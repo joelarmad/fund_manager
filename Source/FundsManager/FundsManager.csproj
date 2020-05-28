@@ -373,6 +373,12 @@
     <Compile Include="DisbursementsToBeCollected.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DisbursementToBeOverdueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DisbursementToBeOverdueForm.Designer.cs">
+      <DependentUpon>DisbursementToBeOverdueForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Disbursement_dates.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -794,6 +800,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DisbursementsForm.resx">
       <DependentUpon>DisbursementsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DisbursementToBeOverdueForm.resx">
+      <DependentUpon>DisbursementToBeOverdueForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EmployeesForm.resx">
       <DependentUpon>EmployeesForm.cs</DependentUpon>

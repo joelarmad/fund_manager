@@ -24,7 +24,7 @@ namespace FundsManager
         {
             this.banksTableAdapter.FillExcludingOwnBanks(this.fundsDBDataSet.Banks, manager.Selected);
             this.underlyingDebtorsTableAdapter.FillAddingEmptyRow(this.fundsDBDataSet.UnderlyingDebtors, manager.Selected);
-            this.clientsTableAdapter.FillWithEmpty(this.fundsDBDataSet.Clients, manager.Selected);
+            this.clientsTableAdapter.FillWithEmpty(this.fundsDBDataSet.Clients, "", manager.Selected);
             this.currenciesTableAdapter.FillWithEmpty(this.fundsDBDataSet.Currencies, manager.Selected);
 
             loadInvestments();
