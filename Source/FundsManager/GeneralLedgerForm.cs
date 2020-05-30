@@ -942,13 +942,13 @@ namespace FundsManager
                             detailText = supplier.name;
                         }
                         break;
-                    case 8:
-                        Creditor lender = manager.My_db.Creditors.FirstOrDefault(x => x.Id == _movement.Detail);
-                        if (lender != null)
-                        {
-                            detailText = lender.name;
-                        }
-                        break;
+                    //case 8:
+                    //    Creditor lender = manager.My_db.Creditors.FirstOrDefault(x => x.Id == _movement.Detail);
+                    //    if (lender != null)
+                    //    {
+                    //        detailText = lender.name;
+                    //    }
+                    //    break;
                     case 9:
                         BondsTFAM bond = manager.My_db.BondsTFAMs.FirstOrDefault(x => x.Id == _movement.Detail);
                         if (bond != null)

@@ -641,6 +641,12 @@
     <Compile Include="ReportForms\LoanGeneratedInterestForm.Designer.cs">
       <DependentUpon>LoanGeneratedInterestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportForms\OverduesReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForms\OverduesReportForm.Designer.cs">
+      <DependentUpon>OverduesReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportForms\ReturnsState.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -900,9 +906,13 @@
     <EmbeddedResource Include="ReportForms\LoanGeneratedInterestForm.resx">
       <DependentUpon>LoanGeneratedInterestForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\OverduesReportForm.resx">
+      <DependentUpon>OverduesReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\ReturnsState.resx">
       <DependentUpon>ReturnsState.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DisbursementOverduesGeneratedReport.rdlc" />
     <EmbeddedResource Include="Reports\BondGeneratedInterestReport.rdlc" />
     <EmbeddedResource Include="Reports\LoanGeneratedInterestReport.rdlc" />
     <EmbeddedResource Include="Reports\DisbursementCollections.rdlc" />
