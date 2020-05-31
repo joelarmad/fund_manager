@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="261fa96f59a74e08b2d054a9f6e39a57" Name="Diagram1" ZoomLevel="120">
+      <Diagram DiagramId="261fa96f59a74e08b2d054a9f6e39a57" Name="Diagram1" ZoomLevel="109">
         <EntityTypeShape EntityType="FundsDBModel.AccountingMovement" Width="1.5" PointX="8.25" PointY="53" />
         <EntityTypeShape EntityType="FundsDBModel.AccountsBankingAccount" Width="1.5" PointX="7.5" PointY="74.625" />
         <EntityTypeShape EntityType="FundsDBModel.AccountsClient" Width="1.5" PointX="10.5" PointY="78.375" />
@@ -192,6 +192,9 @@
         <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_DisbursementOverdues" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_Disbursements" />
         <EntityTypeShape EntityType="FundsDBModel.DisbursementsForAddendum" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="FundsDBModel.Loan_InterestRepayments" Width="1.5" PointX="15.75" PointY="55.875" />
+        <AssociationConnector Association="FundsDBModel.FK_Loan_InterestRepayments_AccountingMovements" />
+        <AssociationConnector Association="FundsDBModel.FK_Loan_InterestRepayments_LoanInterestDetails" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

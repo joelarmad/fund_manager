@@ -1,4 +1,5 @@
-﻿using FundsManager.ReportForms;
+﻿using FundsManager.Classes.Utilities;
+using FundsManager.ReportForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -251,7 +252,7 @@ namespace FundsManager
                                         accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
                                         accountingMovement.description = "Overdue";
                                         accountingMovement.date = dtpDate.Value.Date;
-                                        accountingMovement.reference = "";
+                                        accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpDate.Value.Year);
                                         accountingMovement.FK_AccountingMovements_Currencies = disbursement.currency_id;
                                         accountingMovement.original_reference = "";
                                         accountingMovement.contract = disbursement.Investment.contract;

@@ -76,6 +76,7 @@
             this.loanInterestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.repaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loanRenegotiationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.overdueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.investmentsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,7 +88,7 @@
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closePeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.overdueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.interestRepaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -438,7 +439,8 @@
             this.createToolStripMenuItem,
             this.loanInterestToolStripMenuItem,
             this.repaymentToolStripMenuItem,
-            this.loanRenegotiationToolStripMenuItem});
+            this.loanRenegotiationToolStripMenuItem,
+            this.interestRepaymentToolStripMenuItem});
             this.loanToolStripMenuItem.Name = "loanToolStripMenuItem";
             this.loanToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.loanToolStripMenuItem.Text = "Loan";
@@ -470,6 +472,13 @@
             this.loanRenegotiationToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.loanRenegotiationToolStripMenuItem.Text = "Loan Renegotiation";
             this.loanRenegotiationToolStripMenuItem.Click += new System.EventHandler(this.loanRenegotiationToolStripMenuItem_Click);
+            // 
+            // overdueToolStripMenuItem
+            // 
+            this.overdueToolStripMenuItem.Name = "overdueToolStripMenuItem";
+            this.overdueToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.overdueToolStripMenuItem.Text = "Overdue";
+            this.overdueToolStripMenuItem.Click += new System.EventHandler(this.overdueToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -556,12 +565,12 @@
             this.closePeriodToolStripMenuItem.Text = "Close Period";
             this.closePeriodToolStripMenuItem.Click += new System.EventHandler(this.closePeriodToolStripMenuItem_Click);
             // 
-            // overdueToolStripMenuItem
+            // interestRepaymentToolStripMenuItem
             // 
-            this.overdueToolStripMenuItem.Name = "overdueToolStripMenuItem";
-            this.overdueToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.overdueToolStripMenuItem.Text = "Overdue";
-            this.overdueToolStripMenuItem.Click += new System.EventHandler(this.overdueToolStripMenuItem_Click);
+            this.interestRepaymentToolStripMenuItem.Name = "interestRepaymentToolStripMenuItem";
+            this.interestRepaymentToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.interestRepaymentToolStripMenuItem.Text = "Interest Repayment";
+            this.interestRepaymentToolStripMenuItem.Click += new System.EventHandler(this.interestRepaymentToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -648,6 +657,7 @@
         private System.Windows.Forms.ToolStripMenuItem accountReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bondsTFAMToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem overdueToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem interestRepaymentToolStripMenuItem;
     }
 }
 

@@ -99,5 +99,6 @@ namespace FundsManager
         public virtual DbSet<DisbursementCollectionsDetail> DisbursementCollectionsDetails { get; set; }
         public virtual DbSet<DisbursementOverdueDetail> DisbursementOverdueDetails { get; set; }
         public virtual DbSet<DisbursementsForAddendum> DisbursementsForAddendums { get; set; }
+        public virtual DbSet<Loan_InterestRepayments> Loan_InterestRepayments { get; set; }
     }
 }

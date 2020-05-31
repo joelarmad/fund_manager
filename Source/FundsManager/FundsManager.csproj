@@ -511,6 +511,12 @@
     <Compile Include="LoanInterest.Designer.cs">
       <DependentUpon>LoanInterest.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoanInterestRepaymentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoanInterestRepaymentForm.Designer.cs">
+      <DependentUpon>LoanInterestRepaymentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoanRenegotiation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -524,6 +530,9 @@
       <DependentUpon>LoanRepayment.cs</DependentUpon>
     </Compile>
     <Compile Include="Loans_View.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Loan_InterestRepayments.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Loan_Repayments.cs">
@@ -851,6 +860,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoanInterest.resx">
       <DependentUpon>LoanInterest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoanInterestRepaymentForm.resx">
+      <DependentUpon>LoanInterestRepaymentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoanRenegotiation.resx">
       <DependentUpon>LoanRenegotiation.cs</DependentUpon>

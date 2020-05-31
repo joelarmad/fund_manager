@@ -14,6 +14,12 @@ namespace FundsManager
     
     public partial class LoanGeneratedInterestDetail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public LoanGeneratedInterestDetail()
+        {
+            this.Loan_InterestRepayments = new HashSet<Loan_InterestRepayments>();
+        }
+    
         public int Id { get; set; }
         public int loan_generated_interest_id { get; set; }
         public int loan_id { get; set; }
@@ -24,5 +30,7 @@ namespace FundsManager
         public virtual AccountingMovement AccountingMovement { get; set; }
         public virtual LoanGeneratedInterest LoanGeneratedInterest { get; set; }
         public virtual Loan Loan { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Loan_InterestRepayments> Loan_InterestRepayments { get; set; }
     }
 }

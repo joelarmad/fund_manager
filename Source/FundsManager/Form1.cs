@@ -435,5 +435,13 @@ namespace FundsManager
             form.MdiParent = this;
             form.Show();
         }
+
+        private void interestRepaymentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            LoanInterestRepaymentForm form = new LoanInterestRepaymentForm();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }
