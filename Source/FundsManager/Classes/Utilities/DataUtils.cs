@@ -18,52 +18,57 @@ namespace FundsManager.Classes.Utilities
 
                 comboSource.Add(-1, "Select Detail");
 
-                foreach (Client _client in manager.My_db.Clients)
+                if (subacctId > 0)
                 {
-                    int custom_id = int.Parse(1.ToString() + _client.Id.ToString());
-                    comboSource.Add(custom_id, _client.name);
+                    foreach (OtherDetail _detail in manager.My_db.OtherDetails.Where(x => x.subacct_id == subacctId).ToList())
+                    {
+                        int custom_id = int.Parse(5.ToString() + _detail.Id.ToString());
+                        comboSource.Add(custom_id, _detail.name);
+                    }
                 }
-
-                foreach (BankingAccount _bankingaccount in manager.My_db.BankingAccounts)
+                else
                 {
-                    int custom_id = int.Parse(2.ToString() + _bankingaccount.Id.ToString());
-                    comboSource.Add(custom_id, _bankingaccount.name);
-                }
+                    foreach (Client _client in manager.My_db.Clients)
+                    {
+                        int custom_id = int.Parse(1.ToString() + _client.Id.ToString());
+                        comboSource.Add(custom_id, _client.name);
+                    }
 
-                foreach (Employee _employee in manager.My_db.Employees)
-                {
-                    int custom_id = int.Parse(3.ToString() + _employee.Id.ToString());
-                    comboSource.Add(custom_id, _employee.name);
-                }
+                    foreach (BankingAccount _bankingaccount in manager.My_db.BankingAccounts)
+                    {
+                        int custom_id = int.Parse(2.ToString() + _bankingaccount.Id.ToString());
+                        comboSource.Add(custom_id, _bankingaccount.name);
+                    }
 
-                foreach (Creditor _creditor in manager.My_db.Creditors)
-                {
-                    int custom_id = int.Parse(4.ToString() + _creditor.Id.ToString());
-                    comboSource.Add(custom_id, _creditor.name);
-                }
+                    foreach (Employee _employee in manager.My_db.Employees)
+                    {
+                        int custom_id = int.Parse(3.ToString() + _employee.Id.ToString());
+                        comboSource.Add(custom_id, _employee.name);
+                    }
 
-                foreach (OtherDetail _detail in manager.My_db.OtherDetails.Where(x => x.subacct_id == subacctId).ToList())
-                {
-                    int custom_id = int.Parse(5.ToString() + _detail.Id.ToString());
-                    comboSource.Add(custom_id, _detail.name);
-                }
+                    foreach (Creditor _creditor in manager.My_db.Creditors)
+                    {
+                        int custom_id = int.Parse(4.ToString() + _creditor.Id.ToString());
+                        comboSource.Add(custom_id, _creditor.name);
+                    }
 
-                foreach (Shareholder _shareholder in manager.My_db.Shareholders)
-                {
-                    int custom_id = int.Parse(6.ToString() + _shareholder.Id.ToString());
-                    comboSource.Add(custom_id, _shareholder.name);
-                }
+                    foreach (Shareholder _shareholder in manager.My_db.Shareholders)
+                    {
+                        int custom_id = int.Parse(6.ToString() + _shareholder.Id.ToString());
+                        comboSource.Add(custom_id, _shareholder.name);
+                    }
 
-                foreach (ServiceSupplier _serviceSupplier in manager.My_db.ServiceSuppliers)
-                {
-                    int custom_id = int.Parse(7.ToString() + _serviceSupplier.Id.ToString());
-                    comboSource.Add(custom_id, _serviceSupplier.name);
-                }
+                    foreach (ServiceSupplier _serviceSupplier in manager.My_db.ServiceSuppliers)
+                    {
+                        int custom_id = int.Parse(7.ToString() + _serviceSupplier.Id.ToString());
+                        comboSource.Add(custom_id, _serviceSupplier.name);
+                    }
 
-                foreach (BondsTFAM _bondsTFAM in manager.My_db.BondsTFAMs)
-                {
-                    int custom_id = int.Parse(9.ToString() + _bondsTFAM.Id.ToString());
-                    comboSource.Add(custom_id, _bondsTFAM.number);
+                    foreach (BondsTFAM _bondsTFAM in manager.My_db.BondsTFAMs)
+                    {
+                        int custom_id = int.Parse(9.ToString() + _bondsTFAM.Id.ToString());
+                        comboSource.Add(custom_id, _bondsTFAM.number);
+                    }
                 }
 
                 return comboSource;
