@@ -68,12 +68,16 @@ namespace FundsManager
 
                         if (toBeCollected != null)
                         {
-                            fProfitShareRemainig = toBeCollected.profit_share - toBeCollected.profit_share_accrued.Value;
+                            //fProfitShareRemainig = toBeCollected.profit_share - toBeCollected.profit_share_accrued.Value;
+
+                            fProfitShareRemainig = toBeCollected.profit_share - toBeCollected.profit_share_collected.Value;
 
                             fProfitShare = fProfitShareRemainig;
 
-                            fAmountRemaining = toBeCollected.amount + toBeCollected.profit_share + 
-                                - (toBeCollected.amount_collected.Value + toBeCollected.profit_share_collected.Value) - fProfitShareRemainig;
+                            //fAmountRemaining = toBeCollected.amount + toBeCollected.profit_share + 
+                            //    - (toBeCollected.amount_collected.Value + toBeCollected.profit_share_collected.Value) - fProfitShareRemainig;
+
+                            fAmountRemaining = toBeCollected.amount_remainig.Value;
 
                             fAmount = fAmountRemaining;
 
