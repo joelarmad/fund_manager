@@ -83,6 +83,57 @@ namespace FundsManager
             updateDisbursementList();
         }
 
+        private void setCollected(DisbursementBooking booking)
+        {
+            if (!booking.can_generate_interest)
+            {
+                booking.collected = true;
+
+                List<DisbursementBooking> bookings = manager.My_db.DisbursementBookings.Where(x => x.disbursement_id == booking.disbursement_id && x.id != booking.id).ToList();
+
+                bool collected = true;
+
+                foreach (DisbursementBooking item in bookings)
+                {
+                    if (item.collected == false)
+                    {
+                        collected = false;
+                        break;
+                    }
+                }
+
+                booking.Disbursement.collected = collected;
+            }
+        }
+
+        private void setCollected(Disbursement disbursement)
+        {
+            if (!disbursement.can_generate_interest)
+            {
+                if (!disbursement.has_bookings.Value)
+                {
+                    disbursement.collected = true;
+                }
+                else
+                {
+                    bool collected = true;
+
+                    List<DisbursementBooking> bookings = manager.My_db.DisbursementBookings.Where(x => x.disbursement_id == disbursement.Id).ToList();
+
+                    foreach (DisbursementBooking booking in bookings)
+                    {
+                        if (!booking.collected)
+                        {
+                            collected = false;
+                            break;
+                        }
+                    }
+
+                    disbursement.collected = collected;
+                }
+            }
+        }
+
         private void cmdCollect_Click(object sender, EventArgs e)
         {
             try
@@ -235,9 +286,7 @@ namespace FundsManager
 
                                                         if (amount - toBeCollected125 <= 0 && profitShare - toBeCollected128 <= 0 && delayInterest - toBeCollected130 <= 0)
                                                         {
-                                                            //TODO: analizar cuando se da por cobrado un disbursement, tener en cuenta si es un booking
-                                                            //TODO: analizar la posibilidad de generar el overdue correspondiente, automaticamente, en caso de estar vencido.
-                                                            //disbursement.collected = true;
+                                                            setCollected(disbursement);
                                                         }
 
                                                         manager.My_db.DisbursementCollectionsDetails.Add(disbursementCollectionDetail);
@@ -250,7 +299,7 @@ namespace FundsManager
 
                                                         if (amount - toBeCollected125 <= 0 && profitShare - toBeCollected128 <= 0 && delayInterest - toBeCollected130 <= 0)
                                                         {
-                                                            booking.collected = true;
+                                                            setCollected(booking);
                                                         }
 
                                                         manager.My_db.BookingCollectionsDetails.Add(bookingCollectionDetail);
