@@ -8,7 +8,7 @@ namespace FundsManager.Classes.Utilities
 {
     public static class DataUtils
     {
-        public static Dictionary<int, String> getOtherDetailsSource(int subacctId)
+        public static Dictionary<int, String> getOtherDetailsSource(int subacctId, string emptyText = "Select Detail")
         {
             try
             {
@@ -16,7 +16,7 @@ namespace FundsManager.Classes.Utilities
 
                 Dictionary<int, string> comboSource = new Dictionary<int, string>();
 
-                comboSource.Add(-1, "Select Detail");
+                comboSource.Add(-1, emptyText);
 
                 if (subacctId > 0)
                 {

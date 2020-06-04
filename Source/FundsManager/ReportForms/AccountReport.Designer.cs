@@ -201,7 +201,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1025, 564);
+            this.ClientSize = new System.Drawing.Size(882, 564);
             this.Controls.Add(this.cbOtherDetails);
             this.Controls.Add(this.cmdFind);
             this.Controls.Add(this.dtpTo);

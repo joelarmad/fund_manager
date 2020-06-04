@@ -28,7 +28,7 @@ namespace FundsManager.ReportForms
 
             cbAccount_SelectedIndexChanged(null, null);
 
-            loadOtherDetails();
+            cbSubAccount_SelectedIndexChanged(null, null);
 
             cmdFind_Click(null, null);
 
@@ -86,17 +86,19 @@ namespace FundsManager.ReportForms
                 accountId = int.Parse(cbAccount.SelectedValue.ToString());
             }
 
-            this.subaccountsTableAdapter.FillByAccount(this.fundsDBDataSet.Subaccounts,accountId, manager.Selected);
-        }
+            this.subaccountsTableAdapter.FillWithEmpty(this.fundsDBDataSet.Subaccounts,accountId, manager.Selected);
 
-        private void cbOtherDetails_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            cbSubAccount_SelectedIndexChanged(null, null);
         }
 
         private void cbSubAccount_SelectedIndexChanged(object sender, EventArgs e)
         {
             loadOtherDetails();
+        }
+
+        private void cbOtherDetails_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //cmdFind_Click(null, null);
         }
 
         private void loadOtherDetails()
@@ -109,7 +111,9 @@ namespace FundsManager.ReportForms
                 cbOtherDetails.SelectedItem = null;
                 cbOtherDetails.SelectedText = "Select detail";
 
-                Dictionary<int, string> comboSource = DataUtils.getOtherDetailsSource(cbSubAccount.SelectedValue != null ? Convert.ToInt32(cbSubAccount.SelectedValue) : 0);
+                int subacctId = cbSubAccount.SelectedValue != null ? Convert.ToInt32(cbSubAccount.SelectedValue) : 0;
+
+                Dictionary<int, string> comboSource = DataUtils.getOtherDetailsSource(subacctId, "");
 
 
                 cbOtherDetails.DataSource = new BindingSource(comboSource, null);
