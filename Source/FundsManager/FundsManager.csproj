@@ -215,6 +215,12 @@
     <Compile Include="BondsTFAMMainPayment.Designer.cs">
       <DependentUpon>BondsTFAMMainPayment.cs</DependentUpon>
     </Compile>
+    <Compile Include="BondsTFAMRepayment.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BondsTFAMRepaymentDetail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="BondsTFF.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -511,23 +517,20 @@
     <Compile Include="LoanInterest.Designer.cs">
       <DependentUpon>LoanInterest.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoanInterestRepaymentForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LoanInterestRepaymentForm.Designer.cs">
-      <DependentUpon>LoanInterestRepaymentForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="LoanRenegotiation.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoanRenegotiation.Designer.cs">
       <DependentUpon>LoanRenegotiation.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoanRepayment.cs">
+    <Compile Include="LoanRepaymentDetail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoanRepaymentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoanRepayment.Designer.cs">
-      <DependentUpon>LoanRepayment.cs</DependentUpon>
+    <Compile Include="LoanRepaymentForm.Designer.cs">
+      <DependentUpon>LoanRepaymentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Loans_View.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -861,14 +864,11 @@
     <EmbeddedResource Include="LoanInterest.resx">
       <DependentUpon>LoanInterest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoanInterestRepaymentForm.resx">
-      <DependentUpon>LoanInterestRepaymentForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="LoanRenegotiation.resx">
       <DependentUpon>LoanRenegotiation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoanRepayment.resx">
-      <DependentUpon>LoanRepayment.cs</DependentUpon>
+    <EmbeddedResource Include="LoanRepaymentForm.resx">
+      <DependentUpon>LoanRepaymentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MovementReportForm.resx">
       <DependentUpon>MovementReportForm.cs</DependentUpon>

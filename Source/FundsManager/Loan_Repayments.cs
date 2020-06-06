@@ -14,12 +14,18 @@ namespace FundsManager
     
     public partial class Loan_Repayments
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Loan_Repayments()
+        {
+            this.LoanRepaymentDetails = new HashSet<LoanRepaymentDetail>();
+        }
+    
         public int Id { get; set; }
-        public int loan_id { get; set; }
         public System.DateTime repayment_date { get; set; }
         public Nullable<int> accounting_movement_id { get; set; }
     
         public virtual AccountingMovement AccountingMovement { get; set; }
-        public virtual Loan Loan { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoanRepaymentDetail> LoanRepaymentDetails { get; set; }
     }
 }

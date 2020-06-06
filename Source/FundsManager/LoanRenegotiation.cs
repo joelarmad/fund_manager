@@ -118,6 +118,8 @@ namespace FundsManager
                 _loan.renegotiated = false;
                 _loan.loan_origin_id = oldloan.Id;
                 _loan.accounting_movement_id = oldloan.accounting_movement_id;
+                _loan.interest_base = oldloan.interest_base;
+                _loan.can_generate_interest = 1;
 
                 manager.My_db.Loans.Add(_loan);
                 manager.My_db.SaveChanges();

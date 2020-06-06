@@ -342,8 +342,13 @@ namespace FundsManager
 
         private void repaymentToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //this.IsMdiContainer = true;
+            //LoanRepayment form = new LoanRepayment();
+            //form.MdiParent = this;
+            //form.Show();
+
             this.IsMdiContainer = true;
-            LoanRepayment form = new LoanRepayment();
+            LoanRepaymentForm form = new LoanRepaymentForm();
             form.MdiParent = this;
             form.Show();
         }
@@ -432,14 +437,6 @@ namespace FundsManager
         {
             this.IsMdiContainer = true;
             DisbursementToBeOverdueForm form = new DisbursementToBeOverdueForm();
-            form.MdiParent = this;
-            form.Show();
-        }
-
-        private void interestRepaymentToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.IsMdiContainer = true;
-            LoanInterestRepaymentForm form = new LoanInterestRepaymentForm();
             form.MdiParent = this;
             form.Show();
         }

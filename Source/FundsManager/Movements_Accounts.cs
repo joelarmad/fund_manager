@@ -27,6 +27,10 @@ namespace FundsManager
             this.DisbursementCollectionsDetails = new HashSet<DisbursementCollectionsDetail>();
             this.DisbursementCollectionsDetails1 = new HashSet<DisbursementCollectionsDetail>();
             this.DisbursementCollectionsDetails2 = new HashSet<DisbursementCollectionsDetail>();
+            this.BondsTFAMRepaymentDetails = new HashSet<BondsTFAMRepaymentDetail>();
+            this.BondsTFAMRepaymentDetails1 = new HashSet<BondsTFAMRepaymentDetail>();
+            this.LoanRepaymentDetails = new HashSet<LoanRepaymentDetail>();
+            this.LoanRepaymentDetails1 = new HashSet<LoanRepaymentDetail>();
         }
     
         public int Id { get; set; }
@@ -64,5 +68,13 @@ namespace FundsManager
         public virtual ICollection<DisbursementCollectionsDetail> DisbursementCollectionsDetails1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementCollectionsDetail> DisbursementCollectionsDetails2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BondsTFAMRepaymentDetail> BondsTFAMRepaymentDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BondsTFAMRepaymentDetail> BondsTFAMRepaymentDetails1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoanRepaymentDetail> LoanRepaymentDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoanRepaymentDetail> LoanRepaymentDetails1 { get; set; }
     }
 }

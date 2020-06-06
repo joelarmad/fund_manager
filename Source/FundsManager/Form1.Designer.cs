@@ -88,7 +88,6 @@
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closePeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.interestRepaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -439,8 +438,7 @@
             this.createToolStripMenuItem,
             this.loanInterestToolStripMenuItem,
             this.repaymentToolStripMenuItem,
-            this.loanRenegotiationToolStripMenuItem,
-            this.interestRepaymentToolStripMenuItem});
+            this.loanRenegotiationToolStripMenuItem});
             this.loanToolStripMenuItem.Name = "loanToolStripMenuItem";
             this.loanToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.loanToolStripMenuItem.Text = "Loan";
@@ -565,13 +563,6 @@
             this.closePeriodToolStripMenuItem.Text = "Close Period";
             this.closePeriodToolStripMenuItem.Click += new System.EventHandler(this.closePeriodToolStripMenuItem_Click);
             // 
-            // interestRepaymentToolStripMenuItem
-            // 
-            this.interestRepaymentToolStripMenuItem.Name = "interestRepaymentToolStripMenuItem";
-            this.interestRepaymentToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.interestRepaymentToolStripMenuItem.Text = "Interest Repayment";
-            this.interestRepaymentToolStripMenuItem.Click += new System.EventHandler(this.interestRepaymentToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -657,7 +648,6 @@
         private System.Windows.Forms.ToolStripMenuItem accountReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bondsTFAMToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem overdueToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem interestRepaymentToolStripMenuItem;
     }
 }
 

@@ -17,7 +17,6 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Loan()
         {
-            this.Loan_Repayments = new HashSet<Loan_Repayments>();
             this.LoanGeneratedInterestDetails = new HashSet<LoanGeneratedInterestDetail>();
         }
     
@@ -34,13 +33,13 @@ namespace FundsManager
         public Nullable<bool> renegotiated { get; set; }
         public Nullable<int> loan_origin_id { get; set; }
         public int interest_base { get; set; }
+        public Nullable<int> paid { get; set; }
+        public Nullable<int> can_generate_interest { get; set; }
     
         public virtual AccountingMovement AccountingMovement { get; set; }
         public virtual Creditor Creditor { get; set; }
         public virtual Currency Currency { get; set; }
         public virtual Fund Fund { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Loan_Repayments> Loan_Repayments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoanGeneratedInterestDetail> LoanGeneratedInterestDetails { get; set; }
     }

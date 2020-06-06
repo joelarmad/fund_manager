@@ -232,6 +232,12 @@ namespace FundsManager
 
                                         canContinueGeneratingInterest = toDate < _loanToAccrue.end_date;
 
+                                        if(!canContinueGeneratingInterest)
+                                        {
+                                            Loan loan = manager.My_db.Loans.FirstOrDefault(x => x.Id == _loanToAccrue.Id);
+                                            loan.can_generate_interest = 0;
+                                        }
+
                                         if (_interest > 0)
                                         {
                                             if (!interestCreated)

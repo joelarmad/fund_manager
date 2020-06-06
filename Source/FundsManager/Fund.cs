@@ -41,12 +41,12 @@ namespace FundsManager
             this.ServiceSuppliers = new HashSet<ServiceSupplier>();
             this.Shareholders = new HashSet<Shareholder>();
             this.UnderlyingDebtors = new HashSet<UnderlyingDebtor>();
-            this.Loans = new HashSet<Loan>();
             this.BondsTFFs = new HashSet<BondsTFF>();
             this.BondsTFAMs = new HashSet<BondsTFAM>();
             this.Accounts = new HashSet<Account>();
             this.Subaccounts = new HashSet<Subaccount>();
             this.Movements_Accounts = new HashSet<Movements_Accounts>();
+            this.Loans = new HashSet<Loan>();
         }
     
         public int Id { get; set; }
@@ -103,8 +103,6 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UnderlyingDebtor> UnderlyingDebtors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Loan> Loans { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BondsTFF> BondsTFFs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BondsTFAM> BondsTFAMs { get; set; }
@@ -114,5 +112,7 @@ namespace FundsManager
         public virtual ICollection<Subaccount> Subaccounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movements_Accounts> Movements_Accounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Loan> Loans { get; set; }
     }
 }

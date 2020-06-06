@@ -76,9 +76,7 @@ namespace FundsManager
         public virtual DbSet<TotalExpense> TotalExpenses { get; set; }
         public virtual DbSet<TotalIncome> TotalIncomes { get; set; }
         public virtual DbSet<UnlinkedDisbursement> UnlinkedDisbursements { get; set; }
-        public virtual DbSet<Loan_Repayments> Loan_Repayments { get; set; }
         public virtual DbSet<Loans_View> Loans_View { get; set; }
-        public virtual DbSet<Loan> Loans { get; set; }
         public virtual DbSet<BondsTFF> BondsTFFs { get; set; }
         public virtual DbSet<BondsTFFInvestor> BondsTFFInvestors { get; set; }
         public virtual DbSet<BondsTFAM> BondsTFAMs { get; set; }
@@ -100,5 +98,10 @@ namespace FundsManager
         public virtual DbSet<DisbursementOverdueDetail> DisbursementOverdueDetails { get; set; }
         public virtual DbSet<DisbursementsForAddendum> DisbursementsForAddendums { get; set; }
         public virtual DbSet<Loan_InterestRepayments> Loan_InterestRepayments { get; set; }
+        public virtual DbSet<BondsTFAMRepaymentDetail> BondsTFAMRepaymentDetails { get; set; }
+        public virtual DbSet<BondsTFAMRepayment> BondsTFAMRepayments { get; set; }
+        public virtual DbSet<Loan_Repayments> Loan_Repayments { get; set; }
+        public virtual DbSet<LoanRepaymentDetail> LoanRepaymentDetails { get; set; }
+        public virtual DbSet<Loan> Loans { get; set; }
     }
 }

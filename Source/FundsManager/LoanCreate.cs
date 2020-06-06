@@ -142,6 +142,8 @@ namespace FundsManager
                         _loan.currency_id = currencyId;
                         _loan.renegotiated = false;
                         _loan.interest_base = rb360.Checked ? 360 : 365;
+                        _loan.paid = 0;
+                        _loan.can_generate_interest = 1;
 
                         AccountingMovement acctMov = generateAccountingMovement(_loan);
 
