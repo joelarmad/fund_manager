@@ -81,7 +81,6 @@ namespace FundsManager
         public virtual DbSet<BondsTFFInvestor> BondsTFFInvestors { get; set; }
         public virtual DbSet<BondsTFAM> BondsTFAMs { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<Subaccount> Subaccounts { get; set; }
         public virtual DbSet<AccountBalanceView> AccountBalanceViews { get; set; }
         public virtual DbSet<SubAccountBalance> SubAccountBalances { get; set; }
         public virtual DbSet<MovementsView> MovementsViews { get; set; }
@@ -103,5 +102,8 @@ namespace FundsManager
         public virtual DbSet<Loan_Repayments> Loan_Repayments { get; set; }
         public virtual DbSet<LoanRepaymentDetail> LoanRepaymentDetails { get; set; }
         public virtual DbSet<Loan> Loans { get; set; }
+        public virtual DbSet<DetailType> DetailTypes { get; set; }
+        public virtual DbSet<Subaccount> Subaccounts { get; set; }
+        public virtual DbSet<OtherDetailsView> OtherDetailsViews { get; set; }
     }
 }

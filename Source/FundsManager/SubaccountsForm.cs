@@ -27,6 +27,7 @@ namespace FundsManager
 
         private void SubaccountsForm_Load(object sender, EventArgs e)
         {
+            this.detailTypeTableAdapter.FillWithEmpty(this.fundsDBDataSet.DetailType);
             this.accountsTableAdapter.FillByFund(this.fundsDBDataSet.Accounts, manager.Selected);
 
             loadSubAccountData();
@@ -83,6 +84,17 @@ namespace FundsManager
                     _subaccount.FK_Subaccounts_Accounts = accountId;
                     _subaccount.FK_Accounts_Funds = manager.Selected;
                     _subaccount.number = txtNumber.Text;
+
+                    if (cbDetailType.SelectedValue != null)
+                    {
+                        int detailType = 0;
+
+                        if (int.TryParse(cbDetailType.SelectedValue.ToString(), out detailType) && detailType > 0)
+                        {
+                            _subaccount.detail_type = detailType;
+                        }
+                    }
+
                     manager.My_db.Subaccounts.Add(_subaccount);
                     manager.My_db.SaveChanges();
                 }
@@ -105,6 +117,17 @@ namespace FundsManager
                         _selectedSubAccount.name = txtName.Text;
                         _selectedSubAccount.number = txtNumber.Text;
                         _selectedSubAccount.FK_Subaccounts_Accounts = Convert.ToInt32(cbAccount.SelectedValue);
+                        _selectedSubAccount.detail_type = null;
+
+                        if (cbDetailType.SelectedValue != null)
+                        {
+                            int detailType = 0;
+
+                            if (int.TryParse(cbDetailType.SelectedValue.ToString(), out detailType) && detailType > 0)
+                            {
+                                _selectedSubAccount.detail_type = detailType;
+                            }
+                        }
 
                         manager.My_db.SaveChanges();
                     }
@@ -148,6 +171,20 @@ namespace FundsManager
                         }
                     }
 
+                    cbDetailType.SelectedIndex = 0;
+
+                    if(_selectedSubAccount.detail_type.HasValue)
+                    {
+                        foreach (DataRowView _item in cbDetailType.Items)
+                        {
+                            if (_item.Row[0].ToString() == _selectedSubAccount.detail_type.ToString())
+                            {
+                                cbDetailType.SelectedItem = _item;
+                                break;
+                            }
+                        }
+                    }
+
                     cmdCancel.Visible = true;
                 }
             }
@@ -167,6 +204,11 @@ namespace FundsManager
             txtNumber.Text = "";
 
             cmdCancel.Visible = false;
+
+            if (cbDetailType.Items.Count > 0)
+            {
+                cbDetailType.SelectedIndex = 0;
+            }
         }
 
         private void cbAccount_SelectedIndexChanged(object sender, EventArgs e)

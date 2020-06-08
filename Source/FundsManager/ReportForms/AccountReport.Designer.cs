@@ -47,11 +47,14 @@
             this.accountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountsTableAdapter();
             this.subaccountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.SubaccountsTableAdapter();
             this.cbOtherDetails = new System.Windows.Forms.ComboBox();
+            this.otherDetailsViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.accountReportTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountReportTableAdapter();
+            this.otherDetailsViewTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.OtherDetailsViewTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountReportBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subaccountsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.otherDetailsViewBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // reportViewer1
@@ -186,16 +189,28 @@
             // 
             // cbOtherDetails
             // 
+            this.cbOtherDetails.DataSource = this.otherDetailsViewBindingSource;
+            this.cbOtherDetails.DisplayMember = "name";
             this.cbOtherDetails.FormattingEnabled = true;
             this.cbOtherDetails.Location = new System.Drawing.Point(82, 68);
             this.cbOtherDetails.Name = "cbOtherDetails";
             this.cbOtherDetails.Size = new System.Drawing.Size(169, 21);
             this.cbOtherDetails.TabIndex = 13;
+            this.cbOtherDetails.ValueMember = "Row_Id";
             this.cbOtherDetails.SelectedIndexChanged += new System.EventHandler(this.cbOtherDetails_SelectedIndexChanged);
+            // 
+            // otherDetailsViewBindingSource
+            // 
+            this.otherDetailsViewBindingSource.DataMember = "OtherDetailsView";
+            this.otherDetailsViewBindingSource.DataSource = this.fundsDBDataSet;
             // 
             // accountReportTableAdapter
             // 
             this.accountReportTableAdapter.ClearBeforeFill = true;
+            // 
+            // otherDetailsViewTableAdapter
+            // 
+            this.otherDetailsViewTableAdapter.ClearBeforeFill = true;
             // 
             // AccountReport
             // 
@@ -224,6 +239,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.accountReportBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.subaccountsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.otherDetailsViewBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -250,5 +266,7 @@
         private FundsDBDataSetTableAdapters.SubaccountsTableAdapter subaccountsTableAdapter;
         private System.Windows.Forms.ComboBox cbOtherDetails;
         private FundsDBDataSetTableAdapters.AccountReportTableAdapter accountReportTableAdapter;
+        private System.Windows.Forms.BindingSource otherDetailsViewBindingSource;
+        private FundsDBDataSetTableAdapters.OtherDetailsViewTableAdapter otherDetailsViewTableAdapter;
     }
 }

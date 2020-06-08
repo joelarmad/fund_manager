@@ -258,7 +258,6 @@
     <Compile Include="Classes\DataModel\FundsDBEntities.cs" />
     <Compile Include="Classes\Task\GlobalProcess.cs" />
     <Compile Include="Classes\Utilities\Conversions.cs" />
-    <Compile Include="Classes\Utilities\DataUtils.cs" />
     <Compile Include="Classes\Utilities\ErrorMessage.cs" />
     <Compile Include="Classes\Utilities\KeyDefinitions.cs" />
     <Compile Include="Client.cs">
@@ -314,6 +313,9 @@
     </Compile>
     <Compile Include="AddendumsLauncher.Designer.cs">
       <DependentUpon>AddendumsLauncher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DetailType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Disbursement.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -578,6 +580,9 @@
     </Compile>
     <Compile Include="DelayInterestToAccrueForm.Designer.cs">
       <DependentUpon>DelayInterestToAccrueForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OtherDetailsView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ProfitShareToAccrue.cs">
       <DependentUpon>Model.tt</DependentUpon>

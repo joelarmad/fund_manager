@@ -51,7 +51,6 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementBook> DisbursementBooks1 { get; set; }
         public virtual Fund Fund { get; set; }
-        public virtual Subaccount Subaccount1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookingCollectionsDetail> BookingCollectionsDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -76,5 +75,6 @@ namespace FundsManager
         public virtual ICollection<LoanRepaymentDetail> LoanRepaymentDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoanRepaymentDetail> LoanRepaymentDetails1 { get; set; }
+        public virtual Subaccount Subaccount1 { get; set; }
     }
 }

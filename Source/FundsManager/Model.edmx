@@ -261,6 +261,13 @@
           <Property Name="FK_Currencies_Funds" Type="int" Nullable="false" />
           <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="DetailType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Disbursement_dates">
           <Key>
             <PropertyRef Name="Id" />
@@ -640,6 +647,7 @@
           <Property Name="FK_Subaccounts_Accounts" Type="int" Nullable="false" />
           <Property Name="FK_Accounts_Funds" Type="int" Nullable="false" />
           <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="detail_type" Type="int" />
         </EntityType>
         <EntityType Name="UnderlyingDebtors">
           <Key>
@@ -1046,6 +1054,22 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.MovementsView
           <Property Name="SubAccountId" Type="int" />
           <Property Name="detail_type" Type="int" />
           <Property Name="detail_id" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.OtherDetailsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OtherDetailsView">
+          <Key>
+            <PropertyRef Name="source" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DetailType" />
+            <PropertyRef Name="fund_id" />
+          </Key>
+          <Property Name="source" Type="varchar" MaxLength="17" Nullable="false" />
+          <Property Name="Row_Id" Type="varchar" MaxLength="32" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DetailType" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" />
+          <Property Name="fund_id" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ProfitShareToAccrue' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2696,6 +2720,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Creditors" EntityType="Self.Creditors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currencies" EntityType="Self.Currencies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetailType" EntityType="Self.DetailType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disbursement_dates" EntityType="Self.Disbursement_dates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DisbursementBooking" EntityType="Self.DisbursementBooking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DisbursementBooks" EntityType="Self.DisbursementBooks" Schema="dbo" store:Type="Tables" />
@@ -2962,6 +2987,16 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
     [MovementsView].[detail_type] AS [detail_type], 
     [MovementsView].[detail_id] AS [detail_id]
     FROM [dbo].[MovementsView] AS [MovementsView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OtherDetailsView" EntityType="Self.OtherDetailsView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OtherDetailsView].[source] AS [source], 
+    [OtherDetailsView].[Row_Id] AS [Row_Id], 
+    [OtherDetailsView].[Id] AS [Id], 
+    [OtherDetailsView].[DetailType] AS [DetailType], 
+    [OtherDetailsView].[name] AS [name], 
+    [OtherDetailsView].[fund_id] AS [fund_id]
+    FROM [dbo].[OtherDetailsView] AS [OtherDetailsView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ProfitShareToAccrue" EntityType="Self.ProfitShareToAccrue" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -3889,7 +3924,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="BondsTFAM" EntitySet="BondsTFAMs" />
           </AssociationSet>
           <EntitySet Name="Accounts" EntityType="FundsDBModel.Account" />
-          <EntitySet Name="Subaccounts" EntityType="FundsDBModel.Subaccount" />
           <EntitySet Name="AccountBalanceViews" EntityType="FundsDBModel.AccountBalanceView" />
           <EntitySet Name="SubAccountBalances" EntityType="FundsDBModel.SubAccountBalance" />
           <AssociationSet Name="FK_Accounts_Funds" Association="FundsDBModel.FK_Accounts_Funds">
@@ -3912,18 +3946,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="Account" EntitySet="Accounts" />
             <End Role="AccountsEmployee" EntitySet="AccountsEmployees" />
           </AssociationSet>
-          <AssociationSet Name="FK_Subaccounts_Accounts" Association="FundsDBModel.FK_Subaccounts_Accounts">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="Subaccount" EntitySet="Subaccounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Subaccounts_Funds" Association="FundsDBModel.FK_Subaccounts_Funds">
-            <End Role="Fund" EntitySet="Funds" />
-            <End Role="Subaccount" EntitySet="Subaccounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OtherDetails_SubAcct" Association="FundsDBModel.FK_OtherDetails_SubAcct">
-            <End Role="Subaccount" EntitySet="Subaccounts" />
-            <End Role="OtherDetail" EntitySet="OtherDetails" />
-          </AssociationSet>
           <EntitySet Name="MovementsViews" EntityType="FundsDBModel.MovementsView" />
           <EntitySet Name="ClosedPeriods" EntityType="FundsDBModel.ClosedPeriod" />
           <EntitySet Name="Movements_Accounts" EntityType="FundsDBModel.Movements_Accounts" />
@@ -3945,10 +3967,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           </AssociationSet>
           <AssociationSet Name="FK_Movements_Accounts_Funds" Association="FundsDBModel.FK_Movements_Accounts_Funds">
             <End Role="Fund" EntitySet="Funds" />
-            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Movements_Accounts_Subaccounts" Association="FundsDBModel.FK_Movements_Accounts_Subaccounts">
-            <End Role="Subaccount" EntitySet="Subaccounts" />
             <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
           </AssociationSet>
           <EntitySet Name="BondsTFAMGeneratedInterests" EntityType="FundsDBModel.BondsTFAMGeneratedInterest" />
@@ -4127,6 +4145,25 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="Loan" EntitySet="Loans" />
             <End Role="LoanGeneratedInterestDetail" EntitySet="LoanGeneratedInterestDetails" />
           </AssociationSet>
+          <EntitySet Name="DetailTypes" EntityType="FundsDBModel.DetailType" />
+          <EntitySet Name="Subaccounts" EntityType="FundsDBModel.Subaccount" />
+          <AssociationSet Name="FK_Subaccounts_Accounts" Association="FundsDBModel.FK_Subaccounts_Accounts">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Subaccount" EntitySet="Subaccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subaccounts_Funds" Association="FundsDBModel.FK_Subaccounts_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="Subaccount" EntitySet="Subaccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movements_Accounts_Subaccounts" Association="FundsDBModel.FK_Movements_Accounts_Subaccounts">
+            <End Role="Subaccount" EntitySet="Subaccounts" />
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtherDetails_SubAcct" Association="FundsDBModel.FK_OtherDetails_SubAcct">
+            <End Role="Subaccount" EntitySet="Subaccounts" />
+            <End Role="OtherDetail" EntitySet="OtherDetails" />
+          </AssociationSet>
+          <EntitySet Name="OtherDetailsViews" EntityType="FundsDBModel.OtherDetailsView" />
           </EntityContainer>
         <EntityType Name="AccountingMovement">
           <Key>
@@ -4510,9 +4547,9 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="BondsTFFs" Relationship="FundsDBModel.FK_BondsTFF_Funds" FromRole="Fund" ToRole="BondsTFF" />
           <NavigationProperty Name="BondsTFAMs" Relationship="FundsDBModel.FK_BondsTFAM_Funds" FromRole="Fund" ToRole="BondsTFAM" />
           <NavigationProperty Name="Accounts" Relationship="FundsDBModel.FK_Accounts_Funds" FromRole="Fund" ToRole="Account" />
-          <NavigationProperty Name="Subaccounts" Relationship="FundsDBModel.FK_Subaccounts_Funds" FromRole="Fund" ToRole="Subaccount" />
           <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_Funds" FromRole="Fund" ToRole="Movements_Accounts" />
           <NavigationProperty Name="Loans" Relationship="FundsDBModel.FK_Loans_Funds" FromRole="Fund" ToRole="Loan" />
+          <NavigationProperty Name="Subaccounts" Relationship="FundsDBModel.FK_Subaccounts_Funds" FromRole="Fund" ToRole="Subaccount" />
         </EntityType>
         <EntityType Name="Investment">
           <Key>
@@ -5868,22 +5905,8 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="AccountsClients" Relationship="FundsDBModel.FK_AccountsClients_Accounts" FromRole="Account" ToRole="AccountsClient" />
           <NavigationProperty Name="AccountsCreditors" Relationship="FundsDBModel.FK_AccountsCreditors_Accounts" FromRole="Account" ToRole="AccountsCreditor" />
           <NavigationProperty Name="AccountsEmployees" Relationship="FundsDBModel.FK_AccountsEmployees_Accounts" FromRole="Account" ToRole="AccountsEmployee" />
-          <NavigationProperty Name="Subaccounts" Relationship="FundsDBModel.FK_Subaccounts_Accounts" FromRole="Account" ToRole="Subaccount" />
           <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_Accounts" FromRole="Account" ToRole="Movements_Accounts" />
-        </EntityType>
-        <EntityType Name="Subaccount">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FK_Subaccounts_Accounts" Type="Int32" Nullable="false" />
-          <Property Name="FK_Accounts_Funds" Type="Int32" Nullable="false" />
-          <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Account" Relationship="FundsDBModel.FK_Subaccounts_Accounts" FromRole="Subaccount" ToRole="Account" />
-          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Subaccounts_Funds" FromRole="Subaccount" ToRole="Fund" />
-          <NavigationProperty Name="OtherDetails" Relationship="FundsDBModel.FK_OtherDetails_SubAcct" FromRole="Subaccount" ToRole="OtherDetail" />
-          <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_Subaccounts" FromRole="Subaccount" ToRole="Movements_Accounts" />
+          <NavigationProperty Name="Subaccounts" Relationship="FundsDBModel.FK_Subaccounts_Accounts" FromRole="Account" ToRole="Subaccount" />
         </EntityType>
         <EntityType Name="AccountBalanceView">
           <Key>
@@ -5969,42 +5992,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Subaccounts_Accounts">
-          <End Type="FundsDBModel.Account" Role="Account" Multiplicity="1" />
-          <End Type="FundsDBModel.Subaccount" Role="Subaccount" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Subaccount">
-              <PropertyRef Name="FK_Subaccounts_Accounts" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Subaccounts_Funds">
-          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
-          <End Type="FundsDBModel.Subaccount" Role="Subaccount" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Fund">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Subaccount">
-              <PropertyRef Name="FK_Accounts_Funds" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OtherDetails_SubAcct">
-          <End Type="FundsDBModel.Subaccount" Role="Subaccount" Multiplicity="1" />
-          <End Type="FundsDBModel.OtherDetail" Role="OtherDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subaccount">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OtherDetail">
-              <PropertyRef Name="subacct_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="MovementsView">
           <Key>
             <PropertyRef Name="FundId" />
@@ -6069,7 +6056,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="DisbursementBooks" Relationship="FundsDBModel.FK_DisbursementBook_Movement125" FromRole="Movements_Accounts" ToRole="DisbursementBook" />
           <NavigationProperty Name="DisbursementBooks1" Relationship="FundsDBModel.FK_DisbursementBook_Movement128" FromRole="Movements_Accounts" ToRole="DisbursementBook" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Movements_Accounts_Funds" FromRole="Movements_Accounts" ToRole="Fund" />
-          <NavigationProperty Name="Subaccount1" Relationship="FundsDBModel.FK_Movements_Accounts_Subaccounts" FromRole="Movements_Accounts" ToRole="Subaccount" />
           <NavigationProperty Name="BookingCollectionsDetails" Relationship="FundsDBModel.FK_BookingCollectionsDetails_Mov125" FromRole="Movements_Accounts" ToRole="BookingCollectionsDetail" />
           <NavigationProperty Name="BookingCollectionsDetails1" Relationship="FundsDBModel.FK_BookingCollectionsDetails_Mov128" FromRole="Movements_Accounts" ToRole="BookingCollectionsDetail" />
           <NavigationProperty Name="BookingCollectionsDetails2" Relationship="FundsDBModel.FK_BookingCollectionsDetails_Mov130" FromRole="Movements_Accounts" ToRole="BookingCollectionsDetail" />
@@ -6082,6 +6068,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="BondsTFAMRepaymentDetails1" Relationship="FundsDBModel.FK_BondsTFAMRepaymentDetails_Mov02" FromRole="Movements_Accounts" ToRole="BondsTFAMRepaymentDetail" />
           <NavigationProperty Name="LoanRepaymentDetails" Relationship="FundsDBModel.FK_LoanRepaymentDetails_Mov01" FromRole="Movements_Accounts" ToRole="LoanRepaymentDetail" />
           <NavigationProperty Name="LoanRepaymentDetails1" Relationship="FundsDBModel.FK_LoanRepaymentDetails_Mov02" FromRole="Movements_Accounts" ToRole="LoanRepaymentDetail" />
+          <NavigationProperty Name="Subaccount1" Relationship="FundsDBModel.FK_Movements_Accounts_Subaccounts" FromRole="Movements_Accounts" ToRole="Subaccount" />
           </EntityType>
         <Association Name="FK_Movements_Accounts_AccountingMovements">
           <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="1" />
@@ -6140,18 +6127,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Principal>
             <Dependent Role="Movements_Accounts">
               <PropertyRef Name="FK_Movements_Accounts_Funds" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Movements_Accounts_Subaccounts">
-          <End Type="FundsDBModel.Subaccount" Role="Subaccount" Multiplicity="0..1" />
-          <End Type="FundsDBModel.Movements_Accounts" Role="Movements_Accounts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subaccount">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Movements_Accounts">
-              <PropertyRef Name="FK_Movements_Accounts_Subaccounts" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6981,6 +6956,90 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DetailType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Subaccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Subaccounts_Accounts" Type="Int32" Nullable="false" />
+          <Property Name="FK_Accounts_Funds" Type="Int32" Nullable="false" />
+          <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="detail_type" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="FundsDBModel.FK_Subaccounts_Accounts" FromRole="Subaccount" ToRole="Account" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Subaccounts_Funds" FromRole="Subaccount" ToRole="Fund" />
+          <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_Subaccounts" FromRole="Subaccount" ToRole="Movements_Accounts" />
+          <NavigationProperty Name="OtherDetails" Relationship="FundsDBModel.FK_OtherDetails_SubAcct" FromRole="Subaccount" ToRole="OtherDetail" />
+        </EntityType>
+        <Association Name="FK_Subaccounts_Accounts">
+          <End Type="FundsDBModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="FundsDBModel.Subaccount" Role="Subaccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subaccount">
+              <PropertyRef Name="FK_Subaccounts_Accounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subaccounts_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.Subaccount" Role="Subaccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subaccount">
+              <PropertyRef Name="FK_Accounts_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movements_Accounts_Subaccounts">
+          <End Type="FundsDBModel.Subaccount" Role="Subaccount" Multiplicity="0..1" />
+          <End Type="FundsDBModel.Movements_Accounts" Role="Movements_Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subaccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movements_Accounts">
+              <PropertyRef Name="FK_Movements_Accounts_Subaccounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtherDetails_SubAcct">
+          <End Type="FundsDBModel.Subaccount" Role="Subaccount" Multiplicity="1" />
+          <End Type="FundsDBModel.OtherDetail" Role="OtherDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subaccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtherDetail">
+              <PropertyRef Name="subacct_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OtherDetailsView">
+          <Key>
+            <PropertyRef Name="source" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DetailType" />
+            <PropertyRef Name="fund_id" />
+          </Key>
+          <Property Name="source" Type="String" Nullable="false" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="Row_Id" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DetailType" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="fund_id" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7727,17 +7786,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Subaccounts">
-            <EntityTypeMapping TypeName="FundsDBModel.Subaccount">
-              <MappingFragment StoreEntitySet="Subaccounts">
-                <ScalarProperty Name="number" ColumnName="number" />
-                <ScalarProperty Name="FK_Accounts_Funds" ColumnName="FK_Accounts_Funds" />
-                <ScalarProperty Name="FK_Subaccounts_Accounts" ColumnName="FK_Subaccounts_Accounts" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AccountBalanceViews">
             <EntityTypeMapping TypeName="FundsDBModel.AccountBalanceView">
               <MappingFragment StoreEntitySet="AccountBalanceView">
@@ -8066,6 +8114,38 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
                 <ScalarProperty Name="interest" ColumnName="interest" />
                 <ScalarProperty Name="lender_id" ColumnName="lender_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetailTypes">
+            <EntityTypeMapping TypeName="FundsDBModel.DetailType">
+              <MappingFragment StoreEntitySet="DetailType">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subaccounts">
+            <EntityTypeMapping TypeName="FundsDBModel.Subaccount">
+              <MappingFragment StoreEntitySet="Subaccounts">
+                <ScalarProperty Name="detail_type" ColumnName="detail_type" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="FK_Accounts_Funds" ColumnName="FK_Accounts_Funds" />
+                <ScalarProperty Name="FK_Subaccounts_Accounts" ColumnName="FK_Subaccounts_Accounts" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OtherDetailsViews">
+            <EntityTypeMapping TypeName="FundsDBModel.OtherDetailsView">
+              <MappingFragment StoreEntitySet="OtherDetailsView">
+                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="DetailType" ColumnName="DetailType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Row_Id" ColumnName="Row_Id" />
+                <ScalarProperty Name="source" ColumnName="source" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

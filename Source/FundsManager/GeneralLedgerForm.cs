@@ -203,18 +203,33 @@ namespace FundsManager
         {
             try
             {
-                cbOtherDetail.DataSource = null;
-                cbOtherDetail.Items.Clear();
-                cbOtherDetail.Text = "";
-                cbOtherDetail.SelectedItem = null;
-                cbOtherDetail.SelectedText = "Select detail";
+                //cbOtherDetail.DataSource = null;
+                //cbOtherDetail.Items.Clear();
+                //cbOtherDetail.Text = "";
+                //cbOtherDetail.SelectedItem = null;
+                //cbOtherDetail.SelectedText = "Select detail";
 
-                Dictionary<int, string> comboSource = DataUtils.getOtherDetailsSource(Convert.ToInt32(cbSubaccount.SelectedValue));
-                                
+                //Dictionary<int, string> comboSource = DataUtils.getOtherDetailsSource(Convert.ToInt32(cbSubaccount.SelectedValue));
 
-                cbOtherDetail.DataSource = new BindingSource(comboSource, null);
-                cbOtherDetail.DisplayMember = "Value";
-                cbOtherDetail.ValueMember = "Key";
+
+                //cbOtherDetail.DataSource = new BindingSource(comboSource, null);
+                //cbOtherDetail.DisplayMember = "Value";
+                //cbOtherDetail.ValueMember = "Key";
+
+                int subAccountId = 0;
+                int detailType = 0;
+
+                if (cbSubaccount.SelectedValue != null && int.TryParse(cbSubaccount.SelectedValue.ToString(), out subAccountId) && subAccountId > 0)
+                {
+                    Subaccount subAcct = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == subAccountId);
+
+                    if (subAcct != null && subAcct.detail_type.HasValue)
+                    {
+                        detailType = subAcct.detail_type.Value;
+                    }
+                }
+
+                this.otherDetailsViewTableAdapter.FillWithEmpty(this.fundsDBDataSet.OtherDetailsView, manager.Selected, detailType);
             }
             catch (Exception _ex)
             {
@@ -242,8 +257,8 @@ namespace FundsManager
                     if (cbOtherDetail.SelectedIndex > 0)
                     {
                         string temp_id = Convert.ToString(cbOtherDetail.SelectedValue);
-                        movement.Detail_type = Convert.ToInt32(temp_id.Substring(0, 1));
-                        movement.Detail = Convert.ToInt32(temp_id.Substring(1, temp_id.Length - 1));
+                        movement.Detail_type = Convert.ToInt32(temp_id.Split('_')[0]);
+                        movement.Detail = Convert.ToInt32(temp_id.Split('_')[1]);
                     }
                     else
                     {
@@ -1013,8 +1028,8 @@ namespace FundsManager
                 if (cbOtherDetail.SelectedIndex > 0)
                 {
                     string temp_id = Convert.ToString(cbOtherDetail.SelectedValue);
-                    toEdit.Detail_type = Convert.ToInt32(temp_id.Substring(0, 1));
-                    toEdit.Detail = Convert.ToInt32(temp_id.Substring(1, temp_id.Length - 1));
+                    toEdit.Detail_type = Convert.ToInt32(temp_id.Split('_')[0]);
+                    toEdit.Detail = Convert.ToInt32(temp_id.Split('_')[1]);
                 }
                 else
                 {
