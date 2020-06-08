@@ -385,22 +385,6 @@ namespace FundsManager
             form.Show();
         }
 
-        private void mainPaymentToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.IsMdiContainer = true;
-            BondsTFAMMainPayment form = new BondsTFAMMainPayment();
-            form.MdiParent = this;
-            form.Show();
-        }
-
-        private void interestPaymentToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.IsMdiContainer = true;
-            BondsTFAMInterestPayment form = new BondsTFAMInterestPayment();
-            form.MdiParent = this;
-            form.Show();
-        }
-
         private void closePeriodToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
@@ -437,6 +421,14 @@ namespace FundsManager
         {
             this.IsMdiContainer = true;
             DisbursementToBeOverdueForm form = new DisbursementToBeOverdueForm();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void repaymentToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            BondsTFAMRepaymentForm form = new BondsTFAMRepaymentForm();
             form.MdiParent = this;
             form.Show();
         }

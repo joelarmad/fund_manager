@@ -113,12 +113,12 @@ namespace FundsManager
                                 }
                                 else
                                 {
-                                    errors += "\rLoan " + reference + " has too much collection value.";
+                                    errors += "\rLoan " + reference + " has too much repayment value.";
                                 }
                             }
                             else
                             {
-                                errors += "\r  Loan " + reference + " has wrong collection value.";
+                                errors += "\r  Loan " + reference + " has wrong repayment value.";
                             }
                         }
                     }

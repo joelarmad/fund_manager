@@ -94,8 +94,8 @@
     <Shape ID="DesignTable:LoanRepaymentDetails" ZOrder="15" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
     <Shape ID="DesignTable:BondsTFAMRepaymentDetails" ZOrder="14" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
     <Shape ID="DesignTable:BondsTFAMRepayments" ZOrder="13" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
-    <Shape ID="DesignTable:BondsTFAMRepaymentView" ZOrder="12" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
-    <Shape ID="DesignTable:BondsTFAMToBeRepaid" ZOrder="11" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
+    <Shape ID="DesignTable:BondsTFAMRepaymentView" ZOrder="12" X="0" Y="0" Height="305" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:BondsTFAMToBeRepaid" ZOrder="11" X="0" Y="0" Height="324" Width="284" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
     <Shape ID="DesignTable:LoansRepaymentsView" ZOrder="10" X="0" Y="0" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="0" />
     <Shape ID="DesignTable:LoansToBeRepaidView" ZOrder="9" X="0" Y="0" Height="324" Width="276" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
   </Shapes>
