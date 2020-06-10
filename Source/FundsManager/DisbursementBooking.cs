@@ -19,7 +19,6 @@ namespace FundsManager
         {
             this.BookingCollectionsDetails = new HashSet<BookingCollectionsDetail>();
             this.BookingGeneratedInterestDetails = new HashSet<BookingGeneratedInterestDetail>();
-            this.DisbursementOverdueDetails = new HashSet<DisbursementOverdueDetail>();
         }
     
         public int id { get; set; }
@@ -37,6 +36,8 @@ namespace FundsManager
         public int movement128_id { get; set; }
         public bool collected { get; set; }
         public bool can_generate_interest { get; set; }
+        public bool has_booking { get; set; }
+        public Nullable<int> parent_book_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookingCollectionsDetail> BookingCollectionsDetails { get; set; }
@@ -47,7 +48,5 @@ namespace FundsManager
         public virtual Disbursement Disbursement { get; set; }
         public virtual Movements_Accounts Movements_Accounts { get; set; }
         public virtual Movements_Accounts Movements_Accounts1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DisbursementOverdueDetail> DisbursementOverdueDetails { get; set; }
     }
 }

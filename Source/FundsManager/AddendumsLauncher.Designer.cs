@@ -45,6 +45,7 @@
             this.clientsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientsTableAdapter();
             this.clientContractsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientContractsTableAdapter();
             this.disbursementsForAddendumsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.DisbursementsForAddendumsTableAdapter();
+            this.row_key = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.disbursementidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -121,6 +122,7 @@
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.row_key,
             this.disbursementidDataGridViewTextBoxColumn,
             this.numberDataGridViewTextBoxColumn,
             this.amountDataGridViewTextBoxColumn,
@@ -152,6 +154,14 @@
             // disbursementsForAddendumsTableAdapter
             // 
             this.disbursementsForAddendumsTableAdapter.ClearBeforeFill = true;
+            // 
+            // row_key
+            // 
+            this.row_key.DataPropertyName = "row_key";
+            this.row_key.HeaderText = "row_key";
+            this.row_key.Name = "row_key";
+            this.row_key.ReadOnly = true;
+            this.row_key.Visible = false;
             // 
             // disbursementidDataGridViewTextBoxColumn
             // 
@@ -241,6 +251,7 @@
         private FundsDBDataSetTableAdapters.DisbursementsForAddendumsTableAdapter disbursementsForAddendumsTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn toBeCollectedDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn remainingDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn row_key;
         private System.Windows.Forms.DataGridViewTextBoxColumn disbursementidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;

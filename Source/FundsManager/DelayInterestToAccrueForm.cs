@@ -110,11 +110,11 @@ namespace FundsManager
             cmdGenerateInterest.Enabled = false;
             cmdGenerateAllInterest.Enabled = false;
 
-            Account account128 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "128" && x.FK_Accounts_Funds == manager.Selected);
+            Account account130 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "130" && x.FK_Accounts_Funds == manager.Selected);
 
-            Account account901 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "901" && x.FK_Accounts_Funds == manager.Selected);
+            Account account902 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "902" && x.FK_Accounts_Funds == manager.Selected);
 
-            if (account128 != null && account901 != null)
+            if (account130 != null && account902 != null)
             {
                 try
                 {
@@ -207,9 +207,9 @@ namespace FundsManager
                             foreach (DisbursementsBookingView _delayedInterestToAccrue in _delayedInterestToAccrueList)
                             {
                                 Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == _delayedInterestToAccrue.currency_id && x.FK_Currencies_Funds == manager.Selected);
-                                Subaccount subacct128 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account128.Id && x.name == "INV " + currency.symbol);
+                                Subaccount subacct130 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account130.Id && x.name == "INV " + currency.symbol);
 
-                                if (currency != null && subacct128 != null)
+                                if (currency != null && subacct130 != null)
                                 {
                                     BookingGeneratedInterestDetail interestDetail = manager.My_db.BookingGeneratedInterestDetails.FirstOrDefault(x => x.booking_id == _delayedInterestToAccrue.booking_id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
 
@@ -284,32 +284,32 @@ namespace FundsManager
 
                                             _detail.AccountingMovement = _accountingMovement;
 
-                                            Movements_Accounts _maccount128 = new Movements_Accounts();
+                                            Movements_Accounts _maccount130 = new Movements_Accounts();
 
-                                            _maccount128.AccountingMovement = _accountingMovement;
-                                            _maccount128.FK_Movements_Accounts_Funds = manager.Selected;
-                                            _maccount128.FK_Movements_Accounts_Accounts = account128.Id;
-                                            if (subacct128 != null)
-                                                _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
-                                            _maccount128.subaccount = _delayedInterestToAccrue.client_id;
-                                            _maccount128.subaccount_type = 1;
-                                            _maccount128.debit = Math.Round(_interest, 2);
-                                            _maccount128.credit = 0;
+                                            _maccount130.AccountingMovement = _accountingMovement;
+                                            _maccount130.FK_Movements_Accounts_Funds = manager.Selected;
+                                            _maccount130.FK_Movements_Accounts_Accounts = account130.Id;
+                                            if (subacct130 != null)
+                                                _maccount130.FK_Movements_Accounts_Subaccounts = subacct130.Id;
+                                            _maccount130.subaccount = _delayedInterestToAccrue.client_id;
+                                            _maccount130.subaccount_type = 1;
+                                            _maccount130.debit = Math.Round(_interest, 2);
+                                            _maccount130.credit = 0;
 
-                                            manager.My_db.Movements_Accounts.Add(_maccount128);
+                                            manager.My_db.Movements_Accounts.Add(_maccount130);
 
-                                            Movements_Accounts _maccount901 = new Movements_Accounts();
+                                            Movements_Accounts _maccount902 = new Movements_Accounts();
 
-                                            _maccount901.AccountingMovement = _accountingMovement;
-                                            _maccount901.FK_Movements_Accounts_Funds = manager.Selected;
-                                            _maccount901.FK_Movements_Accounts_Accounts = account901.Id;
+                                            _maccount902.AccountingMovement = _accountingMovement;
+                                            _maccount902.FK_Movements_Accounts_Funds = manager.Selected;
+                                            _maccount902.FK_Movements_Accounts_Accounts = account902.Id;
 
-                                            _maccount901.subaccount = _delayedInterestToAccrue.client_id;
-                                            _maccount901.subaccount_type = 1;
-                                            _maccount901.debit = 0;
-                                            _maccount901.credit = Math.Round(_interest, 2);
+                                            _maccount902.subaccount = _delayedInterestToAccrue.client_id;
+                                            _maccount902.subaccount_type = 1;
+                                            _maccount902.debit = 0;
+                                            _maccount902.credit = Math.Round(_interest, 2);
 
-                                            manager.My_db.Movements_Accounts.Add(_maccount901);
+                                            manager.My_db.Movements_Accounts.Add(_maccount902);
 
                                         }
                                     }
@@ -365,7 +365,7 @@ namespace FundsManager
             }
             else
             {
-                ErrorMessage.showErrorMessage(new Exception("No account 128 or 901 were found."));
+                ErrorMessage.showErrorMessage(new Exception("No account 130 or 902 were found."));
             }
         }
 

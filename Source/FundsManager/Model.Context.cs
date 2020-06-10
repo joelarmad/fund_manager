@@ -26,6 +26,7 @@ namespace FundsManager
         }
     
         public virtual DbSet<AccountingMovement> AccountingMovements { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<AccountsBankingAccount> AccountsBankingAccounts { get; set; }
         public virtual DbSet<AccountsClient> AccountsClients { get; set; }
         public virtual DbSet<AccountsCreditor> AccountsCreditors { get; set; }
@@ -33,18 +34,32 @@ namespace FundsManager
         public virtual DbSet<AccountType> AccountTypes { get; set; }
         public virtual DbSet<BankingAccount> BankingAccounts { get; set; }
         public virtual DbSet<Bank> Banks { get; set; }
+        public virtual DbSet<BondsTFAM> BondsTFAMs { get; set; }
+        public virtual DbSet<BondsTFAMGeneratedInterestDetail> BondsTFAMGeneratedInterestDetails { get; set; }
+        public virtual DbSet<BondsTFAMGeneratedInterest> BondsTFAMGeneratedInterests { get; set; }
+        public virtual DbSet<BondsTFAMRepaymentDetail> BondsTFAMRepaymentDetails { get; set; }
+        public virtual DbSet<BondsTFAMRepayment> BondsTFAMRepayments { get; set; }
+        public virtual DbSet<BondsTFF> BondsTFFs { get; set; }
+        public virtual DbSet<BondsTFFInvestor> BondsTFFInvestors { get; set; }
+        public virtual DbSet<BookingCollectionsDetail> BookingCollectionsDetails { get; set; }
         public virtual DbSet<BookingGeneratedInterestDetail> BookingGeneratedInterestDetails { get; set; }
         public virtual DbSet<BookingGeneratedInterest> BookingGeneratedInterests { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<ClosedPeriod> ClosedPeriods { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Creditor> Creditors { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
+        public virtual DbSet<DetailType> DetailTypes { get; set; }
         public virtual DbSet<Disbursement_dates> Disbursement_dates { get; set; }
+        public virtual DbSet<DisbursementBooking> DisbursementBookings { get; set; }
         public virtual DbSet<DisbursementBook> DisbursementBooks { get; set; }
         public virtual DbSet<DisbursementCollection> DisbursementCollections { get; set; }
+        public virtual DbSet<DisbursementCollectionsDetail> DisbursementCollectionsDetails { get; set; }
         public virtual DbSet<DisbursementGeneratedInterestDetail> DisbursementGeneratedInterestDetails { get; set; }
         public virtual DbSet<DisbursementGeneratedInterest> DisbursementGeneratedInterests { get; set; }
         public virtual DbSet<DisbursementItem> DisbursementItems { get; set; }
+        public virtual DbSet<DisbursementOverdueDetail> DisbursementOverdueDetails { get; set; }
+        public virtual DbSet<DisbursementOverdue> DisbursementOverdues { get; set; }
         public virtual DbSet<DisbursementPayment> DisbursementPayments { get; set; }
         public virtual DbSet<Disbursement> Disbursements { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
@@ -55,55 +70,51 @@ namespace FundsManager
         public virtual DbSet<Investor> Investors { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<letter_of_credits> letter_of_credits { get; set; }
+        public virtual DbSet<Loan_InterestRepayments> Loan_InterestRepayments { get; set; }
+        public virtual DbSet<Loan_Repayments> Loan_Repayments { get; set; }
         public virtual DbSet<LoanGeneratedInterestDetail> LoanGeneratedInterestDetails { get; set; }
         public virtual DbSet<LoanGeneratedInterest> LoanGeneratedInterests { get; set; }
+        public virtual DbSet<LoanRepaymentDetail> LoanRepaymentDetails { get; set; }
+        public virtual DbSet<Loan> Loans { get; set; }
+        public virtual DbSet<Movements_Accounts> Movements_Accounts { get; set; }
         public virtual DbSet<OtherDetail> OtherDetails { get; set; }
         public virtual DbSet<Resource> Resources { get; set; }
         public virtual DbSet<Sector> Sectors { get; set; }
         public virtual DbSet<ServiceSupplier> ServiceSuppliers { get; set; }
         public virtual DbSet<Shareholder> Shareholders { get; set; }
         public virtual DbSet<Shipment> Shipments { get; set; }
+        public virtual DbSet<Subaccount> Subaccounts { get; set; }
         public virtual DbSet<UnderlyingDebtor> UnderlyingDebtors { get; set; }
+        public virtual DbSet<AccountBalanceView> AccountBalanceViews { get; set; }
         public virtual DbSet<BondDetail> BondDetails { get; set; }
+        public virtual DbSet<BondGeneratedInterestView> BondGeneratedInterestViews { get; set; }
+        public virtual DbSet<BondsTFAMInterestToPay> BondsTFAMInterestToPays { get; set; }
+        public virtual DbSet<BondsTFAMRepaymentView> BondsTFAMRepaymentViews { get; set; }
+        public virtual DbSet<BondsTFAMToBeRepaid> BondsTFAMToBeRepaids { get; set; }
         public virtual DbSet<BookingGeneratedInterestView> BookingGeneratedInterestViews { get; set; }
         public virtual DbSet<ClientContract> ClientContracts { get; set; }
+        public virtual DbSet<DisbursementCollectionView> DisbursementCollectionViews { get; set; }
         public virtual DbSet<DisbursementGeneratedInterestView> DisbursementGeneratedInterestViews { get; set; }
+        public virtual DbSet<DisbursementOverdueGeneratedView> DisbursementOverdueGeneratedViews { get; set; }
+        public virtual DbSet<DisbursementsBookingView> DisbursementsBookingViews { get; set; }
+        public virtual DbSet<DisbursementsForAddendum> DisbursementsForAddendums { get; set; }
+        public virtual DbSet<DisbursementsToBeCollected> DisbursementsToBeCollecteds { get; set; }
         public virtual DbSet<InvestmentsView> InvestmentsViews { get; set; }
+        public virtual DbSet<LoanGeneratedInterestView> LoanGeneratedInterestViews { get; set; }
+        public virtual DbSet<Loans_View> Loans_View { get; set; }
+        public virtual DbSet<LoansRepaymentsView> LoansRepaymentsViews { get; set; }
+        public virtual DbSet<LoansToBeRepaidView> LoansToBeRepaidViews { get; set; }
+        public virtual DbSet<MovementsView> MovementsViews { get; set; }
+        public virtual DbSet<OtherDetailsView> OtherDetailsViews { get; set; }
+        public virtual DbSet<ProfitResultsView> ProfitResultsViews { get; set; }
         public virtual DbSet<ProfitShareToAccrue> ProfitShareToAccrues { get; set; }
         public virtual DbSet<ProfitsResumeView> ProfitsResumeViews { get; set; }
+        public virtual DbSet<SubAccountBalance> SubAccountBalances { get; set; }
         public virtual DbSet<Template_Balance_Sheet> Template_Balance_Sheet { get; set; }
         public virtual DbSet<Template_Profit_Loss> Template_Profit_Loss { get; set; }
         public virtual DbSet<TotalExpense> TotalExpenses { get; set; }
         public virtual DbSet<TotalIncome> TotalIncomes { get; set; }
         public virtual DbSet<UnlinkedDisbursement> UnlinkedDisbursements { get; set; }
-        public virtual DbSet<Loans_View> Loans_View { get; set; }
-        public virtual DbSet<BondsTFF> BondsTFFs { get; set; }
-        public virtual DbSet<BondsTFFInvestor> BondsTFFInvestors { get; set; }
-        public virtual DbSet<BondsTFAM> BondsTFAMs { get; set; }
-        public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<AccountBalanceView> AccountBalanceViews { get; set; }
-        public virtual DbSet<SubAccountBalance> SubAccountBalances { get; set; }
-        public virtual DbSet<MovementsView> MovementsViews { get; set; }
-        public virtual DbSet<ClosedPeriod> ClosedPeriods { get; set; }
-        public virtual DbSet<Movements_Accounts> Movements_Accounts { get; set; }
-        public virtual DbSet<BondsTFAMGeneratedInterest> BondsTFAMGeneratedInterests { get; set; }
-        public virtual DbSet<BondsTFAMGeneratedInterestDetail> BondsTFAMGeneratedInterestDetails { get; set; }
-        public virtual DbSet<BookingCollectionsDetail> BookingCollectionsDetails { get; set; }
-        public virtual DbSet<DisbursementsToBeCollected> DisbursementsToBeCollecteds { get; set; }
-        public virtual DbSet<DisbursementBooking> DisbursementBookings { get; set; }
-        public virtual DbSet<DisbursementsBookingView> DisbursementsBookingViews { get; set; }
-        public virtual DbSet<DisbursementOverdue> DisbursementOverdues { get; set; }
-        public virtual DbSet<DisbursementCollectionsDetail> DisbursementCollectionsDetails { get; set; }
-        public virtual DbSet<DisbursementOverdueDetail> DisbursementOverdueDetails { get; set; }
-        public virtual DbSet<DisbursementsForAddendum> DisbursementsForAddendums { get; set; }
-        public virtual DbSet<Loan_InterestRepayments> Loan_InterestRepayments { get; set; }
-        public virtual DbSet<BondsTFAMRepaymentDetail> BondsTFAMRepaymentDetails { get; set; }
-        public virtual DbSet<BondsTFAMRepayment> BondsTFAMRepayments { get; set; }
-        public virtual DbSet<Loan_Repayments> Loan_Repayments { get; set; }
-        public virtual DbSet<LoanRepaymentDetail> LoanRepaymentDetails { get; set; }
-        public virtual DbSet<Loan> Loans { get; set; }
-        public virtual DbSet<DetailType> DetailTypes { get; set; }
-        public virtual DbSet<Subaccount> Subaccounts { get; set; }
-        public virtual DbSet<OtherDetailsView> OtherDetailsViews { get; set; }
+        public virtual DbSet<DisbursementPlusAddendumsView> DisbursementPlusAddendumsViews { get; set; }
     }
 }

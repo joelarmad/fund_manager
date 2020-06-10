@@ -5,53 +5,122 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="261fa96f59a74e08b2d054a9f6e39a57" Name="Diagram1" ZoomLevel="109">
-        <EntityTypeShape EntityType="FundsDBModel.AccountingMovement" Width="1.5" PointX="8.25" PointY="53" />
-        <EntityTypeShape EntityType="FundsDBModel.AccountsBankingAccount" Width="1.5" PointX="7.5" PointY="74.625" />
-        <EntityTypeShape EntityType="FundsDBModel.AccountsClient" Width="1.5" PointX="10.5" PointY="78.375" />
-        <EntityTypeShape EntityType="FundsDBModel.AccountsCreditor" Width="1.5" PointX="8.25" PointY="80.375" />
-        <EntityTypeShape EntityType="FundsDBModel.AccountsEmployee" Width="1.5" PointX="5.25" PointY="83.375" />
+        <EntityTypeShape EntityType="FundsDBModel.AccountingMovement" Width="1.5" PointX="5.25" PointY="63.75" />
+        <EntityTypeShape EntityType="FundsDBModel.Account" Width="1.5" PointX="3" PointY="73.625" />
+        <EntityTypeShape EntityType="FundsDBModel.AccountsBankingAccount" Width="1.5" PointX="10.5" PointY="70.625" />
+        <EntityTypeShape EntityType="FundsDBModel.AccountsClient" Width="1.5" PointX="5.25" PointY="73.5" />
+        <EntityTypeShape EntityType="FundsDBModel.AccountsCreditor" Width="1.5" PointX="5.25" PointY="90.625" />
+        <EntityTypeShape EntityType="FundsDBModel.AccountsEmployee" Width="1.5" PointX="8.25" PointY="61.125" />
         <EntityTypeShape EntityType="FundsDBModel.AccountType" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="FundsDBModel.BankingAccount" Width="1.5" PointX="5.25" PointY="53.5" />
-        <EntityTypeShape EntityType="FundsDBModel.Bank" Width="1.5" PointX="5.25" PointY="63" />
-        <EntityTypeShape EntityType="FundsDBModel.BookingGeneratedInterestDetail" Width="1.5" PointX="13.5" PointY="53.625" />
-        <EntityTypeShape EntityType="FundsDBModel.BookingGeneratedInterest" Width="1.5" PointX="11.25" PointY="47.375" />
-        <EntityTypeShape EntityType="FundsDBModel.Client" Width="1.5" PointX="8.25" PointY="63.25" />
-        <EntityTypeShape EntityType="FundsDBModel.Country" Width="1.5" PointX="3" PointY="64.625" />
-        <EntityTypeShape EntityType="FundsDBModel.Creditor" Width="1.5" PointX="3" PointY="85.75" />
-        <EntityTypeShape EntityType="FundsDBModel.Currency" Width="1.5" PointX="3" PointY="42.125" />
-        <EntityTypeShape EntityType="FundsDBModel.Disbursement_dates" Width="1.5" PointX="3" PointY="82.875" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementBook" Width="1.5" PointX="13.5" PointY="57.875" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementCollection" Width="1.5" PointX="10.5" PointY="50.5" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementGeneratedInterestDetail" Width="1.5" PointX="10.5" PointY="53.875" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementGeneratedInterest" Width="1.5" PointX="8.25" PointY="50.375" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementItem" Width="1.5" PointX="5.25" PointY="80.25" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementPayment" Width="1.5" PointX="13.5" PointY="50.5" />
-        <EntityTypeShape EntityType="FundsDBModel.Disbursement" Width="1.5" PointX="15" PointY="67" />
-        <EntityTypeShape EntityType="FundsDBModel.Employee" Width="1.5" PointX="3" PointY="91.875" />
-        <EntityTypeShape EntityType="FundsDBModel.FundBondInterest" Width="1.5" PointX="5.25" PointY="76.125" />
-        <EntityTypeShape EntityType="FundsDBModel.Fund" Width="1.5" PointX="0.75" PointY="61" />
-        <EntityTypeShape EntityType="FundsDBModel.Investment" Width="1.5" PointX="3" PointY="46" />
-        <EntityTypeShape EntityType="FundsDBModel.InvestorBondInterest" Width="1.5" PointX="8.25" PointY="87" />
-        <EntityTypeShape EntityType="FundsDBModel.Investor" Width="1.5" PointX="3" PointY="99" />
-        <EntityTypeShape EntityType="FundsDBModel.Item" Width="1.5" PointX="3" PointY="80" />
-        <EntityTypeShape EntityType="FundsDBModel.letter_of_credits" Width="1.5" PointX="7.5" PointY="59.375" />
-        <EntityTypeShape EntityType="FundsDBModel.LoanGeneratedInterestDetail" Width="1.5" PointX="10.5" PointY="57.875" />
-        <EntityTypeShape EntityType="FundsDBModel.LoanGeneratedInterest" Width="1.5" PointX="8.25" PointY="47.375" />
-        <EntityTypeShape EntityType="FundsDBModel.OtherDetail" Width="1.5" PointX="12.5" PointY="67.875" />
-        <EntityTypeShape EntityType="FundsDBModel.Resource" Width="1.5" PointX="3" PointY="102.125" />
-        <EntityTypeShape EntityType="FundsDBModel.Sector" Width="1.5" PointX="3" PointY="88.875" />
-        <EntityTypeShape EntityType="FundsDBModel.ServiceSupplier" Width="1.5" PointX="3" PointY="59.125" />
-        <EntityTypeShape EntityType="FundsDBModel.Shareholder" Width="1.5" PointX="3" PointY="61.875" />
-        <EntityTypeShape EntityType="FundsDBModel.Shipment" Width="1.5" PointX="9.75" PointY="68.5" />
-        <EntityTypeShape EntityType="FundsDBModel.UnderlyingDebtor" Width="1.5" PointX="7.5" PointY="67.125" />
+        <EntityTypeShape EntityType="FundsDBModel.BankingAccount" Width="1.5" PointX="8.25" PointY="65.25" />
+        <EntityTypeShape EntityType="FundsDBModel.Bank" Width="1.5" PointX="5.25" PointY="83.125" />
+        <EntityTypeShape EntityType="FundsDBModel.BondsTFAM" Width="1.5" PointX="10.5" PointY="64.375" />
+        <EntityTypeShape EntityType="FundsDBModel.BondsTFAMGeneratedInterestDetail" Width="1.5" PointX="15.75" PointY="65.125" />
+        <EntityTypeShape EntityType="FundsDBModel.BondsTFAMGeneratedInterest" Width="1.5" PointX="13.5" PointY="57.125" />
+        <EntityTypeShape EntityType="FundsDBModel.BondsTFAMRepaymentDetail" Width="1.5" PointX="9.75" PointY="88.375" />
+        <EntityTypeShape EntityType="FundsDBModel.BondsTFAMRepayment" Width="1.5" PointX="7.5" PointY="88.75" />
+        <EntityTypeShape EntityType="FundsDBModel.BondsTFF" Width="1.5" PointX="3" PointY="92.125" />
+        <EntityTypeShape EntityType="FundsDBModel.BondsTFFInvestor" Width="1.5" PointX="5.25" PointY="77.25" />
+        <EntityTypeShape EntityType="FundsDBModel.BookingCollectionsDetail" Width="1.5" PointX="21" PointY="72.875" />
+        <EntityTypeShape EntityType="FundsDBModel.BookingGeneratedInterestDetail" Width="1.5" PointX="13.5" PointY="60.25" />
+        <EntityTypeShape EntityType="FundsDBModel.BookingGeneratedInterest" Width="1.5" PointX="11.25" PointY="58.125" />
+        <EntityTypeShape EntityType="FundsDBModel.Client" Width="1.5" PointX="8.25" PointY="84.5" />
+        <EntityTypeShape EntityType="FundsDBModel.ClosedPeriod" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FundsDBModel.Country" Width="1.5" PointX="3" PointY="96.125" />
+        <EntityTypeShape EntityType="FundsDBModel.Creditor" Width="1.5" PointX="3" PointY="110.625" />
+        <EntityTypeShape EntityType="FundsDBModel.Currency" Width="1.5" PointX="3" PointY="55.25" />
+        <EntityTypeShape EntityType="FundsDBModel.DetailType" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FundsDBModel.Disbursement_dates" Width="1.5" PointX="3" PointY="77.75" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementBooking" Width="1.5" PointX="18.75" PointY="65" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementBook" Width="1.5" PointX="13.5" PointY="70.5" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementCollection" Width="1.5" PointX="10.5" PointY="81.25" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementCollectionsDetail" Width="1.5" PointX="15.75" PointY="77.375" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementGeneratedInterestDetail" Width="1.5" PointX="10.5" PointY="60.5" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementGeneratedInterest" Width="1.5" PointX="8.25" PointY="54.125" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementItem" Width="1.5" PointX="5.25" PointY="99.75" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementOverdueDetail" Width="1.5" PointX="13.5" PointY="64.875" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementOverdue" Width="1.5" PointX="11.25" PointY="55.125" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementPayment" Width="1.5" PointX="7.5" PointY="77.375" />
+        <EntityTypeShape EntityType="FundsDBModel.Disbursement" Width="1.5" PointX="15.75" PointY="81.875" />
+        <EntityTypeShape EntityType="FundsDBModel.Employee" Width="1.5" PointX="3" PointY="52.25" />
+        <EntityTypeShape EntityType="FundsDBModel.FundBondInterest" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FundsDBModel.Fund" Width="1.5" PointX="0.75" PointY="71" />
+        <EntityTypeShape EntityType="FundsDBModel.Investment" Width="1.5" PointX="3" PointY="88.25" />
+        <EntityTypeShape EntityType="FundsDBModel.InvestorBondInterest" Width="1.5" PointX="5.25" PointY="59.25" />
+        <EntityTypeShape EntityType="FundsDBModel.Investor" Width="1.5" PointX="3" PointY="59.375" />
+        <EntityTypeShape EntityType="FundsDBModel.Item" Width="1.5" PointX="3" PointY="99.5" />
+        <EntityTypeShape EntityType="FundsDBModel.letter_of_credits" Width="1.5" PointX="7.5" PointY="80.5" />
+        <EntityTypeShape EntityType="FundsDBModel.Loan_InterestRepayments" Width="1.5" PointX="7.5" PointY="69.75" />
+        <EntityTypeShape EntityType="FundsDBModel.Loan_Repayments" Width="1.5" PointX="7.5" PointY="114.375" />
+        <EntityTypeShape EntityType="FundsDBModel.LoanGeneratedInterestDetail" Width="1.5" PointX="7.5" PointY="57.375" />
+        <EntityTypeShape EntityType="FundsDBModel.LoanGeneratedInterest" Width="1.5" PointX="5.25" PointY="56.125" />
+        <EntityTypeShape EntityType="FundsDBModel.LoanRepaymentDetail" Width="1.5" PointX="12.75" PointY="93.75" />
+        <EntityTypeShape EntityType="FundsDBModel.Loan" Width="1.5" PointX="12.5" PointY="84.625" />
+        <EntityTypeShape EntityType="FundsDBModel.Movements_Accounts" Width="1.5" PointX="10.5" PointY="74" />
+        <EntityTypeShape EntityType="FundsDBModel.OtherDetail" Width="1.5" PointX="13.5" PointY="74.625" />
+        <EntityTypeShape EntityType="FundsDBModel.Resource" Width="1.5" PointX="3" PointY="102.375" />
+        <EntityTypeShape EntityType="FundsDBModel.Sector" Width="1.5" PointX="3" PointY="113.625" />
+        <EntityTypeShape EntityType="FundsDBModel.ServiceSupplier" Width="1.5" PointX="3" PointY="107.875" />
+        <EntityTypeShape EntityType="FundsDBModel.Shareholder" Width="1.5" PointX="3" PointY="105.125" />
+        <EntityTypeShape EntityType="FundsDBModel.Shipment" Width="1.5" PointX="9.75" PointY="92.625" />
+        <EntityTypeShape EntityType="FundsDBModel.Subaccount" Width="1.5" PointX="8.25" PointY="73.25" />
+        <EntityTypeShape EntityType="FundsDBModel.UnderlyingDebtor" Width="1.5" PointX="13.5" PointY="80.375" />
+        <EntityTypeShape EntityType="FundsDBModel.AccountBalanceView" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FundsDBModel.BondDetail" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FundsDBModel.BondGeneratedInterestView" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FundsDBModel.BondsTFAMInterestToPay" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="FundsDBModel.BondsTFAMRepaymentView" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="FundsDBModel.BondsTFAMToBeRepaid" Width="1.5" PointX="4.75" PointY="7.75" />
+        <EntityTypeShape EntityType="FundsDBModel.BookingGeneratedInterestView" Width="1.5" PointX="6.75" PointY="7.75" />
+        <EntityTypeShape EntityType="FundsDBModel.ClientContract" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementCollectionView" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementGeneratedInterestView" Width="1.5" PointX="8.75" PointY="9.75" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementOverdueGeneratedView" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementsBookingView" Width="1.5" PointX="10.75" PointY="10.75" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementsForAddendum" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementsToBeCollected" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="FundsDBModel.InvestmentsView" Width="1.5" PointX="2.75" PointY="12.75" />
+        <EntityTypeShape EntityType="FundsDBModel.LoanGeneratedInterestView" Width="1.5" PointX="4.75" PointY="12.75" />
+        <EntityTypeShape EntityType="FundsDBModel.Loans_View" Width="1.5" PointX="12.75" PointY="5.75" />
+        <EntityTypeShape EntityType="FundsDBModel.LoansRepaymentsView" Width="1.5" PointX="12.75" PointY="10.75" />
+        <EntityTypeShape EntityType="FundsDBModel.LoansToBeRepaidView" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FundsDBModel.MovementsView" Width="1.5" PointX="14.75" PointY="6.75" />
+        <EntityTypeShape EntityType="FundsDBModel.OtherDetailsView" Width="1.5" PointX="6.75" PointY="14.75" />
+        <EntityTypeShape EntityType="FundsDBModel.ProfitResultsView" Width="1.5" PointX="14.75" PointY="12.75" />
+        <EntityTypeShape EntityType="FundsDBModel.ProfitShareToAccrue" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FundsDBModel.ProfitsResumeView" Width="1.5" PointX="16.75" PointY="6.75" />
+        <EntityTypeShape EntityType="FundsDBModel.SubAccountBalance" Width="1.5" PointX="16.75" PointY="9.75" />
+        <EntityTypeShape EntityType="FundsDBModel.Template_Balance_Sheet" Width="1.5" PointX="16.75" PointY="12.75" />
+        <EntityTypeShape EntityType="FundsDBModel.Template_Profit_Loss" Width="1.5" PointX="6.75" PointY="17.75" />
+        <EntityTypeShape EntityType="FundsDBModel.TotalExpense" Width="1.5" PointX="12.75" PointY="17.75" />
+        <EntityTypeShape EntityType="FundsDBModel.TotalIncome" Width="1.5" PointX="14.75" PointY="17.75" />
+        <EntityTypeShape EntityType="FundsDBModel.UnlinkedDisbursement" Width="1.5" PointX="16.75" PointY="17.75" />
         <AssociationConnector Association="FundsDBModel.FK_AccountingMovements_Currencies" />
         <AssociationConnector Association="FundsDBModel.FK_AccountingMovements_Funds" />
+        <AssociationConnector Association="FundsDBModel.FK_BondsTFAM_AccountingMovements" />
+        <AssociationConnector Association="FundsDBModel.FK_BondsTFAM_AccountingMovements_Activation" />
+        <AssociationConnector Association="FundsDBModel.FK_BondsTFAM_AccountingMovements_Payment" />
+        <AssociationConnector Association="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_interest" />
+        <AssociationConnector Association="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_payment" />
         <AssociationConnector Association="FundsDBModel.FK_BookingGeneratedInterestDetails_AccountingMovements" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementBook_AccountingMovements" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementCollections_AccoutingMovements" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_AccountingMovements" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_CollectionAccountingMovements" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_OverdueAccountingMovements" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementPayments_AccountingMovements" />
+        <AssociationConnector Association="FundsDBModel.FK_Loan_InterestRepayments_AccountingMovements" />
+        <AssociationConnector Association="FundsDBModel.FK_Loan_Repayments_AccountingMovements" />
         <AssociationConnector Association="FundsDBModel.FK_LoanGeneratedInterestDetails_AccountingMovements" />
+        <AssociationConnector Association="FundsDBModel.FK_Loans_Accounting_Movement" />
+        <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_AccountingMovements" />
+        <AssociationConnector Association="FundsDBModel.FK_Accounts_Funds" />
+        <AssociationConnector Association="FundsDBModel.FK_AccountsBankingAccount_Accounts" />
+        <AssociationConnector Association="FundsDBModel.FK_AccountsClients_Accounts" />
+        <AssociationConnector Association="FundsDBModel.FK_AccountsCreditors_Accounts" />
+        <AssociationConnector Association="FundsDBModel.FK_AccountsEmployees_Accounts" />
+        <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_Accounts" />
+        <AssociationConnector Association="FundsDBModel.FK_Subaccounts_Accounts" />
         <AssociationConnector Association="FundsDBModel.FK_AccountsBankingAccount_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_AccountsBankingAccounts_BankingAccounts" />
         <AssociationConnector Association="FundsDBModel.FK_AccountsClients_Clients" />
@@ -68,7 +137,23 @@
         <AssociationConnector Association="FundsDBModel.FK_Banks_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Banks" />
         <AssociationConnector Association="FundsDBModel.FK_letter_of_credits_Banks" />
+        <AssociationConnector Association="FundsDBModel.FK_BondsTFAM_Currencies" />
+        <AssociationConnector Association="FundsDBModel.FK_BondsTFAM_Funds" />
+        <AssociationConnector Association="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_BondsTFAM" />
+        <AssociationConnector Association="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_GeneratedInterest" />
+        <AssociationConnector Association="FundsDBModel.FK_BondsTFAMRepaymentDetails_BondsTFAMRepayments" />
+        <AssociationConnector Association="FundsDBModel.FK_BondsTFAMRepaymentDetails_Mov01" />
+        <AssociationConnector Association="FundsDBModel.FK_BondsTFAMRepaymentDetails_Mov02" />
+        <AssociationConnector Association="FundsDBModel.FK_BondsTFF_Funds" />
+        <AssociationConnector Association="FundsDBModel.FK_BondsTFFInvestors_BondsTFF" />
+        <AssociationConnector Association="FundsDBModel.FK_BondsTFFInvestors_Investors" />
+        <AssociationConnector Association="FundsDBModel.FK_BookingCollectionsDetails_Booking" />
+        <AssociationConnector Association="FundsDBModel.FK_BookingCollectionsDetails_DisbursementCollection" />
+        <AssociationConnector Association="FundsDBModel.FK_BookingCollectionsDetails_Mov125" />
+        <AssociationConnector Association="FundsDBModel.FK_BookingCollectionsDetails_Mov128" />
+        <AssociationConnector Association="FundsDBModel.FK_BookingCollectionsDetails_Mov130" />
         <AssociationConnector Association="FundsDBModel.FK_BookingGeneratedInterestDetails_DisbursementGeneratedInterests" />
+        <AssociationConnector Association="FundsDBModel.FK_BookingGeneratedInterestDetails_Disbursements" />
         <AssociationConnector Association="FundsDBModel.FK_BookingGeneratedInterestDetails_Disbusement" />
         <AssociationConnector Association="FundsDBModel.FK_Clients_Countries" />
         <AssociationConnector Association="FundsDBModel.FK_Clients_Funds" />
@@ -76,13 +161,29 @@
         <AssociationConnector Association="FundsDBModel.FK_Countries_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_UnderlyingDebtors_Countries" />
         <AssociationConnector Association="FundsDBModel.FK_Creditors_Funds" />
+        <AssociationConnector Association="FundsDBModel.FK_Loans_Creditors" />
         <AssociationConnector Association="FundsDBModel.FK_Currencies_Funds" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Currency" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Currencies" />
+        <AssociationConnector Association="FundsDBModel.FK_Loans_Currencies" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursement_dates_Funds" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Book" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Disbursement" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Movement125" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Movement128" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementBook_Movement125" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementBook_Movement128" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementCollections_Investments" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_DisbursementCollection" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov128" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_Disbursements" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementItems_Item" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_DisbursementOverdues" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_Disbursements" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementPayments_Investments" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Investments" />
@@ -94,119 +195,28 @@
         <AssociationConnector Association="FundsDBModel.FK_Investors_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_Items_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_letter_of_credits_Funds" />
+        <AssociationConnector Association="FundsDBModel.FK_Loans_Funds" />
+        <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_OtherDetails_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_Resources_Fund" />
         <AssociationConnector Association="FundsDBModel.FK_Sectors_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_ServiceSupplier_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_Shareholders_Funds" />
+        <AssociationConnector Association="FundsDBModel.FK_Subaccounts_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_UnderlyingDebtors_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_InvestorBondInterest_Investors" />
         <AssociationConnector Association="FundsDBModel.FK_Shipments_LetterOfCredits" />
-        <AssociationConnector Association="FundsDBModel.FK_LoanGeneratedInterestDetails_LoanGeneratedInterests" />
-        <AssociationConnector Association="FundsDBModel.DisbursementPaymentDetails" />
-        <EntityTypeShape EntityType="FundsDBModel.BondDetail" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="FundsDBModel.BookingGeneratedInterestView" Width="1.5" PointX="4.75" PointY="3.75" />
-        <EntityTypeShape EntityType="FundsDBModel.ClientContract" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementGeneratedInterestView" Width="1.5" PointX="0.75" PointY="7.75" />
-        <EntityTypeShape EntityType="FundsDBModel.InvestmentsView" Width="1.5" PointX="10.75" PointY="0.75" />
-        <EntityTypeShape EntityType="FundsDBModel.ProfitShareToAccrue" Width="1.5" PointX="0.75" PointY="12.75" />
-        <EntityTypeShape EntityType="FundsDBModel.ProfitsResumeView" Width="1.5" PointX="12.75" PointY="5.75" />
-        <EntityTypeShape EntityType="FundsDBModel.Template_Balance_Sheet" Width="1.5" PointX="8.75" PointY="12.75" />
-        <EntityTypeShape EntityType="FundsDBModel.Template_Profit_Loss" Width="1.5" PointX="10.75" PointY="12.75" />
-        <EntityTypeShape EntityType="FundsDBModel.TotalExpense" Width="1.5" PointX="14.75" PointY="0.75" />
-        <EntityTypeShape EntityType="FundsDBModel.TotalIncome" Width="1.5" PointX="14.75" PointY="3.75" />
-        <EntityTypeShape EntityType="FundsDBModel.UnlinkedDisbursement" Width="1.5" PointX="14.75" PointY="9.75" />
-        <EntityTypeShape EntityType="FundsDBModel.Loans_View" Width="1.5" PointX="3.375" PointY="15.75" />
-        <EntityTypeShape EntityType="FundsDBModel.BondsTFF" Width="1.5" PointX="3" PointY="68.25" />
-        <AssociationConnector Association="FundsDBModel.FK_BondsTFF_Funds" />
-        <EntityTypeShape EntityType="FundsDBModel.BondsTFFInvestor" Width="1.5" PointX="5.25" PointY="86.75" />
-        <AssociationConnector Association="FundsDBModel.FK_BondsTFFInvestors_BondsTFF" />
-        <AssociationConnector Association="FundsDBModel.FK_BondsTFFInvestors_Investors" />
-        <EntityTypeShape EntityType="FundsDBModel.BondsTFAM" Width="1.5" PointX="16.5" PointY="49.875" />
-        <AssociationConnector Association="FundsDBModel.FK_BondsTFAM_AccountingMovements_Activation" />
-        <AssociationConnector Association="FundsDBModel.FK_BondsTFAM_AccountingMovements_Payment" />
-        <AssociationConnector Association="FundsDBModel.FK_BondsTFAM_Currencies" />
-        <AssociationConnector Association="FundsDBModel.FK_BondsTFAM_Funds" />
-        <EntityTypeShape EntityType="FundsDBModel.Account" Width="1.5" PointX="3" PointY="54.125" />
-        <EntityTypeShape EntityType="FundsDBModel.AccountBalanceView" Width="1.5" PointX="11.375" PointY="8.75" />
-        <EntityTypeShape EntityType="FundsDBModel.SubAccountBalance" Width="1.5" PointX="15.375" PointY="6.75" />
-        <AssociationConnector Association="FundsDBModel.FK_Accounts_Funds" />
-        <AssociationConnector Association="FundsDBModel.FK_AccountsBankingAccount_Accounts" />
-        <AssociationConnector Association="FundsDBModel.FK_AccountsClients_Accounts" />
-        <AssociationConnector Association="FundsDBModel.FK_AccountsCreditors_Accounts" />
-        <AssociationConnector Association="FundsDBModel.FK_AccountsEmployees_Accounts" />
-        <EntityTypeShape EntityType="FundsDBModel.MovementsView" Width="1.5" PointX="5.375" PointY="15.75" />
-        <EntityTypeShape EntityType="FundsDBModel.ClosedPeriod" Width="1.5" PointX="11.375" PointY="16.75" />
-        <EntityTypeShape EntityType="FundsDBModel.Movements_Accounts" Width="1.5" PointX="17.5" PointY="65.25" />
-        <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_AccountingMovements" />
-        <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_Accounts" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementBook_Movement125" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementBook_Movement128" />
-        <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_Funds" />
-        <EntityTypeShape EntityType="FundsDBModel.BondsTFAMGeneratedInterest" Width="1.5" PointX="17.375" PointY="3.75" />
-        <EntityTypeShape EntityType="FundsDBModel.BondsTFAMGeneratedInterestDetail" Width="1.5" PointX="19.625" PointY="29.375" />
-        <AssociationConnector Association="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_interest" />
-        <AssociationConnector Association="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_AccountingMovements_payment" />
-        <AssociationConnector Association="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_BondsTFAM" />
-        <AssociationConnector Association="FundsDBModel.FK_BondsTFAMGeneratedInterestDetails_GeneratedInterest" />
-        <EntityTypeShape EntityType="FundsDBModel.BookingCollectionsDetail" Width="1.5" PointX="19.75" PointY="58.125" />
-        <AssociationConnector Association="FundsDBModel.FK_BookingCollectionsDetails_DisbursementCollection" />
-        <AssociationConnector Association="FundsDBModel.FK_BookingCollectionsDetails_Mov125" />
-        <AssociationConnector Association="FundsDBModel.FK_BookingCollectionsDetails_Mov128" />
-        <AssociationConnector Association="FundsDBModel.FK_BookingCollectionsDetails_Mov130" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementsToBeCollected" Width="1.5" PointX="5.375" PointY="8.75" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementBooking" Width="1.5" PointX="22.75" PointY="56.5" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementsBookingView" Width="1.5" PointX="17.375" PointY="6.75" />
-        <AssociationConnector Association="FundsDBModel.FK_BookingCollectionsDetails_Booking" />
-        <AssociationConnector Association="FundsDBModel.FK_BookingGeneratedInterestDetails_Disbursements" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Currency" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Book" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Disbursement" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Movement125" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementBooking_Movement128" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementOverdue" Width="1.5" PointX="22.75" PointY="65.875" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementCollectionsDetail" Width="1.5" PointX="19.75" PointY="65.875" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_DisbursementCollection" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov128" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementOverdueDetail" Width="1.5" PointX="25" PointY="61.5" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_CollectionAccountingMovements" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_OverdueAccountingMovements" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_DisbursementsBookings" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_DisbursementOverdues" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_Disbursements" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementsForAddendum" Width="1.5" PointX="7.375" PointY="3.75" />
-        <EntityTypeShape EntityType="FundsDBModel.Loan_InterestRepayments" Width="1.5" PointX="15.75" PointY="55.875" />
-        <AssociationConnector Association="FundsDBModel.FK_Loan_InterestRepayments_AccountingMovements" />
         <AssociationConnector Association="FundsDBModel.FK_Loan_InterestRepayments_LoanInterestDetails" />
-        <EntityTypeShape EntityType="FundsDBModel.BondsTFAMRepaymentDetail" Width="1.5" PointX="19.75" PointY="54.375" />
-        <EntityTypeShape EntityType="FundsDBModel.BondsTFAMRepayment" Width="1.5" PointX="10.5" PointY="43.75" />
-        <EntityTypeShape EntityType="FundsDBModel.Loan_Repayments" Width="1.5" PointX="10.5" PointY="71.5" />
-        <EntityTypeShape EntityType="FundsDBModel.LoanRepaymentDetail" Width="1.5" PointX="19.75" PointY="70" />
-        <AssociationConnector Association="FundsDBModel.FK_BondsTFAM_AccountingMovements" />
-        <AssociationConnector Association="FundsDBModel.FK_Loan_Repayments_AccountingMovements" />
-        <AssociationConnector Association="FundsDBModel.FK_BondsTFAMRepaymentDetails_BondsTFAMRepayments" />
-        <AssociationConnector Association="FundsDBModel.FK_BondsTFAMRepaymentDetails_Mov01" />
-        <AssociationConnector Association="FundsDBModel.FK_BondsTFAMRepaymentDetails_Mov02" />
         <AssociationConnector Association="FundsDBModel.FK_LoanRepaymentDetails_Loan_Repayments" />
+        <AssociationConnector Association="FundsDBModel.FK_LoanGeneratedInterestDetails_Loan" />
+        <AssociationConnector Association="FundsDBModel.FK_LoanGeneratedInterestDetails_LoanGeneratedInterests" />
         <AssociationConnector Association="FundsDBModel.FK_LoanRepaymentDetails_Mov01" />
         <AssociationConnector Association="FundsDBModel.FK_LoanRepaymentDetails_Mov02" />
-        <EntityTypeShape EntityType="FundsDBModel.Loan" Width="1.5" PointX="10.5" PointY="61.75" />
-        <AssociationConnector Association="FundsDBModel.FK_Loans_Accounting_Movement" />
-        <AssociationConnector Association="FundsDBModel.FK_Loans_Creditors" />
-        <AssociationConnector Association="FundsDBModel.FK_Loans_Currencies" />
-        <AssociationConnector Association="FundsDBModel.FK_Loans_Funds" />
-        <AssociationConnector Association="FundsDBModel.FK_LoanGeneratedInterestDetails_Loan" />
-        <EntityTypeShape EntityType="FundsDBModel.DetailType" Width="1.5" PointX="7.375" PointY="8.75" />
-        <EntityTypeShape EntityType="FundsDBModel.Subaccount" Width="1.5" PointX="5.25" PointY="58.875" />
-        <AssociationConnector Association="FundsDBModel.FK_Subaccounts_Accounts" />
-        <AssociationConnector Association="FundsDBModel.FK_Subaccounts_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_Movements_Accounts_Subaccounts" />
         <AssociationConnector Association="FundsDBModel.FK_OtherDetails_SubAcct" />
-        <EntityTypeShape EntityType="FundsDBModel.OtherDetailsView" Width="1.5" PointX="17.375" PointY="0.75" />
-        </Diagram>
+        <AssociationConnector Association="FundsDBModel.DisbursementPaymentDetails" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementPlusAddendumsView" Width="1.5" PointX="19.375" PointY="0.75" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

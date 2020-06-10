@@ -158,6 +158,9 @@
     <Compile Include="BondDetail.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="BondGeneratedInterestView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="BondPayments.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +200,9 @@
     <Compile Include="BondsTFAMInterest.Designer.cs">
       <DependentUpon>BondsTFAMInterest.cs</DependentUpon>
     </Compile>
+    <Compile Include="BondsTFAMInterestToPay.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="BondsTFAMListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,6 +220,12 @@
     </Compile>
     <Compile Include="BondsTFAMRepaymentForm.Designer.cs">
       <DependentUpon>BondsTFAMRepaymentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BondsTFAMRepaymentView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BondsTFAMToBeRepaid.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="BondsTFF.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -305,14 +317,14 @@
     <Compile Include="CurrenciesForm.Designer.cs">
       <DependentUpon>CurrenciesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Currency.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="AddendumsLauncher.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AddendumsLauncher.Designer.cs">
       <DependentUpon>AddendumsLauncher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Currency.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DetailType.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -338,6 +350,9 @@
     <Compile Include="DisbursementCollectionsDetail.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DisbursementCollectionView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DisbursementForInvestement.cs" />
     <Compile Include="DisbursementGeneratedInterest.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -357,7 +372,13 @@
     <Compile Include="DisbursementOverdueDetail.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DisbursementOverdueGeneratedView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DisbursementPayment.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DisbursementPlusAddendumsView.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DisbursementsBookingView.cs">
@@ -507,6 +528,9 @@
     <Compile Include="LoanGeneratedInterestDetail.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="LoanGeneratedInterestView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="LoanInterest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -527,6 +551,12 @@
     </Compile>
     <Compile Include="LoanRepaymentForm.Designer.cs">
       <DependentUpon>LoanRepaymentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoansRepaymentsView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoansToBeRepaidView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Loans_View.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -582,6 +612,9 @@
       <DependentUpon>DelayInterestToAccrueForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OtherDetailsView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfitResultsView.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ProfitShareToAccrue.cs">

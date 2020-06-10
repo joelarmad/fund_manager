@@ -36,5 +36,6 @@ namespace FundsManager
         public Nullable<decimal> delay_interest_accrued_remaining { get; set; }
         public bool can_generate_interest { get; set; }
         public int is_booking { get; set; }
+        public Nullable<int> has_bookings { get; set; }
     }
 }

@@ -62,7 +62,7 @@ namespace FundsManager
                 if (e.RowIndex >= 0 && e.RowIndex < dataGridView1.Rows.Count)
                 {
                     AddendumsForm addendumsForm = new AddendumsForm();
-                    addendumsForm.DisbursementId = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    addendumsForm.DisbursementForAddendumId = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
                     addendumsForm.EditingExistingBook = true;
                     int book_id = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
                     addendumsForm.BookToEdit = manager.My_db.DisbursementBooks.FirstOrDefault(x => x.Id == book_id);

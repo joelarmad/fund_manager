@@ -16,6 +16,7 @@ namespace FundsManager
     {
         public int FundId { get; set; }
         public int Id { get; set; }
+        public int MovementId { get; set; }
         public string Reference { get; set; }
         public string description { get; set; }
         public int account_id { get; set; }
@@ -29,7 +30,6 @@ namespace FundsManager
         public Nullable<decimal> Shift_Amount { get; set; }
         public string Detail { get; set; }
         public string Currency { get; set; }
-        public int MovementId { get; set; }
         public Nullable<int> SubAccountId { get; set; }
         public Nullable<int> detail_type { get; set; }
         public Nullable<int> detail_id { get; set; }

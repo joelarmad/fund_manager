@@ -138,7 +138,7 @@
                   <Width>1.13542in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>1.23958in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -236,7 +236,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Interest</Value>
+                                  <Value>Delay Interest</Value>
                                   <Style>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -393,7 +393,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1.03125in</Size>
+                    <Size>1.48958in</Size>
                     <CellContents>
                       <Textbox Name="Textbox11">
                         <CanGrow>true</CanGrow>
@@ -437,16 +437,16 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.21875in</Size>
+                        <Size>1.5in</Size>
                         <CellContents>
-                          <Textbox Name="Textbox9">
+                          <Textbox Name="Textbox7">
                             <CanGrow>true</CanGrow>
                             <KeepTogether>true</KeepTogether>
                             <Paragraphs>
                               <Paragraph>
                                 <TextRuns>
                                   <TextRun>
-                                    <Value>Pay Date</Value>
+                                    <Value>Interest Date</Value>
                                     <Style>
                                       <FontSize>11pt</FontSize>
                                       <FontWeight>Bold</FontWeight>
@@ -459,7 +459,7 @@
                                 </Style>
                               </Paragraph>
                             </Paragraphs>
-                            <rd:DefaultName>Textbox9</rd:DefaultName>
+                            <rd:DefaultName>Textbox7</rd:DefaultName>
                             <Style>
                               <Border>
                                 <Style>None</Style>
@@ -479,53 +479,7 @@
                         </CellContents>
                       </TablixHeader>
                       <TablixMembers>
-                        <TablixMember>
-                          <TablixHeader>
-                            <Size>1.21875in</Size>
-                            <CellContents>
-                              <Textbox Name="Textbox7">
-                                <CanGrow>true</CanGrow>
-                                <KeepTogether>true</KeepTogether>
-                                <Paragraphs>
-                                  <Paragraph>
-                                    <TextRuns>
-                                      <TextRun>
-                                        <Value>Interest Date</Value>
-                                        <Style>
-                                          <FontSize>11pt</FontSize>
-                                          <FontWeight>Bold</FontWeight>
-                                          <Color>#666666</Color>
-                                        </Style>
-                                      </TextRun>
-                                    </TextRuns>
-                                    <Style>
-                                      <TextAlign>Left</TextAlign>
-                                    </Style>
-                                  </Paragraph>
-                                </Paragraphs>
-                                <rd:DefaultName>Textbox7</rd:DefaultName>
-                                <Style>
-                                  <Border>
-                                    <Style>None</Style>
-                                  </Border>
-                                  <BottomBorder>
-                                    <Color>LightGrey</Color>
-                                    <Style>Solid</Style>
-                                    <Width>1pt</Width>
-                                  </BottomBorder>
-                                  <BackgroundColor>White</BackgroundColor>
-                                  <PaddingLeft>2pt</PaddingLeft>
-                                  <PaddingRight>2pt</PaddingRight>
-                                  <PaddingTop>2pt</PaddingTop>
-                                  <PaddingBottom>2pt</PaddingBottom>
-                                </Style>
-                              </Textbox>
-                            </CellContents>
-                          </TablixHeader>
-                          <TablixMembers>
-                            <TablixMember />
-                          </TablixMembers>
-                        </TablixMember>
+                        <TablixMember />
                       </TablixMembers>
                     </TablixMember>
                   </TablixMembers>
@@ -542,7 +496,7 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>1.03125in</Size>
+                    <Size>1.48958in</Size>
                     <CellContents>
                       <Textbox Name="disbursement_number">
                         <CanGrow>true</CanGrow>
@@ -583,27 +537,27 @@
                   </TablixHeader>
                   <TablixMembers>
                     <TablixMember>
-                      <Group Name="disbursement_pay_date">
+                      <Group Name="GeneratedDate">
                         <GroupExpressions>
-                          <GroupExpression>=Fields!disbursement_pay_date.Value</GroupExpression>
+                          <GroupExpression>=Fields!GeneratedDate.Value</GroupExpression>
                         </GroupExpressions>
                       </Group>
                       <SortExpressions>
                         <SortExpression>
-                          <Value>=Fields!disbursement_pay_date.Value</Value>
+                          <Value>=Fields!GeneratedDate.Value</Value>
                         </SortExpression>
                       </SortExpressions>
                       <TablixHeader>
-                        <Size>1.21875in</Size>
+                        <Size>1.5in</Size>
                         <CellContents>
-                          <Textbox Name="disbursement_pay_date">
+                          <Textbox Name="GeneratedDate">
                             <CanGrow>true</CanGrow>
                             <KeepTogether>true</KeepTogether>
                             <Paragraphs>
                               <Paragraph>
                                 <TextRuns>
                                   <TextRun>
-                                    <Value>=FormatDateTime(Fields!disbursement_pay_date.Value, DateFormat.ShortDate)</Value>
+                                    <Value>=FormatDateTime(Fields!GeneratedDate.Value, DateFormat.ShortDate)</Value>
                                     <Style>
                                       <Color>#333333</Color>
                                     </Style>
@@ -614,7 +568,7 @@
                                 </Style>
                               </Paragraph>
                             </Paragraphs>
-                            <rd:DefaultName>disbursement_pay_date</rd:DefaultName>
+                            <rd:DefaultName>GeneratedDate</rd:DefaultName>
                             <Style>
                               <Border>
                                 <Style>None</Style>
@@ -634,61 +588,7 @@
                         </CellContents>
                       </TablixHeader>
                       <TablixMembers>
-                        <TablixMember>
-                          <Group Name="GeneratedDate">
-                            <GroupExpressions>
-                              <GroupExpression>=Fields!GeneratedDate.Value</GroupExpression>
-                            </GroupExpressions>
-                          </Group>
-                          <SortExpressions>
-                            <SortExpression>
-                              <Value>=Fields!GeneratedDate.Value</Value>
-                            </SortExpression>
-                          </SortExpressions>
-                          <TablixHeader>
-                            <Size>1.21875in</Size>
-                            <CellContents>
-                              <Textbox Name="GeneratedDate">
-                                <CanGrow>true</CanGrow>
-                                <KeepTogether>true</KeepTogether>
-                                <Paragraphs>
-                                  <Paragraph>
-                                    <TextRuns>
-                                      <TextRun>
-                                        <Value>=FormatDateTime(Fields!GeneratedDate.Value, DateFormat.ShortDate)</Value>
-                                        <Style>
-                                          <Color>#333333</Color>
-                                        </Style>
-                                      </TextRun>
-                                    </TextRuns>
-                                    <Style>
-                                      <TextAlign>Left</TextAlign>
-                                    </Style>
-                                  </Paragraph>
-                                </Paragraphs>
-                                <rd:DefaultName>GeneratedDate</rd:DefaultName>
-                                <Style>
-                                  <Border>
-                                    <Style>None</Style>
-                                  </Border>
-                                  <BottomBorder>
-                                    <Color>LightGrey</Color>
-                                    <Style>Solid</Style>
-                                    <Width>1pt</Width>
-                                  </BottomBorder>
-                                  <BackgroundColor>White</BackgroundColor>
-                                  <PaddingLeft>2pt</PaddingLeft>
-                                  <PaddingRight>2pt</PaddingRight>
-                                  <PaddingTop>2pt</PaddingTop>
-                                  <PaddingBottom>2pt</PaddingBottom>
-                                </Style>
-                              </Textbox>
-                            </CellContents>
-                          </TablixHeader>
-                          <TablixMembers>
-                            <TablixMember />
-                          </TablixMembers>
-                        </TablixMember>
+                        <TablixMember />
                       </TablixMembers>
                     </TablixMember>
                   </TablixMembers>
@@ -698,7 +598,7 @@
             <DataSetName>dsGeneratedInterest</DataSetName>
             <Top>0.875in</Top>
             <Height>0.5in</Height>
-            <Width>6.78125in</Width>
+            <Width>6.54167in</Width>
             <Style>
               <Border>
                 <Style>None</Style>

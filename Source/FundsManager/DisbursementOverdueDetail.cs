@@ -29,7 +29,6 @@ namespace FundsManager
     
         public virtual AccountingMovement AccountingMovement { get; set; }
         public virtual AccountingMovement AccountingMovement1 { get; set; }
-        public virtual DisbursementBooking DisbursementBooking { get; set; }
         public virtual DisbursementOverdue DisbursementOverdue { get; set; }
         public virtual Disbursement Disbursement { get; set; }
     }

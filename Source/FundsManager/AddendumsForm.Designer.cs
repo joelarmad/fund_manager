@@ -48,7 +48,7 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cmdAddBooking = new System.Windows.Forms.Button();
-            this.txtTotalToBeCollected = new System.Windows.Forms.TextBox();
+            this.lblTotalToBeCollected = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.lbISelectedItems = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -250,14 +250,14 @@
             this.cmdAddBooking.UseVisualStyleBackColor = true;
             this.cmdAddBooking.Click += new System.EventHandler(this.cmdAddBooking_Click);
             // 
-            // txtTotalToBeCollected
+            // lblTotalToBeCollected
             // 
-            this.txtTotalToBeCollected.Location = new System.Drawing.Point(125, 228);
-            this.txtTotalToBeCollected.Name = "txtTotalToBeCollected";
-            this.txtTotalToBeCollected.ReadOnly = true;
-            this.txtTotalToBeCollected.Size = new System.Drawing.Size(100, 20);
-            this.txtTotalToBeCollected.TabIndex = 261;
-            this.txtTotalToBeCollected.Text = "0.00";
+            this.lblTotalToBeCollected.Location = new System.Drawing.Point(125, 228);
+            this.lblTotalToBeCollected.Name = "lblTotalToBeCollected";
+            this.lblTotalToBeCollected.ReadOnly = true;
+            this.lblTotalToBeCollected.Size = new System.Drawing.Size(100, 20);
+            this.lblTotalToBeCollected.TabIndex = 261;
+            this.lblTotalToBeCollected.Text = "0.00";
             // 
             // label10
             // 
@@ -551,7 +551,7 @@
             this.Controls.Add(this.cmdDeleteBooking);
             this.Controls.Add(this.lvBooking);
             this.Controls.Add(this.cmdAddBooking);
-            this.Controls.Add(this.txtTotalToBeCollected);
+            this.Controls.Add(this.lblTotalToBeCollected);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.lbISelectedItems);
             this.Controls.Add(this.label8);
@@ -598,7 +598,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.Button cmdAddBooking;
-        private System.Windows.Forms.TextBox txtTotalToBeCollected;
+        private System.Windows.Forms.TextBox lblTotalToBeCollected;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ListBox lbISelectedItems;
         private System.Windows.Forms.Label label8;

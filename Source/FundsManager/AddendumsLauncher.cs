@@ -59,7 +59,7 @@ namespace FundsManager
             if (e.RowIndex >= 0 && e.RowIndex < dataGridView1.Rows.Count)
             {
                 AddendumsForm addendumsForm = new AddendumsForm();
-                addendumsForm.DisbursementId = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                addendumsForm.DisbursementForAddendumId = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
                 addendumsForm.ShowDialog();
 
                 updateDisbursements();

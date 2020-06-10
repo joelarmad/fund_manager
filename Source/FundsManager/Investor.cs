@@ -17,8 +17,8 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Investor()
         {
-            this.InvestorBondInterests = new HashSet<InvestorBondInterest>();
             this.BondsTFFInvestors = new HashSet<BondsTFFInvestor>();
+            this.InvestorBondInterests = new HashSet<InvestorBondInterest>();
         }
     
         public int Id { get; set; }
@@ -26,10 +26,10 @@ namespace FundsManager
         public int FK_Investors_Funds { get; set; }
         public string number { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BondsTFFInvestor> BondsTFFInvestors { get; set; }
         public virtual Fund Fund { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InvestorBondInterest> InvestorBondInterests { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BondsTFFInvestor> BondsTFFInvestors { get; set; }
     }
 }

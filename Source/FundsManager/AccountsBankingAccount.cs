@@ -20,8 +20,8 @@ namespace FundsManager
         public int banking_account_id { get; set; }
         public decimal amount { get; set; }
     
+        public virtual Account Account { get; set; }
         public virtual Fund Fund { get; set; }
         public virtual BankingAccount BankingAccount { get; set; }
-        public virtual Account Account { get; set; }
     }
 }
