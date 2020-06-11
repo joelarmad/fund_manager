@@ -110,42 +110,45 @@ namespace FundsManager.ReportForms
 
         private void loadOtherDetails()
         {
-            //try
-            //{
-            //    cbOtherDetails.DataSource = null;
-            //    cbOtherDetails.Items.Clear();
-            //    cbOtherDetails.Text = "";
-            //    cbOtherDetails.SelectedItem = null;
-            //    cbOtherDetails.SelectedText = "Select detail";
-
-            //    int subacctId = cbSubAccount.SelectedValue != null ? Convert.ToInt32(cbSubAccount.SelectedValue) : 0;
-
-            //    Dictionary<int, string> comboSource = DataUtils.getOtherDetailsSource(subacctId, "");
-
-
-            //    cbOtherDetails.DataSource = new BindingSource(comboSource, null);
-            //    cbOtherDetails.DisplayMember = "Value";
-            //    cbOtherDetails.ValueMember = "Key";
-            //}
-            //catch (Exception _ex)
-            //{
-            //    Console.WriteLine("Error in AcctountReport.loadOtherDetails: " + _ex.Message);
-            //}
-
-            int subAccountId = 0;
-            int detailType = 0;
-
-            if (cbSubAccount.SelectedValue != null && int.TryParse(cbSubAccount.SelectedValue.ToString(), out subAccountId) && subAccountId > 0)
+            try
             {
-                Subaccount subAcct = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == subAccountId);
+                //cbOtherDetails.DataSource = null;
+                //cbOtherDetails.Items.Clear();
+                //cbOtherDetails.Text = "";
+                //cbOtherDetails.SelectedItem = null;
+                //cbOtherDetails.SelectedText = "Select detail";
 
-                if (subAcct != null && subAcct.detail_type.HasValue)
+                //int subacctId = cbSubAccount.SelectedValue != null ? Convert.ToInt32(cbSubAccount.SelectedValue) : 0;
+
+                //Dictionary<int, string> comboSource = DataUtils.getOtherDetailsSource(subacctId, "");
+
+
+                //cbOtherDetails.DataSource = new BindingSource(comboSource, null);
+                //cbOtherDetails.DisplayMember = "Value";
+                //cbOtherDetails.ValueMember = "Key";
+
+                int subAccountId = 0;
+                int detailType = 0;
+
+                if (cbSubAccount.SelectedValue != null && int.TryParse(cbSubAccount.SelectedValue.ToString(), out subAccountId) && subAccountId > 0)
                 {
-                    detailType = subAcct.detail_type.Value;
+                    Subaccount subAcct = manager.My_db.Subaccounts.FirstOrDefault(x => x.Id == subAccountId);
+
+                    if (subAcct != null && subAcct.detail_type.HasValue)
+                    {
+                        detailType = subAcct.detail_type.Value;
+                    }
                 }
+
+                this.otherDetailsViewTableAdapter.FillWithEmpty(this.fundsDBDataSet.OtherDetailsView, manager.Selected, detailType, subAccountId);
+
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error in AcctountReport.loadOtherDetails: " + _ex.Message);
             }
 
-            this.otherDetailsViewTableAdapter.FillWithEmpty(this.fundsDBDataSet.OtherDetailsView, manager.Selected, detailType);
+            
         }
     }
 }

@@ -110,7 +110,7 @@
             this.cbAccount.FormattingEnabled = true;
             this.cbAccount.Location = new System.Drawing.Point(82, 15);
             this.cbAccount.Name = "cbAccount";
-            this.cbAccount.Size = new System.Drawing.Size(169, 21);
+            this.cbAccount.Size = new System.Drawing.Size(273, 21);
             this.cbAccount.TabIndex = 5;
             this.cbAccount.ValueMember = "Id";
             this.cbAccount.SelectedIndexChanged += new System.EventHandler(this.cbAccount_SelectedIndexChanged);
@@ -127,7 +127,7 @@
             this.cbSubAccount.FormattingEnabled = true;
             this.cbSubAccount.Location = new System.Drawing.Point(82, 41);
             this.cbSubAccount.Name = "cbSubAccount";
-            this.cbSubAccount.Size = new System.Drawing.Size(169, 21);
+            this.cbSubAccount.Size = new System.Drawing.Size(273, 21);
             this.cbSubAccount.TabIndex = 6;
             this.cbSubAccount.ValueMember = "Id";
             this.cbSubAccount.SelectedIndexChanged += new System.EventHandler(this.cbSubAccount_SelectedIndexChanged);
@@ -140,7 +140,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(266, 20);
+            this.label4.Location = new System.Drawing.Point(380, 20);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(33, 13);
             this.label4.TabIndex = 8;
@@ -149,7 +149,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(266, 46);
+            this.label5.Location = new System.Drawing.Point(380, 46);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(23, 13);
             this.label5.TabIndex = 9;
@@ -157,21 +157,21 @@
             // 
             // dtpFrom
             // 
-            this.dtpFrom.Location = new System.Drawing.Point(305, 18);
+            this.dtpFrom.Location = new System.Drawing.Point(419, 18);
             this.dtpFrom.Name = "dtpFrom";
             this.dtpFrom.Size = new System.Drawing.Size(200, 20);
             this.dtpFrom.TabIndex = 10;
             // 
             // dtpTo
             // 
-            this.dtpTo.Location = new System.Drawing.Point(305, 44);
+            this.dtpTo.Location = new System.Drawing.Point(419, 44);
             this.dtpTo.Name = "dtpTo";
             this.dtpTo.Size = new System.Drawing.Size(200, 20);
             this.dtpTo.TabIndex = 11;
             // 
             // cmdFind
             // 
-            this.cmdFind.Location = new System.Drawing.Point(389, 70);
+            this.cmdFind.Location = new System.Drawing.Point(503, 70);
             this.cmdFind.Name = "cmdFind";
             this.cmdFind.Size = new System.Drawing.Size(116, 23);
             this.cmdFind.TabIndex = 12;
@@ -194,7 +194,7 @@
             this.cbOtherDetails.FormattingEnabled = true;
             this.cbOtherDetails.Location = new System.Drawing.Point(82, 68);
             this.cbOtherDetails.Name = "cbOtherDetails";
-            this.cbOtherDetails.Size = new System.Drawing.Size(169, 21);
+            this.cbOtherDetails.Size = new System.Drawing.Size(273, 21);
             this.cbOtherDetails.TabIndex = 13;
             this.cbOtherDetails.ValueMember = "Row_Id";
             this.cbOtherDetails.SelectedIndexChanged += new System.EventHandler(this.cbOtherDetails_SelectedIndexChanged);

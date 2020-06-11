@@ -37,6 +37,7 @@
             this.cbSubaccount = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cbOtherDetail = new System.Windows.Forms.ComboBox();
+            this.otherDetailsViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -67,12 +68,11 @@
             this.accountsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountsTableAdapter();
             this.cmdCancel = new System.Windows.Forms.Button();
             this.cmdDeleteMovement = new System.Windows.Forms.Button();
-            this.otherDetailsViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.otherDetailsViewTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.OtherDetailsViewTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.otherDetailsViewBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -140,10 +140,15 @@
             this.cbOtherDetail.FormattingEnabled = true;
             this.cbOtherDetail.Location = new System.Drawing.Point(612, 30);
             this.cbOtherDetail.Name = "cbOtherDetail";
-            this.cbOtherDetail.Size = new System.Drawing.Size(164, 21);
+            this.cbOtherDetail.Size = new System.Drawing.Size(245, 21);
             this.cbOtherDetail.TabIndex = 3;
             this.cbOtherDetail.ValueMember = "Row_Id";
             this.cbOtherDetail.SelectedIndexChanged += new System.EventHandler(this.cbOtherDetail_SelectedIndexChanged);
+            // 
+            // otherDetailsViewBindingSource
+            // 
+            this.otherDetailsViewBindingSource.DataMember = "OtherDetailsView";
+            this.otherDetailsViewBindingSource.DataSource = this.fundsDBDataSet;
             // 
             // label4
             // 
@@ -399,11 +404,6 @@
             this.cmdDeleteMovement.Visible = false;
             this.cmdDeleteMovement.Click += new System.EventHandler(this.cmdDeleteMovement_Click);
             // 
-            // otherDetailsViewBindingSource
-            // 
-            this.otherDetailsViewBindingSource.DataMember = "OtherDetailsView";
-            this.otherDetailsViewBindingSource.DataSource = this.fundsDBDataSet;
-            // 
             // otherDetailsViewTableAdapter
             // 
             this.otherDetailsViewTableAdapter.ClearBeforeFill = true;
@@ -449,8 +449,8 @@
             this.Load += new System.EventHandler(this.GeneralLedgerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.otherDetailsViewBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.currenciesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

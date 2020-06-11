@@ -229,7 +229,7 @@ namespace FundsManager
                     }
                 }
 
-                this.otherDetailsViewTableAdapter.FillWithEmpty(this.fundsDBDataSet.OtherDetailsView, manager.Selected, detailType);
+                this.otherDetailsViewTableAdapter.FillWithEmpty(this.fundsDBDataSet.OtherDetailsView, manager.Selected, detailType, subAccountId);
             }
             catch (Exception _ex)
             {
