@@ -34,7 +34,7 @@ namespace FundsManager
             this.bAccountsWithBanksCurrenciesTableAdapter.FillByFund(this.fundsDBDataSet1.BAccountsWithBanksCurrencies, manager.Selected);
             this.bAccountsWithBanksCurrenciesTableAdapter.FillByFund(this.fundsDBDataSet.BAccountsWithBanksCurrencies, manager.Selected);
             this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
-            this.banksTableAdapter.FillByFund(this.fundsDBDataSet.Banks, manager.Selected);
+            //this.banksTableAdapter.FillByFund(this.fundsDBDataSet.Banks, manager.Selected);
             this.bankingAccountsTableAdapter.FillByFund(this.fundsDBDataSet.BankingAccounts, manager.Selected);
 
         }

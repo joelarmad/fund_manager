@@ -35,15 +35,15 @@ namespace FundsManager
 
         private void BondsForm_Load(object sender, EventArgs e)
         {
-            this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
-
-            cbCurrency.SelectedIndex = 0;
-
             try
             {
+                this.currenciesTableAdapter.FillByFund(this.fundsDBDataSet.Currencies, manager.Selected);
+
+                cbCurrency.SelectedIndex = 0;
+
                 fBondConsecutive = 0;
 
-                Resource _resource = manager.My_db.Resources.FirstOrDefault(x => x.Name == KeyDefinitions.BONDTFAM_CONSECUTIVE_KEY);
+                Resource _resource = manager.My_db.Resources.FirstOrDefault(x => x.Name == KeyDefinitions.BONDTFAM_CONSECUTIVE_KEY && x.FundId == manager.Selected);
 
                 if (_resource != null && _resource.Value != null && int.TryParse(_resource.Value, out fBondConsecutive))
                 {
@@ -96,7 +96,7 @@ namespace FundsManager
 
                     manager.My_db.BondsTFAMs.Add(bond);
 
-                    Resource _resource = manager.My_db.Resources.FirstOrDefault(x => x.Name == KeyDefinitions.BONDTFAM_CONSECUTIVE_KEY);
+                    Resource _resource = manager.My_db.Resources.FirstOrDefault(x => x.Name == KeyDefinitions.BONDTFAM_CONSECUTIVE_KEY && x.FundId == manager.Selected);
 
                     fBondConsecutive++;
 

@@ -41,6 +41,22 @@ namespace FundsManager
                     _fund.number = txtNumber.Text;
                     manager.My_db.Funds.Add(_fund);
                     manager.My_db.SaveChanges();
+
+                    Resource bondTFFConsecutive = new Resource();
+                    bondTFFConsecutive.Name = "BONDTFF_CONSECUTIVE";
+                    bondTFFConsecutive.Value = "1";
+                    bondTFFConsecutive.FundId = _fund.Id;
+
+                    Resource bondTFAMConsecutive = new Resource();
+                    bondTFAMConsecutive.Name = "BONDTFAM_CONSECUTIVE";
+                    bondTFAMConsecutive.Value = "1";
+                    bondTFAMConsecutive.FundId = _fund.Id;
+
+                    manager.My_db.Resources.Add(bondTFFConsecutive);
+                    manager.My_db.Resources.Add(bondTFAMConsecutive);
+
+                    manager.My_db.SaveChanges();
+
                     txtName.Clear();
                     txtContractPrefix.Clear();
                     this.fundsTableAdapter.Fill(this.fundsDBDataSet.Funds);

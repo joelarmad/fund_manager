@@ -50,7 +50,7 @@ namespace FundsManager
                 cbInvestors.SelectedItem = null;
                 cbInvestors.SelectedText = "Select investor";
 
-                Resource _resource = manager.My_db.Resources.FirstOrDefault(x => x.Name == KeyDefinitions.BONDTFF_CONSECUTIVE_KEY);
+                Resource _resource = manager.My_db.Resources.FirstOrDefault(x => x.Name == KeyDefinitions.BONDTFF_CONSECUTIVE_KEY && x.FundId == manager.Selected);
 
                 if (_resource != null && _resource.Value != null && int.TryParse(_resource.Value, out fBondConsecutive))
                 {
@@ -248,7 +248,7 @@ namespace FundsManager
 
                     }
 
-                    Resource _resource = manager.My_db.Resources.FirstOrDefault(x => x.Name == KeyDefinitions.BONDTFF_CONSECUTIVE_KEY);
+                    Resource _resource = manager.My_db.Resources.FirstOrDefault(x => x.Name == KeyDefinitions.BONDTFF_CONSECUTIVE_KEY && x.FundId == manager.Selected);
 
                     fBondConsecutive++;
 

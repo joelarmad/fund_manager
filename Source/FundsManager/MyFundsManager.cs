@@ -197,13 +197,7 @@ namespace FundsManager
 
         public List<Bank> OwnBanks()
         {
-            List<Bank> own_banks = new List<Bank>();
-
-            foreach (Bank _bank in My_db.Banks)
-                if (_bank.own == 1)
-                    own_banks.Add(_bank);
-
-            return own_banks;
+            return My_db.Banks.Where(x => x.own == 1 && x.FK_Banks_Funds == selected).ToList();
         }
 
         public void DeleteSubaccount(int _id)
