@@ -87,6 +87,7 @@
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closePeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dealTrackingListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -484,35 +485,35 @@
             // movementsToolStripMenuItem
             // 
             this.movementsToolStripMenuItem.Name = "movementsToolStripMenuItem";
-            this.movementsToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.movementsToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.movementsToolStripMenuItem.Text = "Movements";
             this.movementsToolStripMenuItem.Click += new System.EventHandler(this.movementsToolStripMenuItem_Click);
             // 
             // investmentsToolStripMenuItem1
             // 
             this.investmentsToolStripMenuItem1.Name = "investmentsToolStripMenuItem1";
-            this.investmentsToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
+            this.investmentsToolStripMenuItem1.Size = new System.Drawing.Size(140, 22);
             this.investmentsToolStripMenuItem1.Text = "Investments";
             this.investmentsToolStripMenuItem1.Click += new System.EventHandler(this.investmentsToolStripMenuItem1_Click);
             // 
             // booksToolStripMenuItem
             // 
             this.booksToolStripMenuItem.Name = "booksToolStripMenuItem";
-            this.booksToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.booksToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.booksToolStripMenuItem.Text = "Books";
             this.booksToolStripMenuItem.Click += new System.EventHandler(this.booksToolStripMenuItem_Click);
             // 
             // bondsToolStripMenuItem1
             // 
             this.bondsToolStripMenuItem1.Name = "bondsToolStripMenuItem1";
-            this.bondsToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
+            this.bondsToolStripMenuItem1.Size = new System.Drawing.Size(140, 22);
             this.bondsToolStripMenuItem1.Text = "Bonds TFF";
             this.bondsToolStripMenuItem1.Click += new System.EventHandler(this.bondsToolStripMenuItem1_Click_1);
             // 
             // bondsTFAMToolStripMenuItem2
             // 
             this.bondsTFAMToolStripMenuItem2.Name = "bondsTFAMToolStripMenuItem2";
-            this.bondsTFAMToolStripMenuItem2.Size = new System.Drawing.Size(141, 22);
+            this.bondsTFAMToolStripMenuItem2.Size = new System.Drawing.Size(140, 22);
             this.bondsTFAMToolStripMenuItem2.Text = "Bonds TFAM";
             this.bondsTFAMToolStripMenuItem2.Click += new System.EventHandler(this.bondsTFAMToolStripMenuItem2_Click);
             // 
@@ -521,7 +522,8 @@
             this.reportsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.generalBalanceToolStripMenuItem,
             this.returnsStateToolStripMenuItem,
-            this.accountReportToolStripMenuItem});
+            this.accountReportToolStripMenuItem,
+            this.dealTrackingListToolStripMenuItem});
             this.reportsToolStripMenuItem1.Name = "reportsToolStripMenuItem1";
             this.reportsToolStripMenuItem1.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem1.Text = "Reports";
@@ -553,6 +555,13 @@
             this.closePeriodToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
             this.closePeriodToolStripMenuItem.Text = "Close Period";
             this.closePeriodToolStripMenuItem.Click += new System.EventHandler(this.closePeriodToolStripMenuItem_Click);
+            // 
+            // dealTrackingListToolStripMenuItem
+            // 
+            this.dealTrackingListToolStripMenuItem.Name = "dealTrackingListToolStripMenuItem";
+            this.dealTrackingListToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.dealTrackingListToolStripMenuItem.Text = "Deal Tracking List";
+            this.dealTrackingListToolStripMenuItem.Click += new System.EventHandler(this.dealTrackingListToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -638,6 +647,7 @@
         private System.Windows.Forms.ToolStripMenuItem bondsTFAMToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem overdueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem repaymentToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem dealTrackingListToolStripMenuItem;
     }
 }
 

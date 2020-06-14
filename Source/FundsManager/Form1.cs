@@ -432,5 +432,13 @@ namespace FundsManager
             form.MdiParent = this;
             form.Show();
         }
+
+        private void dealTrackingListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            DealTrackingReportForm form = new DealTrackingReportForm();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }
