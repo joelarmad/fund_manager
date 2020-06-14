@@ -48,10 +48,18 @@
             this.label4 = new System.Windows.Forms.Label();
             this.clientsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientsTableAdapter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.disbursementToBeOverduedBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.disbursementToBeOverduedTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.DisbursementToBeOverduedTableAdapter();
+            this.clientContractsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientContractsTableAdapter();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtMonthlyRate = new System.Windows.Forms.TextBox();
+            this.cmdGenerateAll = new System.Windows.Forms.Button();
+            this.cmdJustForSelection = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.disbursementidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bookingidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,13 +69,6 @@
             this.fromdateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.todateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.daysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.disbursementToBeOverduedBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.disbursementToBeOverduedTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.DisbursementToBeOverduedTableAdapter();
-            this.clientContractsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientContractsTableAdapter();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtMonthlyRate = new System.Windows.Forms.TextBox();
-            this.cmdGenerateAll = new System.Windows.Forms.Button();
-            this.cmdJustForSelection = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.clientContractsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
@@ -164,6 +165,7 @@
             this.disbursementidDataGridViewTextBoxColumn,
             this.bookingidDataGridViewTextBoxColumn,
             this.dataGridViewTextBoxColumn2,
+            this.number,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5,
@@ -178,8 +180,60 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1057, 395);
+            this.dataGridView1.Size = new System.Drawing.Size(1133, 395);
             this.dataGridView1.TabIndex = 23;
+            // 
+            // disbursementToBeOverduedBindingSource
+            // 
+            this.disbursementToBeOverduedBindingSource.DataMember = "DisbursementToBeOverdued";
+            this.disbursementToBeOverduedBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // disbursementToBeOverduedTableAdapter
+            // 
+            this.disbursementToBeOverduedTableAdapter.ClearBeforeFill = true;
+            // 
+            // clientContractsTableAdapter
+            // 
+            this.clientContractsTableAdapter.ClearBeforeFill = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "Montly Rate:";
+            // 
+            // txtMonthlyRate
+            // 
+            this.txtMonthlyRate.Location = new System.Drawing.Point(93, 52);
+            this.txtMonthlyRate.Name = "txtMonthlyRate";
+            this.txtMonthlyRate.Size = new System.Drawing.Size(100, 20);
+            this.txtMonthlyRate.TabIndex = 25;
+            this.txtMonthlyRate.Text = "2.5";
+            this.txtMonthlyRate.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtMonthlyRate_KeyUp);
+            this.txtMonthlyRate.Leave += new System.EventHandler(this.txtMonthlyRate_Leave);
+            // 
+            // cmdGenerateAll
+            // 
+            this.cmdGenerateAll.Location = new System.Drawing.Point(224, 51);
+            this.cmdGenerateAll.Name = "cmdGenerateAll";
+            this.cmdGenerateAll.Size = new System.Drawing.Size(141, 23);
+            this.cmdGenerateAll.TabIndex = 26;
+            this.cmdGenerateAll.Text = "For ALL";
+            this.cmdGenerateAll.UseVisualStyleBackColor = true;
+            this.cmdGenerateAll.Click += new System.EventHandler(this.cmdGenerateAll_Click);
+            // 
+            // cmdJustForSelection
+            // 
+            this.cmdJustForSelection.Location = new System.Drawing.Point(375, 51);
+            this.cmdJustForSelection.Name = "cmdJustForSelection";
+            this.cmdJustForSelection.Size = new System.Drawing.Size(230, 23);
+            this.cmdJustForSelection.TabIndex = 27;
+            this.cmdJustForSelection.Text = "Just for SELECTION";
+            this.cmdJustForSelection.UseVisualStyleBackColor = true;
+            this.cmdJustForSelection.Click += new System.EventHandler(this.cmdJustForSelection_Click);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -211,6 +265,13 @@
             this.dataGridViewTextBoxColumn2.HeaderText = "Reference";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // number
+            // 
+            this.number.DataPropertyName = "number";
+            this.number.HeaderText = "Number";
+            this.number.Name = "number";
+            this.number.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -291,63 +352,11 @@
             this.daysDataGridViewTextBoxColumn.Name = "daysDataGridViewTextBoxColumn";
             this.daysDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // disbursementToBeOverduedBindingSource
-            // 
-            this.disbursementToBeOverduedBindingSource.DataMember = "DisbursementToBeOverdued";
-            this.disbursementToBeOverduedBindingSource.DataSource = this.fundsDBDataSet;
-            // 
-            // disbursementToBeOverduedTableAdapter
-            // 
-            this.disbursementToBeOverduedTableAdapter.ClearBeforeFill = true;
-            // 
-            // clientContractsTableAdapter
-            // 
-            this.clientContractsTableAdapter.ClearBeforeFill = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 56);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 13);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "Montly Rate:";
-            // 
-            // txtMonthlyRate
-            // 
-            this.txtMonthlyRate.Location = new System.Drawing.Point(93, 52);
-            this.txtMonthlyRate.Name = "txtMonthlyRate";
-            this.txtMonthlyRate.Size = new System.Drawing.Size(100, 20);
-            this.txtMonthlyRate.TabIndex = 25;
-            this.txtMonthlyRate.Text = "2.5";
-            this.txtMonthlyRate.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtMonthlyRate_KeyUp);
-            this.txtMonthlyRate.Leave += new System.EventHandler(this.txtMonthlyRate_Leave);
-            // 
-            // cmdGenerateAll
-            // 
-            this.cmdGenerateAll.Location = new System.Drawing.Point(224, 51);
-            this.cmdGenerateAll.Name = "cmdGenerateAll";
-            this.cmdGenerateAll.Size = new System.Drawing.Size(141, 23);
-            this.cmdGenerateAll.TabIndex = 26;
-            this.cmdGenerateAll.Text = "For ALL";
-            this.cmdGenerateAll.UseVisualStyleBackColor = true;
-            this.cmdGenerateAll.Click += new System.EventHandler(this.cmdGenerateAll_Click);
-            // 
-            // cmdJustForSelection
-            // 
-            this.cmdJustForSelection.Location = new System.Drawing.Point(375, 51);
-            this.cmdJustForSelection.Name = "cmdJustForSelection";
-            this.cmdJustForSelection.Size = new System.Drawing.Size(230, 23);
-            this.cmdJustForSelection.TabIndex = 27;
-            this.cmdJustForSelection.Text = "Just for SELECTION";
-            this.cmdJustForSelection.UseVisualStyleBackColor = true;
-            this.cmdJustForSelection.Click += new System.EventHandler(this.cmdJustForSelection_Click);
-            // 
             // DisbursementToBeOverdueForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1075, 521);
+            this.ClientSize = new System.Drawing.Size(1157, 521);
             this.Controls.Add(this.cmdJustForSelection);
             this.Controls.Add(this.cmdGenerateAll);
             this.Controls.Add(this.txtMonthlyRate);
@@ -407,6 +416,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn disbursementidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn bookingidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn number;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;

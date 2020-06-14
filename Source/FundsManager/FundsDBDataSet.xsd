@@ -3362,7 +3362,7 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
               <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.DisbursementsToBeCollected" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT fund_id, contract, disbursement_id, investment_id, number, collection_date, date, pay_date, can_generate_interest, amount, profit_share, profit_share_accrued, amount_collected, delay_interest, delay_interest_accrued, delay_interest_collected, profit_share_collected, amount_remainig, delay_interest_accrued_remaining, profit_share_accrued_remaining, is_booking, row_key, has_bookings FROM DisbursementsToBeCollected</CommandText>
+                    <CommandText>SELECT fund_id, contract, disbursement_id, investment_id, number, collection_date, date, pay_date, can_generate_interest, amount, profit_share, profit_share_accrued, amount_collected, delay_interest, delay_interest_accrued, delay_interest_collected, profit_share_collected, amount_remainig, delay_interest_accrued_remaining, profit_share_accrued_remaining, is_booking, row_key, has_bookings, booking_id, collected FROM DisbursementsToBeCollected</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -3392,15 +3392,17 @@ SELECT disbursement_collection_id, disbursement_id, amount_collected, movement12
               <Mapping SourceColumn="is_booking" DataSetColumn="is_booking" />
               <Mapping SourceColumn="row_key" DataSetColumn="row_key" />
               <Mapping SourceColumn="has_bookings" DataSetColumn="has_bookings" />
+              <Mapping SourceColumn="booking_id" DataSetColumn="booking_id" />
+              <Mapping SourceColumn="collected" DataSetColumn="collected" />
             </Mappings>
             <Sources>
               <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.DisbursementsToBeCollected" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByContract" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByContract" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByContract">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        fund_id, contract, disbursement_id, investment_id, number, collection_date, date, pay_date, can_generate_interest, amount, profit_share, profit_share_accrued, amount_collected, delay_interest, delay_interest_accrued, 
-                         delay_interest_collected, profit_share_collected, amount_remainig, delay_interest_accrued_remaining, profit_share_accrued_remaining, is_booking, row_key, has_bookings
+                         delay_interest_collected, profit_share_collected, amount_remainig, delay_interest_accrued_remaining, profit_share_accrued_remaining, is_booking, row_key, has_bookings, booking_id, collected
 FROM            DisbursementsToBeCollected
-WHERE        (contract = @contract) AND (fund_id = @fundId) AND (amount_remainig &gt; 0) OR
+WHERE        (contract = @contract) AND (fund_id = @fundId) AND (amount_remainig &gt; 0) AND (collected = 0) OR
                          (contract = @contract) AND (fund_id = @fundId) AND (profit_share_accrued_remaining &gt; 0) OR
                          (contract = @contract) AND (fund_id = @fundId) AND (delay_interest_accrued_remaining &gt; 0)</CommandText>
                     <Parameters>
@@ -5031,42 +5033,6 @@ SELECT Id, GeneratedDate FROM BondsTFAMGeneratedInterests WHERE (Id = @Id)</Comm
               </DbSource>
             </Sources>
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DisbursementCollectionViewTableAdapter" GeneratorDataComponentClassName="DisbursementCollectionViewTableAdapter" Name="DisbursementCollectionView" UserDataComponentName="DisbursementCollectionViewTableAdapter">
-            <MainSource>
-              <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.DisbursementCollectionView" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT fund_id, contract, investment_id, disbursement_id, number, date, pay_date, collection_date, amount, profit_share, profit_share_accrued, delay_interest, delay_interest_accrued, amount_collected, profit_share_collected, delay_interest_collected, can_generate_interest, booking_id, is_booking, has_bookings, overdues_accrued FROM DisbursementCollectionView</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-            </MainSource>
-            <Mappings>
-              <Mapping SourceColumn="fund_id" DataSetColumn="fund_id" />
-              <Mapping SourceColumn="contract" DataSetColumn="contract" />
-              <Mapping SourceColumn="investment_id" DataSetColumn="investment_id" />
-              <Mapping SourceColumn="disbursement_id" DataSetColumn="disbursement_id" />
-              <Mapping SourceColumn="number" DataSetColumn="number" />
-              <Mapping SourceColumn="date" DataSetColumn="date" />
-              <Mapping SourceColumn="pay_date" DataSetColumn="pay_date" />
-              <Mapping SourceColumn="collection_date" DataSetColumn="collection_date" />
-              <Mapping SourceColumn="amount" DataSetColumn="amount" />
-              <Mapping SourceColumn="profit_share" DataSetColumn="profit_share" />
-              <Mapping SourceColumn="profit_share_accrued" DataSetColumn="profit_share_accrued" />
-              <Mapping SourceColumn="delay_interest" DataSetColumn="delay_interest" />
-              <Mapping SourceColumn="delay_interest_accrued" DataSetColumn="delay_interest_accrued" />
-              <Mapping SourceColumn="amount_collected" DataSetColumn="amount_collected" />
-              <Mapping SourceColumn="profit_share_collected" DataSetColumn="profit_share_collected" />
-              <Mapping SourceColumn="delay_interest_collected" DataSetColumn="delay_interest_collected" />
-              <Mapping SourceColumn="can_generate_interest" DataSetColumn="can_generate_interest" />
-              <Mapping SourceColumn="is_booking" DataSetColumn="is_booking" />
-              <Mapping SourceColumn="booking_id" DataSetColumn="booking_id" />
-              <Mapping SourceColumn="overdues_accrued" DataSetColumn="overdues_accrued" />
-              <Mapping SourceColumn="has_bookings" DataSetColumn="has_bookings" />
-            </Mappings>
-            <Sources />
-          </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccountReportTableAdapter" GeneratorDataComponentClassName="AccountReportTableAdapter" Name="AccountReport" UserDataComponentName="AccountReportTableAdapter">
             <MainSource>
               <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.AccountReport" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
@@ -5915,6 +5881,46 @@ ORDER BY DetailType, Id</CommandText>
                 </SelectCommand>
               </DbSource>
             </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DealTrackingViewTableAdapter" GeneratorDataComponentClassName="DealTrackingViewTableAdapter" Name="DealTrackingView" UserDataComponentName="DealTrackingViewTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.DealTrackingView" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT row_id, is_booking, has_bookings, investment_id, disbursement_id, booking_id, contract, client, underlying_debtor, bank_name, items, pay_date, principal, interest, delay_interest, estimated_repay_date, principal_collected, interest_collected, delay_interest_collected, principal_remaining, interest_remaining, delay_interest_remaining, can_generate_interest, collected, fund_id FROM DealTrackingView</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="row_id" DataSetColumn="row_id" />
+              <Mapping SourceColumn="is_booking" DataSetColumn="is_booking" />
+              <Mapping SourceColumn="has_bookings" DataSetColumn="has_bookings" />
+              <Mapping SourceColumn="investment_id" DataSetColumn="investment_id" />
+              <Mapping SourceColumn="disbursement_id" DataSetColumn="disbursement_id" />
+              <Mapping SourceColumn="booking_id" DataSetColumn="booking_id" />
+              <Mapping SourceColumn="contract" DataSetColumn="contract" />
+              <Mapping SourceColumn="client" DataSetColumn="client" />
+              <Mapping SourceColumn="underlying_debtor" DataSetColumn="underlying_debtor" />
+              <Mapping SourceColumn="bank_name" DataSetColumn="bank_name" />
+              <Mapping SourceColumn="items" DataSetColumn="items" />
+              <Mapping SourceColumn="pay_date" DataSetColumn="pay_date" />
+              <Mapping SourceColumn="principal" DataSetColumn="principal" />
+              <Mapping SourceColumn="interest" DataSetColumn="interest" />
+              <Mapping SourceColumn="delay_interest" DataSetColumn="delay_interest" />
+              <Mapping SourceColumn="estimated_repay_date" DataSetColumn="estimated_repay_date" />
+              <Mapping SourceColumn="principal_collected" DataSetColumn="principal_collected" />
+              <Mapping SourceColumn="interest_collected" DataSetColumn="interest_collected" />
+              <Mapping SourceColumn="delay_interest_collected" DataSetColumn="delay_interest_collected" />
+              <Mapping SourceColumn="principal_remaining" DataSetColumn="principal_remaining" />
+              <Mapping SourceColumn="interest_remaining" DataSetColumn="interest_remaining" />
+              <Mapping SourceColumn="delay_interest_remaining" DataSetColumn="delay_interest_remaining" />
+              <Mapping SourceColumn="can_generate_interest" DataSetColumn="can_generate_interest" />
+              <Mapping SourceColumn="collected" DataSetColumn="collected" />
+              <Mapping SourceColumn="fund_id" DataSetColumn="fund_id" />
+            </Mappings>
+            <Sources />
           </TableAdapter>
         </Tables>
         <Sources />
@@ -7090,6 +7096,8 @@ ORDER BY DetailType, Id</CommandText>
                 </xs:simpleType>
               </xs:element>
               <xs:element name="has_bookings" msprop:Generator_ColumnVarNameInTable="columnhas_bookings" msprop:Generator_ColumnPropNameInRow="has_bookings" msprop:Generator_ColumnPropNameInTable="has_bookingsColumn" msprop:Generator_UserColumnName="has_bookings" type="xs:int" minOccurs="0" />
+              <xs:element name="booking_id" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnbooking_id" msprop:Generator_ColumnPropNameInRow="booking_id" msprop:Generator_ColumnPropNameInTable="booking_idColumn" msprop:Generator_UserColumnName="booking_id" type="xs:int" minOccurs="0" />
+              <xs:element name="collected" msprop:Generator_ColumnVarNameInTable="columncollected" msprop:Generator_ColumnPropNameInRow="collected" msprop:Generator_ColumnPropNameInTable="collectedColumn" msprop:Generator_UserColumnName="collected" type="xs:boolean" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -7731,45 +7739,6 @@ ORDER BY DetailType, Id</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="DisbursementCollectionView" msprop:Generator_TableClassName="DisbursementCollectionViewDataTable" msprop:Generator_TableVarName="tableDisbursementCollectionView" msprop:Generator_TablePropName="DisbursementCollectionView" msprop:Generator_RowDeletingName="DisbursementCollectionViewRowDeleting" msprop:Generator_RowChangingName="DisbursementCollectionViewRowChanging" msprop:Generator_RowEvHandlerName="DisbursementCollectionViewRowChangeEventHandler" msprop:Generator_RowDeletedName="DisbursementCollectionViewRowDeleted" msprop:Generator_UserTableName="DisbursementCollectionView" msprop:Generator_RowChangedName="DisbursementCollectionViewRowChanged" msprop:Generator_RowEvArgName="DisbursementCollectionViewRowChangeEvent" msprop:Generator_RowClassName="DisbursementCollectionViewRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="fund_id" msprop:Generator_ColumnVarNameInTable="columnfund_id" msprop:Generator_ColumnPropNameInRow="fund_id" msprop:Generator_ColumnPropNameInTable="fund_idColumn" msprop:Generator_UserColumnName="fund_id" type="xs:int" />
-              <xs:element name="contract" msprop:Generator_ColumnVarNameInTable="columncontract" msprop:Generator_ColumnPropNameInRow="contract" msprop:Generator_ColumnPropNameInTable="contractColumn" msprop:Generator_UserColumnName="contract">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="investment_id" msprop:Generator_ColumnVarNameInTable="columninvestment_id" msprop:Generator_ColumnPropNameInRow="investment_id" msprop:Generator_ColumnPropNameInTable="investment_idColumn" msprop:Generator_UserColumnName="investment_id" type="xs:int" />
-              <xs:element name="disbursement_id" msprop:Generator_ColumnVarNameInTable="columndisbursement_id" msprop:Generator_ColumnPropNameInRow="disbursement_id" msprop:Generator_ColumnPropNameInTable="disbursement_idColumn" msprop:Generator_UserColumnName="disbursement_id" type="xs:int" />
-              <xs:element name="number" msprop:Generator_ColumnVarNameInTable="columnnumber" msprop:Generator_ColumnPropNameInRow="number" msprop:Generator_ColumnPropNameInTable="numberColumn" msprop:Generator_UserColumnName="number">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="date" msprop:Generator_ColumnVarNameInTable="columndate" msprop:Generator_ColumnPropNameInRow="date" msprop:Generator_ColumnPropNameInTable="dateColumn" msprop:Generator_UserColumnName="date" type="xs:dateTime" />
-              <xs:element name="pay_date" msprop:Generator_ColumnVarNameInTable="columnpay_date" msprop:Generator_ColumnPropNameInRow="pay_date" msprop:Generator_ColumnPropNameInTable="pay_dateColumn" msprop:Generator_UserColumnName="pay_date" type="xs:dateTime" />
-              <xs:element name="collection_date" msprop:Generator_ColumnVarNameInTable="columncollection_date" msprop:Generator_ColumnPropNameInRow="collection_date" msprop:Generator_ColumnPropNameInTable="collection_dateColumn" msprop:Generator_UserColumnName="collection_date" type="xs:dateTime" />
-              <xs:element name="amount" msprop:Generator_ColumnVarNameInTable="columnamount" msprop:Generator_ColumnPropNameInRow="amount" msprop:Generator_ColumnPropNameInTable="amountColumn" msprop:Generator_UserColumnName="amount" type="xs:decimal" />
-              <xs:element name="profit_share" msprop:Generator_ColumnVarNameInTable="columnprofit_share" msprop:Generator_ColumnPropNameInRow="profit_share" msprop:Generator_ColumnPropNameInTable="profit_shareColumn" msprop:Generator_UserColumnName="profit_share" type="xs:decimal" />
-              <xs:element name="profit_share_accrued" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnprofit_share_accrued" msprop:Generator_ColumnPropNameInRow="profit_share_accrued" msprop:Generator_ColumnPropNameInTable="profit_share_accruedColumn" msprop:Generator_UserColumnName="profit_share_accrued" type="xs:decimal" minOccurs="0" />
-              <xs:element name="delay_interest" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columndelay_interest" msprop:Generator_ColumnPropNameInRow="delay_interest" msprop:Generator_ColumnPropNameInTable="delay_interestColumn" msprop:Generator_UserColumnName="delay_interest" type="xs:decimal" minOccurs="0" />
-              <xs:element name="delay_interest_accrued" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columndelay_interest_accrued" msprop:Generator_ColumnPropNameInRow="delay_interest_accrued" msprop:Generator_ColumnPropNameInTable="delay_interest_accruedColumn" msprop:Generator_UserColumnName="delay_interest_accrued" type="xs:decimal" minOccurs="0" />
-              <xs:element name="amount_collected" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnamount_collected" msprop:Generator_ColumnPropNameInRow="amount_collected" msprop:Generator_ColumnPropNameInTable="amount_collectedColumn" msprop:Generator_UserColumnName="amount_collected" type="xs:decimal" minOccurs="0" />
-              <xs:element name="profit_share_collected" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnprofit_share_collected" msprop:Generator_ColumnPropNameInRow="profit_share_collected" msprop:Generator_ColumnPropNameInTable="profit_share_collectedColumn" msprop:Generator_UserColumnName="profit_share_collected" type="xs:decimal" minOccurs="0" />
-              <xs:element name="delay_interest_collected" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columndelay_interest_collected" msprop:Generator_ColumnPropNameInRow="delay_interest_collected" msprop:Generator_ColumnPropNameInTable="delay_interest_collectedColumn" msprop:Generator_UserColumnName="delay_interest_collected" type="xs:decimal" minOccurs="0" />
-              <xs:element name="can_generate_interest" msprop:Generator_ColumnVarNameInTable="columncan_generate_interest" msprop:Generator_ColumnPropNameInRow="can_generate_interest" msprop:Generator_ColumnPropNameInTable="can_generate_interestColumn" msprop:Generator_UserColumnName="can_generate_interest" type="xs:boolean" />
-              <xs:element name="is_booking" msprop:Generator_ColumnVarNameInTable="columnis_booking" msprop:Generator_ColumnPropNameInRow="is_booking" msprop:Generator_ColumnPropNameInTable="is_bookingColumn" msprop:Generator_UserColumnName="is_booking" type="xs:boolean" minOccurs="0" />
-              <xs:element name="booking_id" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnbooking_id" msprop:Generator_ColumnPropNameInRow="booking_id" msprop:Generator_ColumnPropNameInTable="booking_idColumn" msprop:Generator_UserColumnName="booking_id" type="xs:int" minOccurs="0" />
-              <xs:element name="overdues_accrued" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnoverdues_accrued" msprop:Generator_ColumnPropNameInRow="overdues_accrued" msprop:Generator_ColumnPropNameInTable="overdues_accruedColumn" msprop:Generator_UserColumnName="overdues_accrued" type="xs:decimal" minOccurs="0" />
-              <xs:element name="has_bookings" msprop:Generator_ColumnVarNameInTable="columnhas_bookings" msprop:Generator_ColumnPropNameInRow="has_bookings" msprop:Generator_ColumnPropNameInTable="has_bookingsColumn" msprop:Generator_UserColumnName="has_bookings" type="xs:int" minOccurs="0" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
         <xs:element name="AccountReport" msprop:Generator_TableClassName="AccountReportDataTable" msprop:Generator_TableVarName="tableAccountReport" msprop:Generator_TablePropName="AccountReport" msprop:Generator_RowDeletingName="AccountReportRowDeleting" msprop:Generator_RowChangingName="AccountReportRowChanging" msprop:Generator_RowEvHandlerName="AccountReportRowChangeEventHandler" msprop:Generator_RowDeletedName="AccountReportRowDeleted" msprop:Generator_UserTableName="AccountReport" msprop:Generator_RowChangedName="AccountReportRowChanged" msprop:Generator_RowEvArgName="AccountReportRowChangeEvent" msprop:Generator_RowClassName="AccountReportRow">
           <xs:complexType>
             <xs:sequence>
@@ -8131,6 +8100,73 @@ ORDER BY DetailType, Id</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="DealTrackingView" msprop:Generator_TableClassName="DealTrackingViewDataTable" msprop:Generator_TableVarName="tableDealTrackingView" msprop:Generator_TablePropName="DealTrackingView" msprop:Generator_RowDeletingName="DealTrackingViewRowDeleting" msprop:Generator_RowChangingName="DealTrackingViewRowChanging" msprop:Generator_RowEvHandlerName="DealTrackingViewRowChangeEventHandler" msprop:Generator_RowDeletedName="DealTrackingViewRowDeleted" msprop:Generator_UserTableName="DealTrackingView" msprop:Generator_RowChangedName="DealTrackingViewRowChanged" msprop:Generator_RowEvArgName="DealTrackingViewRowChangeEvent" msprop:Generator_RowClassName="DealTrackingViewRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="row_id" msprop:Generator_ColumnVarNameInTable="columnrow_id" msprop:Generator_ColumnPropNameInRow="row_id" msprop:Generator_ColumnPropNameInTable="row_idColumn" msprop:Generator_UserColumnName="row_id">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="is_booking" msprop:Generator_ColumnVarNameInTable="columnis_booking" msprop:Generator_ColumnPropNameInRow="is_booking" msprop:Generator_ColumnPropNameInTable="is_bookingColumn" msprop:Generator_UserColumnName="is_booking" type="xs:int" />
+              <xs:element name="has_bookings" msprop:Generator_ColumnVarNameInTable="columnhas_bookings" msprop:Generator_ColumnPropNameInRow="has_bookings" msprop:Generator_ColumnPropNameInTable="has_bookingsColumn" msprop:Generator_UserColumnName="has_bookings" type="xs:int" minOccurs="0" />
+              <xs:element name="investment_id" msprop:Generator_ColumnVarNameInTable="columninvestment_id" msprop:Generator_ColumnPropNameInRow="investment_id" msprop:Generator_ColumnPropNameInTable="investment_idColumn" msprop:Generator_UserColumnName="investment_id" type="xs:int" />
+              <xs:element name="disbursement_id" msprop:Generator_ColumnVarNameInTable="columndisbursement_id" msprop:Generator_ColumnPropNameInRow="disbursement_id" msprop:Generator_ColumnPropNameInTable="disbursement_idColumn" msprop:Generator_UserColumnName="disbursement_id" type="xs:int" />
+              <xs:element name="booking_id" msprop:Generator_ColumnVarNameInTable="columnbooking_id" msprop:Generator_ColumnPropNameInRow="booking_id" msprop:Generator_ColumnPropNameInTable="booking_idColumn" msprop:Generator_UserColumnName="booking_id" type="xs:int" minOccurs="0" />
+              <xs:element name="contract" msprop:Generator_ColumnVarNameInTable="columncontract" msprop:Generator_ColumnPropNameInRow="contract" msprop:Generator_ColumnPropNameInTable="contractColumn" msprop:Generator_UserColumnName="contract">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="client" msprop:Generator_ColumnVarNameInTable="columnclient" msprop:Generator_ColumnPropNameInRow="client" msprop:Generator_ColumnPropNameInTable="clientColumn" msprop:Generator_UserColumnName="client">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="underlying_debtor" msprop:Generator_ColumnVarNameInTable="columnunderlying_debtor" msprop:Generator_ColumnPropNameInRow="underlying_debtor" msprop:Generator_ColumnPropNameInTable="underlying_debtorColumn" msprop:Generator_UserColumnName="underlying_debtor" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="bank_name" msprop:Generator_ColumnVarNameInTable="columnbank_name" msprop:Generator_ColumnPropNameInRow="bank_name" msprop:Generator_ColumnPropNameInTable="bank_nameColumn" msprop:Generator_UserColumnName="bank_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="items" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnitems" msprop:Generator_ColumnPropNameInRow="items" msprop:Generator_ColumnPropNameInTable="itemsColumn" msprop:Generator_UserColumnName="items" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pay_date" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnpay_date" msprop:Generator_ColumnPropNameInRow="pay_date" msprop:Generator_ColumnPropNameInTable="pay_dateColumn" msprop:Generator_UserColumnName="pay_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="principal" msprop:Generator_ColumnVarNameInTable="columnprincipal" msprop:Generator_ColumnPropNameInRow="principal" msprop:Generator_ColumnPropNameInTable="principalColumn" msprop:Generator_UserColumnName="principal" type="xs:decimal" />
+              <xs:element name="interest" msprop:Generator_ColumnVarNameInTable="columninterest" msprop:Generator_ColumnPropNameInRow="interest" msprop:Generator_ColumnPropNameInTable="interestColumn" msprop:Generator_UserColumnName="interest" type="xs:decimal" />
+              <xs:element name="delay_interest" msprop:Generator_ColumnVarNameInTable="columndelay_interest" msprop:Generator_ColumnPropNameInRow="delay_interest" msprop:Generator_ColumnPropNameInTable="delay_interestColumn" msprop:Generator_UserColumnName="delay_interest" type="xs:decimal" />
+              <xs:element name="estimated_repay_date" msprop:Generator_ColumnVarNameInTable="columnestimated_repay_date" msprop:Generator_ColumnPropNameInRow="estimated_repay_date" msprop:Generator_ColumnPropNameInTable="estimated_repay_dateColumn" msprop:Generator_UserColumnName="estimated_repay_date" type="xs:dateTime" />
+              <xs:element name="principal_collected" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnprincipal_collected" msprop:Generator_ColumnPropNameInRow="principal_collected" msprop:Generator_ColumnPropNameInTable="principal_collectedColumn" msprop:Generator_UserColumnName="principal_collected" type="xs:decimal" minOccurs="0" />
+              <xs:element name="interest_collected" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columninterest_collected" msprop:Generator_ColumnPropNameInRow="interest_collected" msprop:Generator_ColumnPropNameInTable="interest_collectedColumn" msprop:Generator_UserColumnName="interest_collected" type="xs:decimal" minOccurs="0" />
+              <xs:element name="delay_interest_collected" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columndelay_interest_collected" msprop:Generator_ColumnPropNameInRow="delay_interest_collected" msprop:Generator_ColumnPropNameInTable="delay_interest_collectedColumn" msprop:Generator_UserColumnName="delay_interest_collected" type="xs:decimal" minOccurs="0" />
+              <xs:element name="principal_remaining" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnprincipal_remaining" msprop:Generator_ColumnPropNameInRow="principal_remaining" msprop:Generator_ColumnPropNameInTable="principal_remainingColumn" msprop:Generator_UserColumnName="principal_remaining" type="xs:decimal" minOccurs="0" />
+              <xs:element name="interest_remaining" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columninterest_remaining" msprop:Generator_ColumnPropNameInRow="interest_remaining" msprop:Generator_ColumnPropNameInTable="interest_remainingColumn" msprop:Generator_UserColumnName="interest_remaining" type="xs:decimal" minOccurs="0" />
+              <xs:element name="delay_interest_remaining" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columndelay_interest_remaining" msprop:Generator_ColumnPropNameInRow="delay_interest_remaining" msprop:Generator_ColumnPropNameInTable="delay_interest_remainingColumn" msprop:Generator_UserColumnName="delay_interest_remaining" type="xs:decimal" minOccurs="0" />
+              <xs:element name="can_generate_interest" msprop:Generator_ColumnVarNameInTable="columncan_generate_interest" msprop:Generator_ColumnPropNameInRow="can_generate_interest" msprop:Generator_ColumnPropNameInTable="can_generate_interestColumn" msprop:Generator_UserColumnName="can_generate_interest" type="xs:boolean" />
+              <xs:element name="collected" msprop:Generator_ColumnVarNameInTable="columncollected" msprop:Generator_ColumnPropNameInRow="collected" msprop:Generator_ColumnPropNameInTable="collectedColumn" msprop:Generator_UserColumnName="collected" type="xs:boolean" minOccurs="0" />
+              <xs:element name="fund_id" msprop:Generator_ColumnVarNameInTable="columnfund_id" msprop:Generator_ColumnPropNameInRow="fund_id" msprop:Generator_ColumnPropNameInTable="fund_idColumn" msprop:Generator_UserColumnName="fund_id" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -8395,10 +8431,6 @@ ORDER BY DetailType, Id</CommandText>
     <xs:unique name="BondsTFAMGeneratedInterests_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:BondsTFAMGeneratedInterests" />
       <xs:field xpath="mstns:Id" />
-    </xs:unique>
-    <xs:unique name="DisbursementCollectionView_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:DisbursementCollectionView" />
-      <xs:field xpath="mstns:investment_id" />
     </xs:unique>
     <xs:unique name="BookingCollectionsDetails_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:BookingCollectionsDetails" />
