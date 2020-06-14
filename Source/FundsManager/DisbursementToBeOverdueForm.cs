@@ -141,9 +141,16 @@ namespace FundsManager
 
         private void cmdGenerateAll_Click(object sender, EventArgs e)
         {
-            generate(true);
+            if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpDate.Value.Year) == null)
+            {
+                generate(true);
 
-            loadOverdues();
+                loadOverdues();
+            }
+            else
+            {
+                ErrorMessage.showErrorMessage(new Exception("No movement allowed in closed period."));
+            }
         }
 
         private void cmdJustForSelection_Click(object sender, EventArgs e)

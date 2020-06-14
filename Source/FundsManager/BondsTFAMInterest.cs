@@ -335,9 +335,17 @@ namespace FundsManager
 
         private void cmdGenerateAllInterest_Click(object sender, EventArgs e)
         {
-            generateInterest(true);
+            if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpDate.Value.Year) == null)
+            {
+                generateInterest(true);
 
-            LoadData();
+                LoadData();
+            }
+            else
+            {
+                ErrorMessage.showErrorMessage(new Exception("No movement allowed in closed period."));
+            }
+            
         }
 
         private void cmdGenerateInterest_Click(object sender, EventArgs e)

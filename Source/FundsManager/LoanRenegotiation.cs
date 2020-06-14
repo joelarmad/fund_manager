@@ -92,40 +92,47 @@ namespace FundsManager
         {
             try
             {
-                Loan _validation = manager.My_db.Loans.FirstOrDefault(x => x.reference == txtNewReference.Text && x.fund_id == manager.Selected);
-
-                if (_validation != null)
+                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpStart.Value.Year) == null)
                 {
-                    MessageBox.Show("Duplicated reference.");
-                    return;
+                    Loan _validation = manager.My_db.Loans.FirstOrDefault(x => x.reference == txtNewReference.Text && x.fund_id == manager.Selected);
+
+                    if (_validation != null)
+                    {
+                        MessageBox.Show("Duplicated reference.");
+                        return;
+                    }
+
+                    int id = int.Parse(cbLoan.SelectedValue.ToString());
+
+                    Loan oldloan = manager.My_db.Loans.FirstOrDefault(x => x.Id == id);
+
+                    oldloan.renegotiated = true;
+
+                    Loan _loan = new Loan();
+                    _loan.fund_id = manager.Selected;
+                    _loan.lender_id = oldloan.lender_id;
+                    _loan.reference = txtNewReference.Text;
+                    _loan.interest = oldloan.interest;
+                    _loan.amount = oldloan.amount;
+                    _loan.start = dtpStart.Value;
+                    _loan.end = dtpEnd.Value;
+                    _loan.currency_id = oldloan.currency_id;
+                    _loan.renegotiated = false;
+                    _loan.loan_origin_id = oldloan.Id;
+                    _loan.accounting_movement_id = oldloan.accounting_movement_id;
+                    _loan.interest_base = oldloan.interest_base;
+                    _loan.can_generate_interest = 1;
+
+                    manager.My_db.Loans.Add(_loan);
+                    manager.My_db.SaveChanges();
+
+                    clear();
+                    loadLoans();
                 }
-
-                int id = int.Parse(cbLoan.SelectedValue.ToString());
-
-                Loan oldloan = manager.My_db.Loans.FirstOrDefault(x => x.Id == id);
-
-                oldloan.renegotiated = true;
-
-                Loan _loan = new Loan();
-                _loan.fund_id = manager.Selected;
-                _loan.lender_id = oldloan.lender_id;
-                _loan.reference = txtNewReference.Text;
-                _loan.interest = oldloan.interest;
-                _loan.amount = oldloan.amount;
-                _loan.start = dtpStart.Value;
-                _loan.end = dtpEnd.Value;
-                _loan.currency_id = oldloan.currency_id;
-                _loan.renegotiated = false;
-                _loan.loan_origin_id = oldloan.Id;
-                _loan.accounting_movement_id = oldloan.accounting_movement_id;
-                _loan.interest_base = oldloan.interest_base;
-                _loan.can_generate_interest = 1;
-
-                manager.My_db.Loans.Add(_loan);
-                manager.My_db.SaveChanges();
-
-                clear();
-                loadLoans();
+                else
+                {
+                    ErrorMessage.showErrorMessage(new Exception("No movement allowed in closed period."));
+                }
             }
             catch (Exception _ex)
             {

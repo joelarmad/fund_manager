@@ -80,42 +80,50 @@ namespace FundsManager
         {
             try
             {
-                if (doValidations())
+                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpIssuingDate.Value.Year) == null)
                 {
-                    BondsTFAM bond = new BondsTFAM();
-                    bond.number = txtNumber.Text;
-                    bond.issued = Convert.ToDateTime(dtpIssuingDate.Text);
-                    bond.expired = Convert.ToDateTime(dtpExpirationDate.Text);
-                    bond.FK_Bonds_Funds = manager.Selected;
-                    bond.amount = Math.Round(Convert.ToDecimal(txtAmount.Text), 2);
-                    bond.interest_on_bond = Convert.ToInt32(txtBondInterest.Text);
-                    bond.interest_tff_contribution = Convert.ToInt32(txtTFFInterest.Text);
-                    bond.currency_id = int.Parse(cbCurrency.SelectedValue.ToString());
+                    if (doValidations())
+                    {
+                        BondsTFAM bond = new BondsTFAM();
+                        bond.number = txtNumber.Text;
+                        bond.issued = Convert.ToDateTime(dtpIssuingDate.Text);
+                        bond.expired = Convert.ToDateTime(dtpExpirationDate.Text);
+                        bond.FK_Bonds_Funds = manager.Selected;
+                        bond.amount = Math.Round(Convert.ToDecimal(txtAmount.Text), 2);
+                        bond.interest_on_bond = Convert.ToInt32(txtBondInterest.Text);
+                        bond.interest_tff_contribution = Convert.ToInt32(txtTFFInterest.Text);
+                        bond.currency_id = int.Parse(cbCurrency.SelectedValue.ToString());
 
-                    bond.active = 0;
+                        bond.active = 0;
 
-                    manager.My_db.BondsTFAMs.Add(bond);
+                        manager.My_db.BondsTFAMs.Add(bond);
 
-                    Resource _resource = manager.My_db.Resources.FirstOrDefault(x => x.Name == KeyDefinitions.BONDTFAM_CONSECUTIVE_KEY && x.FundId == manager.Selected);
+                        Resource _resource = manager.My_db.Resources.FirstOrDefault(x => x.Name == KeyDefinitions.BONDTFAM_CONSECUTIVE_KEY && x.FundId == manager.Selected);
 
-                    fBondConsecutive++;
+                        fBondConsecutive++;
 
-                    _resource.Value = fBondConsecutive.ToString();
+                        _resource.Value = fBondConsecutive.ToString();
 
-                    manager.My_db.SaveChanges();
+                        manager.My_db.SaveChanges();
 
-                    txtNumber.Text = "Bond " + Conversions.toRomanNumeral(fBondConsecutive);
-                    txtAmount.Text = "0";
-                    txtBondInterest.Text = "10";
-                    txtTFFInterest.Text = "1";
-                    txtAmount.ReadOnly = false;
+                        txtNumber.Text = "Bond " + Conversions.toRomanNumeral(fBondConsecutive);
+                        txtAmount.Text = "0";
+                        txtBondInterest.Text = "10";
+                        txtTFFInterest.Text = "1";
+                        txtAmount.ReadOnly = false;
 
-                    MessageBox.Show("Bond has been saved", "");
+                        MessageBox.Show("Bond has been saved", "");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Data verification error.", "Error");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Data verification error.", "Error");
+                    ErrorMessage.showErrorMessage(new Exception("No movement allowed in closed period."));
                 }
+                
             }
             catch (Exception _ex)
             {
