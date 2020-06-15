@@ -20,15 +20,16 @@ namespace FundsManager
         int disburdsementIdIndex = 1;
         int bookingIdIndex = 2;
         int referenceIndex = 3;
-        int collectionDateIndex = 4;
-        int investmentIndex = 5;
-        int profitShareIndex = 6;
-        int delayInterestIndex = 7;
-        int toBeCollectedIndex = 8;
-        int overdueIndex = 9;
-        int fromIndex = 10;
-        int toIndex = 11;
-        int daysIndex = 12;
+        int numberIndex = 4;
+        int collectionDateIndex = 5;
+        int investmentIndex = 6;
+        int profitShareIndex = 7;
+        int delayInterestIndex = 8;
+        int toBeCollectedIndex = 9;
+        int overdueIndex = 10;
+        int fromIndex = 11;
+        int toIndex = 12;
+        int daysIndex = 13;
 
         public DisbursementToBeOverdueForm()
         {
