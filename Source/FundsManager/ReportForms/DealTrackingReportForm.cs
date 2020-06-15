@@ -41,45 +41,53 @@ namespace FundsManager.ReportForms
 
         private void updateReport()
         {
-            String client = "Any client";
-            int clientId = 0;
-
-            if (cbClient.SelectedValue != null)
+            try
             {
-                clientId = int.Parse(cbClient.SelectedValue.ToString());
-                client = ((FundsManager.FundsDBDataSet.ClientsRow)((System.Data.DataRowView)cbClient.SelectedItem).Row).name;
-            }
+                String client = "Any client";
+                int clientId = 0;
 
-            String contract = "Any contract";
-            int investmentId = 0;
-
-            if (cbContract.SelectedValue != null)
-            {
-                investmentId = int.Parse(cbContract.SelectedValue.ToString());
-
-                if (cbContract.SelectedIndex > 0)
+                if (cbClient.SelectedValue != null)
                 {
-                    contract = ((FundsManager.FundsDBDataSet.ClientContractsRow)((System.Data.DataRowView)cbContract.SelectedItem).Row).contract;
+                    clientId = int.Parse(cbClient.SelectedValue.ToString());
+                    client = ((FundsManager.FundsDBDataSet.ClientsRow)((System.Data.DataRowView)cbClient.SelectedItem).Row).name;
                 }
+
+                String contract = "Any contract";
+                int investmentId = 0;
+
+                if (cbContract.SelectedValue != null)
+                {
+                    investmentId = int.Parse(cbContract.SelectedValue.ToString());
+
+                    if (cbContract.SelectedIndex > 0)
+                    {
+                        contract = ((FundsManager.FundsDBDataSet.ClientContractsRow)((System.Data.DataRowView)cbContract.SelectedItem).Row).contract;
+                    }
+                }
+
+                this.dealTrackingViewTableAdapter.FillByFilters(this.fundsDBDataSet.DealTrackingView, manager.Selected, investmentId, clientId);
+
+                var rds = new ReportDataSource("dsDealTracking", (DataTable)this.fundsDBDataSet.DealTrackingView);
+
+                reportViewer1.LocalReport.DataSources.Clear();
+                reportViewer1.LocalReport.DataSources.Add(rds);
+
+                ReportParameter language = new ReportParameter("Language", Thread.CurrentThread.CurrentCulture.Name);
+                ReportParameter pClient = new ReportParameter("Client", client);
+                ReportParameter pContract = new ReportParameter("Contract", contract);
+
+                reportViewer1.LocalReport.SetParameters(language);
+                reportViewer1.LocalReport.SetParameters(pClient);
+                reportViewer1.LocalReport.SetParameters(pContract);
+
+
+                reportViewer1.RefreshReport();
             }
+            catch
+            {
 
-            this.dealTrackingViewTableAdapter.FillByFilters(this.fundsDBDataSet.DealTrackingView, manager.Selected, investmentId, clientId);
-
-            var rds = new ReportDataSource("dsDealTracking", (DataTable)this.fundsDBDataSet.DealTrackingView);
-
-            reportViewer1.LocalReport.DataSources.Clear();
-            reportViewer1.LocalReport.DataSources.Add(rds);
-
-            ReportParameter language = new ReportParameter("Language", Thread.CurrentThread.CurrentCulture.Name);
-            ReportParameter pClient = new ReportParameter("Client", client);
-            ReportParameter pContract = new ReportParameter("Contract", contract);
-
-            reportViewer1.LocalReport.SetParameters(language);
-            reportViewer1.LocalReport.SetParameters(pClient);
-            reportViewer1.LocalReport.SetParameters(pContract);
-
-
-            reportViewer1.RefreshReport();
+            }
+            
         }
 
         private void cbClient_SelectedIndexChanged(object sender, EventArgs e)

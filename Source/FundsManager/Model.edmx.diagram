@@ -38,7 +38,6 @@
         <EntityTypeShape EntityType="FundsDBModel.DisbursementGeneratedInterestDetail" Width="1.5" PointX="10.5" PointY="60.5" />
         <EntityTypeShape EntityType="FundsDBModel.DisbursementGeneratedInterest" Width="1.5" PointX="8.25" PointY="54.125" />
         <EntityTypeShape EntityType="FundsDBModel.DisbursementItem" Width="1.5" PointX="5.25" PointY="99.75" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementOverdueDetail" Width="1.5" PointX="13.5" PointY="64.875" />
         <EntityTypeShape EntityType="FundsDBModel.DisbursementOverdue" Width="1.5" PointX="11.25" PointY="55.125" />
         <EntityTypeShape EntityType="FundsDBModel.DisbursementPayment" Width="1.5" PointX="7.5" PointY="77.375" />
         <EntityTypeShape EntityType="FundsDBModel.Disbursement" Width="1.5" PointX="15.75" PointY="81.875" />
@@ -75,7 +74,6 @@
         <EntityTypeShape EntityType="FundsDBModel.ClientContract" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="FundsDBModel.DisbursementCollectionView" Width="1.5" PointX="8.75" PointY="3.75" />
         <EntityTypeShape EntityType="FundsDBModel.DisbursementGeneratedInterestView" Width="1.5" PointX="8.75" PointY="9.75" />
-        <EntityTypeShape EntityType="FundsDBModel.DisbursementOverdueGeneratedView" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="FundsDBModel.DisbursementsBookingView" Width="1.5" PointX="10.75" PointY="10.75" />
         <EntityTypeShape EntityType="FundsDBModel.DisbursementsForAddendum" Width="1.5" PointX="12.75" PointY="0.75" />
         <EntityTypeShape EntityType="FundsDBModel.DisbursementsToBeCollected" Width="1.5" PointX="0.75" PointY="12.75" />
@@ -106,8 +104,6 @@
         <AssociationConnector Association="FundsDBModel.FK_DisbursementBook_AccountingMovements" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementCollections_AccoutingMovements" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_AccountingMovements" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_CollectionAccountingMovements" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_OverdueAccountingMovements" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementPayments_AccountingMovements" />
         <AssociationConnector Association="FundsDBModel.FK_Loan_InterestRepayments_AccountingMovements" />
         <AssociationConnector Association="FundsDBModel.FK_Loan_Repayments_AccountingMovements" />
@@ -182,8 +178,6 @@
         <AssociationConnector Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_Disbursements" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementItems_Item" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_DisbursementOverdues" />
-        <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_Disbursements" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementPayments_Investments" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Funds" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Investments" />
@@ -216,6 +210,12 @@
         <AssociationConnector Association="FundsDBModel.FK_OtherDetails_SubAcct" />
         <AssociationConnector Association="FundsDBModel.DisbursementPaymentDetails" />
         <EntityTypeShape EntityType="FundsDBModel.DisbursementPlusAddendumsView" Width="1.5" PointX="19.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementOverdueDetail" Width="1.5" PointX="18" PointY="71.5" />
+        <EntityTypeShape EntityType="FundsDBModel.DealTrackingView" Width="1.5" PointX="19.375" PointY="5.75" />
+        <EntityTypeShape EntityType="FundsDBModel.DisbursementOverdueGeneratedView" Width="1.5" PointX="19.375" PointY="12.75" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_OverdueAccountingMovements" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_DisbursementOverdues" />
+        <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_Disbursements" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

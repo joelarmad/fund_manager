@@ -50,10 +50,10 @@
             // reportViewer1
             // 
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "FundsManager.Reports.DealTrackingReport.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(12, 102);
+            this.reportViewer1.Location = new System.Drawing.Point(12, 53);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(1049, 440);
+            this.reportViewer1.Size = new System.Drawing.Size(1049, 489);
             this.reportViewer1.TabIndex = 3;
             // 
             // fundsDBDataSet

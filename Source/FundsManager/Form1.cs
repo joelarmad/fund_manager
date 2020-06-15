@@ -440,5 +440,13 @@ namespace FundsManager
             form.MdiParent = this;
             form.Show();
         }
+
+        private void overduesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            OverdueResumedReportForm form = new OverdueResumedReportForm();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }

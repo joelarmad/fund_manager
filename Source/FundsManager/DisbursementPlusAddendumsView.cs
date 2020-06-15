@@ -29,5 +29,6 @@ namespace FundsManager
         public int is_booking { get; set; }
         public Nullable<int> booking_id { get; set; }
         public decimal delay_interest { get; set; }
+        public Nullable<int> fund_id { get; set; }
     }
 }

@@ -58,7 +58,6 @@ namespace FundsManager
         public virtual DbSet<DisbursementGeneratedInterestDetail> DisbursementGeneratedInterestDetails { get; set; }
         public virtual DbSet<DisbursementGeneratedInterest> DisbursementGeneratedInterests { get; set; }
         public virtual DbSet<DisbursementItem> DisbursementItems { get; set; }
-        public virtual DbSet<DisbursementOverdueDetail> DisbursementOverdueDetails { get; set; }
         public virtual DbSet<DisbursementOverdue> DisbursementOverdues { get; set; }
         public virtual DbSet<DisbursementPayment> DisbursementPayments { get; set; }
         public virtual DbSet<Disbursement> Disbursements { get; set; }
@@ -95,7 +94,6 @@ namespace FundsManager
         public virtual DbSet<ClientContract> ClientContracts { get; set; }
         public virtual DbSet<DisbursementCollectionView> DisbursementCollectionViews { get; set; }
         public virtual DbSet<DisbursementGeneratedInterestView> DisbursementGeneratedInterestViews { get; set; }
-        public virtual DbSet<DisbursementOverdueGeneratedView> DisbursementOverdueGeneratedViews { get; set; }
         public virtual DbSet<DisbursementsBookingView> DisbursementsBookingViews { get; set; }
         public virtual DbSet<DisbursementsForAddendum> DisbursementsForAddendums { get; set; }
         public virtual DbSet<DisbursementsToBeCollected> DisbursementsToBeCollecteds { get; set; }
@@ -116,5 +114,8 @@ namespace FundsManager
         public virtual DbSet<TotalIncome> TotalIncomes { get; set; }
         public virtual DbSet<UnlinkedDisbursement> UnlinkedDisbursements { get; set; }
         public virtual DbSet<DisbursementPlusAddendumsView> DisbursementPlusAddendumsViews { get; set; }
+        public virtual DbSet<DisbursementOverdueDetail> DisbursementOverdueDetails { get; set; }
+        public virtual DbSet<DealTrackingView> DealTrackingViews { get; set; }
+        public virtual DbSet<DisbursementOverdueGeneratedView> DisbursementOverdueGeneratedViews { get; set; }
     }
 }

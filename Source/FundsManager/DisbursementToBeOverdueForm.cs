@@ -175,7 +175,6 @@ namespace FundsManager
                 detail.monthly_rate = monthlyRate;
                 detail.overdue_date_from = DateTime.Parse(row.Cells[fromIndex].Value.ToString());
                 detail.overdue_date_to = DateTime.Parse(row.Cells[toIndex].Value.ToString());
-                detail.collected = 0;
 
                 return detail;
             }
@@ -295,6 +294,8 @@ namespace FundsManager
                                         _maccount902.credit = Math.Round(detail.generated_overdue, 2);
 
                                         manager.My_db.Movements_Accounts.Add(_maccount902);
+
+                                        detail.AccountingMovement = accountingMovement;
 
                                         manager.My_db.DisbursementOverdueDetails.Add(detail);
                                     }

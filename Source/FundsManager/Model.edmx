@@ -369,10 +369,7 @@
           <Property Name="monthly_rate" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="overdue_date_from" Type="date" Nullable="false" />
           <Property Name="overdue_date_to" Type="date" Nullable="false" />
-          <Property Name="collected" Type="int" Nullable="false" />
-          <Property Name="collection_date" Type="date" />
           <Property Name="overdue_accounting_movement_id" Type="int" />
-          <Property Name="collection_accounting_movement_id" Type="int" />
         </EntityType>
         <EntityType Name="DisbursementOverdues">
           <Key>
@@ -875,6 +872,52 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.ClientContrac
           <Property Name="name" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DealTrackingView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DealTrackingView">
+          <Key>
+            <PropertyRef Name="row_id" />
+            <PropertyRef Name="is_booking" />
+            <PropertyRef Name="investment_id" />
+            <PropertyRef Name="disbursement_id" />
+            <PropertyRef Name="number" />
+            <PropertyRef Name="contract" />
+            <PropertyRef Name="client" />
+            <PropertyRef Name="client_id" />
+            <PropertyRef Name="principal" />
+            <PropertyRef Name="interest" />
+            <PropertyRef Name="delay_interest" />
+            <PropertyRef Name="estimated_repay_date" />
+            <PropertyRef Name="can_generate_interest" />
+          </Key>
+          <Property Name="fund_id" Type="int" />
+          <Property Name="row_id" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="is_booking" Type="int" Nullable="false" />
+          <Property Name="has_bookings" Type="int" />
+          <Property Name="investment_id" Type="int" Nullable="false" />
+          <Property Name="disbursement_id" Type="int" Nullable="false" />
+          <Property Name="booking_id" Type="int" />
+          <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contract" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="client" Type="varchar(max)" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="underlying_debtor" Type="varchar(max)" />
+          <Property Name="bank_name" Type="varchar" MaxLength="50" />
+          <Property Name="items" Type="text" />
+          <Property Name="pay_date" Type="date" />
+          <Property Name="principal" Type="money" Nullable="false" />
+          <Property Name="interest" Type="money" Nullable="false" />
+          <Property Name="delay_interest" Type="numeric" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="estimated_repay_date" Type="date" Nullable="false" />
+          <Property Name="principal_collected" Type="money" />
+          <Property Name="interest_collected" Type="money" />
+          <Property Name="delay_interest_collected" Type="numeric" Precision="19" Scale="4" />
+          <Property Name="principal_remaining" Type="numeric" Precision="19" Scale="4" />
+          <Property Name="interest_remaining" Type="numeric" Precision="19" Scale="4" />
+          <Property Name="delay_interest_remaining" Type="numeric" Precision="21" Scale="4" />
+          <Property Name="can_generate_interest" Type="bit" Nullable="false" />
+          <Property Name="collected" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementCollectionView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DisbursementCollectionView">
           <Key>
@@ -907,12 +950,13 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementC
           <Property Name="delay_interest_accrued" Type="numeric" Precision="19" Scale="4" />
           <Property Name="overdues_accrued" Type="money" />
           <Property Name="amount_collected" Type="money" />
-          <Property Name="profit_share_collected" Type="numeric" Precision="19" Scale="4" />
+          <Property Name="profit_share_collected" Type="money" />
           <Property Name="delay_interest_collected" Type="numeric" Precision="19" Scale="4" />
           <Property Name="can_generate_interest" Type="bit" Nullable="false" />
           <Property Name="is_booking" Type="int" Nullable="false" />
           <Property Name="booking_id" Type="int" Nullable="false" />
           <Property Name="has_bookings" Type="int" />
+          <Property Name="collected" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementGeneratedInterestView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -958,7 +1002,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementO
             <PropertyRef Name="monthly_rate" />
             <PropertyRef Name="overdue_date_from" />
             <PropertyRef Name="overdue_date_to" />
-            <PropertyRef Name="collected" />
             <PropertyRef Name="investment_id" />
             <PropertyRef Name="currency_id" />
             <PropertyRef Name="contract" />
@@ -971,10 +1014,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementO
           <Property Name="monthly_rate" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="overdue_date_from" Type="date" Nullable="false" />
           <Property Name="overdue_date_to" Type="date" Nullable="false" />
-          <Property Name="collected" Type="int" Nullable="false" />
-          <Property Name="collection_date" Type="date" />
           <Property Name="overdue_accounting_movement_id" Type="int" />
-          <Property Name="collection_accounting_movement_id" Type="int" />
           <Property Name="investment_id" Type="int" Nullable="false" />
           <Property Name="currency_id" Type="int" Nullable="false" />
           <Property Name="contract" Type="varchar" MaxLength="50" Nullable="false" />
@@ -1011,6 +1051,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementP
           <Property Name="is_booking" Type="int" Nullable="false" />
           <Property Name="booking_id" Type="int" />
           <Property Name="delay_interest" Type="numeric" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="fund_id" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementsBookingView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1137,6 +1178,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Disbursements
             <PropertyRef Name="delay_interest" />
             <PropertyRef Name="can_generate_interest" />
             <PropertyRef Name="is_booking" />
+            <PropertyRef Name="booking_id" />
           </Key>
           <Property Name="row_key" Type="varchar" MaxLength="61" />
           <Property Name="fund_id" Type="int" Nullable="false" />
@@ -1153,14 +1195,16 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Disbursements
           <Property Name="delay_interest" Type="numeric" Precision="19" Scale="4" Nullable="false" />
           <Property Name="delay_interest_accrued" Type="numeric" Precision="19" Scale="4" />
           <Property Name="amount_collected" Type="money" />
-          <Property Name="profit_share_collected" Type="numeric" Precision="19" Scale="4" />
+          <Property Name="profit_share_collected" Type="money" />
           <Property Name="delay_interest_collected" Type="numeric" Precision="19" Scale="4" />
           <Property Name="amount_remainig" Type="numeric" Precision="19" Scale="4" />
-          <Property Name="profit_share_accrued_remaining" Type="numeric" Precision="20" Scale="4" />
+          <Property Name="profit_share_accrued_remaining" Type="numeric" Precision="19" Scale="4" />
           <Property Name="delay_interest_accrued_remaining" Type="numeric" Precision="21" Scale="4" />
           <Property Name="can_generate_interest" Type="bit" Nullable="false" />
           <Property Name="is_booking" Type="int" Nullable="false" />
+          <Property Name="booking_id" Type="int" Nullable="false" />
           <Property Name="has_bookings" Type="int" />
+          <Property Name="collected" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.InvestmentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1396,11 +1440,13 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.OtherDetailsV
         <EntityType Name="OtherDetailsView">
           <Key>
             <PropertyRef Name="source" />
+            <PropertyRef Name="subaccount_id" />
             <PropertyRef Name="Id" />
             <PropertyRef Name="DetailType" />
             <PropertyRef Name="fund_id" />
           </Key>
           <Property Name="source" Type="varchar" MaxLength="17" Nullable="false" />
+          <Property Name="subaccount_id" Type="int" Nullable="false" />
           <Property Name="Row_Id" Type="varchar" MaxLength="32" />
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="DetailType" Type="int" Nullable="false" />
@@ -2450,18 +2496,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DisbursementOverdueDetails_CollectionAccountingMovements">
-          <End Role="AccountingMovements" Type="Self.AccountingMovements" Multiplicity="0..1" />
-          <End Role="DisbursementOverdueDetails" Type="Self.DisbursementOverdueDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccountingMovements">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DisbursementOverdueDetails">
-              <PropertyRef Name="collection_accounting_movement_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DisbursementOverdueDetails_DisbursementOverdues">
           <End Role="DisbursementOverdues" Type="Self.DisbursementOverdues" Multiplicity="1" />
           <End Role="DisbursementOverdueDetails" Type="Self.DisbursementOverdueDetails" Multiplicity="*" />
@@ -3247,6 +3281,37 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
     [ClientContracts].[name] AS [name]
     FROM [dbo].[ClientContracts] AS [ClientContracts]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="DealTrackingView" EntityType="Self.DealTrackingView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DealTrackingView].[fund_id] AS [fund_id], 
+    [DealTrackingView].[row_id] AS [row_id], 
+    [DealTrackingView].[is_booking] AS [is_booking], 
+    [DealTrackingView].[has_bookings] AS [has_bookings], 
+    [DealTrackingView].[investment_id] AS [investment_id], 
+    [DealTrackingView].[disbursement_id] AS [disbursement_id], 
+    [DealTrackingView].[booking_id] AS [booking_id], 
+    [DealTrackingView].[number] AS [number], 
+    [DealTrackingView].[contract] AS [contract], 
+    [DealTrackingView].[client] AS [client], 
+    [DealTrackingView].[client_id] AS [client_id], 
+    [DealTrackingView].[underlying_debtor] AS [underlying_debtor], 
+    [DealTrackingView].[bank_name] AS [bank_name], 
+    [DealTrackingView].[items] AS [items], 
+    [DealTrackingView].[pay_date] AS [pay_date], 
+    [DealTrackingView].[principal] AS [principal], 
+    [DealTrackingView].[interest] AS [interest], 
+    [DealTrackingView].[delay_interest] AS [delay_interest], 
+    [DealTrackingView].[estimated_repay_date] AS [estimated_repay_date], 
+    [DealTrackingView].[principal_collected] AS [principal_collected], 
+    [DealTrackingView].[interest_collected] AS [interest_collected], 
+    [DealTrackingView].[delay_interest_collected] AS [delay_interest_collected], 
+    [DealTrackingView].[principal_remaining] AS [principal_remaining], 
+    [DealTrackingView].[interest_remaining] AS [interest_remaining], 
+    [DealTrackingView].[delay_interest_remaining] AS [delay_interest_remaining], 
+    [DealTrackingView].[can_generate_interest] AS [can_generate_interest], 
+    [DealTrackingView].[collected] AS [collected]
+    FROM [dbo].[DealTrackingView] AS [DealTrackingView]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="DisbursementCollectionView" EntityType="Self.DisbursementCollectionView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DisbursementCollectionView].[fund_id] AS [fund_id], 
@@ -3269,7 +3334,8 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
     [DisbursementCollectionView].[can_generate_interest] AS [can_generate_interest], 
     [DisbursementCollectionView].[is_booking] AS [is_booking], 
     [DisbursementCollectionView].[booking_id] AS [booking_id], 
-    [DisbursementCollectionView].[has_bookings] AS [has_bookings]
+    [DisbursementCollectionView].[has_bookings] AS [has_bookings], 
+    [DisbursementCollectionView].[collected] AS [collected]
     FROM [dbo].[DisbursementCollectionView] AS [DisbursementCollectionView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="DisbursementGeneratedInterestView" EntityType="Self.DisbursementGeneratedInterestView" store:Type="Views" store:Schema="dbo">
@@ -3300,10 +3366,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
     [DisbursementOverdueGeneratedView].[monthly_rate] AS [monthly_rate], 
     [DisbursementOverdueGeneratedView].[overdue_date_from] AS [overdue_date_from], 
     [DisbursementOverdueGeneratedView].[overdue_date_to] AS [overdue_date_to], 
-    [DisbursementOverdueGeneratedView].[collected] AS [collected], 
-    [DisbursementOverdueGeneratedView].[collection_date] AS [collection_date], 
     [DisbursementOverdueGeneratedView].[overdue_accounting_movement_id] AS [overdue_accounting_movement_id], 
-    [DisbursementOverdueGeneratedView].[collection_accounting_movement_id] AS [collection_accounting_movement_id], 
     [DisbursementOverdueGeneratedView].[investment_id] AS [investment_id], 
     [DisbursementOverdueGeneratedView].[currency_id] AS [currency_id], 
     [DisbursementOverdueGeneratedView].[contract] AS [contract]
@@ -3325,7 +3388,8 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
     [DisbursementPlusAddendumsView].[has_bookings] AS [has_bookings], 
     [DisbursementPlusAddendumsView].[is_booking] AS [is_booking], 
     [DisbursementPlusAddendumsView].[booking_id] AS [booking_id], 
-    [DisbursementPlusAddendumsView].[delay_interest] AS [delay_interest]
+    [DisbursementPlusAddendumsView].[delay_interest] AS [delay_interest], 
+    [DisbursementPlusAddendumsView].[fund_id] AS [fund_id]
     FROM [dbo].[DisbursementPlusAddendumsView] AS [DisbursementPlusAddendumsView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="DisbursementsBookingView" EntityType="Self.DisbursementsBookingView" store:Type="Views" store:Schema="dbo">
@@ -3415,7 +3479,9 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
     [DisbursementsToBeCollected].[delay_interest_accrued_remaining] AS [delay_interest_accrued_remaining], 
     [DisbursementsToBeCollected].[can_generate_interest] AS [can_generate_interest], 
     [DisbursementsToBeCollected].[is_booking] AS [is_booking], 
-    [DisbursementsToBeCollected].[has_bookings] AS [has_bookings]
+    [DisbursementsToBeCollected].[booking_id] AS [booking_id], 
+    [DisbursementsToBeCollected].[has_bookings] AS [has_bookings], 
+    [DisbursementsToBeCollected].[collected] AS [collected]
     FROM [dbo].[DisbursementsToBeCollected] AS [DisbursementsToBeCollected]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="InvestmentsView" EntityType="Self.InvestmentsView" store:Type="Views" store:Schema="dbo">
@@ -3558,6 +3624,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySet Name="OtherDetailsView" EntityType="Self.OtherDetailsView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [OtherDetailsView].[source] AS [source], 
+    [OtherDetailsView].[subaccount_id] AS [subaccount_id], 
     [OtherDetailsView].[Row_Id] AS [Row_Id], 
     [OtherDetailsView].[Id] AS [Id], 
     [OtherDetailsView].[DetailType] AS [DetailType], 
@@ -3974,10 +4041,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="Items" EntitySet="Items" />
             <End Role="DisbursementItems" EntitySet="DisbursementItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_DisbursementOverdueDetails_CollectionAccountingMovements" Association="Self.FK_DisbursementOverdueDetails_CollectionAccountingMovements">
-            <End Role="AccountingMovements" EntitySet="AccountingMovements" />
-            <End Role="DisbursementOverdueDetails" EntitySet="DisbursementOverdueDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_DisbursementOverdueDetails_DisbursementOverdues" Association="Self.FK_DisbursementOverdueDetails_DisbursementOverdues">
             <End Role="DisbursementOverdues" EntitySet="DisbursementOverdues" />
             <End Role="DisbursementOverdueDetails" EntitySet="DisbursementOverdueDetails" />
@@ -4217,7 +4280,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySet Name="DisbursementGeneratedInterestDetails" EntityType="FundsDBModel.DisbursementGeneratedInterestDetail" />
           <EntitySet Name="DisbursementGeneratedInterests" EntityType="FundsDBModel.DisbursementGeneratedInterest" />
           <EntitySet Name="DisbursementItems" EntityType="FundsDBModel.DisbursementItem" />
-          <EntitySet Name="DisbursementOverdueDetails" EntityType="FundsDBModel.DisbursementOverdueDetail" />
           <EntitySet Name="DisbursementOverdues" EntityType="FundsDBModel.DisbursementOverdue" />
           <EntitySet Name="DisbursementPayments" EntityType="FundsDBModel.DisbursementPayment" />
           <EntitySet Name="Disbursements" EntityType="FundsDBModel.Disbursement" />
@@ -4254,7 +4316,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySet Name="ClientContracts" EntityType="FundsDBModel.ClientContract" />
           <EntitySet Name="DisbursementCollectionViews" EntityType="FundsDBModel.DisbursementCollectionView" />
           <EntitySet Name="DisbursementGeneratedInterestViews" EntityType="FundsDBModel.DisbursementGeneratedInterestView" />
-          <EntitySet Name="DisbursementOverdueGeneratedViews" EntityType="FundsDBModel.DisbursementOverdueGeneratedView" />
           <EntitySet Name="DisbursementsBookingViews" EntityType="FundsDBModel.DisbursementsBookingView" />
           <EntitySet Name="DisbursementsForAddendums" EntityType="FundsDBModel.DisbursementsForAddendum" />
           <EntitySet Name="DisbursementsToBeCollecteds" EntityType="FundsDBModel.DisbursementsToBeCollected" />
@@ -4317,14 +4378,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <AssociationSet Name="FK_DisbursementGeneratedInterestDetails_AccountingMovements" Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_AccountingMovements">
             <End Role="AccountingMovement" EntitySet="AccountingMovements" />
             <End Role="DisbursementGeneratedInterestDetail" EntitySet="DisbursementGeneratedInterestDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DisbursementOverdueDetails_CollectionAccountingMovements" Association="FundsDBModel.FK_DisbursementOverdueDetails_CollectionAccountingMovements">
-            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
-            <End Role="DisbursementOverdueDetail" EntitySet="DisbursementOverdueDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DisbursementOverdueDetails_OverdueAccountingMovements" Association="FundsDBModel.FK_DisbursementOverdueDetails_OverdueAccountingMovements">
-            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
-            <End Role="DisbursementOverdueDetail" EntitySet="DisbursementOverdueDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_DisbursementPayments_AccountingMovements" Association="FundsDBModel.FK_DisbursementPayments_AccountingMovements">
             <End Role="AccountingMovement" EntitySet="AccountingMovements" />
@@ -4622,14 +4675,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="Item" EntitySet="Items" />
             <End Role="DisbursementItem" EntitySet="DisbursementItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_DisbursementOverdueDetails_DisbursementOverdues" Association="FundsDBModel.FK_DisbursementOverdueDetails_DisbursementOverdues">
-            <End Role="DisbursementOverdue" EntitySet="DisbursementOverdues" />
-            <End Role="DisbursementOverdueDetail" EntitySet="DisbursementOverdueDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DisbursementOverdueDetails_Disbursements" Association="FundsDBModel.FK_DisbursementOverdueDetails_Disbursements">
-            <End Role="Disbursement" EntitySet="Disbursements" />
-            <End Role="DisbursementOverdueDetail" EntitySet="DisbursementOverdueDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_DisbursementPayments_Investments" Association="FundsDBModel.FK_DisbursementPayments_Investments">
             <End Role="Investment" EntitySet="Investments" />
             <End Role="DisbursementPayment" EntitySet="DisbursementPayments" />
@@ -4755,6 +4800,21 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="DisbursementPayment" EntitySet="DisbursementPayments" />
           </AssociationSet>
           <EntitySet Name="DisbursementPlusAddendumsViews" EntityType="FundsDBModel.DisbursementPlusAddendumsView" />
+          <EntitySet Name="DisbursementOverdueDetails" EntityType="FundsDBModel.DisbursementOverdueDetail" />
+          <EntitySet Name="DealTrackingViews" EntityType="FundsDBModel.DealTrackingView" />
+          <EntitySet Name="DisbursementOverdueGeneratedViews" EntityType="FundsDBModel.DisbursementOverdueGeneratedView" />
+          <AssociationSet Name="FK_DisbursementOverdueDetails_OverdueAccountingMovements" Association="FundsDBModel.FK_DisbursementOverdueDetails_OverdueAccountingMovements">
+            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
+            <End Role="DisbursementOverdueDetail" EntitySet="DisbursementOverdueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementOverdueDetails_DisbursementOverdues" Association="FundsDBModel.FK_DisbursementOverdueDetails_DisbursementOverdues">
+            <End Role="DisbursementOverdue" EntitySet="DisbursementOverdues" />
+            <End Role="DisbursementOverdueDetail" EntitySet="DisbursementOverdueDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementOverdueDetails_Disbursements" Association="FundsDBModel.FK_DisbursementOverdueDetails_Disbursements">
+            <End Role="Disbursement" EntitySet="Disbursements" />
+            <End Role="DisbursementOverdueDetail" EntitySet="DisbursementOverdueDetails" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AccountingMovement">
           <Key>
@@ -4779,14 +4839,13 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="DisbursementBooks" Relationship="FundsDBModel.FK_DisbursementBook_AccountingMovements" FromRole="AccountingMovement" ToRole="DisbursementBook" />
           <NavigationProperty Name="DisbursementCollections" Relationship="FundsDBModel.FK_DisbursementCollections_AccoutingMovements" FromRole="AccountingMovement" ToRole="DisbursementCollection" />
           <NavigationProperty Name="DisbursementGeneratedInterestDetails" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_AccountingMovements" FromRole="AccountingMovement" ToRole="DisbursementGeneratedInterestDetail" />
-          <NavigationProperty Name="DisbursementOverdueDetails" Relationship="FundsDBModel.FK_DisbursementOverdueDetails_CollectionAccountingMovements" FromRole="AccountingMovement" ToRole="DisbursementOverdueDetail" />
-          <NavigationProperty Name="DisbursementOverdueDetails1" Relationship="FundsDBModel.FK_DisbursementOverdueDetails_OverdueAccountingMovements" FromRole="AccountingMovement" ToRole="DisbursementOverdueDetail" />
           <NavigationProperty Name="DisbursementPayments" Relationship="FundsDBModel.FK_DisbursementPayments_AccountingMovements" FromRole="AccountingMovement" ToRole="DisbursementPayment" />
           <NavigationProperty Name="Loan_InterestRepayments" Relationship="FundsDBModel.FK_Loan_InterestRepayments_AccountingMovements" FromRole="AccountingMovement" ToRole="Loan_InterestRepayments" />
           <NavigationProperty Name="Loan_Repayments" Relationship="FundsDBModel.FK_Loan_Repayments_AccountingMovements" FromRole="AccountingMovement" ToRole="Loan_Repayments" />
           <NavigationProperty Name="LoanGeneratedInterestDetails" Relationship="FundsDBModel.FK_LoanGeneratedInterestDetails_AccountingMovements" FromRole="AccountingMovement" ToRole="LoanGeneratedInterestDetail" />
           <NavigationProperty Name="Loans" Relationship="FundsDBModel.FK_Loans_Accounting_Movement" FromRole="AccountingMovement" ToRole="Loan" />
           <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_AccountingMovements" FromRole="AccountingMovement" ToRole="Movements_Accounts" />
+          <NavigationProperty Name="DisbursementOverdueDetails" Relationship="FundsDBModel.FK_DisbursementOverdueDetails_OverdueAccountingMovements" FromRole="AccountingMovement" ToRole="DisbursementOverdueDetail" />
         </EntityType>
         <EntityType Name="Account">
           <Key>
@@ -5229,27 +5288,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="ItemId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Item" Relationship="FundsDBModel.FK_DisbursementItems_Item" FromRole="DisbursementItem" ToRole="Item" />
         </EntityType>
-        <EntityType Name="DisbursementOverdueDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="disbursement_overdue_id" Type="Int32" Nullable="false" />
-          <Property Name="disbursement_id" Type="Int32" Nullable="false" />
-          <Property Name="booking_id" Type="Int32" />
-          <Property Name="generated_overdue" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="monthly_rate" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
-          <Property Name="overdue_date_from" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="overdue_date_to" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="collected" Type="Int32" Nullable="false" />
-          <Property Name="collection_date" Type="DateTime" Precision="0" />
-          <Property Name="overdue_accounting_movement_id" Type="Int32" />
-          <Property Name="collection_accounting_movement_id" Type="Int32" />
-          <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_DisbursementOverdueDetails_CollectionAccountingMovements" FromRole="DisbursementOverdueDetail" ToRole="AccountingMovement" />
-          <NavigationProperty Name="AccountingMovement1" Relationship="FundsDBModel.FK_DisbursementOverdueDetails_OverdueAccountingMovements" FromRole="DisbursementOverdueDetail" ToRole="AccountingMovement" />
-          <NavigationProperty Name="DisbursementOverdue" Relationship="FundsDBModel.FK_DisbursementOverdueDetails_DisbursementOverdues" FromRole="DisbursementOverdueDetail" ToRole="DisbursementOverdue" />
-          <NavigationProperty Name="Disbursement" Relationship="FundsDBModel.FK_DisbursementOverdueDetails_Disbursements" FromRole="DisbursementOverdueDetail" ToRole="Disbursement" />
-        </EntityType>
         <EntityType Name="DisbursementOverdue">
           <Key>
             <PropertyRef Name="Id" />
@@ -5300,13 +5338,13 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="DisbursementBookings" Relationship="FundsDBModel.FK_DisbursementBooking_Disbursement" FromRole="Disbursement" ToRole="DisbursementBooking" />
           <NavigationProperty Name="DisbursementCollectionsDetails" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement" FromRole="Disbursement" ToRole="DisbursementCollectionsDetail" />
           <NavigationProperty Name="DisbursementGeneratedInterestDetails" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_Disbursements" FromRole="Disbursement" ToRole="DisbursementGeneratedInterestDetail" />
-          <NavigationProperty Name="DisbursementOverdueDetails" Relationship="FundsDBModel.FK_DisbursementOverdueDetails_Disbursements" FromRole="Disbursement" ToRole="DisbursementOverdueDetail" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Disbursements_Funds" FromRole="Disbursement" ToRole="Fund" />
           <NavigationProperty Name="Investment" Relationship="FundsDBModel.FK_Disbursements_Investments" FromRole="Disbursement" ToRole="Investment" />
           <NavigationProperty Name="Sector" Relationship="FundsDBModel.FK_Disbursements_Sector" FromRole="Disbursement" ToRole="Sector" />
           <NavigationProperty Name="Shipment" Relationship="FundsDBModel.FK_Disbursements_Shipments" FromRole="Disbursement" ToRole="Shipment" />
           <NavigationProperty Name="UnderlyingDebtor" Relationship="FundsDBModel.FK_Disbursements_UnderlyingDebtors" FromRole="Disbursement" ToRole="UnderlyingDebtor" />
           <NavigationProperty Name="DisbursementPayments" Relationship="FundsDBModel.DisbursementPaymentDetails" FromRole="Disbursement" ToRole="DisbursementPayment" />
+          <NavigationProperty Name="DisbursementOverdueDetails" Relationship="FundsDBModel.FK_DisbursementOverdueDetails_Disbursements" FromRole="Disbursement" ToRole="DisbursementOverdueDetail" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -5878,6 +5916,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="is_booking" Type="Int32" Nullable="false" />
           <Property Name="booking_id" Type="Int32" Nullable="false" />
           <Property Name="has_bookings" Type="Int32" />
+          <Property Name="collected" Type="Boolean" />
         </EntityType>
         <EntityType Name="DisbursementGeneratedInterestView">
           <Key>
@@ -5909,36 +5948,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="generated_interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="disbursement_generated_interest_id" Type="Int32" Nullable="false" />
           <Property Name="GeneratedDate" Type="DateTime" Nullable="false" Precision="0" />
-        </EntityType>
-        <EntityType Name="DisbursementOverdueGeneratedView">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="disbursement_overdue_id" />
-            <PropertyRef Name="disbursement_id" />
-            <PropertyRef Name="generated_overdue" />
-            <PropertyRef Name="monthly_rate" />
-            <PropertyRef Name="overdue_date_from" />
-            <PropertyRef Name="overdue_date_to" />
-            <PropertyRef Name="collected" />
-            <PropertyRef Name="investment_id" />
-            <PropertyRef Name="currency_id" />
-            <PropertyRef Name="contract" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="disbursement_overdue_id" Type="Int32" Nullable="false" />
-          <Property Name="disbursement_id" Type="Int32" Nullable="false" />
-          <Property Name="booking_id" Type="Int32" />
-          <Property Name="generated_overdue" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="monthly_rate" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
-          <Property Name="overdue_date_from" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="overdue_date_to" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="collected" Type="Int32" Nullable="false" />
-          <Property Name="collection_date" Type="DateTime" Precision="0" />
-          <Property Name="overdue_accounting_movement_id" Type="Int32" />
-          <Property Name="collection_accounting_movement_id" Type="Int32" />
-          <Property Name="investment_id" Type="Int32" Nullable="false" />
-          <Property Name="currency_id" Type="Int32" Nullable="false" />
-          <Property Name="contract" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DisbursementsBookingView">
           <Key>
@@ -6059,6 +6068,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <PropertyRef Name="delay_interest" />
             <PropertyRef Name="can_generate_interest" />
             <PropertyRef Name="is_booking" />
+            <PropertyRef Name="booking_id" />
           </Key>
           <Property Name="row_key" Type="String" MaxLength="61" FixedLength="false" Unicode="false" />
           <Property Name="fund_id" Type="Int32" Nullable="false" />
@@ -6078,11 +6088,13 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="profit_share_collected" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="delay_interest_collected" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="amount_remainig" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="profit_share_accrued_remaining" Type="Decimal" Precision="20" Scale="4" />
+          <Property Name="profit_share_accrued_remaining" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="delay_interest_accrued_remaining" Type="Decimal" Precision="21" Scale="4" />
           <Property Name="can_generate_interest" Type="Boolean" Nullable="false" />
           <Property Name="is_booking" Type="Int32" Nullable="false" />
           <Property Name="has_bookings" Type="Int32" />
+          <Property Name="booking_id" Type="Int32" Nullable="false" />
+          <Property Name="collected" Type="Boolean" />
         </EntityType>
         <EntityType Name="InvestmentsView">
           <Key>
@@ -6307,6 +6319,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <PropertyRef Name="Id" />
             <PropertyRef Name="DetailType" />
             <PropertyRef Name="fund_id" />
+            <PropertyRef Name="subaccount_id" />
           </Key>
           <Property Name="source" Type="String" Nullable="false" MaxLength="17" FixedLength="false" Unicode="false" />
           <Property Name="Row_Id" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
@@ -6314,6 +6327,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="DetailType" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="fund_id" Type="Int32" Nullable="false" />
+          <Property Name="subaccount_id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="ProfitResultsView">
           <Key>
@@ -6629,30 +6643,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Principal>
             <Dependent Role="DisbursementGeneratedInterestDetail">
               <PropertyRef Name="accounting_movement_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DisbursementOverdueDetails_CollectionAccountingMovements">
-          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="0..1" />
-          <End Type="FundsDBModel.DisbursementOverdueDetail" Role="DisbursementOverdueDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccountingMovement">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DisbursementOverdueDetail">
-              <PropertyRef Name="collection_accounting_movement_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DisbursementOverdueDetails_OverdueAccountingMovements">
-          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="0..1" />
-          <End Type="FundsDBModel.DisbursementOverdueDetail" Role="DisbursementOverdueDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccountingMovement">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DisbursementOverdueDetail">
-              <PropertyRef Name="overdue_accounting_movement_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7544,30 +7534,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DisbursementOverdueDetails_DisbursementOverdues">
-          <End Type="FundsDBModel.DisbursementOverdue" Role="DisbursementOverdue" Multiplicity="1" />
-          <End Type="FundsDBModel.DisbursementOverdueDetail" Role="DisbursementOverdueDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DisbursementOverdue">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DisbursementOverdueDetail">
-              <PropertyRef Name="disbursement_overdue_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DisbursementOverdueDetails_Disbursements">
-          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="1" />
-          <End Type="FundsDBModel.DisbursementOverdueDetail" Role="DisbursementOverdueDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Disbursement">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DisbursementOverdueDetail">
-              <PropertyRef Name="disbursement_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DisbursementPayments_Investments">
           <End Type="FundsDBModel.Investment" Role="Investment" Multiplicity="1" />
           <End Type="FundsDBModel.DisbursementPayment" Role="DisbursementPayment" Multiplicity="*" />
@@ -7962,7 +7928,131 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="is_booking" Type="Int32" Nullable="false" />
           <Property Name="booking_id" Type="Int32" />
           <Property Name="delay_interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="fund_id" Type="Int32" />
         </EntityType>
+        <EntityType Name="DisbursementOverdueDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="disbursement_overdue_id" Type="Int32" Nullable="false" />
+          <Property Name="disbursement_id" Type="Int32" Nullable="false" />
+          <Property Name="booking_id" Type="Int32" />
+          <Property Name="generated_overdue" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="monthly_rate" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+          <Property Name="overdue_date_from" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="overdue_date_to" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="overdue_accounting_movement_id" Type="Int32" />
+          <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_DisbursementOverdueDetails_OverdueAccountingMovements" FromRole="DisbursementOverdueDetail" ToRole="AccountingMovement" />
+          <NavigationProperty Name="DisbursementOverdue" Relationship="FundsDBModel.FK_DisbursementOverdueDetails_DisbursementOverdues" FromRole="DisbursementOverdueDetail" ToRole="DisbursementOverdue" />
+          <NavigationProperty Name="Disbursement" Relationship="FundsDBModel.FK_DisbursementOverdueDetails_Disbursements" FromRole="DisbursementOverdueDetail" ToRole="Disbursement" />
+        </EntityType>
+        <EntityType Name="DealTrackingView">
+          <Key>
+            <PropertyRef Name="row_id" />
+            <PropertyRef Name="is_booking" />
+            <PropertyRef Name="investment_id" />
+            <PropertyRef Name="disbursement_id" />
+            <PropertyRef Name="number" />
+            <PropertyRef Name="contract" />
+            <PropertyRef Name="client" />
+            <PropertyRef Name="client_id" />
+            <PropertyRef Name="principal" />
+            <PropertyRef Name="interest" />
+            <PropertyRef Name="delay_interest" />
+            <PropertyRef Name="estimated_repay_date" />
+            <PropertyRef Name="can_generate_interest" />
+          </Key>
+          <Property Name="fund_id" Type="Int32" />
+          <Property Name="row_id" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="is_booking" Type="Int32" Nullable="false" />
+          <Property Name="has_bookings" Type="Int32" />
+          <Property Name="investment_id" Type="Int32" Nullable="false" />
+          <Property Name="disbursement_id" Type="Int32" Nullable="false" />
+          <Property Name="booking_id" Type="Int32" />
+          <Property Name="number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contract" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="client" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="underlying_debtor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="bank_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="items" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pay_date" Type="DateTime" Precision="0" />
+          <Property Name="principal" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="delay_interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="estimated_repay_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="principal_collected" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="interest_collected" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="delay_interest_collected" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="principal_remaining" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="interest_remaining" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="delay_interest_remaining" Type="Decimal" Precision="21" Scale="4" />
+          <Property Name="can_generate_interest" Type="Boolean" Nullable="false" />
+          <Property Name="collected" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="DisbursementOverdueGeneratedView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="disbursement_overdue_id" />
+            <PropertyRef Name="disbursement_id" />
+            <PropertyRef Name="generated_overdue" />
+            <PropertyRef Name="monthly_rate" />
+            <PropertyRef Name="overdue_date_from" />
+            <PropertyRef Name="overdue_date_to" />
+            <PropertyRef Name="investment_id" />
+            <PropertyRef Name="currency_id" />
+            <PropertyRef Name="contract" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="disbursement_overdue_id" Type="Int32" Nullable="false" />
+          <Property Name="disbursement_id" Type="Int32" Nullable="false" />
+          <Property Name="booking_id" Type="Int32" />
+          <Property Name="generated_overdue" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="monthly_rate" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+          <Property Name="overdue_date_from" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="overdue_date_to" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="overdue_accounting_movement_id" Type="Int32" />
+          <Property Name="investment_id" Type="Int32" Nullable="false" />
+          <Property Name="currency_id" Type="Int32" Nullable="false" />
+          <Property Name="contract" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_DisbursementOverdueDetails_OverdueAccountingMovements">
+          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="0..1" />
+          <End Type="FundsDBModel.DisbursementOverdueDetail" Role="DisbursementOverdueDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingMovement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementOverdueDetail">
+              <PropertyRef Name="overdue_accounting_movement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementOverdueDetails_DisbursementOverdues">
+          <End Type="FundsDBModel.DisbursementOverdue" Role="DisbursementOverdue" Multiplicity="1" />
+          <End Type="FundsDBModel.DisbursementOverdueDetail" Role="DisbursementOverdueDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DisbursementOverdue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementOverdueDetail">
+              <PropertyRef Name="disbursement_overdue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementOverdueDetails_Disbursements">
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="1" />
+          <End Type="FundsDBModel.DisbursementOverdueDetail" Role="DisbursementOverdueDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disbursement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementOverdueDetail">
+              <PropertyRef Name="disbursement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8347,24 +8437,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
               <MappingFragment StoreEntitySet="DisbursementItems">
                 <ScalarProperty Name="ItemId" ColumnName="ItemId" />
                 <ScalarProperty Name="DisbursementId" ColumnName="DisbursementId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DisbursementOverdueDetails">
-            <EntityTypeMapping TypeName="FundsDBModel.DisbursementOverdueDetail">
-              <MappingFragment StoreEntitySet="DisbursementOverdueDetails">
-                <ScalarProperty Name="collection_accounting_movement_id" ColumnName="collection_accounting_movement_id" />
-                <ScalarProperty Name="overdue_accounting_movement_id" ColumnName="overdue_accounting_movement_id" />
-                <ScalarProperty Name="collection_date" ColumnName="collection_date" />
-                <ScalarProperty Name="collected" ColumnName="collected" />
-                <ScalarProperty Name="overdue_date_to" ColumnName="overdue_date_to" />
-                <ScalarProperty Name="overdue_date_from" ColumnName="overdue_date_from" />
-                <ScalarProperty Name="monthly_rate" ColumnName="monthly_rate" />
-                <ScalarProperty Name="generated_overdue" ColumnName="generated_overdue" />
-                <ScalarProperty Name="booking_id" ColumnName="booking_id" />
-                <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
-                <ScalarProperty Name="disbursement_overdue_id" ColumnName="disbursement_overdue_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8815,6 +8887,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySetMapping Name="DisbursementCollectionViews">
             <EntityTypeMapping TypeName="FundsDBModel.DisbursementCollectionView">
               <MappingFragment StoreEntitySet="DisbursementCollectionView">
+                <ScalarProperty Name="collected" ColumnName="collected" />
                 <ScalarProperty Name="has_bookings" ColumnName="has_bookings" />
                 <ScalarProperty Name="booking_id" ColumnName="booking_id" />
                 <ScalarProperty Name="is_booking" ColumnName="is_booking" />
@@ -8856,27 +8929,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
                 <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
                 <ScalarProperty Name="contract" ColumnName="contract" />
                 <ScalarProperty Name="fund_id" ColumnName="fund_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DisbursementOverdueGeneratedViews">
-            <EntityTypeMapping TypeName="FundsDBModel.DisbursementOverdueGeneratedView">
-              <MappingFragment StoreEntitySet="DisbursementOverdueGeneratedView">
-                <ScalarProperty Name="contract" ColumnName="contract" />
-                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
-                <ScalarProperty Name="investment_id" ColumnName="investment_id" />
-                <ScalarProperty Name="collection_accounting_movement_id" ColumnName="collection_accounting_movement_id" />
-                <ScalarProperty Name="overdue_accounting_movement_id" ColumnName="overdue_accounting_movement_id" />
-                <ScalarProperty Name="collection_date" ColumnName="collection_date" />
-                <ScalarProperty Name="collected" ColumnName="collected" />
-                <ScalarProperty Name="overdue_date_to" ColumnName="overdue_date_to" />
-                <ScalarProperty Name="overdue_date_from" ColumnName="overdue_date_from" />
-                <ScalarProperty Name="monthly_rate" ColumnName="monthly_rate" />
-                <ScalarProperty Name="generated_overdue" ColumnName="generated_overdue" />
-                <ScalarProperty Name="booking_id" ColumnName="booking_id" />
-                <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
-                <ScalarProperty Name="disbursement_overdue_id" ColumnName="disbursement_overdue_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8950,6 +9002,8 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySetMapping Name="DisbursementsToBeCollecteds">
             <EntityTypeMapping TypeName="FundsDBModel.DisbursementsToBeCollected">
               <MappingFragment StoreEntitySet="DisbursementsToBeCollected">
+                <ScalarProperty Name="collected" ColumnName="collected" />
+                <ScalarProperty Name="booking_id" ColumnName="booking_id" />
                 <ScalarProperty Name="has_bookings" ColumnName="has_bookings" />
                 <ScalarProperty Name="is_booking" ColumnName="is_booking" />
                 <ScalarProperty Name="can_generate_interest" ColumnName="can_generate_interest" />
@@ -9128,6 +9182,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySetMapping Name="OtherDetailsViews">
             <EntityTypeMapping TypeName="FundsDBModel.OtherDetailsView">
               <MappingFragment StoreEntitySet="OtherDetailsView">
+                <ScalarProperty Name="subaccount_id" ColumnName="subaccount_id" />
                 <ScalarProperty Name="fund_id" ColumnName="fund_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="DetailType" ColumnName="DetailType" />
@@ -9295,6 +9350,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySetMapping Name="DisbursementPlusAddendumsViews">
             <EntityTypeMapping TypeName="FundsDBModel.DisbursementPlusAddendumsView">
               <MappingFragment StoreEntitySet="DisbursementPlusAddendumsView">
+                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
                 <ScalarProperty Name="delay_interest" ColumnName="delay_interest" />
                 <ScalarProperty Name="booking_id" ColumnName="booking_id" />
                 <ScalarProperty Name="is_booking" ColumnName="is_booking" />
@@ -9310,6 +9366,72 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
                 <ScalarProperty Name="currency_id" ColumnName="currency_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="row_id" ColumnName="row_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DisbursementOverdueDetails">
+            <EntityTypeMapping TypeName="FundsDBModel.DisbursementOverdueDetail">
+              <MappingFragment StoreEntitySet="DisbursementOverdueDetails">
+                <ScalarProperty Name="overdue_accounting_movement_id" ColumnName="overdue_accounting_movement_id" />
+                <ScalarProperty Name="overdue_date_to" ColumnName="overdue_date_to" />
+                <ScalarProperty Name="overdue_date_from" ColumnName="overdue_date_from" />
+                <ScalarProperty Name="monthly_rate" ColumnName="monthly_rate" />
+                <ScalarProperty Name="generated_overdue" ColumnName="generated_overdue" />
+                <ScalarProperty Name="booking_id" ColumnName="booking_id" />
+                <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
+                <ScalarProperty Name="disbursement_overdue_id" ColumnName="disbursement_overdue_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DealTrackingViews">
+            <EntityTypeMapping TypeName="FundsDBModel.DealTrackingView">
+              <MappingFragment StoreEntitySet="DealTrackingView">
+                <ScalarProperty Name="collected" ColumnName="collected" />
+                <ScalarProperty Name="can_generate_interest" ColumnName="can_generate_interest" />
+                <ScalarProperty Name="delay_interest_remaining" ColumnName="delay_interest_remaining" />
+                <ScalarProperty Name="interest_remaining" ColumnName="interest_remaining" />
+                <ScalarProperty Name="principal_remaining" ColumnName="principal_remaining" />
+                <ScalarProperty Name="delay_interest_collected" ColumnName="delay_interest_collected" />
+                <ScalarProperty Name="interest_collected" ColumnName="interest_collected" />
+                <ScalarProperty Name="principal_collected" ColumnName="principal_collected" />
+                <ScalarProperty Name="estimated_repay_date" ColumnName="estimated_repay_date" />
+                <ScalarProperty Name="delay_interest" ColumnName="delay_interest" />
+                <ScalarProperty Name="interest" ColumnName="interest" />
+                <ScalarProperty Name="principal" ColumnName="principal" />
+                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
+                <ScalarProperty Name="items" ColumnName="items" />
+                <ScalarProperty Name="bank_name" ColumnName="bank_name" />
+                <ScalarProperty Name="underlying_debtor" ColumnName="underlying_debtor" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="client" ColumnName="client" />
+                <ScalarProperty Name="contract" ColumnName="contract" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="booking_id" ColumnName="booking_id" />
+                <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
+                <ScalarProperty Name="investment_id" ColumnName="investment_id" />
+                <ScalarProperty Name="has_bookings" ColumnName="has_bookings" />
+                <ScalarProperty Name="is_booking" ColumnName="is_booking" />
+                <ScalarProperty Name="row_id" ColumnName="row_id" />
+                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DisbursementOverdueGeneratedViews">
+            <EntityTypeMapping TypeName="FundsDBModel.DisbursementOverdueGeneratedView">
+              <MappingFragment StoreEntitySet="DisbursementOverdueGeneratedView">
+                <ScalarProperty Name="contract" ColumnName="contract" />
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+                <ScalarProperty Name="investment_id" ColumnName="investment_id" />
+                <ScalarProperty Name="overdue_accounting_movement_id" ColumnName="overdue_accounting_movement_id" />
+                <ScalarProperty Name="overdue_date_to" ColumnName="overdue_date_to" />
+                <ScalarProperty Name="overdue_date_from" ColumnName="overdue_date_from" />
+                <ScalarProperty Name="monthly_rate" ColumnName="monthly_rate" />
+                <ScalarProperty Name="generated_overdue" ColumnName="generated_overdue" />
+                <ScalarProperty Name="booking_id" ColumnName="booking_id" />
+                <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
+                <ScalarProperty Name="disbursement_overdue_id" ColumnName="disbursement_overdue_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

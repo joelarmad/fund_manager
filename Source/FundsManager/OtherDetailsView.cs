@@ -20,5 +20,6 @@ namespace FundsManager
         public int DetailType { get; set; }
         public string name { get; set; }
         public int fund_id { get; set; }
+        public int subaccount_id { get; set; }
     }
 }

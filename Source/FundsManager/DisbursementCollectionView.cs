@@ -35,5 +35,6 @@ namespace FundsManager
         public int is_booking { get; set; }
         public int booking_id { get; set; }
         public Nullable<int> has_bookings { get; set; }
+        public Nullable<bool> collected { get; set; }
     }
 }

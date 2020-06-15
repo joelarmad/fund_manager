@@ -86,8 +86,9 @@
             this.generalBalanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnsStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closePeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dealTrackingListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.overduesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closePeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -523,7 +524,8 @@
             this.generalBalanceToolStripMenuItem,
             this.returnsStateToolStripMenuItem,
             this.accountReportToolStripMenuItem,
-            this.dealTrackingListToolStripMenuItem});
+            this.dealTrackingListToolStripMenuItem,
+            this.overduesToolStripMenuItem});
             this.reportsToolStripMenuItem1.Name = "reportsToolStripMenuItem1";
             this.reportsToolStripMenuItem1.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem1.Text = "Reports";
@@ -549,19 +551,26 @@
             this.accountReportToolStripMenuItem.Text = "Account Report";
             this.accountReportToolStripMenuItem.Click += new System.EventHandler(this.accountReportToolStripMenuItem_Click);
             // 
-            // closePeriodToolStripMenuItem
-            // 
-            this.closePeriodToolStripMenuItem.Name = "closePeriodToolStripMenuItem";
-            this.closePeriodToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
-            this.closePeriodToolStripMenuItem.Text = "Close Period";
-            this.closePeriodToolStripMenuItem.Click += new System.EventHandler(this.closePeriodToolStripMenuItem_Click);
-            // 
             // dealTrackingListToolStripMenuItem
             // 
             this.dealTrackingListToolStripMenuItem.Name = "dealTrackingListToolStripMenuItem";
             this.dealTrackingListToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.dealTrackingListToolStripMenuItem.Text = "Deal Tracking List";
             this.dealTrackingListToolStripMenuItem.Click += new System.EventHandler(this.dealTrackingListToolStripMenuItem_Click);
+            // 
+            // overduesToolStripMenuItem
+            // 
+            this.overduesToolStripMenuItem.Name = "overduesToolStripMenuItem";
+            this.overduesToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.overduesToolStripMenuItem.Text = "Overdue List";
+            this.overduesToolStripMenuItem.Click += new System.EventHandler(this.overduesToolStripMenuItem_Click);
+            // 
+            // closePeriodToolStripMenuItem
+            // 
+            this.closePeriodToolStripMenuItem.Name = "closePeriodToolStripMenuItem";
+            this.closePeriodToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
+            this.closePeriodToolStripMenuItem.Text = "Close Period";
+            this.closePeriodToolStripMenuItem.Click += new System.EventHandler(this.closePeriodToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -648,6 +657,7 @@
         private System.Windows.Forms.ToolStripMenuItem overdueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem repaymentToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem dealTrackingListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem overduesToolStripMenuItem;
     }
 }
 

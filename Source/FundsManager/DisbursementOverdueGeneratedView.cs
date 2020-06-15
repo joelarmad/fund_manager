@@ -22,10 +22,7 @@ namespace FundsManager
         public decimal monthly_rate { get; set; }
         public System.DateTime overdue_date_from { get; set; }
         public System.DateTime overdue_date_to { get; set; }
-        public int collected { get; set; }
-        public Nullable<System.DateTime> collection_date { get; set; }
         public Nullable<int> overdue_accounting_movement_id { get; set; }
-        public Nullable<int> collection_accounting_movement_id { get; set; }
         public int investment_id { get; set; }
         public int currency_id { get; set; }
         public string contract { get; set; }
