@@ -171,19 +171,19 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.88909in</Width>
+                  <Width>0.79534in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.87867in</Width>
+                  <Width>0.75367in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.94117in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.89951in</Width>
+                  <Width>0.81618in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.92034in</Width>
+                  <Width>0.79534in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.94117in</Width>
@@ -591,7 +591,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.95159in</Size>
+                    <Size>0.75307in</Size>
                     <CellContents>
                       <Textbox Name="Textbox111">
                         <CanGrow>true</CanGrow>
@@ -657,7 +657,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>0.98284in</Size>
+                            <Size>0.86826in</Size>
                             <CellContents>
                               <Textbox Name="Textbox114">
                                 <CanGrow>true</CanGrow>
@@ -690,7 +690,7 @@
                           <TablixMembers>
                             <TablixMember>
                               <TablixHeader>
-                                <Size>0.90992in</Size>
+                                <Size>0.78492in</Size>
                                 <CellContents>
                                   <Textbox Name="Textbox105">
                                     <CanGrow>true</CanGrow>
@@ -723,7 +723,7 @@
                               <TablixMembers>
                                 <TablixMember>
                                   <TablixHeader>
-                                    <Size>0.95159in</Size>
+                                    <Size>0.82659in</Size>
                                     <CellContents>
                                       <Textbox Name="Textbox108">
                                         <CanGrow>true</CanGrow>
@@ -754,7 +754,42 @@
                                     </CellContents>
                                   </TablixHeader>
                                   <TablixMembers>
-                                    <TablixMember />
+                                    <TablixMember>
+                                      <TablixHeader>
+                                        <Size>0.90625in</Size>
+                                        <CellContents>
+                                          <Textbox Name="Textbox6">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>Estimated Repay Date</Value>
+                                                    <Style />
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>Textbox6</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixHeader>
+                                      <TablixMembers>
+                                        <TablixMember />
+                                      </TablixMembers>
+                                    </TablixMember>
                                   </TablixMembers>
                                 </TablixMember>
                               </TablixMembers>
@@ -787,7 +822,7 @@
                             </SortExpression>
                           </SortExpressions>
                           <TablixHeader>
-                            <Size>0.95159in</Size>
+                            <Size>0.75307in</Size>
                             <CellContents>
                               <Textbox Name="Textbox113">
                                 <CanGrow>true</CanGrow>
@@ -863,7 +898,7 @@
                                     </SortExpression>
                                   </SortExpressions>
                                   <TablixHeader>
-                                    <Size>0.98284in</Size>
+                                    <Size>0.86826in</Size>
                                     <CellContents>
                                       <Textbox Name="underlying_debtor1">
                                         <CanGrow>true</CanGrow>
@@ -906,7 +941,7 @@
                                         </SortExpression>
                                       </SortExpressions>
                                       <TablixHeader>
-                                        <Size>0.90992in</Size>
+                                        <Size>0.78492in</Size>
                                         <CellContents>
                                           <Textbox Name="bank_name1">
                                             <CanGrow>true</CanGrow>
@@ -952,7 +987,7 @@
                                             </SortExpression>
                                           </SortExpressions>
                                           <TablixHeader>
-                                            <Size>0.95159in</Size>
+                                            <Size>0.82659in</Size>
                                             <CellContents>
                                               <Textbox Name="number1">
                                                 <CanGrow>true</CanGrow>
@@ -984,6 +1019,57 @@
                                               </Textbox>
                                             </CellContents>
                                           </TablixHeader>
+                                          <TablixMembers>
+                                            <TablixMember>
+                                              <Group Name="estimated_repay_date">
+                                                <GroupExpressions>
+                                                  <GroupExpression>=Fields!estimated_repay_date.Value</GroupExpression>
+                                                </GroupExpressions>
+                                              </Group>
+                                              <SortExpressions>
+                                                <SortExpression>
+                                                  <Value>=Fields!estimated_repay_date.Value</Value>
+                                                </SortExpression>
+                                              </SortExpressions>
+                                              <TablixHeader>
+                                                <Size>0.90625in</Size>
+                                                <CellContents>
+                                                  <Textbox Name="estimated_repay_date">
+                                                    <CanGrow>true</CanGrow>
+                                                    <KeepTogether>true</KeepTogether>
+                                                    <Paragraphs>
+                                                      <Paragraph>
+                                                        <TextRuns>
+                                                          <TextRun>
+                                                            <Value>=Fields!estimated_repay_date.Value</Value>
+                                                            <Style>
+                                                              <Format>d</Format>
+                                                              <TextDecoration>=IIF(Sum(Fields!has_bookings.Value) = 1, "LineThrough", "Default")</TextDecoration>
+                                                            </Style>
+                                                          </TextRun>
+                                                        </TextRuns>
+                                                        <Style />
+                                                      </Paragraph>
+                                                    </Paragraphs>
+                                                    <rd:DefaultName>estimated_repay_date</rd:DefaultName>
+                                                    <Style>
+                                                      <Border>
+                                                        <Color>LightGrey</Color>
+                                                        <Style>Solid</Style>
+                                                      </Border>
+                                                      <PaddingLeft>2pt</PaddingLeft>
+                                                      <PaddingRight>2pt</PaddingRight>
+                                                      <PaddingTop>2pt</PaddingTop>
+                                                      <PaddingBottom>2pt</PaddingBottom>
+                                                    </Style>
+                                                  </Textbox>
+                                                </CellContents>
+                                              </TablixHeader>
+                                              <TablixMembers>
+                                                <TablixMember />
+                                              </TablixMembers>
+                                            </TablixMember>
+                                          </TablixMembers>
                                         </TablixMember>
                                       </TablixMembers>
                                     </TablixMember>
@@ -1002,7 +1088,7 @@
             <DataSetName>dsDealTracking</DataSetName>
             <Top>1.48833in</Top>
             <Height>0.79167in</Height>
-            <Width>10.2904in</Width>
+            <Width>10.20646in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1134,7 +1220,7 @@
         <Height>2.53in</Height>
         <Style />
       </Body>
-      <Width>10.47791in</Width>
+      <Width>10.3529in</Width>
       <Page>
         <PageHeight>8.5in</PageHeight>
         <PageWidth>11in</PageWidth>
