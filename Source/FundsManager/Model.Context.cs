@@ -99,7 +99,6 @@ namespace FundsManager
         public virtual DbSet<DisbursementsToBeCollected> DisbursementsToBeCollecteds { get; set; }
         public virtual DbSet<InvestmentsView> InvestmentsViews { get; set; }
         public virtual DbSet<LoanGeneratedInterestView> LoanGeneratedInterestViews { get; set; }
-        public virtual DbSet<Loans_View> Loans_View { get; set; }
         public virtual DbSet<LoansRepaymentsView> LoansRepaymentsViews { get; set; }
         public virtual DbSet<LoansToBeRepaidView> LoansToBeRepaidViews { get; set; }
         public virtual DbSet<MovementsView> MovementsViews { get; set; }
@@ -117,5 +116,6 @@ namespace FundsManager
         public virtual DbSet<DisbursementOverdueDetail> DisbursementOverdueDetails { get; set; }
         public virtual DbSet<DealTrackingView> DealTrackingViews { get; set; }
         public virtual DbSet<DisbursementOverdueGeneratedView> DisbursementOverdueGeneratedViews { get; set; }
+        public virtual DbSet<Loans_View> Loans_View { get; set; }
     }
 }

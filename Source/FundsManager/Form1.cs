@@ -448,5 +448,13 @@ namespace FundsManager
             form.MdiParent = this;
             form.Show();
         }
+
+        private void loansToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            LoansReportForm form = new LoansReportForm();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }

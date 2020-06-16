@@ -30,5 +30,6 @@ namespace FundsManager
         public decimal interest { get; set; }
         public Nullable<decimal> interest_accrued { get; set; }
         public Nullable<decimal> interest_repaid { get; set; }
+        public Nullable<int> paid { get; set; }
     }
 }

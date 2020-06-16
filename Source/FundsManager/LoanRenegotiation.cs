@@ -122,6 +122,7 @@ namespace FundsManager
                     _loan.accounting_movement_id = oldloan.accounting_movement_id;
                     _loan.interest_base = oldloan.interest_base;
                     _loan.can_generate_interest = 1;
+                    _loan.paid = oldloan.paid;
 
                     manager.My_db.Loans.Add(_loan);
                     manager.My_db.SaveChanges();

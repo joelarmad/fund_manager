@@ -31,7 +31,7 @@ namespace FundsManager
 
                 DateTime _date = dtpDate.Value;
 
-                List<Loans_View> _loansToAccrueList = manager.My_db.Loans_View.Where(x => (x.renegotiated == null || x.renegotiated == false) && x.start_date <= _date).OrderBy(x => x.reference).ToList();
+                List<Loans_View> _loansToAccrueList = manager.My_db.Loans_View.Where(x => x.can_generate_interest == 1 && (x.renegotiated == null || x.renegotiated == false) && x.start_date <= _date).OrderBy(x => x.reference).ToList();
 
                 foreach (Loans_View _loanToAccrue in _loansToAccrueList)
                 {
@@ -54,18 +54,21 @@ namespace FundsManager
 
                         int financingDays = (toDate.Date - fromDate.Value.Date).Days;
 
-                        string[] row = {
-                            _loanToAccrue.Id.ToString(),
-                            _loanToAccrue.reference,
-                            String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _loanToAccrue.amount),
-                            String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:N2}", _loanToAccrue.interest) + "%",
-                            _loanToAccrue.start_date.ToLongDateString(),
-                            _loanToAccrue.end_date.ToLongDateString(),
-                            financingDays.ToString()
-                        };
+                        if (financingDays > 0)
+                        {
+                            string[] row = {
+                                _loanToAccrue.Id.ToString(),
+                                _loanToAccrue.reference,
+                                String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _loanToAccrue.amount),
+                                String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:N2}", _loanToAccrue.interest) + "%",
+                                _loanToAccrue.start_date.ToLongDateString(),
+                                _loanToAccrue.end_date.ToLongDateString(),
+                                financingDays.ToString()
+                            };
 
-                        ListViewItem my_item = new ListViewItem(row);
-                        lvData.Items.Add(my_item);
+                            ListViewItem my_item = new ListViewItem(row);
+                            lvData.Items.Add(my_item);
+                        }
                     }
 
                 }

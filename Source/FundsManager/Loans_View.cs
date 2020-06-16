@@ -29,5 +29,6 @@ namespace FundsManager
         public Nullable<bool> renegotiated { get; set; }
         public Nullable<int> loan_origin_id { get; set; }
         public int interest_base { get; set; }
+        public Nullable<int> can_generate_interest { get; set; }
     }
 }

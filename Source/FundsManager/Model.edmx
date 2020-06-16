@@ -1326,6 +1326,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Loans_View' d
           <Property Name="renegotiated" Type="bit" />
           <Property Name="loan_origin_id" Type="int" />
           <Property Name="interest_base" Type="int" Nullable="false" />
+          <Property Name="can_generate_interest" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.LoansRepaymentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1359,6 +1360,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.LoansRepaymen
           <Property Name="interest" Type="money" Nullable="false" />
           <Property Name="interest_accrued" Type="money" />
           <Property Name="interest_repaid" Type="money" />
+          <Property Name="paid" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.LoansToBeRepaidView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3553,7 +3555,8 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
     [Loans_View].[currency_name] AS [currency_name], 
     [Loans_View].[renegotiated] AS [renegotiated], 
     [Loans_View].[loan_origin_id] AS [loan_origin_id], 
-    [Loans_View].[interest_base] AS [interest_base]
+    [Loans_View].[interest_base] AS [interest_base], 
+    [Loans_View].[can_generate_interest] AS [can_generate_interest]
     FROM [dbo].[Loans_View] AS [Loans_View]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="LoansRepaymentsView" EntityType="Self.LoansRepaymentsView" store:Type="Views" store:Schema="dbo">
@@ -3573,7 +3576,8 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
     [LoansRepaymentsView].[amount_repaid] AS [amount_repaid], 
     [LoansRepaymentsView].[interest] AS [interest], 
     [LoansRepaymentsView].[interest_accrued] AS [interest_accrued], 
-    [LoansRepaymentsView].[interest_repaid] AS [interest_repaid]
+    [LoansRepaymentsView].[interest_repaid] AS [interest_repaid], 
+    [LoansRepaymentsView].[paid] AS [paid]
     FROM [dbo].[LoansRepaymentsView] AS [LoansRepaymentsView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="LoansToBeRepaidView" EntityType="Self.LoansToBeRepaidView" store:Type="Views" store:Schema="dbo">
@@ -4321,7 +4325,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySet Name="DisbursementsToBeCollecteds" EntityType="FundsDBModel.DisbursementsToBeCollected" />
           <EntitySet Name="InvestmentsViews" EntityType="FundsDBModel.InvestmentsView" />
           <EntitySet Name="LoanGeneratedInterestViews" EntityType="FundsDBModel.LoanGeneratedInterestView" />
-          <EntitySet Name="Loans_View" EntityType="FundsDBModel.Loans_View" />
           <EntitySet Name="LoansRepaymentsViews" EntityType="FundsDBModel.LoansRepaymentsView" />
           <EntitySet Name="LoansToBeRepaidViews" EntityType="FundsDBModel.LoansToBeRepaidView" />
           <EntitySet Name="MovementsViews" EntityType="FundsDBModel.MovementsView" />
@@ -4815,6 +4818,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="Disbursement" EntitySet="Disbursements" />
             <End Role="DisbursementOverdueDetail" EntitySet="DisbursementOverdueDetails" />
           </AssociationSet>
+          <EntitySet Name="Loans_View" EntityType="FundsDBModel.Loans_View" />
         </EntityContainer>
         <EntityType Name="AccountingMovement">
           <Key>
@@ -6180,37 +6184,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="interest_base" Type="Int32" Nullable="false" />
           <Property Name="lender_id" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="Loans_View">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="fund_id" />
-            <PropertyRef Name="lender_id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="interest" />
-            <PropertyRef Name="amount" />
-            <PropertyRef Name="reference" />
-            <PropertyRef Name="start_date" />
-            <PropertyRef Name="end_date" />
-            <PropertyRef Name="currency_id" />
-            <PropertyRef Name="currency_name" />
-            <PropertyRef Name="interest_base" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="fund_id" Type="Int32" Nullable="false" />
-          <Property Name="lender_id" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="reference" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="generated_interest" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="currency_id" Type="Int32" Nullable="false" />
-          <Property Name="currency_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="renegotiated" Type="Boolean" />
-          <Property Name="loan_origin_id" Type="Int32" />
-          <Property Name="interest_base" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="LoansRepaymentsView">
           <Key>
             <PropertyRef Name="Id" />
@@ -6241,6 +6214,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="interest_accrued" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="interest_repaid" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="paid" Type="Int32" />
         </EntityType>
         <EntityType Name="LoansToBeRepaidView">
           <Key>
@@ -8053,6 +8027,38 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Loans_View">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="fund_id" />
+            <PropertyRef Name="lender_id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="interest" />
+            <PropertyRef Name="amount" />
+            <PropertyRef Name="reference" />
+            <PropertyRef Name="start_date" />
+            <PropertyRef Name="end_date" />
+            <PropertyRef Name="currency_id" />
+            <PropertyRef Name="currency_name" />
+            <PropertyRef Name="interest_base" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="fund_id" Type="Int32" Nullable="false" />
+          <Property Name="lender_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="interest" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="reference" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="generated_interest" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="currency_id" Type="Int32" Nullable="false" />
+          <Property Name="currency_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="renegotiated" Type="Boolean" />
+          <Property Name="loan_origin_id" Type="Int32" />
+          <Property Name="interest_base" Type="Int32" Nullable="false" />
+          <Property Name="can_generate_interest" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9087,30 +9093,10 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Loans_View">
-            <EntityTypeMapping TypeName="FundsDBModel.Loans_View">
-              <MappingFragment StoreEntitySet="Loans_View">
-                <ScalarProperty Name="interest_base" ColumnName="interest_base" />
-                <ScalarProperty Name="loan_origin_id" ColumnName="loan_origin_id" />
-                <ScalarProperty Name="renegotiated" ColumnName="renegotiated" />
-                <ScalarProperty Name="currency_name" ColumnName="currency_name" />
-                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
-                <ScalarProperty Name="generated_interest" ColumnName="generated_interest" />
-                <ScalarProperty Name="end_date" ColumnName="end_date" />
-                <ScalarProperty Name="start_date" ColumnName="start_date" />
-                <ScalarProperty Name="reference" ColumnName="reference" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="interest" ColumnName="interest" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="lender_id" ColumnName="lender_id" />
-                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LoansRepaymentsViews">
             <EntityTypeMapping TypeName="FundsDBModel.LoansRepaymentsView">
               <MappingFragment StoreEntitySet="LoansRepaymentsView">
+                <ScalarProperty Name="paid" ColumnName="paid" />
                 <ScalarProperty Name="interest_repaid" ColumnName="interest_repaid" />
                 <ScalarProperty Name="interest_accrued" ColumnName="interest_accrued" />
                 <ScalarProperty Name="interest" ColumnName="interest" />
@@ -9431,6 +9417,28 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
                 <ScalarProperty Name="booking_id" ColumnName="booking_id" />
                 <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
                 <ScalarProperty Name="disbursement_overdue_id" ColumnName="disbursement_overdue_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loans_View">
+            <EntityTypeMapping TypeName="FundsDBModel.Loans_View">
+              <MappingFragment StoreEntitySet="Loans_View">
+                <ScalarProperty Name="can_generate_interest" ColumnName="can_generate_interest" />
+                <ScalarProperty Name="interest_base" ColumnName="interest_base" />
+                <ScalarProperty Name="loan_origin_id" ColumnName="loan_origin_id" />
+                <ScalarProperty Name="renegotiated" ColumnName="renegotiated" />
+                <ScalarProperty Name="currency_name" ColumnName="currency_name" />
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+                <ScalarProperty Name="generated_interest" ColumnName="generated_interest" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="interest" ColumnName="interest" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="lender_id" ColumnName="lender_id" />
+                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

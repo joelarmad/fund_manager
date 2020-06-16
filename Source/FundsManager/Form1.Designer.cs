@@ -89,6 +89,7 @@
             this.dealTrackingListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.overduesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closePeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loansToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -525,7 +526,8 @@
             this.returnsStateToolStripMenuItem,
             this.accountReportToolStripMenuItem,
             this.dealTrackingListToolStripMenuItem,
-            this.overduesToolStripMenuItem});
+            this.overduesToolStripMenuItem,
+            this.loansToolStripMenuItem});
             this.reportsToolStripMenuItem1.Name = "reportsToolStripMenuItem1";
             this.reportsToolStripMenuItem1.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem1.Text = "Reports";
@@ -571,6 +573,13 @@
             this.closePeriodToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
             this.closePeriodToolStripMenuItem.Text = "Close Period";
             this.closePeriodToolStripMenuItem.Click += new System.EventHandler(this.closePeriodToolStripMenuItem_Click);
+            // 
+            // loansToolStripMenuItem
+            // 
+            this.loansToolStripMenuItem.Name = "loansToolStripMenuItem";
+            this.loansToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.loansToolStripMenuItem.Text = "Loans";
+            this.loansToolStripMenuItem.Click += new System.EventHandler(this.loansToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -658,6 +667,7 @@
         private System.Windows.Forms.ToolStripMenuItem repaymentToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem dealTrackingListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem overduesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loansToolStripMenuItem;
     }
 }
 

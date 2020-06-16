@@ -694,6 +694,12 @@
     <Compile Include="ReportForms\LoanGeneratedInterestForm.Designer.cs">
       <DependentUpon>LoanGeneratedInterestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportForms\LoansReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForms\LoansReportForm.Designer.cs">
+      <DependentUpon>LoansReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportForms\OverdueResumedReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -965,6 +971,9 @@
     <EmbeddedResource Include="ReportForms\LoanGeneratedInterestForm.resx">
       <DependentUpon>LoanGeneratedInterestForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\LoansReportForm.resx">
+      <DependentUpon>LoansReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\OverdueResumedReportForm.resx">
       <DependentUpon>OverdueResumedReportForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -974,6 +983,7 @@
     <EmbeddedResource Include="ReportForms\ReturnsState.resx">
       <DependentUpon>ReturnsState.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LoansReport.rdlc" />
     <EmbeddedResource Include="Reports\OverdueResumedReport.rdlc" />
     <EmbeddedResource Include="Reports\DealTrackingReport.rdlc" />
     <EmbeddedResource Include="Reports\DisbursementOverduesGeneratedReport.rdlc" />

@@ -79,7 +79,6 @@
         <EntityTypeShape EntityType="FundsDBModel.DisbursementsToBeCollected" Width="1.5" PointX="0.75" PointY="12.75" />
         <EntityTypeShape EntityType="FundsDBModel.InvestmentsView" Width="1.5" PointX="2.75" PointY="12.75" />
         <EntityTypeShape EntityType="FundsDBModel.LoanGeneratedInterestView" Width="1.5" PointX="4.75" PointY="12.75" />
-        <EntityTypeShape EntityType="FundsDBModel.Loans_View" Width="1.5" PointX="12.75" PointY="5.75" />
         <EntityTypeShape EntityType="FundsDBModel.LoansRepaymentsView" Width="1.5" PointX="12.75" PointY="10.75" />
         <EntityTypeShape EntityType="FundsDBModel.LoansToBeRepaidView" Width="1.5" PointX="14.75" PointY="0.75" />
         <EntityTypeShape EntityType="FundsDBModel.MovementsView" Width="1.5" PointX="14.75" PointY="6.75" />
@@ -216,6 +215,7 @@
         <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_OverdueAccountingMovements" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_DisbursementOverdues" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementOverdueDetails_Disbursements" />
+        <EntityTypeShape EntityType="FundsDBModel.Loans_View" Width="1.5" PointX="11.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
