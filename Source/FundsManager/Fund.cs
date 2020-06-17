@@ -25,7 +25,6 @@ namespace FundsManager
             this.AccountsEmployees = new HashSet<AccountsEmployee>();
             this.BankingAccounts = new HashSet<BankingAccount>();
             this.Banks = new HashSet<Bank>();
-            this.BondsTFAMs = new HashSet<BondsTFAM>();
             this.BondsTFFs = new HashSet<BondsTFF>();
             this.Clients = new HashSet<Client>();
             this.Countries = new HashSet<Country>();
@@ -47,6 +46,7 @@ namespace FundsManager
             this.Shareholders = new HashSet<Shareholder>();
             this.Subaccounts = new HashSet<Subaccount>();
             this.UnderlyingDebtors = new HashSet<UnderlyingDebtor>();
+            this.BondsTFAMs = new HashSet<BondsTFAM>();
         }
     
         public int Id { get; set; }
@@ -70,8 +70,6 @@ namespace FundsManager
         public virtual ICollection<BankingAccount> BankingAccounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bank> Banks { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BondsTFAM> BondsTFAMs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BondsTFF> BondsTFFs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -114,5 +112,7 @@ namespace FundsManager
         public virtual ICollection<Subaccount> Subaccounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UnderlyingDebtor> UnderlyingDebtors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BondsTFAM> BondsTFAMs { get; set; }
     }
 }

@@ -34,7 +34,6 @@ namespace FundsManager
         public virtual DbSet<AccountType> AccountTypes { get; set; }
         public virtual DbSet<BankingAccount> BankingAccounts { get; set; }
         public virtual DbSet<Bank> Banks { get; set; }
-        public virtual DbSet<BondsTFAM> BondsTFAMs { get; set; }
         public virtual DbSet<BondsTFAMGeneratedInterestDetail> BondsTFAMGeneratedInterestDetails { get; set; }
         public virtual DbSet<BondsTFAMGeneratedInterest> BondsTFAMGeneratedInterests { get; set; }
         public virtual DbSet<BondsTFAMRepaymentDetail> BondsTFAMRepaymentDetails { get; set; }
@@ -86,7 +85,6 @@ namespace FundsManager
         public virtual DbSet<UnderlyingDebtor> UnderlyingDebtors { get; set; }
         public virtual DbSet<AccountBalanceView> AccountBalanceViews { get; set; }
         public virtual DbSet<BondDetail> BondDetails { get; set; }
-        public virtual DbSet<BondGeneratedInterestView> BondGeneratedInterestViews { get; set; }
         public virtual DbSet<BondsTFAMInterestToPay> BondsTFAMInterestToPays { get; set; }
         public virtual DbSet<BondsTFAMRepaymentView> BondsTFAMRepaymentViews { get; set; }
         public virtual DbSet<BondsTFAMToBeRepaid> BondsTFAMToBeRepaids { get; set; }
@@ -117,5 +115,10 @@ namespace FundsManager
         public virtual DbSet<DealTrackingView> DealTrackingViews { get; set; }
         public virtual DbSet<DisbursementOverdueGeneratedView> DisbursementOverdueGeneratedViews { get; set; }
         public virtual DbSet<Loans_View> Loans_View { get; set; }
+        public virtual DbSet<BondsTFAM> BondsTFAMs { get; set; }
+        public virtual DbSet<BondGeneratedInterestView> BondGeneratedInterestViews { get; set; }
+        public virtual DbSet<BondsTFAMView> BondsTFAMViews { get; set; }
+        public virtual DbSet<LoansReportView> LoansReportViews { get; set; }
+        public virtual DbSet<OverdueResumedReportView> OverdueResumedReportViews { get; set; }
     }
 }

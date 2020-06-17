@@ -30,12 +30,10 @@ namespace FundsManager
         public double interest_tff_contribution { get; set; }
         public int active { get; set; }
         public int paid { get; set; }
-        public Nullable<System.DateTime> payment_date { get; set; }
         public System.DateTime expired { get; set; }
         public int currency_id { get; set; }
         public int can_generate_interest { get; set; }
         public Nullable<int> activation_accounting_movement_id { get; set; }
-        public Nullable<int> bond_payment_accounting_movement_id { get; set; }
         public int generated_id { get; set; }
         public System.DateTime GeneratedDate { get; set; }
     }

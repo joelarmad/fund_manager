@@ -456,5 +456,13 @@ namespace FundsManager
             form.MdiParent = this;
             form.Show();
         }
+
+        private void bondsTFAMToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            BondsTFAMReportForm form = new BondsTFAMReportForm();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }

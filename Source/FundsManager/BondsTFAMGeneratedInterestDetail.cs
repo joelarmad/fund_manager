@@ -26,7 +26,7 @@ namespace FundsManager
     
         public virtual AccountingMovement AccountingMovement { get; set; }
         public virtual AccountingMovement AccountingMovement1 { get; set; }
-        public virtual BondsTFAM BondsTFAM { get; set; }
         public virtual BondsTFAMGeneratedInterest BondsTFAMGeneratedInterest { get; set; }
+        public virtual BondsTFAM BondsTFAM { get; set; }
     }
 }

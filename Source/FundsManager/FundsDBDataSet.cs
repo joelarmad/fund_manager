@@ -9,6 +9,10 @@
 
 namespace FundsManager.FundsDBDataSetTableAdapters
 {
+    partial class BondsTFAMViewTableAdapter
+    {
+    }
+
     partial class DisbursementCollectionViewTableAdapter
     {
     }

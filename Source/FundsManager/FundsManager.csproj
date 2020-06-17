@@ -227,6 +227,9 @@
     <Compile Include="BondsTFAMToBeRepaid.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="BondsTFAMView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="BondsTFF.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -558,6 +561,9 @@
     <Compile Include="LoansRepaymentsView.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="LoansReportView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="LoansToBeRepaidView.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -617,6 +623,9 @@
     <Compile Include="OtherDetailsView.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="OverdueResumedReportView.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProfitResultsView.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -645,6 +654,12 @@
     </Compile>
     <Compile Include="ReportForms\BondGeneratedInterestForm.Designer.cs">
       <DependentUpon>BondGeneratedInterestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForms\BondsTFAMReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForms\BondsTFAMReportForm.Designer.cs">
+      <DependentUpon>BondsTFAMReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportForms\DealTrackingReportForm.cs">
       <SubType>Form</SubType>
@@ -947,6 +962,9 @@
     <EmbeddedResource Include="ReportForms\BondGeneratedInterestForm.resx">
       <DependentUpon>BondGeneratedInterestForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\BondsTFAMReportForm.resx">
+      <DependentUpon>BondsTFAMReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\DealTrackingReportForm.resx">
       <DependentUpon>DealTrackingReportForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -983,6 +1001,7 @@
     <EmbeddedResource Include="ReportForms\ReturnsState.resx">
       <DependentUpon>ReturnsState.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\BondsTFAMReport.rdlc" />
     <EmbeddedResource Include="Reports\LoansReport.rdlc" />
     <EmbeddedResource Include="Reports\OverdueResumedReport.rdlc" />
     <EmbeddedResource Include="Reports\DealTrackingReport.rdlc" />
