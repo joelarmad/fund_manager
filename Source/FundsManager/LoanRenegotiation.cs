@@ -85,7 +85,7 @@ namespace FundsManager
         private void LoanRenegotiation_Load(object sender, EventArgs e)
         {
             this.creditorsTableAdapter.Fill(this.fundsDBDataSet.Creditors);
-
+            loadLoans();
         }
 
         private void cmdRenegotiate_Click(object sender, EventArgs e)
