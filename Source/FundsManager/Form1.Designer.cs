@@ -89,8 +89,9 @@
             this.dealTrackingListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.overduesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loansToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closePeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bondsTFAMToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.closePeriodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -529,7 +530,8 @@
             this.dealTrackingListToolStripMenuItem,
             this.overduesToolStripMenuItem,
             this.loansToolStripMenuItem,
-            this.bondsTFAMToolStripMenuItem3});
+            this.bondsTFAMToolStripMenuItem3,
+            this.expensesToolStripMenuItem});
             this.reportsToolStripMenuItem1.Name = "reportsToolStripMenuItem1";
             this.reportsToolStripMenuItem1.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem1.Text = "Reports";
@@ -576,6 +578,13 @@
             this.loansToolStripMenuItem.Text = "Loans";
             this.loansToolStripMenuItem.Click += new System.EventHandler(this.loansToolStripMenuItem_Click);
             // 
+            // bondsTFAMToolStripMenuItem3
+            // 
+            this.bondsTFAMToolStripMenuItem3.Name = "bondsTFAMToolStripMenuItem3";
+            this.bondsTFAMToolStripMenuItem3.Size = new System.Drawing.Size(199, 22);
+            this.bondsTFAMToolStripMenuItem3.Text = "Bonds TFAM";
+            this.bondsTFAMToolStripMenuItem3.Click += new System.EventHandler(this.bondsTFAMToolStripMenuItem3_Click);
+            // 
             // closePeriodToolStripMenuItem
             // 
             this.closePeriodToolStripMenuItem.Name = "closePeriodToolStripMenuItem";
@@ -583,12 +592,12 @@
             this.closePeriodToolStripMenuItem.Text = "Close Period";
             this.closePeriodToolStripMenuItem.Click += new System.EventHandler(this.closePeriodToolStripMenuItem_Click);
             // 
-            // bondsTFAMToolStripMenuItem3
+            // expensesToolStripMenuItem
             // 
-            this.bondsTFAMToolStripMenuItem3.Name = "bondsTFAMToolStripMenuItem3";
-            this.bondsTFAMToolStripMenuItem3.Size = new System.Drawing.Size(199, 22);
-            this.bondsTFAMToolStripMenuItem3.Text = "Bonds TFAM";
-            this.bondsTFAMToolStripMenuItem3.Click += new System.EventHandler(this.bondsTFAMToolStripMenuItem3_Click);
+            this.expensesToolStripMenuItem.Name = "expensesToolStripMenuItem";
+            this.expensesToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.expensesToolStripMenuItem.Text = "Expenses";
+            this.expensesToolStripMenuItem.Click += new System.EventHandler(this.expensesToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -678,6 +687,7 @@
         private System.Windows.Forms.ToolStripMenuItem overduesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loansToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bondsTFAMToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem expensesToolStripMenuItem;
     }
 }
 

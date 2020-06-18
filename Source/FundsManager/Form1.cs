@@ -464,5 +464,13 @@ namespace FundsManager
             form.MdiParent = this;
             form.Show();
         }
+
+        private void expensesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            ExpensesReportForm form = new ExpensesReportForm();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }
