@@ -173,13 +173,15 @@ namespace FundsManager
             {
                 decimal _amount = 0;
                 decimal _profit = 0;
+                decimal _delayInterest = 0;
                 decimal _exchange = 0;
 
                 if (decimal.TryParse(txtAmount.Text, out _amount)
                     && decimal.TryParse(txtProfitShare.Text, out _profit)
+                    && decimal.TryParse(txtDelayInterest.Text, out _delayInterest)
                     && decimal.TryParse(txtExchangeRate.Text, out _exchange) && _exchange > 0)
                 {
-                    decimal toBeColected = Math.Round((_amount + _profit) / _exchange, 2);
+                    decimal toBeColected = Math.Round(_amount / _exchange, 2) + Math.Round(_profit / _exchange, 2) + Math.Round(_delayInterest / _exchange, 2);
                     lblTotalToBeCollected.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", toBeColected);
                 }
                 else
@@ -512,7 +514,7 @@ namespace FundsManager
                     _booking.starting_date = Convert.ToDateTime(dtpStartingDate.Text);
                     _booking.collection_date = Convert.ToDateTime(dtpCollectionDate.Text);
                     _booking.number = txtNumber.Text;
-                    _booking.delay_interest = Math.Round(Convert.ToDecimal(txtDelayInterest.Text), 2);
+                    _booking.delay_interest = Math.Round(Convert.ToDecimal(txtDelayInterest.Text) / (decimal)exchangeRate, 2);
 
                     fAmountRemaining -= amountToDecrease;
                     fProfitShareRemainig -= profitShareToDecrease;
@@ -614,8 +616,6 @@ namespace FundsManager
             lvBooking_SelectedIndexChanged(null, null);
             cmdAddBooking.Enabled = false;
             txtAmount.Text = String.Format("{0:0.00}", fAmountRemaining);
-            cbCurrency.SelectedIndex = 0;
-            txtExchangeRate.Text = String.Format("{0:0.0000000}", 1);
             txtProfitShare.Text = String.Format("{0:0.00}", fProfitShareRemainig);
             txtDelayInterest.Text = String.Format("{0:0.00}", 0);
             txtNumber.Text = "";
@@ -953,6 +953,18 @@ namespace FundsManager
             catch (Exception _ex)
             {
                 Console.WriteLine("Error in AddendumsForm.txtProfitShare_TextChanged: " + _ex.Message);
+            }
+        }
+
+        private void txtDelayInterest_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                calculate_total_collection();
+            }
+            catch (Exception _ex)
+            {
+                Console.WriteLine("Error in AddendumsForm.txtDelayInterest_KeyUp: " + _ex.Message);
             }
         }
     }

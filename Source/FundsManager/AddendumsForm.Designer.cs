@@ -136,6 +136,7 @@
             this.txtDelayInterest.Text = "0";
             this.txtDelayInterest.Click += new System.EventHandler(this.txtDelayInterest_Click);
             this.txtDelayInterest.TextChanged += new System.EventHandler(this.txtDelayInterest_TextChanged);
+            this.txtDelayInterest.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDelayInterest_KeyUp);
             this.txtDelayInterest.Leave += new System.EventHandler(this.txtDelayInterest_Leave);
             // 
             // label12
