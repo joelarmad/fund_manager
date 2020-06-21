@@ -77,11 +77,11 @@ namespace FundsManager
 
                         if (toBeCollected != null)
                         {
-                            fProfitShareRemainig = toBeCollected.profit_share - toBeCollected.profit_share_collected.Value;
+                            fProfitShareRemainig = Math.Round(toBeCollected.profit_share * (decimal)disbPlusAddendum.exchange_rate - toBeCollected.profit_share_collected.Value * (decimal)disbPlusAddendum.exchange_rate, 2);
 
                             fProfitShare = fProfitShareRemainig;
 
-                            fAmountRemaining = toBeCollected.amount_remainig.Value;
+                            fAmountRemaining = Math.Round(toBeCollected.amount_remainig.Value * (decimal)disbPlusAddendum.exchange_rate, 2);
 
                             fAmount = fAmountRemaining;
 

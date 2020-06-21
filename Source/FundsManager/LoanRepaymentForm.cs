@@ -197,8 +197,14 @@ namespace FundsManager
                                                 repaymentDetail.principal_repaid = Math.Round(principalToBeCollected, 2);
                                                 repaymentDetail.interest_repaid = Math.Round(interestToBeCollected, 2);
 
+                                                if (principal - principalToBeCollected <= 0)
+                                                {
+                                                    loan.can_generate_interest = 0;
+                                                }
+
                                                 if (loan.can_generate_interest == 0 && principal - principalToBeCollected <= 0 && interestAccrued - interestToBeCollected <= 0)
                                                 {
+                                                    loan.can_generate_interest = 0;
                                                     loan.paid = 1;
                                                 }
 

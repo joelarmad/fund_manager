@@ -336,6 +336,7 @@
             // 
             // txtExchangeRate
             // 
+            this.txtExchangeRate.Enabled = false;
             this.txtExchangeRate.Location = new System.Drawing.Point(97, 88);
             this.txtExchangeRate.Name = "txtExchangeRate";
             this.txtExchangeRate.Size = new System.Drawing.Size(121, 20);
@@ -358,6 +359,7 @@
             // 
             this.cbCurrency.DataSource = this.currenciesBindingSource;
             this.cbCurrency.DisplayMember = "name";
+            this.cbCurrency.Enabled = false;
             this.cbCurrency.FormattingEnabled = true;
             this.cbCurrency.Location = new System.Drawing.Point(97, 53);
             this.cbCurrency.Name = "cbCurrency";
