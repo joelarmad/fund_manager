@@ -176,6 +176,8 @@ namespace FundsManager
                                                     _maccount01.FK_Movements_Accounts_Accounts = account540.Id;
                                                     if (subAcct01 != null)
                                                         _maccount01.FK_Movements_Accounts_Subaccounts = subAcct01.Id;
+                                                    _maccount01.subaccount = bond.Id;
+                                                    _maccount01.subaccount_type = 9;
                                                     _maccount01.debit = Math.Round(principalToBeCollected, 2);
                                                     _maccount01.credit = 0;
 
@@ -193,6 +195,8 @@ namespace FundsManager
                                                     _maccount02.FK_Movements_Accounts_Accounts = account540.Id;
                                                     if (subAcct02 != null)
                                                         _maccount02.FK_Movements_Accounts_Subaccounts = subAcct02.Id;
+                                                    _maccount02.subaccount = bond.Id;
+                                                    _maccount02.subaccount_type = 9;
                                                     _maccount02.debit = Math.Round(interestToBeCollected, 2);
                                                     _maccount02.credit = 0;
 
