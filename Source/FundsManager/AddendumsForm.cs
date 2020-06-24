@@ -519,6 +519,16 @@ namespace FundsManager
                     fAmountRemaining -= amountToDecrease;
                     fProfitShareRemainig -= profitShareToDecrease;
 
+                    if (fAmountRemaining < 0)
+                    {
+                        fAmountRemaining = 0;
+                    }
+
+                    if (fProfitShareRemainig < 0)
+                    {
+                        fProfitShareRemainig = 0;
+                    }
+
                     _booking.collected = false;
                     _booking.can_generate_interest = true;
 
@@ -620,9 +630,6 @@ namespace FundsManager
             txtDelayInterest.Text = String.Format("{0:0.00}", 0);
             txtNumber.Text = "";
             lblTotalToBeCollected.Text = String.Format("{0:0.00}", 0);
-            dtpStartingDate.Value = DateTime.Now;
-            dtpBookingDate.Value = DateTime.Now;
-            dtpCollectionDate.Value = DateTime.Now;
             cmdDeleteBooking.Enabled = false;
         }
 
@@ -672,7 +679,8 @@ namespace FundsManager
                     }
 
                     txtExchangeRate.Text = String.Format("{0:0.0000000}", selected.exchange_rate);
-                    txtProfitShare.Text = String.Format("{0:0.00}", selected.profit_share);
+                    txtProfitShare.Text = String.Format("{0:0.00}", selected.profit_share * (decimal)selected.exchange_rate);
+                    txtDelayInterest.Text = String.Format("{0:0.00}", selected.delay_interest * (decimal)selected.exchange_rate);
                     txtNumber.Text = selected.number;
 
                     calculate_total_collection();
@@ -698,7 +706,7 @@ namespace FundsManager
 
         private void checkEnablingBookButton()
         {
-            cmdBook.Enabled = bookings.Count > 0 && fAmountRemaining == 0 && fProfitShareRemainig == 0;
+            cmdBook.Enabled = bookings.Count > 0 && Math.Round(fAmountRemaining, 2) == 0 && Math.Round(fProfitShareRemainig, 2) == 0;
         }
 
         private void cmdDeleteBooking_Click(object sender, EventArgs e)
