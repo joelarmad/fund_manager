@@ -156,7 +156,7 @@ namespace FundsManager
                                     accountingMovement.description = "Loan Repayment";
                                     accountingMovement.date = dtpDate.Value;
                                     accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpDate.Value.Year);
-                                    accountingMovement.original_reference = cbContract.Text;
+                                    accountingMovement.original_reference = cbContract.SelectedIndex > 0 ? cbContract.Text : "";
                                     accountingMovement.contract = cbContract.Text;
                                     accountingMovement.FK_AccountingMovements_Currencies = 0;
 

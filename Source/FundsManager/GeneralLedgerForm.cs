@@ -154,6 +154,7 @@ namespace FundsManager
 
                     textBox3.Enabled = false;
                     textBox5.Enabled = false;
+                    comboBox4.Enabled = false;
 
                     textBox1.Text = String.Format("{0:0.00}", ExternalDebit);
                     textBox2.Text = String.Format("{0:0.00}", ExternalCredit);
