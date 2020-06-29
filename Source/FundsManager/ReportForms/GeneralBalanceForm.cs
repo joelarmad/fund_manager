@@ -38,7 +38,7 @@ namespace FundsManager.ReportForms
         {
             try
             {
-                DateTime to = dtpTo.Value.AddDays(1).AddSeconds(-1);
+                DateTime to = dtpTo.Value.Date.AddDays(1).AddSeconds(-1);
                 DateTime toLastPeriod = to.AddYears(-1);
 
                 this.accountBalanceViewTableAdapter.Fill(this.fundsDBDataSet.AccountBalanceView, manager.Selected, to, toLastPeriod);
