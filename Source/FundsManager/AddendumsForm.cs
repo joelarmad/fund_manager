@@ -776,9 +776,8 @@ namespace FundsManager
                             return;
                         }
 
-                        BookToEdit.Movements_Accounts.credit = fAmount;
-                        //BookToEdit.Movements_Accounts128.credit = fDelayedInterest;
-                        BookToEdit.Movements_Accounts1.credit = fProfitShare;
+                        BookToEdit.Movements_Accounts.credit = Math.Round(fAmount / (decimal)disbPlusAddendum.exchange_rate, 2);
+                        BookToEdit.Movements_Accounts1.credit = Math.Round(fDelayedInterest / (decimal)disbPlusAddendum.exchange_rate, 2);
 
                     }
                     else
@@ -786,7 +785,7 @@ namespace FundsManager
                         _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
                         _accountingMovement.description = "";
                         _accountingMovement.date = dtpBookingDate.Value.Date;
-                        _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpStartingDate.Value.Year);
+                        _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpBookingDate.Value.Year);
                         _accountingMovement.FK_AccountingMovements_Currencies = disbPlusAddendum.currency_id;
                         _accountingMovement.original_reference = disb.Investment.contract;
                         _accountingMovement.contract = disb.Investment.contract;
@@ -807,7 +806,7 @@ namespace FundsManager
                             _maccount125.FK_Movements_Accounts_Subaccounts = subacct125.Id;
                         _maccount125.subaccount = disb.client_id;
                         _maccount125.subaccount_type = 1;
-                        _maccount125.credit = Math.Round(fAmount, 2);
+                        _maccount125.credit = Math.Round(fAmount / (decimal)disbPlusAddendum.exchange_rate, 2);
                         _maccount125.debit = 0;
 
                         manager.My_db.Movements_Accounts.Add(_maccount125);
@@ -821,8 +820,7 @@ namespace FundsManager
                             _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
                         _maccount128.subaccount = disb.client_id;
                         _maccount128.subaccount_type = 1;
-                        _maccount128.credit = Math.Round(fDelayedInterest, 2);
-                        //_maccount128.credit = Math.Round(fProfitShare, 2);
+                        _maccount128.credit = Math.Round(fDelayedInterest / (decimal)disbPlusAddendum.exchange_rate, 2);
                         _maccount128.debit = 0;
 
                         manager.My_db.Movements_Accounts.Add(_maccount128);
@@ -855,7 +853,7 @@ namespace FundsManager
                             _maccount125.subaccount = disb.client_id;
                             _maccount125.subaccount_type = 1;
                             _maccount125.credit = 0;
-                            _maccount125.debit = Math.Round(_booking.amount, 2);
+                            _maccount125.debit = Math.Round(_booking.amount / (decimal)disbPlusAddendum.exchange_rate, 2);
 
                             manager.My_db.Movements_Accounts.Add(_maccount125);
 
@@ -869,8 +867,7 @@ namespace FundsManager
                             _maccount128.subaccount = disb.client_id;
                             _maccount128.subaccount_type = 1;
                             _maccount128.credit = 0;
-                            _maccount128.debit = Math.Round(_booking.delay_interest, 2);
-                            //_maccount128.debit = Math.Round(_booking.profit_share, 2);
+                            _maccount128.debit = Math.Round(_booking.delay_interest / (decimal)disbPlusAddendum.exchange_rate, 2);
 
                             manager.My_db.Movements_Accounts.Add(_maccount128);
 
@@ -882,7 +879,7 @@ namespace FundsManager
                         else
                         {
                             _booking.Movements_Accounts.debit = _booking.amount;
-                            _booking.Movements_Accounts1.debit = _booking.profit_share;
+                            _booking.Movements_Accounts1.debit = _booking.delay_interest;
                         }
                     }
 

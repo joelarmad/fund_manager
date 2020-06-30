@@ -30,6 +30,7 @@ namespace FundsManager
         int fromIndex = 11;
         int toIndex = 12;
         int daysIndex = 13;
+        int exchangeRateIndex = 14;
 
         public DisbursementToBeOverdueForm()
         {
@@ -168,10 +169,12 @@ namespace FundsManager
             try
             {
                 int days = int.Parse(row.Cells[daysIndex].Value.ToString());
+                float exchange_rate = float.Parse(row.Cells[exchangeRateIndex].Value.ToString());
+                decimal overdue = Math.Round(decimal.Parse(row.Cells[toBeCollectedIndex].Value.ToString()) / (decimal)exchange_rate, 2);
 
                 detail.disbursement_id = int.Parse(row.Cells[disburdsementIdIndex].Value.ToString());
                 detail.booking_id = int.Parse(row.Cells[bookingIdIndex].Value.ToString());
-                detail.generated_overdue = decimal.Parse(row.Cells[toBeCollectedIndex].Value.ToString()) * monthlyRate * daysIndex / 30 / 100;
+                detail.generated_overdue = Math.Round(overdue * monthlyRate * daysIndex / 30 / 100, 2);
                 detail.monthly_rate = monthlyRate;
                 detail.overdue_date_from = DateTime.Parse(row.Cells[fromIndex].Value.ToString());
                 detail.overdue_date_to = DateTime.Parse(row.Cells[toIndex].Value.ToString());

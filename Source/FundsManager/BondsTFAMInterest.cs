@@ -31,7 +31,7 @@ namespace FundsManager
 
                 DateTime _date = dtpDate.Value;
 
-                List<BondsTFAM> _bondsList = manager.My_db.BondsTFAMs.Where(x => x.active == 1 && x.can_generate_interest == 1 && x.issued <= _date).OrderBy(x => x.Id).ToList();
+                List<BondsTFAM> _bondsList = manager.My_db.BondsTFAMs.Where(x => x.active == 1 && x.can_generate_interest == 1 && x.issued <= _date && x.FK_Bonds_Funds == manager.Selected).OrderBy(x => x.Id).ToList();
 
                 foreach (BondsTFAM _bond in _bondsList)
                 {

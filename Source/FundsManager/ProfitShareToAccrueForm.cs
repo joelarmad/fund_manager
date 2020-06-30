@@ -31,7 +31,7 @@ namespace FundsManager
 
                 DateTime _date = dtpDate.Value;
 
-                List<ProfitShareToAccrue> _profitShareToAccrueList = manager.My_db.ProfitShareToAccrues.Where(x => x.pay_date <= _date).OrderBy(x => x.contract).ToList();
+                List<ProfitShareToAccrue> _profitShareToAccrueList = manager.My_db.ProfitShareToAccrues.Where(x => x.pay_date <= _date && x.fund_id == manager.Selected).OrderBy(x => x.contract).ToList();
 
                 foreach (ProfitShareToAccrue _profitShareToAccrue in _profitShareToAccrueList)
                 {
@@ -384,11 +384,6 @@ namespace FundsManager
         private void cmdSearch_Click(object sender, EventArgs e)
         {
             loadDisbursements();
-        }
-
-        private void ProfitShareToAccrueForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

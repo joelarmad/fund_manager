@@ -69,6 +69,7 @@
             this.fromdateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.todateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.daysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.exchange_rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.clientContractsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
@@ -174,7 +175,8 @@
             this.overdue,
             this.fromdateDataGridViewTextBoxColumn,
             this.todateDataGridViewTextBoxColumn,
-            this.daysDataGridViewTextBoxColumn});
+            this.daysDataGridViewTextBoxColumn,
+            this.exchange_rate});
             this.dataGridView1.DataSource = this.disbursementToBeOverduedBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(12, 114);
             this.dataGridView1.Name = "dataGridView1";
@@ -352,6 +354,14 @@
             this.daysDataGridViewTextBoxColumn.Name = "daysDataGridViewTextBoxColumn";
             this.daysDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // exchange_rate
+            // 
+            this.exchange_rate.DataPropertyName = "exchange_rate";
+            this.exchange_rate.HeaderText = "exchange_rate";
+            this.exchange_rate.Name = "exchange_rate";
+            this.exchange_rate.ReadOnly = true;
+            this.exchange_rate.Visible = false;
+            // 
             // DisbursementToBeOverdueForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -426,5 +436,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fromdateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn todateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn daysDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn exchange_rate;
     }
 }

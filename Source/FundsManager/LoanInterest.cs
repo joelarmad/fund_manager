@@ -31,7 +31,7 @@ namespace FundsManager
 
                 DateTime _date = dtpDate.Value;
 
-                List<Loans_View> _loansToAccrueList = manager.My_db.Loans_View.Where(x => x.can_generate_interest == 1 && (x.renegotiated == null || x.renegotiated == false) && x.start_date <= _date).OrderBy(x => x.reference).ToList();
+                List<Loans_View> _loansToAccrueList = manager.My_db.Loans_View.Where(x => x.can_generate_interest == 1 && (x.renegotiated == null || x.renegotiated == false) && x.start_date <= _date && x.fund_id == manager.Selected).OrderBy(x => x.reference).ToList();
 
                 foreach (Loans_View _loanToAccrue in _loansToAccrueList)
                 {

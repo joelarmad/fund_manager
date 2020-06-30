@@ -34,7 +34,7 @@ namespace FundsManager
 
         private void DisbursementCollectionForm_Load(object sender, EventArgs e)
         {
-            this.clientsTableAdapter.Fill(this.fundsDBDataSet.Clients);
+            this.clientsTableAdapter.FillByFund(this.fundsDBDataSet.Clients, manager.Selected);
 
             updateContractCombo();
 
