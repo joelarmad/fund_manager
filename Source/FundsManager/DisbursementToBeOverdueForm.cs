@@ -170,7 +170,7 @@ namespace FundsManager
             {
                 int days = int.Parse(row.Cells[daysIndex].Value.ToString());
                 float exchange_rate = float.Parse(row.Cells[exchangeRateIndex].Value.ToString());
-                decimal overdue = Math.Round(decimal.Parse(row.Cells[toBeCollectedIndex].Value.ToString()) / (decimal)exchange_rate, 2);
+                decimal overdue = Math.Round(decimal.Parse(row.Cells[toBeCollectedIndex].Value.ToString()), 2);
 
                 detail.disbursement_id = int.Parse(row.Cells[disburdsementIdIndex].Value.ToString());
                 detail.booking_id = int.Parse(row.Cells[bookingIdIndex].Value.ToString());

@@ -853,7 +853,7 @@ namespace FundsManager
                             _maccount125.subaccount = disb.client_id;
                             _maccount125.subaccount_type = 1;
                             _maccount125.credit = 0;
-                            _maccount125.debit = Math.Round(_booking.amount / (decimal)disbPlusAddendum.exchange_rate, 2);
+                            _maccount125.debit = Math.Round(_booking.amount, 2);
 
                             manager.My_db.Movements_Accounts.Add(_maccount125);
 
@@ -867,7 +867,7 @@ namespace FundsManager
                             _maccount128.subaccount = disb.client_id;
                             _maccount128.subaccount_type = 1;
                             _maccount128.credit = 0;
-                            _maccount128.debit = Math.Round(_booking.delay_interest / (decimal)disbPlusAddendum.exchange_rate, 2);
+                            _maccount128.debit = Math.Round(_booking.delay_interest, 2);
 
                             manager.My_db.Movements_Accounts.Add(_maccount128);
 
