@@ -41,34 +41,18 @@
           <DataField>acct_amount_last_period</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="TotalAsset">
-          <DataField>TotalAsset</DataField>
+        <Field Name="acct_amount2">
+          <DataField>acct_amount2</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="TotalLiability">
-          <DataField>TotalLiability</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="TotalEquity">
-          <DataField>TotalEquity</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="TotalAsset_last_period">
-          <DataField>TotalAsset_last_period</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="TotalLiability_last_period">
-          <DataField>TotalLiability_last_period</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="TotalEquity_last_period">
-          <DataField>TotalEquity_last_period</DataField>
+        <Field Name="acct_amount_last_period2">
+          <DataField>acct_amount_last_period2</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>FundsDBDataSet</rd:DataSetName>
-        <rd:SchemaPath>\\10.30.10.122\d\00_Proyectos\fund_manager\Source\FundsManager\FundsDBDataSet.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\00_Proyectos\fund_manager\Source\FundsManager\FundsDBDataSet.xsd</rd:SchemaPath>
         <rd:TableName>Template_Balance_Sheet</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
@@ -665,7 +649,6 @@
                             <rd:FormatSymbolCulture>es-ES</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -792,9 +775,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!TotalEquity.Value + Fields!TotalLiability.Value)</Value>
+                                  <Value>=Sum(Fields!acct_amount2.Value, "DataSet1")</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>n2</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -869,9 +853,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!TotalEquity_last_period.Value + Fields!TotalLiability_last_period.Value)</Value>
+                                  <Value>=Sum(Fields!acct_amount_last_period2.Value, "DataSet1")</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>n2</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>

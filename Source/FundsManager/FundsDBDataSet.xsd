@@ -2856,28 +2856,50 @@ group by at.AccountType, a.Id, a.name, s.name</CommandText>
                                WHERE        (account_id = a.Id) AND (Date &lt;= @EndDate)) AS acct_amount,
                              (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1
                                FROM            MovementsView AS m
-                               WHERE        (account_id = a.Id) AND (Date &lt;= @EndDateLastPeriod)) AS acct_amount_last_period,
+                               WHERE        (account_id = a.Id) AND (Date &lt;= @EndDateLastPeriod)) AS acct_amount_last_period, CASE WHEN at.Id IN (0, 5, 7, 8, 9) THEN 0.00 ELSE
                              (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1
                                FROM            MovementsView AS m
-                               WHERE        (Date &lt;= @EndDate) AND (TypeId IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalAsset,
+                               WHERE        (account_id = a.Id) AND (Date &lt;= @EndDate)) END AS acct_amount2, CASE WHEN at.Id IN (0, 5, 7, 8, 9) THEN 0.00 ELSE
                              (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1
                                FROM            MovementsView AS m
-                               WHERE        (Date &lt;= @EndDate) AND (TypeId IN (1, 6, 10, 11)) AND (FundId = @FundId)) AS TotalLiability,
-                             (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1
-                               FROM            MovementsView AS m
-                               WHERE        (Date &lt;= @EndDate) AND (TypeId IN (2)) AND (FundId = @FundId)) AS TotalEquity,
-                             (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1
-                               FROM            MovementsView AS m
-                               WHERE        (Date &lt;= @EndDateLastPeriod) AND (TypeId IN (0, 4, 5, 7, 8, 9)) AND (FundId = @FundId)) AS TotalAsset_last_period,
-                             (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1
-                               FROM            MovementsView AS m
-                               WHERE        (Date &lt;= @EndDateLastPeriod) AND (TypeId IN (1, 6, 10, 11)) AND (FundId = @FundId)) AS TotalLiability_last_period,
-                             (SELECT        ISNULL(SUM(Shift_Amount), 0) AS Expr1
-                               FROM            MovementsView AS m
-                               WHERE        (Date &lt;= @EndDateLastPeriod) AND (TypeId IN (2)) AND (FundId = @FundId)) AS TotalEquity_last_period
+                               WHERE        (account_id = a.Id) AND (Date &lt;= @EndDateLastPeriod)) END AS acct_amount_last_period2
 FROM            Accounts AS a INNER JOIN
                          AccountType AS at ON a.type = at.Id AND at.Id IN (0, 1, 2, 5, 6, 7, 8, 9, 10, 11)
-WHERE        (a.FK_Accounts_Funds = @FundId)</CommandText>
+WHERE        (a.FK_Accounts_Funds = @FundId)
+UNION
+SELECT        @FundId AS FundId, '000' AS acct_number, 'Equity' AS acct_type, 'Profit &amp; Loss' AS acct_name,
+                             (SELECT        SUM(Shift_Amount) AS Expr1
+                               FROM            MovementsView AS m
+                               WHERE        (FundId = @FundId) AND (TypeId = 3) AND (Date &lt;= @EndDate)
+                               GROUP BY TypeId) -
+                             (SELECT        SUM(Shift_Amount) AS Expr1
+                               FROM            MovementsView AS m
+                               WHERE        (FundId = @FundId) AND (TypeId = 4) AND (Date &lt;= @EndDate)
+                               GROUP BY TypeId) AS acct_amount,
+                             (SELECT        SUM(Shift_Amount) AS Expr1
+                               FROM            MovementsView AS m
+                               WHERE        (FundId = @FundId) AND (TypeId = 3) AND (Date &lt;= @EndDateLastPeriod)
+                               GROUP BY TypeId) -
+                             (SELECT        SUM(Shift_Amount) AS Expr1
+                               FROM            MovementsView AS m
+                               WHERE        (FundId = @FundId) AND (TypeId = 4) AND (Date &lt;= @EndDateLastPeriod)
+                               GROUP BY TypeId) AS acct_amount_last_period,
+                             (SELECT        SUM(Shift_Amount) AS Expr1
+                               FROM            MovementsView AS m
+                               WHERE        (FundId = @FundId) AND (TypeId = 3) AND (Date &lt;= @EndDate)
+                               GROUP BY TypeId) -
+                             (SELECT        SUM(Shift_Amount) AS Expr1
+                               FROM            MovementsView AS m
+                               WHERE        (FundId = @FundId) AND (TypeId = 4) AND (Date &lt;= @EndDate)
+                               GROUP BY TypeId) AS acct_amount2,
+                             (SELECT        SUM(Shift_Amount) AS Expr1
+                               FROM            MovementsView AS m
+                               WHERE        (FundId = @FundId) AND (TypeId = 3) AND (Date &lt;= @EndDateLastPeriod)
+                               GROUP BY TypeId) -
+                             (SELECT        SUM(Shift_Amount) AS Expr1
+                               FROM            MovementsView AS m
+                               WHERE        (FundId = @FundId) AND (TypeId = 4) AND (Date &lt;= @EndDateLastPeriod)
+                               GROUP BY TypeId) AS acct_amount_last_period2</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="FundId" ColumnName="FK_Accounts_Funds" DataSourceName="[D:\TEMP\00_DATABASES\FUNDSDB.MDF].dbo.Accounts" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@FundId" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="FundId" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="EndDate" ColumnName="" DataSourceName="" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@EndDate" Precision="0" Scale="0" Size="8" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -2893,13 +2915,9 @@ WHERE        (a.FK_Accounts_Funds = @FundId)</CommandText>
               <Mapping SourceColumn="acct_type" DataSetColumn="acct_type" />
               <Mapping SourceColumn="acct_name" DataSetColumn="acct_name" />
               <Mapping SourceColumn="acct_amount" DataSetColumn="acct_amount" />
-              <Mapping SourceColumn="TotalAsset" DataSetColumn="TotalAsset" />
-              <Mapping SourceColumn="TotalLiability" DataSetColumn="TotalLiability" />
               <Mapping SourceColumn="acct_amount_last_period" DataSetColumn="acct_amount_last_period" />
-              <Mapping SourceColumn="TotalAsset_last_period" DataSetColumn="TotalAsset_last_period" />
-              <Mapping SourceColumn="TotalLiability_last_period" DataSetColumn="TotalLiability_last_period" />
-              <Mapping SourceColumn="TotalEquity" DataSetColumn="TotalEquity" />
-              <Mapping SourceColumn="TotalEquity_last_period" DataSetColumn="TotalEquity_last_period" />
+              <Mapping SourceColumn="acct_amount2" DataSetColumn="acct_amount2" />
+              <Mapping SourceColumn="acct_amount_last_period2" DataSetColumn="acct_amount_last_period2" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -4006,7 +4024,7 @@ SELECT Id, name, FK_ServiceSupplier_Funds, number FROM ServiceSuppliers WHERE (I
               <DbSource ConnectionRef="FundsDBConnectionString (Settings)" DbObjectName="dbo.Template_Balance_Sheet" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT FundId, acct_number, acct_type, acct_name, acct_amount, acct_amount_last_period, TotalAsset, TotalLiability, TotalEquity, TotalAsset_last_period, TotalLiability_last_period, TotalEquity_last_period FROM dbo.Template_Balance_Sheet</CommandText>
+                    <CommandText>SELECT FundId, acct_number, acct_type, acct_name, acct_amount, acct_amount_last_period, acct_amount2, acct_amount_last_period2 FROM Template_Balance_Sheet</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -4019,12 +4037,8 @@ SELECT Id, name, FK_ServiceSupplier_Funds, number FROM ServiceSuppliers WHERE (I
               <Mapping SourceColumn="acct_name" DataSetColumn="acct_name" />
               <Mapping SourceColumn="acct_amount" DataSetColumn="acct_amount" />
               <Mapping SourceColumn="acct_amount_last_period" DataSetColumn="acct_amount_last_period" />
-              <Mapping SourceColumn="TotalAsset" DataSetColumn="TotalAsset" />
-              <Mapping SourceColumn="TotalLiability" DataSetColumn="TotalLiability" />
-              <Mapping SourceColumn="TotalEquity" DataSetColumn="TotalEquity" />
-              <Mapping SourceColumn="TotalAsset_last_period" DataSetColumn="TotalAsset_last_period" />
-              <Mapping SourceColumn="TotalLiability_last_period" DataSetColumn="TotalLiability_last_period" />
-              <Mapping SourceColumn="TotalEquity_last_period" DataSetColumn="TotalEquity_last_period" />
+              <Mapping SourceColumn="acct_amount2" DataSetColumn="acct_amount2" />
+              <Mapping SourceColumn="acct_amount_last_period2" DataSetColumn="acct_amount_last_period2" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -7047,8 +7061,8 @@ WHERE        (issued &gt;= @From) AND (issued &lt; @To) AND (fund_id = @FundId)<
         <xs:element name="AccountBalanceView" msprop:Generator_TableClassName="AccountBalanceViewDataTable" msprop:Generator_TableVarName="tableAccountBalanceView" msprop:Generator_RowChangedName="AccountBalanceViewRowChanged" msprop:Generator_TablePropName="AccountBalanceView" msprop:Generator_RowDeletingName="AccountBalanceViewRowDeleting" msprop:Generator_RowChangingName="AccountBalanceViewRowChanging" msprop:Generator_RowEvHandlerName="AccountBalanceViewRowChangeEventHandler" msprop:Generator_RowDeletedName="AccountBalanceViewRowDeleted" msprop:Generator_RowClassName="AccountBalanceViewRow" msprop:Generator_UserTableName="AccountBalanceView" msprop:Generator_RowEvArgName="AccountBalanceViewRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="FundId" msprop:Generator_ColumnVarNameInTable="columnFundId" msprop:Generator_ColumnPropNameInRow="FundId" msprop:Generator_ColumnPropNameInTable="FundIdColumn" msprop:Generator_UserColumnName="FundId" type="xs:int" />
-              <xs:element name="acct_number" msprop:Generator_ColumnVarNameInTable="columnacct_number" msprop:Generator_ColumnPropNameInRow="acct_number" msprop:Generator_ColumnPropNameInTable="acct_numberColumn" msprop:Generator_UserColumnName="acct_number">
+              <xs:element name="FundId" msprop:Generator_ColumnVarNameInTable="columnFundId" msprop:Generator_ColumnPropNameInRow="FundId" msprop:Generator_ColumnPropNameInTable="FundIdColumn" msprop:Generator_UserColumnName="FundId" type="xs:int" minOccurs="0" />
+              <xs:element name="acct_number" msprop:Generator_ColumnVarNameInTable="columnacct_number" msprop:Generator_ColumnPropNameInRow="acct_number" msprop:Generator_ColumnPropNameInTable="acct_numberColumn" msprop:Generator_UserColumnName="acct_number" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
@@ -7062,7 +7076,7 @@ WHERE        (issued &gt;= @From) AND (issued &lt; @To) AND (fund_id = @FundId)<
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="acct_name" msprop:Generator_ColumnVarNameInTable="columnacct_name" msprop:Generator_ColumnPropNameInRow="acct_name" msprop:Generator_ColumnPropNameInTable="acct_nameColumn" msprop:Generator_UserColumnName="acct_name">
+              <xs:element name="acct_name" msprop:Generator_ColumnVarNameInTable="columnacct_name" msprop:Generator_ColumnPropNameInRow="acct_name" msprop:Generator_ColumnPropNameInTable="acct_nameColumn" msprop:Generator_UserColumnName="acct_name" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="2147483647" />
@@ -7070,13 +7084,9 @@ WHERE        (issued &gt;= @From) AND (issued &lt; @To) AND (fund_id = @FundId)<
                 </xs:simpleType>
               </xs:element>
               <xs:element name="acct_amount" msprop:Generator_ColumnVarNameInTable="columnacct_amount" msprop:Generator_ColumnPropNameInRow="acct_amount" msprop:Generator_ColumnPropNameInTable="acct_amountColumn" msprop:Generator_UserColumnName="acct_amount" type="xs:decimal" minOccurs="0" />
-              <xs:element name="TotalAsset" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalAsset" msprop:Generator_ColumnPropNameInRow="TotalAsset" msprop:Generator_ColumnPropNameInTable="TotalAssetColumn" msprop:Generator_UserColumnName="TotalAsset" type="xs:decimal" minOccurs="0" />
-              <xs:element name="TotalLiability" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalLiability" msprop:Generator_ColumnPropNameInRow="TotalLiability" msprop:Generator_ColumnPropNameInTable="TotalLiabilityColumn" msprop:Generator_UserColumnName="TotalLiability" type="xs:decimal" minOccurs="0" />
               <xs:element name="acct_amount_last_period" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnacct_amount_last_period" msprop:Generator_ColumnPropNameInRow="acct_amount_last_period" msprop:Generator_ColumnPropNameInTable="acct_amount_last_periodColumn" msprop:Generator_UserColumnName="acct_amount_last_period" type="xs:decimal" minOccurs="0" />
-              <xs:element name="TotalAsset_last_period" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalAsset_last_period" msprop:Generator_ColumnPropNameInRow="TotalAsset_last_period" msprop:Generator_ColumnPropNameInTable="TotalAsset_last_periodColumn" msprop:Generator_UserColumnName="TotalAsset_last_period" type="xs:decimal" minOccurs="0" />
-              <xs:element name="TotalLiability_last_period" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalLiability_last_period" msprop:Generator_ColumnPropNameInRow="TotalLiability_last_period" msprop:Generator_ColumnPropNameInTable="TotalLiability_last_periodColumn" msprop:Generator_UserColumnName="TotalLiability_last_period" type="xs:decimal" minOccurs="0" />
-              <xs:element name="TotalEquity" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalEquity" msprop:Generator_ColumnPropNameInRow="TotalEquity" msprop:Generator_ColumnPropNameInTable="TotalEquityColumn" msprop:Generator_UserColumnName="TotalEquity" type="xs:decimal" minOccurs="0" />
-              <xs:element name="TotalEquity_last_period" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalEquity_last_period" msprop:Generator_ColumnPropNameInRow="TotalEquity_last_period" msprop:Generator_ColumnPropNameInTable="TotalEquity_last_periodColumn" msprop:Generator_UserColumnName="TotalEquity_last_period" type="xs:decimal" minOccurs="0" />
+              <xs:element name="acct_amount2" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnacct_amount2" msprop:Generator_ColumnPropNameInRow="acct_amount2" msprop:Generator_ColumnPropNameInTable="acct_amount2Column" msprop:Generator_UserColumnName="acct_amount2" type="xs:decimal" minOccurs="0" />
+              <xs:element name="acct_amount_last_period2" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnacct_amount_last_period2" msprop:Generator_ColumnPropNameInRow="acct_amount_last_period2" msprop:Generator_ColumnPropNameInTable="acct_amount_last_period2Column" msprop:Generator_UserColumnName="acct_amount_last_period2" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -7608,12 +7618,8 @@ WHERE        (issued &gt;= @From) AND (issued &lt; @To) AND (fund_id = @FundId)<
               </xs:element>
               <xs:element name="acct_amount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnacct_amount" msprop:Generator_ColumnPropNameInRow="acct_amount" msprop:Generator_ColumnPropNameInTable="acct_amountColumn" msprop:Generator_UserColumnName="acct_amount" type="xs:decimal" minOccurs="0" />
               <xs:element name="acct_amount_last_period" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnacct_amount_last_period" msprop:Generator_ColumnPropNameInRow="acct_amount_last_period" msprop:Generator_ColumnPropNameInTable="acct_amount_last_periodColumn" msprop:Generator_UserColumnName="acct_amount_last_period" type="xs:decimal" minOccurs="0" />
-              <xs:element name="TotalAsset" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalAsset" msprop:Generator_ColumnPropNameInRow="TotalAsset" msprop:Generator_ColumnPropNameInTable="TotalAssetColumn" msprop:Generator_UserColumnName="TotalAsset" type="xs:decimal" minOccurs="0" />
-              <xs:element name="TotalLiability" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalLiability" msprop:Generator_ColumnPropNameInRow="TotalLiability" msprop:Generator_ColumnPropNameInTable="TotalLiabilityColumn" msprop:Generator_UserColumnName="TotalLiability" type="xs:decimal" minOccurs="0" />
-              <xs:element name="TotalEquity" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalEquity" msprop:Generator_ColumnPropNameInRow="TotalEquity" msprop:Generator_ColumnPropNameInTable="TotalEquityColumn" msprop:Generator_UserColumnName="TotalEquity" type="xs:decimal" minOccurs="0" />
-              <xs:element name="TotalAsset_last_period" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalAsset_last_period" msprop:Generator_ColumnPropNameInRow="TotalAsset_last_period" msprop:Generator_ColumnPropNameInTable="TotalAsset_last_periodColumn" msprop:Generator_UserColumnName="TotalAsset_last_period" type="xs:decimal" minOccurs="0" />
-              <xs:element name="TotalLiability_last_period" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalLiability_last_period" msprop:Generator_ColumnPropNameInRow="TotalLiability_last_period" msprop:Generator_ColumnPropNameInTable="TotalLiability_last_periodColumn" msprop:Generator_UserColumnName="TotalLiability_last_period" type="xs:decimal" minOccurs="0" />
-              <xs:element name="TotalEquity_last_period" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalEquity_last_period" msprop:Generator_ColumnPropNameInRow="TotalEquity_last_period" msprop:Generator_ColumnPropNameInTable="TotalEquity_last_periodColumn" msprop:Generator_UserColumnName="TotalEquity_last_period" type="xs:decimal" minOccurs="0" />
+              <xs:element name="acct_amount2" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnacct_amount2" msprop:Generator_ColumnPropNameInRow="acct_amount2" msprop:Generator_ColumnPropNameInTable="acct_amount2Column" msprop:Generator_UserColumnName="acct_amount2" type="xs:decimal" minOccurs="0" />
+              <xs:element name="acct_amount_last_period2" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnacct_amount_last_period2" msprop:Generator_ColumnPropNameInRow="acct_amount_last_period2" msprop:Generator_ColumnPropNameInTable="acct_amount_last_period2Column" msprop:Generator_UserColumnName="acct_amount_last_period2" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
