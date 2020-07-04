@@ -10,7 +10,7 @@ namespace FundsManager.Classes.Utilities
     public class ErrorMessage
     {
 
-        public static void showErrorMessage(Exception ex)
+        public static void showErrorMessage(Exception ex, bool showErrorHeader = true)
         {
             MyFundsManager.SingletonInstance.Reset();
 
@@ -25,7 +25,12 @@ namespace FundsManager.Classes.Utilities
                 inner = inner.InnerException;
             }
 
-            MessageBox.Show("Error: " + msg);
+            if (showErrorHeader)
+            {
+                msg = "Error: " + msg;
+            }
+
+            MessageBox.Show(msg);
         }
 
     }

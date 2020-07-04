@@ -158,12 +158,11 @@ namespace FundsManager
                             gledger.FromExternalOperation = true;
                             gledger.ExternalAccountMovemet = acctMov;
                             gledger.ExternalDebit = _loan.amount;
-                            gledger.ControlBox = false;
                             gledger.ShowDialog();
 
                             if (!gledger.OperationCompleted)
                             {
-                                throw new Exception("Ledger operation has been failed.");
+                                throw new Exception("Ledger window has been closed. The operation has been rolled back.");
                             }
 
                         }
@@ -211,7 +210,7 @@ namespace FundsManager
             }
             catch (Exception _ex)
             {
-                ErrorMessage.showErrorMessage(_ex);
+                ErrorMessage.showErrorMessage(_ex, false);
             }
         }
 
