@@ -665,7 +665,7 @@ namespace FundsManager
 
                     DisbursementBooking selected = bookings[lvBooking.SelectedIndices[0]];
 
-                    txtAmount.Text = String.Format("{0:0.00}", selected.amount * (decimal)selected.exchange_rate);
+                    txtAmount.Text = String.Format("{0:0.00}", Math.Round(selected.amount * (decimal)selected.exchange_rate, 2));
 
                     if (selected.currency_id > 0)
                     {
@@ -679,8 +679,8 @@ namespace FundsManager
                     }
 
                     txtExchangeRate.Text = String.Format("{0:0.0000000}", selected.exchange_rate);
-                    txtProfitShare.Text = String.Format("{0:0.00}", selected.profit_share * (decimal)selected.exchange_rate);
-                    txtDelayInterest.Text = String.Format("{0:0.00}", selected.delay_interest * (decimal)selected.exchange_rate);
+                    txtProfitShare.Text = String.Format("{0:0.00}", Math.Round(selected.profit_share * (decimal)selected.exchange_rate, 2));
+                    txtDelayInterest.Text = String.Format("{0:0.00}", Math.Round(selected.delay_interest * (decimal)selected.exchange_rate), 2);
                     txtNumber.Text = selected.number;
 
                     calculate_total_collection();
@@ -777,7 +777,7 @@ namespace FundsManager
                         }
 
                         BookToEdit.Movements_Accounts.credit = Math.Round(fAmount / (decimal)disbPlusAddendum.exchange_rate, 2);
-                        BookToEdit.Movements_Accounts1.credit = Math.Round(fDelayedInterest / (decimal)disbPlusAddendum.exchange_rate, 2);
+                        BookToEdit.Movements_Accounts1.credit = Math.Round(fProfitShare / (decimal)disbPlusAddendum.exchange_rate, 2);
 
                     }
                     else
@@ -820,7 +820,7 @@ namespace FundsManager
                             _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
                         _maccount128.subaccount = disb.client_id;
                         _maccount128.subaccount_type = 1;
-                        _maccount128.credit = Math.Round(fDelayedInterest / (decimal)disbPlusAddendum.exchange_rate, 2);
+                        _maccount128.credit = Math.Round(fProfitShare / (decimal)disbPlusAddendum.exchange_rate, 2);
                         _maccount128.debit = 0;
 
                         manager.My_db.Movements_Accounts.Add(_maccount128);
@@ -867,7 +867,7 @@ namespace FundsManager
                             _maccount128.subaccount = disb.client_id;
                             _maccount128.subaccount_type = 1;
                             _maccount128.credit = 0;
-                            _maccount128.debit = Math.Round(_booking.delay_interest, 2);
+                            _maccount128.debit = Math.Round(_booking.profit_share, 2);
 
                             manager.My_db.Movements_Accounts.Add(_maccount128);
 
@@ -879,7 +879,7 @@ namespace FundsManager
                         else
                         {
                             _booking.Movements_Accounts.debit = _booking.amount;
-                            _booking.Movements_Accounts1.debit = _booking.delay_interest;
+                            _booking.Movements_Accounts1.debit = _booking.profit_share;
                         }
                     }
 
