@@ -24,13 +24,10 @@ namespace FundsManager
         public String DisbursementForAddendumId = "";
 
         private bool fEditMode;
-
-        private decimal fAmount = 0;
-        private decimal fProfitShare = 0;
-        private decimal fDelayedInterest = 0;
+        
         private decimal fAmountRemaining = 0;
         private decimal fProfitShareRemainig = 0;
-        
+
         private List<DisbursementBooking> bookings;
         private List<DisbursementBooking> toDelete;
 
@@ -77,14 +74,10 @@ namespace FundsManager
 
                         if (toBeCollected != null)
                         {
-                            fProfitShareRemainig = Math.Round(toBeCollected.profit_share * (decimal)disbPlusAddendum.exchange_rate - toBeCollected.profit_share_collected.Value * (decimal)disbPlusAddendum.exchange_rate, 2);
-
-                            fProfitShare = fProfitShareRemainig;
-
+                            fProfitShareRemainig = Math.Round((toBeCollected.profit_share - toBeCollected.profit_share_collected.Value) * (decimal)disbPlusAddendum.exchange_rate, 2);
+                            
                             fAmountRemaining = Math.Round(toBeCollected.amount_remainig.Value * (decimal)disbPlusAddendum.exchange_rate, 2);
-
-                            fAmount = fAmountRemaining;
-
+                            
                             txtAmount.Text = String.Format("{0:0.00}", fAmountRemaining);
 
                             txtProfitShare.Text = String.Format("{0:0.00}", fProfitShareRemainig);
@@ -397,8 +390,8 @@ namespace FundsManager
                     && _selectedAmount > 0
                     && _selectedProfitShare >= 0
                     && _delayedInterest >= 0
-                    && fAmount - _amount >= 0
-                    && fProfitShare - _profitShare >= 0;
+                    && fAmountRemaining - _amount >= 0
+                    && fProfitShareRemainig - _profitShare >= 0;
                 }
                 
             }
@@ -486,6 +479,7 @@ namespace FundsManager
 
             return false;
         }
+
         private DisbursementBooking getBookingFromGUI()
         {
             try
@@ -499,12 +493,13 @@ namespace FundsManager
                     if (fEditMode && lvBooking.SelectedIndices.Count > 0)
                     {
                         _booking = bookings[lvBooking.SelectedIndices[0]];
-                        fAmountRemaining += _booking.amount * (decimal)_booking.exchange_rate;
-                        fProfitShareRemainig += _booking.profit_share * (decimal)_booking.exchange_rate;
+                        fAmountRemaining += _booking.amountReference;
+                        fProfitShareRemainig += booking.profitShareReference;
                     }
 
                     decimal amountToDecrease = Convert.ToDecimal(txtAmount.Text);
                     decimal profitShareToDecrease = Convert.ToDecimal(txtProfitShare.Text);
+                    decimal delayInterest = Convert.ToDecimal(txtDelayInterest.Text);
 
                     _booking.disbursement_id = disb.Id;
                     _booking.exchange_rate = exchangeRate;
@@ -514,20 +509,10 @@ namespace FundsManager
                     _booking.starting_date = Convert.ToDateTime(dtpStartingDate.Text);
                     _booking.collection_date = Convert.ToDateTime(dtpCollectionDate.Text);
                     _booking.number = txtNumber.Text;
-                    _booking.delay_interest = Math.Round(Convert.ToDecimal(txtDelayInterest.Text) / (decimal)exchangeRate, 2);
+                    _booking.delay_interest = Math.Round(delayInterest / (decimal)exchangeRate, 2);
 
                     fAmountRemaining -= amountToDecrease;
                     fProfitShareRemainig -= profitShareToDecrease;
-
-                    if (fAmountRemaining < 0)
-                    {
-                        fAmountRemaining = 0;
-                    }
-
-                    if (fProfitShareRemainig < 0)
-                    {
-                        fProfitShareRemainig = 0;
-                    }
 
                     _booking.collected = false;
                     _booking.can_generate_interest = true;
@@ -538,6 +523,10 @@ namespace FundsManager
                     {
                         _booking.parent_book_id = disbPlusAddendum.booking_id;
                     }
+
+                    _booking.amountReference = amountToDecrease;
+                    _booking.profitShareReference = profitShareToDecrease;
+                    _booking.delayInterestReference = delayInterest;
 
                     return _booking;
                 }
@@ -581,8 +570,6 @@ namespace FundsManager
         {
             try
             {
-                fDelayedInterest = 0;
-
                 lvBooking.Items.Clear();
 
                 Decimal total_investment = 0;
@@ -611,8 +598,6 @@ namespace FundsManager
                     ListViewItem listViewItemTotal = new ListViewItem(totales);
                     lvBooking.Items.Add(listViewItemTotal);
                 }
-
-                fDelayedInterest = total_delay_interest;
             }
             catch (Exception)
             {
@@ -665,7 +650,7 @@ namespace FundsManager
 
                     DisbursementBooking selected = bookings[lvBooking.SelectedIndices[0]];
 
-                    txtAmount.Text = String.Format("{0:0.00}", Math.Round(selected.amount * (decimal)selected.exchange_rate, 2));
+                    txtAmount.Text = String.Format("{0:0.00}", selected.amountReference);
 
                     if (selected.currency_id > 0)
                     {
@@ -679,8 +664,8 @@ namespace FundsManager
                     }
 
                     txtExchangeRate.Text = String.Format("{0:0.0000000}", selected.exchange_rate);
-                    txtProfitShare.Text = String.Format("{0:0.00}", Math.Round(selected.profit_share * (decimal)selected.exchange_rate, 2));
-                    txtDelayInterest.Text = String.Format("{0:0.00}", Math.Round(selected.delay_interest * (decimal)selected.exchange_rate), 2);
+                    txtProfitShare.Text = String.Format("{0:0.00}", selected.profitShareReference);
+                    txtDelayInterest.Text = String.Format("{0:0.00}", selected.delayInterestReference);
                     txtNumber.Text = selected.number;
 
                     calculate_total_collection();
@@ -716,8 +701,8 @@ namespace FundsManager
                 if (lvBooking.SelectedIndices.Count > 0)
                 {
                     DisbursementBooking booking = bookings[lvBooking.SelectedIndices[0]];
-                    fAmountRemaining += booking.amount * (decimal)booking.exchange_rate;
-                    fProfitShareRemainig += booking.profit_share * (decimal)booking.exchange_rate;
+                    fAmountRemaining += booking.amountReference;
+                    fProfitShareRemainig += booking.profitShareReference;
                     if(booking.id > 0)
                     {
                         toDelete.Add(booking);
@@ -743,6 +728,9 @@ namespace FundsManager
             {
                 if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpBookingDate.Value.Year) == null)
                 {
+                    decimal totalAmount = bookings.Sum(x => x.amount);
+                    decimal totalProfitShare = bookings.Sum(x => x.profit_share);
+
                     AccountingMovement _accountingMovement = new AccountingMovement();
                     DisbursementBook _book = new DisbursementBook();
 
@@ -776,8 +764,8 @@ namespace FundsManager
                             return;
                         }
 
-                        BookToEdit.Movements_Accounts.credit = Math.Round(fAmount / (decimal)disbPlusAddendum.exchange_rate, 2);
-                        BookToEdit.Movements_Accounts1.credit = Math.Round(fProfitShare / (decimal)disbPlusAddendum.exchange_rate, 2);
+                        BookToEdit.Movements_Accounts.credit = totalAmount;
+                        BookToEdit.Movements_Accounts1.credit = totalProfitShare;
 
                     }
                     else
@@ -806,7 +794,7 @@ namespace FundsManager
                             _maccount125.FK_Movements_Accounts_Subaccounts = subacct125.Id;
                         _maccount125.subaccount = disb.client_id;
                         _maccount125.subaccount_type = 1;
-                        _maccount125.credit = Math.Round(fAmount / (decimal)disbPlusAddendum.exchange_rate, 2);
+                        _maccount125.credit = totalAmount;
                         _maccount125.debit = 0;
 
                         manager.My_db.Movements_Accounts.Add(_maccount125);
@@ -820,7 +808,7 @@ namespace FundsManager
                             _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
                         _maccount128.subaccount = disb.client_id;
                         _maccount128.subaccount_type = 1;
-                        _maccount128.credit = Math.Round(fProfitShare / (decimal)disbPlusAddendum.exchange_rate, 2);
+                        _maccount128.credit = totalProfitShare;
                         _maccount128.debit = 0;
 
                         manager.My_db.Movements_Accounts.Add(_maccount128);

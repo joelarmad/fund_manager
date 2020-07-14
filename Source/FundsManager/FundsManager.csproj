@@ -270,6 +270,7 @@
     <Compile Include="Classes\DataModel\Bond.cs" />
     <Compile Include="Classes\DataModel\BondInvestor.cs" />
     <Compile Include="Classes\DataModel\Disbursement.cs" />
+    <Compile Include="Classes\DataModel\DisbursementBooking.cs" />
     <Compile Include="Classes\DataModel\FundsDBEntities.cs" />
     <Compile Include="Classes\Task\GlobalProcess.cs" />
     <Compile Include="Classes\Utilities\Conversions.cs" />
