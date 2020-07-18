@@ -46,11 +46,14 @@ namespace FundsManager
 
         private void updateDisbursements()
         {
+
+            int clientId = 0;
             int investmentId = 0;
 
-            if (cbContract.SelectedValue != null && int.TryParse(cbContract.SelectedValue.ToString(), out investmentId))
+            if (cbContract.SelectedValue != null && int.TryParse(cbContract.SelectedValue.ToString(), out investmentId)
+                && cbClient.SelectedValue != null && int.TryParse(cbClient.SelectedValue.ToString(), out clientId))
             {
-                this.disbursementsForAddendumsTableAdapter.FillByInvestmentId(this.fundsDBDataSet.DisbursementsForAddendums, investmentId, manager.Selected);
+                this.disbursementsForAddendumsTableAdapter.FillByInvestmentId(this.fundsDBDataSet.DisbursementsForAddendums, investmentId, manager.Selected, clientId);
             }
         }
 
