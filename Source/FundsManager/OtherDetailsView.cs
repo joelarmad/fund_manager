@@ -15,11 +15,11 @@ namespace FundsManager
     public partial class OtherDetailsView
     {
         public string source { get; set; }
+        public int subaccount_id { get; set; }
         public string Row_Id { get; set; }
         public int Id { get; set; }
         public int DetailType { get; set; }
         public string name { get; set; }
         public int fund_id { get; set; }
-        public int subaccount_id { get; set; }
     }
 }

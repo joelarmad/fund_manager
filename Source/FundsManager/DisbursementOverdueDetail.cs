@@ -17,7 +17,6 @@ namespace FundsManager
         public int Id { get; set; }
         public int disbursement_overdue_id { get; set; }
         public int disbursement_id { get; set; }
-        public Nullable<int> booking_id { get; set; }
         public decimal generated_overdue { get; set; }
         public decimal monthly_rate { get; set; }
         public System.DateTime overdue_date_from { get; set; }

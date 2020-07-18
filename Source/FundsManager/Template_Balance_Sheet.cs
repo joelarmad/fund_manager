@@ -20,11 +20,7 @@ namespace FundsManager
         public string acct_name { get; set; }
         public Nullable<decimal> acct_amount { get; set; }
         public Nullable<decimal> acct_amount_last_period { get; set; }
-        public Nullable<decimal> TotalAsset { get; set; }
-        public Nullable<decimal> TotalLiability { get; set; }
-        public Nullable<decimal> TotalEquity { get; set; }
-        public Nullable<decimal> TotalAsset_last_period { get; set; }
-        public Nullable<decimal> TotalLiability_last_period { get; set; }
-        public Nullable<decimal> TotalEquity_last_period { get; set; }
+        public Nullable<decimal> acct_amount2 { get; set; }
+        public Nullable<decimal> acct_amount_last_period2 { get; set; }
     }
 }

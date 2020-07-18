@@ -14,24 +14,22 @@ namespace FundsManager
     
     public partial class DealTrackingView
     {
-        public Nullable<int> fund_id { get; set; }
+        public int fund_id { get; set; }
         public string row_id { get; set; }
-        public int is_booking { get; set; }
-        public Nullable<int> has_bookings { get; set; }
+        public Nullable<bool> is_booking { get; set; }
+        public Nullable<bool> has_bookings { get; set; }
         public int investment_id { get; set; }
         public int disbursement_id { get; set; }
-        public Nullable<int> booking_id { get; set; }
         public string number { get; set; }
         public string contract { get; set; }
         public string client { get; set; }
         public int client_id { get; set; }
         public string underlying_debtor { get; set; }
         public string bank_name { get; set; }
-        public string items { get; set; }
         public Nullable<System.DateTime> pay_date { get; set; }
         public decimal principal { get; set; }
         public decimal interest { get; set; }
-        public decimal delay_interest { get; set; }
+        public Nullable<decimal> delay_interest { get; set; }
         public System.DateTime estimated_repay_date { get; set; }
         public Nullable<decimal> principal_collected { get; set; }
         public Nullable<decimal> interest_collected { get; set; }

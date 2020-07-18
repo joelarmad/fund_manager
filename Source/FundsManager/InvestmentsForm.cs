@@ -324,6 +324,7 @@ namespace FundsManager
                 foreach (Disbursement _disbursement in disbursements)
                 {
                     _disbursement.Investment = _newInvestment;
+                    _disbursement.contract = _newInvestment.contract;
 
                     _totalDisbursement += _disbursement.Euro_collection;
                     _totalProfitShare += _disbursement.profit_share;
@@ -978,6 +979,9 @@ namespace FundsManager
                 Disbursement _disbursement = new Disbursement();
 
                 _disbursement.has_bookings = false;
+                _disbursement.is_booking = false;
+                _disbursement.delay_interest = 0;
+
 
                 float exchangeRate = 0;
 

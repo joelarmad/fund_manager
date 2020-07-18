@@ -57,7 +57,6 @@
             this.cmdJustForSelection = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.disbursementidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bookingidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -164,7 +163,6 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.disbursementidDataGridViewTextBoxColumn,
-            this.bookingidDataGridViewTextBoxColumn,
             this.dataGridViewTextBoxColumn2,
             this.number,
             this.dataGridViewTextBoxColumn3,
@@ -252,14 +250,6 @@
             this.disbursementidDataGridViewTextBoxColumn.Name = "disbursementidDataGridViewTextBoxColumn";
             this.disbursementidDataGridViewTextBoxColumn.ReadOnly = true;
             this.disbursementidDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // bookingidDataGridViewTextBoxColumn
-            // 
-            this.bookingidDataGridViewTextBoxColumn.DataPropertyName = "booking_id";
-            this.bookingidDataGridViewTextBoxColumn.HeaderText = "booking_id";
-            this.bookingidDataGridViewTextBoxColumn.Name = "bookingidDataGridViewTextBoxColumn";
-            this.bookingidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.bookingidDataGridViewTextBoxColumn.Visible = false;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -424,7 +414,6 @@
         private System.Windows.Forms.Button cmdJustForSelection;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn disbursementidDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn bookingidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn number;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;

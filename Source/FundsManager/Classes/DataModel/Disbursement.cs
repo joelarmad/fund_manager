@@ -8,6 +8,10 @@ namespace FundsManager
 {
     public partial class Disbursement
     {
+        public decimal amountReference;
+        public decimal profitShareReference;
+        public decimal delayInterestReference;
+
         public decimal Euro_collection;
 
         public string TextClient;

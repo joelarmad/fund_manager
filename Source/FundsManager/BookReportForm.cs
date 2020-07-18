@@ -51,30 +51,30 @@ namespace FundsManager
 
             if (cbContract.SelectedValue != null && int.TryParse(cbContract.SelectedValue.ToString(), out investmentId))
             {
-                this.disbursementsBookingViewTableAdapter.FillByInvestmentId(this.fundsDBDataSet.DisbursementsBookingView, manager.Selected, investmentId);
+                this.disbursementsBookingViewTableAdapter.FillByInvestmentId(this.fundsDBDataSet.DisbursementsBookingView, investmentId);
             }
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0 && e.RowIndex < dataGridView1.Rows.Count)
-                {
-                    AddendumsForm addendumsForm = new AddendumsForm();
-                    addendumsForm.DisbursementForAddendumId = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                    addendumsForm.EditingExistingBook = true;
-                    int book_id = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
-                    addendumsForm.BookToEdit = manager.My_db.DisbursementBooks.FirstOrDefault(x => x.Id == book_id);
-                    addendumsForm.ShowDialog();
+            //try
+            //{
+            //    if (e.RowIndex >= 0 && e.RowIndex < dataGridView1.Rows.Count)
+            //    {
+            //        AddendumsForm addendumsForm = new AddendumsForm();
+            //        addendumsForm.DisbursementForAddendumId = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            //        addendumsForm.EditingExistingBook = true;
+            //        int book_id = int.Parse(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
+            //        addendumsForm.BookToEdit = manager.My_db.DisbursementBooks.FirstOrDefault(x => x.Id == book_id);
+            //        addendumsForm.ShowDialog();
 
-                    updateBookings();
-                }
-            }
-            catch (Exception _ex)
-            {
-                ErrorMessage.showErrorMessage(_ex);
-            }
+            //        updateBookings();
+            //    }
+            //}
+            //catch (Exception _ex)
+            //{
+            //    ErrorMessage.showErrorMessage(_ex);
+            //}
         }
 
         private void cbClient_SelectedIndexChanged(object sender, EventArgs e)

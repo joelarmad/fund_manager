@@ -14,7 +14,6 @@ namespace FundsManager
     
     public partial class DisbursementsForAddendum
     {
-        public string row_key { get; set; }
         public int fund_id { get; set; }
         public string contract { get; set; }
         public int disbursement_id { get; set; }

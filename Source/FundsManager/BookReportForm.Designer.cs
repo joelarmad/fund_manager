@@ -29,11 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cbContract = new System.Windows.Forms.ComboBox();
             this.clientContractsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
@@ -44,16 +42,14 @@
             this.clientsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientsTableAdapter();
             this.clientContractsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientContractsTableAdapter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.disbursement_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contract = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.profit_share = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.delayinterestDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.disbursementsBookingViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.disbursementsBookingViewTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.DisbursementsBookingViewTableAdapter();
-            this.disbursement_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.book_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.disbursementnumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bookingamountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bookingprofitshareDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.delayinterestDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.startingdateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.newcollectiondateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.clientContractsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
@@ -134,13 +130,11 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.disbursement_id,
-            this.book_id,
-            this.disbursementnumberDataGridViewTextBoxColumn,
-            this.bookingamountDataGridViewTextBoxColumn,
-            this.bookingprofitshareDataGridViewTextBoxColumn,
-            this.delayinterestDataGridViewTextBoxColumn,
-            this.startingdateDataGridViewTextBoxColumn,
-            this.newcollectiondateDataGridViewTextBoxColumn});
+            this.contract,
+            this.number,
+            this.amount,
+            this.profit_share,
+            this.delayinterestDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.disbursementsBookingViewBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(9, 58);
             this.dataGridView1.MultiSelect = false;
@@ -151,15 +145,6 @@
             this.dataGridView1.TabIndex = 8;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
-            // disbursementsBookingViewBindingSource
-            // 
-            this.disbursementsBookingViewBindingSource.DataMember = "DisbursementsBookingView";
-            this.disbursementsBookingViewBindingSource.DataSource = this.fundsDBDataSet;
-            // 
-            // disbursementsBookingViewTableAdapter
-            // 
-            this.disbursementsBookingViewTableAdapter.ClearBeforeFill = true;
-            // 
             // disbursement_id
             // 
             this.disbursement_id.DataPropertyName = "disbursement_id";
@@ -168,75 +153,57 @@
             this.disbursement_id.ReadOnly = true;
             this.disbursement_id.Visible = false;
             // 
-            // book_id
+            // contract
             // 
-            this.book_id.DataPropertyName = "book_id";
-            this.book_id.HeaderText = "book_id";
-            this.book_id.Name = "book_id";
-            this.book_id.ReadOnly = true;
-            this.book_id.Visible = false;
+            this.contract.DataPropertyName = "contract";
+            this.contract.HeaderText = "Contract";
+            this.contract.Name = "contract";
+            this.contract.ReadOnly = true;
             // 
-            // disbursementnumberDataGridViewTextBoxColumn
+            // number
             // 
-            this.disbursementnumberDataGridViewTextBoxColumn.DataPropertyName = "disbursement_number";
-            this.disbursementnumberDataGridViewTextBoxColumn.HeaderText = "Disbursement Number";
-            this.disbursementnumberDataGridViewTextBoxColumn.Name = "disbursementnumberDataGridViewTextBoxColumn";
-            this.disbursementnumberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.disbursementnumberDataGridViewTextBoxColumn.Width = 120;
+            this.number.DataPropertyName = "number";
+            this.number.HeaderText = "Number";
+            this.number.Name = "number";
+            this.number.ReadOnly = true;
             // 
-            // bookingamountDataGridViewTextBoxColumn
+            // amount
             // 
-            this.bookingamountDataGridViewTextBoxColumn.DataPropertyName = "booking_amount";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "N2";
-            this.bookingamountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle11;
-            this.bookingamountDataGridViewTextBoxColumn.HeaderText = "Amount";
-            this.bookingamountDataGridViewTextBoxColumn.Name = "bookingamountDataGridViewTextBoxColumn";
-            this.bookingamountDataGridViewTextBoxColumn.ReadOnly = true;
-            this.bookingamountDataGridViewTextBoxColumn.Width = 120;
+            this.amount.DataPropertyName = "amount";
+            dataGridViewCellStyle1.Format = "N2";
+            this.amount.DefaultCellStyle = dataGridViewCellStyle1;
+            this.amount.HeaderText = "Amount";
+            this.amount.Name = "amount";
+            this.amount.ReadOnly = true;
             // 
-            // bookingprofitshareDataGridViewTextBoxColumn
+            // profit_share
             // 
-            this.bookingprofitshareDataGridViewTextBoxColumn.DataPropertyName = "booking_profit_share";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle12.Format = "N2";
-            this.bookingprofitshareDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle12;
-            this.bookingprofitshareDataGridViewTextBoxColumn.HeaderText = "Profit Share";
-            this.bookingprofitshareDataGridViewTextBoxColumn.Name = "bookingprofitshareDataGridViewTextBoxColumn";
-            this.bookingprofitshareDataGridViewTextBoxColumn.ReadOnly = true;
-            this.bookingprofitshareDataGridViewTextBoxColumn.Width = 120;
+            this.profit_share.DataPropertyName = "profit_share";
+            dataGridViewCellStyle2.Format = "N2";
+            this.profit_share.DefaultCellStyle = dataGridViewCellStyle2;
+            this.profit_share.HeaderText = "Profit Share";
+            this.profit_share.Name = "profit_share";
+            this.profit_share.ReadOnly = true;
             // 
             // delayinterestDataGridViewTextBoxColumn
             // 
             this.delayinterestDataGridViewTextBoxColumn.DataPropertyName = "delay_interest";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle13.Format = "N2";
-            this.delayinterestDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.delayinterestDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
             this.delayinterestDataGridViewTextBoxColumn.HeaderText = "Delay Interest";
             this.delayinterestDataGridViewTextBoxColumn.Name = "delayinterestDataGridViewTextBoxColumn";
             this.delayinterestDataGridViewTextBoxColumn.ReadOnly = true;
             this.delayinterestDataGridViewTextBoxColumn.Width = 120;
             // 
-            // startingdateDataGridViewTextBoxColumn
+            // disbursementsBookingViewBindingSource
             // 
-            this.startingdateDataGridViewTextBoxColumn.DataPropertyName = "starting_date";
-            dataGridViewCellStyle14.Format = "d";
-            dataGridViewCellStyle14.NullValue = null;
-            this.startingdateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle14;
-            this.startingdateDataGridViewTextBoxColumn.HeaderText = "Starting Date";
-            this.startingdateDataGridViewTextBoxColumn.Name = "startingdateDataGridViewTextBoxColumn";
-            this.startingdateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.startingdateDataGridViewTextBoxColumn.Width = 150;
+            this.disbursementsBookingViewBindingSource.DataMember = "DisbursementsBookingView";
+            this.disbursementsBookingViewBindingSource.DataSource = this.fundsDBDataSet;
             // 
-            // newcollectiondateDataGridViewTextBoxColumn
+            // disbursementsBookingViewTableAdapter
             // 
-            this.newcollectiondateDataGridViewTextBoxColumn.DataPropertyName = "new_collection_date";
-            dataGridViewCellStyle15.Format = "d";
-            this.newcollectiondateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle15;
-            this.newcollectiondateDataGridViewTextBoxColumn.HeaderText = "New Collection Date";
-            this.newcollectiondateDataGridViewTextBoxColumn.Name = "newcollectiondateDataGridViewTextBoxColumn";
-            this.newcollectiondateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.newcollectiondateDataGridViewTextBoxColumn.Width = 150;
+            this.disbursementsBookingViewTableAdapter.ClearBeforeFill = true;
             // 
             // BookReportForm
             // 
@@ -276,13 +243,16 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource disbursementsBookingViewBindingSource;
         private FundsDBDataSetTableAdapters.DisbursementsBookingViewTableAdapter disbursementsBookingViewTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn disbursement_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn book_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn disbursementnumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn bookingamountDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn bookingprofitshareDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn delayinterestDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn startingdateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn newcollectiondateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn disbursement_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn contract;
+        private System.Windows.Forms.DataGridViewTextBoxColumn number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn profit_share;
+        private System.Windows.Forms.DataGridViewTextBoxColumn delayinterestDataGridViewTextBoxColumn;
     }
 }

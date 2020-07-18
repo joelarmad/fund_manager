@@ -18,20 +18,20 @@ namespace FundsManager
         public AccountingMovement()
         {
             this.BondsTFAMRepayments = new HashSet<BondsTFAMRepayment>();
+            this.BondsTFAMs = new HashSet<BondsTFAM>();
             this.BondsTFAMGeneratedInterestDetails = new HashSet<BondsTFAMGeneratedInterestDetail>();
             this.BondsTFAMGeneratedInterestDetails1 = new HashSet<BondsTFAMGeneratedInterestDetail>();
             this.BookingGeneratedInterestDetails = new HashSet<BookingGeneratedInterestDetail>();
             this.DisbursementBooks = new HashSet<DisbursementBook>();
             this.DisbursementCollections = new HashSet<DisbursementCollection>();
             this.DisbursementGeneratedInterestDetails = new HashSet<DisbursementGeneratedInterestDetail>();
+            this.DisbursementOverdueDetails = new HashSet<DisbursementOverdueDetail>();
             this.DisbursementPayments = new HashSet<DisbursementPayment>();
             this.Loan_InterestRepayments = new HashSet<Loan_InterestRepayments>();
             this.Loan_Repayments = new HashSet<Loan_Repayments>();
             this.LoanGeneratedInterestDetails = new HashSet<LoanGeneratedInterestDetail>();
             this.Loans = new HashSet<Loan>();
             this.Movements_Accounts = new HashSet<Movements_Accounts>();
-            this.DisbursementOverdueDetails = new HashSet<DisbursementOverdueDetail>();
-            this.BondsTFAMs = new HashSet<BondsTFAM>();
         }
     
         public int Id { get; set; }
@@ -48,6 +48,8 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BondsTFAMRepayment> BondsTFAMRepayments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BondsTFAM> BondsTFAMs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BondsTFAMGeneratedInterestDetail> BondsTFAMGeneratedInterestDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BondsTFAMGeneratedInterestDetail> BondsTFAMGeneratedInterestDetails1 { get; set; }
@@ -60,6 +62,8 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementGeneratedInterestDetail> DisbursementGeneratedInterestDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementOverdueDetail> DisbursementOverdueDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementPayment> DisbursementPayments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Loan_InterestRepayments> Loan_InterestRepayments { get; set; }
@@ -71,9 +75,5 @@ namespace FundsManager
         public virtual ICollection<Loan> Loans { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movements_Accounts> Movements_Accounts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DisbursementOverdueDetail> DisbursementOverdueDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BondsTFAM> BondsTFAMs { get; set; }
     }
 }

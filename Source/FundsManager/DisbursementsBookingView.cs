@@ -14,48 +14,32 @@ namespace FundsManager
     
     public partial class DisbursementsBookingView
     {
-        public int fund_id { get; set; }
+        public int Id { get; set; }
         public int investment_id { get; set; }
-        public string contract { get; set; }
-        public System.DateTime investment_date { get; set; }
-        public Nullable<decimal> total_disbursement { get; set; }
-        public decimal investment_profit_share { get; set; }
-        public Nullable<int> payment_id { get; set; }
-        public Nullable<System.DateTime> payment_date { get; set; }
-        public int disbursement_id { get; set; }
-        public string disbursement_number { get; set; }
-        public Nullable<System.DateTime> disbursement_pay_date { get; set; }
         public int currency_id { get; set; }
-        public decimal amount { get; set; }
         public float exchange_rate { get; set; }
-        public decimal profit_share { get; set; }
-        public System.DateTime disbursement_date { get; set; }
-        public System.DateTime collection_date { get; set; }
-        public bool can_generate_interest { get; set; }
-        public Nullable<bool> collected { get; set; }
-        public Nullable<int> bank_risk_id { get; set; }
-        public string bank_name { get; set; }
         public int client_id { get; set; }
-        public string client { get; set; }
+        public Nullable<int> underlying_debtor_id { get; set; }
+        public Nullable<int> bank_risk_id { get; set; }
+        public decimal profit_share { get; set; }
+        public decimal amount { get; set; }
+        public int fund_id { get; set; }
+        public System.DateTime date { get; set; }
         public int sector_id { get; set; }
-        public string sector { get; set; }
-        public Nullable<decimal> generated_interest { get; set; }
-        public Nullable<decimal> collected_amount { get; set; }
+        public string number { get; set; }
+        public System.DateTime collection_date { get; set; }
+        public Nullable<System.DateTime> pay_date { get; set; }
+        public bool can_generate_interest { get; set; }
+        public Nullable<int> shipment_id { get; set; }
+        public Nullable<bool> collected { get; set; }
         public Nullable<bool> has_bookings { get; set; }
-        public int book_id { get; set; }
-        public string booking_number { get; set; }
-        public System.DateTime book_date { get; set; }
-        public int accounting_movement_id { get; set; }
-        public int book_movement125_id { get; set; }
-        public int book_movement128_id { get; set; }
-        public int booking_id { get; set; }
-        public decimal booking_amount { get; set; }
-        public decimal booking_profit_share { get; set; }
-        public decimal delay_interest { get; set; }
-        public System.DateTime starting_date { get; set; }
-        public System.DateTime new_collection_date { get; set; }
-        public int movement125_id { get; set; }
-        public int movement128_id { get; set; }
-        public bool is_booking_collected { get; set; }
+        public Nullable<bool> is_booking { get; set; }
+        public Nullable<int> group_id { get; set; }
+        public Nullable<int> group_parent_id { get; set; }
+        public Nullable<int> book_id { get; set; }
+        public Nullable<decimal> delay_interest { get; set; }
+        public Nullable<int> movement125_id { get; set; }
+        public Nullable<int> movement128_id { get; set; }
+        public string contract { get; set; }
     }
 }

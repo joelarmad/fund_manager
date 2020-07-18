@@ -16,7 +16,6 @@ namespace FundsManager
     {
         public int Id { get; set; }
         public int booking_generated_interest_id { get; set; }
-        public int booking_id { get; set; }
         public decimal generated_interest { get; set; }
         public System.DateTime generated_interest_date { get; set; }
         public Nullable<int> accounting_movement_id { get; set; }
@@ -24,7 +23,6 @@ namespace FundsManager
     
         public virtual AccountingMovement AccountingMovement { get; set; }
         public virtual BookingGeneratedInterest BookingGeneratedInterest { get; set; }
-        public virtual DisbursementBooking DisbursementBooking { get; set; }
         public virtual Disbursement Disbursement { get; set; }
     }
 }

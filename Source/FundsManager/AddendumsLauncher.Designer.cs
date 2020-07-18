@@ -45,7 +45,7 @@
             this.clientsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientsTableAdapter();
             this.clientContractsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientContractsTableAdapter();
             this.disbursementsForAddendumsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.DisbursementsForAddendumsTableAdapter();
-            this.row_key = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmdBook = new System.Windows.Forms.Button();
             this.disbursementidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -122,7 +122,6 @@
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.row_key,
             this.disbursementidDataGridViewTextBoxColumn,
             this.numberDataGridViewTextBoxColumn,
             this.amountDataGridViewTextBoxColumn,
@@ -130,13 +129,11 @@
             this.collectiondateDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.disbursementsForAddendumsBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(11, 67);
-            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(735, 244);
             this.dataGridView1.TabIndex = 4;
-            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // disbursementsForAddendumsBindingSource
             // 
@@ -155,13 +152,15 @@
             // 
             this.disbursementsForAddendumsTableAdapter.ClearBeforeFill = true;
             // 
-            // row_key
+            // cmdBook
             // 
-            this.row_key.DataPropertyName = "row_key";
-            this.row_key.HeaderText = "row_key";
-            this.row_key.Name = "row_key";
-            this.row_key.ReadOnly = true;
-            this.row_key.Visible = false;
+            this.cmdBook.Location = new System.Drawing.Point(536, 19);
+            this.cmdBook.Name = "cmdBook";
+            this.cmdBook.Size = new System.Drawing.Size(75, 23);
+            this.cmdBook.TabIndex = 5;
+            this.cmdBook.Text = "Book";
+            this.cmdBook.UseVisualStyleBackColor = true;
+            this.cmdBook.Click += new System.EventHandler(this.cmdBook_Click);
             // 
             // disbursementidDataGridViewTextBoxColumn
             // 
@@ -215,6 +214,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(758, 331);
+            this.Controls.Add(this.cmdBook);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.cbContract);
             this.Controls.Add(this.cbClient);
@@ -251,7 +251,7 @@
         private FundsDBDataSetTableAdapters.DisbursementsForAddendumsTableAdapter disbursementsForAddendumsTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn toBeCollectedDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn remainingDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn row_key;
+        private System.Windows.Forms.Button cmdBook;
         private System.Windows.Forms.DataGridViewTextBoxColumn disbursementidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;

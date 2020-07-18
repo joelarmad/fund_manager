@@ -248,9 +248,6 @@
     <Compile Include="BondsTFFInvestor.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="BookingCollectionsDetail.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="BookingGeneratedInterest.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -270,7 +267,6 @@
     <Compile Include="Classes\DataModel\Bond.cs" />
     <Compile Include="Classes\DataModel\BondInvestor.cs" />
     <Compile Include="Classes\DataModel\Disbursement.cs" />
-    <Compile Include="Classes\DataModel\DisbursementBooking.cs" />
     <Compile Include="Classes\DataModel\FundsDBEntities.cs" />
     <Compile Include="Classes\Task\GlobalProcess.cs" />
     <Compile Include="Classes\Utilities\Conversions.cs" />
@@ -342,9 +338,6 @@
     <Compile Include="DisbursementBook.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="DisbursementBooking.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="DisbursementCollection.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -383,9 +376,6 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DisbursementPayment.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DisbursementPlusAddendumsView.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DisbursementsBookingView.cs">

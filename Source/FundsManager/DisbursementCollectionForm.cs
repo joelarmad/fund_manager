@@ -83,54 +83,11 @@ namespace FundsManager
             updateDisbursementList();
         }
 
-        private void setCollected(DisbursementBooking booking)
-        {
-            if (!booking.can_generate_interest)
-            {
-                booking.collected = true;
-
-                List<DisbursementBooking> bookings = manager.My_db.DisbursementBookings.Where(x => x.disbursement_id == booking.disbursement_id && x.id != booking.id).ToList();
-
-                bool collected = true;
-
-                foreach (DisbursementBooking item in bookings)
-                {
-                    if (item.collected == false)
-                    {
-                        collected = false;
-                        break;
-                    }
-                }
-
-                booking.Disbursement.collected = collected;
-            }
-        }
-
         private void setCollected(Disbursement disbursement)
         {
             if (!disbursement.can_generate_interest)
             {
-                if (!disbursement.has_bookings.Value)
-                {
-                    disbursement.collected = true;
-                }
-                else
-                {
-                    bool collected = true;
-
-                    List<DisbursementBooking> bookings = manager.My_db.DisbursementBookings.Where(x => x.disbursement_id == disbursement.Id).ToList();
-
-                    foreach (DisbursementBooking booking in bookings)
-                    {
-                        if (!booking.collected)
-                        {
-                            collected = false;
-                            break;
-                        }
-                    }
-
-                    disbursement.collected = collected;
-                }
+                disbursement.collected = true;
             }
         }
 
@@ -247,15 +204,13 @@ namespace FundsManager
                                         decimal toBeCollected130 = collect130[i];
                                         bool isBooking = isBookings[i];
 
-                                        int disbursementId = int.Parse(rowId.Split('_')[0]);
-                                        int bookingId = int.Parse(rowId.Split('_')[1]);
+                                        int disbursementId = int.Parse(rowId);
 
                                         Disbursement disbursement = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == disbursementId);
-                                        DisbursementBooking booking = manager.My_db.DisbursementBookings.FirstOrDefault(x => x.id == bookingId);
 
-                                        if (disbursement != null && (booking != null || !isBooking))
+                                        if (disbursement != null)
                                         {
-                                            int currencyId = booking != null ? booking.currency_id : disbursement.currency_id;
+                                            int currencyId = disbursement.currency_id;
 
                                             Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == currencyId && x.FK_Currencies_Funds == manager.Selected);
                                             Subaccount subacct125 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account125.Id && x.name == "INV " + currency.symbol);
@@ -276,34 +231,17 @@ namespace FundsManager
                                                     }
 
                                                     DisbursementCollectionsDetail disbursementCollectionDetail = new DisbursementCollectionsDetail();
-                                                    BookingCollectionsDetail bookingCollectionDetail = new BookingCollectionsDetail();
 
-                                                    if (!isBooking)
+                                                    disbursementCollectionDetail.DisbursementCollection = collection;
+                                                    disbursementCollectionDetail.disbursement_id = disbursementId;
+                                                    disbursementCollectionDetail.amount_collected = Math.Round(toBeCollected125 + toBeCollected128 + toBeCollected130, 2);
+
+                                                    if (amount - toBeCollected125 <= 0 && profitShare - toBeCollected128 <= 0 && delayInterest - toBeCollected130 <= 0)
                                                     {
-                                                        disbursementCollectionDetail.DisbursementCollection = collection;
-                                                        disbursementCollectionDetail.disbursement_id = disbursementId;
-                                                        disbursementCollectionDetail.amount_collected = Math.Round(toBeCollected125 + toBeCollected128 + toBeCollected130, 2);
-
-                                                        if (amount - toBeCollected125 <= 0 && profitShare - toBeCollected128 <= 0 && delayInterest - toBeCollected130 <= 0)
-                                                        {
-                                                            setCollected(disbursement);
-                                                        }
-
-                                                        manager.My_db.DisbursementCollectionsDetails.Add(disbursementCollectionDetail);
+                                                        setCollected(disbursement);
                                                     }
-                                                    else
-                                                    {
-                                                        bookingCollectionDetail.DisbursementCollection = collection;
-                                                        bookingCollectionDetail.booking_id = bookingId;
-                                                        bookingCollectionDetail.amount_collected = Math.Round(toBeCollected125 + toBeCollected128 + toBeCollected130, 2);
 
-                                                        if (amount - toBeCollected125 <= 0 && profitShare - toBeCollected128 <= 0 && delayInterest - toBeCollected130 <= 0)
-                                                        {
-                                                            setCollected(booking);
-                                                        }
-
-                                                        manager.My_db.BookingCollectionsDetails.Add(bookingCollectionDetail);
-                                                    }
+                                                    manager.My_db.DisbursementCollectionsDetails.Add(disbursementCollectionDetail);
 
                                                     if (toBeCollected125 > 0)
                                                     {
@@ -321,14 +259,7 @@ namespace FundsManager
 
                                                         manager.My_db.Movements_Accounts.Add(_maccount125);
 
-                                                        if (!isBooking)
-                                                        {
-                                                            disbursementCollectionDetail.Movements_Accounts = _maccount125;
-                                                        }
-                                                        else
-                                                        {
-                                                            bookingCollectionDetail.Movements_Accounts = _maccount125;
-                                                        }
+                                                        disbursementCollectionDetail.Movements_Accounts = _maccount125;
                                                     }
 
                                                     if (toBeCollected128 > 0)
@@ -346,15 +277,8 @@ namespace FundsManager
                                                         _maccount128.credit = Math.Round(toBeCollected128, 2);
 
                                                         manager.My_db.Movements_Accounts.Add(_maccount128);
-                                                        
-                                                        if (!isBooking)
-                                                        {
-                                                            disbursementCollectionDetail.Movements_Accounts1 = _maccount128;
-                                                        }
-                                                        else
-                                                        {
-                                                            bookingCollectionDetail.Movements_Accounts1 = _maccount128;
-                                                        }
+
+                                                        disbursementCollectionDetail.Movements_Accounts1 = _maccount128;
                                                     }
 
                                                     if (toBeCollected130 > 0)
@@ -373,14 +297,7 @@ namespace FundsManager
 
                                                         manager.My_db.Movements_Accounts.Add(_maccount130);
 
-                                                        if (!isBooking)
-                                                        {
-                                                            disbursementCollectionDetail.Movements_Accounts2 = _maccount130;
-                                                        }
-                                                        else
-                                                        {
-                                                            bookingCollectionDetail.Movements_Accounts2 = _maccount130;
-                                                        }
+                                                        disbursementCollectionDetail.Movements_Accounts2 = _maccount130;
                                                     }
 
                                                     totalPaid += toBeCollected125 + toBeCollected128 + toBeCollected130;

@@ -54,18 +54,6 @@ namespace FundsManager
             }
         }
 
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.RowIndex < dataGridView1.Rows.Count)
-            {
-                AddendumsForm addendumsForm = new AddendumsForm();
-                addendumsForm.DisbursementForAddendumId = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                addendumsForm.ShowDialog();
-
-                updateDisbursements();
-            }
-        }
-
         private void cbClient_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateContractCombo();
@@ -75,6 +63,33 @@ namespace FundsManager
         private void cbContract_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateDisbursements();
+        }
+
+        private void cmdBook_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                List<Disbursement> disbursements = new List<Disbursement>();
+
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    int id = int.Parse(row.Cells[0].Value.ToString());
+                    Disbursement item = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == id);
+                    disbursements.Add(item);
+                }
+
+                AddendumsForm addendumsForm = new AddendumsForm();
+
+                addendumsForm.disbursementForAddendumGroup = disbursements;
+
+                addendumsForm.ShowDialog();
+
+                updateDisbursements();
+            }
+            else
+            {
+                MessageBox.Show("Select the item(s)");
+            }
         }
     }
 }

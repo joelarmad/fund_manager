@@ -18,19 +18,18 @@ namespace FundsManager
 
         int idIndex = 0;
         int disburdsementIdIndex = 1;
-        int bookingIdIndex = 2;
-        int referenceIndex = 3;
-        int numberIndex = 4;
-        int collectionDateIndex = 5;
-        int investmentIndex = 6;
-        int profitShareIndex = 7;
-        int delayInterestIndex = 8;
-        int toBeCollectedIndex = 9;
-        int overdueIndex = 10;
-        int fromIndex = 11;
-        int toIndex = 12;
-        int daysIndex = 13;
-        int exchangeRateIndex = 14;
+        int referenceIndex = 2;
+        int numberIndex = 3;
+        int collectionDateIndex = 4;
+        int investmentIndex = 5;
+        int profitShareIndex = 6;
+        int delayInterestIndex = 7;
+        int toBeCollectedIndex = 8;
+        int overdueIndex = 9;
+        int fromIndex = 10;
+        int toIndex = 11;
+        int daysIndex = 12;
+        int exchangeRateIndex = 13;
 
         public DisbursementToBeOverdueForm()
         {
@@ -173,8 +172,7 @@ namespace FundsManager
                 decimal overdue = Math.Round(decimal.Parse(row.Cells[toBeCollectedIndex].Value.ToString()), 2);
 
                 detail.disbursement_id = int.Parse(row.Cells[disburdsementIdIndex].Value.ToString());
-                detail.booking_id = int.Parse(row.Cells[bookingIdIndex].Value.ToString());
-                detail.generated_overdue = Math.Round(overdue * monthlyRate * daysIndex / 30 / 100, 2);
+                detail.generated_overdue = Math.Round(overdue * monthlyRate * days / 30 / 100, 2);
                 detail.monthly_rate = monthlyRate;
                 detail.overdue_date_from = DateTime.Parse(row.Cells[fromIndex].Value.ToString());
                 detail.overdue_date_to = DateTime.Parse(row.Cells[toIndex].Value.ToString());

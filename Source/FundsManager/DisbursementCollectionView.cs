@@ -32,9 +32,9 @@ namespace FundsManager
         public Nullable<decimal> profit_share_collected { get; set; }
         public Nullable<decimal> delay_interest_collected { get; set; }
         public bool can_generate_interest { get; set; }
-        public int is_booking { get; set; }
+        public Nullable<bool> is_booking { get; set; }
         public int booking_id { get; set; }
-        public Nullable<int> has_bookings { get; set; }
+        public Nullable<bool> has_bookings { get; set; }
         public Nullable<bool> collected { get; set; }
     }
 }

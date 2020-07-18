@@ -49,7 +49,7 @@
             this.clientContractsTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.ClientContractsTableAdapter();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.disbursementidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.disbursement_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.collection_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -95,7 +95,7 @@
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.disbursementidDataGridViewTextBoxColumn,
+            this.disbursement_id,
             this.numberDataGridViewTextBoxColumn,
             this.collection_date,
             this.amount,
@@ -202,13 +202,12 @@
             this.label1.TabIndex = 26;
             this.label1.Text = "Collection Date:";
             // 
-            // disbursementidDataGridViewTextBoxColumn
+            // disbursement_id
             // 
-            this.disbursementidDataGridViewTextBoxColumn.DataPropertyName = "row_key";
-            this.disbursementidDataGridViewTextBoxColumn.HeaderText = "row key";
-            this.disbursementidDataGridViewTextBoxColumn.Name = "disbursementidDataGridViewTextBoxColumn";
-            this.disbursementidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.disbursementidDataGridViewTextBoxColumn.Visible = false;
+            this.disbursement_id.DataPropertyName = "disbursement_id";
+            this.disbursement_id.HeaderText = "disbursement_id";
+            this.disbursement_id.Name = "disbursement_id";
+            this.disbursement_id.Visible = false;
             // 
             // numberDataGridViewTextBoxColumn
             // 
@@ -336,6 +335,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn collectedDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn disbursementidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn disbursement_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn collection_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn amount;

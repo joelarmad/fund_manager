@@ -19,7 +19,6 @@ namespace FundsManager
         public Nullable<int> investment_id { get; set; }
         public string contract { get; set; }
         public int disbursement_id { get; set; }
-        public Nullable<int> booking_id { get; set; }
         public Nullable<decimal> montly_rate_avg { get; set; }
         public Nullable<decimal> total_generated_overdue { get; set; }
         public Nullable<int> generation_count { get; set; }

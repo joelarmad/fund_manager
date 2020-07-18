@@ -31,35 +31,40 @@ namespace FundsManager
 
                 DateTime _date = dtpDate.Value;
 
-                List<DisbursementsBookingView> _delayedProfitShareToAccrueList = manager.My_db.DisbursementsBookingViews.Where(x => x.starting_date <= _date).OrderBy(x => x.contract).ToList();
+                List<Disbursement> _delayedProfitShareToAccrueList = manager.My_db.Disbursements.Where(x => 
+                    x.date <= _date && 
+                    x.fund_id == manager.Selected && 
+                    x.can_generate_interest &&
+                    x.is_booking.Value &&
+                    !x.has_bookings.Value).OrderBy(x => x.contract).ToList();
 
-                foreach (DisbursementsBookingView _delayedProfitShareToAccrue in _delayedProfitShareToAccrueList)
+                foreach (Disbursement _delayedProfitShareToAccrue in _delayedProfitShareToAccrueList)
                 {
 
-                    BookingGeneratedInterestDetail interestDetail = manager.My_db.BookingGeneratedInterestDetails.FirstOrDefault(x => x.booking_id == _delayedProfitShareToAccrue.booking_id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
+                    BookingGeneratedInterestDetail interestDetail = manager.My_db.BookingGeneratedInterestDetails.FirstOrDefault(x => x.disbursement_id == _delayedProfitShareToAccrue.Id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
 
                     if (interestDetail == null)
                     {
 
-                        string starting_date = _delayedProfitShareToAccrue.starting_date.ToLongDateString();
+                        string starting_date = _delayedProfitShareToAccrue.date.ToLongDateString();
 
-                        DateTime? fromDate = getLastGeneratedInterestDateFor(_delayedProfitShareToAccrue.booking_id);
+                        DateTime? fromDate = getLastGeneratedInterestDateFor(_delayedProfitShareToAccrue.Id);
 
                         if (fromDate == null)
                         {
-                            fromDate = _delayedProfitShareToAccrue.starting_date;
+                            fromDate = _delayedProfitShareToAccrue.date;
                         }
 
-                        DateTime toDate = dtpDate.Value <= _delayedProfitShareToAccrue.new_collection_date ? dtpDate.Value : _delayedProfitShareToAccrue.new_collection_date;
+                        DateTime toDate = dtpDate.Value <= _delayedProfitShareToAccrue.collection_date ? dtpDate.Value : _delayedProfitShareToAccrue.collection_date;
 
                         int financingDays = (toDate.Date - fromDate.Value.Date).Days;
                         
                         string[] row = {
-                            _delayedProfitShareToAccrue.booking_id.ToString(),
+                            _delayedProfitShareToAccrue.Id.ToString(),
                             _delayedProfitShareToAccrue.contract,
-                            _delayedProfitShareToAccrue.booking_number,
+                            _delayedProfitShareToAccrue.number,
                             String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _delayedProfitShareToAccrue.delay_interest),
-                            _delayedProfitShareToAccrue.new_collection_date.ToLongDateString(),
+                            _delayedProfitShareToAccrue.collection_date.ToLongDateString(),
                             starting_date,
                             financingDays.ToString()
                         };
@@ -87,7 +92,7 @@ namespace FundsManager
         {
             try
             {
-                BookingGeneratedInterestDetail interest = manager.My_db.BookingGeneratedInterestDetails.OrderByDescending(x => x.generated_interest_date).FirstOrDefault(x => x.booking_id == bookingId);
+                BookingGeneratedInterestDetail interest = manager.My_db.BookingGeneratedInterestDetails.OrderByDescending(x => x.generated_interest_date).FirstOrDefault(x => x.disbursement_id == bookingId);
 
                 if (interest != null)
                 {
@@ -122,7 +127,7 @@ namespace FundsManager
                     {
                         DateTime _date = Convert.ToDateTime(dtpDate.Text);
 
-                        List<DisbursementsBookingView> _delayedInterestToAccrueList = new List<DisbursementsBookingView>();
+                        List<Disbursement> _delayedInterestToAccrueList = new List<Disbursement>();
 
                         if (!forAll)
                         {
@@ -132,23 +137,23 @@ namespace FundsManager
 
                                 if (int.TryParse(_item.Text, out bookingId))
                                 {
-                                    DisbursementsBookingView toAcrue = manager.My_db.DisbursementsBookingViews.FirstOrDefault(x => x.booking_id == bookingId);
+                                    Disbursement toAcrue = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == bookingId);
 
                                     if (toAcrue != null)
                                     {
                                         _delayedInterestToAccrueList.Add(toAcrue);
                                     }
 
-                                    if (toAcrue.new_collection_date <= toAcrue.starting_date)
+                                    if (toAcrue.collection_date <= toAcrue.date)
                                     {
                                         errorsDetected = true;
-                                        errorMessages += "\rNumber " + toAcrue.booking_number + ": collection <= stating date.";
+                                        errorMessages += "\rNumber " + toAcrue.number + ": collection <= stating date.";
                                     }
 
                                     if (toAcrue.delay_interest == 0)
                                     {
                                         errorsDetected = true;
-                                        errorMessages += "\rNumber " + toAcrue.booking_number + ": delay interest = 0.";
+                                        errorMessages += "\rNumber " + toAcrue.number + ": delay interest = 0.";
                                     }
                                 }
                             }
@@ -161,23 +166,23 @@ namespace FundsManager
 
                                 if (int.TryParse(_item.Text, out bookingId))
                                 {
-                                    DisbursementsBookingView toAcrue = manager.My_db.DisbursementsBookingViews.FirstOrDefault(x => x.booking_id == bookingId);
+                                    Disbursement toAcrue = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == bookingId);
 
                                     if (toAcrue != null)
                                     {
                                         _delayedInterestToAccrueList.Add(toAcrue);
                                     }
 
-                                    if (toAcrue.new_collection_date <= toAcrue.starting_date)
+                                    if (toAcrue.collection_date <= toAcrue.date)
                                     {
                                         errorsDetected = true;
-                                        errorMessages += "\rNumber " + toAcrue.booking_number + ": collection <= starting date.";
+                                        errorMessages += "\rNumber " + toAcrue.number + ": collection <= starting date.";
                                     }
 
                                     if (toAcrue.delay_interest == 0)
                                     {
                                         errorsDetected = true;
-                                        errorMessages += "\rNumber " + toAcrue.booking_number + ": delay interest = 0.";
+                                        errorMessages += "\rNumber " + toAcrue.number + ": delay interest = 0.";
                                     }
                                 }
                             }
@@ -204,41 +209,41 @@ namespace FundsManager
 
                             bool someDataMissed = false;
 
-                            foreach (DisbursementsBookingView _delayedInterestToAccrue in _delayedInterestToAccrueList)
+                            foreach (Disbursement _delayedInterestToAccrue in _delayedInterestToAccrueList)
                             {
                                 Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == _delayedInterestToAccrue.currency_id && x.FK_Currencies_Funds == manager.Selected);
                                 Subaccount subacct130 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account130.Id && x.name == "INV " + currency.symbol);
 
                                 if (currency != null && subacct130 != null)
                                 {
-                                    BookingGeneratedInterestDetail interestDetail = manager.My_db.BookingGeneratedInterestDetails.FirstOrDefault(x => x.booking_id == _delayedInterestToAccrue.booking_id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
+                                    BookingGeneratedInterestDetail interestDetail = manager.My_db.BookingGeneratedInterestDetails.FirstOrDefault(x => x.disbursement_id == _delayedInterestToAccrue.Id && x.generated_interest_date.Year == _date.Year && x.generated_interest_date.Month == _date.Month);
 
                                     if (interestDetail == null)
                                     {
-                                        DateTime? fromDate = getLastGeneratedInterestDateFor(_delayedInterestToAccrue.booking_id);
+                                        DateTime? fromDate = getLastGeneratedInterestDateFor(_delayedInterestToAccrue.Id);
 
                                         if (fromDate == null)
                                         {
-                                            fromDate = _delayedInterestToAccrue.starting_date;
+                                            fromDate = _delayedInterestToAccrue.date;
                                         }
 
                                         bool canContinueGeneratingInterest = true;
 
                                         decimal _interest = 0;
 
-                                        int totalFinancingDays = (_delayedInterestToAccrue.new_collection_date.Date - _delayedInterestToAccrue.starting_date.Date).Days;
+                                        int totalFinancingDays = (_delayedInterestToAccrue.collection_date.Date - _delayedInterestToAccrue.date.Date).Days;
 
-                                        DateTime toDate = dtpDate.Value <= _delayedInterestToAccrue.new_collection_date ? dtpDate.Value : _delayedInterestToAccrue.new_collection_date;
+                                        DateTime toDate = dtpDate.Value <= _delayedInterestToAccrue.collection_date ? dtpDate.Value : _delayedInterestToAccrue.collection_date;
 
                                         int financingDays = (toDate.Date - fromDate.Value.Date).Days;
 
                                         if (totalFinancingDays > 0 && financingDays > 0)
                                         {
-                                            decimal delayInterestPerDay = _delayedInterestToAccrue.delay_interest / totalFinancingDays;
+                                            decimal delayInterestPerDay = _delayedInterestToAccrue.delay_interest.Value / totalFinancingDays;
                                             _interest = Math.Round(financingDays * delayInterestPerDay, 2);
                                         }
 
-                                        canContinueGeneratingInterest = toDate < _delayedInterestToAccrue.new_collection_date;
+                                        canContinueGeneratingInterest = toDate < _delayedInterestToAccrue.collection_date;
 
                                         if (_interest > 0)
                                         {
@@ -250,7 +255,7 @@ namespace FundsManager
 
                                             if (!canContinueGeneratingInterest)
                                             {
-                                                DisbursementBooking disbBooking = manager.My_db.DisbursementBookings.FirstOrDefault(x => x.id == _delayedInterestToAccrue.booking_id);
+                                                Disbursement disbBooking = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == _delayedInterestToAccrue.Id);
 
                                                 if (disbBooking != null)
                                                 {
@@ -263,10 +268,9 @@ namespace FundsManager
                                             BookingGeneratedInterestDetail _detail = new BookingGeneratedInterestDetail();
 
                                             _detail.BookingGeneratedInterest = _generatedInterest;
-                                            _detail.booking_id = _delayedInterestToAccrue.booking_id;
                                             _detail.generated_interest = Math.Round(_interest, 2);
                                             _detail.generated_interest_date = toDate;
-                                            _detail.disbursement_id = _delayedInterestToAccrue.disbursement_id;
+                                            _detail.disbursement_id = _delayedInterestToAccrue.Id;
 
                                             manager.My_db.BookingGeneratedInterestDetails.Add(_detail);
 

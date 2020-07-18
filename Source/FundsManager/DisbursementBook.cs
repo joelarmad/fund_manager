@@ -17,7 +17,7 @@ namespace FundsManager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DisbursementBook()
         {
-            this.DisbursementBookings = new HashSet<DisbursementBooking>();
+            this.Disbursements = new HashSet<Disbursement>();
         }
     
         public int Id { get; set; }
@@ -27,9 +27,9 @@ namespace FundsManager
         public int movement128_id { get; set; }
     
         public virtual AccountingMovement AccountingMovement { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DisbursementBooking> DisbursementBookings { get; set; }
         public virtual Movements_Accounts Movements_Accounts { get; set; }
         public virtual Movements_Accounts Movements_Accounts1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Disbursement> Disbursements { get; set; }
     }
 }

@@ -15,21 +15,26 @@ namespace FundsManager
     {
         private MyFundsManager manager;
 
-        public bool EditingExistingBook = false;
-        public DisbursementBook BookToEdit = null;
+        public List<Disbursement> disbursementForAddendumGroup = new List<Disbursement>();
 
-        private DisbursementPlusAddendumsView disbPlusAddendum;
-        private Disbursement disb;
-        private DisbursementBooking booking;
-        public String DisbursementForAddendumId = "";
+        int groupId = 0;
+
+        Investment investment;
+        int currencyId = 0;
+        float exchangeRate;
+        int clientId = 0;
+        int? underlayingDebtor = null;
+        int? bankRiskId = null;
+        int sectorId = 0;
+        DateTime? payDate = null;
+        int? shipmentId = null;
 
         private bool fEditMode;
         
         private decimal fAmountRemaining = 0;
         private decimal fProfitShareRemainig = 0;
 
-        private List<DisbursementBooking> bookings;
-        private List<DisbursementBooking> toDelete;
+        private List<Disbursement> bookings;
 
         public AddendumsForm()
         {
@@ -37,8 +42,7 @@ namespace FundsManager
             {
                 manager = MyFundsManager.SingletonInstance;
                 InitializeComponent();
-                bookings = new List<DisbursementBooking>();
-                toDelete = new List<DisbursementBooking>();
+                bookings = new List<Disbursement>();
             }
             catch (Exception _ex)
             {
@@ -51,106 +55,89 @@ namespace FundsManager
 
             try
             {
+                bool guiInitialized = false;
+
                 txtExchangeRate.Text = String.Format("{0:0.0000000}", 1);
                 txtProfitShare.Text = String.Format("{0:0.00}", 0);
                 lblTotalToBeCollected.Text = String.Format("{0:0.00}", 0);
 
                 this.currenciesTableAdapter.Fill(this.fundsDBDataSet.Currencies);
 
-                disbPlusAddendum = manager.My_db.DisbursementPlusAddendumsViews.FirstOrDefault(x => x.row_id == DisbursementForAddendumId);
-                
-                if (disbPlusAddendum != null)
+                foreach (Disbursement item in disbursementForAddendumGroup)
                 {
-                    disb = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == disbPlusAddendum.Id);
+                    int disbId = item.Id;
 
-                    if(disbPlusAddendum.is_booking == 1)
-                    {
-                        booking = manager.My_db.DisbursementBookings.FirstOrDefault(x => x.id == disbPlusAddendum.booking_id);
-                    }
-                                        
-                    if (!EditingExistingBook)
-                    {
-                        DisbursementsToBeCollected toBeCollected = manager.My_db.DisbursementsToBeCollecteds.FirstOrDefault(x => x.row_key == DisbursementForAddendumId);
+                    DisbursementsToBeCollected toBeCollected = manager.My_db.DisbursementsToBeCollecteds.FirstOrDefault(x => x.disbursement_id == disbId);
 
-                        if (toBeCollected != null)
+                    if (toBeCollected != null)
+                    {
+                        fProfitShareRemainig += Math.Round((toBeCollected.profit_share - toBeCollected.profit_share_collected.Value) * (decimal)item.exchange_rate, 2);
+
+                        fAmountRemaining += Math.Round(toBeCollected.amount_remainig.Value * (decimal)item.exchange_rate, 2);
+
+                        if (!guiInitialized)
                         {
-                            fProfitShareRemainig = Math.Round((toBeCollected.profit_share - toBeCollected.profit_share_collected.Value) * (decimal)disbPlusAddendum.exchange_rate, 2);
-                            
-                            fAmountRemaining = Math.Round(toBeCollected.amount_remainig.Value * (decimal)disbPlusAddendum.exchange_rate, 2);
-                            
-                            txtAmount.Text = String.Format("{0:0.00}", fAmountRemaining);
+                            guiInitialized = true;
 
-                            txtProfitShare.Text = String.Format("{0:0.00}", fProfitShareRemainig);
+                            investment = item.Investment;
+                            clientId = item.client_id;
+                            currencyId = item.currency_id;
+                            exchangeRate = item.exchange_rate;
+                            underlayingDebtor = item.underlying_debtor_id;
+                            bankRiskId = item.bank_risk_id;
+                            sectorId = item.sector_id;
+                            payDate = item.pay_date;
+                            shipmentId = item.shipment_id;
 
-                            txtDelayInterest.Text = String.Format("{0:0.00}", 0);
+                            if (item.currency_id > 0)
+                            {
+                                for (int i = 0; i < cbCurrency.Items.Count; i++)
+                                {
+                                    cbCurrency.SelectedIndex = i;
 
+                                    if (cbCurrency.SelectedValue.ToString() == item.currency_id.ToString())
+                                        break;
+                                }
+                            }
 
+                            txtExchangeRate.Text = String.Format("{0:0.0000000}", item.exchange_rate);
+
+                            txtNumber.Text = item.number.ToString();                            
+
+                            lblContract.Text = item.Investment.contract;
+
+                            lblClient.Text = clientId > 0 ? manager.My_db.Clients.FirstOrDefault(x => x.Id == clientId).name : "";
+
+                            lblUnderLayingDebtor.Text = underlayingDebtor > 0 ? manager.My_db.UnderlyingDebtors.FirstOrDefault(x => x.Id == underlayingDebtor).name : "";
+
+                            lblUnderlayingBank.Text = bankRiskId > 0 ? manager.My_db.Banks.FirstOrDefault(x => x.Id == bankRiskId).name : "";
+
+                            lblLetterOfCredit.Text = shipmentId > 0 ? manager.My_db.Shipments.FirstOrDefault(x => x.Id == shipmentId).letter_of_credits.Reference : "";
+
+                            lblShipment.Text = shipmentId > 0 ? manager.My_db.Shipments.FirstOrDefault(x => x.Id == shipmentId).Value.ToString() : "";
+
+                            lblSector.Text = sectorId > 0 ? manager.My_db.Sectors.FirstOrDefault(x => x.Id == sectorId).name : "";
+
+                            List<DisbursementItem> items = manager.My_db.DisbursementItems.Where(x => x.DisbursementId == item.Id).ToList();
+
+                            foreach (DisbursementItem disbItem in items)
+                            {
+                                lbISelectedItems.Items.Add(disbItem.Item.name);
+                            }
+
+                            dtpStartingDate.Value = item.collection_date;
+                            dtpBookingDate.Value = item.collection_date;
                         }
                     }
-                    //else
-                    //{
-                    //    if (BookToEdit != null)
-                    //    {
-                    //        cmdBook.Text = "Save Book";
-                    //        cmdBook.Enabled = true;
-
-                    //        bookings = manager.My_db.DisbursementBookings.Where(x => x.book_id == BookToEdit.Id).ToList();
-
-                    //        foreach (DisbursementBooking booking in bookings)
-                    //        {
-                    //            fAmount += booking.amount;
-                    //            fProfitShare += booking.profit_share;
-                    //        }
-
-                    //        loadBookings();
-                    //    }
-                    //}
-                    
-                    if (disbPlusAddendum.currency_id > 0)
-                    {
-                        for (int i = 0; i < cbCurrency.Items.Count; i++)
-                        {
-                            cbCurrency.SelectedIndex = i;
-
-                            if (cbCurrency.SelectedValue.ToString() == disbPlusAddendum.currency_id.ToString())
-                                break;
-                        }
-                    }
-
-                    txtExchangeRate.Text = String.Format("{0:0.0000000}", disbPlusAddendum.exchange_rate);
-
-                    txtNumber.Text = disbPlusAddendum.number.ToString();
-
-                    calculate_total_collection();
-
-                    lblContract.Text = disb.Investment.contract;
-
-                    lblClient.Text = disb.Client != null ? disb.Client.name : "";
-
-                    lblUnderLayingDebtor.Text = disb.UnderlyingDebtor != null ? disb.UnderlyingDebtor.name : "";
-
-                    lblUnderlayingBank.Text = disb.Bank != null ? disb.Bank.name : "";
-
-                    lblLetterOfCredit.Text = disb.Shipment != null ? disb.Shipment.letter_of_credits.Reference : "";
-
-                    lblShipment.Text = disb.Shipment != null ? disb.Shipment.Number : "";
-
-                    lblSector.Text = disb.Sector != null ? disb.Sector.name : "";
-
-                    List<DisbursementItem> items = manager.My_db.DisbursementItems.Where(x => x.DisbursementId == disb.Id).ToList();
-
-                    foreach (DisbursementItem disbItem in items)
-                    {
-                        lbISelectedItems.Items.Add(disbItem.Item.name);
-                    }
-
-                    dtpStartingDate.Value = disbPlusAddendum.collection_date;
-                    dtpBookingDate.Value = disbPlusAddendum.collection_date;
                 }
-                else
-                {
-                    //TODO: error
-                }
+
+                txtAmount.Text = String.Format("{0:0.00}", fAmountRemaining);
+
+                txtProfitShare.Text = String.Format("{0:0.00}", fProfitShareRemainig);
+
+                txtDelayInterest.Text = String.Format("{0:0.00}", 0);
+
+                calculate_total_collection();
 
                 checkEnablingAddBookingButton();
             }
@@ -368,22 +355,22 @@ namespace FundsManager
                 }
                 else
                 {
-                    DisbursementBooking toModify = bookings[lvBooking.SelectedIndices[0]];
+                    Disbursement toModify = bookings[lvBooking.SelectedIndices[0]];
 
                     decimal _amount = 0;
                     decimal _profitShare = 0;
                     decimal _delayedInterest = 0;
 
-                    foreach (DisbursementBooking booking in bookings)
+                    foreach (Disbursement booking in bookings)
                     {
                         _amount += booking.amount;
                         _profitShare += booking.profit_share;
-                        _delayedInterest += booking.delay_interest;
+                        _delayedInterest += booking.delay_interest ?? 0;
                     }
 
                     _amount -= toModify.amount - _selectedAmount;
                     _profitShare -= toModify.profit_share - _selectedProfitShare;
-                    _delayedInterest -= toModify.delay_interest - _selectedDelayedInterest;
+                    _delayedInterest -= (toModify.delay_interest ?? 0) - _selectedDelayedInterest;
 
                     cmdAddBooking.Enabled = cbCurrency.SelectedIndex >= 0
                     && txtNumber.Text.Trim() != ""
@@ -419,7 +406,7 @@ namespace FundsManager
                 {
                     if (!duplicatedBookingNumber())
                     {
-                        DisbursementBooking toAdd = getBookingFromGUI();
+                        Disbursement toAdd = getBookingFromGUI();
 
                         if (fEditMode)
                         {
@@ -457,7 +444,7 @@ namespace FundsManager
         private bool duplicatedBookingNumber()
         {
             int i = 0;
-            foreach (DisbursementBooking disb in bookings)
+            foreach (Disbursement disb in bookings)
             {
                 if (disb.number == txtNumber.Text)
                 {
@@ -480,60 +467,56 @@ namespace FundsManager
             return false;
         }
 
-        private DisbursementBooking getBookingFromGUI()
+        private Disbursement getBookingFromGUI()
         {
             try
             {
-                DisbursementBooking _booking = new DisbursementBooking();
+                Disbursement _booking = new Disbursement();
 
-                float exchangeRate = 0;
+                _booking.fund_id = manager.Selected;
+                _booking.investment_id = investment.Id;
+                _booking.contract = investment.contract;
+                _booking.is_booking = true;
+                _booking.client_id = clientId;
+                _booking.currency_id = currencyId;
+                _booking.exchange_rate = exchangeRate;
+                _booking.underlying_debtor_id = underlayingDebtor;
+                _booking.bank_risk_id = bankRiskId;
+                _booking.sector_id = sectorId;
+                _booking.pay_date = payDate;
+                _booking.shipment_id = shipmentId;
 
-                if (float.TryParse(txtExchangeRate.Text, out exchangeRate) && exchangeRate > 0)
+                if (fEditMode && lvBooking.SelectedIndices.Count > 0)
                 {
-                    if (fEditMode && lvBooking.SelectedIndices.Count > 0)
-                    {
-                        _booking = bookings[lvBooking.SelectedIndices[0]];
-                        fAmountRemaining += _booking.amountReference;
-                        fProfitShareRemainig += booking.profitShareReference;
-                    }
-
-                    decimal amountToDecrease = Convert.ToDecimal(txtAmount.Text);
-                    decimal profitShareToDecrease = Convert.ToDecimal(txtProfitShare.Text);
-                    decimal delayInterest = Convert.ToDecimal(txtDelayInterest.Text);
-
-                    _booking.disbursement_id = disb.Id;
-                    _booking.exchange_rate = exchangeRate;
-                    _booking.amount = Math.Round(amountToDecrease / (decimal)exchangeRate, 2);
-                    _booking.profit_share = Math.Round(Convert.ToDecimal(txtProfitShare.Text) / (decimal)exchangeRate, 2);
-                    _booking.currency_id = Convert.ToInt32(cbCurrency.SelectedValue);
-                    _booking.starting_date = Convert.ToDateTime(dtpStartingDate.Text);
-                    _booking.collection_date = Convert.ToDateTime(dtpCollectionDate.Text);
-                    _booking.number = txtNumber.Text;
-                    _booking.delay_interest = Math.Round(delayInterest / (decimal)exchangeRate, 2);
-
-                    fAmountRemaining -= amountToDecrease;
-                    fProfitShareRemainig -= profitShareToDecrease;
-
-                    _booking.collected = false;
-                    _booking.can_generate_interest = true;
-
-                    _booking.has_booking = false;
-
-                    if(disbPlusAddendum.is_booking == 1)
-                    {
-                        _booking.parent_book_id = disbPlusAddendum.booking_id;
-                    }
-
-                    _booking.amountReference = amountToDecrease;
-                    _booking.profitShareReference = profitShareToDecrease;
-                    _booking.delayInterestReference = delayInterest;
-
-                    return _booking;
+                    _booking = bookings[lvBooking.SelectedIndices[0]];
+                    fAmountRemaining += _booking.amountReference;
+                    fProfitShareRemainig += _booking.profitShareReference;
                 }
-                else
-                {
-                    return null;
-                }
+
+                decimal amountToDecrease = Convert.ToDecimal(txtAmount.Text);
+                decimal profitShareToDecrease = Convert.ToDecimal(txtProfitShare.Text);
+                decimal delayInterest = Convert.ToDecimal(txtDelayInterest.Text);
+
+                _booking.amount = Math.Round(amountToDecrease / (decimal)exchangeRate, 2);
+                _booking.profit_share = Math.Round(Convert.ToDecimal(txtProfitShare.Text) / (decimal)exchangeRate, 2);
+                _booking.date = Convert.ToDateTime(dtpStartingDate.Text);
+                _booking.collection_date = Convert.ToDateTime(dtpCollectionDate.Text);
+                _booking.number = txtNumber.Text;
+                _booking.delay_interest = Math.Round(delayInterest / (decimal)exchangeRate, 2);
+
+                fAmountRemaining -= amountToDecrease;
+                fProfitShareRemainig -= profitShareToDecrease;
+
+                _booking.collected = false;
+                _booking.can_generate_interest = true;
+
+                _booking.has_bookings = false;
+
+                _booking.amountReference = amountToDecrease;
+                _booking.profitShareReference = profitShareToDecrease;
+                _booking.delayInterestReference = delayInterest;
+
+                return _booking;
             }
             catch (Exception)
             {
@@ -541,7 +524,7 @@ namespace FundsManager
             }
         }
 
-        private void addBooking(DisbursementBooking toAdd)
+        private void addBooking(Disbursement toAdd)
         {
             if (toAdd != null)
             {
@@ -549,9 +532,9 @@ namespace FundsManager
 
                 for (int i = 0; i < bookings.Count; i++)
                 {
-                    DisbursementBooking _item = bookings[i];
+                    Disbursement _item = bookings[i];
 
-                    if (_item.starting_date > toAdd.starting_date)
+                    if (_item.date > toAdd.date)
                     {
                         bookings.Insert(i, toAdd);
                         _index = i;
@@ -577,9 +560,9 @@ namespace FundsManager
                 Decimal total_delay_interest = 0;
                 Decimal total_to_be_collected = 0;
 
-                foreach (DisbursementBooking _booking in bookings)
+                foreach (Disbursement _booking in bookings)
                 {
-                    decimal _totalToBeCollected = _booking.amount + _booking.profit_share + _booking.delay_interest;
+                    decimal _totalToBeCollected = _booking.amount + _booking.profit_share + _booking.delay_interest ?? 0;
 
                     
                     string[] row = { _booking.number,  String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _booking.amount), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _booking.profit_share), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _booking.delay_interest), String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", _totalToBeCollected), _booking.collection_date.ToLongDateString() };
@@ -588,7 +571,7 @@ namespace FundsManager
 
                     total_investment += _booking.amount;
                     total_profit += _booking.profit_share;
-                    total_delay_interest += _booking.delay_interest;
+                    total_delay_interest += _booking.delay_interest ?? 0;
                     total_to_be_collected += _totalToBeCollected;
                 }
 
@@ -630,13 +613,7 @@ namespace FundsManager
                     }
                     else
                     {
-                        DisbursementBooking selected = bookings[lvBooking.SelectedIndices[0]];
-                        //TODO: validar si tiene algun cobro
-                        //if (selected.pay_date.HasValue)
-                        //{
-                        //    lvDisbursements.SelectedIndices.Clear();
-                        //    MessageBox.Show("This disbursement has been already paid.");
-                        //}
+                        Disbursement selected = bookings[lvBooking.SelectedIndices[0]];
                     }
                 }
 
@@ -648,7 +625,7 @@ namespace FundsManager
                     cmdAddBooking.Text = "Save Booking";
                     cmdCancel.Visible = true;
 
-                    DisbursementBooking selected = bookings[lvBooking.SelectedIndices[0]];
+                    Disbursement selected = bookings[lvBooking.SelectedIndices[0]];
 
                     txtAmount.Text = String.Format("{0:0.00}", selected.amountReference);
 
@@ -670,7 +647,7 @@ namespace FundsManager
 
                     calculate_total_collection();
 
-                    dtpStartingDate.Value = selected.starting_date;
+                    dtpStartingDate.Value = selected.date;
                     dtpCollectionDate.Value = selected.collection_date;
                 }
                 else
@@ -700,13 +677,9 @@ namespace FundsManager
             {
                 if (lvBooking.SelectedIndices.Count > 0)
                 {
-                    DisbursementBooking booking = bookings[lvBooking.SelectedIndices[0]];
+                    Disbursement booking = bookings[lvBooking.SelectedIndices[0]];
                     fAmountRemaining += booking.amountReference;
-                    fProfitShareRemainig += booking.profitShareReference;
-                    if(booking.id > 0)
-                    {
-                        toDelete.Add(booking);
-                    }                    
+                    fProfitShareRemainig += booking.profitShareReference;                 
                     bookings.RemoveAt(lvBooking.SelectedIndices[0]);
                 }
 
@@ -734,8 +707,9 @@ namespace FundsManager
                     AccountingMovement _accountingMovement = new AccountingMovement();
                     DisbursementBook _book = new DisbursementBook();
 
+                    int currency_id = int.Parse(cbCurrency.SelectedValue.ToString());
 
-                    Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == disbPlusAddendum.currency_id && x.FK_Currencies_Funds == manager.Selected);
+                    Currency currency = manager.My_db.Currencies.FirstOrDefault(x => x.Id == currency_id && x.FK_Currencies_Funds == manager.Selected);
                     Account account125 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "125" && x.FK_Accounts_Funds == manager.Selected);
                     Subaccount subacct125 = manager.My_db.Subaccounts.FirstOrDefault(x => x.FK_Subaccounts_Accounts == account125.Id && x.name == "INV " + currency.symbol);
                     Account account128 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "128" && x.FK_Accounts_Funds == manager.Selected);
@@ -747,43 +721,55 @@ namespace FundsManager
                         return;
                     }
 
-                    if (EditingExistingBook)
+                    _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
+                    _accountingMovement.description = "";
+                    _accountingMovement.date = dtpBookingDate.Value.Date;
+                    _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpBookingDate.Value.Year);
+                    _accountingMovement.FK_AccountingMovements_Currencies = currency_id;
+                    _accountingMovement.original_reference = investment.contract;
+                    _accountingMovement.contract = investment.contract;
+
+                    manager.My_db.AccountingMovements.Add(_accountingMovement);
+
+                    _book.date = DateTime.Now.Date;
+
+                    _book.AccountingMovement = _accountingMovement;
+                    manager.My_db.DisbursementBooks.Add(_book);
+
+                    Movements_Accounts _maccount125_total = new Movements_Accounts();
+
+                    _maccount125_total.AccountingMovement = _accountingMovement;
+                    _maccount125_total.FK_Movements_Accounts_Funds = manager.Selected;
+                    _maccount125_total.FK_Movements_Accounts_Accounts = account125.Id;
+                    if (subacct125 != null)
+                        _maccount125_total.FK_Movements_Accounts_Subaccounts = subacct125.Id;
+                    _maccount125_total.subaccount = clientId;
+                    _maccount125_total.subaccount_type = 1;
+                    _maccount125_total.credit = totalAmount;
+                    _maccount125_total.debit = 0;
+
+                    manager.My_db.Movements_Accounts.Add(_maccount125_total);
+
+                    Movements_Accounts _maccount128_total = new Movements_Accounts();
+
+                    _maccount128_total.AccountingMovement = _accountingMovement;
+                    _maccount128_total.FK_Movements_Accounts_Funds = manager.Selected;
+                    _maccount128_total.FK_Movements_Accounts_Accounts = account128.Id;
+                    if (subacct128 != null)
+                        _maccount128_total.FK_Movements_Accounts_Subaccounts = subacct128.Id;
+                    _maccount128_total.subaccount = clientId;
+                    _maccount128_total.subaccount_type = 1;
+                    _maccount128_total.credit = totalProfitShare;
+                    _maccount128_total.debit = 0;
+
+                    manager.My_db.Movements_Accounts.Add(_maccount128_total);
+
+                    _book.Movements_Accounts = _maccount125_total;
+                    _book.Movements_Accounts1 = _maccount128_total;
+
+                    foreach (Disbursement _booking in bookings)
                     {
-                        if (BookToEdit == null)
-                        {
-                            //TODO: Error
-                            return;
-                        }
-
-                        _book = BookToEdit;
-                        _accountingMovement = manager.My_db.AccountingMovements.FirstOrDefault(x => x.Id == _book.accounting_movement_id);
-
-                        if (_accountingMovement == null)
-                        {
-                            //TODO: error
-                            return;
-                        }
-
-                        BookToEdit.Movements_Accounts.credit = totalAmount;
-                        BookToEdit.Movements_Accounts1.credit = totalProfitShare;
-
-                    }
-                    else
-                    {
-                        _accountingMovement.FK_AccountingMovements_Funds = manager.Selected;
-                        _accountingMovement.description = "";
-                        _accountingMovement.date = dtpBookingDate.Value.Date;
-                        _accountingMovement.reference = KeyDefinitions.NextAccountMovementReference(dtpBookingDate.Value.Year);
-                        _accountingMovement.FK_AccountingMovements_Currencies = disbPlusAddendum.currency_id;
-                        _accountingMovement.original_reference = disb.Investment.contract;
-                        _accountingMovement.contract = disb.Investment.contract;
-
-                        manager.My_db.AccountingMovements.Add(_accountingMovement);
-
-                        _book.date = DateTime.Now.Date;
-
-                        _book.AccountingMovement = _accountingMovement;
-                        manager.My_db.DisbursementBooks.Add(_book);
+                        _booking.book_id = _book.Id;
 
                         Movements_Accounts _maccount125 = new Movements_Accounts();
 
@@ -792,10 +778,10 @@ namespace FundsManager
                         _maccount125.FK_Movements_Accounts_Accounts = account125.Id;
                         if (subacct125 != null)
                             _maccount125.FK_Movements_Accounts_Subaccounts = subacct125.Id;
-                        _maccount125.subaccount = disb.client_id;
+                        _maccount125.subaccount = clientId;
                         _maccount125.subaccount_type = 1;
-                        _maccount125.credit = totalAmount;
-                        _maccount125.debit = 0;
+                        _maccount125.credit = 0;
+                        _maccount125.debit = Math.Round(_booking.amount, 2);
 
                         manager.My_db.Movements_Accounts.Add(_maccount125);
 
@@ -806,76 +792,47 @@ namespace FundsManager
                         _maccount128.FK_Movements_Accounts_Accounts = account128.Id;
                         if (subacct128 != null)
                             _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
-                        _maccount128.subaccount = disb.client_id;
+                        _maccount128.subaccount = clientId;
                         _maccount128.subaccount_type = 1;
-                        _maccount128.credit = totalProfitShare;
-                        _maccount128.debit = 0;
+                        _maccount128.credit = 0;
+                        _maccount128.debit = Math.Round(_booking.profit_share, 2);
 
                         manager.My_db.Movements_Accounts.Add(_maccount128);
 
-                        _book.Movements_Accounts = _maccount125;
-                        _book.Movements_Accounts1 = _maccount128;
+                        _booking.Movements_Accounts = _maccount125;
+                        _booking.Movements_Accounts1 = _maccount128;
+
+                        manager.My_db.Disbursements.Add(_booking);
                     }
 
-                    foreach (DisbursementBooking bookingToDelete in toDelete)
-                    {
-                        manager.My_db.Movements_Accounts.Remove(bookingToDelete.Movements_Accounts);
-                        manager.My_db.Movements_Accounts.Remove(bookingToDelete.Movements_Accounts1);
+                    int groupParentId = 0;
 
-                        manager.My_db.DisbursementBookings.Remove(bookingToDelete);
+                    if (disbursementForAddendumGroup.Count == 1)
+                    {
+                        groupParentId = disbursementForAddendumGroup.ElementAt(0).group_id.Value;
                     }
-
-                    foreach (DisbursementBooking _booking in bookings)
+                    else
                     {
-                        _booking.book_id = _book.Id;
+                        int? maxGroupId = manager.My_db.Disbursements.Max(x => x.group_id);
 
-                        if (_booking.id == 0)
+                        if (!maxGroupId.HasValue)
                         {
-                            Movements_Accounts _maccount125 = new Movements_Accounts();
-
-                            _maccount125.AccountingMovement = _accountingMovement;
-                            _maccount125.FK_Movements_Accounts_Funds = manager.Selected;
-                            _maccount125.FK_Movements_Accounts_Accounts = account125.Id;
-                            if (subacct125 != null)
-                                _maccount125.FK_Movements_Accounts_Subaccounts = subacct125.Id;
-                            _maccount125.subaccount = disb.client_id;
-                            _maccount125.subaccount_type = 1;
-                            _maccount125.credit = 0;
-                            _maccount125.debit = Math.Round(_booking.amount, 2);
-
-                            manager.My_db.Movements_Accounts.Add(_maccount125);
-
-                            Movements_Accounts _maccount128 = new Movements_Accounts();
-
-                            _maccount128.AccountingMovement = _accountingMovement;
-                            _maccount128.FK_Movements_Accounts_Funds = manager.Selected;
-                            _maccount128.FK_Movements_Accounts_Accounts = account128.Id;
-                            if (subacct128 != null)
-                                _maccount128.FK_Movements_Accounts_Subaccounts = subacct128.Id;
-                            _maccount128.subaccount = disb.client_id;
-                            _maccount128.subaccount_type = 1;
-                            _maccount128.credit = 0;
-                            _maccount128.debit = Math.Round(_booking.profit_share, 2);
-
-                            manager.My_db.Movements_Accounts.Add(_maccount128);
-
-                            _booking.Movements_Accounts = _maccount125;
-                            _booking.Movements_Accounts1 = _maccount128;
-
-                            manager.My_db.DisbursementBookings.Add(_booking);
+                            maxGroupId = 1;
                         }
-                        else
-                        {
-                            _booking.Movements_Accounts.debit = _booking.amount;
-                            _booking.Movements_Accounts1.debit = _booking.profit_share;
-                        }
+
+                        groupParentId = maxGroupId.Value + bookings.Count + 1;
                     }
 
-                    disb.has_bookings = true;
-
-                    if (booking != null)
+                    foreach (Disbursement item in disbursementForAddendumGroup)
                     {
-                        booking.has_booking = true;
+                        item.has_bookings = true;
+                        item.group_id = groupParentId;
+                    }
+
+                    foreach (Disbursement item in bookings)
+                    {
+                        item.DisbursementBook = _book;
+                        item.group_parent_id = groupParentId;
                     }
 
                     manager.My_db.SaveChanges();

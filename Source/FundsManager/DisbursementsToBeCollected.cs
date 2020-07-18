@@ -14,7 +14,6 @@ namespace FundsManager
     
     public partial class DisbursementsToBeCollected
     {
-        public string row_key { get; set; }
         public int fund_id { get; set; }
         public string contract { get; set; }
         public int investment_id { get; set; }
@@ -35,9 +34,9 @@ namespace FundsManager
         public Nullable<decimal> profit_share_accrued_remaining { get; set; }
         public Nullable<decimal> delay_interest_accrued_remaining { get; set; }
         public bool can_generate_interest { get; set; }
-        public int is_booking { get; set; }
-        public Nullable<int> has_bookings { get; set; }
+        public Nullable<bool> is_booking { get; set; }
         public int booking_id { get; set; }
+        public Nullable<bool> has_bookings { get; set; }
         public Nullable<bool> collected { get; set; }
     }
 }
