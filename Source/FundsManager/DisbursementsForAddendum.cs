@@ -25,5 +25,6 @@ namespace FundsManager
         public bool can_generate_interest { get; set; }
         public decimal amount { get; set; }
         public decimal profit_share { get; set; }
+        public int client_id { get; set; }
     }
 }

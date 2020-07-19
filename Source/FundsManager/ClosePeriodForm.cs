@@ -100,12 +100,6 @@ namespace FundsManager
             {
                 if (MessageBox.Show("Do you want close selected period?", "Warning", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
-                    ClosedPeriod closure = new ClosedPeriod();
-                    closure.year = selectedYear;
-                    closure.closing_date = DateTime.Now;
-
-                    manager.My_db.ClosedPeriods.Add(closure);
-
                     AccountingMovement _accountingMovement = new AccountingMovement();
 
                     Account account999 = manager.My_db.Accounts.FirstOrDefault(x => x.number == "999" && x.FK_Accounts_Funds == manager.Selected);
@@ -131,14 +125,22 @@ namespace FundsManager
 
                         manager.My_db.Movements_Accounts.Add(_maccount999);
 
-                        manager.My_db.SaveChanges();
-
                         txtYear.Text = "";
                         lblCredit.Text = "";
                         lblDebit.Text = "";
                         cmdClose.Enabled = false;
+                        
+                        ClosedPeriod closure = new ClosedPeriod();
+                        closure.year = selectedYear;
+                        closure.closing_date = DateTime.Now;
+                        closure.AccountingMovement = _accountingMovement;
+
+                        manager.My_db.ClosedPeriods.Add(closure);
+
+                        manager.My_db.SaveChanges();
 
                         MessageBox.Show("Period has been closed.");
+
                     }
                     else
                     {

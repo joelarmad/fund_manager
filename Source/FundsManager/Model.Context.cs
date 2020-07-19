@@ -44,7 +44,6 @@ namespace FundsManager
         public virtual DbSet<BookingGeneratedInterestDetail> BookingGeneratedInterestDetails { get; set; }
         public virtual DbSet<BookingGeneratedInterest> BookingGeneratedInterests { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
-        public virtual DbSet<ClosedPeriod> ClosedPeriods { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Creditor> Creditors { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
@@ -117,5 +116,6 @@ namespace FundsManager
         public virtual DbSet<TotalIncome> TotalIncomes { get; set; }
         public virtual DbSet<UnlinkedDisbursement> UnlinkedDisbursements { get; set; }
         public virtual DbSet<Disbursement> Disbursements { get; set; }
+        public virtual DbSet<ClosedPeriod> ClosedPeriods { get; set; }
     }
 }

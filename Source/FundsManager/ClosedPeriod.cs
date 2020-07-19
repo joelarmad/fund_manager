@@ -16,5 +16,8 @@ namespace FundsManager
     {
         public int year { get; set; }
         public System.DateTime closing_date { get; set; }
+        public int accounting_movement_id { get; set; }
+    
+        public virtual AccountingMovement AccountingMovement { get; set; }
     }
 }

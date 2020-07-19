@@ -32,6 +32,7 @@ namespace FundsManager
             this.LoanGeneratedInterestDetails = new HashSet<LoanGeneratedInterestDetail>();
             this.Loans = new HashSet<Loan>();
             this.Movements_Accounts = new HashSet<Movements_Accounts>();
+            this.ClosedPeriods = new HashSet<ClosedPeriod>();
         }
     
         public int Id { get; set; }
@@ -75,5 +76,7 @@ namespace FundsManager
         public virtual ICollection<Loan> Loans { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movements_Accounts> Movements_Accounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClosedPeriod> ClosedPeriods { get; set; }
     }
 }

@@ -217,6 +217,7 @@
           </Key>
           <Property Name="year" Type="int" Nullable="false" />
           <Property Name="closing_date" Type="datetime" Nullable="false" />
+          <Property Name="accounting_movement_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -935,6 +936,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementC
             <PropertyRef Name="delay_interest" />
             <PropertyRef Name="can_generate_interest" />
             <PropertyRef Name="booking_id" />
+            <PropertyRef Name="client_id" />
           </Key>
           <Property Name="fund_id" Type="int" Nullable="false" />
           <Property Name="contract" Type="varchar" MaxLength="50" Nullable="false" />
@@ -958,6 +960,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementC
           <Property Name="booking_id" Type="int" Nullable="false" />
           <Property Name="has_bookings" Type="bit" />
           <Property Name="collected" Type="bit" />
+          <Property Name="client_id" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementGeneratedInterestView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1079,6 +1082,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Disbursements
             <PropertyRef Name="can_generate_interest" />
             <PropertyRef Name="amount" />
             <PropertyRef Name="profit_share" />
+            <PropertyRef Name="client_id" />
           </Key>
           <Property Name="fund_id" Type="int" Nullable="false" />
           <Property Name="contract" Type="varchar" MaxLength="50" Nullable="false" />
@@ -1091,6 +1095,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Disbursements
           <Property Name="can_generate_interest" Type="bit" Nullable="false" />
           <Property Name="amount" Type="money" Nullable="false" />
           <Property Name="profit_share" Type="money" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementsToBeCollected' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1108,6 +1113,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Disbursements
             <PropertyRef Name="delay_interest" />
             <PropertyRef Name="can_generate_interest" />
             <PropertyRef Name="booking_id" />
+            <PropertyRef Name="client_id" />
           </Key>
           <Property Name="fund_id" Type="int" Nullable="false" />
           <Property Name="contract" Type="varchar" MaxLength="50" Nullable="false" />
@@ -1133,6 +1139,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Disbursements
           <Property Name="booking_id" Type="int" Nullable="false" />
           <Property Name="has_bookings" Type="bit" />
           <Property Name="collected" Type="bit" />
+          <Property Name="client_id" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.InvestmentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2114,6 +2121,18 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Principal>
             <Dependent Role="Clients">
               <PropertyRef Name="FK_Clients_Funds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClosedPeriods_AccountingMovements">
+          <End Role="AccountingMovements" Type="Self.AccountingMovements" Multiplicity="1" />
+          <End Role="ClosedPeriods" Type="Self.ClosedPeriods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingMovements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClosedPeriods">
+              <PropertyRef Name="accounting_movement_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3224,7 +3243,8 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
     [DisbursementCollectionView].[is_booking] AS [is_booking], 
     [DisbursementCollectionView].[booking_id] AS [booking_id], 
     [DisbursementCollectionView].[has_bookings] AS [has_bookings], 
-    [DisbursementCollectionView].[collected] AS [collected]
+    [DisbursementCollectionView].[collected] AS [collected], 
+    [DisbursementCollectionView].[client_id] AS [client_id]
     FROM [dbo].[DisbursementCollectionView] AS [DisbursementCollectionView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="DisbursementGeneratedInterestView" EntityType="Self.DisbursementGeneratedInterestView" store:Type="Views" store:Schema="dbo">
@@ -3303,7 +3323,8 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
     [DisbursementsForAddendums].[pay_date] AS [pay_date], 
     [DisbursementsForAddendums].[can_generate_interest] AS [can_generate_interest], 
     [DisbursementsForAddendums].[amount] AS [amount], 
-    [DisbursementsForAddendums].[profit_share] AS [profit_share]
+    [DisbursementsForAddendums].[profit_share] AS [profit_share], 
+    [DisbursementsForAddendums].[client_id] AS [client_id]
     FROM [dbo].[DisbursementsForAddendums] AS [DisbursementsForAddendums]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="DisbursementsToBeCollected" EntityType="Self.DisbursementsToBeCollected" store:Type="Views" store:Schema="dbo">
@@ -3331,7 +3352,8 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
     [DisbursementsToBeCollected].[is_booking] AS [is_booking], 
     [DisbursementsToBeCollected].[booking_id] AS [booking_id], 
     [DisbursementsToBeCollected].[has_bookings] AS [has_bookings], 
-    [DisbursementsToBeCollected].[collected] AS [collected]
+    [DisbursementsToBeCollected].[collected] AS [collected], 
+    [DisbursementsToBeCollected].[client_id] AS [client_id]
     FROM [dbo].[DisbursementsToBeCollected] AS [DisbursementsToBeCollected]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="InvestmentsView" EntityType="Self.InvestmentsView" store:Type="Views" store:Schema="dbo">
@@ -3807,6 +3829,10 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="Funds" EntitySet="Funds" />
             <End Role="Clients" EntitySet="Clients" />
           </AssociationSet>
+          <AssociationSet Name="FK_ClosedPeriods_AccountingMovements" Association="Self.FK_ClosedPeriods_AccountingMovements">
+            <End Role="AccountingMovements" EntitySet="AccountingMovements" />
+            <End Role="ClosedPeriods" EntitySet="ClosedPeriods" />
+          </AssociationSet>
           <AssociationSet Name="FK_Countries_Funds" Association="Self.FK_Countries_Funds">
             <End Role="Funds" EntitySet="Funds" />
             <End Role="Countries" EntitySet="Countries" />
@@ -4116,7 +4142,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySet Name="BookingGeneratedInterestDetails" EntityType="FundsDBModel.BookingGeneratedInterestDetail" />
           <EntitySet Name="BookingGeneratedInterests" EntityType="FundsDBModel.BookingGeneratedInterest" />
           <EntitySet Name="Clients" EntityType="FundsDBModel.Client" />
-          <EntitySet Name="ClosedPeriods" EntityType="FundsDBModel.ClosedPeriod" />
           <EntitySet Name="Countries" EntityType="FundsDBModel.Country" />
           <EntitySet Name="Creditors" EntityType="FundsDBModel.Creditor" />
           <EntitySet Name="Currencies" EntityType="FundsDBModel.Currency" />
@@ -4629,6 +4654,11 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="Disbursement" EntitySet="Disbursements" />
             <End Role="DisbursementPayment" EntitySet="DisbursementPayments" />
           </AssociationSet>
+          <EntitySet Name="ClosedPeriods" EntityType="FundsDBModel.ClosedPeriod" />
+          <AssociationSet Name="FK_ClosedPeriods_AccountingMovements" Association="FundsDBModel.FK_ClosedPeriods_AccountingMovements">
+            <End Role="AccountingMovement" EntitySet="AccountingMovements" />
+            <End Role="ClosedPeriod" EntitySet="ClosedPeriods" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AccountingMovement">
           <Key>
@@ -4659,6 +4689,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="LoanGeneratedInterestDetails" Relationship="FundsDBModel.FK_LoanGeneratedInterestDetails_AccountingMovements" FromRole="AccountingMovement" ToRole="LoanGeneratedInterestDetail" />
           <NavigationProperty Name="Loans" Relationship="FundsDBModel.FK_Loans_Accounting_Movement" FromRole="AccountingMovement" ToRole="Loan" />
           <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_Movements_Accounts_AccountingMovements" FromRole="AccountingMovement" ToRole="Movements_Accounts" />
+          <NavigationProperty Name="ClosedPeriods" Relationship="FundsDBModel.FK_ClosedPeriods_AccountingMovements" FromRole="AccountingMovement" ToRole="ClosedPeriod" />
         </EntityType>
         <EntityType Name="Account">
           <Key>
@@ -4907,13 +4938,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="Country" Relationship="FundsDBModel.FK_Clients_Countries" FromRole="Client" ToRole="Country" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Clients_Funds" FromRole="Client" ToRole="Fund" />
           <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Clients" FromRole="Client" ToRole="Disbursement" />
-        </EntityType>
-        <EntityType Name="ClosedPeriod">
-          <Key>
-            <PropertyRef Name="year" />
-          </Key>
-          <Property Name="year" Type="Int32" Nullable="false" />
-          <Property Name="closing_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -5702,6 +5726,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <PropertyRef Name="delay_interest" />
             <PropertyRef Name="can_generate_interest" />
             <PropertyRef Name="booking_id" />
+            <PropertyRef Name="client_id" />
           </Key>
           <Property Name="fund_id" Type="Int32" Nullable="false" />
           <Property Name="contract" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -5725,6 +5750,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="booking_id" Type="Int32" Nullable="false" />
           <Property Name="has_bookings" Type="Boolean" />
           <Property Name="collected" Type="Boolean" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="DisbursementGeneratedInterestView">
           <Key>
@@ -5838,6 +5864,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <PropertyRef Name="can_generate_interest" />
             <PropertyRef Name="amount" />
             <PropertyRef Name="profit_share" />
+            <PropertyRef Name="client_id" />
           </Key>
           <Property Name="fund_id" Type="Int32" Nullable="false" />
           <Property Name="contract" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -5850,6 +5877,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="can_generate_interest" Type="Boolean" Nullable="false" />
           <Property Name="amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="profit_share" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="DisbursementsToBeCollected">
           <Key>
@@ -5865,6 +5893,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <PropertyRef Name="delay_interest" />
             <PropertyRef Name="can_generate_interest" />
             <PropertyRef Name="booking_id" />
+            <PropertyRef Name="client_id" />
           </Key>
           <Property Name="fund_id" Type="Int32" Nullable="false" />
           <Property Name="contract" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -5890,6 +5919,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="booking_id" Type="Int32" Nullable="false" />
           <Property Name="has_bookings" Type="Boolean" />
           <Property Name="collected" Type="Boolean" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="InvestmentsView">
           <Key>
@@ -7718,6 +7748,27 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="*" />
           <End Type="FundsDBModel.DisbursementPayment" Role="DisbursementPayment" Multiplicity="*" />
         </Association>
+        <EntityType Name="ClosedPeriod">
+          <Key>
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="closing_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="accounting_movement_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_ClosedPeriods_AccountingMovements" FromRole="ClosedPeriod" ToRole="AccountingMovement" />
+        </EntityType>
+        <Association Name="FK_ClosedPeriods_AccountingMovements">
+          <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="1" />
+          <End Type="FundsDBModel.ClosedPeriod" Role="ClosedPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingMovement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClosedPeriod">
+              <PropertyRef Name="accounting_movement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7945,14 +7996,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
                 <ScalarProperty Name="FK_Clients_Funds" ColumnName="FK_Clients_Funds" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ClosedPeriods">
-            <EntityTypeMapping TypeName="FundsDBModel.ClosedPeriod">
-              <MappingFragment StoreEntitySet="ClosedPeriods">
-                <ScalarProperty Name="closing_date" ColumnName="closing_date" />
-                <ScalarProperty Name="year" ColumnName="year" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8556,6 +8599,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySetMapping Name="DisbursementCollectionViews">
             <EntityTypeMapping TypeName="FundsDBModel.DisbursementCollectionView">
               <MappingFragment StoreEntitySet="DisbursementCollectionView">
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
                 <ScalarProperty Name="collected" ColumnName="collected" />
                 <ScalarProperty Name="has_bookings" ColumnName="has_bookings" />
                 <ScalarProperty Name="booking_id" ColumnName="booking_id" />
@@ -8654,6 +8698,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySetMapping Name="DisbursementsForAddendums">
             <EntityTypeMapping TypeName="FundsDBModel.DisbursementsForAddendum">
               <MappingFragment StoreEntitySet="DisbursementsForAddendums">
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
                 <ScalarProperty Name="profit_share" ColumnName="profit_share" />
                 <ScalarProperty Name="amount" ColumnName="amount" />
                 <ScalarProperty Name="can_generate_interest" ColumnName="can_generate_interest" />
@@ -8671,6 +8716,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySetMapping Name="DisbursementsToBeCollecteds">
             <EntityTypeMapping TypeName="FundsDBModel.DisbursementsToBeCollected">
               <MappingFragment StoreEntitySet="DisbursementsToBeCollected">
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
                 <ScalarProperty Name="collected" ColumnName="collected" />
                 <ScalarProperty Name="has_bookings" ColumnName="has_bookings" />
                 <ScalarProperty Name="booking_id" ColumnName="booking_id" />
@@ -9088,6 +9134,15 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
               <ScalarProperty Name="Id" ColumnName="disbursement_id" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="ClosedPeriods">
+            <EntityTypeMapping TypeName="FundsDBModel.ClosedPeriod">
+              <MappingFragment StoreEntitySet="ClosedPeriods">
+                <ScalarProperty Name="accounting_movement_id" ColumnName="accounting_movement_id" />
+                <ScalarProperty Name="closing_date" ColumnName="closing_date" />
+                <ScalarProperty Name="year" ColumnName="year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

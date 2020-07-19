@@ -24,7 +24,6 @@
         <EntityTypeShape EntityType="FundsDBModel.BookingGeneratedInterestDetail" Width="1.5" PointX="16.5" PointY="80.75" />
         <EntityTypeShape EntityType="FundsDBModel.BookingGeneratedInterest" Width="1.5" PointX="14.25" PointY="93.25" />
         <EntityTypeShape EntityType="FundsDBModel.Client" Width="1.5" PointX="5.25" PointY="69.125" />
-        <EntityTypeShape EntityType="FundsDBModel.ClosedPeriod" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="FundsDBModel.Country" Width="1.5" PointX="3" PointY="66.25" />
         <EntityTypeShape EntityType="FundsDBModel.Creditor" Width="1.5" PointX="3" PointY="92.25" />
         <EntityTypeShape EntityType="FundsDBModel.Currency" Width="1.5" PointX="3" PointY="81.875" />
@@ -207,6 +206,8 @@
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Shipments" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_UnderlyingDebtors" />
         <AssociationConnector Association="FundsDBModel.DisbursementPaymentDetails" />
+        <EntityTypeShape EntityType="FundsDBModel.ClosedPeriod" Width="1.5" PointX="10.5" PointY="65.25" />
+        <AssociationConnector Association="FundsDBModel.FK_ClosedPeriods_AccountingMovements" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
