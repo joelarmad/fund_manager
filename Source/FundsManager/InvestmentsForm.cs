@@ -321,6 +321,8 @@ namespace FundsManager
                     }
                 }
 
+                int plus = 1;
+
                 foreach (Disbursement _disbursement in disbursements)
                 {
                     _disbursement.Investment = _newInvestment;
@@ -331,6 +333,19 @@ namespace FundsManager
 
                     if (_disbursement.Id == 0)
                     {
+                        int? groupId = manager.My_db.Disbursements.Max(x => x.group_id);
+
+                        if (!groupId.HasValue)
+                        {
+                            groupId = 1;
+                        }
+
+                        groupId += plus;
+
+                        plus++;
+
+                        _disbursement.group_id = groupId;
+
                         manager.My_db.Disbursements.Add(_disbursement);
                     }
                     else
