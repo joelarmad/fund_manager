@@ -57,12 +57,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtExchangeRate = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cbCurrency = new System.Windows.Forms.ComboBox();
             this.currenciesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
-            this.label2 = new System.Windows.Forms.Label();
             this.txtAmount = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNumber = new System.Windows.Forms.TextBox();
@@ -129,7 +125,7 @@
             // 
             // txtDelayInterest
             // 
-            this.txtDelayInterest.Location = new System.Drawing.Point(97, 156);
+            this.txtDelayInterest.Location = new System.Drawing.Point(97, 87);
             this.txtDelayInterest.Name = "txtDelayInterest";
             this.txtDelayInterest.Size = new System.Drawing.Size(121, 20);
             this.txtDelayInterest.TabIndex = 243;
@@ -142,7 +138,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(20, 159);
+            this.label12.Location = new System.Drawing.Point(20, 90);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(75, 13);
             this.label12.TabIndex = 266;
@@ -254,7 +250,7 @@
             // 
             // lblTotalToBeCollected
             // 
-            this.lblTotalToBeCollected.Location = new System.Drawing.Point(125, 228);
+            this.lblTotalToBeCollected.Location = new System.Drawing.Point(125, 159);
             this.lblTotalToBeCollected.Name = "lblTotalToBeCollected";
             this.lblTotalToBeCollected.ReadOnly = true;
             this.lblTotalToBeCollected.Size = new System.Drawing.Size(100, 20);
@@ -264,7 +260,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(15, 231);
+            this.label10.Location = new System.Drawing.Point(15, 162);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(108, 13);
             this.label10.TabIndex = 260;
@@ -289,7 +285,7 @@
             // 
             // txtProfitShare
             // 
-            this.txtProfitShare.Location = new System.Drawing.Point(97, 122);
+            this.txtProfitShare.Location = new System.Drawing.Point(97, 53);
             this.txtProfitShare.Name = "txtProfitShare";
             this.txtProfitShare.Size = new System.Drawing.Size(121, 20);
             this.txtProfitShare.TabIndex = 242;
@@ -302,7 +298,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(30, 125);
+            this.label7.Location = new System.Drawing.Point(30, 56);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(65, 13);
             this.label7.TabIndex = 253;
@@ -335,41 +331,6 @@
             this.label4.TabIndex = 244;
             this.label4.Text = "Client:";
             // 
-            // txtExchangeRate
-            // 
-            this.txtExchangeRate.Enabled = false;
-            this.txtExchangeRate.Location = new System.Drawing.Point(97, 88);
-            this.txtExchangeRate.Name = "txtExchangeRate";
-            this.txtExchangeRate.Size = new System.Drawing.Size(121, 20);
-            this.txtExchangeRate.TabIndex = 240;
-            this.txtExchangeRate.Text = "1.0000000";
-            this.txtExchangeRate.Click += new System.EventHandler(this.txtExchangeRate_Click);
-            this.txtExchangeRate.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtExchangeRate_KeyUp);
-            this.txtExchangeRate.Leave += new System.EventHandler(this.txtExchangeRate_Leave);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 91);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 13);
-            this.label3.TabIndex = 241;
-            this.label3.Text = "Exchange Rate:";
-            // 
-            // cbCurrency
-            // 
-            this.cbCurrency.DataSource = this.currenciesBindingSource;
-            this.cbCurrency.DisplayMember = "name";
-            this.cbCurrency.Enabled = false;
-            this.cbCurrency.FormattingEnabled = true;
-            this.cbCurrency.Location = new System.Drawing.Point(97, 53);
-            this.cbCurrency.Name = "cbCurrency";
-            this.cbCurrency.Size = new System.Drawing.Size(121, 21);
-            this.cbCurrency.TabIndex = 239;
-            this.cbCurrency.ValueMember = "Id";
-            this.cbCurrency.SelectedIndexChanged += new System.EventHandler(this.cbCurrency_SelectedIndexChanged);
-            this.cbCurrency.Leave += new System.EventHandler(this.cbCurrency_Leave);
-            // 
             // currenciesBindingSource
             // 
             this.currenciesBindingSource.DataMember = "Currencies";
@@ -379,15 +340,6 @@
             // 
             this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
             this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(43, 57);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 13);
-            this.label2.TabIndex = 238;
-            this.label2.Text = "Currency:";
             // 
             // txtAmount
             // 
@@ -412,7 +364,7 @@
             // 
             // txtNumber
             // 
-            this.txtNumber.Location = new System.Drawing.Point(97, 190);
+            this.txtNumber.Location = new System.Drawing.Point(97, 121);
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Size = new System.Drawing.Size(121, 20);
             this.txtNumber.TabIndex = 244;
@@ -422,7 +374,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(49, 192);
+            this.label16.Location = new System.Drawing.Point(49, 123);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(47, 13);
             this.label16.TabIndex = 277;
@@ -564,10 +516,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtExchangeRate);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.cbCurrency);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.txtAmount);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -611,10 +559,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtExchangeRate;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cbCurrency;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtAmount;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNumber;
