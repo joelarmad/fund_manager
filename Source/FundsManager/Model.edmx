@@ -218,6 +218,7 @@
           <Property Name="year" Type="int" Nullable="false" />
           <Property Name="closing_date" Type="datetime" Nullable="false" />
           <Property Name="accounting_movement_id" Type="int" Nullable="false" />
+          <Property Name="fund_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -2136,6 +2137,18 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ClosedPeriods_Funds">
+          <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
+          <End Role="ClosedPeriods" Type="Self.ClosedPeriods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClosedPeriods">
+              <PropertyRef Name="fund_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Countries_Funds">
           <End Role="Funds" Type="Self.Funds" Multiplicity="1" />
           <End Role="Countries" Type="Self.Countries" Multiplicity="*" />
@@ -3833,6 +3846,10 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="AccountingMovements" EntitySet="AccountingMovements" />
             <End Role="ClosedPeriods" EntitySet="ClosedPeriods" />
           </AssociationSet>
+          <AssociationSet Name="FK_ClosedPeriods_Funds" Association="Self.FK_ClosedPeriods_Funds">
+            <End Role="Funds" EntitySet="Funds" />
+            <End Role="ClosedPeriods" EntitySet="ClosedPeriods" />
+          </AssociationSet>
           <AssociationSet Name="FK_Countries_Funds" Association="Self.FK_Countries_Funds">
             <End Role="Funds" EntitySet="Funds" />
             <End Role="Countries" EntitySet="Countries" />
@@ -4659,6 +4676,10 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="AccountingMovement" EntitySet="AccountingMovements" />
             <End Role="ClosedPeriod" EntitySet="ClosedPeriods" />
           </AssociationSet>
+          <AssociationSet Name="FK_ClosedPeriods_Funds" Association="FundsDBModel.FK_ClosedPeriods_Funds">
+            <End Role="Fund" EntitySet="Funds" />
+            <End Role="ClosedPeriod" EntitySet="ClosedPeriods" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AccountingMovement">
           <Key>
@@ -5168,6 +5189,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="Subaccounts" Relationship="FundsDBModel.FK_Subaccounts_Funds" FromRole="Fund" ToRole="Subaccount" />
           <NavigationProperty Name="UnderlyingDebtors" Relationship="FundsDBModel.FK_UnderlyingDebtors_Funds" FromRole="Fund" ToRole="UnderlyingDebtor" />
           <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Funds" FromRole="Fund" ToRole="Disbursement" />
+          <NavigationProperty Name="ClosedPeriods" Relationship="FundsDBModel.FK_ClosedPeriods_Funds" FromRole="Fund" ToRole="ClosedPeriod" />
         </EntityType>
         <EntityType Name="Investment">
           <Key>
@@ -7755,7 +7777,9 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="closing_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="accounting_movement_id" Type="Int32" Nullable="false" />
+          <Property Name="fund_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AccountingMovement" Relationship="FundsDBModel.FK_ClosedPeriods_AccountingMovements" FromRole="ClosedPeriod" ToRole="AccountingMovement" />
+          <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_ClosedPeriods_Funds" FromRole="ClosedPeriod" ToRole="Fund" />
         </EntityType>
         <Association Name="FK_ClosedPeriods_AccountingMovements">
           <End Type="FundsDBModel.AccountingMovement" Role="AccountingMovement" Multiplicity="1" />
@@ -7766,6 +7790,18 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Principal>
             <Dependent Role="ClosedPeriod">
               <PropertyRef Name="accounting_movement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClosedPeriods_Funds">
+          <End Type="FundsDBModel.Fund" Role="Fund" Multiplicity="1" />
+          <End Type="FundsDBModel.ClosedPeriod" Role="ClosedPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fund">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClosedPeriod">
+              <PropertyRef Name="fund_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9137,6 +9173,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySetMapping Name="ClosedPeriods">
             <EntityTypeMapping TypeName="FundsDBModel.ClosedPeriod">
               <MappingFragment StoreEntitySet="ClosedPeriods">
+                <ScalarProperty Name="fund_id" ColumnName="fund_id" />
                 <ScalarProperty Name="accounting_movement_id" ColumnName="accounting_movement_id" />
                 <ScalarProperty Name="closing_date" ColumnName="closing_date" />
                 <ScalarProperty Name="year" ColumnName="year" />

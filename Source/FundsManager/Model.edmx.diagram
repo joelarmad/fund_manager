@@ -206,8 +206,9 @@
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_Shipments" />
         <AssociationConnector Association="FundsDBModel.FK_Disbursements_UnderlyingDebtors" />
         <AssociationConnector Association="FundsDBModel.DisbursementPaymentDetails" />
-        <EntityTypeShape EntityType="FundsDBModel.ClosedPeriod" Width="1.5" PointX="10.5" PointY="65.25" />
+        <EntityTypeShape EntityType="FundsDBModel.ClosedPeriod" Width="1.5" PointX="16.5" PointY="70" />
         <AssociationConnector Association="FundsDBModel.FK_ClosedPeriods_AccountingMovements" />
+        <AssociationConnector Association="FundsDBModel.FK_ClosedPeriods_Funds" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

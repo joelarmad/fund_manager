@@ -166,7 +166,7 @@ namespace FundsManager
 
             try
             {
-                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpPayDate.Value.Year) == null)
+                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpPayDate.Value.Year && x.fund_id == manager.Selected) == null)
                 {
                     if (account125 != null)
                     {

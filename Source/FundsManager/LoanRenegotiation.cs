@@ -104,7 +104,7 @@ namespace FundsManager
 
                 if (decimal.TryParse(txtNewAmount.Text.Trim(), out amount) && decimal.TryParse(txtNewInterest.Text.Trim(), out interest) && amount > 0 && interest > 0)
                 {
-                    if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpStart.Value.Year) == null)
+                    if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpStart.Value.Year && x.fund_id == manager.Selected) == null)
                     {
                         Loan _validation = manager.My_db.Loans.FirstOrDefault(x => x.reference == txtNewReference.Text && x.fund_id == manager.Selected);
 

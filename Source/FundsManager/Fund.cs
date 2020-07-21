@@ -47,6 +47,7 @@ namespace FundsManager
             this.Subaccounts = new HashSet<Subaccount>();
             this.UnderlyingDebtors = new HashSet<UnderlyingDebtor>();
             this.Disbursements = new HashSet<Disbursement>();
+            this.ClosedPeriods = new HashSet<ClosedPeriod>();
         }
     
         public int Id { get; set; }
@@ -114,5 +115,7 @@ namespace FundsManager
         public virtual ICollection<UnderlyingDebtor> UnderlyingDebtors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disbursement> Disbursements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClosedPeriod> ClosedPeriods { get; set; }
     }
 }

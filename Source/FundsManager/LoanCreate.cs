@@ -116,7 +116,7 @@ namespace FundsManager
         {
             try
             {
-                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpFrom.Value.Year) == null)
+                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpFrom.Value.Year && x.fund_id == manager.Selected) == null)
                 {
                     int lenderId = Convert.ToInt32(cbLender.SelectedValue);
                     int currencyId = Convert.ToInt32(cbCurrency.SelectedValue);

@@ -142,7 +142,7 @@ namespace FundsManager
 
         private void cmdGenerateAll_Click(object sender, EventArgs e)
         {
-            if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpDate.Value.Year) == null)
+            if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpDate.Value.Year && x.fund_id == manager.Selected) == null)
             {
                 generate(true);
 

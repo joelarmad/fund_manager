@@ -80,7 +80,7 @@ namespace FundsManager
         {
             try
             {
-                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpIssuingDate.Value.Year) == null)
+                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpIssuingDate.Value.Year && x.fund_id == manager.Selected) == null)
                 {
                     if (doValidations())
                     {

@@ -615,7 +615,7 @@ namespace FundsManager
         {
             try
             {
-                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpBookingDate.Value.Year) == null)
+                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpBookingDate.Value.Year && x.fund_id == manager.Selected) == null)
                 {
                     decimal totalAmount = bookings.Sum(x => x.amount);
                     decimal totalProfitShare = bookings.Sum(x => x.profit_share);

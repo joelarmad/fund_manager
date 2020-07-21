@@ -116,7 +116,7 @@ namespace FundsManager
                 {
                     try
                     {
-                        if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpDate.Value.Year) == null)
+                        if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpDate.Value.Year && x.fund_id == manager.Selected) == null)
                         {
                             DateTime _date = Convert.ToDateTime(dtpDate.Text);
 
@@ -335,7 +335,7 @@ namespace FundsManager
 
         private void cmdGenerateAllInterest_Click(object sender, EventArgs e)
         {
-            if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpDate.Value.Year) == null)
+            if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpDate.Value.Year && x.fund_id == manager.Selected) == null)
             {
                 generateInterest(true);
 

@@ -387,7 +387,7 @@ namespace FundsManager
                 try
                 {
                     DateTime date = Convert.ToDateTime(dateTimePicker1.Text);
-                    if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == date.Year) == null)
+                    if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == date.Year && x.fund_id == manager.Selected) == null)
                     {
                         if (!FormInEditAccountingMovement)
                         {

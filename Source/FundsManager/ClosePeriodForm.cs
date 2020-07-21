@@ -45,7 +45,7 @@ namespace FundsManager
                 {
                     selectedYear = year;
 
-                    ClosedPeriod closedPeriod = manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == year);
+                    ClosedPeriod closedPeriod = manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == year && x.fund_id == manager.Selected);
 
                     if (closedPeriod != null)
                     {
@@ -53,11 +53,11 @@ namespace FundsManager
                         return;
                     }
 
-                    List<MovementsView> movements = manager.My_db.MovementsViews.Where(x => (x.TypeId == 3 || x.TypeId == 4) && x.Date.Year == year).ToList();
+                    List<MovementsView> movements = manager.My_db.MovementsViews.Where(x => (x.TypeId == 3 || x.TypeId == 4) && x.Date.Year == year && x.FundId == manager.Selected).ToList();
 
                     if (movements.Count == 0)
                     {
-                        ErrorMessage.showErrorMessage(new Exception("No data in selected period."));
+                        ErrorMessage.showErrorMessage(new Exception("No found data in selected period."));
                         return;
                     }
 
@@ -134,6 +134,7 @@ namespace FundsManager
                         closure.year = selectedYear;
                         closure.closing_date = DateTime.Now;
                         closure.AccountingMovement = _accountingMovement;
+                        closure.fund_id = manager.Selected;
 
                         manager.My_db.ClosedPeriods.Add(closure);
 

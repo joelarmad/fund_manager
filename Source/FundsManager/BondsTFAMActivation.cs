@@ -29,7 +29,7 @@ namespace FundsManager
         {
             try
             {
-                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpActivationDate.Value.Year) == null)
+                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpActivationDate.Value.Year && x.fund_id == manager.Selected) == null)
                 {
                     if (cbBond.SelectedItem != null)
                     {
