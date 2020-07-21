@@ -29,33 +29,26 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.accountBalanceViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource3 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.cmdFilter = new System.Windows.Forms.Button();
+            this.accountBalanceViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fundsDBDataSet = new FundsManager.FundsDBDataSet();
             this.accountBalanceViewTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountBalanceViewTableAdapter();
+            this.accountBalanceClosedPeriodViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.accountBalanceClosedPeriodTableAdapter = new FundsManager.FundsDBDataSetTableAdapters.AccountBalanceClosedPeriodTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.accountBalanceViewBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.accountBalanceClosedPeriodViewBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // accountBalanceViewBindingSource
-            // 
-            this.accountBalanceViewBindingSource.DataMember = "AccountBalanceView";
-            this.accountBalanceViewBindingSource.DataSource = this.fundsDBDataSet;
-            // 
-            // fundsDBDataSet
-            // 
-            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
-            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // reportViewer1
             // 
-            reportDataSource1.Name = "DataSet1";
-            reportDataSource1.Value = this.accountBalanceViewBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
+            reportDataSource3.Name = "DataSet1";
+            reportDataSource3.Value = this.accountBalanceViewBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource3);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "FundsManager.Reports.GeneralBalance.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(12, 70);
             this.reportViewer1.Name = "reportViewer1";
@@ -90,15 +83,34 @@
             this.cmdFilter.UseVisualStyleBackColor = true;
             this.cmdFilter.Click += new System.EventHandler(this.cmdFilter_Click);
             // 
+            // accountBalanceViewBindingSource
+            // 
+            this.accountBalanceViewBindingSource.DataMember = "AccountBalanceView";
+            this.accountBalanceViewBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // fundsDBDataSet
+            // 
+            this.fundsDBDataSet.DataSetName = "FundsDBDataSet";
+            this.fundsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // accountBalanceViewTableAdapter
             // 
             this.accountBalanceViewTableAdapter.ClearBeforeFill = true;
+            // 
+            // accountBalanceClosedPeriodViewBindingSource
+            // 
+            this.accountBalanceClosedPeriodViewBindingSource.DataMember = "AccountBalanceClosedPeriodView";
+            this.accountBalanceClosedPeriodViewBindingSource.DataSource = this.fundsDBDataSet;
+            // 
+            // accountBalanceClosedPeriodTableAdapter
+            // 
+            this.accountBalanceClosedPeriodTableAdapter.ClearBeforeFill = true;
             // 
             // GeneralBalanceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(829, 551);
+            this.ClientSize = new System.Drawing.Size(823, 555);
             this.Controls.Add(this.cmdFilter);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dtpTo);
@@ -111,6 +123,7 @@
             this.Load += new System.EventHandler(this.GeneralBalanceForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.accountBalanceViewBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.accountBalanceClosedPeriodViewBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,5 +138,7 @@
         private System.Windows.Forms.Button cmdFilter;
         private System.Windows.Forms.BindingSource accountBalanceViewBindingSource;
         private FundsDBDataSetTableAdapters.AccountBalanceViewTableAdapter accountBalanceViewTableAdapter;
+        private System.Windows.Forms.BindingSource accountBalanceClosedPeriodViewBindingSource;
+        private FundsDBDataSetTableAdapters.AccountBalanceClosedPeriodTableAdapter accountBalanceClosedPeriodTableAdapter;
     }
 }

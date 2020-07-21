@@ -40,12 +40,28 @@ namespace FundsManager.ReportForms
             {
                 DateTime to = dtpTo.Value.Date.AddDays(1).AddSeconds(-1);
                 DateTime toLastPeriod = to.AddYears(-1);
-
-                this.accountBalanceViewTableAdapter.Fill(this.fundsDBDataSet.AccountBalanceView, manager.Selected, to, toLastPeriod);
-
+                
                 ReportParameter language = new ReportParameter("Language", Thread.CurrentThread.CurrentCulture.Name);
                 ReportParameter current = new ReportParameter("Current", to.Year.ToString());
                 ReportParameter last = new ReportParameter("Last", toLastPeriod.Year.ToString());
+
+                if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpTo.Value.Year && x.fund_id == manager.Selected) == null)
+                {
+                    this.accountBalanceViewTableAdapter.Fill(this.fundsDBDataSet.AccountBalanceView, manager.Selected, to, toLastPeriod);
+                    var rds = new ReportDataSource("DataSet1", (DataTable)this.fundsDBDataSet.AccountBalanceView);
+
+                    reportViewer1.LocalReport.DataSources.Clear();
+                    reportViewer1.LocalReport.DataSources.Add(rds);
+                }
+                else
+                {
+                    this.accountBalanceClosedPeriodTableAdapter.Fill(this.fundsDBDataSet.AccountBalanceClosedPeriodView, manager.Selected, to, toLastPeriod);
+                    var rds = new ReportDataSource("DataSet1", (DataTable)this.fundsDBDataSet.AccountBalanceClosedPeriodView);
+
+                    reportViewer1.LocalReport.DataSources.Clear();
+                    reportViewer1.LocalReport.DataSources.Add(rds);
+                }
+                
 
                 reportViewer1.LocalReport.SetParameters(language);
                 reportViewer1.LocalReport.SetParameters(current);
