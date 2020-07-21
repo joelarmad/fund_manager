@@ -18,6 +18,10 @@ namespace FundsManager
         int selectedYear = 0;
         decimal credit = 0;
         decimal debit = 0;
+        decimal debitAdjustment = 0;
+        decimal creditAdjustment = 0;
+
+        Dictionary<int, decimal> accountBalances = new Dictionary<int, decimal>();
 
         public ClosePeriodForm()
         {
@@ -36,7 +40,7 @@ namespace FundsManager
                 credit = 0;
                 debit = 0;
 
-                decimal shiftAmoutIncomes = 0;
+                decimal shiftAmountIncomes = 0;
                 decimal shiftAmountExpenses = 0;
 
                 int year = 0;
@@ -65,20 +69,34 @@ namespace FundsManager
                     {
                         if (movement.TypeId == 3)
                         {
-                            shiftAmoutIncomes += movement.Shift_Amount.Value;
+                            shiftAmountIncomes += movement.Shift_Amount.Value;
                         }
                         else
                         {
                             shiftAmountExpenses += movement.Shift_Amount.Value;
                         }
+
+                        if (accountBalances.ContainsKey(movement.account_id))
+                        {
+                            accountBalances[movement.account_id] += movement.Shift_Amount.Value;
+                        }
+                        else
+                        {
+                            accountBalances.Add(movement.account_id, movement.Shift_Amount.Value);
+                        }
                     }
 
-                    if (shiftAmoutIncomes > 0 || shiftAmoutIncomes > 0)
+                    debitAdjustment = shiftAmountExpenses > shiftAmountIncomes ? shiftAmountExpenses - shiftAmountIncomes : 0;
+                    creditAdjustment = shiftAmountIncomes > shiftAmountExpenses ? shiftAmountIncomes - shiftAmountExpenses : 0;
+
+                    if (shiftAmountIncomes > 0 || shiftAmountIncomes > 0)
                     {
                         credit = shiftAmountExpenses;
-                        debit = shiftAmoutIncomes;
+                        debit = shiftAmountIncomes;
                         lblCredit.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", shiftAmountExpenses);
-                        lblDebit.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", shiftAmoutIncomes);
+                        lblCreditAdjustment.Text = creditAdjustment > 0 ? "+ " + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", creditAdjustment) : "";
+                        lblDebit.Text = String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", shiftAmountIncomes);
+                        lblDebitAdjustment.Text = debitAdjustment > 0 ? "+ " + String.Format(System.Globalization.CultureInfo.CreateSpecificCulture("es-ES"), "{0:C2}", debitAdjustment) : "";
 
                         cmdClose.Enabled = true;
                     }
@@ -114,20 +132,37 @@ namespace FundsManager
                         _accountingMovement.original_reference = "";
 
                         manager.My_db.AccountingMovements.Add(_accountingMovement);
+                        
+                        foreach (KeyValuePair<int, decimal> item in accountBalances)
+                        {
+                            Account acct = manager.My_db.Accounts.FirstOrDefault(x => x.Id == item.Key);
+
+                            Movements_Accounts movement = new Movements_Accounts();
+
+                            movement.AccountingMovement = _accountingMovement;
+                            movement.FK_Movements_Accounts_Funds = manager.Selected;
+                            movement.FK_Movements_Accounts_Accounts = item.Key;
+                            movement.debit = acct.type == 3 ? Math.Round(item.Value, 2) : 0;
+                            movement.credit = acct.type == 4 ? Math.Round(item.Value, 2) : 0;
+
+                            manager.My_db.Movements_Accounts.Add(movement);
+                        }
 
                         Movements_Accounts _maccount999 = new Movements_Accounts();
 
                         _maccount999.AccountingMovement = _accountingMovement;
                         _maccount999.FK_Movements_Accounts_Funds = manager.Selected;
                         _maccount999.FK_Movements_Accounts_Accounts = account999.Id;
-                        _maccount999.debit = Math.Round(debit, 2);
-                        _maccount999.credit = Math.Round(credit, 2);
+                        _maccount999.debit = Math.Round(debitAdjustment, 2);
+                        _maccount999.credit = Math.Round(creditAdjustment, 2);
 
                         manager.My_db.Movements_Accounts.Add(_maccount999);
 
                         txtYear.Text = "";
                         lblCredit.Text = "";
                         lblDebit.Text = "";
+                        lblCreditAdjustment.Text = "";
+                        lblDebitAdjustment.Text = "";
                         cmdClose.Enabled = false;
                         
                         ClosedPeriod closure = new ClosedPeriod();
@@ -161,6 +196,11 @@ namespace FundsManager
             {
                 cmdFind_Click(null, null);
             }
+        }
+
+        private void ClosePeriodForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

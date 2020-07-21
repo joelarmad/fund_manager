@@ -37,6 +37,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cmdFind = new System.Windows.Forms.Button();
+            this.lblCreditAdjustment = new System.Windows.Forms.Label();
+            this.lblDebitAdjustment = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,14 +72,16 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblDebitAdjustment);
+            this.groupBox1.Controls.Add(this.lblCreditAdjustment);
             this.groupBox1.Controls.Add(this.lblDebit);
             this.groupBox1.Controls.Add(this.lblCredit);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.cmdClose);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(27, 69);
+            this.groupBox1.Location = new System.Drawing.Point(27, 72);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(333, 135);
+            this.groupBox1.Size = new System.Drawing.Size(508, 135);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Movement to 999 account";
@@ -85,7 +89,7 @@
             // lblDebit
             // 
             this.lblDebit.AutoSize = true;
-            this.lblDebit.Location = new System.Drawing.Point(209, 33);
+            this.lblDebit.Location = new System.Drawing.Point(271, 33);
             this.lblDebit.Name = "lblDebit";
             this.lblDebit.Size = new System.Drawing.Size(0, 13);
             this.lblDebit.TabIndex = 4;
@@ -93,7 +97,7 @@
             // lblCredit
             // 
             this.lblCredit.AutoSize = true;
-            this.lblCredit.Location = new System.Drawing.Point(60, 33);
+            this.lblCredit.Location = new System.Drawing.Point(61, 33);
             this.lblCredit.Name = "lblCredit";
             this.lblCredit.Size = new System.Drawing.Size(0, 13);
             this.lblCredit.TabIndex = 3;
@@ -101,7 +105,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(168, 33);
+            this.label3.Location = new System.Drawing.Point(230, 33);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 1;
@@ -126,11 +130,27 @@
             this.cmdFind.UseVisualStyleBackColor = true;
             this.cmdFind.Click += new System.EventHandler(this.cmdFind_Click);
             // 
+            // lblCreditAdjustment
+            // 
+            this.lblCreditAdjustment.AutoSize = true;
+            this.lblCreditAdjustment.Location = new System.Drawing.Point(61, 61);
+            this.lblCreditAdjustment.Name = "lblCreditAdjustment";
+            this.lblCreditAdjustment.Size = new System.Drawing.Size(0, 13);
+            this.lblCreditAdjustment.TabIndex = 6;
+            // 
+            // lblDebitAdjustment
+            // 
+            this.lblDebitAdjustment.AutoSize = true;
+            this.lblDebitAdjustment.Location = new System.Drawing.Point(271, 61);
+            this.lblDebitAdjustment.Name = "lblDebitAdjustment";
+            this.lblDebitAdjustment.Size = new System.Drawing.Size(0, 13);
+            this.lblDebitAdjustment.TabIndex = 7;
+            // 
             // ClosePeriodForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(392, 233);
+            this.ClientSize = new System.Drawing.Size(552, 225);
             this.Controls.Add(this.cmdFind);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtYear);
@@ -140,6 +160,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Close Period";
+            this.Load += new System.EventHandler(this.ClosePeriodForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -158,5 +179,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button cmdFind;
+        private System.Windows.Forms.Label lblDebitAdjustment;
+        private System.Windows.Forms.Label lblCreditAdjustment;
     }
 }
