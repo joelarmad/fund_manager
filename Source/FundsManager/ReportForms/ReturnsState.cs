@@ -24,7 +24,8 @@ namespace FundsManager.ReportForms
 
         private void ReturnsState_Load(object sender, EventArgs e)
         {
-            dtpTo.Value = DateTime.Now.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+            //WARNING second 58 is a fix for excluding closing period
+            dtpTo.Value = DateTime.Now.Date.AddHours(23).AddMinutes(59).AddSeconds(58);
 
             refreshData();
         }

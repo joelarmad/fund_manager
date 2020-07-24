@@ -21,7 +21,7 @@ namespace FundsManager
         decimal debitAdjustment = 0;
         decimal creditAdjustment = 0;
 
-        Dictionary<int, decimal> accountBalances = new Dictionary<int, decimal>();
+        Dictionary<string, decimal> accountBalances = new Dictionary<string, decimal>();
 
         public ClosePeriodForm()
         {
@@ -76,13 +76,18 @@ namespace FundsManager
                             shiftAmountExpenses += movement.Shift_Amount.Value;
                         }
 
-                        if (accountBalances.ContainsKey(movement.account_id))
+                        string key = movement.account_id.ToString() + "_" +
+                            (movement.SubAccountId.HasValue ? movement.SubAccountId.Value.ToString() : "x") + "_" +
+                            (movement.detail_type.HasValue ? movement.detail_type.Value.ToString() : "x") + "_" +
+                            (movement.detail_id.HasValue ? movement.detail_id.Value.ToString() : "x");
+
+                        if (accountBalances.ContainsKey(key))
                         {
-                            accountBalances[movement.account_id] += movement.Shift_Amount.Value;
+                            accountBalances[key] += movement.Shift_Amount.Value;
                         }
                         else
                         {
-                            accountBalances.Add(movement.account_id, movement.Shift_Amount.Value);
+                            accountBalances.Add(key, movement.Shift_Amount.Value);
                         }
                     }
 
@@ -132,16 +137,41 @@ namespace FundsManager
                         _accountingMovement.original_reference = "";
 
                         manager.My_db.AccountingMovements.Add(_accountingMovement);
-                        
-                        foreach (KeyValuePair<int, decimal> item in accountBalances)
-                        {
-                            Account acct = manager.My_db.Accounts.FirstOrDefault(x => x.Id == item.Key);
+
+                        foreach (KeyValuePair<string, decimal> item in accountBalances)
+                        { 
+                            string[] strKeys =  item.Key.Split('_');
+
+                            int accountId = int.Parse(strKeys[0]);
+                            int? subaccountId = null;
+                            int? detailType = null;
+                            int? detailId = null;
+
+                            if (strKeys[1] != "x")
+                            {
+                                subaccountId = int.Parse(strKeys[1]);
+                            }
+
+                            if (strKeys[2] != "x")
+                            {
+                                detailType = int.Parse(strKeys[2]);
+                            }
+
+                            if (strKeys[3] != "x")
+                            {
+                                detailId = int.Parse(strKeys[3]);
+                            }
+
+                            Account acct = manager.My_db.Accounts.FirstOrDefault(x => x.Id == accountId);
 
                             Movements_Accounts movement = new Movements_Accounts();
 
                             movement.AccountingMovement = _accountingMovement;
                             movement.FK_Movements_Accounts_Funds = manager.Selected;
-                            movement.FK_Movements_Accounts_Accounts = item.Key;
+                            movement.FK_Movements_Accounts_Accounts = accountId;
+                            movement.FK_Movements_Accounts_Subaccounts = subaccountId;
+                            movement.subaccount_type = detailType;
+                            movement.subaccount = detailId;
                             movement.debit = acct.type == 3 ? Math.Round(item.Value, 2) : 0;
                             movement.credit = acct.type == 4 ? Math.Round(item.Value, 2) : 0;
 
