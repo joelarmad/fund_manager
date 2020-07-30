@@ -291,7 +291,16 @@
           </Key>
           <Property Name="disbursement_collection_id" Type="int" Nullable="false" />
           <Property Name="disbursement_id" Type="int" Nullable="false" />
+          <Property Name="amount_to_be_collected" Type="money" Nullable="false" />
           <Property Name="amount_collected" Type="money" Nullable="false" />
+          <Property Name="principal_to_be_collected" Type="money" Nullable="false" />
+          <Property Name="principal_collected" Type="money" Nullable="false" />
+          <Property Name="profit_share_to_be_collected" Type="money" Nullable="false" />
+          <Property Name="profit_share_collected" Type="money" Nullable="false" />
+          <Property Name="delay_interest_be_collected" Type="money" Nullable="false" />
+          <Property Name="delay_interest_collected" Type="money" Nullable="false" />
+          <Property Name="overdue_to_be_collected" Type="money" Nullable="false" />
+          <Property Name="overdue_collected" Type="money" Nullable="false" />
           <Property Name="movement125_id" Type="int" />
           <Property Name="movement128_id" Type="int" />
           <Property Name="movement130_id" Type="int" />
@@ -956,6 +965,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.DisbursementC
           <Property Name="amount_collected" Type="money" />
           <Property Name="profit_share_collected" Type="money" />
           <Property Name="delay_interest_collected" Type="money" />
+          <Property Name="overdues_collected" Type="money" />
           <Property Name="can_generate_interest" Type="bit" Nullable="false" />
           <Property Name="is_booking" Type="bit" />
           <Property Name="booking_id" Type="int" Nullable="false" />
@@ -1135,6 +1145,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.Disbursements
           <Property Name="amount_remainig" Type="numeric" Precision="19" Scale="4" />
           <Property Name="profit_share_accrued_remaining" Type="numeric" Precision="19" Scale="4" />
           <Property Name="delay_interest_accrued_remaining" Type="money" />
+          <Property Name="overdues_accrued_remaining" Type="money" />
           <Property Name="can_generate_interest" Type="bit" Nullable="false" />
           <Property Name="is_booking" Type="bit" />
           <Property Name="booking_id" Type="int" Nullable="false" />
@@ -3252,6 +3263,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
     [DisbursementCollectionView].[amount_collected] AS [amount_collected], 
     [DisbursementCollectionView].[profit_share_collected] AS [profit_share_collected], 
     [DisbursementCollectionView].[delay_interest_collected] AS [delay_interest_collected], 
+    [DisbursementCollectionView].[overdues_collected] AS [overdues_collected], 
     [DisbursementCollectionView].[can_generate_interest] AS [can_generate_interest], 
     [DisbursementCollectionView].[is_booking] AS [is_booking], 
     [DisbursementCollectionView].[booking_id] AS [booking_id], 
@@ -3361,6 +3373,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
     [DisbursementsToBeCollected].[amount_remainig] AS [amount_remainig], 
     [DisbursementsToBeCollected].[profit_share_accrued_remaining] AS [profit_share_accrued_remaining], 
     [DisbursementsToBeCollected].[delay_interest_accrued_remaining] AS [delay_interest_accrued_remaining], 
+    [DisbursementsToBeCollected].[overdues_accrued_remaining] AS [overdues_accrued_remaining], 
     [DisbursementsToBeCollected].[can_generate_interest] AS [can_generate_interest], 
     [DisbursementsToBeCollected].[is_booking] AS [is_booking], 
     [DisbursementsToBeCollected].[booking_id] AS [booking_id], 
@@ -4166,7 +4179,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySet Name="Disbursement_dates" EntityType="FundsDBModel.Disbursement_dates" />
           <EntitySet Name="DisbursementBooks" EntityType="FundsDBModel.DisbursementBook" />
           <EntitySet Name="DisbursementCollections" EntityType="FundsDBModel.DisbursementCollection" />
-          <EntitySet Name="DisbursementCollectionsDetails" EntityType="FundsDBModel.DisbursementCollectionsDetail" />
           <EntitySet Name="DisbursementGeneratedInterestDetails" EntityType="FundsDBModel.DisbursementGeneratedInterestDetail" />
           <EntitySet Name="DisbursementGeneratedInterests" EntityType="FundsDBModel.DisbursementGeneratedInterest" />
           <EntitySet Name="DisbursementItems" EntityType="FundsDBModel.DisbursementItem" />
@@ -4478,22 +4490,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="Investment" EntitySet="Investments" />
             <End Role="DisbursementCollection" EntitySet="DisbursementCollections" />
           </AssociationSet>
-          <AssociationSet Name="FK_DisbursementCollectionsDetails_DisbursementCollection" Association="FundsDBModel.FK_DisbursementCollectionsDetails_DisbursementCollection">
-            <End Role="DisbursementCollection" EntitySet="DisbursementCollections" />
-            <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DisbursementCollectionsDetails_Mov125" Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125">
-            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
-            <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DisbursementCollectionsDetails_Mov128" Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov128">
-            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
-            <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DisbursementCollectionsDetails_Mov130" Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130">
-            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
-            <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests" Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests">
             <End Role="DisbursementGeneratedInterest" EntitySet="DisbursementGeneratedInterests" />
             <End Role="DisbursementGeneratedInterestDetail" EntitySet="DisbursementGeneratedInterestDetails" />
@@ -4627,10 +4623,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="DisbursementBook" EntitySet="DisbursementBooks" />
             <End Role="Disbursement" EntitySet="Disbursements" />
           </AssociationSet>
-          <AssociationSet Name="FK_DisbursementCollectionsDetails_Disbursement" Association="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement">
-            <End Role="Disbursement" EntitySet="Disbursements" />
-            <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_DisbursementGeneratedInterestDetails_Disbursements" Association="FundsDBModel.FK_DisbursementGeneratedInterestDetails_Disbursements">
             <End Role="Disbursement" EntitySet="Disbursements" />
             <End Role="DisbursementGeneratedInterestDetail" EntitySet="DisbursementGeneratedInterestDetails" />
@@ -4680,7 +4672,28 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="Fund" EntitySet="Funds" />
             <End Role="ClosedPeriod" EntitySet="ClosedPeriods" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="DisbursementCollectionsDetails" EntityType="FundsDBModel.DisbursementCollectionsDetail" />
+          <AssociationSet Name="FK_DisbursementCollectionsDetails_DisbursementCollection" Association="FundsDBModel.FK_DisbursementCollectionsDetails_DisbursementCollection">
+            <End Role="DisbursementCollection" EntitySet="DisbursementCollections" />
+            <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementCollectionsDetails_Disbursement" Association="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement">
+            <End Role="Disbursement" EntitySet="Disbursements" />
+            <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementCollectionsDetails_Mov125" Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125">
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+            <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementCollectionsDetails_Mov128" Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov128">
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+            <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementCollectionsDetails_Mov130" Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130">
+            <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
+            <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="AccountingMovement">
           <Key>
             <PropertyRef Name="Id" />
@@ -5045,23 +5058,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="Investment" Relationship="FundsDBModel.FK_DisbursementCollections_Investments" FromRole="DisbursementCollection" ToRole="Investment" />
           <NavigationProperty Name="DisbursementCollectionsDetails" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_DisbursementCollection" FromRole="DisbursementCollection" ToRole="DisbursementCollectionsDetail" />
         </EntityType>
-        <EntityType Name="DisbursementCollectionsDetail">
-          <Key>
-            <PropertyRef Name="disbursement_collection_id" />
-            <PropertyRef Name="disbursement_id" />
-          </Key>
-          <Property Name="disbursement_collection_id" Type="Int32" Nullable="false" />
-          <Property Name="disbursement_id" Type="Int32" Nullable="false" />
-          <Property Name="amount_collected" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="movement125_id" Type="Int32" />
-          <Property Name="movement128_id" Type="Int32" />
-          <Property Name="movement130_id" Type="Int32" />
-          <NavigationProperty Name="DisbursementCollection" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_DisbursementCollection" FromRole="DisbursementCollectionsDetail" ToRole="DisbursementCollection" />
-          <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
-          <NavigationProperty Name="Movements_Accounts1" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov128" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
-          <NavigationProperty Name="Movements_Accounts2" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
-          <NavigationProperty Name="Disbursement" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement" FromRole="DisbursementCollectionsDetail" ToRole="Disbursement" />
-        </EntityType>
         <EntityType Name="DisbursementGeneratedInterestDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -5360,16 +5356,16 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="BondsTFAMRepaymentDetails1" Relationship="FundsDBModel.FK_BondsTFAMRepaymentDetails_Mov02" FromRole="Movements_Accounts" ToRole="BondsTFAMRepaymentDetail" />
           <NavigationProperty Name="DisbursementBooks" Relationship="FundsDBModel.FK_DisbursementBook_Movement125" FromRole="Movements_Accounts" ToRole="DisbursementBook" />
           <NavigationProperty Name="DisbursementBooks1" Relationship="FundsDBModel.FK_DisbursementBook_Movement128" FromRole="Movements_Accounts" ToRole="DisbursementBook" />
-          <NavigationProperty Name="DisbursementCollectionsDetails" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125" FromRole="Movements_Accounts" ToRole="DisbursementCollectionsDetail" />
-          <NavigationProperty Name="DisbursementCollectionsDetails1" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov128" FromRole="Movements_Accounts" ToRole="DisbursementCollectionsDetail" />
-          <NavigationProperty Name="DisbursementCollectionsDetails2" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130" FromRole="Movements_Accounts" ToRole="DisbursementCollectionsDetail" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Movements_Accounts_Funds" FromRole="Movements_Accounts" ToRole="Fund" />
           <NavigationProperty Name="LoanRepaymentDetails" Relationship="FundsDBModel.FK_LoanRepaymentDetails_Mov01" FromRole="Movements_Accounts" ToRole="LoanRepaymentDetail" />
           <NavigationProperty Name="LoanRepaymentDetails1" Relationship="FundsDBModel.FK_LoanRepaymentDetails_Mov02" FromRole="Movements_Accounts" ToRole="LoanRepaymentDetail" />
           <NavigationProperty Name="Subaccount1" Relationship="FundsDBModel.FK_Movements_Accounts_Subaccounts" FromRole="Movements_Accounts" ToRole="Subaccount" />
           <NavigationProperty Name="Disbursements" Relationship="FundsDBModel.FK_Disbursements_Movements_Accounts" FromRole="Movements_Accounts" ToRole="Disbursement" />
           <NavigationProperty Name="Disbursements1" Relationship="FundsDBModel.FK_Disbursements_Movements_Accounts1" FromRole="Movements_Accounts" ToRole="Disbursement" />
-        </EntityType>
+          <NavigationProperty Name="DisbursementCollectionsDetails" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125" FromRole="Movements_Accounts" ToRole="DisbursementCollectionsDetail" />
+          <NavigationProperty Name="DisbursementCollectionsDetails1" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov128" FromRole="Movements_Accounts" ToRole="DisbursementCollectionsDetail" />
+          <NavigationProperty Name="DisbursementCollectionsDetails2" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130" FromRole="Movements_Accounts" ToRole="DisbursementCollectionsDetail" />
+          </EntityType>
         <EntityType Name="OtherDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -5773,6 +5769,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="has_bookings" Type="Boolean" />
           <Property Name="collected" Type="Boolean" />
           <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="overdues_collected" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="DisbursementGeneratedInterestView">
           <Key>
@@ -5942,6 +5939,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <Property Name="has_bookings" Type="Boolean" />
           <Property Name="collected" Type="Boolean" />
           <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="overdues_accrued_remaining" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="InvestmentsView">
           <Key>
@@ -7154,54 +7152,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DisbursementCollectionsDetails_DisbursementCollection">
-          <End Type="FundsDBModel.DisbursementCollection" Role="DisbursementCollection" Multiplicity="1" />
-          <End Type="FundsDBModel.DisbursementCollectionsDetail" Role="DisbursementCollectionsDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DisbursementCollection">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DisbursementCollectionsDetail">
-              <PropertyRef Name="disbursement_collection_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DisbursementCollectionsDetails_Mov125">
-          <End Type="FundsDBModel.Movements_Accounts" Role="Movements_Accounts" Multiplicity="0..1" />
-          <End Type="FundsDBModel.DisbursementCollectionsDetail" Role="DisbursementCollectionsDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Movements_Accounts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DisbursementCollectionsDetail">
-              <PropertyRef Name="movement125_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DisbursementCollectionsDetails_Mov128">
-          <End Type="FundsDBModel.Movements_Accounts" Role="Movements_Accounts" Multiplicity="0..1" />
-          <End Type="FundsDBModel.DisbursementCollectionsDetail" Role="DisbursementCollectionsDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Movements_Accounts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DisbursementCollectionsDetail">
-              <PropertyRef Name="movement128_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DisbursementCollectionsDetails_Mov130">
-          <End Type="FundsDBModel.Movements_Accounts" Role="Movements_Accounts" Multiplicity="0..1" />
-          <End Type="FundsDBModel.DisbursementCollectionsDetail" Role="DisbursementCollectionsDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Movements_Accounts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DisbursementCollectionsDetail">
-              <PropertyRef Name="movement130_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DisbursementGeneratedInterestDetails_DisbursementGeneratedInterests">
           <End Type="FundsDBModel.DisbursementGeneratedInterest" Role="DisbursementGeneratedInterest" Multiplicity="1" />
           <End Type="FundsDBModel.DisbursementGeneratedInterestDetail" Role="DisbursementGeneratedInterestDetail" Multiplicity="*" />
@@ -7574,7 +7524,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="Client" Relationship="FundsDBModel.FK_Disbursements_Clients" FromRole="Disbursement" ToRole="Client" />
           <NavigationProperty Name="Currency" Relationship="FundsDBModel.FK_Disbursements_Currencies" FromRole="Disbursement" ToRole="Currency" />
           <NavigationProperty Name="DisbursementBook" Relationship="FundsDBModel.FK_Disbursements_Books" FromRole="Disbursement" ToRole="DisbursementBook" />
-          <NavigationProperty Name="DisbursementCollectionsDetails" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement" FromRole="Disbursement" ToRole="DisbursementCollectionsDetail" />
           <NavigationProperty Name="DisbursementGeneratedInterestDetails" Relationship="FundsDBModel.FK_DisbursementGeneratedInterestDetails_Disbursements" FromRole="Disbursement" ToRole="DisbursementGeneratedInterestDetail" />
           <NavigationProperty Name="DisbursementOverdueDetails" Relationship="FundsDBModel.FK_DisbursementOverdueDetails_Disbursements" FromRole="Disbursement" ToRole="DisbursementOverdueDetail" />
           <NavigationProperty Name="Fund" Relationship="FundsDBModel.FK_Disbursements_Funds" FromRole="Disbursement" ToRole="Fund" />
@@ -7585,6 +7534,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <NavigationProperty Name="Shipment" Relationship="FundsDBModel.FK_Disbursements_Shipments" FromRole="Disbursement" ToRole="Shipment" />
           <NavigationProperty Name="UnderlyingDebtor" Relationship="FundsDBModel.FK_Disbursements_UnderlyingDebtors" FromRole="Disbursement" ToRole="UnderlyingDebtor" />
           <NavigationProperty Name="DisbursementPayments" Relationship="FundsDBModel.DisbursementPaymentDetails" FromRole="Disbursement" ToRole="DisbursementPayment" />
+          <NavigationProperty Name="DisbursementCollectionsDetails" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement" FromRole="Disbursement" ToRole="DisbursementCollectionsDetail" />
         </EntityType>
         <Association Name="FK_Disbursements_Banks">
           <End Type="FundsDBModel.Bank" Role="Bank" Multiplicity="0..1" />
@@ -7643,18 +7593,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Principal>
             <Dependent Role="Disbursement">
               <PropertyRef Name="book_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DisbursementCollectionsDetails_Disbursement">
-          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="1" />
-          <End Type="FundsDBModel.DisbursementCollectionsDetail" Role="DisbursementCollectionsDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Disbursement">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DisbursementCollectionsDetail">
-              <PropertyRef Name="disbursement_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7802,6 +7740,92 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Principal>
             <Dependent Role="ClosedPeriod">
               <PropertyRef Name="fund_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DisbursementCollectionsDetail">
+          <Key>
+            <PropertyRef Name="disbursement_collection_id" />
+            <PropertyRef Name="disbursement_id" />
+          </Key>
+          <Property Name="disbursement_collection_id" Type="Int32" Nullable="false" />
+          <Property Name="disbursement_id" Type="Int32" Nullable="false" />
+          <Property Name="amount_to_be_collected" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="amount_collected" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="principal_to_be_collected" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="principal_collected" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="profit_share_to_be_collected" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="profit_share_collected" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="delay_interest_be_collected" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="delay_interest_collected" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="overdue_to_be_collected" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="overdue_collected" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="movement125_id" Type="Int32" />
+          <Property Name="movement128_id" Type="Int32" />
+          <Property Name="movement130_id" Type="Int32" />
+          <NavigationProperty Name="DisbursementCollection" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_DisbursementCollection" FromRole="DisbursementCollectionsDetail" ToRole="DisbursementCollection" />
+          <NavigationProperty Name="Disbursement" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Disbursement" FromRole="DisbursementCollectionsDetail" ToRole="Disbursement" />
+          <NavigationProperty Name="Movements_Accounts" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
+          <NavigationProperty Name="Movements_Accounts1" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov128" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
+          <NavigationProperty Name="Movements_Accounts2" Relationship="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130" FromRole="DisbursementCollectionsDetail" ToRole="Movements_Accounts" />
+        </EntityType>
+        <Association Name="FK_DisbursementCollectionsDetails_DisbursementCollection">
+          <End Type="FundsDBModel.DisbursementCollection" Role="DisbursementCollection" Multiplicity="1" />
+          <End Type="FundsDBModel.DisbursementCollectionsDetail" Role="DisbursementCollectionsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DisbursementCollection">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DisbursementCollectionsDetail">
+              <PropertyRef Name="disbursement_collection_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementCollectionsDetails_Disbursement">
+          <End Type="FundsDBModel.Disbursement" Role="Disbursement" Multiplicity="1" />
+          <End Type="FundsDBModel.DisbursementCollectionsDetail" Role="DisbursementCollectionsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disbursement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementCollectionsDetail">
+              <PropertyRef Name="disbursement_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementCollectionsDetails_Mov125">
+          <End Type="FundsDBModel.Movements_Accounts" Role="Movements_Accounts" Multiplicity="0..1" />
+          <End Type="FundsDBModel.DisbursementCollectionsDetail" Role="DisbursementCollectionsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movements_Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementCollectionsDetail">
+              <PropertyRef Name="movement125_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementCollectionsDetails_Mov128">
+          <End Type="FundsDBModel.Movements_Accounts" Role="Movements_Accounts" Multiplicity="0..1" />
+          <End Type="FundsDBModel.DisbursementCollectionsDetail" Role="DisbursementCollectionsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movements_Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementCollectionsDetail">
+              <PropertyRef Name="movement128_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementCollectionsDetails_Mov130">
+          <End Type="FundsDBModel.Movements_Accounts" Role="Movements_Accounts" Multiplicity="0..1" />
+          <End Type="FundsDBModel.DisbursementCollectionsDetail" Role="DisbursementCollectionsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movements_Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisbursementCollectionsDetail">
+              <PropertyRef Name="movement130_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8103,18 +8127,6 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
                 <ScalarProperty Name="collection_date" ColumnName="collection_date" />
                 <ScalarProperty Name="investment_id" ColumnName="investment_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DisbursementCollectionsDetails">
-            <EntityTypeMapping TypeName="FundsDBModel.DisbursementCollectionsDetail">
-              <MappingFragment StoreEntitySet="DisbursementCollectionsDetails">
-                <ScalarProperty Name="movement130_id" ColumnName="movement130_id" />
-                <ScalarProperty Name="movement128_id" ColumnName="movement128_id" />
-                <ScalarProperty Name="movement125_id" ColumnName="movement125_id" />
-                <ScalarProperty Name="amount_collected" ColumnName="amount_collected" />
-                <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
-                <ScalarProperty Name="disbursement_collection_id" ColumnName="disbursement_collection_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8635,6 +8647,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySetMapping Name="DisbursementCollectionViews">
             <EntityTypeMapping TypeName="FundsDBModel.DisbursementCollectionView">
               <MappingFragment StoreEntitySet="DisbursementCollectionView">
+                <ScalarProperty Name="overdues_collected" ColumnName="overdues_collected" />
                 <ScalarProperty Name="client_id" ColumnName="client_id" />
                 <ScalarProperty Name="collected" ColumnName="collected" />
                 <ScalarProperty Name="has_bookings" ColumnName="has_bookings" />
@@ -8752,6 +8765,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySetMapping Name="DisbursementsToBeCollecteds">
             <EntityTypeMapping TypeName="FundsDBModel.DisbursementsToBeCollected">
               <MappingFragment StoreEntitySet="DisbursementsToBeCollected">
+                <ScalarProperty Name="overdues_accrued_remaining" ColumnName="overdues_accrued_remaining" />
                 <ScalarProperty Name="client_id" ColumnName="client_id" />
                 <ScalarProperty Name="collected" ColumnName="collected" />
                 <ScalarProperty Name="has_bookings" ColumnName="has_bookings" />
@@ -9177,6 +9191,27 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
                 <ScalarProperty Name="accounting_movement_id" ColumnName="accounting_movement_id" />
                 <ScalarProperty Name="closing_date" ColumnName="closing_date" />
                 <ScalarProperty Name="year" ColumnName="year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DisbursementCollectionsDetails">
+            <EntityTypeMapping TypeName="FundsDBModel.DisbursementCollectionsDetail">
+              <MappingFragment StoreEntitySet="DisbursementCollectionsDetails">
+                <ScalarProperty Name="movement130_id" ColumnName="movement130_id" />
+                <ScalarProperty Name="movement128_id" ColumnName="movement128_id" />
+                <ScalarProperty Name="movement125_id" ColumnName="movement125_id" />
+                <ScalarProperty Name="overdue_collected" ColumnName="overdue_collected" />
+                <ScalarProperty Name="overdue_to_be_collected" ColumnName="overdue_to_be_collected" />
+                <ScalarProperty Name="delay_interest_collected" ColumnName="delay_interest_collected" />
+                <ScalarProperty Name="delay_interest_be_collected" ColumnName="delay_interest_be_collected" />
+                <ScalarProperty Name="profit_share_collected" ColumnName="profit_share_collected" />
+                <ScalarProperty Name="profit_share_to_be_collected" ColumnName="profit_share_to_be_collected" />
+                <ScalarProperty Name="principal_collected" ColumnName="principal_collected" />
+                <ScalarProperty Name="principal_to_be_collected" ColumnName="principal_to_be_collected" />
+                <ScalarProperty Name="amount_collected" ColumnName="amount_collected" />
+                <ScalarProperty Name="amount_to_be_collected" ColumnName="amount_to_be_collected" />
+                <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
+                <ScalarProperty Name="disbursement_collection_id" ColumnName="disbursement_collection_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

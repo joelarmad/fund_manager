@@ -16,15 +16,24 @@ namespace FundsManager
     {
         public int disbursement_collection_id { get; set; }
         public int disbursement_id { get; set; }
+        public decimal amount_to_be_collected { get; set; }
         public decimal amount_collected { get; set; }
+        public decimal principal_to_be_collected { get; set; }
+        public decimal principal_collected { get; set; }
+        public decimal profit_share_to_be_collected { get; set; }
+        public decimal profit_share_collected { get; set; }
+        public decimal delay_interest_be_collected { get; set; }
+        public decimal delay_interest_collected { get; set; }
+        public decimal overdue_to_be_collected { get; set; }
+        public decimal overdue_collected { get; set; }
         public Nullable<int> movement125_id { get; set; }
         public Nullable<int> movement128_id { get; set; }
         public Nullable<int> movement130_id { get; set; }
     
         public virtual DisbursementCollection DisbursementCollection { get; set; }
+        public virtual Disbursement Disbursement { get; set; }
         public virtual Movements_Accounts Movements_Accounts { get; set; }
         public virtual Movements_Accounts Movements_Accounts1 { get; set; }
         public virtual Movements_Accounts Movements_Accounts2 { get; set; }
-        public virtual Disbursement Disbursement { get; set; }
     }
 }

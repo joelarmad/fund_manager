@@ -39,5 +39,6 @@ namespace FundsManager
         public Nullable<bool> has_bookings { get; set; }
         public Nullable<bool> collected { get; set; }
         public int client_id { get; set; }
+        public Nullable<decimal> overdues_accrued_remaining { get; set; }
     }
 }

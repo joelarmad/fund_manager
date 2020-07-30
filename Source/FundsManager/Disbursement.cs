@@ -18,10 +18,10 @@ namespace FundsManager
         public Disbursement()
         {
             this.BookingGeneratedInterestDetails = new HashSet<BookingGeneratedInterestDetail>();
-            this.DisbursementCollectionsDetails = new HashSet<DisbursementCollectionsDetail>();
             this.DisbursementGeneratedInterestDetails = new HashSet<DisbursementGeneratedInterestDetail>();
             this.DisbursementOverdueDetails = new HashSet<DisbursementOverdueDetail>();
             this.DisbursementPayments = new HashSet<DisbursementPayment>();
+            this.DisbursementCollectionsDetails = new HashSet<DisbursementCollectionsDetail>();
         }
     
         public int Id { get; set; }
@@ -59,8 +59,6 @@ namespace FundsManager
         public virtual Currency Currency { get; set; }
         public virtual DisbursementBook DisbursementBook { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DisbursementCollectionsDetail> DisbursementCollectionsDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementGeneratedInterestDetail> DisbursementGeneratedInterestDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementOverdueDetail> DisbursementOverdueDetails { get; set; }
@@ -73,5 +71,7 @@ namespace FundsManager
         public virtual UnderlyingDebtor UnderlyingDebtor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisbursementPayment> DisbursementPayments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DisbursementCollectionsDetail> DisbursementCollectionsDetails { get; set; }
     }
 }

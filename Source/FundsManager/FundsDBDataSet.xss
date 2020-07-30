@@ -56,7 +56,7 @@
     <Shape ID="DesignTable:Shipments" ZOrder="118" X="14695" Y="0" Height="172" Width="240" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
     <Shape ID="DesignTable:DisbursementGeneratedInterestView" ZOrder="95" X="15005" Y="0" Height="324" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
     <Shape ID="DesignTable:DisbursementCollections" ZOrder="111" X="15375" Y="0" Height="153" Width="289" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
-    <Shape ID="DesignTable:DisbursementCollectionsDetails" ZOrder="110" X="15734" Y="0" Height="191" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
+    <Shape ID="DesignTable:DisbursementCollectionsDetails" ZOrder="110" X="15734" Y="0" Height="305" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
     <Shape ID="DesignTable:DisbursementsToBeCollected" ZOrder="17" X="16104" Y="0" Height="324" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
     <Shape ID="DesignTable:DisbursementsForAddendums" ZOrder="7" X="17214" Y="0" Height="324" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
     <Shape ID="DesignTable:DisbursementBooks" ZOrder="99" X="0" Y="0" Height="172" Width="260" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
@@ -1425,12 +1425,8 @@
           <Y>279</Y>
         </Point>
         <Point>
-          <X>15751</X>
+          <X>15734</X>
           <Y>279</Y>
-        </Point>
-        <Point>
-          <X>15751</X>
-          <Y>191</Y>
         </Point>
       </RoutePoints>
     </Connector>
@@ -1518,15 +1514,15 @@
       <RoutePoints>
         <Point>
           <X>1293</X>
-          <Y>296</Y>
+          <Y>313</Y>
         </Point>
         <Point>
           <X>15759</X>
-          <Y>296</Y>
+          <Y>313</Y>
         </Point>
         <Point>
           <X>15759</X>
-          <Y>191</Y>
+          <Y>305</Y>
         </Point>
       </RoutePoints>
     </Connector>
@@ -1534,15 +1530,15 @@
       <RoutePoints>
         <Point>
           <X>1293</X>
-          <Y>304</Y>
+          <Y>313</Y>
         </Point>
         <Point>
           <X>15767</X>
-          <Y>304</Y>
+          <Y>313</Y>
         </Point>
         <Point>
           <X>15767</X>
-          <Y>191</Y>
+          <Y>305</Y>
         </Point>
       </RoutePoints>
     </Connector>
@@ -1550,15 +1546,15 @@
       <RoutePoints>
         <Point>
           <X>1293</X>
-          <Y>312</Y>
+          <Y>313</Y>
         </Point>
         <Point>
           <X>15775</X>
-          <Y>312</Y>
+          <Y>313</Y>
         </Point>
         <Point>
           <X>15775</X>
-          <Y>191</Y>
+          <Y>305</Y>
         </Point>
       </RoutePoints>
     </Connector>

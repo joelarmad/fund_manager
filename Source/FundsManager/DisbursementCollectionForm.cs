@@ -22,10 +22,12 @@ namespace FundsManager
         int AmountIndex = 4;
         int ProfitShareIndex = 5;
         int DelayInterestIndex = 6;
-        int CollectTo125Index = 7;
-        int CollectTo128Index = 8;
-        int CollectTo130Index = 9;
-        int IsBookingIndex = 10;
+        int OverdueIndex = 7;
+        int CollectToPrincipalIndex = 8;
+        int CollectToProfitShareIndex = 9;
+        int CollectToDelayInterestIndex = 10;
+        int CollectToOverdueIndex = 11;
+        int IsBookingIndex = 12;
 
         public DisbursementCollectionForm()
         {
@@ -101,9 +103,11 @@ namespace FundsManager
                     List<decimal> amounts = new List<decimal>();
                     List<decimal> profitShares = new List<decimal>();
                     List<decimal> delayInterests = new List<decimal>();
-                    List<decimal> collect125 = new List<decimal>();
-                    List<decimal> collect128 = new List<decimal>();
-                    List<decimal> collect130 = new List<decimal>();
+                    List<decimal> overdues = new List<decimal>();
+                    List<decimal> collectPrincipal = new List<decimal>();
+                    List<decimal> collectProfitShare = new List<decimal>();
+                    List<decimal> collectDelayInterest = new List<decimal>();
+                    List<decimal> collectOverdues = new List<decimal>();
                     List<bool> isBookings = new List<bool>();
 
                     String errors = "";
@@ -115,30 +119,42 @@ namespace FundsManager
                         decimal amount = decimal.Parse(row.Cells[AmountIndex].Value.ToString());
                         decimal profitShare = decimal.Parse(row.Cells[ProfitShareIndex].Value.ToString());
                         decimal delayInterest = decimal.Parse(row.Cells[DelayInterestIndex].Value.ToString());
-                        string amountToBeCollected125Str = row.Cells[CollectTo125Index].Value != null ? row.Cells[CollectTo125Index].Value.ToString() : "0";
-                        string amountToBeCollected128Str = row.Cells[CollectTo128Index].Value != null ? row.Cells[CollectTo128Index].Value.ToString() : "0";
-                        string amountToBeCollected130Str = row.Cells[CollectTo130Index].Value != null ? row.Cells[CollectTo130Index].Value.ToString() : "0";
+                        decimal overdue = decimal.Parse(row.Cells[OverdueIndex].Value.ToString());
+                        string amountToBeCollectedPrincipalStr = row.Cells[CollectToPrincipalIndex].Value != null ? row.Cells[CollectToPrincipalIndex].Value.ToString() : "0";
+                        string amountToBeCollectedProfitShareStr = row.Cells[CollectToProfitShareIndex].Value != null ? row.Cells[CollectToProfitShareIndex].Value.ToString() : "0";
+                        string amountToBeCollectedDelayInterestStr = row.Cells[CollectToDelayInterestIndex].Value != null ? row.Cells[CollectToDelayInterestIndex].Value.ToString() : "0";
+                        string amountToBeCollectedOverdueStr = row.Cells[CollectToOverdueIndex].Value != null ? row.Cells[CollectToOverdueIndex].Value.ToString() : "0";
                         bool isBooking = row.Cells[IsBookingIndex].Value != null ? bool.Parse(row.Cells[IsBookingIndex].Value.ToString()) : false;
 
-                        if (amountToBeCollected125Str != "0" || amountToBeCollected128Str != "0" || amountToBeCollected130Str != "0")
+                        if (amountToBeCollectedPrincipalStr != "0" || 
+                            amountToBeCollectedProfitShareStr != "0" || 
+                            amountToBeCollectedDelayInterestStr != "0" || 
+                            amountToBeCollectedOverdueStr != "0")
                         {
-                            decimal amountToBeCollected125 = 0;
-                            decimal amountToBeCollected128 = 0;
-                            decimal amountToBeCollected130 = 0;
+                            decimal amountToBeCollectedPrincipal = 0;
+                            decimal amountToBeCollectedProfitShare = 0;
+                            decimal amountToBeCollectedDelayInterest = 0;
+                            decimal amountToBeCollectedOverdue = 0;
 
-                            if (decimal.TryParse(amountToBeCollected125Str, out amountToBeCollected125) &&
-                                    decimal.TryParse(amountToBeCollected128Str, out amountToBeCollected128) &&
-                                    decimal.TryParse(amountToBeCollected130Str, out amountToBeCollected130))
+                            if (decimal.TryParse(amountToBeCollectedPrincipalStr, out amountToBeCollectedPrincipal) &&
+                                    decimal.TryParse(amountToBeCollectedProfitShareStr, out amountToBeCollectedProfitShare) &&
+                                    decimal.TryParse(amountToBeCollectedDelayInterestStr, out amountToBeCollectedDelayInterest) &&
+                                    decimal.TryParse(amountToBeCollectedOverdueStr, out amountToBeCollectedOverdue))
                             {
-                                if (amount - amountToBeCollected125 >= 0 && profitShare - amountToBeCollected128 >= 0 && delayInterest - amountToBeCollected130 >= 0)
+                                if (amount - amountToBeCollectedPrincipal >= 0 && 
+                                    profitShare - amountToBeCollectedProfitShare >= 0 && 
+                                    delayInterest - amountToBeCollectedDelayInterest >= 0 && 
+                                    overdue - amountToBeCollectedOverdue >= 0)
                                 {
                                     rowIds.Add(rowId);
                                     amounts.Add(amount);
                                     profitShares.Add(profitShare);
                                     delayInterests.Add(delayInterest);
-                                    collect125.Add(amountToBeCollected125);
-                                    collect128.Add(amountToBeCollected128);
-                                    collect130.Add(amountToBeCollected130);
+                                    overdues.Add(overdue);
+                                    collectPrincipal.Add(amountToBeCollectedPrincipal);
+                                    collectProfitShare.Add(amountToBeCollectedProfitShare);
+                                    collectDelayInterest.Add(amountToBeCollectedDelayInterest);
+                                    collectOverdues.Add(amountToBeCollectedOverdue);
                                     isBookings.Add(isBooking);
                                 }
                                 else
@@ -199,9 +215,11 @@ namespace FundsManager
                                         decimal amount = amounts[i];
                                         decimal profitShare = profitShares[i];
                                         decimal delayInterest = delayInterests[i];
-                                        decimal toBeCollected125 = collect125[i];
-                                        decimal toBeCollected128 = collect128[i];
-                                        decimal toBeCollected130 = collect130[i];
+                                        decimal overdue = overdues[i];
+                                        decimal toBeCollectedPrincipal = collectPrincipal[i];
+                                        decimal toBeCollectedProfitShare = collectProfitShare[i];
+                                        decimal toBeCollectedDelayInterest = collectDelayInterest[i];
+                                        decimal toBeCollectedOverdue = collectOverdues[i];
                                         bool isBooking = isBookings[i];
 
                                         int disbursementId = int.Parse(rowId);
@@ -234,16 +252,28 @@ namespace FundsManager
 
                                                     disbursementCollectionDetail.DisbursementCollection = collection;
                                                     disbursementCollectionDetail.disbursement_id = disbursementId;
-                                                    disbursementCollectionDetail.amount_collected = Math.Round(toBeCollected125 + toBeCollected128 + toBeCollected130, 2);
+                                                    disbursementCollectionDetail.amount_to_be_collected = amount + profitShare + delayInterest;
+                                                    disbursementCollectionDetail.amount_collected = Math.Round(toBeCollectedPrincipal + toBeCollectedProfitShare + toBeCollectedDelayInterest + toBeCollectedOverdue, 2);
+                                                    disbursementCollectionDetail.principal_to_be_collected = amount;
+                                                    disbursementCollectionDetail.principal_collected = Math.Round(toBeCollectedPrincipal, 2);
+                                                    disbursementCollectionDetail.profit_share_to_be_collected = profitShare;
+                                                    disbursementCollectionDetail.profit_share_collected = Math.Round(toBeCollectedProfitShare, 2);
+                                                    disbursementCollectionDetail.delay_interest_be_collected = delayInterest;
+                                                    disbursementCollectionDetail.delay_interest_collected = Math.Round(toBeCollectedDelayInterest, 2);
+                                                    disbursementCollectionDetail.overdue_to_be_collected = overdue;
+                                                    disbursementCollectionDetail.overdue_collected = Math.Round(toBeCollectedOverdue, 2);
 
-                                                    if (amount - toBeCollected125 <= 0 && profitShare - toBeCollected128 <= 0 && delayInterest - toBeCollected130 <= 0)
+                                                    if (amount - toBeCollectedPrincipal <= 0 && 
+                                                        profitShare - toBeCollectedProfitShare <= 0 && 
+                                                        delayInterest - toBeCollectedDelayInterest <= 0 &&
+                                                        overdue - toBeCollectedOverdue <= 0)
                                                     {
                                                         setCollected(disbursement);
                                                     }
 
                                                     manager.My_db.DisbursementCollectionsDetails.Add(disbursementCollectionDetail);
 
-                                                    if (toBeCollected125 > 0)
+                                                    if (toBeCollectedPrincipal > 0)
                                                     {
                                                         Movements_Accounts _maccount125 = new Movements_Accounts();
 
@@ -255,14 +285,14 @@ namespace FundsManager
                                                         _maccount125.subaccount = disbursement.client_id;
                                                         _maccount125.subaccount_type = 1;
                                                         _maccount125.debit = 0;
-                                                        _maccount125.credit = Math.Round(toBeCollected125, 2);
+                                                        _maccount125.credit = Math.Round(toBeCollectedPrincipal, 2);
 
                                                         manager.My_db.Movements_Accounts.Add(_maccount125);
 
                                                         disbursementCollectionDetail.Movements_Accounts = _maccount125;
                                                     }
 
-                                                    if (toBeCollected128 > 0)
+                                                    if (toBeCollectedProfitShare > 0)
                                                     {
                                                         Movements_Accounts _maccount128 = new Movements_Accounts();
 
@@ -274,14 +304,14 @@ namespace FundsManager
                                                         _maccount128.subaccount = disbursement.client_id;
                                                         _maccount128.subaccount_type = 1;
                                                         _maccount128.debit = 0;
-                                                        _maccount128.credit = Math.Round(toBeCollected128, 2);
+                                                        _maccount128.credit = Math.Round(toBeCollectedProfitShare, 2);
 
                                                         manager.My_db.Movements_Accounts.Add(_maccount128);
 
                                                         disbursementCollectionDetail.Movements_Accounts1 = _maccount128;
                                                     }
 
-                                                    if (toBeCollected130 > 0)
+                                                    if (toBeCollectedDelayInterest > 0 | toBeCollectedOverdue > 0)
                                                     {
                                                         Movements_Accounts _maccount130 = new Movements_Accounts();
 
@@ -293,14 +323,14 @@ namespace FundsManager
                                                         _maccount130.subaccount = disbursement.client_id;
                                                         _maccount130.subaccount_type = 1;
                                                         _maccount130.debit = 0;
-                                                        _maccount130.credit = Math.Round(toBeCollected130, 2);
+                                                        _maccount130.credit = Math.Round(toBeCollectedDelayInterest + toBeCollectedOverdue, 2);
 
                                                         manager.My_db.Movements_Accounts.Add(_maccount130);
 
                                                         disbursementCollectionDetail.Movements_Accounts2 = _maccount130;
                                                     }
 
-                                                    totalPaid += toBeCollected125 + toBeCollected128 + toBeCollected130;
+                                                    totalPaid += toBeCollectedPrincipal + toBeCollectedProfitShare + toBeCollectedDelayInterest + toBeCollectedOverdue;
 
                                                     showGL = true;
                                                 }

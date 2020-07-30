@@ -56,9 +56,11 @@
             this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toBeCollected = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DelayInterest = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.overdues_accrued_remaining = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Collect125 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Collect128 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Collect130 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.collect_to_overdues = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.is_booking = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -83,7 +85,7 @@
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Location = new System.Drawing.Point(8, 78);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(939, 248);
+            this.groupBox1.Size = new System.Drawing.Size(1156, 248);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Disbursements";
@@ -102,14 +104,16 @@
             this.amountDataGridViewTextBoxColumn,
             this.toBeCollected,
             this.DelayInterest,
+            this.overdues_accrued_remaining,
             this.Collect125,
             this.Collect128,
             this.Collect130,
+            this.collect_to_overdues,
             this.is_booking});
             this.dataGridView1.DataSource = this.disbursementsToBeCollectedBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(14, 19);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(909, 212);
+            this.dataGridView1.Size = new System.Drawing.Size(1122, 212);
             this.dataGridView1.TabIndex = 0;
             // 
             // disbursementsToBeCollectedBindingSource
@@ -263,20 +267,32 @@
             this.DelayInterest.Name = "DelayInterest";
             this.DelayInterest.ReadOnly = true;
             // 
+            // overdues_accrued_remaining
+            // 
+            this.overdues_accrued_remaining.DataPropertyName = "overdues_accrued_remaining";
+            this.overdues_accrued_remaining.HeaderText = "Overdues";
+            this.overdues_accrued_remaining.Name = "overdues_accrued_remaining";
+            this.overdues_accrued_remaining.ReadOnly = true;
+            // 
             // Collect125
             // 
-            this.Collect125.HeaderText = "Collect to 125";
+            this.Collect125.HeaderText = "Collect to Principal";
             this.Collect125.Name = "Collect125";
             // 
             // Collect128
             // 
-            this.Collect128.HeaderText = "Collect to 128";
+            this.Collect128.HeaderText = "Collect to Profit Share";
             this.Collect128.Name = "Collect128";
             // 
             // Collect130
             // 
-            this.Collect130.HeaderText = "Collect to 130";
+            this.Collect130.HeaderText = "Collect to Delay Interest";
             this.Collect130.Name = "Collect130";
+            // 
+            // collect_to_overdues
+            // 
+            this.collect_to_overdues.HeaderText = "Colect to Overdues";
+            this.collect_to_overdues.Name = "collect_to_overdues";
             // 
             // is_booking
             // 
@@ -291,7 +307,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(958, 339);
+            this.ClientSize = new System.Drawing.Size(1185, 339);
             this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdCollect);
@@ -342,9 +358,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn toBeCollected;
         private System.Windows.Forms.DataGridViewTextBoxColumn DelayInterest;
+        private System.Windows.Forms.DataGridViewTextBoxColumn overdues_accrued_remaining;
         private System.Windows.Forms.DataGridViewTextBoxColumn Collect125;
         private System.Windows.Forms.DataGridViewTextBoxColumn Collect128;
         private System.Windows.Forms.DataGridViewTextBoxColumn Collect130;
+        private System.Windows.Forms.DataGridViewTextBoxColumn collect_to_overdues;
         private System.Windows.Forms.DataGridViewCheckBoxColumn is_booking;
     }
 }
