@@ -161,30 +161,35 @@ namespace FundsManager
             loadOverdues();
         }
 
-        private DisbursementOverdueDetail readFromRow(DataGridViewRow row, decimal monthlyRate)
+        private List<DisbursementOverdueDetail> readFromRow(DataGridViewRow row, decimal monthlyRate)
         {
-            DisbursementOverdueDetail detail = new DisbursementOverdueDetail();
+            List<DisbursementOverdueDetail> result = new List<DisbursementOverdueDetail>();
 
             try
             {
-                int days = int.Parse(row.Cells[daysIndex].Value.ToString());
-                float exchange_rate = float.Parse(row.Cells[exchangeRateIndex].Value.ToString());
-                decimal overdue = Math.Round(decimal.Parse(row.Cells[toBeCollectedIndex].Value.ToString()), 2);
+                int disbId = int.Parse(row.Cells[disburdsementIdIndex].Value.ToString());
 
-                detail.disbursement_id = int.Parse(row.Cells[disburdsementIdIndex].Value.ToString());
-                detail.generated_overdue = Math.Round(overdue * monthlyRate * days / 30 / 100, 2);
-                detail.monthly_rate = monthlyRate;
-                detail.overdue_date_from = DateTime.Parse(row.Cells[fromIndex].Value.ToString());
-                detail.overdue_date_to = DateTime.Parse(row.Cells[toIndex].Value.ToString());
+                List<tempOverdue> overdues = manager.My_db.tempOverdues.Where(x => x.disbursement_id == disbId).ToList();
 
-                return detail;
+                foreach (tempOverdue item in overdues)
+                {
+                    DisbursementOverdueDetail detail = new DisbursementOverdueDetail();
+
+                    detail.disbursement_id = disbId;
+                    detail.generated_overdue = Math.Round(item.overdue.Value, 2);
+                    detail.monthly_rate = monthlyRate;
+                    detail.overdue_date_from = item.from_date.Value;
+                    detail.overdue_date_to = item.to_date.Value;
+
+                    result.Add(detail);
+                }
             }
             catch (Exception _ex)
             {
                 Console.WriteLine("Error in DisbursementToBeOverdueForm.readFromRow: " + _ex.Message);
             }
 
-            return null;
+            return result;
         }
 
         private void generate(bool forAll)
@@ -209,32 +214,14 @@ namespace FundsManager
 
                                 foreach (DataGridViewRow row in dataGridView1.Rows)
                                 {
-                                    DisbursementOverdueDetail detail = readFromRow(row, monthly_rate);
-
-                                    if (detail != null)
-                                    {
-                                        details.Add(detail);
-                                    }
-                                    else
-                                    {
-                                        //TODO: error. El detail no se pudo generar
-                                    }
+                                    details.AddRange(readFromRow(row, monthly_rate));
                                 }
                             }
                             else
                             {
                                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                                 {
-                                    DisbursementOverdueDetail detail = readFromRow(row, monthly_rate);
-
-                                    if (detail != null)
-                                    {
-                                        details.Add(detail);
-                                    }
-                                    else
-                                    {
-                                        //TODO: error. El detail no se pudo generar
-                                    }
+                                    details.AddRange(readFromRow(row, monthly_rate));
                                 }
                             }
 

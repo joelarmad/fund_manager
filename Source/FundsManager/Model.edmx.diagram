@@ -209,6 +209,7 @@
         <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov125" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov128" />
         <AssociationConnector Association="FundsDBModel.FK_DisbursementCollectionsDetails_Mov130" />
+        <EntityTypeShape EntityType="FundsDBModel.tempOverdue" Width="1.5" PointX="11.375" PointY="19.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

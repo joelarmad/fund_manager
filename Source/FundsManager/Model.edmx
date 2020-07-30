@@ -629,6 +629,26 @@
           <Property Name="number" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="detail_type" Type="int" />
         </EntityType>
+        <EntityType Name="tempOverdues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="disbursement_id" Type="int" />
+          <Property Name="reference" Type="varchar" MaxLength="50" />
+          <Property Name="number" Type="varchar" MaxLength="50" />
+          <Property Name="collection_date" Type="date" />
+          <Property Name="to_be_collected" Type="money" />
+          <Property Name="principal_tbc" Type="money" />
+          <Property Name="profit_tbc" Type="money" />
+          <Property Name="delay_tbc" Type="money" />
+          <Property Name="from_date" Type="date" />
+          <Property Name="to_date" Type="date" />
+          <Property Name="monthly_rate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="overdue" Type="money" />
+          <Property Name="days" Type="int" />
+          <Property Name="exchange_rate" Type="real" />
+        </EntityType>
         <EntityType Name="UnderlyingDebtors">
           <Key>
             <PropertyRef Name="Id" />
@@ -3071,6 +3091,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
           <EntitySet Name="Shareholders" EntityType="Self.Shareholders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shipments" EntityType="Self.Shipments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subaccounts" EntityType="Self.Subaccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tempOverdues" EntityType="Self.tempOverdues" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnderlyingDebtors" EntityType="Self.UnderlyingDebtors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountBalanceView" EntityType="Self.AccountBalanceView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -4693,6 +4714,7 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             <End Role="Movements_Accounts" EntitySet="Movements_Accounts" />
             <End Role="DisbursementCollectionsDetail" EntitySet="DisbursementCollectionsDetails" />
           </AssociationSet>
+          <EntitySet Name="tempOverdues" EntityType="FundsDBModel.tempOverdue" />
           </EntityContainer>
         <EntityType Name="AccountingMovement">
           <Key>
@@ -7829,6 +7851,26 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tempOverdue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="disbursement_id" Type="Int32" />
+          <Property Name="reference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="collection_date" Type="DateTime" Precision="0" />
+          <Property Name="to_be_collected" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="principal_tbc" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="profit_tbc" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="delay_tbc" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="from_date" Type="DateTime" Precision="0" />
+          <Property Name="to_date" Type="DateTime" Precision="0" />
+          <Property Name="monthly_rate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="overdue" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="days" Type="Int32" />
+          <Property Name="exchange_rate" Type="Single" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9212,6 +9254,27 @@ warning 6002: The table/view 'D:\TEMP\00_DATABASES\FUNDSDB.MDF.dbo.UnlinkedDisbu
                 <ScalarProperty Name="amount_to_be_collected" ColumnName="amount_to_be_collected" />
                 <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
                 <ScalarProperty Name="disbursement_collection_id" ColumnName="disbursement_collection_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tempOverdues">
+            <EntityTypeMapping TypeName="FundsDBModel.tempOverdue">
+              <MappingFragment StoreEntitySet="tempOverdues">
+                <ScalarProperty Name="exchange_rate" ColumnName="exchange_rate" />
+                <ScalarProperty Name="days" ColumnName="days" />
+                <ScalarProperty Name="overdue" ColumnName="overdue" />
+                <ScalarProperty Name="monthly_rate" ColumnName="monthly_rate" />
+                <ScalarProperty Name="to_date" ColumnName="to_date" />
+                <ScalarProperty Name="from_date" ColumnName="from_date" />
+                <ScalarProperty Name="delay_tbc" ColumnName="delay_tbc" />
+                <ScalarProperty Name="profit_tbc" ColumnName="profit_tbc" />
+                <ScalarProperty Name="principal_tbc" ColumnName="principal_tbc" />
+                <ScalarProperty Name="to_be_collected" ColumnName="to_be_collected" />
+                <ScalarProperty Name="collection_date" ColumnName="collection_date" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="disbursement_id" ColumnName="disbursement_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -117,5 +117,6 @@ namespace FundsManager
         public virtual DbSet<Disbursement> Disbursements { get; set; }
         public virtual DbSet<ClosedPeriod> ClosedPeriods { get; set; }
         public virtual DbSet<DisbursementCollectionsDetail> DisbursementCollectionsDetails { get; set; }
+        public virtual DbSet<tempOverdue> tempOverdues { get; set; }
     }
 }
