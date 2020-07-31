@@ -18,16 +18,15 @@ namespace FundsManager
         int IdIndex = 0;
         int NumberIndex = 1;
         int CollectionDateIndex = 2;
-        int DisbursementIndex = 3;
-        int AmountIndex = 4;
-        int ProfitShareIndex = 5;
-        int DelayInterestIndex = 6;
-        int OverdueIndex = 7;
-        int CollectToPrincipalIndex = 8;
-        int CollectToProfitShareIndex = 9;
-        int CollectToDelayInterestIndex = 10;
-        int CollectToOverdueIndex = 11;
-        int IsBookingIndex = 12;
+        int AmountIndex = 3;
+        int ProfitShareIndex = 4;
+        int DelayInterestIndex = 5;
+        int OverdueIndex = 6;
+        int CollectToPrincipalIndex = 7;
+        int CollectToProfitShareIndex = 8;
+        int CollectToDelayInterestIndex = 9;
+        int CollectToOverdueIndex = 10;
+        int IsBookingIndex = 11;
 
         public DisbursementCollectionForm()
         {

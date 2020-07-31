@@ -32,7 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmdCollect = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -52,7 +51,6 @@
             this.disbursement_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.collection_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toBeCollected = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DelayInterest = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -100,7 +98,6 @@
             this.disbursement_id,
             this.numberDataGridViewTextBoxColumn,
             this.collection_date,
-            this.amount,
             this.amountDataGridViewTextBoxColumn,
             this.toBeCollected,
             this.DelayInterest,
@@ -229,21 +226,13 @@
             this.collection_date.ReadOnly = true;
             this.collection_date.Width = 120;
             // 
-            // amount
-            // 
-            this.amount.DataPropertyName = "amount";
-            dataGridViewCellStyle1.Format = "N2";
-            this.amount.DefaultCellStyle = dataGridViewCellStyle1;
-            this.amount.HeaderText = "Disbursement";
-            this.amount.Name = "amount";
-            // 
             // amountDataGridViewTextBoxColumn
             // 
             this.amountDataGridViewTextBoxColumn.DataPropertyName = "amount_remainig";
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.amountDataGridViewTextBoxColumn.HeaderText = "Amount";
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.amountDataGridViewTextBoxColumn.HeaderText = "Investment";
             this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
             this.amountDataGridViewTextBoxColumn.ReadOnly = true;
             this.amountDataGridViewTextBoxColumn.Width = 70;
@@ -251,9 +240,9 @@
             // toBeCollected
             // 
             this.toBeCollected.DataPropertyName = "profit_share_accrued_remaining";
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.toBeCollected.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.toBeCollected.DefaultCellStyle = dataGridViewCellStyle2;
             this.toBeCollected.HeaderText = "Profit Share";
             this.toBeCollected.Name = "toBeCollected";
             this.toBeCollected.ReadOnly = true;
@@ -261,8 +250,8 @@
             // DelayInterest
             // 
             this.DelayInterest.DataPropertyName = "delay_interest_accrued_remaining";
-            dataGridViewCellStyle4.Format = "N2";
-            this.DelayInterest.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle3.Format = "N2";
+            this.DelayInterest.DefaultCellStyle = dataGridViewCellStyle3;
             this.DelayInterest.HeaderText = "Delay Interest";
             this.DelayInterest.Name = "DelayInterest";
             this.DelayInterest.ReadOnly = true;
@@ -354,7 +343,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn disbursement_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn collection_date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn toBeCollected;
         private System.Windows.Forms.DataGridViewTextBoxColumn DelayInterest;
