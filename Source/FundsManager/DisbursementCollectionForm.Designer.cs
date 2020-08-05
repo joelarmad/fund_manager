@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmdCollect = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -259,6 +260,9 @@
             // overdues_accrued_remaining
             // 
             this.overdues_accrued_remaining.DataPropertyName = "overdues_accrued_remaining";
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.overdues_accrued_remaining.DefaultCellStyle = dataGridViewCellStyle4;
             this.overdues_accrued_remaining.HeaderText = "Overdues";
             this.overdues_accrued_remaining.Name = "overdues_accrued_remaining";
             this.overdues_accrued_remaining.ReadOnly = true;
