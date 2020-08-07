@@ -166,6 +166,7 @@
             // 
             // dtpStartingDate
             // 
+            this.dtpStartingDate.Enabled = false;
             this.dtpStartingDate.Location = new System.Drawing.Point(589, 165);
             this.dtpStartingDate.Name = "dtpStartingDate";
             this.dtpStartingDate.Size = new System.Drawing.Size(200, 20);

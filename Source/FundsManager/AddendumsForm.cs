@@ -292,8 +292,7 @@ namespace FundsManager
                     cmdAddBooking.Enabled = txtNumber.Text.Trim() != ""
                     && _selectedAmount >= 0 
                     && _selectedProfitShare >= 0
-                    && _selectedDelayedInterest >= 0
-                    && (_selectedAmount > 0 || _selectedProfitShare > 0 || _selectedDelayedInterest > 0);
+                    && _selectedDelayedInterest >= 0;
                 }
                 else
                 {
@@ -318,7 +317,6 @@ namespace FundsManager
                     && _selectedAmount >= 0
                     && _selectedProfitShare >= 0
                     && _delayedInterest >= 0
-                    && (_selectedAmount > 0 || _selectedProfitShare > 0 || _selectedDelayedInterest > 0)
                     && fAmountRemaining - _amount >= 0
                     && fProfitShareRemainig - _profitShare >= 0
                     ;
