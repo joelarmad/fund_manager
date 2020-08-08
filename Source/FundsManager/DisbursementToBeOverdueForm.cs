@@ -73,6 +73,9 @@ namespace FundsManager
         {
             try
             {
+                manager.My_db.tempOverdues.RemoveRange(manager.My_db.tempOverdues);
+                manager.My_db.SaveChanges();
+
                 int clientId = 0;
                 if (cbClient.SelectedValue != null)
                 {
