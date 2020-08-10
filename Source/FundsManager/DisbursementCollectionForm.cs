@@ -251,7 +251,7 @@ namespace FundsManager
 
                                                     disbursementCollectionDetail.DisbursementCollection = collection;
                                                     disbursementCollectionDetail.disbursement_id = disbursementId;
-                                                    disbursementCollectionDetail.amount_to_be_collected = amount + profitShare + delayInterest;
+                                                    disbursementCollectionDetail.amount_to_be_collected = amount + profitShare + delayInterest + overdue;
                                                     disbursementCollectionDetail.amount_collected = Math.Round(toBeCollectedPrincipal + toBeCollectedProfitShare + toBeCollectedDelayInterest + toBeCollectedOverdue, 2);
                                                     disbursementCollectionDetail.principal_to_be_collected = amount;
                                                     disbursementCollectionDetail.principal_collected = Math.Round(toBeCollectedPrincipal, 2);
@@ -265,7 +265,8 @@ namespace FundsManager
                                                     if (amount - toBeCollectedPrincipal <= 0 && 
                                                         profitShare - toBeCollectedProfitShare <= 0 && 
                                                         delayInterest - toBeCollectedDelayInterest <= 0 &&
-                                                        overdue - toBeCollectedOverdue <= 0)
+                                                        overdue - toBeCollectedOverdue <= 0 && 
+                                                        !disbursement.can_generate_interest)
                                                     {
                                                         setCollected(disbursement);
                                                     }
