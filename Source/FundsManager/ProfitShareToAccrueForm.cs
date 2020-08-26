@@ -251,10 +251,21 @@ namespace FundsManager
 
                                             if (!canContinueGeneratingInterest)
                                             {
+                                                decimal generatedInterest = manager.My_db.DisbursementGeneratedInterestDetails.Where(x => x.disbursement_id == _profitShareToAccrue.Id).Sum(x => x.generated_interest);
+                                 
                                                 Disbursement disb = manager.My_db.Disbursements.FirstOrDefault(x => x.Id == _profitShareToAccrue.Id);
 
                                                 if (disb != null)
                                                 {
+                                                    decimal difference = disb.profit_share - generatedInterest - _interest;
+
+                                                    if ((double)Math.Abs(difference) > 0.01)
+                                                    {
+                                                        ErrorMessage.showErrorMessage(new Exception("Referece " + disb.number + " has wrong interest accrued. Please, contact with tech support."));
+                                                    }
+
+                                                    _interest = disb.profit_share - generatedInterest;
+
                                                     disb.can_generate_interest = false;
                                                 }
                                             }

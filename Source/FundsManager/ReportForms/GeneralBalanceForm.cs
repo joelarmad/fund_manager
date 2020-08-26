@@ -27,6 +27,7 @@ namespace FundsManager.ReportForms
             dtpTo.Value = DateTime.Now;
 
             refreshData();
+            refreshData();
         }
 
         private void cmdFilter_Click(object sender, EventArgs e)
@@ -44,6 +45,8 @@ namespace FundsManager.ReportForms
                 ReportParameter language = new ReportParameter("Language", Thread.CurrentThread.CurrentCulture.Name);
                 ReportParameter current = new ReportParameter("Current", to.Year.ToString());
                 ReportParameter last = new ReportParameter("Last", toLastPeriod.Year.ToString());
+                ReportParameter title = new ReportParameter("Title", manager.SelectedFund().name);
+                ReportParameter date = new ReportParameter("Date", dtpTo.Value.ToShortDateString());
 
                 if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpTo.Value.Year && x.fund_id == manager.Selected) == null)
                 {
@@ -66,6 +69,8 @@ namespace FundsManager.ReportForms
                 reportViewer1.LocalReport.SetParameters(language);
                 reportViewer1.LocalReport.SetParameters(current);
                 reportViewer1.LocalReport.SetParameters(last);
+                reportViewer1.LocalReport.SetParameters(title);
+                reportViewer1.LocalReport.SetParameters(date);
 
                 reportViewer1.RefreshReport();
             }
