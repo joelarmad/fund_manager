@@ -46,7 +46,7 @@ namespace FundsManager.ReportForms
                 ReportParameter current = new ReportParameter("Current", to.Year.ToString());
                 ReportParameter last = new ReportParameter("Last", toLastPeriod.Year.ToString());
                 ReportParameter title = new ReportParameter("Title", manager.SelectedFund().name);
-                ReportParameter date = new ReportParameter("Date", dtpTo.Value.ToShortDateString());
+                ReportParameter date = new ReportParameter("Date", DateTime.Now.ToShortDateString());
 
                 if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpTo.Value.Year && x.fund_id == manager.Selected) == null)
                 {
