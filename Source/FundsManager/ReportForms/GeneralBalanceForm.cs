@@ -43,8 +43,8 @@ namespace FundsManager.ReportForms
                 DateTime toLastPeriod = to.AddYears(-1);
                 
                 ReportParameter language = new ReportParameter("Language", Thread.CurrentThread.CurrentCulture.Name);
-                ReportParameter current = new ReportParameter("Current", to.Year.ToString());
-                ReportParameter last = new ReportParameter("Last", toLastPeriod.Year.ToString());
+                ReportParameter current = new ReportParameter("Current", to.ToShortDateString());
+                ReportParameter last = new ReportParameter("Last", toLastPeriod.ToShortDateString());
                 ReportParameter title = new ReportParameter("Title", manager.SelectedFund().name);
                 ReportParameter date = new ReportParameter("Date", DateTime.Now.ToShortDateString());
 

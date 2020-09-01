@@ -97,6 +97,7 @@
                                   <Value>=Parameters!Current.Value</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>yyyy-MM-dd</Format>
                                     <TextDecoration>Underline</TextDecoration>
                                     <Color>#333333</Color>
                                   </Style>
@@ -169,6 +170,7 @@
                                   <Value>=Parameters!Last.Value</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>yyyy-MM-dd</Format>
                                     <TextDecoration>Underline</TextDecoration>
                                     <Color>#333333</Color>
                                   </Style>
@@ -191,6 +193,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
