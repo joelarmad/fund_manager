@@ -42,11 +42,11 @@ namespace FundsManager.ReportForms
                 DateTime to = dtpTo.Value.Date.AddDays(1).AddSeconds(-1);
                 DateTime toLastPeriod = to.AddYears(-1);
                 
-                ReportParameter language = new ReportParameter("Language", Thread.CurrentThread.CurrentCulture.Name);
-                ReportParameter current = new ReportParameter("Current", to.ToShortDateString());
-                ReportParameter last = new ReportParameter("Last", toLastPeriod.ToShortDateString());
-                ReportParameter title = new ReportParameter("Title", manager.SelectedFund().name);
-                ReportParameter date = new ReportParameter("Date", DateTime.Now.ToShortDateString());
+                ReportParameter pLanguage = new ReportParameter("Language", Thread.CurrentThread.CurrentCulture.Name);
+                ReportParameter pCurrent = new ReportParameter("Current", to.ToShortDateString());
+                ReportParameter pLast = new ReportParameter("Last", toLastPeriod.ToShortDateString());
+                ReportParameter pTitle = new ReportParameter("Title", manager.SelectedFund().name);
+                ReportParameter pDate = new ReportParameter("Date", DateTime.Now.ToShortDateString());
 
                 if (manager.My_db.ClosedPeriods.FirstOrDefault(x => x.year == dtpTo.Value.Year && x.fund_id == manager.Selected) == null)
                 {
@@ -66,11 +66,11 @@ namespace FundsManager.ReportForms
                 }
                 
 
-                reportViewer1.LocalReport.SetParameters(language);
-                reportViewer1.LocalReport.SetParameters(current);
-                reportViewer1.LocalReport.SetParameters(last);
-                reportViewer1.LocalReport.SetParameters(title);
-                reportViewer1.LocalReport.SetParameters(date);
+                reportViewer1.LocalReport.SetParameters(pLanguage);
+                reportViewer1.LocalReport.SetParameters(pCurrent);
+                reportViewer1.LocalReport.SetParameters(pLast);
+                reportViewer1.LocalReport.SetParameters(pTitle);
+                reportViewer1.LocalReport.SetParameters(pDate);
 
                 reportViewer1.RefreshReport();
             }

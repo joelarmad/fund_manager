@@ -72,6 +72,7 @@ namespace FundsManager.ReportForms
             ReportParameter pDetails = new ReportParameter("Detail", "Other details: " + detail);
             ReportParameter pFrom = new ReportParameter("From", "From " + dtpFrom.Value.ToShortDateString());
             ReportParameter pTo = new ReportParameter("To", "To " + dtpTo.Value.ToShortDateString());
+            ReportParameter pTitle = new ReportParameter("Title", manager.SelectedFund().name);
 
 
 
@@ -80,6 +81,7 @@ namespace FundsManager.ReportForms
             reportViewer1.LocalReport.SetParameters(pDetails);
             reportViewer1.LocalReport.SetParameters(pFrom);
             reportViewer1.LocalReport.SetParameters(pTo);
+            reportViewer1.LocalReport.SetParameters(pTitle);
 
 
             reportViewer1.RefreshReport();

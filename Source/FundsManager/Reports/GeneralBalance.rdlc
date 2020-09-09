@@ -193,7 +193,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -1660,7 +1659,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Title</rd:DefaultName>
-              <Top>0.14458in</Top>
+              <Top>0.15625in</Top>
               <Height>0.25in</Height>
               <Width>5.22868in</Width>
               <ZIndex>2</ZIndex>
