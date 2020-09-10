@@ -44,8 +44,8 @@ namespace FundsManager.ReportForms
                 this.profitResultsViewTableAdapter.Fill(this.fundsDBDataSet.ProfitResultsView, manager.Selected, from, to, lastFrom, lastTo);
 
                 ReportParameter pLanguage = new ReportParameter("Language", Thread.CurrentThread.CurrentCulture.Name);
-                ReportParameter pCurrent = new ReportParameter("Current", from.ToShortDateString());
-                ReportParameter pLast = new ReportParameter("Last", lastFrom.ToShortDateString());
+                ReportParameter pCurrent = new ReportParameter("Current", to.ToShortDateString());
+                ReportParameter pLast = new ReportParameter("Last", lastTo.ToShortDateString());
                 ReportParameter pTitle = new ReportParameter("Title", manager.SelectedFund().name);
 
                 reportViewer1.LocalReport.SetParameters(pLanguage);
