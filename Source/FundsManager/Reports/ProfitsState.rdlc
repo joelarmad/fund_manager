@@ -317,7 +317,7 @@
                                   <Value>=Fields!Shift_Amount.Value</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
-                                    <Format>'€'0.00</Format>
+                                    <Format>'€'#,0.00</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -354,7 +354,7 @@
                                   <Value>=Fields!Shift_Amount_Last_Period.Value</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
-                                    <Format>'€'0.00</Format>
+                                    <Format>'€'#,0.00</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -396,7 +396,7 @@
                                   <Value>=Sum(Fields!Shift_Amount.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>'€'0.00</Format>
+                                    <Format>'€'#,0.00</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -434,7 +434,7 @@
                                   <Value>=Sum(Fields!Shift_Amount_Last_Period.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>'€'0.00</Format>
+                                    <Format>'€'#,0.00</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -514,7 +514,7 @@
                                   <Value>=Sum(Fields!Shift_Amount_Last_Period.Value)</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>'€'0.00</Format>
+                                    <Format>'€'#,0.00</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
