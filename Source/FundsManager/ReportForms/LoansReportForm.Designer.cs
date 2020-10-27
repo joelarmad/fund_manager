@@ -107,7 +107,7 @@
             this.Name = "LoansReportForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "Loans Report";
+            this.Text = "Loan Repayment";
             this.Load += new System.EventHandler(this.LoansReportForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.creditorsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fundsDBDataSet)).EndInit();

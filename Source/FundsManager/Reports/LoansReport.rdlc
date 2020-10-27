@@ -107,7 +107,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Loans Report</Value>
+                    <Value>Loan Repayment</Value>
                     <Style>
                       <FontSize>14pt</FontSize>
                     </Style>

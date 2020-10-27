@@ -472,5 +472,21 @@ namespace FundsManager
             form.MdiParent = this;
             form.Show();
         }
+
+        private void loanGeneralInformationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            LoanGeneralInformationForm form = new LoanGeneralInformationForm();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void interestOnLoanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            InterestOnLoanForm form = new InterestOnLoanForm();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }

@@ -700,6 +700,18 @@
     <Compile Include="ReportForms\GeneralBalanceForm.Designer.cs">
       <DependentUpon>GeneralBalanceForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportForms\InterestOnLoanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForms\InterestOnLoanForm.Designer.cs">
+      <DependentUpon>InterestOnLoanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForms\LoanGeneralInformationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForms\LoanGeneralInformationForm.Designer.cs">
+      <DependentUpon>LoanGeneralInformationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportForms\LoanGeneratedInterestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -989,6 +1001,12 @@
     <EmbeddedResource Include="ReportForms\GeneralBalanceForm.resx">
       <DependentUpon>GeneralBalanceForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\InterestOnLoanForm.resx">
+      <DependentUpon>InterestOnLoanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\LoanGeneralInformationForm.resx">
+      <DependentUpon>LoanGeneralInformationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\LoanGeneratedInterestForm.resx">
       <DependentUpon>LoanGeneratedInterestForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1006,6 +1024,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ExpensesReport.rdlc" />
     <EmbeddedResource Include="Reports\BondsTFAMReport.rdlc" />
+    <EmbeddedResource Include="Reports\InterestOnLoanReport.rdlc" />
+    <EmbeddedResource Include="Reports\LoanGeneralInformationReport.rdlc" />
     <EmbeddedResource Include="Reports\LoansReport.rdlc" />
     <EmbeddedResource Include="Reports\OverdueResumedReport.rdlc" />
     <EmbeddedResource Include="Reports\DealTrackingReport.rdlc" />
