@@ -269,7 +269,7 @@
                                   <Value>=Fields!date_from.Value</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
-                                    <Format>yyyy-MM-dd</Format>
+                                    <Format>MM/dd/yy</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -303,7 +303,7 @@
                                   <Value>=Fields!date_to.Value</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
-                                    <Format>yyyy-MM-dd</Format>
+                                    <Format>MM/dd/yy</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -323,6 +323,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -368,15 +369,17 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!interest.Value)</Value>
+                                  <Value>=CStr(Round(Fields!interest.Value, 2)) + "%"</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
-                                    <Format>#,0.00;(#,0.00)</Format>
+                                    <Format>#,0.00</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>interest</rd:DefaultName>
@@ -632,7 +635,6 @@
                               <PaddingBottom>2pt</PaddingBottom>
                             </Style>
                           </Textbox>
-                          <rd:Selected>true</rd:Selected>
                         </CellContents>
                       </TablixHeader>
                       <TablixMembers>
@@ -832,7 +834,7 @@
             <Top>1.25in</Top>
             <Left>0.25in</Left>
             <Height>0.75in</Height>
-            <Width>7.57292in</Width>
+            <Width>7.57293in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
